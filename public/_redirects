@@ -1,0 +1,6 @@
+# SPA fallback - serve index.html for all routes
+/*    /index.html   200
+
+# Specific redirects for better SEO
+/blogs    /index.html   200
+/blogs/*  /index.html   200
