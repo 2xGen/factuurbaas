@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Handle blog posts - redirect /blogs/slug to /blogs/slug/index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^blogs/([^/]+)/?$ /blogs/$1/index.html [L]
+  
+  # Handle /blogs/ directory - redirect to main blogs page
+  RewriteRule ^blogs/?$ /blogs/index.html [L]
+  
+  # Handle all other routes - fallback to index.html for SPA
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Powered-By "Hostinger Horizons"
+
+  # Cache everything on CDN by default
+  Header set Cache-Control "public, s-maxage=604800, max-age=0"
+  
+  # Cache in browser all assets
+  <If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+    Header set Cache-Control "public, max-age=604800"
+  </If>
+</IfModule>
