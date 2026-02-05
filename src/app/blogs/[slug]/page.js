@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import { articles } from '@/lib/blogData';
 import BlogPostClient from './BlogPostClient';
 
+// Dynamic to avoid auth/context issues during Vercel static build
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
 }
