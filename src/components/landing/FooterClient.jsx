@@ -2,8 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
 
 export default function FooterClient() {
+  const { openCookiePreferences } = useCookieConsent();
+
   return (
     <footer className="py-12 border-t border-gray-200 bg-slate-50 text-slate-700">
       <div className="container mx-auto px-6">
@@ -27,6 +30,15 @@ export default function FooterClient() {
             <ul className="space-y-2">
               <li><Link href="/privacybeleid" className="text-sm hover:text-warm-orange transition-colors">Privacybeleid</Link></li>
               <li><Link href="/algemene-voorwaarden" className="text-sm hover:text-warm-orange transition-colors">Algemene Voorwaarden</Link></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={openCookiePreferences}
+                  className="text-sm hover:text-warm-orange transition-colors text-left"
+                >
+                  Cookievoorkeuren
+                </button>
+              </li>
               <li><a href="mailto:mail@factuurbaas.nl" className="text-sm hover:text-warm-orange transition-colors">Contact</a></li>
             </ul>
           </div>

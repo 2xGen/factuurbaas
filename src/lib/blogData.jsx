@@ -127,7 +127,7 @@ export const articles = [
         
         <h3>Hoe werkt het?</h3>
         <ol>
-          <li>Ga naar de <Link to="/create-invoice" className="text-warm-orange hover:underline">factuurmaker</Link>.</li>
+          <li>Ga naar de <Link href="/create-invoice" className="text-warm-orange hover:underline">factuurmaker</Link>.</li>
           <li>Vul je bedrijfsgegevens en die van je klant in.</li>
           <li>Voeg de geleverde diensten of producten toe.</li>
           <li>Kies een van de professionele layouts.</li>
@@ -293,7 +293,7 @@ export const articles = [
             </ol>
     
             <h3>De anatomie van je eerste factuur</h3>
-            <p>Je eerste factuur is een blauwdruk voor alle volgende. Zorg dat deze perfect is. We hebben in ons artikel <Link to="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">"Hoe maak je een factuur als zzp'er?"</Link> al een gedetailleerd stappenplan gegeven. De belangrijkste elementen zijn je eigen gegevens, de gegevens van je klant, een uniek factuurnummer en een duidelijke specificatie van je werk.</p>
+            <p>Je eerste factuur is een blauwdruk voor alle volgende. Zorg dat deze perfect is. We hebben in ons artikel <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">"Hoe maak je een factuur als zzp'er?"</Link> al een gedetailleerd stappenplan gegeven. De belangrijkste elementen zijn je eigen gegevens, de gegevens van je klant, een uniek factuurnummer en een duidelijke specificatie van je werk.</p>
     
             <h3>Betaaltermijn: Wees duidelijk en redelijk</h3>
             <p>Als starter wil je snel betaald krijgen. Een gebruikelijke betalingstermijn voor zzp'ers is 14 of 30 dagen. Wees hier duidelijk over op je factuur. Bijvoorbeeld: "Wij verzoeken u vriendelijk deze factuur binnen 14 dagen na factuurdatum te voldoen."</p>
@@ -396,7 +396,7 @@ export const articles = [
         <p>Je hebt je werk gedaan, nu is het tijd om betaald te krijgen. De laatste stap is het maken en versturen van een professionele factuur. Een PDF-factuur is de standaard: het is niet-aanpasbaar en ziet er op elk apparaat hetzelfde uit. Met FactuurBaas is dit proces een fluitje van een cent.</p>
         
         <h2>Stap voor stap: van invullen tot PDF</h2>
-        <p>Volg deze eenvoudige stappen in onze <Link to="/create-invoice" className="text-warm-orange hover:underline">gratis factuur tool</Link>:</p>
+        <p>Volg deze eenvoudige stappen in onze <Link href="/create-invoice" className="text-warm-orange hover:underline">gratis factuur tool</Link>:</p>
         
         <ol>
           <li><strong>Vul de velden in:</strong> Start met je eigen bedrijfsgegevens, voeg de klantdetails toe en specificeer de geleverde diensten of producten. Je ziet aan de rechterkant direct hoe je factuur eruit komt te zien.</li>
@@ -477,7 +477,7 @@ export const articles = [
         <h3>Hoe werkt factureren zonder account?</h3>
         <p>Het is precies zo simpel als het klinkt:</p>
         <ol>
-          <li>Je bezoekt <Link to="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas.nl</Link>.</li>
+          <li>Je bezoekt <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas.nl</Link>.</li>
           <li>Je vult direct alle benodigde informatie in de factuurvelden.</li>
           <li>Je downloadt je voltooide, professionele factuur als PDF.</li>
         </ol>
