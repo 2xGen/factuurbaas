@@ -13,7 +13,7 @@ function formatDate(iso) {
   }
 }
 
-export default function BlogPostClient({ article }) {
+export default function BlogPostClient({ article, relatedArticles = [] }) {
   const articleUrl = `https://factuurbaas.nl/blogs/${article.slug}`;
   const published = article.datePublished ? `${article.datePublished}T12:00:00+01:00` : new Date().toISOString();
   const modified = article.dateModified ? `${article.dateModified}T12:00:00+01:00` : published;
@@ -45,6 +45,19 @@ export default function BlogPostClient({ article }) {
     ],
   };
 
+  const faqSchema =
+    article.faq?.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: article.faq.map(({ question, answer }) => ({
+            '@type': 'Question',
+            name: question,
+            acceptedAnswer: { '@type': 'Answer', text: answer },
+          })),
+        }
+      : null;
+
   const publishedFormatted = formatDate(published);
   const modifiedFormatted = formatDate(modified);
   const showDates = publishedFormatted || modifiedFormatted;
@@ -59,6 +72,12 @@ export default function BlogPostClient({ article }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <div className="bg-white">
         <motion.div
           initial={{ opacity: 0 }}
@@ -103,6 +122,36 @@ export default function BlogPostClient({ article }) {
           <article className="prose prose-lg lg:prose-xl max-w-none text-slate-700 leading-relaxed">
             {article.content}
           </article>
+
+          {relatedArticles.length > 0 && (
+            <section className="mt-16 pt-12 border-t border-slate-200" aria-label="Gerelateerde artikelen">
+              <h2 className="text-xl font-semibold text-slate-800 font-heading mb-6">Lees ook</h2>
+              <ul className="grid gap-6 sm:grid-cols-2">
+                {relatedArticles.map((related) => (
+                  <li key={related.slug}>
+                    <Link
+                      href={`/blogs/${related.slug}`}
+                      className="group flex gap-4 rounded-lg border border-slate-200 bg-slate-50/50 p-4 transition-colors hover:border-warm-orange/40 hover:bg-white"
+                    >
+                      <div className="h-20 w-24 shrink-0 overflow-hidden rounded-md bg-slate-200">
+                        <img
+                          src={related.image.url}
+                          alt={related.image.alt}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="font-medium text-slate-800 group-hover:text-warm-orange transition-colors line-clamp-2">
+                          {related.title}
+                        </span>
+                        <p className="mt-1 text-sm text-slate-600 line-clamp-2">{related.excerpt}</p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
       </div>
     </>

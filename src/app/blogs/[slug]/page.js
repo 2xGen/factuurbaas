@@ -44,5 +44,11 @@ export default async function BlogPostPage({ params }) {
   const resolvedParams = typeof params.then === 'function' ? await params : params;
   const article = articles.find((a) => a.slug === resolvedParams.slug);
   if (!article) notFound();
-  return <BlogPostClient article={article} />;
+  const relatedArticles = (article.relatedSlugs?.length
+    ? article.relatedSlugs
+        .map((slug) => articles.find((a) => a.slug === slug))
+        .filter(Boolean)
+    : articles.filter((a) => a.slug !== article.slug).slice(0, 4)
+  ).slice(0, 4);
+  return <BlogPostClient article={article} relatedArticles={relatedArticles} />;
 }

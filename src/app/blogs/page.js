@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { articles } from '@/lib/blogData';
 import BlogListClient from './BlogListClient';
 
@@ -44,7 +44,9 @@ export default function BlogsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      <BlogListClient articles={articles} />
+      <Suspense fallback={<div className="bg-slate-50 py-24 min-h-[40rem] flex items-center justify-center"><div className="animate-pulse text-slate-400">Laden...</div></div>}>
+        <BlogListClient articles={articles} />
+      </Suspense>
     </>
   );
 }

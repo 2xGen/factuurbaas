@@ -1,11 +1,45 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { blogPillars } from '@/lib/blogPillars';
 
 export default function BlogListClient({ articles }) {
+  const searchParams = useSearchParams();
+  const pillarFromUrl = searchParams.get('pillar');
+  const [selectedPillar, setSelectedPillar] = useState(() => {
+    if (pillarFromUrl && blogPillars.some((p) => p.id === pillarFromUrl)) return pillarFromUrl;
+    return null;
+  });
+
+  useEffect(() => {
+    if (pillarFromUrl && blogPillars.some((p) => p.id === pillarFromUrl)) {
+      setSelectedPillar(pillarFromUrl);
+    }
+  }, [pillarFromUrl]);
+
+  const filteredArticles = useMemo(() => {
+    if (!selectedPillar) return articles;
+    const pillar = blogPillars.find((p) => p.id === selectedPillar);
+    if (!pillar) return articles;
+    const slugSet = new Set(pillar.slugs);
+    return articles.filter((a) => slugSet.has(a.slug));
+  }, [articles, selectedPillar]);
+
+  const handlePillarChange = (pillarId) => {
+    setSelectedPillar(pillarId);
+    const url = new URL(window.location.href);
+    if (pillarId) {
+      url.searchParams.set('pillar', pillarId);
+    } else {
+      url.searchParams.delete('pillar');
+    }
+    window.history.replaceState({}, '', url.pathname + url.search);
+  };
+
   return (
     <main className="bg-slate-50 py-16 sm:py-24" aria-label="Blog overzicht">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,15 +57,55 @@ export default function BlogListClient({ articles }) {
           </p>
         </motion.header>
 
+        {/* Pillar filter */}
+        <motion.nav
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mb-10"
+          aria-label="Filter op onderwerp"
+        >
+          <div className="flex flex-wrap justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => handlePillarChange(null)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                selectedPillar === null
+                  ? 'bg-warm-orange text-white shadow-md'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              Alle
+            </button>
+            {blogPillars.map((pillar) => (
+              <button
+                key={pillar.id}
+                type="button"
+                onClick={() => handlePillarChange(pillar.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  selectedPillar === pillar.id
+                    ? 'bg-warm-orange text-white shadow-md'
+                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                }`}
+              >
+                {pillar.title}
+              </button>
+            ))}
+          </div>
+        </motion.nav>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
-          {articles.map((article, index) => (
+          <AnimatePresence mode="popLayout">
+          {filteredArticles.map((article, index) => (
             <motion.article
               key={article.slug}
-              role="listitem"
-              initial={{ opacity: 0, y: 20 }}
+              layout
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.35, delay: index * 0.04 }}
               className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col group hover:shadow-xl transition-shadow duration-300"
+              role="listitem"
               aria-labelledby={`blog-title-${article.slug}`}
             >
               <Link href={`/blogs/${article.slug}`} className="block" aria-hidden="true" tabIndex={-1}>
@@ -66,7 +140,12 @@ export default function BlogListClient({ articles }) {
               </div>
             </motion.article>
           ))}
+          </AnimatePresence>
         </div>
+
+        {filteredArticles.length === 0 && (
+          <p className="text-center text-slate-500 py-12">Geen artikelen in deze categorie.</p>
+        )}
       </div>
     </main>
   );

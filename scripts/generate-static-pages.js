@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { articles } from '../src/lib/blogData.js';
+import { articles } from '../src/lib/blogData.jsx';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 

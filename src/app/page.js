@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "@/components/landing/page/sections/HeroSection";
 import FeaturesSection from "@/components/landing/page/sections/FeaturesSection";
 import TestimonialsSection from "@/components/landing/page/sections/TestimonialsSection";
+import BlogPillarsSection from "@/components/landing/page/sections/BlogPillarsSection";
 import CallToActionSection from "@/components/landing/page/sections/CallToActionSection";
 
 export const metadata = {
@@ -25,6 +26,7 @@ export default function HomePage() {
         <HeroSection />
         <FeaturesSection />
         <TestimonialsSection />
+        <BlogPillarsSection />
         <CallToActionSection />
       </main>
     </div>
