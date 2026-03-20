@@ -39,46 +39,28 @@ const PremiumSignupCard = ({ source = 'premium_page' }) => {
 
     setIsSubmitting(true);
     try {
-      const consentFields = ['consent_given', 'consentgiven', 'consentGiven', 'consent'];
-      const payloadAttempts = [
-        // Try with explicit consent column
-        ...consentFields.map((consentField) => ({
-          email: normalizedEmail,
-          [consentField]: true,
-          source,
-        })),
-        // Try consent column without source (source column may not exist)
-        ...consentFields.map((consentField) => ({
-          email: normalizedEmail,
-          [consentField]: true,
-        })),
-        // As a last resort, try without any consent column
-        { email: normalizedEmail, source },
-        // Final fallback: insert with only email (no consent/source columns)
-        { email: normalizedEmail },
-      ];
+      // Your current Supabase schema for `factuurbaas_emails` includes:
+      // id, email, created_at, discount_percent, discount_cycle, discount_valid_for_life
+      // There are no consent_* or source columns. Your RLS policy only checks email IS NOT NULL.
+      // So we only insert the existing columns.
+      const payload = {
+        email: normalizedEmail,
+        discount_percent: 50,
+        discount_cycle: 'monthly',
+        discount_valid_for_life: true,
+      };
 
-      let lastError = null;
-      for (const payload of payloadAttempts) {
-        const { error } = await supabase.from('factuurbaas_emails').insert([payload]);
-        if (!error) {
-          lastError = null;
-          break;
-        }
-
-        lastError = error;
-
-        // Unique constraint: user already registered
-        if (error?.code === '23505') {
+      const { error } = await supabase.from('factuurbaas_emails').insert([payload]);
+      if (error) {
+        if (error.code === '23505') {
           toast({
             title: 'Je staat al op de lijst',
             description: 'Bedankt! We hebben je e-mailadres al opgeslagen.',
           });
           return;
         }
+        throw error;
       }
-
-      if (lastError) throw lastError;
 
       toast({
         title: 'Aangemeld',

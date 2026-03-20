@@ -40,43 +40,26 @@ const EmailOptInCard = ({ source = 'invoice_create', mode = 'time_banner' }) => 
 
     setIsSubmitting(true);
     try {
-      // Insert attempts: your Supabase schema may differ (missing consent/source columns).
-      const consentFields = ['consent_given', 'consentgiven', 'consentGiven', 'consent'];
-      const payloadAttempts = [
-        ...consentFields.map((consentField) => ({
-          email: normalizedEmail,
-          [consentField]: true,
-          source,
-        })),
-        ...consentFields.map((consentField) => ({
-          email: normalizedEmail,
-          [consentField]: true,
-        })),
-        { email: normalizedEmail, source },
-        { email: normalizedEmail },
-      ];
+      // Your current `factuurbaas_emails` schema (per production):
+      // id, email, created_at, discount_percent, discount_cycle, discount_valid_for_life
+      // There are no consent_* or source columns, and RLS checks `email IS NOT NULL`.
+      const payload = {
+        email: normalizedEmail,
+        discount_percent: 50,
+        discount_cycle: 'monthly',
+        discount_valid_for_life: true,
+      };
 
-      let lastError = null;
-      for (const payload of payloadAttempts) {
-        const { error } = await supabase.from('factuurbaas_emails').insert([payload]);
-        if (!error) {
-          lastError = null;
-          break;
-        }
-        lastError = error;
-      }
-
-      if (lastError) {
-        // Unique constraint: user already registered
-        if (lastError.code === '23505') {
+      const { error } = await supabase.from('factuurbaas_emails').insert([payload]);
+      if (error) {
+        if (error.code === '23505') {
           toast({
             title: 'Je staat al op de lijst',
             description: 'Bedankt! We hebben je e-mailadres al opgeslagen.',
           });
           return;
         }
-
-        throw lastError;
+        throw error;
       }
 
       toast({
