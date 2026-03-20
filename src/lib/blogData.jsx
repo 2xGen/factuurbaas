@@ -14,8 +14,8 @@ export const articles = [
   {
     slug: 'factuur-maken-zzp',
     relatedSlugs: ['gratis-factuur-zzp', 'factuur-fouten-voorkomen', 'factuur-templates-zzp', 'factuur-pdf-downloaden'],
-    title: 'Hoe maak je een factuur als zzp’er? (stappenplan + gratis voorbeeld)',
-    excerpt: 'Hoe maak je een factuur als zzp\'er? Stappenplan met wat er op moet staan, voorbeeld factuurnummer, betalingstermijn en gratis template.',
+    title: 'Factuur maken zzp: stappenplan + gratis voorbeeld',
+    excerpt: 'Factuur maken zzp met een stappenplan: wat er op moet staan, factuurnummer, betalingstermijn en een gratis voorbeeld/template.',
     keywords: 'factuur maken zzp, factuur zzp, zzp factuur, voorbeeld factuur zzp, template factuur zzp, wat moet er op een factuur staan zzp, factuurnummer voorbeeld, betalingstermijn factuur zzp, kvk factuur maken, hoe maak je een factuur zzp',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Hoe%20maak%20je%20een%20factuur%20als%20zzp%20er.png',
@@ -704,9 +704,9 @@ export const articles = [
   {
     slug: 'gratis-factuur-zzp',
     relatedSlugs: ['factuur-maken-zzp', 'factuur-fouten-voorkomen', 'factuur-pdf-downloaden', 'factureren-zonder-account', 'factuur-templates-zzp', 'factureren-startende-zzper'],
-    title: 'Factuur maken als zzp\'er: gratis voorbeeld, template en uitleg (2026)',
+    title: 'Gratis factuur maken zzp: voorbeeld, template & uitleg (2026)',
     keywords: 'factuur maken zzp, factuur zzp, voorbeeld factuur zzp, facturen maken zzp, template factuur zzp, gratis factuur maken zzp, factureren zzp, wat moet er op een factuur staan zzp',
-    excerpt: 'Hoe maak je een factuur als zzp\'er? Gratis voorbeeld en template, wat moet er op een factuur staan, en direct een professionele factuur maken zonder account.',
+    excerpt: 'Gratis factuur maken zzp (online) zonder account: wat er op een factuur moet staan, plus een professionele template om direct als PDF te downloaden.',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Gratis%20factuur%20maken%20Factuurbaas%20gratis%20online%20facturen%20maken.png',
       alt: 'Gratis factuur maken voor zzp\'ers: voorbeeld en template met FactuurBaas.',
@@ -809,8 +809,8 @@ export const articles = [
   {
     slug: 'factureren-zonder-account',
     relatedSlugs: ['gratis-factuur-zzp', 'factuur-maken-zzp', 'factuur-pdf-downloaden', 'factureren-startende-zzper'],
-    title: 'Factuur maken zonder account: gratis en direct, geen registratie',
-    excerpt: 'Factuur maken zonder account? Bij FactuurBaas kan het: gratis factuur maken zonder registratie, ideaal voor factuur maken zzp. Geen inlog, direct PDF. Over factuur maken zonder KvK en wat wél op je factuur moet.',
+    title: 'Gratis factuur maken zonder account: direct download (PDF)',
+    excerpt: 'Gratis factuur maken zonder account: vul je gegevens in, download direct een professionele factuur als PDF. Inclusief wat er verplicht op moet staan (KVK/btw).',
     keywords: 'factuur maken zonder account, factureren zonder account, gratis factuur maken, factuur maken zonder kvk, factuur maken zzp, gratis factuur zzp, factuur zonder registratie, direct factuur maken, factuur maken zonder inloggen',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Factureren%20zonder%20account.png',

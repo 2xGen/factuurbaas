@@ -23,6 +23,7 @@ export default function FooterClient() {
               <li><Link href="/" className="text-sm hover:text-warm-orange transition-colors">Home</Link></li>
               <li><Link href="/create-invoice" className="text-sm hover:text-warm-orange transition-colors">Factuur Maken</Link></li>
               <li><Link href="/blogs" className="text-sm hover:text-warm-orange transition-colors">Blogs</Link></li>
+              <li><Link href="/premium" className="text-sm hover:text-warm-orange transition-colors">Premium</Link></li>
             </ul>
           </div>
           <div>

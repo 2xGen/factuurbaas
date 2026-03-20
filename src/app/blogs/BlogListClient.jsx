@@ -50,10 +50,10 @@ export default function BlogListClient({ articles }) {
           className="text-center mb-12"
         >
           <h1 className="text-4xl sm:text-5xl font-extrabold text-deep-blue tracking-tight font-heading">
-            Inzichten voor <span className="text-warm-orange">Ondernemers</span>
+            Factuur tips voor <span className="text-warm-orange">zzp'ers</span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
-            Artikelen en gidsen om je te helpen met facturatie, administratie en de groei van je bedrijf.
+            Zoek je een goede factuur? Hier vind je artikelen over factuur maken, btw op je factuur, betaaltermijn en factuurbeheer.
           </p>
         </motion.header>
 

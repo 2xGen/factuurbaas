@@ -3,12 +3,14 @@ import { articles } from '@/lib/blogData';
 import BlogListClient from './BlogListClient';
 
 export const metadata = {
-  title: 'Blogs - Tips voor Facturatie en Ondernemen | FactuurBaas',
-  description: 'Ontdek onze artikelen vol tips over factuur maken, gratis online facturen maken, en efficiënt ondernemen. Verbeter je administratie met de inzichten van FactuurBaas.',
+  title: 'Factuur tips zzp’ers: factuur maken, btw & betaaltermijn | FactuurBaas',
+  description:
+    'Ontdek artikelen voor zzp’ers over factuur maken, btw op je factuur, betaaltermijn en factuurbeheer. Inclusief praktische stappenplannen voor sneller betaling en minder fouten.',
   keywords: 'factuur maken, gratis online facturen maken, zzp tips, ondernemerstips, facturatie software, administratie, blog',
   openGraph: {
-    title: 'Blogs - Tips voor Facturatie en Ondernemen | FactuurBaas',
-    description: 'Artikelen en gidsen om je te helpen met facturatie, administratie en de groei van je bedrijf.',
+    title: 'Factuur tips zzp’ers: factuur maken, btw & betaaltermijn | FactuurBaas',
+    description:
+      'Ontdek artikelen voor zzp’ers over factuur maken, btw op je factuur, betaaltermijn en factuurbeheer. Inclusief praktische stappenplannen voor sneller betaling en minder fouten.',
     url: 'https://factuurbaas.nl/blogs',
     type: 'website',
     siteName: 'FactuurBaas',
@@ -16,8 +18,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blogs - Tips voor Facturatie en Ondernemen | FactuurBaas',
-    description: 'Artikelen en gidsen om je te helpen met facturatie, administratie en de groei van je bedrijf.',
+    title: 'Factuur tips zzp’ers: factuur maken, btw & betaaltermijn | FactuurBaas',
+    description:
+      'Ontdek artikelen voor zzp’ers over factuur maken, btw op je factuur, betaaltermijn en factuurbeheer. Inclusief praktische stappenplannen voor sneller betaling en minder fouten.',
   },
   alternates: { canonical: 'https://factuurbaas.nl/blogs' },
 };

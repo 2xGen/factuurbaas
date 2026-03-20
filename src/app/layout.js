@@ -1,6 +1,7 @@
 import '@/app/globals.css';
 import { Providers } from './providers';
 import ClientLayout from './ClientLayout';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'FactuurBaas | Gratis Factuur Maken voor ZZP',
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
           <ClientLayout>
             {children}
           </ClientLayout>
+          <Analytics />
         </Providers>
       </body>
     </html>

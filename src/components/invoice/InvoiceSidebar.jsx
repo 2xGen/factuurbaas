@@ -5,6 +5,7 @@ import PreviewDialog from '@/components/invoice/dialogs/PreviewDialog';
 import { usePdfExport } from '@/hooks/usePdfExport';
 import { useToast } from '@/components/ui/use-toast';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
+import Link from 'next/link';
 
 const InvoiceSidebar = ({ invoice, onSelectLayout, previewRef }) => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -69,6 +70,23 @@ const InvoiceSidebar = ({ invoice, onSelectLayout, previewRef }) => {
             <span>Totaal:</span>
             <span>€{invoiceBreakdown.grandTotal.toFixed(2)}</span>
           </div>
+        </div>
+      </div>
+
+      <div className="pt-4 border-t border-gray-200">
+        <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+          <h3 className="text-lg font-semibold text-deep-blue">Premium</h3>
+          <p className="text-sm text-slate-700 mt-1">
+            Sla je gegevens op en bespaar tijd bij elke factuur.
+            <br />
+            Krijg als eerste toegang tot Premium en profiteer van lifetime 50% korting.
+          </p>
+          <Link
+            href="/premium"
+            className="mt-4 inline-flex w-full justify-center rounded-md bg-deep-blue px-4 py-2 text-white font-semibold hover:bg-deep-blue/90 transition-colors"
+          >
+            Bekijk Premium
+          </Link>
         </div>
       </div>
       

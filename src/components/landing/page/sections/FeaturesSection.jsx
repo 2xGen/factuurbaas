@@ -80,7 +80,7 @@ const FeaturesSection = () => {
             />
           ))}
         </div>
-         <motion.p 
+        <motion.p 
           className="text-center mt-10 md:mt-12 text-gray-500 text-xs md:text-sm"
           variants={textVariants}
         >

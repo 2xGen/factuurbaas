@@ -1,6 +1,6 @@
 import React from "react";
 import FeatureCard from "@/components/landing/FeatureCard";
-import { Crown, LayoutDashboard, Users, BellRing } from "lucide-react"; 
+import { Crown } from "lucide-react"; 
 import { motion } from "framer-motion";
 
 const FeaturesSection = () => {
@@ -11,9 +11,9 @@ const FeaturesSection = () => {
     { icon: Crown, title: "Geen Account Nodig", description: "Begin direct met factureren, zonder registratie of inloggen. Jouw gemak voorop." },
     { icon: Crown, title: "Simpel & Intuïtief", description: "Een duidelijke interface, ontworpen voor maximaal gebruiksgemak. Iedereen kan het." },
     { icon: Crown, title: "Gratis Facturen Maken", description: "Maak onbeperkt facturen, helemaal gratis. Geen verborgen kosten." },
-    { icon: LayoutDashboard, title: "Overzicht*", description: "Binnenkort: Een helder dashboard met al je factuurstatistieken." },
-    { icon: Users, title: "Contacten Opslaan*", description: "Binnenkort: Bewaar je klantgegevens voor nog snellere facturatie." },
-    { icon: BellRing, title: "Automatische Herinneringen*", description: "Binnenkort: Stuur automatisch betalingsherinneringen naar je klanten." },
+    { icon: Crown, title: "Overzicht*", description: "Binnenkort: Een helder dashboard met al je factuurstatistieken." },
+    { icon: Crown, title: "Contacten Opslaan*", description: "Binnenkort: Bewaar je klantgegevens voor nog snellere facturatie." },
+    { icon: Crown, title: "Automatische Herinneringen*", description: "Binnenkort: Stuur automatisch betalingsherinneringen naar je klanten." },
   ];
 
   return (
@@ -45,7 +45,7 @@ const FeaturesSection = () => {
             />
           ))}
         </div>
-         <motion.p 
+        <motion.p 
           className="text-center mt-10 md:mt-12 text-gray-500 text-xs md:text-sm"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

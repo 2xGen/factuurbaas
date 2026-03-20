@@ -26,6 +26,7 @@ export default function HeaderClient() {
     { name: "Home", href: "/" },
     { name: "Factuur Maken", href: "/create-invoice" },
     { name: "Blogs", href: "/blogs" },
+    { name: "Premium", href: "/premium" },
   ];
 
   const headerVariants = {
@@ -56,17 +57,27 @@ export default function HeaderClient() {
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`text-slate-700 hover:text-warm-orange transition-colors font-medium ${
-                pathname === link.href ? "text-warm-orange" : ""
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              pathname === link.href || pathname.startsWith(`${link.href}/`);
+            const isPremium = link.href === '/premium';
+
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={
+                  isPremium
+                    ? 'inline-flex items-center rounded-full bg-warm-orange px-3 py-1 text-white font-bold shadow-sm hover:bg-orange-600 transition-colors'
+                    : `text-slate-700 hover:text-warm-orange transition-colors font-medium ${
+                        isActive ? 'text-warm-orange font-bold' : ''
+                      }`
+                }
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center space-x-4">
@@ -96,15 +107,28 @@ export default function HeaderClient() {
             className="md:hidden bg-white/95 backdrop-blur-lg shadow-lg"
           >
             <nav className="flex flex-col items-center space-y-4 py-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-lg text-slate-700 hover:text-warm-orange transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive =
+                  pathname === link.href ||
+                  pathname.startsWith(`${link.href}/`);
+                const isPremium = link.href === '/premium';
+
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={
+                      isPremium
+                        ? 'text-lg inline-flex items-center rounded-full bg-warm-orange px-3 py-1 text-white font-bold shadow-sm hover:bg-orange-600 transition-colors justify-center'
+                        : `text-lg transition-colors ${
+                            isActive ? 'text-warm-orange font-bold' : 'text-slate-700 hover:text-warm-orange'
+                          }`
+                    }
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
               {pathname !== "/create-invoice" && (
                 <Button asChild className="mt-4">
                   <Link href="/create-invoice">
