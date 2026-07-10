@@ -4,8 +4,9 @@ import ClientLayout from './ClientLayout';
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
-  title: 'FactuurBaas | Gratis Factuur Maken voor ZZP',
-  description: 'Gratis factuur maken als zzp. Binnen 1 minuut een professionele factuur. Geen account nodig.',
+  title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
+  description:
+    "Maak gratis professionele facturen in 2 minuten. Geen account nodig. Direct PDF downloaden voor zzp'ers en kleine ondernemers.",
   metadataBase: new URL('https://factuurbaas.nl'),
   openGraph: {
     title: 'FactuurBaas | Eenvoudig Factureren',

@@ -1,19 +1,8 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { supabase } from '@/lib/supabaseClient'; 
+import { INVOICE_LOG_INSERT_TABLE, logToolUsage } from '@/lib/toolUsageLog';
 
 export const usePdfExport = (previewRef, toast) => {
-  const logInvoiceCreation = async () => {
-    try {
-      const { error } = await supabase.from('invoice_creations_log').insert([{}]);
-      if (error) {
-        console.error('Error logging invoice creation:', error);
-      }
-    } catch (error) {
-      console.error('Supabase client error logging invoice creation:', error);
-    }
-  };
-
   const exportToPdf = async (invoiceData, invoiceBreakdown, fileName = 'invoice.pdf') => {
     const input = previewRef.current;
     if (input) {
@@ -72,33 +61,36 @@ export const usePdfExport = (previewRef, toast) => {
         pdf.addImage(imgData, 'PNG', imgX, imgY, finalImgWidth, finalImgHeight);
         pdf.save(fileName);
         
-        await logInvoiceCreation();
+        await logToolUsage(INVOICE_LOG_INSERT_TABLE);
 
         if (toast) {
           toast({
-            title: "PDF Gecreëerd",
-            description: "Uw factuur PDF wordt gedownload.",
+            title: 'PDF Gecreëerd',
+            description: 'Uw factuur PDF wordt gedownload.',
           });
         }
+        return true;
       } catch (error) {
-        console.error("Error generating PDF:", error);
+        console.error('Error generating PDF:', error);
         if (toast) {
           toast({
-            title: "Fout bij PDF creatie",
-            description: "Er is een fout opgetreden bij het genereren van de PDF. Probeer het opnieuw.",
-            variant: "destructive",
+            title: 'Fout bij PDF creatie',
+            description: 'Er is een fout opgetreden bij het genereren van de PDF. Probeer het opnieuw.',
+            variant: 'destructive',
           });
         }
+        return false;
       }
     } else {
       if (toast) {
         toast({
-          title: "Fout bij PDF creatie",
-          description: "Kon het voorbeeld niet vinden. Zorg dat het voorbeeld zichtbaar is.",
-          variant: "destructive",
+          title: 'Fout bij PDF creatie',
+          description: 'Kon het voorbeeld niet vinden. Zorg dat het voorbeeld zichtbaar is.',
+          variant: 'destructive',
         });
       }
     }
+    return false;
   };
 
   return { exportToPdf };

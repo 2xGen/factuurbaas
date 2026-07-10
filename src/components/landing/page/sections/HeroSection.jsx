@@ -1,121 +1,127 @@
 'use client';
-import React from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { FileText, CheckCircle } from "lucide-react"; 
-import TopSloganSlider from "@/components/landing/TopSloganSlider";
 
-const AnimatedShape = ({ className, delay, duration = 15, opacityValues = [0, 0.05, 0.1, 0.05, 0] }) => (
-  <motion.div
-    className={`absolute rounded-full pointer-events-none ${className}`}
-    initial={{ opacity: 0, scale: 0.5 }}
-    animate={{ opacity: opacityValues, scale: 1 }}
-    transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
-  />
-);
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, CheckCircle, FileText } from 'lucide-react';
+import DemoInvoicePreview from '@/components/landing/DemoInvoicePreview';
 
-const TechPath = ({ d, delay, duration }) => (
-  <motion.path
-    d={d}
-    initial={{ pathLength: 0, opacity: 0 }}
-    animate={{ pathLength: 1, opacity: 0.3 }}
-    transition={{ duration, delay, repeat: Infinity, repeatType: "loop", ease: "easeInOut" }}
-    stroke="url(#techGradient)"
-    strokeWidth="0.5"
-    fill="none"
-  />
-);
-
-const FeaturePill = ({ icon: Icon, text, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-    className="flex items-center text-[0.9rem] sm:text-base bg-sky-500/10 backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg hover:bg-sky-500/20 transition-colors duration-300 border border-sky-400/30"
-  >
-    <Icon className="w-5 h-5 mr-2.5 text-sky-300" />
-    <span className="text-sky-100">{text}</span>
-  </motion.div>
-);
-
+const trustItems = [
+  'Gratis',
+  'Geen account nodig',
+  'Direct PDF downloaden',
+  "Voor ZZP'ers en kleine ondernemers",
+];
 
 const HeroSection = () => (
-  <section className="relative bg-gradient-to-br from-deep-blue via-sky-700 to-indigo-600 text-white pt-20 pb-20 md:pb-28 lg:pb-32 overflow-hidden">
-    <div className="absolute inset-0 pointer-events-none">
-      <svg width="100%" height="100%" className="absolute inset-0 opacity-20">
-        <defs>
-          <pattern id="heroTechGrid" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <circle cx="1" cy="1" r="0.5" fill="rgba(128, 193, 255, 0.5)" />
-            <line x1="0" y1="0" x2="80" y2="80" stroke="rgba(128, 193, 255, 0.1)" strokeWidth="0.2"/>
-            <line x1="80" y1="0" x2="0" y2="80" stroke="rgba(128, 193, 255, 0.1)" strokeWidth="0.2"/>
-          </pattern>
-          <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{stopColor: "rgb(56, 189, 248)", stopOpacity:1}} /> {/* sky-400 */}
-            <stop offset="100%" style={{stopColor: "rgb(96, 165, 250)", stopOpacity:1}} /> {/* blue-400 */}
-          </linearGradient>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#heroTechGrid)" />
-      </svg>
-      <svg width="100%" height="100%" className="absolute inset-0 opacity-30">
-        <TechPath d="M0,50 Q100,0 200,50 T400,50 T600,50 T800,50 T1000,50 T1200,50 T1400,50" delay={0} duration={20} />
-        <TechPath d="M0,150 Q150,100 300,150 T600,150 T900,150 T1200,150" delay={2} duration={25} />
-        <TechPath d="M1400,250 Q1300,300 1200,250 T1000,250 T800,250 T600,250 T400,250" delay={1} duration={18} />
-      </svg>
+  <section className="relative overflow-hidden bg-gradient-to-br from-deep-blue via-sky-800 to-indigo-700 text-white">
+    <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+          backgroundSize: '32px 32px',
+        }}
+      />
     </div>
-    
-    <AnimatedShape className="w-72 h-72 bg-sky-400/5 -top-20 -left-32 filter blur-xl" delay={0} duration={20} />
-    <AnimatedShape className="w-96 h-96 bg-blue-500/5 -bottom-40 -right-40 filter blur-2xl" delay={2.5} duration={25}/>
-    <AnimatedShape className="w-60 h-60 bg-indigo-500/5 top-1/3 left-1/2 transform -translate-x-1/2 filter blur-xl" delay={5} duration={18} />
 
-    <TopSloganSlider slogans={["Moeilijk? Nee.", "Saai? Nooit.", "Snel? Altijd."]} />
-    
-    <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
-      <motion.h1 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        className="text-[3.25rem] sm:text-[3.875rem] md:text-7xl lg:text-8xl font-heading font-extrabold leading-tight tracking-tight"
-      >
-        Factureren.
-        <br /> 
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-300 via-blue-300 to-indigo-300">
-          Eenvoudig. Slim.
-        </span>
-      </motion.h1>
-       
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.6 }}
-        className="text-[1.05rem] sm:text-[1.15rem] md:text-2xl text-blue-100 my-8 md:my-10 max-w-xl lg:max-w-2xl mx-auto leading-relaxed"
-      >
-        Waarom moeilijk doen als het zo makkelijk kan?<br/>
-        FactuurBaas: professionele facturen in 2 minuten - klaar.
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: 0.9 }}
-        className="flex justify-center items-center"
-      >
-        <Link href="/create-invoice">
-          <Button 
-            size="xl" 
-            variant="secondary"
-            className="text-secondary-foreground text-md sm:text-lg px-10 sm:px-12 py-5 sm:py-6 rounded-xl transform hover:scale-105 transition-transform duration-300 ease-out group"
+    <div className="container relative z-10 mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+        <div className="text-center lg:text-left">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mb-4 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-sky-100"
           >
-            Direct Factuur Maken <FileText className="ml-2 sm:ml-3 h-5 w-5 group-hover:rotate-3 transition-transform" />
-          </Button>
-        </Link>
-      </motion.div>
+            Gratis · Geen account · Direct PDF
+          </motion.p>
 
-      <div 
-        className="mt-16 md:mt-20 flex flex-wrap justify-center items-center gap-3 sm:gap-4"
-      >
-        <FeaturePill icon={CheckCircle} text="Professionele facturen" delay={1.2} />
-        <FeaturePill icon={CheckCircle} text="Heldere overzichten" delay={1.35} />
-        <FeaturePill icon={CheckCircle} text="Meer tijd voor je werk" delay={1.5} />
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="text-[1.75rem] leading-[1.15] font-heading font-extrabold tracking-tight sm:text-4xl md:text-[2.75rem] lg:text-5xl"
+          >
+            Maak gratis professionele facturen in 2 minuten
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.12 }}
+            className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-blue-100 sm:text-lg lg:mx-0"
+          >
+            Geen account. Geen abonnement. Geen ingewikkelde boekhouding. Maak je factuur,
+            download direct als PDF en stuur hem naar je klant.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start"
+          >
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="h-12 rounded-xl px-6 text-base font-semibold sm:h-14 sm:px-8 sm:text-lg"
+            >
+              <Link href="/create-invoice">
+                Maak gratis factuur
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-12 rounded-xl border-white/30 bg-white/5 px-6 text-base font-semibold text-white hover:bg-white/15 hover:text-white sm:h-14 sm:px-8 sm:text-lg"
+            >
+              <Link href="/voorbeeld">
+                <FileText className="mr-2 h-5 w-5" />
+                Bekijk voorbeelden
+              </Link>
+            </Button>
+          </motion.div>
+
+          <motion.ul
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 lg:max-w-lg"
+          >
+            {trustItems.map((item) => (
+              <li
+                key={item}
+                className="flex items-center justify-center gap-2 text-sm text-sky-100 sm:justify-start"
+              >
+                <CheckCircle className="h-4 w-4 flex-shrink-0 text-sky-300" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </motion.ul>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mx-auto w-full max-w-md lg:max-w-lg lg:justify-self-end"
+        >
+          <div className="relative">
+            <div
+              className="absolute -inset-3 rounded-2xl bg-white/10 blur-2xl sm:-inset-4"
+              aria-hidden
+            />
+            <div className="relative rounded-2xl bg-white/10 p-3 ring-1 ring-white/20 backdrop-blur-sm sm:p-4">
+              <DemoInvoicePreview layout="plain" className="shadow-2xl" />
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   </section>

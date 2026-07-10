@@ -10,20 +10,27 @@ export default function FooterClient() {
   return (
     <footer className="py-12 border-t border-gray-200 bg-slate-50 text-slate-700">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-lg font-semibold text-deep-blue mb-3 font-heading">FactuurBaas</h3>
             <p className="text-sm text-slate-600">
-              Eenvoudig en snel professionele facturen maken. Bespaar tijd en focus op je onderneming.
+              De makkelijkste manier voor Nederlandse ondernemers om mooie facturen te maken. Gratis, zonder account.
             </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-deep-blue mb-3 font-heading">Snelle Links</h3>
+            <h3 className="text-lg font-semibold text-deep-blue mb-3 font-heading">Facturen</h3>
             <ul className="space-y-2">
-              <li><Link href="/" className="text-sm hover:text-warm-orange transition-colors">Home</Link></li>
-              <li><Link href="/create-invoice" className="text-sm hover:text-warm-orange transition-colors">Factuur Maken</Link></li>
-              <li><Link href="/blogs" className="text-sm hover:text-warm-orange transition-colors">Blogs</Link></li>
-              <li><Link href="/premium" className="text-sm hover:text-warm-orange transition-colors">Premium</Link></li>
+              <li><Link href="/factuur-maken" className="text-sm hover:text-warm-orange transition-colors">Factuur maken</Link></li>
+              <li><Link href="/template" className="text-sm hover:text-warm-orange transition-colors">Templates</Link></li>
+              <li><Link href="/voorbeeld" className="text-sm hover:text-warm-orange transition-colors">Voorbeelden</Link></li>
+              <li><Link href="/create-invoice" className="text-sm hover:text-warm-orange transition-colors">Gratis factuur tool</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-deep-blue mb-3 font-heading">Meer</h3>
+            <ul className="space-y-2">
+              <li><Link href="/tools" className="text-sm hover:text-warm-orange transition-colors">Tools</Link></li>
+              <li><Link href="/blogs" className="text-sm hover:text-warm-orange transition-colors">Gidsen</Link></li>
             </ul>
           </div>
           <div>

@@ -1,8 +1,10 @@
 import React from 'react';
 import InvoiceLogSection from '@/components/admin/InvoiceLogSection';
+import ToolUsageLogSection from '@/components/admin/ToolUsageLogSection';
 import FooterLinksSection from '@/components/admin/FooterLinksSection';
-// BlogListingsSection is removed
 import PageViewsSection from '@/components/admin/PageViewsSection';
+import { TOOL_USAGE_ADMIN_SECTIONS } from '@/lib/toolUsageLog';
+import { Calculator } from 'lucide-react';
 
 const AdminDashboardPage = () => {
   return (
@@ -14,9 +16,18 @@ const AdminDashboardPage = () => {
 
       <PageViewsSection />
       <InvoiceLogSection />
+      {TOOL_USAGE_ADMIN_SECTIONS.map((section) => (
+        <ToolUsageLogSection
+          key={section.table}
+          title={section.title}
+          description={section.description}
+          table={section.table}
+          statsRpc={section.statsRpc}
+          icon={Calculator}
+          emptyMessage={section.emptyMessage}
+        />
+      ))}
       <FooterLinksSection />
-      {/* BlogListingsSection component is no longer rendered here */}
-
     </div>
   );
 };

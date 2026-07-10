@@ -1,102 +1,91 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Eye, Settings, Info } from 'lucide-react';
+import { Download, Info } from 'lucide-react';
 import PreviewDialog from '@/components/invoice/dialogs/PreviewDialog';
+import DownloadSuccessDialog from '@/components/invoice/dialogs/DownloadSuccessDialog';
 import { usePdfExport } from '@/hooks/usePdfExport';
 import { useToast } from '@/components/ui/use-toast';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
-import Link from 'next/link';
+import { formatMoney, getTaxDisplayLabel, INVOICE_LABELS } from '@/lib/invoiceConfig';
 
-const InvoiceSidebar = ({ invoice, onSelectLayout, previewRef }) => {
+const InvoiceSidebar = ({ invoice, previewRef }) => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const { toast } = useToast();
   const { exportToPdf } = usePdfExport(previewRef, toast);
 
   const invoiceBreakdown = calculateInvoiceBreakdown(invoice);
+  const currency = invoice?.currency || 'EUR';
+  const labels = INVOICE_LABELS[invoice?.pdfLanguage || 'nl'] || INVOICE_LABELS.nl;
+  const fmt = (amount) => formatMoney(amount, currency);
 
-  const handleOpenPreviewAndPrepareDownload = () => {
-    setIsPreviewOpen(true);
-  };
-  
-  const handleConfirmDownload = () => {
-    if (previewRef && previewRef.current) {
-        exportToPdf(invoice, invoiceBreakdown, `Factuur-${invoice.invoice_number || 'concept'}.pdf`);
-    } else {
-        toast({
-            title: "Download Fout",
-            description: "Kan PDF niet downloaden. Voorbeeld is nog niet geladen.",
-            variant: "destructive",
-        });
+  const handleConfirmDownload = async () => {
+    const success = await exportToPdf(
+      invoice,
+      invoiceBreakdown,
+      `Factuur-${invoice.invoice_number || 'concept'}.pdf`
+    );
+    if (success) {
+      setIsPreviewOpen(false);
+      setIsSuccessOpen(true);
     }
   };
 
   if (!invoice) return null;
 
+  const showVatAmount = !['exempt', 'reverse'].includes(invoice.tax);
+
   return (
-    // Added min-h-[calc(100vh-theme(spacing.24))] to ensure the column can be tall enough for sticky to work
-    // The top-24 value should match header height + some spacing if there's a fixed header
     <div className="lg:sticky lg:top-6 p-6 bg-white rounded-xl shadow-xl border border-gray-200 space-y-6 self-start">
       <div>
         <h3 className="text-lg font-semibold text-deep-blue mb-3 flex items-center">
-          <Settings className="w-5 h-5 mr-2 text-warm-orange" />
-          Factuur Acties
-        </h3>
-        <div className="space-y-3">
-          <Button 
-            variant="outline" 
-            className="w-full justify-start text-gray-700 hover:bg-gray-100"
-            onClick={handleOpenPreviewAndPrepareDownload}
-          >
-            <Eye className="w-4 h-4 mr-2" /> Factuur Bekijken & Downloaden
-          </Button>
-        </div>
-      </div>
-
-      <div className="pt-4 border-t border-gray-200">
-         <h3 className="text-lg font-semibold text-deep-blue mb-3 flex items-center">
           <Info className="w-5 h-5 mr-2 text-blue-500" />
           Factuur Info
         </h3>
         <div className="space-y-2 text-sm text-gray-600">
           <div className="flex justify-between">
-            <span>Subtotaal:</span>
-            <span className="font-medium">€{invoiceBreakdown.subtotal.toFixed(2)}</span>
+            <span>{labels.subtotal}:</span>
+            <span className="font-medium">{fmt(invoiceBreakdown.subtotal)}</span>
           </div>
-          <div className="flex justify-between">
-            <span>BTW ({invoice.tax}%):</span>
-            <span className="font-medium">€{invoiceBreakdown.taxAmount.toFixed(2)}</span>
-          </div>
+          {showVatAmount ? (
+            <div className="flex justify-between">
+              <span>{getTaxDisplayLabel(invoice, labels)}:</span>
+              <span className="font-medium">{fmt(invoiceBreakdown.taxAmount)}</span>
+            </div>
+          ) : (
+            <p className="text-xs text-gray-500">{getTaxDisplayLabel(invoice, labels)}</p>
+          )}
           <div className="flex justify-between text-md font-semibold text-deep-blue pt-1 border-t border-gray-100">
-            <span>Totaal:</span>
-            <span>€{invoiceBreakdown.grandTotal.toFixed(2)}</span>
+            <span>{labels.total}:</span>
+            <span>{fmt(invoiceBreakdown.grandTotal)}</span>
           </div>
         </div>
       </div>
 
       <div className="pt-4 border-t border-gray-200">
-        <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-          <h3 className="text-lg font-semibold text-deep-blue">Premium</h3>
-          <p className="text-sm text-slate-700 mt-1">
-            Sla je gegevens op en bespaar tijd bij elke factuur.
-            <br />
-            Krijg als eerste toegang tot Premium en profiteer van lifetime 50% korting.
-          </p>
-          <Link
-            href="/premium"
-            className="mt-4 inline-flex w-full justify-center rounded-md bg-deep-blue px-4 py-2 text-white font-semibold hover:bg-deep-blue/90 transition-colors"
-          >
-            Bekijk Premium
-          </Link>
-        </div>
+        <h3 className="text-lg font-semibold text-deep-blue mb-3">Factuur Acties</h3>
+        <Button
+          className="w-full bg-deep-blue hover:bg-deep-blue/90 text-white font-semibold h-12"
+          onClick={() => setIsPreviewOpen(true)}
+        >
+          <Download className="w-4 h-4 mr-2" />
+          Factuur Bekijken & Downloaden
+        </Button>
       </div>
-      
-      <PreviewDialog 
-        isOpen={isPreviewOpen} 
-        onClose={() => setIsPreviewOpen(false)} 
-        invoice={invoice} 
+
+      <PreviewDialog
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        invoice={invoice}
         invoiceBreakdown={invoiceBreakdown}
         onConfirmDownload={handleConfirmDownload}
-        previewRef={previewRef} 
+        previewRef={previewRef}
+      />
+
+      <DownloadSuccessDialog
+        isOpen={isSuccessOpen}
+        onClose={() => setIsSuccessOpen(false)}
+        companyEmail={invoice.companyDetails?.email}
       />
     </div>
   );

@@ -1,17 +1,24 @@
 import React from "react";
 import HeroSection from "@/components/landing/page/sections/HeroSection";
-import FeaturesSection from "@/components/landing/page/sections/FeaturesSection";
-import TestimonialsSection from "@/components/landing/page/sections/TestimonialsSection";
+import StylePickerSection from "@/components/landing/page/sections/StylePickerSection";
+import HowItWorksSection from "@/components/landing/page/sections/HowItWorksSection";
+import TemplatesLibrarySection from "@/components/landing/page/sections/TemplatesLibrarySection";
+import SeoLandingSection from "@/components/landing/page/sections/SeoLandingSection";
+import TrustSection from "@/components/landing/page/sections/TrustSection";
+import HomeToolsSection from "@/components/landing/page/sections/HomeToolsSection";
 import BlogPillarsSection from "@/components/landing/page/sections/BlogPillarsSection";
 import CallToActionSection from "@/components/landing/page/sections/CallToActionSection";
 
 export const metadata = {
-  title: 'FactuurBaas | Gratis Factuur Maken voor ZZP – Online, Geen Account',
-  description: "Gratis factuur maken als zzp? Met FactuurBaas maak je binnen 1 minuut een professionele factuur. Geen account nodig – direct PDF downloaden. Probeer nu.",
-  keywords: "factuur maken, online factureren, zzp factuur, factuurprogramma, gratis factureren, factuur template, professionele factuur",
+  title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
+  description:
+    "Maak gratis professionele facturen in 2 minuten. Geen account, geen abonnement. Download direct als PDF. Voor zzp'ers en kleine ondernemers.",
+  keywords:
+    'gratis factuur maken, factuur maken zonder account, factuur maken zzp, factuur template, factuur voorbeeld, online factuur maken',
   openGraph: {
-    title: 'FactuurBaas | Jouw Partner in Eenvoudig Factureren',
-    description: 'Ontdek hoe FactuurBaas je helpt om moeiteloos professionele facturen te maken.',
+    title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
+    description:
+      'Maak gratis professionele facturen in 2 minuten. Geen account nodig. Direct PDF downloaden.',
     url: 'https://factuurbaas.nl',
     type: 'website',
     images: ['/og-image.png'],
@@ -21,14 +28,16 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 font-sans">
-      <main>
-        <HeroSection />
-        <FeaturesSection />
-        <TestimonialsSection />
-        <BlogPillarsSection />
-        <CallToActionSection />
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <StylePickerSection />
+      <HowItWorksSection />
+      <TemplatesLibrarySection />
+      <SeoLandingSection />
+      <TrustSection />
+      <HomeToolsSection />
+      <BlogPillarsSection />
+      <CallToActionSection />
+    </>
   );
 }

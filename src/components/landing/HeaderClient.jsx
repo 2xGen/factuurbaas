@@ -1,11 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Menu, X, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Menu, X } from 'lucide-react';
+
+const navLinks = [
+  { name: 'Factuur maken', href: '/factuur-maken' },
+  { name: 'Templates', href: '/template' },
+  { name: 'Voorbeelden', href: '/voorbeeld' },
+  { name: 'Tools', href: '/tools' },
+  { name: 'Gidsen', href: '/blogs' },
+];
 
 export default function HeaderClient() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,65 +22,40 @@ export default function HeaderClient() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Factuur Maken", href: "/create-invoice" },
-    { name: "Blogs", href: "/blogs" },
-    { name: "Premium", href: "/premium" },
-  ];
-
-  const headerVariants = {
-    initial: {
-      backgroundColor: "rgba(255, 255, 255, 0)",
-      backdropFilter: "blur(0px)",
-      boxShadow: "none",
-    },
-    scrolled: {
-      backgroundColor: "rgba(255, 255, 255, 0.8)",
-      backdropFilter: "blur(10px)",
-      boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-    },
-  };
-
   return (
-    <motion.header
-      variants={headerVariants}
-      initial="initial"
-      animate={isScrolled ? "scrolled" : "initial"}
-      transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 right-0 z-50 transition-all"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-white transition-shadow duration-300 ${
+        isScrolled ? 'shadow-md' : 'shadow-sm'
+      }`}
     >
-      <div className="container mx-auto px-6 h-20 flex justify-between items-center">
+      <div className="container mx-auto flex h-20 items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
           <img src="/crown-favicon.svg" alt="FactuurBaas Logo" className="h-8 w-8" />
-          <span className="text-2xl font-bold text-deep-blue font-heading">FactuurBaas</span>
+          <span className="font-heading text-2xl font-bold text-deep-blue">FactuurBaas</span>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden items-center space-x-6 md:flex">
           {navLinks.map((link) => {
             const isActive =
-              pathname === link.href || pathname.startsWith(`${link.href}/`);
-            const isPremium = link.href === '/premium';
+              pathname === link.href ||
+              (link.href !== '/' && pathname.startsWith(`${link.href}/`));
 
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={
-                  isPremium
-                    ? 'inline-flex items-center rounded-full bg-warm-orange px-3 py-1 text-white font-bold shadow-sm hover:bg-orange-600 transition-colors'
-                    : `text-slate-700 hover:text-warm-orange transition-colors font-medium ${
-                        isActive ? 'text-warm-orange font-bold' : ''
-                      }`
-                }
+                className={`font-medium text-slate-700 transition-colors hover:text-warm-orange ${
+                  isActive ? 'font-bold text-warm-orange' : ''
+                }`}
               >
                 {link.name}
               </Link>
@@ -81,17 +64,17 @@ export default function HeaderClient() {
         </nav>
 
         <div className="flex items-center space-x-4">
-          {pathname !== "/create-invoice" && (
+          {pathname !== '/create-invoice' && (
             <div className="hidden md:block">
               <Button asChild>
                 <Link href="/create-invoice">
-                  Start Nu <ArrowRight className="ml-2 h-4 w-4" />
+                  Maak gratis factuur <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
           )}
           <div className="md:hidden">
-            <Button onClick={() => setIsOpen(!isOpen)} variant="ghost" size="icon">
+            <Button onClick={() => setIsOpen(!isOpen)} variant="ghost" size="icon" aria-label="Menu">
               {isOpen ? <X /> : <Menu />}
             </Button>
           </div>
@@ -102,37 +85,32 @@ export default function HeaderClient() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 backdrop-blur-lg shadow-lg"
+            className="border-t border-slate-200 bg-white md:hidden"
           >
             <nav className="flex flex-col items-center space-y-4 py-6">
               {navLinks.map((link) => {
                 const isActive =
                   pathname === link.href ||
-                  pathname.startsWith(`${link.href}/`);
-                const isPremium = link.href === '/premium';
+                  (link.href !== '/' && pathname.startsWith(`${link.href}/`));
 
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={
-                      isPremium
-                        ? 'text-lg inline-flex items-center rounded-full bg-warm-orange px-3 py-1 text-white font-bold shadow-sm hover:bg-orange-600 transition-colors justify-center'
-                        : `text-lg transition-colors ${
-                            isActive ? 'text-warm-orange font-bold' : 'text-slate-700 hover:text-warm-orange'
-                          }`
-                    }
+                    className={`text-lg transition-colors ${
+                      isActive ? 'font-bold text-warm-orange' : 'text-slate-700 hover:text-warm-orange'
+                    }`}
                   >
                     {link.name}
                   </Link>
                 );
               })}
-              {pathname !== "/create-invoice" && (
+              {pathname !== '/create-invoice' && (
                 <Button asChild className="mt-4">
                   <Link href="/create-invoice">
-                    Start Nu <ArrowRight className="ml-2 h-4 w-4" />
+                    Maak gratis factuur <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               )}
@@ -140,6 +118,6 @@ export default function HeaderClient() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

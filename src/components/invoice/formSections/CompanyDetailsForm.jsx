@@ -1,19 +1,29 @@
 import React from 'react';
-import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
-import FormInput from "@/components/invoice/formElements/FormInput";
-import FormTextarea from "@/components/invoice/formElements/FormTextarea";
+import { Button } from '@/components/ui/button';
+import { Upload, CheckCircle2 } from 'lucide-react';
+import FormInput from '@/components/invoice/formElements/FormInput';
+import MeerOpties from '@/components/invoice/formElements/MeerOpties';
 
-const CompanyDetailsForm = ({ companyDetails, logo, onInputChange, onLogoUpload, fileInputRef }) => {
+const CompanyDetailsForm = ({
+  companyDetails,
+  logo,
+  rememberCompanyDetails,
+  onInputChange,
+  onLogoUpload,
+  onRememberChange,
+  fileInputRef,
+}) => {
   const handleDetailChange = (e) => {
-    onInputChange({ 
-      target: { 
-        name: e.target.name, 
+    onInputChange({
+      target: {
+        name: e.target.name,
         value: e.target.value,
-        dataset: { section: 'companyDetails' } 
-      } 
+        dataset: { section: 'companyDetails' },
+      },
     });
   };
+
+  const hasAdvancedFields = Boolean(companyDetails.kvk || companyDetails.btw);
 
   return (
     <div className="space-y-6">
@@ -46,37 +56,55 @@ const CompanyDetailsForm = ({ companyDetails, logo, onInputChange, onLogoUpload,
             </div>
           )}
         </div>
-        <div className="flex-grow w-full">
+        <div className="flex-grow w-full space-y-4">
           <FormInput
             name="name"
             value={companyDetails.name || ''}
             onChange={handleDetailChange}
             placeholder="Uw Bedrijfsnaam"
-            className="text-2xl font-bold bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500 mb-2"
+            className="text-2xl font-bold bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           />
-          <FormTextarea
-            name="address"
-            value={companyDetails.address || ''}
+          <FormInput
+            label="Straatnaam en nummer"
+            name="street"
+            value={companyDetails.street || ''}
             onChange={handleDetailChange}
-            placeholder="Straatnaam en nummer&#10;Postcode en Plaats&#10;Land"
-            rows="3"
+            placeholder="Bijv. Hoofdstraat 12"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <FormInput
+              label="Postcode"
+              name="postalCode"
+              value={companyDetails.postalCode || ''}
+              onChange={handleDetailChange}
+              placeholder="1234 AB"
+            />
+            <FormInput
+              label="Plaats"
+              name="city"
+              value={companyDetails.city || ''}
+              onChange={handleDetailChange}
+              placeholder="Amsterdam"
+            />
+          </div>
+          <FormInput
+            label="Land"
+            name="country"
+            value={companyDetails.country || ''}
+            onChange={handleDetailChange}
+            placeholder="Nederland"
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormInput
-          label="KVK-nummer"
-          name="kvk"
-          value={companyDetails.kvk || ''}
+          label="E-mailadres (optioneel)"
+          name="email"
+          type="email"
+          value={companyDetails.email || ''}
           onChange={handleDetailChange}
-          placeholder="Uw KVK-nummer"
-        />
-        <FormInput
-          label="BTW-nummer"
-          name="btw"
-          value={companyDetails.btw || ''}
-          onChange={handleDetailChange}
-          placeholder="Uw BTW-nummer"
+          placeholder="info@uwbedrijf.nl"
         />
         <FormInput
           label="IBAN"
@@ -85,6 +113,48 @@ const CompanyDetailsForm = ({ companyDetails, logo, onInputChange, onLogoUpload,
           onChange={handleDetailChange}
           placeholder="Uw IBAN"
         />
+      </div>
+
+      <MeerOpties defaultOpen={hasAdvancedFields}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FormInput
+            label="KVK-nummer"
+            name="kvk"
+            value={companyDetails.kvk || ''}
+            onChange={handleDetailChange}
+            placeholder="Uw KVK-nummer"
+          />
+          <FormInput
+            label="BTW-nummer"
+            name="btw"
+            value={companyDetails.btw || ''}
+            onChange={handleDetailChange}
+            placeholder="Uw BTW-nummer"
+          />
+        </div>
+      </MeerOpties>
+
+      <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-3">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={rememberCompanyDetails}
+            onChange={(e) => onRememberChange(e.target.checked)}
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <span className="text-sm text-slate-700">
+            <span className="font-medium text-slate-900">Onthoud mijn bedrijfsgegevens op dit apparaat</span>
+            <span className="block mt-1 text-slate-500">
+              Opgeslagen in je browser. Wij slaan deze gegevens niet op onze servers op.
+            </span>
+          </span>
+        </label>
+        {rememberCompanyDetails && (
+          <p className="flex items-center gap-2 text-sm text-green-700 font-medium pl-7">
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
+            Bedrijfsgegevens worden lokaal opgeslagen.
+          </p>
+        )}
       </div>
     </div>
   );

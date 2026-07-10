@@ -34,10 +34,10 @@ const layoutOptions = [
   },
 ];
 
-const LayoutSelector = ({ currentLayout, onSelectLayout }) => {
+const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Factuur Stijl:' }) => {
   return (
     <div className="mb-6">
-      <p className="block text-sm font-medium text-gray-700 mb-3">Kies Factuur Stijl:</p>
+      <p className="block text-sm font-medium text-gray-700 mb-3">{styleLabel}</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"> {/* Changed grid columns */}
         {layoutOptions.map(option => (
           <button

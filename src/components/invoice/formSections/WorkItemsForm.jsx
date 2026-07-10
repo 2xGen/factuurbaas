@@ -1,23 +1,23 @@
-import React from 'react';
-import { Button } from "@/components/ui/button";
-import { PlusCircle, Trash2, CalendarDays, Clock } from "lucide-react";
-import FormInput from "@/components/invoice/formElements/FormInput";
-import FormTextarea from "@/components/invoice/formElements/FormTextarea";
-import FormSelect from "@/components/invoice/formElements/FormSelect";
-import FormDatePicker from "@/components/invoice/formElements/FormDatePicker";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { PlusCircle, Trash2, CalendarDays, Clock } from 'lucide-react';
+import FormInput from '@/components/invoice/formElements/FormInput';
+import FormTextarea from '@/components/invoice/formElements/FormTextarea';
+import FormSelect from '@/components/invoice/formElements/FormSelect';
+import FormDatePicker from '@/components/invoice/formElements/FormDatePicker';
+import { TAX_OPTIONS } from '@/lib/invoiceConfig';
 
-const WorkItemsForm = ({ 
-  invoice, 
-  onWorkTypeChange, 
-  onInputChange, 
-  onAddItem, 
-  onUpdateItem, 
+const WorkItemsForm = ({
+  invoice,
+  onWorkTypeChange,
+  onInputChange,
+  onAddItem,
+  onUpdateItem,
   onRemoveItem,
   onAddWorkDay,
   onUpdateWorkDay,
-  onRemoveWorkDay
+  onRemoveWorkDay,
 }) => {
-  
   const handleTaxSettingChange = (e) => {
     onInputChange({ target: { name: 'taxIncluded', value: e.target.value === 'inclusive' } });
   };
@@ -25,11 +25,25 @@ const WorkItemsForm = ({
   const handleTaxRateChange = (e) => {
     onInputChange({ target: { name: 'tax', value: e.target.value } });
   };
-  
+
   const handleWorkTypeSelectChange = (e) => {
     onWorkTypeChange(e.target.value);
   };
 
+  const handleExtraCostChange = (e) => {
+    onInputChange({
+      target: {
+        name: e.target.name,
+        value: e.target.value,
+        dataset: { section: 'extraCosts' },
+      },
+    });
+  };
+
+  const showTaxIncluded = !['exempt', 'reverse'].includes(invoice.tax);
+  const extra = invoice.extraCosts || {};
+  const hasExtraCosts = Boolean(extra.travel || extra.shipping || extra.material);
+  const [showExtraCosts, setShowExtraCosts] = useState(hasExtraCosts);
 
   return (
     <div className="space-y-6">
@@ -46,10 +60,10 @@ const WorkItemsForm = ({
         />
         {invoice.workType === 'hourly' && (
           <FormInput
-            label="Uurtarief" 
-            name="amount" 
+            label="Uurtarief"
+            name="amount"
             type="number"
-            value={invoice.amount || ''} 
+            value={invoice.amount || ''}
             onChange={onInputChange}
             placeholder="Bijv. 50"
             min="0"
@@ -60,26 +74,37 @@ const WorkItemsForm = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
         <FormSelect
-            label="BTW Tarief"
-            name="tax"
-            value={invoice.tax}
-            onChange={handleTaxRateChange}
+          label="BTW Tarief"
+          name="tax"
+          value={invoice.tax}
+          onChange={handleTaxRateChange}
+          options={TAX_OPTIONS}
+        />
+        {invoice.tax === 'custom' && (
+          <FormInput
+            label="Eigen percentage (%)"
+            name="customTaxRate"
+            type="number"
+            min="0"
+            max="100"
+            step="0.1"
+            value={invoice.customTaxRate ?? ''}
+            onChange={onInputChange}
+            placeholder="Bijv. 13"
+          />
+        )}
+        {showTaxIncluded && (
+          <FormSelect
+            label="Prijsweergave"
+            name="taxSetting"
+            value={invoice.taxIncluded ? 'inclusive' : 'exclusive'}
+            onChange={handleTaxSettingChange}
             options={[
-              { value: '21', label: '21% (Standaard tarief)' },
-              { value: '9', label: '9% (Laag tarief)' },
-              { value: '0', label: '0% (BTW verlegd / Vrijgesteld)' },
+              { value: 'exclusive', label: 'Prijzen excl. BTW' },
+              { value: 'inclusive', label: 'Prijzen incl. BTW' },
             ]}
           />
-        <FormSelect
-          label="Prijsweergave"
-          name="taxSetting" 
-          value={invoice.taxIncluded ? 'inclusive' : 'exclusive'}
-          onChange={handleTaxSettingChange}
-          options={[
-            { value: 'exclusive', label: 'Prijzen excl. BTW' },
-            { value: 'inclusive', label: 'Prijzen incl. BTW' },
-          ]}
-          />
+        )}
       </div>
 
       {invoice.workType === 'fixed' && (
@@ -115,7 +140,7 @@ const WorkItemsForm = ({
                   labelClassName="text-xs"
                 />
                 <FormInput
-                  label="Prijs per stuk" // Changed label
+                  label="Prijs per stuk"
                   type="number"
                   min="0"
                   step="0.01"
@@ -195,25 +220,70 @@ const WorkItemsForm = ({
         </div>
       )}
 
-       <div className="space-y-4 pt-4 border-t">
-          <FormTextarea 
-            label="Notities (optioneel)"
-            name="notes"
-            value={invoice.notes}
-            onChange={onInputChange}
-            placeholder="Bijv. extra details over de factuur, een persoonlijke boodschap..."
-            rows={2}
+      <div className="pt-4 border-t">
+        <label className="flex items-center gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showExtraCosts}
+            onChange={(e) => setShowExtraCosts(e.target.checked)}
+            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          <FormTextarea
-            label="Betaalvoorwaarden (optioneel)"
-            name="terms"
-            value={invoice.terms}
-            onChange={onInputChange}
-            placeholder="Bijv. Betaling binnen 14 dagen na factuurdatum."
-            rows={2}
-          />
-        </div>
+          <span className="text-sm font-medium text-gray-700">Extra kosten toevoegen</span>
+        </label>
+        {showExtraCosts && (
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <FormInput
+              label="Voorrijkosten"
+              name="travel"
+              type="number"
+              min="0"
+              step="0.01"
+              value={extra.travel || ''}
+              onChange={handleExtraCostChange}
+              placeholder="0,00"
+            />
+            <FormInput
+              label="Verzendkosten"
+              name="shipping"
+              type="number"
+              min="0"
+              step="0.01"
+              value={extra.shipping || ''}
+              onChange={handleExtraCostChange}
+              placeholder="0,00"
+            />
+            <FormInput
+              label="Materiaalkosten"
+              name="material"
+              type="number"
+              min="0"
+              step="0.01"
+              value={extra.material || ''}
+              onChange={handleExtraCostChange}
+              placeholder="0,00"
+            />
+          </div>
+        )}
+      </div>
 
+      <div className="space-y-4 pt-4 border-t">
+        <FormTextarea
+          label="Notities (optioneel)"
+          name="notes"
+          value={invoice.notes}
+          onChange={onInputChange}
+          placeholder="Bijv. extra details over de factuur, een persoonlijke boodschap..."
+          rows={2}
+        />
+        <FormTextarea
+          label="Betaalvoorwaarden (optioneel)"
+          name="terms"
+          value={invoice.terms}
+          onChange={onInputChange}
+          placeholder="Bijv. Betaling binnen 14 dagen na factuurdatum."
+          rows={2}
+        />
+      </div>
     </div>
   );
 };

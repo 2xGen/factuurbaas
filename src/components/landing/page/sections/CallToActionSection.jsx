@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const CallToActionSection = () => {
   return (
     <motion.section 
-      className="py-16 md:py-24 bg-deep-blue text-white relative overflow-hidden"
+      className="py-16 sm:py-20 bg-deep-blue text-white relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -41,11 +41,11 @@ const CallToActionSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <Zap className="w-12 h-12 text-warm-orange mx-auto mb-4 drop-shadow-lg" />
-          <h2 className="text-[1.95rem] md:text-5xl font-heading font-bold mb-4">
-            Klaar om Snel een Factuur te Maken?
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-4">
+            Klaar om je factuur te maken?
           </h2>
-          <p className="text-lg md:text-xl text-blue-200 mb-10 max-w-xl mx-auto">
-            FactuurBaas: professionele facturen in 2 minuten - klaar.
+          <p className="text-base sm:text-lg text-blue-200 mb-8 max-w-xl mx-auto">
+            Gratis, zonder account. Download direct als PDF en stuur hem naar je klant.
           </p>
         </motion.div>
         <motion.div
@@ -60,7 +60,7 @@ const CallToActionSection = () => {
               variant="secondary" 
               className="text-secondary-foreground text-md sm:text-lg px-10 sm:px-12 py-5 sm:py-6 rounded-xl transform hover:scale-105 transition-transform duration-300 ease-out group"
             >
-              Direct Factuur Maken <FileText className="ml-2 sm:ml-3 h-5 w-5 group-hover:rotate-3 transition-transform" />
+              Maak gratis factuur <FileText className="ml-2 sm:ml-3 h-5 w-5 group-hover:rotate-3 transition-transform" />
             </Button>
           </Link>
         </motion.div>

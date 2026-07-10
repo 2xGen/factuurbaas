@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://factuurbaas.nl/:path*",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.factuurbaas.nl"
+        }
+      ]
+    }
+  ]
+}
