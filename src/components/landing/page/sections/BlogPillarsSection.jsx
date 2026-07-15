@@ -10,12 +10,14 @@ import {
   FileStack,
   Scale,
   Wallet,
+  FileText,
   ArrowRight,
 } from 'lucide-react';
 
 const pillarIcons = {
   starten: Rocket,
   'btw-belasting': Scale,
+  offertes: FileText,
   'templates-voorbeelden': FileStack,
   'betaling-beheer': Wallet,
 };
@@ -35,7 +37,7 @@ function BlogPillarsSection() {
       <SectionHeader
         eyebrow="Gidsen"
         title="Alles over factureren"
-        description="Praktische uitleg per onderwerp. Kies een categorie en lees verder op onze gidsenpagina."
+        description="Praktische uitleg per onderwerp. Kies een categorie en lees verder."
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">

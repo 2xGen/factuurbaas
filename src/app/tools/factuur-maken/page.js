@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import ToolGatePage from '@/components/tools/ToolGatePage';
+import ToolGuideLinks from '@/components/tools/ToolGuideLinks';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import {
+  buildGuideItemListSchema,
+  getGuideLinksByCluster,
+} from '@/lib/guideData';
 import {
   FACTUUR_MAKEN_GATE_FAQS,
   getFactuurMakenGateSchema,
@@ -15,6 +20,8 @@ export const metadata = {
 };
 
 const TOOL_HREF = '/create-invoice';
+const BTW_GUIDES = getGuideLinksByCluster('btw');
+const OFFERTE_GUIDES = getGuideLinksByCluster('offertes');
 
 export default function FactuurMakenGatePage() {
   return (
@@ -34,6 +41,10 @@ export default function FactuurMakenGatePage() {
       secondaryHref="/voorbeeld"
       secondaryCtaLabel="Bekijk voorbeelden"
       faqSchema={getFactuurMakenGateSchema()}
+      extraSchemas={[
+        buildGuideItemListSchema(BTW_GUIDES, 'BTW-gidsen voor factureren'),
+        buildGuideItemListSchema(OFFERTE_GUIDES, 'Offerte-gidsen voor factureren'),
+      ]}
     >
       <div className="space-y-14">
         <section>
@@ -127,6 +138,20 @@ export default function FactuurMakenGatePage() {
             ))}
           </div>
         </section>
+
+        <ToolGuideLinks
+          guides={BTW_GUIDES}
+          title="Gidsen over BTW op je factuur"
+          viewAllHref="/blogs?pillar=btw-belasting"
+          viewAllLabel="Alle BTW-gidsen"
+        />
+
+        <ToolGuideLinks
+          guides={OFFERTE_GUIDES}
+          title="Gidsen over offertes en factureren"
+          viewAllHref="/blogs?pillar=offertes"
+          viewAllLabel="Alle offerte-gidsen"
+        />
 
         <section>
           <h2 className="font-heading text-lg font-bold text-deep-blue">Gerelateerd</h2>

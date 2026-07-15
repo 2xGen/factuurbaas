@@ -1,4 +1,5 @@
 import { articles } from '@/lib/blogData';
+import { guides } from '@/lib/guideData';
 import { getAllTemplateSlugs } from '@/lib/templateLandingPages';
 import { getAllVoorbeeldSlugs } from '@/lib/voorbeeldLandingPages';
 import { getAllOfferteVoorbeeldSlugs } from '@/lib/offerteVoorbeeldLandingPages';
@@ -40,6 +41,13 @@ export function getSitemapEntries() {
     priority: 0.7,
   }));
 
+  const guidePages = guides.map((guide) => ({
+    url: `${SITEMAP_BASE_URL}/gidsen/${guide.slug}`,
+    lastModified: guide.dateModified ? new Date(guide.dateModified) : new Date(guide.datePublished || '2026-07-15'),
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }));
+
   const templatePages = getAllTemplateSlugs().map((slug) => ({
     url: `${SITEMAP_BASE_URL}/factuur-template/${slug}`,
     lastModified: new Date('2026-07-09'),
@@ -61,5 +69,5 @@ export function getSitemapEntries() {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...templatePages, ...voorbeeldPages, ...offerteVoorbeeldPages, ...blogPages];
+  return [...staticPages, ...templatePages, ...voorbeeldPages, ...offerteVoorbeeldPages, ...guidePages, ...blogPages];
 }

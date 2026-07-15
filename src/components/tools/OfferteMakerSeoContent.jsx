@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import ToolGuideLinks from '@/components/tools/ToolGuideLinks';
+import { getGuideLinksByCluster } from '@/lib/guideData';
 import {
   OFFERTE_COMPARISON,
   OFFERTE_FAQS,
   OFFERTE_RELATED,
 } from '@/lib/offerteLanding';
 import { formatQuoteMoney } from '@/lib/quoteUtils';
+
+const OFFERTE_GUIDES = getGuideLinksByCluster('offertes');
 
 function ComparisonTable({ comparison }) {
   return (
@@ -170,6 +174,13 @@ export default function OfferteMakerSeoContent({
           ))}
         </div>
       </section>
+
+      <ToolGuideLinks
+        guides={OFFERTE_GUIDES}
+        title="Gidsen over offertes"
+        viewAllHref="/blogs?pillar=offertes"
+        viewAllLabel="Alle offerte-gidsen"
+      />
 
       <section>
         <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">

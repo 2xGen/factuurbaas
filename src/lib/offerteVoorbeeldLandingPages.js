@@ -1,5 +1,6 @@
 const sharedRelatedLinks = [
   { label: 'Alle voorbeelden', href: '/voorbeeld' },
+  { label: 'Offerte voorbeeld gids', href: '/gidsen/offerte-voorbeeld' },
   { label: 'Offerte maker', href: '/tools/offerte-maker' },
   { label: 'Gratis offerte maken', href: '/tools/offerte-maker/maken' },
 ];

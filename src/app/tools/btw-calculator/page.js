@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import ToolGatePage from '@/components/tools/ToolGatePage';
+import ToolGatePage from '@/components/tools/ToolGatePage';import { buildGuideItemListSchema, getGuideLinksByCluster } from '@/lib/guideData';
 import { getBtwFaqSchema } from '@/lib/btwCalculator';
 import BtwCalculatorSeoContent from '@/components/tools/BtwCalculatorSeoContent';
 
@@ -11,6 +10,7 @@ export const metadata = {
 };
 
 const TOOL_HREF = '/tools/btw-calculator/berekenen';
+const BTW_GUIDES = getGuideLinksByCluster('btw');
 
 export default function BtwCalculatorGatePage() {
   return (
@@ -30,6 +30,7 @@ export default function BtwCalculatorGatePage() {
       secondaryHref="/tools/factuur-maken"
       secondaryCtaLabel="Gratis factuur maken"
       faqSchema={getBtwFaqSchema()}
+      extraSchemas={[buildGuideItemListSchema(BTW_GUIDES, 'Gidsen over BTW')]}
     >
       <BtwCalculatorSeoContent toolHref={TOOL_HREF} />
     </ToolGatePage>

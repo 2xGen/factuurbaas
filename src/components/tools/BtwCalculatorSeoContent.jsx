@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import ToolGuideLinks from '@/components/tools/ToolGuideLinks';
+import { getGuideLinksByCluster } from '@/lib/guideData';
 import {
   BTW_ADD_TABLE,
   BTW_FAQS,
@@ -8,6 +10,8 @@ import {
   RELATED_ARTICLES,
   formatEuro,
 } from '@/lib/btwCalculator';
+
+const BTW_GUIDES = getGuideLinksByCluster('btw');
 
 function CalcTable({ headers, rows }) {
   return (
@@ -82,14 +86,14 @@ export default function BtwCalculatorSeoContent({
         <div className="mt-6">
           <p className="text-sm font-semibold text-deep-blue">Lees ook:</p>
           <ul className="mt-3 space-y-2">
-            {RELATED_ARTICLES.slice(0, 2).map((article) => (
-              <li key={article.href}>
+            {BTW_GUIDES.slice(0, 3).map((guide) => (
+              <li key={guide.href}>
                 <Link
-                  href={article.href}
+                  href={guide.href}
                   className="inline-flex items-center gap-2 text-sm font-medium text-warm-orange hover:underline"
                 >
                   <ArrowRight className="h-3.5 w-3.5" />
-                  {article.title}
+                  {guide.title}
                 </Link>
               </li>
             ))}
@@ -232,9 +236,16 @@ export default function BtwCalculatorSeoContent({
         </div>
       </section>
 
+      <ToolGuideLinks
+        guides={BTW_GUIDES}
+        title="Gidsen over BTW"
+        viewAllHref="/blogs?pillar=btw-belasting"
+        viewAllLabel="Alle BTW-gidsen"
+      />
+
       <section>
         <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          Meer over BTW en factureren
+          Meer artikelen over BTW en factureren
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {RELATED_ARTICLES.map((article) => (

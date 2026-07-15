@@ -22,6 +22,7 @@ export default function OfferteVoorbeeldHubPage() {
       ctaHref="/tools/offerte-maker/maken"
       ctaLabel="Maak gratis offerte"
       relatedLinks={[
+        { label: 'Offerte voorbeeld gids', href: '/gidsen/offerte-voorbeeld' },
         { label: 'Offerte maker', href: '/tools/offerte-maker' },
         { label: 'Factuur maken', href: '/tools/factuur-maken' },
         { label: 'Verschil offerte en factuur', href: '/blogs/verschil-factuur-offerte' },

@@ -1,5 +1,6 @@
 import ToolGatePage from '@/components/tools/ToolGatePage';
 import OfferteMakerSeoContent from '@/components/tools/OfferteMakerSeoContent';
+import { buildGuideItemListSchema, getGuideLinksByCluster } from '@/lib/guideData';
 import { getOfferteFaqSchema } from '@/lib/offerteLanding';
 
 export const metadata = {
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 const TOOL_HREF = '/tools/offerte-maker/maken';
+const OFFERTE_GUIDES = getGuideLinksByCluster('offertes');
 
 export default function OfferteMakerGatePage() {
   return (
@@ -29,6 +31,9 @@ export default function OfferteMakerGatePage() {
       secondaryHref="/create-invoice"
       secondaryCtaLabel="Maak factuur"
       faqSchema={getOfferteFaqSchema()}
+      extraSchemas={[
+        buildGuideItemListSchema(OFFERTE_GUIDES, 'Gidsen over offertes'),
+      ]}
     >
       <OfferteMakerSeoContent toolHref={TOOL_HREF} />
     </ToolGatePage>

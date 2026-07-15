@@ -14,16 +14,20 @@ export default function ToolGatePage({
   secondaryHref,
   secondaryCtaLabel,
   faqSchema,
+  extraSchemas = [],
   children,
 }) {
+  const jsonLdSchemas = [faqSchema, ...extraSchemas].filter(Boolean);
+
   return (
     <div className="min-h-screen bg-slate-50">
-      {faqSchema && (
+      {jsonLdSchemas.map((schema, index) => (
         <script
+          key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-      )}
+      ))}
 
       <section className="bg-gradient-to-br from-deep-blue via-sky-700 to-indigo-600 py-12 text-white sm:py-16">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6">
