@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import ToolGuideLinks from '@/components/tools/ToolGuideLinks';
+import { getGuideLinksByCluster } from '@/lib/guideData';
 import {
   BRANCH_RATES_TABLE,
   RELATED_ARTICLES,
   UURTARIEF_FAQS,
   formatEuro,
 } from '@/lib/uurtariefCalculator';
+
+const UURTARIEF_GUIDES = getGuideLinksByCluster('uurtarief');
 
 function CalcTable({ headers, rows }) {
   return (
@@ -166,6 +170,13 @@ export default function UurtariefCalculatorSeoContent({
           </Button>
         </div>
       </section>
+
+      <ToolGuideLinks
+        guides={UURTARIEF_GUIDES}
+        title="Gidsen over uurtarief"
+        viewAllHref="/blogs?pillar=uurtarief"
+        viewAllLabel="Alle uurtarief-gidsen"
+      />
 
       <section>
         <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">

@@ -153,3 +153,16 @@ export function formatCompanyAddress(companyDetails = {}) {
   ].filter(Boolean);
   return lines.join('\n');
 }
+
+/** Receiver / klant address: structured fields, with legacy `address` fallback. */
+export function formatReceiverAddress(details = {}) {
+  if (details.street || details.postalCode || details.city || details.country) {
+    const lines = [
+      details.street,
+      [details.postalCode, details.city].filter(Boolean).join(' '),
+      details.country,
+    ].filter(Boolean);
+    return lines.join('\n');
+  }
+  return details.address || '';
+}

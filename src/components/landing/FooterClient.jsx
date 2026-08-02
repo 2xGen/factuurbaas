@@ -31,12 +31,15 @@ export default function FooterClient() {
             <ul className="space-y-2">
               <li><Link href="/tools" className="text-sm hover:text-warm-orange transition-colors">Tools</Link></li>
               <li><Link href="/blogs" className="text-sm hover:text-warm-orange transition-colors">Gidsen</Link></li>
+              <li><Link href="/waarom-gratis" className="text-sm hover:text-warm-orange transition-colors">Waarom gratis</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-lg font-semibold text-deep-blue mb-3 font-heading">Meer Info</h3>
             <ul className="space-y-2">
+              <li><Link href="/veiligheid" className="text-sm hover:text-warm-orange transition-colors">Veiligheid</Link></li>
               <li><Link href="/privacybeleid" className="text-sm hover:text-warm-orange transition-colors">Privacybeleid</Link></li>
+              <li><Link href="/verwerkersovereenkomst" className="text-sm hover:text-warm-orange transition-colors">Verwerkersovereenkomst</Link></li>
               <li><Link href="/algemene-voorwaarden" className="text-sm hover:text-warm-orange transition-colors">Algemene Voorwaarden</Link></li>
               <li>
                 <button
@@ -55,9 +58,9 @@ export default function FooterClient() {
         <div className="text-center text-sm text-slate-500 border-t border-slate-200 pt-8">
           <p className="mb-2">&copy; {new Date().getFullYear()} FactuurBaas.nl. Alle rechten voorbehouden.</p>
           <p>
-            FactuurBaas is gebouwd en beheerd door{' '}
+            FactuurBaas.nl is een dienst van{' '}
             <Link href="/2xgen" className="font-semibold text-deep-blue hover:text-warm-orange transition-colors">
-              2xGen
+              2xGen LLC
             </Link>
             .
           </p>

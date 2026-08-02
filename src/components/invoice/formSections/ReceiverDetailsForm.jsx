@@ -1,9 +1,9 @@
 import React from 'react';
 import FormInput from '@/components/invoice/formElements/FormInput';
-import FormTextarea from '@/components/invoice/formElements/FormTextarea';
 import MeerOpties from '@/components/invoice/formElements/MeerOpties';
+import ClientPicker from '@/components/invoice/ClientPicker';
 
-const ReceiverDetailsForm = ({ receiverDetails, onInputChange }) => {
+const ReceiverDetailsForm = ({ receiverDetails, onInputChange, isLoggedIn, onApplyReceiver }) => {
   const handleChange = (e) => {
     onInputChange({
       target: {
@@ -14,11 +14,31 @@ const ReceiverDetailsForm = ({ receiverDetails, onInputChange }) => {
     });
   };
 
+const applyClient = (details) => {
+    if (onApplyReceiver) {
+      onApplyReceiver(details);
+      return;
+    }
+    Object.entries(details).forEach(([name, value]) => {
+      onInputChange({
+        target: {
+          name,
+          value: value || '',
+          dataset: { section: 'receiverDetails' },
+        },
+      });
+    });
+  };
+
   const r = receiverDetails || {};
   const hasAdvancedFields = Boolean(r.phone || r.kvk || r.btw);
 
   return (
     <div className="space-y-4">
+      {isLoggedIn && (
+        <ClientPicker receiverDetails={receiverDetails} onApply={applyClient} />
+      )}
+
       <FormInput
         label="Bedrijfsnaam"
         name="companyName"
@@ -41,13 +61,35 @@ const ReceiverDetailsForm = ({ receiverDetails, onInputChange }) => {
         type="email"
         placeholder="email@klant.nl"
       />
-      <FormTextarea
-        label="Adres"
-        name="address"
-        value={r.address || ''}
+      <FormInput
+        label="Straatnaam en nummer"
+        name="street"
+        value={r.street || ''}
         onChange={handleChange}
-        placeholder="Straatnaam en nummer&#10;Postcode en Plaats&#10;Land"
-        rows="3"
+        placeholder="Bijv. Hoofdstraat 12"
+      />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <FormInput
+          label="Postcode"
+          name="postalCode"
+          value={r.postalCode || ''}
+          onChange={handleChange}
+          placeholder="1234 AB"
+        />
+        <FormInput
+          label="Plaats"
+          name="city"
+          value={r.city || ''}
+          onChange={handleChange}
+          placeholder="Amsterdam"
+        />
+      </div>
+      <FormInput
+        label="Land"
+        name="country"
+        value={r.country || ''}
+        onChange={handleChange}
+        placeholder="Nederland"
       />
 
       <MeerOpties defaultOpen={hasAdvancedFields}>

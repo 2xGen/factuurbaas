@@ -51,10 +51,6 @@ export default function TrustSection() {
             ))}
           </div>
         </motion.div>
-
-        <p className="mt-5 text-center text-xs text-slate-400">
-          * Geschat op basis van gebruik van de factuurtool.
-        </p>
       </div>
     </LandingSection>
   );

@@ -80,7 +80,7 @@ export const seoLandingLinks = [
 ];
 
 export const trustPoints = [
-  { label: '1.000+ facturen gemaakt*', note: true },
+  { label: '1.000+ facturen gemaakt' },
   { label: 'Gratis zonder account' },
   { label: 'Direct PDF downloaden' },
   { label: 'Geen abonnement' },

@@ -11,6 +11,7 @@ import {
   Scale,
   Wallet,
   FileText,
+  Clock,
   ArrowRight,
 } from 'lucide-react';
 
@@ -18,6 +19,7 @@ const pillarIcons = {
   starten: Rocket,
   'btw-belasting': Scale,
   offertes: FileText,
+  uurtarief: Clock,
   'templates-voorbeelden': FileStack,
   'betaling-beheer': Wallet,
 };
@@ -40,7 +42,7 @@ function BlogPillarsSection() {
         description="Praktische uitleg per onderwerp. Kies een categorie en lees verder."
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+      <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
         {blogPillars.map((pillar, index) => {
           const Icon = pillarIcons[pillar.id] || FileStack;
 

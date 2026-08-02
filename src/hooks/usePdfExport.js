@@ -1,6 +1,8 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { INVOICE_LOG_INSERT_TABLE, logToolUsage } from '@/lib/toolUsageLog';
+import { markGuestInvoiceCreated } from '@/lib/guestInvoiceAttribution';
+import { supabase } from '@/lib/customSupabaseClient';
 
 export const usePdfExport = (previewRef, toast) => {
   const exportToPdf = async (invoiceData, invoiceBreakdown, fileName = 'invoice.pdf') => {
@@ -8,60 +10,58 @@ export const usePdfExport = (previewRef, toast) => {
     if (input) {
       try {
         const canvas = await html2canvas(input, {
-          scale: 3, // Increased scale for better quality
+          scale: 3,
           useCORS: true,
-          logging: false, 
-          imageTimeout: 15000, 
-          backgroundColor: null, // Use transparent background for canvas if layout has gradient
-          width: input.offsetWidth, // Explicitly set canvas width
-          height: input.offsetHeight, // Explicitly set canvas height
+          logging: false,
+          imageTimeout: 15000,
+          backgroundColor: null,
+          width: input.offsetWidth,
+          height: input.offsetHeight,
           windowWidth: input.scrollWidth,
           windowHeight: input.scrollHeight,
         });
 
-        const imgData = canvas.toDataURL('image/png', 1.0); // Use PNG with max quality
-        
+        const imgData = canvas.toDataURL('image/png', 1.0);
+
         const pdf = new jsPDF({
-          orientation: 'p', // portrait
-          unit: 'mm', // millimeters
-          format: 'a4', // A4 page size
+          orientation: 'p',
+          unit: 'mm',
+          format: 'a4',
           putOnlyUsedFonts: true,
-          floatPrecision: 16 // or "smart"
+          floatPrecision: 16,
         });
 
-        const pdfWidth = pdf.internal.pageSize.getWidth(); // A4 width in mm
-        const pdfHeight = pdf.internal.pageSize.getHeight(); // A4 height in mm
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
 
-        // Calculate the aspect ratio of the image and the PDF page
         const imgWidth = canvas.width;
         const imgHeight = canvas.height;
         const imgAspectRatio = imgWidth / imgHeight;
-        const pdfAspectRatio = pdfWidth / pdfHeight;
 
-        let finalImgWidth, finalImgHeight, imgX, imgY;
+        let finalImgWidth = pdfWidth;
+        let finalImgHeight = pdfWidth / imgAspectRatio;
 
-        // Fit image to page width, adjust height proportionally
-        finalImgWidth = pdfWidth;
-        finalImgHeight = pdfWidth / imgAspectRatio;
-        
-        // If scaled height is greater than PDF height, scale to PDF height
         if (finalImgHeight > pdfHeight) {
-            finalImgHeight = pdfHeight;
-            finalImgWidth = pdfHeight * imgAspectRatio;
+          finalImgHeight = pdfHeight;
+          finalImgWidth = pdfHeight * imgAspectRatio;
         }
 
-        imgX = (pdfWidth - finalImgWidth) / 2; // Center horizontally
-        imgY = (pdfHeight - finalImgHeight) / 2; // Center vertically
-
-        // If content is meant to be top-aligned, set imgY to 0
-        // For full A4 fitting, centering might be okay if the content itself fills the A4 preview
-        imgY = 0;
-
+        const imgX = (pdfWidth - finalImgWidth) / 2;
+        const imgY = 0;
 
         pdf.addImage(imgData, 'PNG', imgX, imgY, finalImgWidth, finalImgHeight);
         pdf.save(fileName);
-        
+
         await logToolUsage(INVOICE_LOG_INSERT_TABLE);
+
+        try {
+          const { data: sessionData } = await supabase.auth.getSession();
+          if (!sessionData?.session) {
+            markGuestInvoiceCreated();
+          }
+        } catch {
+          markGuestInvoiceCreated();
+        }
 
         if (toast) {
           toast({
@@ -75,20 +75,19 @@ export const usePdfExport = (previewRef, toast) => {
         if (toast) {
           toast({
             title: 'Fout bij PDF creatie',
-            description: 'Er is een fout opgetreden bij het genereren van de PDF. Probeer het opnieuw.',
+            description:
+              'Er is een fout opgetreden bij het genereren van de PDF. Probeer het opnieuw.',
             variant: 'destructive',
           });
         }
         return false;
       }
-    } else {
-      if (toast) {
-        toast({
-          title: 'Fout bij PDF creatie',
-          description: 'Kon het voorbeeld niet vinden. Zorg dat het voorbeeld zichtbaar is.',
-          variant: 'destructive',
-        });
-      }
+    } else if (toast) {
+      toast({
+        title: 'Fout bij PDF creatie',
+        description: 'Kon het voorbeeld niet vinden. Zorg dat het voorbeeld zichtbaar is.',
+        variant: 'destructive',
+      });
     }
     return false;
   };

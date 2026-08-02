@@ -63,6 +63,14 @@ export const blogPillars = [
     ],
   },
   {
+    id: 'uurtarief',
+    title: 'Uurtarief & inkomen',
+    description:
+      "Welk uurtarief moet je rekenen als zzp'er? Bereken je tarief, omzet en inkomen met praktische gidsen en gratis tools.",
+    slugs: [],
+    guideSlugs: ['welk-uurtarief-moet-ik-rekenen'],
+  },
+  {
     id: 'templates-voorbeelden',
     title: 'Templates & voorbeelden',
     description:

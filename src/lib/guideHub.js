@@ -29,6 +29,13 @@ export const guideHubIntro = {
       'Maak gratis een offerte met FactuurBaas — zonder account en direct downloadbaar als PDF.',
     ],
   },
+  uurtarief: {
+    title: "Uurtarief-gidsen voor zzp'ers",
+    paragraphs: [
+      "Welk uurtarief moet je vragen? Hoe bereken je omzet uit je tarief? In deze gidsen leer je hoe je als zzp'er een realistisch uurtarief bepaalt op basis van inkomen, kosten en factureerbare uren.",
+      'Gebruik onze gratis uurtarief calculator om direct te berekenen welk tarief bij jouw situatie past.',
+    ],
+  },
 };
 
 /** Hub FAQs with short answers; each links to a guide. */
@@ -83,6 +90,12 @@ export const guideHubFaqs = [
     answer: 'Download je offerte als PDF en verstuur per e-mail met offertenummer en geldigheidsduur in je bericht.',
     guideSlug: 'digitale-offertes-versturen',
   },
+  {
+    question: "Welk uurtarief moet ik rekenen als zzp'er?",
+    answer:
+      'Bereken je benodigde omzet (inkomen + kosten + belastingreservering) en deel door je factureerbare uren. Gebruik de gratis uurtarief calculator voor jouw situatie.',
+    guideSlug: 'welk-uurtarief-moet-ik-rekenen',
+  },
 ];
 
 export function getBlogHubIntro(pillarId) {
@@ -109,5 +122,6 @@ export function getGuideHubIntro(pillarId) {
 export function clusterToPillarId(cluster) {
   if (cluster === 'offertes') return 'offertes';
   if (cluster === 'btw') return 'btw-belasting';
+  if (cluster === 'uurtarief') return 'uurtarief';
   return null;
 }

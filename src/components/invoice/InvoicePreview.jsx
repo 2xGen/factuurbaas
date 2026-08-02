@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { nl, enGB } from 'date-fns/locale';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
-import { formatMoney, getEffectiveTaxRate, getTaxDisplayLabel, INVOICE_LABELS, formatCompanyAddress } from '@/lib/invoiceConfig';
+import { formatMoney, getEffectiveTaxRate, getTaxDisplayLabel, INVOICE_LABELS, formatCompanyAddress, formatReceiverAddress } from '@/lib/invoiceConfig';
 
 const layoutStyles = {
   plain: {
@@ -50,10 +50,15 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
     contactPerson: '',
     email: invoice.email || '',
     phone: '',
+    street: '',
+    postalCode: '',
+    city: '',
+    country: '',
     address: invoice.address || '',
     kvk: '',
     btw: '',
   };
+  const receiverAddress = formatReceiverAddress(receiver);
   const extra = invoice.extraCosts || {};
   const vatLabel = invoice.tax === 'exempt' || invoice.tax === 'reverse';
 
@@ -158,8 +163,8 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
                 {labels.phone} {receiver.phone}
               </p>
             )}
-            {receiver.address && (
-              <p className={`${currentLayout.secondary} whitespace-pre-line text-[10px] md:text-xs`}>{receiver.address}</p>
+            {receiverAddress && (
+              <p className={`${currentLayout.secondary} whitespace-pre-line text-[10px] md:text-xs`}>{receiverAddress}</p>
             )}
             {receiver.kvk && (
               <p className={`${currentLayout.secondary} text-[10px] md:text-xs`}>{labels.kvk}: {receiver.kvk}</p>

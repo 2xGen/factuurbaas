@@ -11,8 +11,8 @@ const FeaturesSection = () => {
     { icon: Crown, title: "Geen Account Nodig", description: "Begin direct met factureren, zonder registratie of inloggen. Jouw gemak voorop." },
     { icon: Crown, title: "Simpel & Intuïtief", description: "Een duidelijke interface, ontworpen voor maximaal gebruiksgemak. Iedereen kan het." },
     { icon: Crown, title: "Gratis Facturen Maken", description: "Maak onbeperkt facturen, helemaal gratis. Geen verborgen kosten." },
-    { icon: Crown, title: "Overzicht*", description: "Binnenkort: Een helder dashboard met al je factuurstatistieken." },
-    { icon: Crown, title: "Contacten Opslaan*", description: "Binnenkort: Bewaar je klantgegevens voor nog snellere facturatie." },
+    { icon: Crown, title: "Overzicht", description: "Dashboard met openstaande, betaalde en btw-bedragen van je opgeslagen facturen." },
+    { icon: Crown, title: "Optioneel account", description: "Log in met Google om facturen veilig op te slaan. Zonder account kun je nog steeds PDF's downloaden." },
     { icon: Crown, title: "Automatische Herinneringen*", description: "Binnenkort: Stuur automatisch betalingsherinneringen naar je klanten." },
   ];
 

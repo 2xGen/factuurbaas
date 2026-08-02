@@ -5181,6 +5181,276 @@ Met vriendelijke groet,
       </>
     ),
   },
+  {
+    slug: 'welk-uurtarief-moet-ik-rekenen',
+    cluster: 'uurtarief',
+    seoTitle: "Welk uurtarief moet ik rekenen als zzp'er? Bereken het juiste tarief",
+    title: "Welk uurtarief moet ik rekenen als zzp'er? Bereken het juiste tarief",
+    excerpt:
+      "Welk uurtarief moet je vragen als zzp'er? Leer hoe je je tarief bepaalt op basis van inkomen, kosten en factureerbare uren — met gratis calculator.",
+    keywords:
+      "welk uurtarief moet ik rekenen, uurtarief zzp, uurtarief berekenen, gemiddeld uurtarief zzp, uurtarief calculator, uurtarief exclusief btw, goed uurtarief zzp",
+    tool: {
+      href: '/tools/uurtarief-calculator',
+      label: 'Bereken je uurtarief',
+      ctaLabel: 'Open gratis uurtarief calculator',
+      relatedTitle: 'Uurtarief calculator',
+      relatedExcerpt:
+        "Bereken welk uurtarief je nodig hebt op basis van inkomen, kosten en werkuren. Gratis en zonder account.",
+    },
+    image: {
+      url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/welk%20uur%20tarief.jpg',
+      alt: "Welk uurtarief moet ik rekenen: zakhorloge op eurobiljetten",
+    },
+    datePublished: '2026-07-31',
+    dateModified: '2026-07-31',
+    relatedSlugs: ['factuur-maken-zzp', 'hoeveel-geld-apart-belasting-zzper'],
+    relatedGuideSlugs: [],
+    faq: [
+      {
+        question: "Wat is een goed uurtarief voor een zzp'er?",
+        answer:
+          'Een goed uurtarief is een tarief waarmee je je kosten kunt betalen, belasting kunt reserveren en voldoende inkomen overhoudt. Het juiste bedrag verschilt per beroep en situatie.',
+      },
+      {
+        question: 'Hoe bereken ik mijn minimale uurtarief?',
+        answer:
+          'Bereken hoeveel omzet je nodig hebt per maand en deel dit door het aantal uren dat je daadwerkelijk kunt factureren.',
+      },
+      {
+        question: 'Moet ik btw bovenop mijn uurtarief rekenen?',
+        answer:
+          "Ja, meestal vermeld je als zzp'er je uurtarief exclusief btw. De btw wordt apart op je factuur gezet.",
+      },
+      {
+        question: 'Kan ik mijn uurtarief verhogen?',
+        answer:
+          'Ja. Je kunt je tarief verhogen wanneer je meer ervaring hebt, meer waarde levert of wanneer je kosten stijgen.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Als zzp&apos;er is één van de belangrijkste vragen: <strong>welk uurtarief moet ik vragen?</strong> Een te laag
+          tarief betekent dat je misschien hard werkt maar onvoldoende overhoudt. Een te hoog tarief zonder goede
+          onderbouwing kan ervoor zorgen dat klanten afhaken.
+        </p>
+        <p>
+          Je uurtarief moet passen bij je ervaring, branche, kosten en het inkomen dat je wilt bereiken.
+        </p>
+        <p>
+          Met de gratis{' '}
+          <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
+            uurtarief calculator van FactuurBaas
+          </Link>{' '}
+          bereken je eenvoudig welk uurtarief je nodig hebt op basis van je gewenste inkomen, kosten en werkuren.
+        </p>
+
+        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken direct je uurtarief →" />
+
+        <h2>Hoe bepaal je je uurtarief?</h2>
+        <p>
+          Een goed uurtarief bestaat uit meer dan alleen wat je graag wilt verdienen. Als ondernemer betaal je namelijk
+          zelf voor zaken die bij een werknemer vaak geregeld zijn, zoals:
+        </p>
+        <ul>
+          <li>pensioen</li>
+          <li>verzekeringen</li>
+          <li>vakantiedagen</li>
+          <li>administratie</li>
+          <li>marketing</li>
+          <li>opleidingen</li>
+          <li>apparatuur en software</li>
+          <li>periodes zonder opdrachten</li>
+        </ul>
+        <p>
+          Je uurtarief moet daarom voldoende ruimte geven om deze kosten te betalen én winst over te houden.
+        </p>
+
+        <h2>Bereken je uurtarief in 5 stappen</h2>
+
+        <h3>1. Bepaal hoeveel inkomen je wilt verdienen</h3>
+        <p>Begin met je gewenste netto inkomen per maand.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>Je wilt netto €3.500 per maand overhouden.</p>
+        <p>
+          Dit betekent niet automatisch dat je €3.500 omzet nodig hebt. Als zzp&apos;er moet je ook rekening houden met
+          belasting en zakelijke kosten.
+        </p>
+
+        <h3>2. Tel je zakelijke kosten erbij op</h3>
+        <p>Zakelijke kosten verminderen je winst, maar moeten wel betaald worden vanuit je omzet.</p>
+        <p>Voorbeelden:</p>
+        <ul>
+          <li>laptop en apparatuur</li>
+          <li>website en hosting</li>
+          <li>boekhoudsoftware</li>
+          <li>telefoonabonnement</li>
+          <li>auto of vervoer</li>
+          <li>verzekeringen</li>
+        </ul>
+        <p>
+          Heb je bijvoorbeeld €500 kosten per maand? Dan moet je uurtarief voldoende omzet opleveren om deze kosten te
+          dekken.
+        </p>
+
+        <h3>3. Bepaal hoeveel uur je kunt factureren</h3>
+        <p>Niet alle uren die je werkt kun je doorberekenen aan klanten.</p>
+        <p>Een werkweek van 40 uur bestaat bijvoorbeeld uit:</p>
+        <ul>
+          <li>klantwerk</li>
+          <li>administratie</li>
+          <li>offertes maken</li>
+          <li>gesprekken</li>
+          <li>marketing</li>
+          <li>planning</li>
+          <li>ontwikkeling</li>
+        </ul>
+        <p>
+          Veel zzp&apos;ers kunnen niet elke gewerkte minuut factureren. Daarom is het belangrijk om realistisch te kijken
+          naar je factureerbare uren.
+        </p>
+
+        <h3>4. Kijk naar je branche</h3>
+        <p>Het gemiddelde uurtarief verschilt sterk per beroep.</p>
+        <p>Voorbeelden:</p>
+        <ul>
+          <li>een startende freelancer kan bijvoorbeeld een lager tarief rekenen om ervaring op te bouwen</li>
+          <li>een specialist met jaren ervaring kan vaak een hoger tarief vragen</li>
+          <li>technische beroepen hebben vaak andere tarieven dan creatieve diensten</li>
+        </ul>
+        <p>Vergelijk jezelf daarom niet alleen met anderen, maar kijk ook naar de waarde die je levert.</p>
+
+        <h3>5. Controleer of je tarief haalbaar is</h3>
+        <p>Een uurtarief moet niet alleen goed voelen, maar ook financieel werken.</p>
+        <p>Vraag jezelf af:</p>
+        <ul>
+          <li>Kan ik mijn kosten hiermee betalen?</li>
+          <li>Houd ik genoeg over voor belasting?</li>
+          <li>Past dit bij mijn ervaring?</li>
+          <li>Past dit bij mijn klanten?</li>
+        </ul>
+
+        <h2>Wat is een normaal uurtarief voor zzp&apos;ers?</h2>
+        <p>Het gemiddelde zzp-uurtarief verschilt per sector.</p>
+        <p>Een aantal factoren bepalen je tarief:</p>
+
+        <h3>Ervaring</h3>
+        <p>Een starter rekent vaak minder dan iemand met jaren ervaring en een sterk portfolio.</p>
+
+        <h3>Specialisatie</h3>
+        <p>Een specialist met unieke kennis kan vaak meer vragen dan iemand die algemene diensten aanbiedt.</p>
+
+        <h3>Type klant</h3>
+        <p>Zakelijke klanten hebben vaak andere budgetten dan particuliere klanten.</p>
+
+        <h3>Verantwoordelijkheid</h3>
+        <p>Meer verantwoordelijkheid of complexiteit betekent meestal een hoger tarief.</p>
+
+        <h2>Uurtarief inclusief of exclusief btw?</h2>
+        <p>
+          Als zzp&apos;er communiceer je meestal je uurtarief <strong>exclusief btw</strong>.
+        </p>
+        <p>Voorbeeld:</p>
+        <p>Je rekent €75 per uur exclusief btw.</p>
+        <p>Met 21% btw betaalt je klant:</p>
+        <p>€75 + €15,75 btw = €90,75 inclusief btw.</p>
+        <p>
+          De btw is geen inkomen voor jou. Deze draag je later af via je btw-aangifte. Lees meer in onze gids over{' '}
+          <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">
+            welke btw je als zzp&apos;er rekent
+          </Link>
+          .
+        </p>
+
+        <h2>Veelgemaakte fouten bij het bepalen van een uurtarief</h2>
+
+        <h3>Je kijkt alleen naar wat anderen vragen</h3>
+        <p>
+          Iedere ondernemer heeft andere kosten en doelen. Een tarief dat voor iemand anders werkt, hoeft niet voor jou te
+          werken.
+        </p>
+
+        <h3>Je vergeet niet-factureerbare tijd</h3>
+        <p>Administratie, acquisitie en voorbereiding horen ook bij ondernemen.</p>
+
+        <h3>Je rekent jezelf te goedkoop</h3>
+        <p>
+          Een laag tarief lijkt aantrekkelijk om opdrachten binnen te halen, maar kan ervoor zorgen dat je uiteindelijk te
+          weinig verdient.
+        </p>
+
+        <h3>Je verhoogt je tarief nooit</h3>
+        <p>Veel zzp&apos;ers houden jarenlang hetzelfde tarief terwijl hun ervaring en waarde groeien.</p>
+
+        <h2>Uurtarief berekenen met de gratis calculator</h2>
+        <p>
+          Met de FactuurBaas{' '}
+          <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
+            uurtarief calculator
+          </Link>{' '}
+          bereken je eenvoudig welk tarief past bij jouw situatie.
+        </p>
+        <p>Vul in:</p>
+        <ul>
+          <li>gewenst netto inkomen</li>
+          <li>zakelijke kosten</li>
+          <li>werkuren</li>
+          <li>aantal factureerbare uren</li>
+        </ul>
+        <p>Je ziet direct welk uurtarief je ongeveer nodig hebt.</p>
+
+        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken gratis je uurtarief →" />
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Wat is een goed uurtarief voor een zzp&apos;er?</h3>
+        <p>
+          Een goed uurtarief is een tarief waarmee je je kosten kunt betalen, belasting kunt reserveren en voldoende
+          inkomen overhoudt. Het juiste bedrag verschilt per beroep en situatie.
+        </p>
+        <h3>Hoe bereken ik mijn minimale uurtarief?</h3>
+        <p>
+          Bereken hoeveel omzet je nodig hebt per maand en deel dit door het aantal uren dat je daadwerkelijk kunt
+          factureren.
+        </p>
+        <h3>Moet ik btw bovenop mijn uurtarief rekenen?</h3>
+        <p>
+          Ja, meestal vermeld je als zzp&apos;er je uurtarief exclusief btw. De btw wordt apart op je factuur gezet.
+        </p>
+        <h3>Kan ik mijn uurtarief verhogen?</h3>
+        <p>
+          Ja. Je kunt je tarief verhogen wanneer je meer ervaring hebt, meer waarde levert of wanneer je kosten stijgen.
+        </p>
+
+        <h2>Bereken jouw ideale uurtarief</h2>
+        <p>
+          Weet je nog niet welk tarief bij jouw situatie past? Gebruik de gratis uurtarief calculator van FactuurBaas en
+          ontdek welk bedrag je nodig hebt.
+        </p>
+
+        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken je uurtarief →" />
+
+        <p>Lees ook:</p>
+        <ul>
+          <li>
+            <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
+              Uurtarief naar inkomen berekenen
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hoeveel-geld-apart-belasting-zzper" className="text-warm-orange hover:underline">
+              Hoeveel geld apart zetten voor belasting als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">
+              Factuur maken als zzp&apos;er
+            </Link>
+          </li>
+        </ul>
+      </>
+    ),
+  },
 ];
 
 export function getGuideBySlug(slug) {

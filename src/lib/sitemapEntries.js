@@ -10,7 +10,13 @@ export function getSitemapEntries() {
   const staticPages = [
     { url: SITEMAP_BASE_URL, lastModified: new Date('2026-07-09'), changeFrequency: 'daily', priority: 1 },
     { url: `${SITEMAP_BASE_URL}/create-invoice`, lastModified: new Date('2026-07-09'), changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITEMAP_BASE_URL}/factuur-maken`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITEMAP_BASE_URL}/factuur-maken`, lastModified: new Date('2026-08-02'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${SITEMAP_BASE_URL}/factuur-maken/zzp`, lastModified: new Date('2026-08-02'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/factuur-maken/zonder-kvk`, lastModified: new Date('2026-08-02'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITEMAP_BASE_URL}/factuur-maken/particulier`, lastModified: new Date('2026-08-02'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITEMAP_BASE_URL}/waarom-gratis`, lastModified: new Date('2026-08-02'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITEMAP_BASE_URL}/veiligheid`, lastModified: new Date('2026-08-02'), changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${SITEMAP_BASE_URL}/verwerkersovereenkomst`, lastModified: new Date('2026-08-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITEMAP_BASE_URL}/template`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/factuur-template`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/offerte-template`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.85 },
@@ -30,8 +36,8 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/premium`, lastModified: new Date('2026-02-05'), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITEMAP_BASE_URL}/blogs`, lastModified: new Date('2026-02-05'), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITEMAP_BASE_URL}/2xgen`, lastModified: new Date('2026-02-05'), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${SITEMAP_BASE_URL}/privacybeleid`, lastModified: new Date('2026-02-05'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITEMAP_BASE_URL}/algemene-voorwaarden`, lastModified: new Date('2026-02-05'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITEMAP_BASE_URL}/privacybeleid`, lastModified: new Date('2026-08-02'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITEMAP_BASE_URL}/algemene-voorwaarden`, lastModified: new Date('2026-08-02'), changeFrequency: 'yearly', priority: 0.3 },
   ];
 
   const blogPages = articles.map((article) => ({

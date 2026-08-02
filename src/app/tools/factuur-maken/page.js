@@ -16,7 +16,7 @@ export const metadata = {
   title: 'Gratis Factuur Maken 2026 – Online voor ZZP\'ers | FactuurBaas',
   description:
     'Maak gratis een professionele factuur als zzp\'er. Vul je gegevens in, kies een layout en download direct als PDF. Geen account nodig.',
-  alternates: { canonical: 'https://factuurbaas.nl/tools/factuur-maken' },
+  alternates: { canonical: 'https://factuurbaas.nl/factuur-maken' },
 };
 
 const TOOL_HREF = '/create-invoice';

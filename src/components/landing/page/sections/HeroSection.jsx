@@ -8,9 +8,9 @@ import { ArrowRight, CheckCircle, FileText } from 'lucide-react';
 import DemoInvoicePreview from '@/components/landing/DemoInvoicePreview';
 
 const trustItems = [
-  'Gratis',
-  'Geen account nodig',
-  'Direct PDF downloaden',
+  'Gratis · geen abonnement',
+  'Zonder account als PDF',
+  'Met account: status, btw & overzicht',
   "Voor ZZP'ers en kleine ondernemers",
 ];
 

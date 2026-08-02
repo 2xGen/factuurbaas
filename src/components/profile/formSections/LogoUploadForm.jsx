@@ -9,7 +9,7 @@ const LogoUploadForm = ({ logoPreview, onLogoChange, fileInputRef, disabled, onR
       <div className="flex items-center space-x-4">
         {logoPreview ? (
           <div className="relative group">
-            <img-replace
+            <img
               src={logoPreview} 
               alt="Logo voorbeeld" 
               className="h-24 w-24 rounded-lg object-contain border border-gray-300 p-1 bg-white"

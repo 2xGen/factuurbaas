@@ -82,7 +82,7 @@ export default function ToolsHubPage() {
       linksDescription="Kies een gratis tool voor je administratie. Bekijk uitleg, voorbeelden en gebruik daarna direct de online versie."
       linkFooterLabel="Meer info"
       links={toolLinks}
-      ctaHref="/tools/factuur-maken"
+      ctaHref="/factuur-maken"
       ctaLabel="Maak gratis factuur"
     />
   );

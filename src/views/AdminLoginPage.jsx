@@ -21,6 +21,7 @@ const AdminLoginPage = () => {
 
     if (password === ADMIN_PASSWORD) {
       sessionStorage.setItem('isAdminAuthenticated', 'true');
+      sessionStorage.setItem('adminPassword', password);
       toast({
         title: "Admin Login Succesvol",
         description: "Welkom bij het FactuurBaas Admin Dashboard.",

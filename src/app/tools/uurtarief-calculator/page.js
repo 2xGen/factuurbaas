@@ -1,4 +1,5 @@
 import ToolGatePage from '@/components/tools/ToolGatePage';
+import { buildGuideItemListSchema, getGuideLinksByCluster } from '@/lib/guideData';
 import { getUurtariefFaqSchema } from '@/lib/uurtariefCalculator';
 import UurtariefCalculatorSeoContent from '@/components/tools/UurtariefCalculatorSeoContent';
 
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 const TOOL_HREF = '/tools/uurtarief-calculator/maken';
+const UURTARIEF_GUIDES = getGuideLinksByCluster('uurtarief');
 
 export default function UurtariefCalculatorGatePage() {
   return (
@@ -31,6 +33,9 @@ export default function UurtariefCalculatorGatePage() {
       secondaryHref="/tools/factuur-maken"
       secondaryCtaLabel="Maak gratis factuur"
       faqSchema={getUurtariefFaqSchema()}
+      extraSchemas={[
+        buildGuideItemListSchema(UURTARIEF_GUIDES, 'Gidsen over uurtarief'),
+      ]}
     >
       <UurtariefCalculatorSeoContent toolHref={TOOL_HREF} />
     </ToolGatePage>

@@ -16,6 +16,11 @@ const CompanyInfoSection = ({
   onLogoUpload,
   onRememberChange,
   fileInputRef,
+  isLoggedIn,
+  onImportFromProfile,
+  isImportingProfile,
+  onSaveToAccount,
+  isSavingToAccount,
 }) => (
   <InvoiceFormSection title="Jouw Bedrijfsgegevens" icon={<Info className="w-5 h-5 text-blue-600" />}>
     <CompanyDetailsForm
@@ -26,6 +31,11 @@ const CompanyInfoSection = ({
       onLogoUpload={onLogoUpload}
       onRememberChange={onRememberChange}
       fileInputRef={fileInputRef}
+      isLoggedIn={isLoggedIn}
+      onImportFromProfile={onImportFromProfile}
+      isImportingProfile={isImportingProfile}
+      onSaveToAccount={onSaveToAccount}
+      isSavingToAccount={isSavingToAccount}
     />
   </InvoiceFormSection>
 );
@@ -35,6 +45,8 @@ const PrimaryDetailsSection = ({
   onInputChange,
   onDateChange,
   onPaymentTermChange,
+  isLoggedIn,
+  onApplyReceiver,
 }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
     <InvoiceFormSection title="Factuur Details" icon={<FileText className="w-5 h-5 text-blue-600" />}>
@@ -56,6 +68,8 @@ const PrimaryDetailsSection = ({
       <ReceiverDetailsForm
         receiverDetails={invoice.receiverDetails}
         onInputChange={onInputChange}
+        isLoggedIn={isLoggedIn}
+        onApplyReceiver={onApplyReceiver}
       />
     </InvoiceFormSection>
   </div>
@@ -110,6 +124,12 @@ const InvoiceForm = ({
   onRemoveWorkDay,
   fileInputRef,
   onSelectLayout,
+  isLoggedIn,
+  onImportFromProfile,
+  isImportingProfile,
+  onSaveToAccount,
+  isSavingToAccount,
+  onApplyReceiver,
 }) => {
   if (!invoice) return null;
 
@@ -126,6 +146,11 @@ const InvoiceForm = ({
         onLogoUpload={onLogoUpload}
         onRememberChange={onRememberChange}
         fileInputRef={fileInputRef}
+        isLoggedIn={isLoggedIn}
+        onImportFromProfile={onImportFromProfile}
+        isImportingProfile={isImportingProfile}
+        onSaveToAccount={onSaveToAccount}
+        isSavingToAccount={isSavingToAccount}
       />
 
       <PrimaryDetailsSection
@@ -133,6 +158,8 @@ const InvoiceForm = ({
         onInputChange={onInputChange}
         onDateChange={onDateChange}
         onPaymentTermChange={onPaymentTermChange}
+        isLoggedIn={isLoggedIn}
+        onApplyReceiver={onApplyReceiver}
       />
 
       <WorkAndLayoutSection
