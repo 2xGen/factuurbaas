@@ -70,43 +70,42 @@ export default function ShareFactuurBaas({
     return (
       <div
         className={cn(
-          'border-b border-slate-200/80 bg-slate-50/95 text-slate-700',
+          'border-b border-slate-100 bg-slate-50/80 text-slate-500',
           className
         )}
       >
-        <div className="container mx-auto flex items-center justify-center gap-2 px-3 py-2 sm:gap-3 sm:px-6">
-          <p className="min-w-0 text-center text-xs leading-snug sm:text-left sm:text-sm">
-            <span className="block sm:inline">FactuurBaas is gratis dankzij ondernemers zoals jij.</span>{' '}
-            <span className="block text-slate-600 sm:inline">
-              Ken je een zzp&apos;er? Deel het met hem of haar.
+        <div className="container mx-auto flex items-center gap-2 px-3 py-1 sm:gap-3 sm:px-6 sm:py-1.5">
+          <p className="min-w-0 flex-1 truncate text-[10px] leading-none sm:overflow-visible sm:whitespace-normal sm:text-[11px] sm:leading-snug md:text-center">
+            <span className="sm:hidden">Ken je een zzp&apos;er? Deel FactuurBaas.</span>
+            <span className="hidden sm:inline">
+              FactuurBaas is gratis dankzij ondernemers zoals jij. Ken je een zzp&apos;er? Deel het
+              met hem of haar.
             </span>
           </p>
-          <Button
+          <button
             type="button"
-            variant="outline"
-            size="sm"
             onClick={handleCopy}
-            className="h-7 shrink-0 border-slate-200 bg-white px-2.5 text-xs text-slate-700 hover:bg-white sm:h-8 sm:px-3"
+            className="inline-flex h-6 shrink-0 items-center gap-1 rounded-md px-1.5 text-[10px] font-medium text-slate-500 transition-colors hover:bg-slate-200/50 hover:text-slate-700 sm:h-7 sm:gap-1.5 sm:px-2 sm:text-[11px]"
           >
             {copied ? (
               <>
-                <Check className="mr-1 h-3.5 w-3.5 text-green-600" />
-                Gekopieerd
+                <Check className="h-3 w-3 text-green-600" />
+                <span>Gekopieerd</span>
               </>
             ) : (
               <>
-                <Link2 className="mr-1 h-3.5 w-3.5" />
-                Link kopiëren
+                <Link2 className="h-3 w-3" />
+                <span>Link</span>
               </>
             )}
-          </Button>
+          </button>
           <button
             type="button"
             onClick={handleDismiss}
-            className="shrink-0 rounded p-1 text-slate-400 transition-colors hover:bg-slate-200/60 hover:text-slate-600"
+            className="shrink-0 rounded p-0.5 text-slate-300 transition-colors hover:text-slate-500"
             aria-label="Banner sluiten"
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="h-3 w-3" />
           </button>
         </div>
       </div>
