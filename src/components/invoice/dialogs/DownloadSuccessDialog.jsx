@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, LayoutDashboard } from 'lucide-react';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
+import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 
 const NEXT_STEPS = [
   'Boekhouding',
@@ -71,6 +72,8 @@ export default function DownloadSuccessDialog({
           )}
 
           {!isLoggedIn && <FeatureUpdatesSignup companyEmail={companyEmail} />}
+
+          <ShareFactuurBaas />
         </div>
       </DialogContent>
     </Dialog>

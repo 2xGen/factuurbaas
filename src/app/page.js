@@ -12,6 +12,7 @@ import TrustSection from "@/components/landing/page/sections/TrustSection";
 import HomeToolsSection from "@/components/landing/page/sections/HomeToolsSection";
 import BlogPillarsSection from "@/components/landing/page/sections/BlogPillarsSection";
 import CallToActionSection from "@/components/landing/page/sections/CallToActionSection";
+import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 
 export const metadata = {
   title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
@@ -25,7 +26,14 @@ export const metadata = {
       'Maak gratis professionele facturen in 2 minuten. Geen account nodig. Direct PDF downloaden.',
     url: 'https://factuurbaas.nl',
     type: 'website',
-    images: ['/og-image.png'],
+    images: siteOpenGraphImages,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
+    description:
+      'Maak gratis professionele facturen in 2 minuten. Geen account nodig. Direct PDF downloaden.',
+    images: [SITE_OG_IMAGE],
   },
   alternates: { canonical: 'https://factuurbaas.nl' },
 };

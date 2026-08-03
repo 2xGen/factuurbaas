@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import InvoiceLandingPage from '@/components/landing/InvoiceLandingPage';
 import { getAllTemplateSlugs, getTemplatePage } from '@/lib/templateLandingPages';
+import { siteOpenGraphImages } from '@/lib/siteOg';
 
 export async function generateStaticParams() {
   return getAllTemplateSlugs().map((slug) => ({ slug }));
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }) {
       description: page.metaDescription,
       url: `https://factuurbaas.nl/factuur-template/${slug}`,
       type: 'website',
+      images: siteOpenGraphImages,
     },
   };
 }

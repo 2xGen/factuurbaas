@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import ArticlePostClient from '@/components/articles/ArticlePostClient';
 import { getGuideBySlug, getRelatedGuideItems, guides } from '@/lib/guideData';
 import { clusterToPillarId } from '@/lib/guideHub';
+import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }) {
       url: guideUrl,
       type: 'article',
       siteName: 'FactuurBaas',
-      images: [{ url: guide.image.url, width: 1200, height: 630, alt: guide.image.alt }],
+      images: siteOpenGraphImages,
       publishedTime: published,
       modifiedTime: modified,
     },
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title,
       description: guide.excerpt,
-      images: [guide.image.url],
+      images: [SITE_OG_IMAGE],
     },
     alternates: { canonical: guideUrl },
   };

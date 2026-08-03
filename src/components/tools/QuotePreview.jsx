@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { nl } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { calculateQuoteBreakdown, formatQuoteMoney } from '@/lib/quoteUtils';
+import PdfBrandingFooter from '@/components/shared/PdfBrandingFooter';
 
 const layoutStyles = {
   plain: {
@@ -242,6 +243,12 @@ const QuotePreview = React.forwardRef(({ quote }, ref) => {
             <p className={cn('mt-2 text-xs', currentLayout.muted)}>Datum en handtekening</p>
           </div>
         )}
+
+        <PdfBrandingFooter
+          showBranding={opts.showFactuurBaasBranding !== false}
+          language="nl"
+          className={currentLayout.muted}
+        />
       </div>
     </div>
   );

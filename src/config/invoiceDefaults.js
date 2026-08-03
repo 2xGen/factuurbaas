@@ -52,6 +52,7 @@ export const defaultInvoice = {
   terms: 'Betaling binnen 14 dagen.',
   layout: 'plain',
   pdfLanguage: 'nl',
+  showFactuurBaasBranding: true,
   logo: null,
   status: 'concept',
   rememberCompanyDetails: false,

@@ -86,10 +86,22 @@ export function useQuoteForm() {
   };
 
   const toggleOption = (key) => {
-    setQuote((prev) => ({
-      ...prev,
-      options: { ...prev.options, [key]: !prev.options[key] },
-    }));
+    setQuote((prev) => {
+      const current = prev.options?.[key];
+      // Options that default to on (including when undefined) flip with !== false
+      const defaultsOn = [
+        'showFactuurBaasBranding',
+        'showValidity',
+        'showTerms',
+        'showPaymentTerms',
+      ].includes(key);
+      const nextValue = defaultsOn ? !(current !== false) : !current;
+
+      return {
+        ...prev,
+        options: { ...prev.options, [key]: nextValue },
+      };
+    });
   };
 
   const handleRememberChange = (checked) => {

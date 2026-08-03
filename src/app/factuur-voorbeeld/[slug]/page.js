@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import VoorbeeldLandingPage from '@/components/landing/VoorbeeldLandingPage';
 import { getAllVoorbeeldSlugs, getVoorbeeldPage } from '@/lib/voorbeeldLandingPages';
+import { siteOpenGraphImages } from '@/lib/siteOg';
 
 export async function generateStaticParams() {
   return getAllVoorbeeldSlugs().map((slug) => ({ slug }));
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }) {
       description: page.metaDescription,
       url: `https://factuurbaas.nl/factuur-voorbeeld/${slug}`,
       type: 'website',
+      images: siteOpenGraphImages,
     },
   };
 }

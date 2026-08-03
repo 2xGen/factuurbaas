@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { articles } from '@/lib/blogData';
 import BlogPostClient from './BlogPostClient';
+import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 
 // Dynamic to avoid auth/context issues during Vercel static build
 export const dynamic = 'force-dynamic';
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }) {
       url: articleUrl,
       type: 'article',
       siteName: 'FactuurBaas',
-      images: [{ url: article.image.url, width: 1200, height: 630, alt: article.image.alt }],
+      images: siteOpenGraphImages,
       publishedTime: published,
       modifiedTime: modified,
     },
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: article.title,
       description: article.excerpt,
-      images: [article.image.url],
+      images: [SITE_OG_IMAGE],
     },
     alternates: { canonical: articleUrl },
   };

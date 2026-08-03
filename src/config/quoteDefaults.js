@@ -30,6 +30,7 @@ export const defaultQuote = {
     showTerms: true,
     showSignature: false,
     showPaymentTerms: true,
+    showFactuurBaasBranding: true,
   },
   terms: 'Deze offerte is 14 dagen geldig. Betaling binnen 14 dagen na akkoord.',
   notes: '',

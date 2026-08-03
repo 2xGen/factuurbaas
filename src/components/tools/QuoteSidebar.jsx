@@ -3,8 +3,15 @@
 import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Download, FileText, Info } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { CheckCircle2, Download, FileText, Info } from 'lucide-react';
 import QuotePreviewDialog from '@/components/tools/QuotePreviewDialog';
+import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 import { useToast } from '@/components/ui/use-toast';
 import { calculateQuoteBreakdown, exportQuotePdf, formatQuoteMoney } from '@/lib/quoteUtils';
 import { saveQuoteToInvoicePrefill } from '@/lib/invoicePrefill';
@@ -14,6 +21,7 @@ export default function QuoteSidebar({ quote, previewRef }) {
   const { toast } = useToast();
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false);
 
   const breakdown = calculateQuoteBreakdown(quote);
 
@@ -25,11 +33,8 @@ export default function QuoteSidebar({ quote, previewRef }) {
         `offerte-${quote.quoteNumber || 'factuurbaas'}.pdf`
       );
       if (ok) {
-        toast({
-          title: 'PDF gedownload',
-          description: 'Je offerte is opgeslagen als PDF.',
-        });
         setIsPreviewOpen(false);
+        setShowShareDialog(true);
       }
     } catch {
       toast({
@@ -97,6 +102,26 @@ export default function QuoteSidebar({ quote, previewRef }) {
         previewRef={previewRef}
         isExporting={isExporting}
       />
+
+      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="h-7 w-7 shrink-0 text-green-600" />
+              <DialogTitle className="text-lg text-deep-blue">Je offerte is gedownload</DialogTitle>
+            </div>
+          </DialogHeader>
+          <ShareFactuurBaas className="border-0 pt-1" />
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-2 w-full"
+            onClick={() => setShowShareDialog(false)}
+          >
+            Sluiten
+          </Button>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

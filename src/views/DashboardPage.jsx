@@ -8,6 +8,7 @@ import { ArrowRight, FilePlus2, Loader2 } from 'lucide-react';
 import DashboardStats from '@/components/dashboard/DashboardStats';
 import DashboardTools from '@/components/dashboard/DashboardTools';
 import DashboardCharts from '@/components/dashboard/DashboardCharts';
+import DashboardComingSoon from '@/components/dashboard/DashboardComingSoon';
 import { Button } from '@/components/ui/button';
 import { useUserInvoices } from '@/hooks/useUserInvoices';
 
@@ -103,6 +104,10 @@ export default function DashboardPage() {
           {userInvoices.length > 0 && <DashboardCharts invoices={userInvoices} />}
 
           <div className="mt-12">
+            <DashboardComingSoon email={user?.email || ''} />
+          </div>
+
+          <div className="mt-4">
             <DashboardTools />
           </div>
         </motion.div>

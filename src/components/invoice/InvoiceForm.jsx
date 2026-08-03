@@ -58,6 +58,7 @@ const PrimaryDetailsSection = ({
         paymentTermDays={invoice.paymentTermDays}
         currency={invoice.currency}
         pdfLanguage={invoice.pdfLanguage}
+        showFactuurBaasBranding={invoice.showFactuurBaasBranding}
         onInputChange={onInputChange}
         onDateChange={onDateChange}
         onPaymentTermChange={onPaymentTermChange}
@@ -175,7 +176,7 @@ const InvoiceForm = ({
         onSelectLayout={onSelectLayout}
       />
 
-      <InvoiceFormSection title="Blijf op de hoogte (optioneel)" icon={<Bell className="w-5 h-5 text-blue-600" />}>
+      <InvoiceFormSection title="Binnenkort & blijf op de hoogte" icon={<Bell className="w-5 h-5 text-blue-600" />}>
         <FeatureUpdatesSignup companyEmail={invoice.companyDetails?.email} />
       </InvoiceFormSection>
     </motion.div>

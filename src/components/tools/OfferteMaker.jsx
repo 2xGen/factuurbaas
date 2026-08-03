@@ -299,15 +299,23 @@ export default function OfferteMaker({ form }) {
             { key: 'showTerms', label: 'Algemene voorwaarden toevoegen' },
             { key: 'showSignature', label: 'Handtekening toevoegen' },
             { key: 'showPaymentTerms', label: 'Betalingsvoorwaarden toevoegen' },
-          ].map(({ key, label }) => (
-            <label key={key} className="flex cursor-pointer items-center gap-3">
+            {
+              key: 'showFactuurBaasBranding',
+              label: 'Toon “Gratis gemaakt met FactuurBaas.nl” op de PDF',
+              hint: 'Helpt ons groeien, zodat we meer gratis features kunnen maken. Je kunt dit uitzetten.',
+            },
+          ].map(({ key, label, hint }) => (
+            <label key={key} className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
-                checked={quote.options[key]}
+                checked={quote.options[key] !== false}
                 onChange={() => toggleOption(key)}
-                className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600"
               />
-              <span className="text-sm text-slate-700">{label}</span>
+              <span className="text-sm leading-relaxed text-slate-700">
+                {label}
+                {hint && <span className="mt-0.5 block text-xs text-slate-500">{hint}</span>}
+              </span>
             </label>
           ))}
           {quote.options.showTerms && (
@@ -322,7 +330,7 @@ export default function OfferteMaker({ form }) {
       </InvoiceFormSection>
 
       <InvoiceFormSection
-        title="Blijf op de hoogte (optioneel)"
+        title="Binnenkort & blijf op de hoogte"
         icon={<Bell className="h-5 w-5 text-blue-600" />}
       >
         <FeatureUpdatesSignup companyEmail={quote.companyDetails?.email} />

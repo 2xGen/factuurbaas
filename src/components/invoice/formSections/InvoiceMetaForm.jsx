@@ -13,6 +13,7 @@ const InvoiceMetaForm = ({
   paymentTermDays,
   currency,
   pdfLanguage,
+  showFactuurBaasBranding,
   onInputChange,
   onDateChange,
   onPaymentTermChange,
@@ -96,6 +97,22 @@ const InvoiceMetaForm = ({
           />
         </div>
       </MeerOpties>
+
+      <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-slate-50/80 px-3 py-3">
+        <input
+          type="checkbox"
+          name="showFactuurBaasBranding"
+          checked={showFactuurBaasBranding !== false}
+          onChange={onInputChange}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+        />
+        <span className="text-sm leading-relaxed text-slate-700">
+          Toon <span className="font-medium">“Gratis gemaakt met FactuurBaas.nl”</span> onderaan de PDF
+          <span className="mt-0.5 block text-xs text-slate-500">
+            Helpt ons groeien, zodat we meer gratis features kunnen maken. Je kunt dit uitzetten.
+          </span>
+        </span>
+      </label>
     </div>
   );
 };

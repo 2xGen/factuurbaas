@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { nl, enGB } from 'date-fns/locale';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
 import { formatMoney, getEffectiveTaxRate, getTaxDisplayLabel, INVOICE_LABELS, formatCompanyAddress, formatReceiverAddress } from '@/lib/invoiceConfig';
+import PdfBrandingFooter from '@/components/shared/PdfBrandingFooter';
 
 const layoutStyles = {
   plain: {
@@ -291,6 +292,12 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
           </p>
           <p className={`${currentLayout.secondary} mt-1 md:mt-2 text-[9px] md:text-[10px]`}>{labels.thanks}</p>
         </div>
+
+        <PdfBrandingFooter
+          showBranding={invoice.showFactuurBaasBranding !== false}
+          language={lang}
+          className={currentLayout.secondary}
+        />
       </div>
     </div>
   );

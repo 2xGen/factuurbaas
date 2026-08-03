@@ -70,6 +70,7 @@ export const INVOICE_LABELS = {
     iban: 'IBAN',
     email: 'E-mail',
     paymentWithin: (days) => `Betaling binnen ${days} dagen.`,
+    madeWith: 'Gratis gemaakt met FactuurBaas.nl',
   },
   en: {
     invoice: 'INVOICE',
@@ -111,6 +112,7 @@ export const INVOICE_LABELS = {
     iban: 'IBAN',
     email: 'Email',
     paymentWithin: (days) => `Payment within ${days} days.`,
+    madeWith: 'Made for free with FactuurBaas.nl',
   },
 };
 

@@ -12,7 +12,7 @@ export default function ClientLayout({ children }) {
       <div className="flex min-h-screen flex-col bg-white">
         <PageViewLogger />
         <HeaderClient />
-        <main className="flex-grow pt-20">{children}</main>
+        <main className="flex-grow pt-[var(--header-height,5rem)]">{children}</main>
         <FooterClient />
         <CookieBanner />
       </div>

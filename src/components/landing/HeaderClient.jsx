@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 import {
   ArrowRight,
   FilePlus2,
@@ -45,6 +46,7 @@ function NavLink({ href, children, active }) {
 export default function HeaderClient() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
   const { user, loading, signOut } = useAuth();
@@ -61,6 +63,22 @@ export default function HeaderClient() {
     setIsOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const syncHeight = () => {
+      document.documentElement.style.setProperty('--header-height', `${el.offsetHeight}px`);
+    };
+
+    syncHeight();
+    const ro = new ResizeObserver(syncHeight);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+    };
+  }, [isOpen]);
+
   const handleSignOut = async () => {
     await signOut();
     setIsOpen(false);
@@ -73,12 +91,15 @@ export default function HeaderClient() {
 
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         isLoggedIn
           ? `border-slate-200/80 bg-white/95 backdrop-blur-md ${isScrolled ? 'shadow-sm' : ''}`
           : `border-slate-200 bg-white ${isScrolled ? 'shadow-md' : 'shadow-sm'}`
       }`}
     >
+      <ShareFactuurBaas variant="banner" />
+
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:h-18 sm:px-6 lg:h-20">
         <Link href={homeHref} className="flex items-center gap-2.5">
           <img src="/crown-favicon.svg" alt="FactuurBaas" className="h-7 w-7 sm:h-8 sm:w-8" />

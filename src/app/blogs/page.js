@@ -3,6 +3,7 @@ import { articles } from '@/lib/blogData';
 import { getGuideListItems } from '@/lib/guideData';
 import { guideHubFaqs } from '@/lib/guideHub';
 import BlogListClient from './BlogListClient';
+import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 
 const guideListItems = getGuideListItems();
 
@@ -18,13 +19,14 @@ export const metadata = {
     url: 'https://factuurbaas.nl/blogs',
     type: 'website',
     siteName: 'FactuurBaas',
-    images: articles.length > 0 ? [{ url: articles[0].image.url, width: 1200, height: 630, alt: articles[0].image.alt }] : [],
+    images: siteOpenGraphImages,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Factuur tips zzp’ers: factuur maken, btw & betaaltermijn | FactuurBaas',
     description:
       'Ontdek artikelen voor zzp’ers over factuur maken, btw op je factuur, betaaltermijn en factuurbeheer. Inclusief praktische stappenplannen voor sneller betaling en minder fouten.',
+    images: [SITE_OG_IMAGE],
   },
   alternates: { canonical: 'https://factuurbaas.nl/blogs' },
 };

@@ -4,6 +4,7 @@ import {
   getAllOfferteVoorbeeldSlugs,
   getOfferteVoorbeeldPage,
 } from '@/lib/offerteVoorbeeldLandingPages';
+import { siteOpenGraphImages } from '@/lib/siteOg';
 
 export async function generateStaticParams() {
   return getAllOfferteVoorbeeldSlugs().map((slug) => ({ slug }));
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }) {
       description: page.metaDescription,
       url: `https://factuurbaas.nl/offerte-voorbeeld/${slug}`,
       type: 'website',
+      images: siteOpenGraphImages,
     },
   };
 }
