@@ -20,6 +20,7 @@ const pillarIcons = {
   'btw-belasting': Scale,
   offertes: FileText,
   uurtarief: Clock,
+  tools: FileStack,
   'templates-voorbeelden': FileStack,
   'betaling-beheer': Wallet,
 };

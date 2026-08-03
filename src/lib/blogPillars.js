@@ -71,6 +71,14 @@ export const blogPillars = [
     guideSlugs: ['welk-uurtarief-moet-ik-rekenen'],
   },
   {
+    id: 'tools',
+    title: 'Tools & calculators',
+    description:
+      "Gratis online tools voor zzp'ers: factuur maken, btw, offerte, uurtarief en meer — met uitleg hoe je ze gebruikt.",
+    slugs: [],
+    guideSlugs: ['deze-7-tools-zijn-heel-handig-voor-zzpers'],
+  },
+  {
     id: 'templates-voorbeelden',
     title: 'Templates & voorbeelden',
     description:

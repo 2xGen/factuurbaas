@@ -5451,6 +5451,214 @@ Met vriendelijke groet,
       </>
     ),
   },
+  {
+    slug: 'deze-7-tools-zijn-heel-handig-voor-zzpers',
+    cluster: 'tools',
+    seoTitle: "Deze 7 tools zijn heel handig voor zzp'ers | Gratis online tools",
+    title: "Deze 7 tools zijn heel handig voor zzp'ers (thuiswerken & administratie)",
+    excerpt:
+      "Deze 7 tools zijn heel handig voor zzp'ers die vanuit huis werken: factuur maken, offerte, btw, uurtarief, factuurnummer, betaaltermijn en KOR — gratis en zonder account.",
+    keywords:
+      "deze 7 tools zijn heel handig om thuis mee te werken als zzp'er, 7 tools zzp, handige tools zzp, gratis tools zzp, tools voor zzp'ers, tools thuiswerken zzp, factuur tools zzp",
+    tool: {
+      href: '/tools',
+      label: 'Bekijk alle tools',
+      ctaLabel: 'Open gratis tools',
+      relatedTitle: 'Gratis factuur tools',
+      relatedExcerpt:
+        'Factuur maken, btw calculator, offerte maker en meer. Gratis en zonder account.',
+    },
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/tools%20voor%20zzpers.jpg',
+      alt: "Deze 7 tools zijn heel handig voor zzp'ers — werken vanaf de laptop",
+    },
+    datePublished: '2026-08-03',
+    dateModified: '2026-08-03',
+    relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'factureren-zonder-account'],
+    relatedGuideSlugs: [
+      'welke-btw-rekenen-zzper',
+      'hoe-maak-je-een-offerte',
+      'welk-uurtarief-moet-ik-rekenen',
+    ],
+    faq: [
+      {
+        question: "Welke tools zijn handig voor zzp'ers die thuiswerken?",
+        answer:
+          'Voor je administratie zijn een factuurtool, offerte maker, btw calculator, uurtarief calculator, factuurnummer generator, betaaltermijn calculator en KOR-check het handigst. Die vind je gratis bij FactuurBaas.',
+      },
+      {
+        question: 'Heb ik een account nodig om FactuurBaas-tools te gebruiken?',
+        answer:
+          'Nee. Je kunt facturen, offertes en calculators direct gebruiken zonder account. Wil je facturen opslaan, dan kun je optioneel inloggen.',
+      },
+      {
+        question: 'Zijn deze 7 tools echt gratis?',
+        answer:
+          'Ja. De tools op FactuurBaas zijn gratis te gebruiken. Je downloadt facturen en offertes direct als PDF.',
+      },
+      {
+        question: 'Wat is het verschil met Zoom, Slack of Trello?',
+        answer:
+          'Tools zoals Zoom en Slack helpen bij communicatie. FactuurBaas focust op administratie: factureren, offertes, btw, uurtarieven en betaaltermijnen.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          <strong>Deze 7 tools zijn heel handig voor zzp&apos;ers</strong> die vanuit huis werken — of gewoon hun
+          administratie snel willen regelen zonder duur softwarepakket. Geen videobellen of projectborden, maar tools
+          die je direct helpen met facturen, offertes, btw en tarieven.
+        </p>
+        <p>
+          Op FactuurBaas vind je gratis online tools zonder account. Hieronder de zeven die je als zzp&apos;er het
+          meest gebruikt.
+        </p>
+
+        <GuideToolCta href="/tools" label="Bekijk alle gratis tools →" />
+
+        <h2>1. Factuur maken</h2>
+        <p>
+          De basis van je administratie: een nette factuur met bedrijfsgegevens, klant, regels, btw en betaaltermijn.
+          Met de{' '}
+          <Link href="/factuur-maken" className="text-warm-orange hover:underline">
+            factuur maken tool
+          </Link>{' '}
+          maak je in een paar minuten een PDF — ideaal als je thuis werkt en snel iets naar een klant wilt sturen.
+        </p>
+        <ul>
+          <li>Geen account nodig</li>
+          <li>Direct downloaden als PDF</li>
+          <li>Optioneel opslaan in je dashboard</li>
+        </ul>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur →" />
+
+        <h2>2. Offerte maker</h2>
+        <p>
+          Voor nieuwe opdrachten stuur je eerst een offerte. De{' '}
+          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
+            offerte maker
+          </Link>{' '}
+          helpt je met een professionele prijsopgave, inclusief geldigheidsduur. Na akkoord zet je de gegevens eenvoudig
+          om naar een factuur.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
+            Hoe maak je een offerte?
+          </Link>
+        </p>
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak een offerte →" />
+
+        <h2>3. BTW calculator</h2>
+        <p>
+          Thuiswerken betekent ook: snel checken of een bedrag klopt. Met de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            BTW calculator
+          </Link>{' '}
+          reken je 21%, 9% of een eigen percentage — inclusief of exclusief btw.
+        </p>
+        <p>
+          Handig bij offertes, facturen en als je btw wilt terugrekenen uit een totaalbedrag. Meer uitleg in{' '}
+          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
+            btw terugrekenen
+          </Link>
+          .
+        </p>
+        <GuideToolCta href="/tools/btw-calculator/berekenen" label="Bereken btw →" />
+
+        <h2>4. Uurtarief calculator</h2>
+        <p>
+          Welk uurtarief moet je vragen? De{' '}
+          <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
+            uurtarief calculator
+          </Link>{' '}
+          rekent terug vanuit gewenst inkomen, kosten en factureerbare uren — zodat je niet te laag zit.
+        </p>
+        <p>
+          Dieper lezen:{' '}
+          <Link href="/gidsen/welk-uurtarief-moet-ik-rekenen" className="text-warm-orange hover:underline">
+            Welk uurtarief moet ik rekenen?
+          </Link>
+        </p>
+        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken je uurtarief →" />
+
+        <h2>5. Factuurnummer generator</h2>
+        <p>
+          Elke factuur heeft een uniek nummer nodig. De{' '}
+          <Link href="/tools/factuurnummer-generator" className="text-warm-orange hover:underline">
+            factuurnummer generator
+          </Link>{' '}
+          helpt je aan een duidelijk, professioneel nummer — handig als je zelf je reeks bijhoudt.
+        </p>
+        <GuideToolCta href="/tools/factuurnummer-generator/maken" label="Genereer een factuurnummer →" />
+
+        <h2>6. Betaaltermijn calculator</h2>
+        <p>
+          Wanneer moet de klant betalen? Met de{' '}
+          <Link href="/tools/betaaltermijn-calculator" className="text-warm-orange hover:underline">
+            betaaltermijn calculator
+          </Link>{' '}
+          bereken je de vervaldatum op basis van factuurdatum en termijn (bijv. 14 of 30 dagen). Zo zet je altijd de
+          juiste datum op je factuur.
+        </p>
+        <GuideToolCta href="/tools/betaaltermijn-calculator/berekenen" label="Bereken vervaldatum →" />
+
+        <h2>7. KOR calculator</h2>
+        <p>
+          Past de kleineondernemersregeling bij jouw omzet? De{' '}
+          <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
+            KOR calculator
+          </Link>{' '}
+          geeft snel inzicht of de KOR bij jouw verwachte jaaromzet past — nuttig bij plannen vanuit huis of bij een
+          nieuwe start.
+        </p>
+        <GuideToolCta href="/tools/kor-calculator/berekenen" label="Check de KOR →" />
+
+        <h2>Bonus: nog meer handige tools</h2>
+        <p>Naast deze zeven vind je op FactuurBaas ook:</p>
+        <ul>
+          <li>
+            <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
+              Uurtarief naar inkomen
+            </Link>{' '}
+            — wat levert je tarief per maand op?
+          </li>
+          <li>
+            <Link href="/tools/marge-calculator" className="text-warm-orange hover:underline">
+              Marge calculator
+            </Link>{' '}
+            — winstmarge op inkoop/verkoop
+          </li>
+        </ul>
+
+        <h2>Waarom deze tools handig zijn als je thuiswerkt</h2>
+        <p>
+          Als zzp&apos;er werk je vaak alleen — thuis, bij de klant of onderweg. Dan wil je geen zware software, maar
+          snelle tools die je administratie afmaken:
+        </p>
+        <ul>
+          <li>factuur of offerte in PDF, klaar om te mailen</li>
+          <li>btw en tarieven zonder Excel-rommel</li>
+          <li>duidelijke factuurnummers en betaaltermijnen</li>
+          <li>alles gratis, in de browser</li>
+        </ul>
+        <p>
+          Communicatie-apps (zoals videobellen of chat) blijven nuttig. Voor je geldzaken en papieren werk zijn deze
+          zeven FactuurBaas-tools een sterke basis.
+        </p>
+
+        <h2>Direct aan de slag</h2>
+        <p>
+          Begin met de tool die je nu nodig hebt, of open het overzicht op{' '}
+          <Link href="/tools" className="text-warm-orange hover:underline">
+            /tools
+          </Link>
+          .
+        </p>
+        <GuideToolCta href="/create-invoice" label="Maak je eerste factuur →" />
+      </>
+    ),
+  },
 ];
 
 export function getGuideBySlug(slug) {

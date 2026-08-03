@@ -36,6 +36,13 @@ export const guideHubIntro = {
       'Gebruik onze gratis uurtarief calculator om direct te berekenen welk tarief bij jouw situatie past.',
     ],
   },
+  tools: {
+    title: "Tools voor zzp'ers",
+    paragraphs: [
+      "Welke online tools helpen je als zzp'er met factureren, offertes, btw en uurtarieven? In deze gidsen lees je welke tools handig zijn — en ga je direct aan de slag zonder account.",
+      'Alle FactuurBaas-tools zijn gratis. Kies een tool, lees hoe het werkt en download wat je nodig hebt.',
+    ],
+  },
 };
 
 /** Hub FAQs with short answers; each links to a guide. */
@@ -96,6 +103,12 @@ export const guideHubFaqs = [
       'Bereken je benodigde omzet (inkomen + kosten + belastingreservering) en deel door je factureerbare uren. Gebruik de gratis uurtarief calculator voor jouw situatie.',
     guideSlug: 'welk-uurtarief-moet-ik-rekenen',
   },
+  {
+    question: "Welke tools zijn handig voor zzp'ers die thuiswerken?",
+    answer:
+      'Voor je administratie: factuur maken, offerte maker, btw calculator, uurtarief calculator, factuurnummer generator, betaaltermijn calculator en KOR-check — allemaal gratis bij FactuurBaas.',
+    guideSlug: 'deze-7-tools-zijn-heel-handig-voor-zzpers',
+  },
 ];
 
 export function getBlogHubIntro(pillarId) {
@@ -123,5 +136,6 @@ export function clusterToPillarId(cluster) {
   if (cluster === 'offertes') return 'offertes';
   if (cluster === 'btw') return 'btw-belasting';
   if (cluster === 'uurtarief') return 'uurtarief';
+  if (cluster === 'tools') return 'tools';
   return null;
 }

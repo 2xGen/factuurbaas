@@ -84,6 +84,13 @@ export default function ToolsHubPage() {
       links={toolLinks}
       ctaHref="/factuur-maken"
       ctaLabel="Maak gratis factuur"
+      relatedLinksTitle="Lees ook"
+      relatedLinks={[
+        {
+          href: '/gidsen/deze-7-tools-zijn-heel-handig-voor-zzpers',
+          label: "Deze 7 tools zijn heel handig voor zzp'ers",
+        },
+      ]}
     />
   );
 }
