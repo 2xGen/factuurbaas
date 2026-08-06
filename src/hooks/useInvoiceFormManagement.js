@@ -39,6 +39,25 @@ export const useInvoiceFormManagement = (initialInvoice) => {
       return;
     }
 
+    if (prefill.source === 'uren' && Array.isArray(prefill.hoursWorked) && prefill.hoursWorked.length) {
+      const rate =
+        prefill.hourlyRate != null && Number.isFinite(Number(prefill.hourlyRate))
+          ? String(Math.round(Number(prefill.hourlyRate) * 100) / 100)
+          : undefined;
+      setInvoice((prev) => ({
+        ...prev,
+        workType: 'hourly',
+        ...(rate != null ? { amount: rate } : {}),
+        hoursWorked: prefill.hoursWorked.map((log, index) => ({
+          id: log.id || Date.now() + index,
+          date: log.date ? new Date(log.date) : new Date(),
+          hours: Number(log.hours) || 0,
+          taskDescription: log.taskDescription || '',
+        })),
+      }));
+      return;
+    }
+
     if (prefill.source === 'factuurnummer-generator' && prefill.invoiceNumber) {
       setInvoice((prev) => ({
         ...prev,

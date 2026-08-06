@@ -10,6 +10,7 @@ const DashboardContent = ({
   invoices,
   calculateInvoiceTotal,
   onEdit,
+  onDuplicate,
   onTogglePaid,
   onSendReminder,
   onOpenActivityLog,
@@ -63,6 +64,7 @@ const DashboardContent = ({
       parseDateSafe={parseDateSafe}
       calculateInvoiceTotal={calculateInvoiceTotal}
       onEdit={onEdit}
+      onDuplicate={onDuplicate}
       onTogglePaid={onTogglePaid}
       onSendReminder={onSendReminder}
       onOpenActivityLog={onOpenActivityLog}

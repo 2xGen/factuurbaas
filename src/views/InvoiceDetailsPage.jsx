@@ -13,11 +13,14 @@ import {
   isPersistedInvoiceId,
   upsertInvoice,
 } from '@/lib/invoicePersistence';
+import { cloneInvoiceAsNewDraft } from '@/lib/invoiceClone';
 import {
   clientToReceiverDetails,
   fetchClientById,
   isPersistedClientId,
 } from '@/lib/clientPersistence';
+import { consumePendingHoursEntryIds } from '@/lib/invoicePrefill';
+import { markTimeEntriesInvoiced } from '@/lib/timeEntryPersistence';
 import {
   fetchProfileForInvoice,
   profileHasCompanyData,
@@ -48,6 +51,7 @@ function InvoiceDetailsInner() {
   const { invoice, setInvoice } = form;
 
   const invoiceIdParam = searchParams.get('id');
+  const fromIdParam = searchParams.get('from');
   const clientIdParam = searchParams.get('clientId');
 
   const handleApplyReceiver = useCallback(
@@ -170,11 +174,57 @@ function InvoiceDetailsInner() {
     };
   }, [invoiceIdParam, user, authLoading, setInvoice]);
 
+  // Opnieuw factureren: clone source invoice into a new draft (?from=)
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadClone() {
+      if (invoiceIdParam && isPersistedInvoiceId(invoiceIdParam)) return;
+      if (!fromIdParam || !isPersistedInvoiceId(fromIdParam)) return;
+      if (authLoading) return;
+
+      if (!user) {
+        setAuthModalOpen(true);
+        return;
+      }
+
+      setIsLoadingRemote(true);
+      setLoadError(null);
+      try {
+        const remote = await fetchInvoiceById(supabase, user.id, fromIdParam);
+        if (cancelled) return;
+        if (!remote) {
+          setLoadError('Bronfactuur niet gevonden of geen toegang.');
+          return;
+        }
+        const draft = cloneInvoiceAsNewDraft(remote);
+        setInvoice(draft);
+        toast({
+          title: 'Factuur gekopieerd',
+          description:
+            'Datum en nummer zijn vernieuwd. Controleer de regels en sla op als nieuwe factuur.',
+        });
+      } catch (err) {
+        if (!cancelled) {
+          setLoadError(err.message || 'Kon factuur niet kopiëren.');
+        }
+      } finally {
+        if (!cancelled) setIsLoadingRemote(false);
+      }
+    }
+
+    loadClone();
+    return () => {
+      cancelled = true;
+    };
+  }, [fromIdParam, invoiceIdParam, user, authLoading, setInvoice, toast]);
+
   useEffect(() => {
     let cancelled = false;
 
     async function loadClient() {
       if (invoiceIdParam && isPersistedInvoiceId(invoiceIdParam)) return;
+      if (fromIdParam && isPersistedInvoiceId(fromIdParam)) return;
       if (!clientIdParam || !isPersistedClientId(clientIdParam)) return;
       if (authLoading) return;
 
@@ -207,7 +257,7 @@ function InvoiceDetailsInner() {
     return () => {
       cancelled = true;
     };
-  }, [clientIdParam, invoiceIdParam, user, authLoading, setInvoice, toast]);
+  }, [clientIdParam, invoiceIdParam, fromIdParam, user, authLoading, setInvoice, toast]);
 
   const handleSave = useCallback(async () => {
     if (!user) {
@@ -225,6 +275,16 @@ function InvoiceDetailsInner() {
         isPersistedInvoiceId(invoice.id) ? 'Factuur bijgewerkt' : 'Factuur opgeslagen'
       );
       setInvoice(saved);
+
+      const pendingHourIds = consumePendingHoursEntryIds();
+      if (pendingHourIds.length) {
+        try {
+          await markTimeEntriesInvoiced(supabase, user.id, pendingHourIds);
+        } catch {
+          // Non-blocking: invoice is already saved
+        }
+      }
+
       if (!isPersistedInvoiceId(invoice.id) || invoice.id !== saved.id) {
         router.replace(`/create-invoice?id=${saved.id}`);
       }

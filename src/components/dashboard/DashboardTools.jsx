@@ -12,6 +12,7 @@ import {
   Timer,
   TrendingUp,
   Users,
+  Wallet,
 } from 'lucide-react';
 
 const DASHBOARD_TOOLS = [
@@ -20,6 +21,12 @@ const DASHBOARD_TOOLS = [
     description: 'Nieuwe factuur opstellen en opslaan.',
     href: '/create-invoice',
     icon: FileText,
+  },
+  {
+    title: 'Uren → factuur',
+    description: 'Log uren en zet ze om naar een factuur.',
+    href: '/uren',
+    icon: Clock,
   },
   {
     title: 'Klanten',
@@ -43,7 +50,7 @@ const DASHBOARD_TOOLS = [
     title: 'Uurtarief',
     description: 'Bepaal je minimale uurtarief.',
     href: '/tools/uurtarief-calculator/maken',
-    icon: Clock,
+    icon: Wallet,
   },
   {
     title: 'Uurtarief → inkomen',

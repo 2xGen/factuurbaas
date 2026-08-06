@@ -22,7 +22,7 @@ export default function DashboardComingSoon({ email = '' }) {
             Nieuwe functies op de planning
           </h2>
           <p className="mt-1 text-sm text-slate-500">
-            Krijg een seintje zodra terugkerende facturen, uren→factuur en herinneringen live zijn.
+            Krijg een seintje zodra automatische herinneringen en geplande facturen live zijn.
           </p>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 import {
   ArrowRight,
+  Clock,
   FilePlus2,
   FileText,
   LayoutDashboard,
@@ -137,6 +138,9 @@ export default function HeaderClient() {
             <NavLink href="/facturen" active={pathname.startsWith('/facturen')}>
               Facturen
             </NavLink>
+            <NavLink href="/uren" active={pathname.startsWith('/uren')}>
+              Uren
+            </NavLink>
             <NavLink href="/klanten" active={pathname.startsWith('/klanten')}>
               Klanten
             </NavLink>
@@ -234,6 +238,14 @@ export default function HeaderClient() {
                   >
                     <span className="inline-flex items-center gap-2">
                       <FileText className="h-4 w-4" /> Facturen
+                    </span>
+                  </Link>
+                  <Link
+                    href="/uren"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Clock className="h-4 w-4" /> Uren
                     </span>
                   </Link>
                   <Link

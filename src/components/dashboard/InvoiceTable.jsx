@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import {
   CheckCircle2,
   Circle,
+  Copy,
   Edit,
   FileText,
   ListChecks,
@@ -23,6 +24,7 @@ const InvoiceTable = ({
   parseDateSafe,
   calculateInvoiceTotal,
   onEdit,
+  onDuplicate,
   onTogglePaid,
   onSendReminder,
   onOpenActivityLog,
@@ -56,7 +58,7 @@ const InvoiceTable = ({
               <th className="w-[10%] px-3 py-3">Dagen</th>
               <th className="w-[12%] px-3 py-3">Bedrag</th>
               <th className="w-[11%] px-3 py-3">Status</th>
-              <th className="w-[12%] px-2 py-3 text-right">Acties</th>
+              <th className="w-[14%] px-2 py-3 text-right">Acties</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -124,6 +126,15 @@ const InvoiceTable = ({
                         title="Bewerken"
                       >
                         <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-warm-orange hover:text-orange-700"
+                        onClick={() => onDuplicate?.(invoice.id)}
+                        title="Opnieuw factureren"
+                      >
+                        <Copy className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="ghost"

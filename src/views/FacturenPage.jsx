@@ -82,6 +82,10 @@ export default function FacturenPage() {
                 <p className="mt-1 text-sm text-slate-500">
                   {userInvoices.length} opgeslagen
                   {openCount > 0 ? ` · ${openCount} openstaand` : ''}
+                  {' · '}
+                  <span className="text-slate-400">
+                    Tip: gebruik het kopieer-icoon om opnieuw te factureren
+                  </span>
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -127,6 +131,7 @@ export default function FacturenPage() {
             invoices={filteredInvoices}
             calculateInvoiceTotal={(inv) => Number(inv.total_incl) || 0}
             onEdit={(id) => router.push(`/create-invoice?id=${id}`)}
+            onDuplicate={(id) => router.push(`/create-invoice?from=${id}`)}
             onTogglePaid={togglePaidStatus}
             onSendReminder={(invoice) => setSelectedInvoiceForReminder(invoice)}
             onOpenActivityLog={(invoice) => setSelectedInvoiceForActivityLog(invoice)}

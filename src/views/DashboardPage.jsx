@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -11,10 +11,37 @@ import DashboardCharts from '@/components/dashboard/DashboardCharts';
 import DashboardComingSoon from '@/components/dashboard/DashboardComingSoon';
 import { Button } from '@/components/ui/button';
 import { useUserInvoices } from '@/hooks/useUserInvoices';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { supabase } from '@/lib/customSupabaseClient';
+import { fetchHoursThisMonth } from '@/lib/timeEntryPersistence';
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { user, authLoading, isLoadingInvoices, userInvoices } = useUserInvoices();
+  const { user } = useAuth();
+  const { authLoading, isLoadingInvoices, userInvoices } = useUserInvoices();
+  const [hoursStats, setHoursStats] = useState({
+    totalHours: 0,
+    openHours: 0,
+    monthLabel: '',
+  });
+
+  useEffect(() => {
+    if (!user?.id) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const stats = await fetchHoursThisMonth(supabase, user.id);
+        if (!cancelled) setHoursStats(stats);
+      } catch {
+        if (!cancelled) {
+          setHoursStats({ totalHours: 0, openHours: 0, monthLabel: '' });
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.id]);
 
   const totalOutstandingAmount = useMemo(
     () =>
@@ -99,6 +126,9 @@ export default function DashboardPage() {
             totalOutstandingBtw={totalOutstandingBtw}
             totalBtw={totalBtw}
             hasInvoices={userInvoices.length > 0}
+            hoursThisMonth={hoursStats.totalHours}
+            openHoursThisMonth={hoursStats.openHours}
+            hoursMonthLabel={hoursStats.monthLabel}
           />
 
           {userInvoices.length > 0 && <DashboardCharts invoices={userInvoices} />}

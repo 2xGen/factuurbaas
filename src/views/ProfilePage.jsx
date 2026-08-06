@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
-import { ArrowLeft, UserCircle, Building, Camera, Save, LogOut, Loader2, Trash2 } from 'lucide-react';
+import { ArrowLeft, UserCircle, Building, Camera, Save, LogOut, Loader2, Trash2, Briefcase } from 'lucide-react';
 import ProfileSection from '@/components/profile/ProfileSection';
 import PersonalDetailsForm from '@/components/profile/formSections/PersonalDetailsForm';
 import CompanyDetailsForm from '@/components/profile/formSections/CompanyDetailsForm';
@@ -24,7 +24,13 @@ import {
 } from '@/lib/logoStorage';
 import PrivacyConsentCheckbox from '@/components/auth/PrivacyConsentCheckbox';
 import NewsletterOptInCheckbox from '@/components/auth/NewsletterOptInCheckbox';
+import OnboardingFields from '@/components/onboarding/OnboardingFields';
 import { PRIVACY_POLICY_VERSION } from '@/lib/privacyConsent';
+import {
+  emptyOnboardingForm,
+  onboardingFormToDbFields,
+  profileToOnboardingForm,
+} from '@/lib/onboardingProfile';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -55,6 +61,7 @@ const ProfilePage = () => {
   const [privacyChecked, setPrivacyChecked] = useState(false);
   const [newsletterOptIn, setNewsletterOptIn] = useState(false);
   const [newsletterOptInAt, setNewsletterOptInAt] = useState(null);
+  const [onboardingForm, setOnboardingForm] = useState(emptyOnboardingForm());
 
   const loadProfile = useCallback(async () => {
     if (!user) {
@@ -84,6 +91,7 @@ const ProfilePage = () => {
       setPrivacyChecked(Boolean(data?.privacy_accepted_at));
       setNewsletterOptIn(Boolean(data?.newsletter_opt_in));
       setNewsletterOptInAt(data?.newsletter_opt_in_at || null);
+      setOnboardingForm(profileToOnboardingForm(data));
     } catch (err) {
       toast({
         title: 'Profiel laden mislukt',
@@ -166,6 +174,8 @@ const ProfilePage = () => {
         id: user.id,
         full_name: formData.name,
         ...profileFormToDbFields(formData.companyDetails),
+        ...onboardingFormToDbFields(onboardingForm),
+        onboarding_completed_at: new Date().toISOString(),
         logo_url: logoPath,
         privacy_accepted_at: acceptedAt,
         privacy_policy_version: PRIVACY_POLICY_VERSION,
@@ -292,6 +302,21 @@ const ProfilePage = () => {
               fileInputRef={fileInputRef}
               onLogoChange={handleLogoChange}
               disabled={isSaving}
+            />
+          </ProfileSection>
+
+          <ProfileSection
+            title="Over jouw onderneming"
+            icon={<Briefcase className="h-6 w-6 text-deep-blue" />}
+          >
+            <p className="mb-4 text-sm text-slate-500">
+              Optioneel — helpt ons FactuurBaas beter af te stemmen op jouw branche. Niet openbaar.
+            </p>
+            <OnboardingFields
+              form={onboardingForm}
+              onChange={setOnboardingForm}
+              disabled={isSaving}
+              idPrefix="profile-onboarding"
             />
           </ProfileSection>
 

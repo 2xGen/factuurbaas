@@ -113,3 +113,36 @@ export function saveQuoteToInvoicePrefill(quote) {
     })
   );
 }
+
+const PENDING_HOURS_ENTRY_IDS_KEY = 'factuurbaas_uren_pending_entry_ids';
+
+/** Prefill create-invoice from selected time entries (uren → factuur). */
+export function saveHoursToInvoicePrefill({ hoursWorked, hourlyRate, entryIds = [] }) {
+  if (typeof window === 'undefined') return;
+  sessionStorage.setItem(
+    PREFILL_KEY,
+    JSON.stringify({
+      source: 'uren',
+      hoursWorked,
+      hourlyRate,
+      entryIds,
+    })
+  );
+  if (entryIds.length) {
+    sessionStorage.setItem(PENDING_HOURS_ENTRY_IDS_KEY, JSON.stringify(entryIds));
+  }
+}
+
+/** Entry IDs waiting to be marked "op factuur" after a successful invoice save. */
+export function consumePendingHoursEntryIds() {
+  if (typeof window === 'undefined') return [];
+  const raw = sessionStorage.getItem(PENDING_HOURS_ENTRY_IDS_KEY);
+  sessionStorage.removeItem(PENDING_HOURS_ENTRY_IDS_KEY);
+  if (!raw) return [];
+  try {
+    const ids = JSON.parse(raw);
+    return Array.isArray(ids) ? ids : [];
+  } catch {
+    return [];
+  }
+}
