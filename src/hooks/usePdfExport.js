@@ -9,19 +9,20 @@ export const usePdfExport = (previewRef, toast) => {
     const input = previewRef.current;
     if (input) {
       try {
+        // Keep PDFs email-friendly: scale 2 + JPEG (PNG at scale 3 was often several MB).
         const canvas = await html2canvas(input, {
-          scale: 3,
+          scale: 2,
           useCORS: true,
           logging: false,
           imageTimeout: 15000,
-          backgroundColor: null,
+          backgroundColor: '#ffffff',
           width: input.offsetWidth,
           height: input.offsetHeight,
           windowWidth: input.scrollWidth,
           windowHeight: input.scrollHeight,
         });
 
-        const imgData = canvas.toDataURL('image/png', 1.0);
+        const imgData = canvas.toDataURL('image/jpeg', 0.82);
 
         const pdf = new jsPDF({
           orientation: 'p',
@@ -29,6 +30,7 @@ export const usePdfExport = (previewRef, toast) => {
           format: 'a4',
           putOnlyUsedFonts: true,
           floatPrecision: 16,
+          compress: true,
         });
 
         const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -49,7 +51,7 @@ export const usePdfExport = (previewRef, toast) => {
         const imgX = (pdfWidth - finalImgWidth) / 2;
         const imgY = 0;
 
-        pdf.addImage(imgData, 'PNG', imgX, imgY, finalImgWidth, finalImgHeight);
+        pdf.addImage(imgData, 'JPEG', imgX, imgY, finalImgWidth, finalImgHeight, undefined, 'MEDIUM');
         pdf.save(fileName);
 
         await logToolUsage(INVOICE_LOG_INSERT_TABLE);

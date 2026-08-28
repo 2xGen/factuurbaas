@@ -32,8 +32,8 @@ export async function exportQuotePdf(previewRef, fileName) {
     backgroundColor: '#ffffff',
   });
 
-  const imgData = canvas.toDataURL('image/png', 1.0);
-  const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+  const imgData = canvas.toDataURL('image/jpeg', 0.82);
+  const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', compress: true });
   const pdfWidth = pdf.internal.pageSize.getWidth();
   const pdfHeight = pdf.internal.pageSize.getHeight();
   const imgAspectRatio = canvas.width / canvas.height;
@@ -43,7 +43,7 @@ export async function exportQuotePdf(previewRef, fileName) {
     finalHeight = pdfHeight;
     finalWidth = pdfHeight * imgAspectRatio;
   }
-  pdf.addImage(imgData, 'PNG', 0, 0, finalWidth, finalHeight);
+  pdf.addImage(imgData, 'JPEG', 0, 0, finalWidth, finalHeight, undefined, 'MEDIUM');
   pdf.save(fileName);
   await logToolUsage(TOOL_LOG_TABLES.offertes);
   return true;

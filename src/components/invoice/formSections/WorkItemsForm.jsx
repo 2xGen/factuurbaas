@@ -5,7 +5,7 @@ import FormInput from '@/components/invoice/formElements/FormInput';
 import FormTextarea from '@/components/invoice/formElements/FormTextarea';
 import FormSelect from '@/components/invoice/formElements/FormSelect';
 import FormDatePicker from '@/components/invoice/formElements/FormDatePicker';
-import { TAX_OPTIONS } from '@/lib/invoiceConfig';
+import { TAX_OPTIONS, LINE_TAX_OPTIONS } from '@/lib/invoiceConfig';
 
 const WorkItemsForm = ({
   invoice,
@@ -40,10 +40,15 @@ const WorkItemsForm = ({
     });
   };
 
-  const showTaxIncluded = !['exempt', 'reverse'].includes(invoice.tax);
+  const invoiceLevelSpecial = ['exempt', 'reverse'].includes(invoice.tax);
+  const showTaxIncluded = !invoiceLevelSpecial;
+  const allowPerLineTax = invoice.workType === 'fixed' && !invoiceLevelSpecial;
   const extra = invoice.extraCosts || {};
   const hasExtraCosts = Boolean(extra.travel || extra.shipping || extra.material);
   const [showExtraCosts, setShowExtraCosts] = useState(hasExtraCosts);
+
+  const lineTaxValue = (item) =>
+    item.tax != null && item.tax !== '' ? String(item.tax) : String(invoice.tax || '21');
 
   return (
     <div className="space-y-6">
@@ -74,7 +79,7 @@ const WorkItemsForm = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
         <FormSelect
-          label="BTW Tarief"
+          label={allowPerLineTax ? 'Standaard BTW (nieuwe regels & extra kosten)' : 'BTW Tarief'}
           name="tax"
           value={invoice.tax}
           onChange={handleTaxRateChange}
@@ -82,15 +87,15 @@ const WorkItemsForm = ({
         />
         {invoice.tax === 'custom' && (
           <FormInput
-            label="Eigen percentage (%)"
+            label="Vrij BTW-percentage (%)"
             name="customTaxRate"
             type="number"
             min="0"
             max="100"
-            step="0.1"
+            step="0.01"
             value={invoice.customTaxRate ?? ''}
             onChange={onInputChange}
-            placeholder="Bijv. 13"
+            placeholder="Bijv. 13 of 6.5"
           />
         )}
         {showTaxIncluded && (
@@ -106,6 +111,11 @@ const WorkItemsForm = ({
           />
         )}
       </div>
+      {allowPerLineTax && (
+        <p className="text-xs text-slate-500 -mt-2">
+          Per item kun je een ander tarief kiezen (0%, 9%, 21% of anders). Handig als je meerdere BTW-percentages op één factuur nodig hebt.
+        </p>
+      )}
 
       {invoice.workType === 'fixed' && (
         <div className="space-y-4">
@@ -150,6 +160,34 @@ const WorkItemsForm = ({
                   labelClassName="text-xs"
                 />
               </div>
+              {allowPerLineTax && (
+                <div className="grid grid-cols-2 gap-3">
+                  <FormSelect
+                    label="BTW op dit item"
+                    name={`item-tax-${index}`}
+                    value={lineTaxValue(item)}
+                    onChange={(e) => onUpdateItem(index, 'tax', e.target.value)}
+                    options={LINE_TAX_OPTIONS}
+                    labelClassName="text-xs"
+                  />
+                  {lineTaxValue(item) === 'custom' && (
+                    <FormInput
+                      label="Vrij % "
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                      value={item.customTaxRate ?? ''}
+                      onChange={(e) =>
+                        onUpdateItem(index, 'customTaxRate', e.target.value === '' ? '' : parseFloat(e.target.value))
+                      }
+                      placeholder="Bijv. 13"
+                      inputClassName="text-sm"
+                      labelClassName="text-xs"
+                    />
+                  )}
+                </div>
+              )}
               <Button
                 type="button"
                 variant="ghost"

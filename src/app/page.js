@@ -17,13 +17,13 @@ import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 export const metadata = {
   title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
   description:
-    "Maak gratis professionele facturen in 2 minuten. Geen account, geen abonnement. Download direct als PDF. Voor zzp'ers en kleine ondernemers.",
+    "Gratis factuur maken zonder account. Maak online een professionele factuur en download direct als PDF. Geen abonnement. Voor zzp'ers en kleine ondernemers.",
   keywords:
-    'gratis factuur maken, factuur maken zonder account, factuur maken zzp, factuur template, factuur voorbeeld, online factuur maken',
+    'gratis factuur maken, factuur maken gratis, factuur maken zonder account, online factuur maken, factuur maken online, gratis factuur maken online, factuur maken zzp',
   openGraph: {
     title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
     description:
-      'Maak gratis professionele facturen in 2 minuten. Geen account nodig. Direct PDF downloaden.',
+      'Gratis factuur maken zonder account. Maak online een professionele factuur en download direct als PDF.',
     url: 'https://factuurbaas.nl',
     type: 'website',
     images: siteOpenGraphImages,
@@ -32,7 +32,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Gratis Factuur Maken – Geen Account | FactuurBaas',
     description:
-      'Maak gratis professionele facturen in 2 minuten. Geen account nodig. Direct PDF downloaden.',
+      'Gratis factuur maken zonder account. Maak online een professionele factuur en download direct als PDF.',
     images: [SITE_OG_IMAGE],
   },
   alternates: { canonical: 'https://factuurbaas.nl' },
@@ -42,6 +42,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <SeoLandingSection />
       <DashboardMockupSection />
       <KlantenHomeSection />
       <BtwHomeSection />
@@ -49,7 +50,6 @@ export default function HomePage() {
       <StylePickerSection />
       <WhyFreeHomeSection />
       <TemplatesLibrarySection />
-      <SeoLandingSection />
       <TrustSection />
       <HomeToolsSection />
       <BlogPillarsSection />

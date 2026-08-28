@@ -256,7 +256,15 @@ export const useInvoiceFormManagement = (initialInvoice) => {
   const handleAddItem = useCallback(() => {
     setInvoice((prev) => ({
       ...prev,
-      items: [...(prev.items || []), { id: Date.now(), itemName: '', itemDescription: '', quantity: 1, price: 0 }],
+      items: [...(prev.items || []), {
+        id: Date.now(),
+        itemName: '',
+        itemDescription: '',
+        quantity: 1,
+        price: 0,
+        tax: prev.tax === 'exempt' || prev.tax === 'reverse' ? '21' : (prev.tax || '21'),
+        customTaxRate: prev.tax === 'custom' ? prev.customTaxRate : '',
+      }],
     }));
   }, []);
 

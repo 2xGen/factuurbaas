@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { nl, enGB } from 'date-fns/locale';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
-import { formatMoney, getEffectiveTaxRate, getTaxDisplayLabel, INVOICE_LABELS, formatCompanyAddress, formatReceiverAddress } from '@/lib/invoiceConfig';
+import { formatMoney, getEffectiveTaxRate, getTaxDisplayLabel, resolveLineTax, INVOICE_LABELS, formatCompanyAddress, formatReceiverAddress } from '@/lib/invoiceConfig';
 import PdfBrandingFooter from '@/components/shared/PdfBrandingFooter';
 
 const layoutStyles = {
@@ -39,7 +39,7 @@ const layoutStyles = {
 };
 
 const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
-  const { subtotal, taxAmount, grandTotal } = calculateInvoiceBreakdown(invoice);
+  const { subtotal, taxAmount, grandTotal, taxLines = [] } = calculateInvoiceBreakdown(invoice);
   const currentLayout = layoutStyles[invoice.layout] || layoutStyles.plain;
   const overallTaxRate = getEffectiveTaxRate(invoice);
   const lang = invoice.pdfLanguage || 'nl';
@@ -62,17 +62,20 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
   const receiverAddress = formatReceiverAddress(receiver);
   const extra = invoice.extraCosts || {};
   const vatLabel = invoice.tax === 'exempt' || invoice.tax === 'reverse';
+  const showPerLineVat =
+    invoice.workType === 'fixed' && !vatLabel && taxLines.length > 1;
 
   const fmt = (amount) => formatMoney(amount, currency);
 
   const getItemDisplayPriceAndTotal = (item) => {
     const itemPrice = parseFloat(item.price) || 0;
-    const itemQuantity = parseInt(item.quantity) || 1;
+    const itemQuantity = parseInt(item.quantity, 10) || 1;
     const displayPrice = itemPrice;
+    const { rate } = resolveLineTax(item, invoice);
     const lineTotal = invoice.taxIncluded
       ? displayPrice * itemQuantity
-      : displayPrice * (1 + overallTaxRate) * itemQuantity;
-    return { displayPrice, lineTotal };
+      : displayPrice * (1 + rate) * itemQuantity;
+    return { displayPrice, lineTotal, vatPctLabel: resolveLineTax(item, invoice).label };
   };
 
   const getHourlyDisplayRateAndTotal = (log) => {
@@ -194,6 +197,11 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
                     <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
                       {labels.pricePerUnit} ({invoice.taxIncluded ? labels.inclVat : labels.exclVat} {labels.vat})
                     </th>
+                    {showPerLineVat && (
+                      <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
+                        {labels.vat}
+                      </th>
+                    )}
                   </>
                 )}
                 <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>{labels.totalInclVat}</th>
@@ -220,7 +228,7 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
                     );
                   })
                 : (invoice.items || []).map((item, index) => {
-                    const { displayPrice, lineTotal } = getItemDisplayPriceAndTotal(item);
+                    const { displayPrice, lineTotal, vatPctLabel } = getItemDisplayPriceAndTotal(item);
                     return (
                       <tr key={index} className={`${currentLayout.borderColor} border-b`}>
                         <td className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
@@ -231,13 +239,21 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
                         </td>
                         <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{item.quantity || 1}</td>
                         <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(displayPrice)}</td>
+                        {showPerLineVat && (
+                          <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                            {vatPctLabel}
+                          </td>
+                        )}
                         <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(lineTotal)}</td>
                       </tr>
                     );
                   })}
               {extraRows.map((row) => (
                 <tr key={row.key} className={`${currentLayout.borderColor} border-b`}>
-                  <td className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`} colSpan={invoice.workType === 'hourly' ? 3 : 3}>
+                  <td
+                    className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}
+                    colSpan={invoice.workType === 'hourly' ? 3 : showPerLineVat ? 4 : 3}
+                  >
                     {row.label}
                   </td>
                   <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(row.value)}</td>
@@ -257,6 +273,18 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
               <div className={`mb-0.5 text-[9px] md:text-[10px] ${currentLayout.secondary}`}>
                 {getTaxDisplayLabel(invoice, labels)}
               </div>
+            ) : taxLines.length > 0 ? (
+              taxLines.map((line) => (
+                <div
+                  key={line.key}
+                  className={`flex justify-between mb-0.5 ${currentLayout.secondary}`}
+                >
+                  <span>
+                    {labels.vat} ({line.label})
+                  </span>
+                  <span>{fmt(line.amount)}</span>
+                </div>
+              ))
             ) : (
               <div className={`flex justify-between mb-0.5 ${currentLayout.secondary}`}>
                 <span>{getTaxDisplayLabel(invoice, labels)}</span>

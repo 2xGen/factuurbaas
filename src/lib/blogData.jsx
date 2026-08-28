@@ -10,6 +10,17 @@ const CtaButton = () => (
     </div>
 );
 
+const OfferteFactuurCtas = () => (
+    <div className="my-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
+            <Link href="/tools/offerte-maker">Maak gratis offerte</Link>
+        </Button>
+        <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
+            <Link href="/create-invoice">Maak gratis factuur</Link>
+        </Button>
+    </div>
+);
+
 export const articles = [
   {
     slug: 'factuur-maken-zzp',
@@ -185,135 +196,492 @@ export const articles = [
   },
   {
     slug: 'factuur-templates-zzp',
-    relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'factuur-pdf-downloaden', 'factuur-fouten-voorkomen'],
-    title: 'Template factuur zzp: voorbeeld, sjabloon en gratis factuur maken zzp',
-    excerpt: 'Template factuur zzp en voorbeeld factuur zzp: professionele factuur template, zzp factuur template en layout factuur. Geen Excel of Word — gratis factuur maken zzp met FactuurBaas.',
-    keywords: 'template factuur zzp, voorbeeld factuur zzp, factuur template, zzp factuur template, factuur zzp template, sjabloon factuur zzp, factuur voorbeeld zzp, zzp factuur voorbeeld, layout factuur, factuur maken zzp gratis, gratis factuur maken zzp, factuur template word, voorbeeld factuur zzp excel',
+    relatedSlugs: ['factuur-maken-zzp', 'factureren-zonder-account', 'factuur-pdf-downloaden', 'btw-factuur-zzp', 'factuur-fouten-voorkomen'],
+    metaTitle: 'Factuur voorbeeld: gratis zzp template + voorbeeldfactuur',
+    title: 'Factuur voorbeeld: gratis template voor zzp\'ers',
+    excerpt:
+      'Factuur voorbeeld en voorbeeldfactuur voor zzp\'ers: compleet voorbeeld met btw, blanco template, Word/Excel-vergelijking en branchevoorbeelden. Direct gratis factuur maken.',
+    keywords:
+      'factuur voorbeeld, voorbeeld factuur zzp, factuur template, template factuur, voorbeeld factuur, factuur voorbeeld zzp, factuur layout, factuur voorbeeld excel, factuur template word, voorbeeld blanco factuur, factuur voorbeeld pdf, sjabloon factuur',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Handige%20factuur%20templates%20voor%20zzp%20ers.png',
-      alt: 'Template factuur zzp en voorbeeld factuur zzp: professionele layout factuur voor zzp\'ers.',
+      alt: 'Factuur voorbeeld zzp: professionele template en voorbeeldfactuur voor zzp\'ers.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-08-28',
     faq: [
-      { question: 'Waar vind ik een template factuur zzp?', answer: 'Bij FactuurBaas kun je direct een professionele factuur template voor zzp\'ers gebruiken. Geen download nodig: vul je gegevens in, kies een layout en download je factuur als PDF. Gratis en zonder account.' },
-      { question: 'Wat is een goed voorbeeld factuur zzp?', answer: 'Een goed voorbeeld factuur zzp bevat alle verplichte onderdelen: jouw gegevens met KvK en btw-nummer, klantgegevens, factuurnummer, datum, omschrijving, bedragen en betaalgegevens. De templates van FactuurBaas voldoen hieraan.' },
-      { question: 'Is er een sjabloon factuur zzp in Word of Excel?', answer: 'Je kunt een factuur template Word of voorbeeld factuur zzp Excel zelf bouwen, maar dat is foutgevoelig en tijdrovend. Met een online tool zoals FactuurBaas heb je direct een correcte zzp factuur template en geen gedoe met formules of opmaak.' },
-      { question: 'Welke layout factuur heb ik nodig als zzp\'er?', answer: 'Elke duidelijke layout met alle verplichte velden is goed. FactuurBaas biedt meerdere professionele layouts; kies er één en vul je gegevens in. De structuur en btw-berekening zijn al correct.' },
-      { question: 'Kan ik gratis factuur maken zzp met een template?', answer: 'Ja. Bij FactuurBaas maak je gratis een factuur met een professionele template. Geen account nodig: vul in, kies je layout en download de PDF. Ideaal voor factuur maken zzp gratis.' },
+      {
+        question: 'Waar vind ik een factuur voorbeeld voor zzp\'ers?',
+        answer:
+          'Op deze pagina staat een compleet voorbeeld met bedragen en btw. Wil je meteen een eigen factuur maken? Ga naar FactuurBaas, vul je gegevens in en download direct een PDF — gratis en zonder account.',
+      },
+      {
+        question: 'Wat is het verschil tussen een factuurvoorbeeld en een template?',
+        answer:
+          'Een voorbeeldfactuur laat zien hoe een complete factuur eruitziet, inclusief ingevulde gegevens. Een template of sjabloon is een leeg format dat je zelf invult — bijvoorbeeld in Word, Excel of via een online factuurmaker.',
+      },
+      {
+        question: 'Is een factuur voorbeeld in Excel of Word handig?',
+        answer:
+          'Het kan, vooral als je al met spreadsheets werkt. Let wel op: je moet btw en totalen zelf controleren. Een online tool berekent dat automatisch en bevat meestal alle verplichte velden.',
+      },
+      {
+        question: 'Wat is een blanco factuur?',
+        answer:
+          'Een blanco factuur is een leeg sjabloon met vaste velden (bedrijfsgegevens, klant, omschrijving, bedragen) die je zelf invult. Met een online factuurmaker hoef je geen blanco Word- of Excel-bestand handmatig in te vullen.',
+      },
+      {
+        question: 'Kan ik gratis een factuur maken met een template?',
+        answer:
+          'Ja. Met FactuurBaas kies je een layout, vult je gegevens in en download je direct een professionele PDF. Geen account nodig.',
+      },
     ],
     content: (
       <>
-        <p>Veel zzp&apos;ers zoeken een <strong>template factuur zzp</strong>, een <strong>voorbeeld factuur zzp</strong> of een <strong>zzp factuur template</strong>. Een goede <strong>factuur template</strong> bespaart tijd en zorgt dat elke factuur er professioneel uitziet en aan alle eisen voldoet. Of je nu in de bouw, beveiliging of een andere sector zit: een <strong>factuur zzp template</strong> met de juiste <strong>layout factuur</strong> is voor elke ondernemer hetzelfde. Hier vind je hoe je zonder gedoe met <strong>voorbeeld factuur zzp Excel</strong> of <strong>factuur template Word</strong> direct <strong>gratis factuur maken zzp</strong> doet.</p>
-
-        <h2>Waarom een goed template factuur zzp belangrijk is</h2>
-        <ul>
-          <li><strong>Professionaliteit:</strong> Een strakke <strong>layout factuur</strong> wekt vertrouwen — bij klanten en de Belastingdienst.</li>
-          <li><strong>Herkenbaarheid:</strong> Je logo en huisstijl op elke factuur versterken je merk.</li>
-          <li><strong>Foutloos:</strong> Een goede <strong>sjabloon factuur zzp</strong> zorgt dat alle verplichte velden (KvK, btw, factuurnummer) erop staan.</li>
-          <li><strong>Tijdsbesparing:</strong> Geen wiel opnieuw uitvinden — vul alleen je gegevens in.</li>
-        </ul>
-
-        <h2>Factuur template Word of voorbeeld factuur zzp Excel?</h2>
-        <p>Een <strong>factuur template Word</strong> of <strong>voorbeeld factuur zzp excel</strong> kan, maar heeft nadelen: je moet zelf formules en opmaak goed zetten, en het is makkelijk om fouten te maken. Een online <strong>template factuur zzp</strong> berekent btw voor je en bevat alle verplichte velden. Meer over fouten voorkomen lees je in <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">veelgemaakte fouten op facturen</Link>. Voor een <strong>factuur voorbeeld zzp</strong> of <strong>zzp factuur voorbeeld</strong> kun je direct bij FactuurBaas starten — zie ook <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">hoe maak je een factuur als zzp&apos;er</Link> en <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis factuur maken voor zzp&apos;ers</Link>.</p>
-
-        <h2>Hoe werkt de factuur template bij FactuurBaas?</h2>
-        <p>Bij FactuurBaas heb je meerdere professionele templates; geen <strong>factuur template Word</strong> of Excel nodig. Het werkt zo:</p>
-        <ol>
-          <li>Ga naar de <Link href="/create-invoice" className="text-warm-orange hover:underline">Factuur Maken</Link>.</li>
-          <li>Vul je bedrijfsgegevens en die van je klant in.</li>
-          <li>Voeg je diensten of producten toe.</li>
-          <li>Kies een van de <strong>layout factuur</strong>-opties.</li>
-          <li>Download je factuur direct als PDF. Klaar!</li>
-        </ol>
-        <p>Zo maak je in minuten een correcte <strong>voorbeeld factuur zzp</strong> — of je nu in bouw, beveiliging of een andere branche zit. <strong>Factuur maken zzp gratis</strong> en zonder account.</p>
+        <p>
+          Een goed <strong>factuurvoorbeeld</strong> helpt je om snel een professionele factuur te maken. Hieronder
+          vind je een compleet <strong>voorbeeld van een zzp-factuur</strong>, inclusief btw, bedragen en de belangrijkste
+          onderdelen. Je kunt het voorbeeld gebruiken als basis voor je eigen factuur of direct een{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">
+            gratis factuur maken
+          </Link>{' '}
+          met FactuurBaas.
+        </p>
 
         <CtaButton />
 
-        <h2>Voordelen van onze template factuur zzp</h2>
+        <h2>Voorbeeld factuur zzp</h2>
+        <p>
+          Onderstaand <strong>factuur voorbeeld</strong> laat zien hoe een complete zzp-factuur eruit kan zien — met alle
+          gebruikelijke onderdelen.
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <div className="border-b border-slate-200 bg-slate-50 px-4 py-3">
+            <p className="text-lg font-semibold text-deep-blue">Factuur 2026-001</p>
+          </div>
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Factuurdatum</td>
+                <td className="px-4 py-2">28 augustus 2026</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Vervaldatum</td>
+                <td className="px-4 py-2">11 september 2026</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Factuurnummer</td>
+                <td className="px-4 py-2">2026-001</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="grid gap-4 border-b border-slate-100 px-4 py-4 sm:grid-cols-2">
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Van</p>
+              <p className="font-medium text-deep-blue">Jansen Webdesign</p>
+              <p>Voorbeeldstraat 1</p>
+              <p>1234 AB Amsterdam</p>
+              <p>KvK: 12345678</p>
+              <p>BTW: NL123456789B01</p>
+            </div>
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Aan</p>
+              <p className="font-medium text-deep-blue">Voorbeeld BV</p>
+              <p>Klantstraat 10</p>
+              <p>1000 AA Amsterdam</p>
+            </div>
+          </div>
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Aantal
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Prijs
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Totaal
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwerp</td>
+                <td className="px-4 py-3 text-right">10 uur</td>
+                <td className="px-4 py-3 text-right">€75,00</td>
+                <td className="px-4 py-3 text-right">€750,00</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="space-y-1 px-4 py-4 text-sm text-slate-700 sm:text-base">
+            <p className="flex justify-between">
+              <span>Subtotaal</span>
+              <span>€750,00</span>
+            </p>
+            <p className="flex justify-between">
+              <span>BTW 21%</span>
+              <span>€157,50</span>
+            </p>
+            <p className="flex justify-between font-semibold text-deep-blue">
+              <span>Totaal</span>
+              <span>€907,50</span>
+            </p>
+            <p className="pt-2 text-slate-600">Betalingstermijn: 14 dagen</p>
+          </div>
+        </div>
+        <p>
+          Dit <strong>voorbeeld factuur zzp</strong> bevat alle elementen die je klant en de Belastingdienst verwachten.
+          Wil je zelf een factuur opstellen? Bekijk het{' '}
+          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">
+            stappenplan factuur maken zzp
+          </Link>{' '}
+          of gebruik het{' '}
+          <Link href="/factuur-template/zzp" className="text-warm-orange hover:underline">
+            zzp-factuur template
+          </Link>
+          .
+        </p>
+
+        <h2>Factuur voorbeelden voor verschillende branches</h2>
+        <p>
+          De opbouw van een factuur is voor elke zzp&apos;er hetzelfde — alleen de omschrijving en het tarief verschillen
+          per branche. Enkele <strong>voorbeelden factuur zzp</strong>:
+        </p>
         <ul>
-          <li><strong>Altijd correct:</strong> Alle verplichte elementen (KvK, btw, factuurnummer, termijn) zitten in de <strong>zzp factuur template</strong>.</li>
-          <li><strong>Mobielvriendelijk:</strong> Maak onderweg net zo makkelijk een factuur als op je desktop.</li>
-          <li><strong>Direct resultaat:</strong> Live preview terwijl je invult — geen gedoe met <strong>factuur template Word</strong> of Excel.</li>
+          <li>
+            <strong>Factuur voorbeeld zzp bouw:</strong> Metselwerk — 20 uur × €45 = €900. Meer voor aannemers en
+            schilders:{' '}
+            <Link href="/factuur-template/bouw" className="text-warm-orange hover:underline">
+              bouwfactuur template
+            </Link>
+            .
+          </li>
+          <li>
+            <strong>Factuur voorbeeld zzp beveiliging:</strong> Beveiligingswerkzaamheden — 16 uur × €35 = €560.
+          </li>
+          <li>
+            <strong>Factuur voorbeeld zzp zorg:</strong> Zorgverlening — 8 uur × €55 = €440 (controleer altijd of
+            btw-vrijstelling van toepassing is).
+          </li>
+          <li>
+            <strong>Factuur voorbeeld koerier:</strong> Transport Amsterdam–Rotterdam — 1 rit × €85 = €85.
+          </li>
+          <li>
+            <strong>Factuur voorbeeld webdesigner:</strong> Website ontwerp — 10 uur × €75 = €750 (zoals het voorbeeld
+            hierboven).
+          </li>
+          <li>
+            <strong>Factuur voorbeeld fotograaf:</strong> Bedrijfsreportage — 1 opdracht × €350 = €350.
+          </li>
+          <li>
+            <strong>Factuur voorbeeld consultant:</strong> Adviesgesprek — 4 uur × €120 = €480. Handig als{' '}
+            <Link href="/factuur-template/uren" className="text-warm-orange hover:underline">
+              urenfactuur template
+            </Link>
+            .
+          </li>
         </ul>
-        <p>Stop met tijd verspillen aan een <strong>sjabloon factuur zzp</strong> in Excel of Word. Probeer de <strong>template factuur zzp</strong> van FactuurBaas nu gratis en maak vandaag nog een professionele <strong>factuur voorbeeld zzp</strong>.</p>
+        <p>
+          Voor een <strong>factuur zonder btw</strong> (bijv. KOR) zie het{' '}
+          <Link href="/factuur-template/zonder-btw" className="text-warm-orange hover:underline">
+            template factuur zonder btw
+          </Link>
+          .
+        </p>
+
+        <h2>Factuur template Word of Excel</h2>
+        <p>
+          Veel ondernemers zoeken een <strong>factuur template Word</strong>, <strong>factuur voorbeeld Excel</strong> of
+          een kant-en-klaar <strong>sjabloon factuur</strong>. Dat kan — maar er zijn verschillen:
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[520px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Methode
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Geschikt voor
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Let op
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">Word</td>
+                <td className="px-4 py-3">Eenvoudige facturen</td>
+                <td className="px-4 py-3">Btw en bedragen zelf controleren</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">Excel</td>
+                <td className="px-4 py-3">Berekeningen en hergebruik</td>
+                <td className="px-4 py-3">Formules kunnen fouten bevatten</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">PDF template</td>
+                <td className="px-4 py-3">Snel een vaste factuur</td>
+                <td className="px-4 py-3">Minder flexibel</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-deep-blue">Online factuurmaker</td>
+                <td className="px-4 py-3">Snel professionele facturen</td>
+                <td className="px-4 py-3">Afhankelijk van de tool</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Wil je vooral snel een professionele factuur maken? Met FactuurBaas kun je online een factuur maken en direct
+          als{' '}
+          <Link href="/blogs/factuur-pdf-downloaden" className="text-warm-orange hover:underline">
+            PDF downloaden
+          </Link>
+          , zonder account. Meer opties vind je op de pagina{' '}
+          <Link href="/factuur-template" className="text-warm-orange hover:underline">
+            factuur template
+          </Link>
+          .
+        </p>
+
+        <h2>Blanco factuur: wat is het?</h2>
+        <p>
+          Een <strong>blanco factuur</strong> is een factuurtemplate waarin de vaste gegevens en velden al zijn opgenomen,
+          maar die je zelf nog invult — denk aan een leeg Word- of Excel-bestand met kolommen voor omschrijving, aantal,
+          prijs en totaal.
+        </p>
+        <p>
+          Wil je geen blanco template handmatig invullen? Met de{' '}
+          <Link href="/blogs/factureren-zonder-account" className="text-warm-orange hover:underline">
+            gratis factuurmaker
+          </Link>{' '}
+          van FactuurBaas vul je je gegevens online in en download je de complete factuur als PDF.
+        </p>
+
+        <CtaButton />
+
+        <h2>Wat moet er op een factuur staan?</h2>
+        <p>Een complete factuur bevat onder andere:</p>
+        <ul>
+          <li>bedrijfsnaam en adres</li>
+          <li>klantgegevens</li>
+          <li>KvK-nummer</li>
+          <li>btw-identificatienummer</li>
+          <li>factuurnummer</li>
+          <li>factuurdatum</li>
+          <li>leveringsdatum, wanneer van toepassing</li>
+          <li>omschrijving van producten of diensten</li>
+          <li>bedrag exclusief btw</li>
+          <li>btw-tarief en btw-bedrag</li>
+          <li>totaalbedrag</li>
+          <li>betaaltermijn en betaalgegevens</li>
+        </ul>
+        <p>
+          Uitgebreide uitleg per onderdeel lees je in{' '}
+          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">
+            factuur maken zzp: stappenplan
+          </Link>
+          . Voor btw op je factuur:{' '}
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
+            btw op je factuur als zzp&apos;er
+          </Link>
+          . Voorkom veelgemaakte fouten met{' '}
+          <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">
+            7 veelgemaakte fouten op facturen
+          </Link>
+          .
+        </p>
+
+        <h2>Waarom een goed factuurvoorbeeld of template helpt</h2>
+        <ul>
+          <li>
+            <strong>Professionaliteit:</strong> een strakke <strong>factuur layout</strong> wekt vertrouwen bij klanten.
+          </li>
+          <li>
+            <strong>Foutloos:</strong> een goed sjabloon zorgt dat verplichte velden (KvK, btw, factuurnummer) niet
+            ontbreken.
+          </li>
+          <li>
+            <strong>Tijdsbesparing:</strong> je hoeft de opbouw niet telkens opnieuw te bedenken.
+          </li>
+        </ul>
+
+        <h2>Gratis factuur maken met FactuurBaas</h2>
+        <p>Bij FactuurBaas kies je een professionele layout — geen Word of Excel nodig:</p>
+        <ol>
+          <li>
+            Ga naar{' '}
+            <Link href="/create-invoice" className="text-warm-orange hover:underline">
+              Factuur maken
+            </Link>
+            .
+          </li>
+          <li>Vul je bedrijfsgegevens en die van je klant in.</li>
+          <li>Voeg je diensten of producten toe.</li>
+          <li>Kies een layout.</li>
+          <li>Download je factuur direct als PDF.</li>
+        </ol>
+        <p>Gratis, zonder account. Alle verplichte velden zitten in de template; btw wordt automatisch berekend.</p>
+
+        <CtaButton />
 
         <h2>Veelgestelde vragen</h2>
-        <h3>Waar vind ik een template factuur zzp?</h3>
-        <p>Bij FactuurBaas: ga naar Factuur Maken, vul je gegevens in, kies een layout en download je PDF. Geen account nodig.</p>
-        <h3>Is een voorbeeld factuur zzp in Excel of Word handig?</h3>
-        <p>Het kan, maar een online template is sneller en minder foutgevoelig. Btw en verplichte velden worden voor je afgehandeld.</p>
-        <h3>Kan ik gratis factuur maken zzp met een template?</h3>
-        <p>Ja. Met FactuurBaas maak je gratis een factuur met een professionele template, zonder registratie.</p>
+        <h3>Waar vind ik een factuur voorbeeld voor zzp&apos;ers?</h3>
+        <p>
+          Op deze pagina staat een compleet voorbeeld met bedragen en btw. Wil je meteen een eigen factuur maken? Ga naar
+          FactuurBaas, vul je gegevens in en download direct een PDF.
+        </p>
+        <h3>Wat is het verschil tussen een factuurvoorbeeld en een template?</h3>
+        <p>
+          Een voorbeeldfactuur laat zien hoe een complete factuur eruitziet. Een template is een leeg format dat je zelf
+          invult — in Word, Excel of via een online factuurmaker.
+        </p>
+        <h3>Is een factuur voorbeeld in Excel of Word handig?</h3>
+        <p>
+          Het kan, maar je moet btw en totalen zelf controleren. Een online tool berekent dat automatisch en bevat
+          meestal alle verplichte velden.
+        </p>
+        <h3>Wat is een blanco factuur?</h3>
+        <p>
+          Een leeg sjabloon met vaste velden die je zelf invult. Met een online factuurmaker hoef je geen blanco
+          Word- of Excel-bestand handmatig in te vullen.
+        </p>
+        <h3>Kan ik gratis een factuur maken met een template?</h3>
+        <p>Ja. Met FactuurBaas kies je een layout, vult je gegevens in en download je direct een professionele PDF.</p>
       </>
     )
   },
   {
     slug: 'verschil-factuur-offerte',
-    relatedSlugs: ['factuur-maken-zzp', 'sneller-betalen-factuur', 'factuur-fouten-voorkomen', 'gratis-factuur-zzp'],
-    title: 'Verschil offerte en factuur: wat is een offerte, offerte vs factuur en wanneer welke?',
-    excerpt: 'Verschil offerte en factuur en offerte en factuur uitgelegd. Wat is een offerte? Is een offerte vrijblijvend? Offerte of factuur — wanneer gebruik je welke? Met FactuurBaas maak je daarna snel je factuur.',
-    keywords: 'verschil offerte en factuur, wat is een offerte, offerte en factuur, offerte factuur, is een offerte vrijblijvend, verschil tussen offerte en factuur, wat is het verschil tussen een offerte en een factuur, offerte vs factuur, is een offerte altijd vrijblijvend, wat is offerte, offerte of factuur, verschil factuur en offerte, prijsopgave of offerte, factuur hoger dan offerte, is een offerte een factuur, mag een factuur afwijken van een offerte, moet je een offerte betalen',
+    relatedSlugs: ['factuur-maken-zzp', 'sneller-betalen-factuur', 'factuur-fouten-voorkomen', 'factureren-zonder-account'],
+    metaTitle: 'Verschil offerte en factuur: wat is het verschil?',
+    title: 'Verschil tussen offerte en factuur',
+    excerpt: 'Wat is het verschil tussen een offerte en factuur? Lees wanneer je een offerte of factuur gebruikt, of een offerte vrijblijvend is en wanneer je factureert.',
+    keywords: 'verschil offerte en factuur, verschil tussen offerte en factuur, offerte en factuur, wat is een offerte, is een offerte vrijblijvend, offerte vs factuur, is een offerte hetzelfde als een factuur, mag een factuur afwijken van een offerte, hoeveel mag factuur afwijken van offerte, offerte of factuur, moet je een offerte betalen',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Wat%20is%20het%20verschil%20tussen%20een%20factuur%20en%20een%20offerte.png',
-      alt: 'Verschil offerte en factuur: wat is een offerte en wanneer stuur je een factuur?',
+      alt: 'Verschil tussen offerte en factuur uitgelegd.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-08-28',
     faq: [
-      { question: 'Wat is het verschil tussen offerte en factuur?', answer: 'Een offerte is een prijsvoorstel vóórdat je gaat leveren; de klant hoeft nog niets te betalen. Een factuur stuur je ná de levering: het is een betaalverzoek. Kortom: offerte = voorstel, factuur = verzoek om betaling. Het verschil tussen offerte en factuur is dus het moment en het doel.' },
-      { question: 'Wat is een offerte?', answer: 'Een offerte (of wat is offerte) is een schriftelijk prijsvoorstel voor diensten of producten die je nog gaat leveren. Het is juridisch een aanbod; pas na akkoord van de klant ontstaat een overeenkomst. Vaak wordt gevraagd: is een offerte een factuur? Nee — een offerte is geen factuur, je stuurt eerst de offerte, dan na akkoord en levering de factuur.' },
-      { question: 'Is een offerte vrijblijvend?', answer: 'Meestal wel. Is een offerte vrijblijvend of is een offerte altijd vrijblijvend? In Nederland is een offerte in principe vrijblijvend tenzij je er uitdrukkelijk iets anders in zet (bijv. "deze offerte is bindend na akkoord"). Zet altijd een geldigheidsduur op je offerte (bijv. 30 dagen).' },
-      { question: 'Moet je een offerte betalen?', answer: 'Nee. Moet je een offerte betalen? Een offerte is alleen een voorstel — je bent niets verschuldigd tot je akkoord gaat en de levering heeft plaatsgevonden. Daarna ontvang je een factuur die je wél moet betalen volgens de afgesproken termijn.' },
-      { question: 'Mag een factuur afwijken van een offerte?', answer: 'Ideaal wijkt een factuur niet af: de factuur sluit aan op de goedgekeurde offerte. Factuur hoger dan offerte kan alleen als dat zo is afgesproken (bijv. meerwerk) of als de offerte een schatting was en je vooraf hebt vermeld dat de definitieve factuur kan afwijken. Anders kan de klant de meerprijs betwisten. Verwijs op de factuur naar de offerte (bijv. "Volgens offerte 2024-A01").' },
-      { question: 'Prijsopgave of offerte — wat is het verschil?', answer: 'In de praktijk worden prijsopgave en offerte vaak hetzelfde bedoeld: een voorstel met prijs en voorwaarden. Een offerte is vaak iets formeler en bevat vaker een geldigheidsduur en handtekening. Beide zijn géén factuur — die komt pas na akkoord en levering.' },
+      { question: 'Wat is het verschil tussen offerte en factuur?', answer: 'Een offerte is een prijsvoorstel vóór je levert; een factuur is een betaalverzoek ná levering. De offerte legt prijs en voorwaarden vast, de factuur vraagt om betaling voor geleverd werk of producten.' },
+      { question: 'Is een offerte vrijblijvend?', answer: 'Dat hangt af van de tekst en omstandigheden. Een offerte kan een bindend aanbod zijn zodra de klant akkoord geeft. Veel ondernemers vermelden expliciet dat een offerte vrijblijvend is, of zetten een geldigheidsduur op het document. Lees altijd de voorwaarden op de offerte zelf.' },
+      { question: 'Is een offerte hetzelfde als een factuur?', answer: 'Nee. Een offerte is een voorstel vóór de opdracht; een factuur is een betaalverzoek na levering. Voor betaling heb je een factuur nodig, geen offerte.' },
+      { question: 'Moet je een offerte betalen?', answer: 'Nee. Een offerte is geen betaalverzoek. Pas na akkoord, levering en het ontvangen van een factuur ben je verschuldigd te betalen volgens de afgesproken termijn.' },
+      { question: 'Mag een factuur afwijken van een offerte?', answer: 'In principe sluit een factuur aan op de goedgekeurde offerte. Een hogere factuur kan als er meerwerk is afgesproken, als de offerte een schatting was (bijv. op urenbasis), of als je dat vooraf hebt vermeld. Zonder afspraak kan de klant een hogere factuur betwisten.' },
+      { question: 'Hoeveel mag een factuur afwijken van een offerte?', answer: 'Er is geen vast percentage. De factuur hoort overeen te komen met wat is afgesproken in de goedgekeurde offerte. Afwijking is alleen redelijk bij expliciet afgesproken meerwerk, nacalculatie of als de offerte een indicatie was. Leg afwijkingen altijd uit op de factuur.' },
+      { question: 'Is een offerte altijd vrijblijvend?', answer: 'Nee, niet altijd. Een offerte kan bindend zijn als de klant akkoord gaat, tenzij je duidelijk vermeldt dat deze vrijblijvend is of onder voorwaarden geldt. Formuleer daarom bewust wat er gebeurt na akkoord.' },
     ],
     content: (
         <>
-            <p>Veel mensen zoeken het <strong>verschil offerte en factuur</strong> of <strong>offerte en factuur</strong> — wanneer gebruik je welke? <strong>Wat is een offerte</strong> precies, en <strong>wat is het verschil tussen een offerte en een factuur</strong>? Kort gezegd: een <strong>offerte</strong> is een voorstel vóórdat je levert, een <strong>factuur</strong> stuur je nadat je hebt geleverd. Hier lees je het <strong>verschil tussen offerte en factuur</strong>, of het <strong>offerte factuur</strong>-verband, en antwoorden op vragen als <strong>is een offerte vrijblijvend</strong> en <strong>offerte vs factuur</strong>.</p>
+            <p>Het <strong>verschil tussen offerte en factuur</strong> zit in het moment en het doel: een offerte is een prijsvoorstel <em>vóór</em> je levert, een factuur is een betaalverzoek <em>na</em> levering. Hieronder lees je wanneer je welke gebruikt, of een offerte vrijblijvend is, en wanneer een factuur mag afwijken van een offerte.</p>
 
-            <h2>Wat is een offerte? (offerte vs factuur)</h2>
-            <p><strong>Wat is offerte</strong> of wat is een offerte? Een offerte maak je <strong>vóórdat</strong> je aan een opdracht begint. Het is een prijsvoorstel voor de diensten of producten die je gaat leveren. Juridisch is het een aanbod; pas als de klant akkoord gaat, is er een overeenkomst. <strong>Is een offerte een factuur?</strong> Nee — een offerte is geen factuur. Bij <strong>offerte of factuur</strong> kies je eerst offerte, daarna (na levering) factuur. <strong>Prijsopgave of offerte?</strong> In de volksmond vaak hetzelfde; een offerte is meestal iets formeler met geldigheidsduur.</p>
-            <h3>Wanneer gebruik je een offerte?</h3>
+            <h2>Verschil offerte en factuur — overzicht</h2>
+            <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+              <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50">
+                    <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col" />
+                    <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Offerte</th>
+                    <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Factuur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-slate-100">
+                    <td className="px-4 py-3 font-medium text-deep-blue">Moment</td>
+                    <td className="px-4 py-3">Voor de opdracht</td>
+                    <td className="px-4 py-3">Na levering/werkzaamheden</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="px-4 py-3 font-medium text-deep-blue">Doel</td>
+                    <td className="px-4 py-3">Prijsvoorstel doen</td>
+                    <td className="px-4 py-3">Betaling vragen</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="px-4 py-3 font-medium text-deep-blue">Bedrag</td>
+                    <td className="px-4 py-3">Voorgestelde prijs</td>
+                    <td className="px-4 py-3">Te betalen bedrag</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="px-4 py-3 font-medium text-deep-blue">Akkoord nodig?</td>
+                    <td className="px-4 py-3">Ja, om de opdracht te accepteren</td>
+                    <td className="px-4 py-3">Nee, als betaling verschuldigd is</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="px-4 py-3 font-medium text-deep-blue">Betaling</td>
+                    <td className="px-4 py-3">Niet bedoeld als betaalverzoek</td>
+                    <td className="px-4 py-3">Ja</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 font-medium text-deep-blue">Geldigheidsduur</td>
+                    <td className="px-4 py-3">Vaak wel</td>
+                    <td className="px-4 py-3">Nee</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Wat is een offerte?</h2>
+            <p>Een offerte is een schriftelijk prijsvoorstel voor diensten of producten die je nog gaat leveren. Je stuurt hem vóór je aan het werk gaat, zodat de klant weet wat het gaat kosten en wat je levert. Juridisch kan een offerte een aanbod zijn — pas als de klant akkoord gaat, ontstaat er een overeenkomst.</p>
+            <p>In de praktijk wordt &quot;prijsopgave&quot; vaak hetzelfde bedoeld. Een offerte is meestal iets formeler en bevat vaker een geldigheidsduur en duidelijke voorwaarden. Met onze <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">gratis offerte maker</Link> maak je snel een professionele offerte en download je die als PDF.</p>
+
+            <h2>Wat is een factuur?</h2>
+            <p>Een factuur stuur je nadat je hebt geleverd: het is een officieel betaalverzoek voor uitgevoerd werk of geleverde producten. Op een factuur staan onder andere je bedrijfsgegevens, het factuurnummer, bedragen, btw en de betalingstermijn. Zie ook <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">hoe je een factuur maakt</Link>.</p>
+
+            <h2>Wanneer gebruik je een offerte?</h2>
             <ul>
-                <li>Bij grotere projecten met variabele kosten.</li>
-                <li>Als een klant om een <strong>prijsopgave</strong> of offerte vraagt.</li>
-                <li>Om afspraken en omvang van het werk vast te leggen.</li>
+                <li>Bij grotere of langere opdrachten waar prijs en omvang vooraf duidelijk moeten zijn.</li>
+                <li>Als een klant om een prijsopgave vraagt.</li>
+                <li>Om scope, planning en voorwaarden vast te leggen voordat je start.</li>
             </ul>
-            <p><strong>Is een offerte vrijblijvend?</strong> Meestal wel. <strong>Is een offerte altijd vrijblijvend?</strong> In Nederland vaak ja, tenzij je anders vermeldt. Zet altijd een geldigheidsduur op je offerte (bijv. &quot;Deze offerte is 30 dagen geldig&quot;).</p>
 
-            <h2>De factuur: betaalverzoek na levering (verschil factuur en offerte)</h2>
-            <p>Een factuur stuur je <strong>nadat</strong> je de werkzaamheden hebt afgerond of de producten hebt geleverd. Het is een officieel betaalverzoek. Het <strong>verschil tussen factuur en offerte</strong>: de offerte komt vóór het werk, de factuur erna. <strong>Factuur of offerte</strong> — voor betaling heb je altijd een factuur nodig. Zie ook <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">hoe maak je een factuur</Link>.</p>
-            <h3>Wanneer gebruik je een factuur?</h3>
+            <h2>Wanneer stuur je een factuur?</h2>
             <ul>
-                <li>Om betaald te worden voor geleverde diensten of producten.</li>
+                <li>Na afloop van het werk of na levering van producten — om betaald te worden.</li>
                 <li>Voor je btw-administratie en boekhouding.</li>
+                <li>Wanneer de afgesproken betalingstermijn begint te lopen.</li>
             </ul>
 
-            <h2>Offerte en factuur: de combinatie in de praktijk</h2>
-            <p>Het <strong>offerte factuur verschil</strong> in de flow:</p>
+            <h2>Is een offerte vrijblijvend?</h2>
+            <p>Dat hangt af van de tekst op je offerte en de omstandigheden. Een offerte kan een bindend aanbod zijn: gaat de klant akkoord, dan kan daar een overeenkomst uit voortkomen. Veel ondernemers vermelden daarom expliciet dat een offerte vrijblijvend is, of koppelen er voorwaarden aan (bijv. &quot;Deze offerte is 30 dagen geldig&quot;).</p>
+            <p><strong>Is een offerte altijd vrijblijvend?</strong> Nee. Formuleer bewust wat er gebeurt na akkoord. Zet een geldigheidsduur op je offerte en vermeld duidelijk of de prijs vaststaat of een indicatie is (bijv. bij urenregistratie of nacalculatie).</p>
+
+            <h2>Is een offerte hetzelfde als een factuur?</h2>
+            <p>Nee. Een offerte is geen factuur. Een offerte is een voorstel vóór de opdracht; een factuur is een betaalverzoek na levering. Je hoeft een offerte niet te betalen — pas de factuur vraagt om betaling binnen de afgesproken termijn.</p>
+
+            <h2>Mag een factuur afwijken van een offerte?</h2>
+            <p>In principe sluit een factuur aan op de goedgekeurde offerte. <strong>Factuur hoger dan offerte</strong> kan als er meerwerk is afgesproken, als de offerte een schatting was (bijv. op basis van uren), of als je vooraf hebt vermeld dat de definitieve factuur kan afwijken.</p>
+            <p><strong>Hoeveel mag een factuur afwijken van een offerte?</strong> Er is geen vast percentage in de wet. Zonder afspraak kan een klant een hogere factuur betwisten. Leg afwijkingen daarom altijd uit op de factuur en verwijs naar de offerte (bijv. &quot;Volgens offerte 2026-A01, inclusief meerwerk punt 3&quot;).</p>
+
+            <h2>Offerte en factuur in de praktijk</h2>
+            <p>Typische flow:</p>
             <ol>
-                <li>Je stuurt een <strong>offerte</strong> naar de klant.</li>
-                <li>De klant gaat <strong>akkoord</strong> (schriftelijk of per e-mail).</li>
-                <li>Je voert de <strong>werkzaamheden</strong> uit.</li>
-                <li>Je stuurt een <strong>factuur</strong> die verwijst naar de offerte (bijv. &quot;Volgens offerte 2024-A01&quot;).</li>
+                <li>Je stuurt een offerte naar de klant.</li>
+                <li>De klant gaat akkoord (schriftelijk of per e-mail).</li>
+                <li>Je voert het werk uit of levert de producten.</li>
+                <li>Je stuurt een factuur die verwijst naar de offerte.</li>
             </ol>
-
-            <h2>Factuur hoger dan offerte — mag een factuur afwijken van een offerte?</h2>
-            <p><strong>Mag een factuur afwijken van een offerte?</strong> In principe sluit de factuur aan op de goedgekeurde offerte. <strong>Factuur hoger dan offerte</strong> kan alleen als je meerwerk hebt afgesproken of als je in de offerte hebt vermeld dat de definitieve factuur kan afwijken (bijv. bij urenregistratie). Verwijs op de factuur altijd naar de offerte om discussie te voorkomen.</p>
-
-            <p>Een duidelijke offerte voorkomt misverstanden en legt de basis voor de factuur die je daarna met <Link href="/create-invoice" className="text-warm-orange hover:underline">Factuur Maken</Link> eenvoudig maakt.</p>
-            <CtaButton />
+            <p>Een duidelijke offerte voorkomt misverstanden en maakt factureren achteraf eenvoudiger. Maak je offerte met de <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">gratis offerte maker</Link> en stuur daarna je factuur via <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link> — beide gratis, zonder account, direct als PDF.</p>
+            <OfferteFactuurCtas />
 
             <h2>Veelgestelde vragen</h2>
             <h3>Wat is het verschil tussen offerte en factuur?</h3>
-            <p>Offerte = voorstel vóór levering. Factuur = betaalverzoek ná levering. Eerst <strong>offerte en factuur verschil</strong> in je hoofd: offerte geen betaling, factuur wel.</p>
+            <p>Offerte = voorstel vóór levering. Factuur = betaalverzoek ná levering.</p>
             <h3>Is een offerte vrijblijvend?</h3>
-            <p>Meestal wel, tenzij je anders vermeldt. Zet een geldigheidsduur op je offerte.</p>
+            <p>Dat hangt af van je tekst en de omstandigheden. Veel ondernemers vermelden expliciet dat een offerte vrijblijvend is, of zetten een geldigheidsduur op het document.</p>
             <h3>Moet je een offerte betalen?</h3>
-            <p>Nee. Pas na akkoord en levering ontvang je een factuur; die moet je binnen de termijn betalen.</p>
+            <p>Nee. Pas na akkoord, levering en het ontvangen van een factuur betaal je volgens de termijn.</p>
             <h3>Mag de factuur afwijken van de offerte?</h3>
-            <p>De factuur hoort aan te sluiten op de offerte. Meerwerk of afwijking alleen als dat is afgesproken of in de offerte staat.</p>
+            <p>Alleen als dat is afgesproken, bij meerwerk, of als de offerte een indicatie was. Leg afwijkingen uit op de factuur.</p>
+            <h3>Is een offerte hetzelfde als een factuur?</h3>
+            <p>Nee. Een offerte is een voorstel; een factuur is een betaalverzoek na levering.</p>
         </>
     )
   },
@@ -808,50 +1176,76 @@ export const articles = [
   },
   {
     slug: 'factureren-zonder-account',
-    relatedSlugs: ['gratis-factuur-zzp', 'factuur-maken-zzp', 'factuur-pdf-downloaden', 'factureren-startende-zzper'],
-    title: 'Gratis factuur maken zonder account: direct download (PDF)',
-    excerpt: 'Gratis factuur maken zonder account: vul je gegevens in, download direct een professionele factuur als PDF. Inclusief wat er verplicht op moet staan (KVK/btw).',
-    keywords: 'factuur maken zonder account, factureren zonder account, gratis factuur maken, factuur maken zonder kvk, factuur maken zzp, gratis factuur zzp, factuur zonder registratie, direct factuur maken, factuur maken zonder inloggen',
+    relatedSlugs: ['factuur-pdf-downloaden', 'factuurbeheer-overzicht', 'gratis-factuurtool-vs-boekhoudprogramma'],
+    title: 'Gratis factuur maken online — zonder account en direct als PDF',
+    excerpt: 'Een gratis factuur maken online zonder account. Vul je gegevens in en download direct een professionele PDF. Geen registratie, geen abonnement, geen ingewikkeld boekhoudprogramma.',
+    keywords: 'factuur maken gratis, gratis factuur maken, gratis factuur maken online, online factuur maken, factuur maken online gratis, factuur maken zonder account, factureren zonder account, gratis factuur maken pdf, factuur maken zonder kvk, zelf factuur maken, hoe maak ik een factuur',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Factureren%20zonder%20account.png',
-      alt: 'Factuur maken zonder account: gratis factuur direct downloaden, geen registratie.',
+      alt: 'Gratis factuur maken online zonder account: direct als PDF downloaden.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-08-28',
     faq: [
-      { question: 'Kan ik een factuur maken zonder account?', answer: 'Ja. Bij FactuurBaas maak je direct een professionele factuur zonder registratie of inloggen. Je vult je gegevens in op de pagina, en downloadt de PDF. Geen e-mail, wachtwoord of account nodig.' },
-      { question: 'Waar kan ik gratis een factuur maken zonder in te loggen?', answer: 'Op FactuurBaas.nl kun je gratis een factuur maken zonder account. Je bezoekt de pagina, vult de velden in en downloadt je factuur als PDF. Alles in je browser; wij slaan niets op.' },
-      { question: 'Kan ik factuur maken zonder KvK?', answer: 'Nee. Voor een geldige factuur als ondernemer in Nederland heb je een KvK-inschrijving en een btw-nummer nodig; beide moeten op je factuur staan. Zonder KvK voldoet je factuur niet aan de eisen van de Belastingdienst. Eerst inschrijven bij de Kamer van Koophandel, daarna kun je factureren — bij FactuurBaas kan dat zonder account.' },
+      { question: 'Kan ik een factuur maken zonder account?', answer: 'Ja. Bij FactuurBaas maak je direct een professionele factuur zonder registratie of inloggen. Je vult je gegevens in op de pagina en downloadt de PDF. Geen e-mail, wachtwoord of account nodig.' },
+      { question: 'Waar kan ik gratis een factuur maken online?', answer: 'Op FactuurBaas.nl kun je gratis online een factuur maken zonder account. Bezoek de factuurpagina, vul je gegevens in en download je factuur direct als PDF. Alles gebeurt in je browser; wij slaan niets op.' },
+      { question: 'Is FactuurBaas gratis?', answer: 'Ja. Je kunt onbeperkt gratis facturen maken en als PDF downloaden — zonder account. Wil je bedrijfsgegevens, klanten of een factuuroverzicht bewaren? Dan kun je optioneel een gratis account aanmaken.' },
+      { question: 'Hoe maak ik zelf een factuur?', answer: 'Je kunt zelf een factuur maken in Word, Excel of met een online factuurtool. Zorg dat alle verplichte gegevens op de factuur staan en dat bedragen en btw correct zijn berekend. Met FactuurBaas kun je gratis online een factuur maken en deze direct als PDF downloaden.' },
+      { question: 'Kan ik factuur maken zonder KvK?', answer: 'Of je een factuur zonder KvK-nummer kunt sturen, hangt af van je situatie. Ben je ondernemer en ingeschreven bij de KvK, dan vermeld je de gegevens die op een zakelijke factuur verplicht zijn. Een KvK-nummer is niet in iedere situatie een verplicht onderdeel van een factuur. Heb je geen KvK-inschrijving? Zorg dat je situatie duidelijk is voordat je een factuur verstuurt.' },
+      { question: 'Kan ik een factuur sturen zonder KvK-nummer?', answer: 'Dat hangt af van je situatie. Ben je ingeschreven als ondernemer, dan hoort je factuur de verplichte zakelijke gegevens te bevatten. Heb je geen KvK-inschrijving maar wil je wel een betaling in rekening brengen, dan kunnen andere regels gelden — bijvoorbeeld bij incidenteel werk. Controleer je situatie voordat je een factuur verstuurt.' },
       { question: 'Worden mijn gegevens opgeslagen als ik zonder account factureer?', answer: 'Nee. De gegevens die je invult worden alleen in je browser gebruikt om de PDF te maken. Wij slaan niets op. Bewaar zelf je gedownloade factuur-PDF voor je administratie.' },
     ],
     content: (
       <>
-        <p>Veel mensen zoeken naar <strong>factuur maken zonder account</strong> of <strong>gratis factuur maken</strong> zonder registratie. Als zzp&apos;er wil je snel een <strong>factuur maken zzp</strong> — zonder weer ergens in te loggen of je e-mail af te geven. Bij FactuurBaas kun je direct aan de slag: <strong>factureren zonder account</strong>, geen wachtwoord, geen poespas. In dit artikel lees je hoe het werkt en wat je moet weten (ook over &quot;factuur maken zonder KvK&quot;).</p>
+        <p>Een gratis factuur maken? Met FactuurBaas maak je online een professionele factuur zonder account. Vul je bedrijfsgegevens, klantgegevens, bedragen en btw in en download je factuur direct als PDF. Geen registratie, geen abonnement en geen ingewikkeld boekhoudprogramma.</p>
+        <CtaButton />
 
-        <h2>Factuur maken zonder account: zo werkt het</h2>
-        <p>Veel online tools vragen om registratie voordat je iets kunt doen. Wij niet. <strong>Factuur maken zonder registratie</strong> bij ons is precies zo simpel als het klinkt:</p>
+        <h2>Gratis factuur maken online: zo werkt het</h2>
+        <p>Veel tools vragen eerst om een account. Bij ons niet — online factureren gaat in drie stappen:</p>
         <ol>
-          <li>Je bezoekt <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas.nl</Link>.</li>
-          <li>Je vult direct alle benodigde informatie in (jouw gegevens, klant, bedragen, btw).</li>
-          <li>Je downloadt je professionele factuur als PDF.</li>
+          <li>Ga naar <Link href="/create-invoice" className="text-warm-orange hover:underline">de factuurpagina</Link>.</li>
+          <li>Vul je gegevens, klant, bedragen en btw in.</li>
+          <li>Download je factuur direct als PDF.</li>
         </ol>
-        <p>Geen e-mailverificatie, geen account, geen inlog. Ideaal voor <strong>gratis factuur zzp</strong> en iedereen die snel een correcte factuur wil. Wat er op je factuur moet staan vind je in <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">Hoe maak je een factuur als zzp&apos;er?</Link> en <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis factuur maken voor zzp&apos;ers</Link>.</p>
+        <p>Geen e-mailverificatie, geen inlog. Handig voor een eenmalige factuur of als je snel wilt factureren zonder account.</p>
 
-        <h2>Factuur maken zonder KvK: mag dat?</h2>
-        <p>Zoek je of je <strong>factuur maken zonder kvk</strong> mag? In Nederland heb je voor een geldige factuur als ondernemer <strong>een KvK-inschrijving en een btw-nummer nodig</strong>. Die moeten op je factuur staan; zonder KvK en btw-nummer voldoet je factuur niet aan de eisen van de Belastingdienst. Kortom: om legaal te factureren als zzp&apos;er heb je wél een KvK nodig. Nog geen KvK? Schrijf je eerst in bij de Kamer van Koophandel — daarna kun je met FactuurBaas direct <strong>factuur maken zonder account</strong> (geen registratie bij ons) en je KvK- en btw-nummer op de factuur zetten.</p>
+        <h2>Zelf een factuur maken: wat moet erop staan?</h2>
+        <p>Zelf een factuur maken hoeft niet ingewikkeld te zijn. Een factuur bevat onder andere je bedrijfsgegevens, de gegevens van je klant, een factuurnummer, factuurdatum, omschrijving van de geleverde producten of diensten, bedragen en btw.</p>
+        <p>Werk je als zzp&apos;er? Dan is het belangrijk dat je factuur aan de wettelijke factuureisen voldoet. In onze <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">uitleg over facturen maken als zzp&apos;er</Link> lees je stap voor stap wat erop moet staan.</p>
+        <ul>
+          <li>Je bedrijfsnaam en adres</li>
+          <li>Je KvK-nummer</li>
+          <li>Je btw-identificatienummer</li>
+          <li>Gegevens van je klant</li>
+          <li>Factuurnummer</li>
+          <li>Factuurdatum</li>
+          <li>Omschrijving van de producten of diensten</li>
+          <li>Bedrag exclusief btw</li>
+          <li>Btw-percentage en btw-bedrag</li>
+          <li>Totaalbedrag inclusief btw</li>
+          <li>Betaaltermijn en betaalgegevens</li>
+        </ul>
+
+        <h2>Factuur maken zonder KvK: kan dat?</h2>
+        <p>Of je een factuur zonder KvK-nummer kunt sturen, hangt af van je situatie. Ben je ondernemer en ingeschreven bij de KvK, dan vermeld je de gegevens die op een zakelijke factuur verplicht zijn. Een KvK-nummer is niet in iedere situatie een verplicht onderdeel van een factuur.</p>
+        <p>Heb je geen KvK-inschrijving maar wil je wel een betaling in rekening brengen? Dan kunnen andere regels gelden, bijvoorbeeld wanneer je incidenteel werkzaamheden uitvoert. Zorg daarom dat je situatie duidelijk is voordat je een factuur verstuurt.</p>
 
         <h2>Wat gebeurt er met mijn gegevens?</h2>
         <p>De gegevens die je invult worden alleen in jouw browser gebruikt om de factuur te genereren. Zodra je de pagina verlaat, zijn ze weg. Wij slaan niets op. Dat betekent privacy, maar ook: bewaar zelf je gedownloade PDF&apos;s voor je administratie.</p>
 
-        <h2>Wanneer is een account wél handig?</h2>
-        <p>Later bieden we optioneel een account aan — handig als je bedrijfsgegevens wilt opslaan, een overzicht van facturen wilt of klanten wilt beheren. Voor nu is <strong>factuur maken zonder account</strong> de perfecte oplossing om snel en <strong>gratis factuur maken</strong> te doen. Ervaar het zelf en maak je factuur in minder dan een minuut.</p>
+        <h2>Account of zonder account?</h2>
+        <p>Beide kan. Gratis factureren zonder account blijft de snelste route: direct invullen en PDF downloaden. Wil je je bedrijfsgegevens opslaan, klanten beheren of een overzicht van facturen bijhouden? Maak dan gratis een account aan — volledig optioneel. Meer over opslaan en beheren lees je in <Link href="/blogs/factuurbeheer-overzicht" className="text-warm-orange hover:underline">factuurbeheer voor zzp&apos;ers</Link>.</p>
         <CtaButton />
 
         <h2>Veelgestelde vragen</h2>
         <h3>Kan ik een factuur maken zonder account?</h3>
         <p>Ja. Ga naar FactuurBaas, vul de velden in en download je PDF. Geen registratie of inlog nodig.</p>
+        <h3>Is FactuurBaas gratis?</h3>
+        <p>Ja. Je kunt onbeperkt gratis facturen maken en downloaden. Een account is optioneel en ook gratis.</p>
+        <h3>Hoe maak ik zelf een factuur?</h3>
+        <p>Je kunt zelf een factuur maken in Word, Excel of met een online factuurtool. Zorg dat alle verplichte gegevens op de factuur staan en dat bedragen en btw correct zijn berekend. Met FactuurBaas kun je gratis online een factuur maken en deze direct als PDF downloaden.</p>
         <h3>Kan ik factureren zonder KvK-nummer?</h3>
-        <p>Nee. Voor een geldige factuur als ondernemer heb je een KvK-inschrijving en btw-nummer nodig; die moeten op je factuur staan. Zie <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">wat er op een factuur moet staan</Link>.</p>
+        <p>Dat hangt af van je situatie. Ben je ingeschreven als ondernemer, dan hoort je factuur de verplichte zakelijke gegevens te bevatten. Heb je geen KvK-inschrijving, controleer dan eerst welke regels voor jouw situatie gelden voordat je een factuur verstuurt.</p>
         <h3>Worden mijn gegevens opgeslagen?</h3>
         <p>Nee. Alles gebeurt in je browser; wij slaan geen gegevens op. Bewaar zelf je PDF.</p>
       </>
@@ -1560,107 +1954,270 @@ export const articles = [
   },
   {
     slug: 'boetes-fouten-facturen',
-    relatedSlugs: ['factuur-fouten-voorkomen', 'btw-factuur-zzp', 'btw-te-laat-betaald', 'factuur-maken-zzp'],
-    title: 'Boetes bij fouten op facturen',
-    excerpt: 'Fouten op facturen kunnen leiden tot flinke boetes van de Belastingdienst. Ontdek welke sancties gelden bij onjuiste btw, vergeten gegevens of te late aangifte — en hoe je ze voorkomt.',
-    keywords: 'boete fouten factuur, boete factuur fout, btw boete factuur, verzuimboete factuur, vergrijpboete btw, boete onjuiste factuur, e-facturatie boete peppol',
+    relatedSlugs: ['factuur-fouten-voorkomen', 'factuur-maken-zzp', 'factureren-zonder-account', 'btw-factuur-zzp'],
+    metaTitle: 'Foutieve factuur: gevolgen, boetes en hoe je fouten corrigeert',
+    title: 'Fouten op facturen: gevolgen, boetes en hoe je ze voorkomt',
+    excerpt:
+      'Een foutieve factuur kan leiden tot correcties, problemen met btw of een boete. Bekijk de meest gemaakte fouten, gevolgen en hoe je een factuur corrigeert.',
+    keywords: 'foutieve factuur, gevolgen foute facturen, wat zijn de gevolgen van foute facturen, wat staat er meestal fout op facturen, boete fout factuur, fouten in btw-aangifte, fouten op facturen',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/boete%20niet%20betalen%20van%20btw.png',
-      alt: 'Boetes bij fouten op facturen: wat zijn de gevolgen van onjuiste of onvolledige facturen?',
+      alt: 'Fouten op facturen: gevolgen, boetes en hoe je ze voorkomt.',
     },
     datePublished: '2026-02-06',
-    dateModified: '2026-02-06',
+    dateModified: '2026-08-28',
     faq: [
-      { question: 'Hoe hoog is de boete voor fouten op een factuur?', answer: 'Bij een eerste toevallige overtreding kan een boete van €25 tot €50 per factuur gelden. Ernstiger fouten (onjuiste btw, opzet of grove schuld) kunnen leiden tot vergrijpboetes van 25% tot 100% van de verschuldigde btw, of tot €5.514 of meer per factuur.' },
-      { question: 'Wanneer krijg ik een vergrijpboete van de Belastingdienst?', answer: 'Een vergrijpboete wordt opgelegd bij opzettelijk onjuiste of onvolledige aangifte, of bij grove schuld. Bij opzet is de boete 50% van de verzwegen belasting; bij grove schuld 25%. Bij eerdere vergrijpen of fraude kan dit oplopen tot 100%.' },
-      { question: 'Kan ik een boete voorkomen door mijn fout te corrigeren?', answer: 'Ja. Dien binnen 8 weken na ontdekking van de fout een suppletieaangifte in, vóórdat de Belastingdienst de fout zelf opmerkt. Dan kun je vaak een vergrijpboete voorkomen. Voor bedragen onder €1.000 mag je corrigeren in de eerstvolgende reguliere btw-aangifte.' },
-      { question: 'Welke boetes gelden voor e-facturatie (Peppol)?', answer: 'Voor het niet naleven van de e-facturatieregels gelden boetes van €1.500 bij de eerste overtreding, oplopend tot €5.000 bij de derde en volgende overtredingen.' },
-      { question: 'Wat moet er verplicht op een factuur staan om boetes te voorkomen?', answer: 'Verplicht: jouw bedrijfsgegevens, KVK- en btw-nummer, klantgegevens, uniek factuurnummer, factuurdatum, datum van levering, omschrijving van producten of diensten, bedragen excl. en incl. btw, en het juiste btw-tarief.' },
+      { question: 'Wat zijn de gevolgen van een foutieve factuur?', answer: 'Een foutieve factuur moet meestal worden gecorrigeerd. Je klant kan de factuur terugsturen of de btw-aftrek aanpassen. Als de fout doorwerkt in je btw-aangifte, kan een suppletieaangifte nodig zijn. In sommige situaties kan de Belastingdienst een boete opleggen.' },
+      { question: 'Wat staat er meestal fout op facturen?', answer: 'Veelvoorkomende fouten zijn een verkeerd btw-tarief of btw-bedrag, een ontbrekend of dubbel factuurnummer, een verkeerde factuurdatum, onjuiste klantgegevens of een verkeerd totaalbedrag.' },
+      { question: 'Kan ik een boete voorkomen door mijn fout te corrigeren?', answer: 'Vaak wel. Corrigeer de factuur richting je klant en los de fout op in je administratie. Bij een fout in je btw-aangifte kun je in veel gevallen een suppletie indienen. Hoe sneller je handelt, hoe kleiner het risico op vervelende gevolgen.' },
+      { question: 'Wat moet er verplicht op een factuur staan?', answer: 'Verplicht zijn onder meer: jouw bedrijfsgegevens, KVK- en btw-nummer, klantgegevens, uniek factuurnummer, factuurdatum, omschrijving, bedragen excl. en incl. btw, en het juiste btw-tarief.' },
+      { question: 'Wat als de fout al in mijn btw-aangifte staat?', answer: 'Dan moet je de btw-aangifte corrigeren, bijvoorbeeld via een suppletieaangifte. Een fout op de factuur zelf lost dat niet automatisch op — beide kunnen apart gecorrigeerd moeten worden.' },
     ],
     content: (
       <>
-        <p>Een fout op een factuur lijkt onschuldig, maar kan je duur komen te staan. De Belastingdienst kan forse <strong>boetes bij fouten op facturen</strong> opleggen — van tientallen euro&apos;s tot duizenden per onjuiste of onvolledige factuur. In dit artikel lees je welke sancties gelden, wanneer ze worden opgelegd en hoe je ze voorkomt. Zo houd je je administratie op orde en voorkom je onaangename verrassingen.</p>
+        <p>
+          Een fout op een factuur kan gevolgen hebben voor jou én je klant. Denk aan een verkeerde
+          btw-berekening, ontbrekende gegevens, een fout factuurnummer of een onjuiste factuurdatum.
+          In sommige situaties kan een fout leiden tot correcties, problemen met de btw-aftrek of een
+          boete.
+        </p>
+        <p>
+          In dit artikel lees je wat de gevolgen zijn van een <strong>foutieve factuur</strong>, welke
+          fouten het vaakst voorkomen, wanneer een boete mogelijk is en hoe je een fout corrigeert.
+        </p>
 
-        <h2>Wanneer kan de Belastingdienst een boete opleggen?</h2>
-        <p>Boetes kunnen volgen bij verschillende soorten fouten of verzuim:</p>
+        <h2>Wat zijn de gevolgen van een foutieve factuur?</h2>
+        <p>Een fout op een factuur is zelden alleen een administratief detail. Mogelijke gevolgen:</p>
         <ul>
-          <li><strong>Onjuiste of onvolledige factuur:</strong> Verkeerde btw-vermelding, ontbrekende NAW-gegevens, fout factuurnummer of datum.</li>
-          <li><strong>Factuur niet of niet tijdig uitgereikt:</strong> Je bent verplicht facturen tijdig te versturen.</li>
-          <li><strong>Aangifte niet of niet op tijd ingediend:</strong> Voor de btw-aangifte geldt een boete van €82 als je te laat bent (na een coulancetermijn van 7 dagen).</li>
-          <li><strong>Betaling niet of niet op tijd:</strong> Voor btw geldt 3% van het openstaande bedrag (min. €50, max. €6.709); voor aanslagbelasting (zoals inkomstenbelasting) is dat 5%.</li>
+          <li>
+            <strong>Correctie nodig:</strong> je moet de factuur aanpassen of een nieuwe factuur of
+            creditnota sturen.
+          </li>
+          <li>
+            <strong>Klant stuurt factuur terug:</strong> bij een verkeerd bedrag of ontbrekende
+            gegevens accepteert je klant de factuur soms niet.
+          </li>
+          <li>
+            <strong>Problemen met btw-aftrek:</strong> je klant kan de factuur niet (volledig) verwerken
+            in de administratie als btw of gegevens niet kloppen.
+          </li>
+          <li>
+            <strong>Administratie corrigeren:</strong> je eigen boekhouding en btw-overzicht moeten
+            kloppen met wat je hebt gefactureerd.
+          </li>
+          <li>
+            <strong>Gevolgen voor btw-aangifte:</strong> een fout op de factuur kan doorwerken in je
+            ingediende btw-aangifte.
+          </li>
+          <li>
+            <strong>Mogelijke boete:</strong> in sommige situaties — vooral bij herhaalde of ernstige
+            fouten — kan de Belastingdienst een boete opleggen.
+          </li>
         </ul>
-        <p>Correcties doen is dus belangrijk — niet alleen voor jezelf, maar ook voor je klant: een onjuiste factuur kan bij hen problemen geven met de <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">btw-aftrek</Link>.</p>
+        <p>
+          Voorkomen is eenvoudiger dan corrigeren. Zie{' '}
+          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">
+            wat er op een factuur moet staan
+          </Link>{' '}
+          en maak je factuur met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">
+            FactuurBaas
+          </Link>{' '}
+          om verplichte velden niet te vergeten.
+        </p>
 
-        <h2>Hoogte van boetes: van licht tot zwaar</h2>
-        <p>De hoogte van de boete hangt af van de ernst van de overtreding:</p>
+        <h2>Wat staat er meestal fout op facturen?</h2>
+        <p>Deze fouten komen het vaakst voor — en zijn vaak eenvoudig te voorkomen:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[480px] text-sm text-slate-700">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Veelgemaakte fout
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Mogelijk gevolg
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Verkeerd btw-tarief', 'Btw moet worden gecorrigeerd'],
+                ['Verkeerd btw-bedrag', 'Factuur corrigeren'],
+                ['Ontbrekend factuurnummer', 'Administratieve fout'],
+                ['Verkeerde factuurdatum', 'Correctie nodig'],
+                ['Onjuiste klantgegevens', 'Factuur opnieuw opstellen'],
+                ['Verkeerd totaalbedrag', 'Klant kan factuur weigeren'],
+                ['Ontbrekend btw-nummer', 'Factuur voldoet mogelijk niet aan eisen'],
+              ].map(([fout, gevolg]) => (
+                <tr key={fout} className="border-b border-slate-100 last:border-0">
+                  <td className="px-4 py-3 font-medium text-deep-blue">{fout}</td>
+                  <td className="px-4 py-3">{gevolg}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Wil je weten hoe je deze fouten voorkomt? Lees{' '}
+          <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">
+            7 veelgemaakte fouten op facturen
+          </Link>
+          . Voor btw-berekeningen kun je de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            BTW calculator
+          </Link>{' '}
+          gebruiken.
+        </p>
+
+        <h2>Wanneer kan een fout op een factuur leiden tot een boete?</h2>
+        <p>
+          Niet elke factuurfout leidt automatisch tot een boete. De Belastingdienst kijkt onder meer
+          naar de ernst van de fout, of deze bewust of herhaaldelijk voorkomt, en of je de fout
+          zelf corrigeert.
+        </p>
+        <p>Boetes of sancties kunnen spelen bij onder andere:</p>
         <ul>
-          <li><strong>Eerste toevallige overtreding:</strong> Vaak €25 tot €50 per factuur, maar dit kan snel oplopen tot honderden euro&apos;s.</li>
-          <li><strong>Herhaaldelijke of structurele fouten:</strong> De boete wordt hoger bij vaker voorkomende overtredingen.</li>
-          <li><strong>Maximale fiscale boete:</strong> Bij ernstige fouten of opzet kan de fiscus een proportionele geldboete eisen tot wel 200% van de verschuldigde btw.</li>
+          <li>
+            <strong>Onjuiste of onvolledige factuur:</strong> verkeerde btw-vermelding, ontbrekende
+            gegevens of een fout factuurnummer.
+          </li>
+          <li>
+            <strong>Factuur niet of niet tijdig uitgereikt</strong> wanneer dat wel verplicht is.
+          </li>
+          <li>
+            <strong>Fouten die doorwerken in je btw-aangifte</strong>, vooral als je niet tijdig
+            corrigeert.
+          </li>
+          <li>
+            <strong>Te late aangifte of betaling</strong> — los van de factuur zelf, maar wel
+            relevant voor je administratie.
+          </li>
         </ul>
-        <p>Een goed opgebouwde factuur met alle verplichte gegevens vermindert het risico op fouten. Met een template die de juiste velden bevat, maak je minder snel vergissingen.</p>
+        <p>
+          De exacte hoogte van een boete hangt af van je situatie. Raadpleeg altijd de actuele regels
+          op{' '}
+          <a
+            href="https://www.belastingdienst.nl"
+            className="text-warm-orange hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Belastingdienst.nl
+          </a>{' '}
+          of vraag je boekhouder om advies.
+        </p>
+
+        <h3>De vergrijpboete: bij opzet of grove schuld</h3>
+        <p>
+          Als je opzettelijk een onjuiste of onvolledige aangifte doet, of als er sprake is van grove
+          schuld, kan de Belastingdienst een <strong>vergrijpboete</strong> opleggen. Deze is doorgaans
+          hoger dan een standaard verzuimboete. Je ontvangt eerst een schriftelijke mededeling en
+          kunt bezwaar maken.
+        </p>
+
+        <h3>Verzuimboetes: te laat aangifte of betaling</h3>
+        <p>
+          Naast factuurfouten zijn er aparte verzuimboetes voor het niet of niet tijdig voldoen aan
+          aangifte- of betaalverplichtingen — bijvoorbeeld een te late btw-aangifte. Meer hierover:{' '}
+          <Link href="/blogs/btw-te-laat-betaald" className="text-warm-orange hover:underline">
+            btw te laat betaald
+          </Link>
+          .
+        </p>
 
         <CtaButton />
 
-        <h2>De vergrijpboete: bij opzet of grove schuld</h2>
-        <p>Als je <em>opzettelijk</em> een onjuiste of onvolledige aangifte doet, of als er sprake is van <strong>grove schuld</strong>, kan de Belastingdienst een <strong>vergrijpboete</strong> opleggen. Deze ligt fors hoger dan een standaard verzuimboete:</p>
+        <h2>Wat als de fout al in je btw-aangifte staat?</h2>
+        <p>
+          Een fout op je factuur en een fout in je btw-aangifte zijn niet hetzelfde — maar ze hangen
+          vaak samen.
+        </p>
         <ul>
-          <li><strong>Bij opzet:</strong> 50% van de belasting die je opzettelijk hebt verzwegen.</li>
-          <li><strong>Bij grove schuld:</strong> 25% van de te betalen belasting.</li>
-          <li><strong>Bij eerdere vergrijpen of fraude:</strong> De boete kan oplopen tot 100% (en bij bepaalde inkomsten tot 300%).</li>
+          <li>
+            <strong>Fout op de factuur:</strong> stuur een gecorrigeerde factuur of creditnota naar
+            je klant.
+          </li>
+          <li>
+            <strong>Fout in de btw-aangifte:</strong> corrigeer via een suppletieaangifte of in een
+            volgende aangifte, afhankelijk van het bedrag en de situatie.
+          </li>
         </ul>
-        <p>Je ontvangt altijd eerst een schriftelijke mededeling voordat de vergrijpboete wordt opgelegd. Je kunt dan aangeven waarom je het er niet mee eens bent en eventueel bezwaar maken.</p>
-
-        <h2>Verzuimboetes: te laat aangifte of betaling</h2>
-        <p>Naast boetes voor factuurfouten zijn er verzuimboetes voor het niet of niet tijdig voldoen aan je aangifte- en betaalverplichtingen:</p>
-        <ul>
-          <li><strong>Btw-aangifte te laat:</strong> €82 (met coulancetermijn van 7 dagen na de uiterste aangiftedatum).</li>
-          <li><strong>Betaalverzuim (aanslag belasting):</strong> 5% van het openstaande bedrag, minimaal €50, maximaal €6.709 per verzuim.</li>
-          <li><strong>Niet op tijd om aangifte gevraagd:</strong> €3.354 (voor inkomsten- of vennootschapsbelasting).</li>
-          <li><strong>Aangifte niet gedaan (inkomstenbelasting, erf- of schenkbelasting):</strong> €469, oplopend tot €6.709 bij herhaald verzuim.</li>
-        </ul>
-        <p>Meer over de gevolgen van te laat btw betalen lees je in ons artikel over <Link href="/blogs/btw-te-laat-betaald" className="text-warm-orange hover:underline">btw te laat betaald</Link>.</p>
-
-        <h2>E-facturatie (Peppol): boetes bij niet-naleving</h2>
-        <p>Vanaf 2025 geldt voor veel ondernemers een verplichting voor e-facturatie via het Peppol-netwerk. Voor het niet naleven van deze regels gelden aparte boetes:</p>
-        <ul>
-          <li><strong>Eerste overtreding:</strong> €1.500</li>
-          <li><strong>Derde en volgende overtredingen:</strong> €5.000 per keer</li>
-        </ul>
-        <p>Zorg dat je op de hoogte bent van de eisen die voor jouw branche gelden, zodat je niet onverwacht een boete krijgt.</p>
+        <p>
+          Meer over btw op facturen:{' '}
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
+            btw op je factuur
+          </Link>
+          .
+        </p>
 
         <h2>Fout ontdekt? Corrigeer tijdig</h2>
-        <p>Heb je een fout ontdekt in een eerder ingediende btw-aangifte of op een uitgereikte factuur? Handel dan snel:</p>
+        <p>Heb je een fout ontdekt op een factuur of in je administratie? Handel dan snel:</p>
         <ul>
-          <li><strong>Suppletieaangifte binnen 8 weken:</strong> Dien een suppletie in zodra je de fout ontdekt, en in elk geval binnen 8 weken. Doe dit vóórdat de Belastingdienst de fout zelf opmerkt — zo kun je vaak een vergrijpboete voorkomen.</li>
-          <li><strong>Kleine bedragen (&lt; €1.000):</strong> Je mag de fout corrigeren in de eerstvolgende reguliere btw-aangifte.</li>
-          <li><strong>Factuur aan klant corrigeren:</strong> Stuur een gecorrigeerde factuur of creditnota naar je klant. Zo voorkom je dat zij problemen krijgen met hun btw-aftrek.</li>
+          <li>
+            <strong>Factuur aan klant corrigeren:</strong> stuur een gecorrigeerde factuur of
+            creditnota. Zo voorkom je problemen met de btw-aftrek bij je klant.
+          </li>
+          <li>
+            <strong>Btw-aangifte corrigeren:</strong> dien waar nodig een suppletie in. Hoe eerder
+            je corrigeert, hoe kleiner het risico op een boete.
+          </li>
+          <li>
+            <strong>Kleine bedragen:</strong> in sommige situaties mag je een kleine fout verwerken
+            in de eerstvolgende reguliere btw-aangifte — check de actuele regels.
+          </li>
         </ul>
-
-        <CtaButton />
 
         <h2>Verplichte vermeldingen op je factuur</h2>
-        <p>Om boetes te voorkomen, controleer altijd of je factuur aan alle wettelijke eisen voldoet. Verplicht zijn onder meer:</p>
+        <p>Controleer altijd of je factuur aan de wettelijke eisen voldoet. Verplicht zijn onder meer:</p>
         <ul>
-          <li><strong>Uniek factuurnummer</strong> (opeenvolgend, niet dubbel gebruikt)</li>
-          <li><strong>Factuurdatum</strong> en datum van levering of uitvoering</li>
-          <li><strong>Jouw gegevens</strong> en die van je klant (naam, adres)</li>
-          <li><strong>KVK-nummer</strong> en btw-identificatienummer</li>
-          <li><strong>Omschrijving</strong> van de geleverde producten of diensten</li>
-          <li><strong>Bedragen</strong> excl. en incl. btw, met het juiste btw-tarief (21%, 9% of 0%)</li>
+          <li>Uniek factuurnummer (opeenvolgend, niet dubbel gebruikt)</li>
+          <li>Factuurdatum en datum van levering of uitvoering</li>
+          <li>Jouw gegevens en die van je klant (naam, adres)</li>
+          <li>KVK-nummer en btw-identificatienummer</li>
+          <li>Omschrijving van de geleverde producten of diensten</li>
+          <li>Bedragen excl. en incl. btw, met het juiste btw-tarief (21%, 9% of 0%)</li>
         </ul>
-        <p>Meer tips om fouten te voorkomen vind je in ons artikel over <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">veelgemaakte fouten op facturen</Link>.</p>
+        <p>
+          Meer tips:{' '}
+          <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">
+            veelgemaakte fouten op facturen voorkomen
+          </Link>
+          . Maak gratis een correcte factuur via{' '}
+          <Link href="/blogs/factureren-zonder-account" className="text-warm-orange hover:underline">
+            factureren zonder account
+          </Link>
+          .
+        </p>
 
         <h2>Conclusie</h2>
-        <p>Fouten op facturen kunnen leiden tot aanzienlijke boetes — van tientallen tot duizenden euro&apos;s. De Belastingdienst houdt strikt toezicht op juiste vermeldingen, tijdige aangifte en betaling. Door je facturen zorgvuldig op te stellen, de verplichte gegevens altijd te vermelden en fouten tijdig te corrigeren, houd je het risico op boetes beperkt. Een duidelijke factuurstructuur helpt daarbij; zo weet je zeker dat je niets vergeet.</p>
+        <p>
+          Een foutieve factuur kan gevolgen hebben voor jou, je klant en je btw-administratie. Door
+          te weten welke fouten het vaakst voorkomen, je facturen zorgvuldig op te stellen en fouten
+          tijdig te corrigeren, houd je het risico op problemen en boetes beperkt.
+        </p>
 
         <h2>Veelgestelde vragen</h2>
-        <h3>Hoe hoog kan een boete voor een factuurfout zijn?</h3>
-        <p>Bij lichte overtredingen €25-50 per factuur; bij ernstige fouten of opzet tot €5.514 of meer, of tot 200% van de verschuldigde btw.</p>
-        <h3>Kan ik een vergrijpboete voorkomen?</h3>
-        <p>Ja, door binnen 8 weken na ontdekking een suppletieaangifte in te dienen vóórdat de Belastingdienst de fout vindt. Voor kleine bedragen mag je corrigeren in de volgende reguliere aangifte.</p>
+        <h3>Wat zijn de gevolgen van een foutieve factuur?</h3>
+        <p>
+          Meestal moet je corrigeren: factuur aanpassen, klant informeren, administratie en
+          eventueel btw-aangifte bijwerken. In sommige gevallen kan een boete volgen.
+        </p>
+        <h3>Wat staat er meestal fout op facturen?</h3>
+        <p>
+          Verkeerd btw-tarief of bedrag, ontbrekend factuurnummer, verkeerde datum, onjuiste
+          klantgegevens of een verkeerd totaal.
+        </p>
+        <h3>Kan ik een boete voorkomen?</h3>
+        <p>
+          Corrigeer fouten zo snel mogelijk — op de factuur én in je administratie. Bij twijfel
+          vraag je boekhouder of raadpleeg je Belastingdienst.nl.
+        </p>
         <h3>Wat moet er verplicht op een factuur?</h3>
-        <p>Uniek factuurnummer, datum, jouw en klantgegevens (incl. KVK en btw-nummer), omschrijving, bedragen en het correcte btw-tarief.</p>
+        <p>
+          Uniek factuurnummer, datum, jouw en klantgegevens (incl. KVK en btw-nummer), omschrijving,
+          bedragen en het correcte btw-tarief.
+        </p>
       </>
     ),
   },

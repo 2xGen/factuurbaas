@@ -31,7 +31,7 @@ export const defaultInvoice = {
     btw: '',
   },
   items: [
-    { id: Date.now(), itemName: '', itemDescription: '', quantity: 1, price: 0 },
+    { id: Date.now(), itemName: '', itemDescription: '', quantity: 1, price: 0, tax: '21', customTaxRate: '' },
   ],
   hoursWorked: [
     { id: Date.now(), date: new Date(), taskDescription: '', hours: 0 },

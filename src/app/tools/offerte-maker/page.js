@@ -4,9 +4,9 @@ import { buildGuideItemListSchema, getGuideLinksByCluster } from '@/lib/guideDat
 import { getOfferteFaqSchema } from '@/lib/offerteLanding';
 
 export const metadata = {
-  title: "Gratis Offerte Maken 2026 | Offerte Template voor ZZP'ers",
+  title: 'Offerte maken: gratis online offerte maker | FactuurBaas',
   description:
-    "Maak gratis een professionele offerte als zzp'er. Kies een template, vul je gegevens in en download direct als PDF. Zet je offerte eenvoudig om naar een factuur.",
+    "Gratis offerte maken als zzp'er of ondernemer? Maak online een professionele offerte, download direct als PDF en stuur hem naar je klant. Geen account nodig.",
   alternates: { canonical: 'https://factuurbaas.nl/tools/offerte-maker' },
 };
 
@@ -17,17 +17,11 @@ export default function OfferteMakerGatePage() {
   return (
     <ToolGatePage
       breadcrumbLabel="Offerte maker"
-      h1="Gratis offerte maken"
-      intro="Maak eenvoudig een professionele offerte voor je klant en download direct als PDF."
-      introExtra="Met FactuurBaas maak je als zzp'er of kleine ondernemer gratis een offerte zonder account. Voeg je diensten toe, download direct een PDF en zet je offerte na akkoord om naar een factuur."
-      trustPoints={[
-        'Gratis offerte maken',
-        'Geen account nodig',
-        'Professionele layout',
-        'Direct PDF downloaden',
-      ]}
+      h1="Gratis offerte maken online — direct als PDF"
+      intro="Maak gratis een professionele offerte online. Vul je bedrijfsgegevens, klantgegevens, werkzaamheden en prijzen in en download je offerte direct als PDF. Geen account nodig."
+      trustPoints={['Gratis offerte maken', 'Geen account nodig', 'Direct PDF downloaden']}
       toolHref={TOOL_HREF}
-      toolCtaLabel="Open offerte maker"
+      toolCtaLabel="Maak gratis offerte"
       secondaryHref="/create-invoice"
       secondaryCtaLabel="Maak factuur"
       faqSchema={getOfferteFaqSchema()}

@@ -45,7 +45,7 @@ const HeroSection = () => (
             transition={{ duration: 0.5, delay: 0.05 }}
             className="text-[1.75rem] leading-[1.15] font-heading font-extrabold tracking-tight sm:text-4xl md:text-[2.75rem] lg:text-5xl"
           >
-            Maak gratis professionele facturen in 2 minuten
+            Gratis factuur maken zonder account
           </motion.h1>
 
           <motion.p
@@ -54,8 +54,8 @@ const HeroSection = () => (
             transition={{ duration: 0.5, delay: 0.12 }}
             className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-blue-100 sm:text-lg lg:mx-0"
           >
-            Geen account. Geen abonnement. Geen ingewikkelde boekhouding. Maak je factuur,
-            download direct als PDF en stuur hem naar je klant.
+            Maak online een professionele factuur, download hem direct als PDF en stuur hem naar je
+            klant. Gratis, zonder abonnement en zonder ingewikkelde boekhouding.
           </motion.p>
 
           <motion.div

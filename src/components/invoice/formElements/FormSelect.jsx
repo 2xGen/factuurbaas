@@ -1,8 +1,8 @@
 import React from 'react';
 
-const FormSelect = ({ label, name, value, onChange, options, className = "", selectClassName = "", disabled = false }) => (
+const FormSelect = ({ label, name, value, onChange, options, className = "", selectClassName = "", labelClassName = "", disabled = false }) => (
   <div className={`w-full ${className}`}>
-    {label && <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
+    {label && <label htmlFor={name} className={`block text-sm font-medium text-gray-700 mb-1 ${labelClassName}`}>{label}</label>}
     <select
       id={name}
       name={name}

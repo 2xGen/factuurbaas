@@ -17,12 +17,13 @@ export async function generateMetadata({ params }) {
   const published = article.datePublished ? `${article.datePublished}T12:00:00+01:00` : '';
   const modified = article.dateModified ? `${article.dateModified}T12:00:00+01:00` : published;
   const articleUrl = `https://factuurbaas.nl/blogs/${article.slug}`;
+  const seoTitle = article.metaTitle || article.title;
   return {
-    title: `${article.title} | FactuurBaas`,
+    title: `${seoTitle} | FactuurBaas`,
     description: article.excerpt,
     keywords: article.keywords,
     openGraph: {
-      title: article.title,
+      title: seoTitle,
       description: article.excerpt,
       url: articleUrl,
       type: 'article',
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
+      title: seoTitle,
       description: article.excerpt,
       images: [SITE_OG_IMAGE],
     },

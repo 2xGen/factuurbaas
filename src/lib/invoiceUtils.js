@@ -1,5 +1,5 @@
 import { differenceInDays, parseISO, isValid, toDate, addDays } from 'date-fns';
-import { getEffectiveTaxRate } from '@/lib/invoiceConfig';
+import { getEffectiveTaxRate, resolveLineTax } from '@/lib/invoiceConfig';
 
 export const ensureDateString = (dateInput) => {
   if (typeof dateInput === 'string') return dateInput;
@@ -38,53 +38,104 @@ function getExtraCostsTotal(invoice) {
   );
 }
 
+function addTaxBucket(buckets, lineTax, taxAmount) {
+  const key =
+    lineTax.tax === 'custom'
+      ? `custom:${lineTax.customTaxRate}`
+      : lineTax.tax;
+  if (!buckets[key]) {
+    buckets[key] = {
+      key,
+      tax: lineTax.tax,
+      customTaxRate: lineTax.customTaxRate,
+      rate: lineTax.rate,
+      label: lineTax.label,
+      amount: 0,
+    };
+  }
+  buckets[key].amount += taxAmount;
+}
+
 export const calculateInvoiceBreakdown = (invoice) => {
-  if (!invoice) return { subtotal: 0, taxAmount: 0, extraCostsTotal: 0, grandTotal: 0 };
+  if (!invoice) {
+    return { subtotal: 0, taxAmount: 0, extraCostsTotal: 0, grandTotal: 0, taxLines: [] };
+  }
 
   let subtotalPreTax = 0;
   let totalTaxAmount = 0;
   const overallTaxRate = getEffectiveTaxRate(invoice);
   const extraCostsTotal = getExtraCostsTotal(invoice);
+  const taxBuckets = {};
 
   if (invoice.workType === 'hourly') {
-    const totalHours = (invoice.hoursWorked || []).reduce((sum, day) => sum + parseFloat(day.hours || 0), 0);
+    const totalHours = (invoice.hoursWorked || []).reduce(
+      (sum, day) => sum + parseFloat(day.hours || 0),
+      0
+    );
     const hourlyRate = parseFloat(invoice.amount) || 0;
     const baseSubtotal = totalHours * hourlyRate;
+    const lineTax = resolveLineTax(null, invoice);
 
     if (invoice.taxIncluded) {
-      subtotalPreTax = baseSubtotal / (1 + overallTaxRate);
+      subtotalPreTax = overallTaxRate > 0 ? baseSubtotal / (1 + overallTaxRate) : baseSubtotal;
       totalTaxAmount = baseSubtotal - subtotalPreTax;
     } else {
       subtotalPreTax = baseSubtotal;
       totalTaxAmount = subtotalPreTax * overallTaxRate;
     }
+    addTaxBucket(taxBuckets, lineTax, totalTaxAmount);
   } else {
     (invoice.items || []).forEach((item) => {
       const itemPrice = parseFloat(item.price) || 0;
-      const itemQuantity = parseInt(item.quantity) || 1;
+      const itemQuantity = parseInt(item.quantity, 10) || 1;
       const itemBasePrice = itemPrice * itemQuantity;
+      const lineTax = resolveLineTax(item, invoice);
+      let linePreTax = 0;
+      let lineTaxAmount = 0;
 
       if (invoice.taxIncluded) {
-        const itemPricePreTax = itemBasePrice / (1 + overallTaxRate);
-        totalTaxAmount += itemBasePrice - itemPricePreTax;
-        subtotalPreTax += itemPricePreTax;
+        linePreTax =
+          lineTax.rate > 0 ? itemBasePrice / (1 + lineTax.rate) : itemBasePrice;
+        lineTaxAmount = itemBasePrice - linePreTax;
       } else {
-        subtotalPreTax += itemBasePrice;
-        totalTaxAmount += itemBasePrice * overallTaxRate;
+        linePreTax = itemBasePrice;
+        lineTaxAmount = itemBasePrice * lineTax.rate;
       }
+
+      subtotalPreTax += linePreTax;
+      totalTaxAmount += lineTaxAmount;
+      addTaxBucket(taxBuckets, lineTax, lineTaxAmount);
     });
   }
 
-  subtotalPreTax += extraCostsTotal;
-  if (!invoice.taxIncluded && extraCostsTotal > 0) {
-    totalTaxAmount += extraCostsTotal * overallTaxRate;
-  } else if (invoice.taxIncluded && extraCostsTotal > 0 && overallTaxRate > 0) {
-    const extraPreTax = extraCostsTotal / (1 + overallTaxRate);
-    totalTaxAmount += extraCostsTotal - extraPreTax;
+  const extraLineTax = resolveLineTax(null, invoice);
+  if (extraCostsTotal > 0) {
+    if (!invoice.taxIncluded) {
+      subtotalPreTax += extraCostsTotal;
+      const extraTax = extraCostsTotal * overallTaxRate;
+      totalTaxAmount += extraTax;
+      addTaxBucket(taxBuckets, extraLineTax, extraTax);
+    } else if (overallTaxRate > 0) {
+      const extraPreTax = extraCostsTotal / (1 + overallTaxRate);
+      const extraTax = extraCostsTotal - extraPreTax;
+      subtotalPreTax += extraPreTax;
+      totalTaxAmount += extraTax;
+      addTaxBucket(taxBuckets, extraLineTax, extraTax);
+    } else {
+      subtotalPreTax += extraCostsTotal;
+      addTaxBucket(taxBuckets, extraLineTax, 0);
+    }
   }
 
+  const taxLines = Object.values(taxBuckets).sort((a, b) => a.rate - b.rate);
   const grandTotal = subtotalPreTax + totalTaxAmount;
-  return { subtotal: subtotalPreTax, taxAmount: totalTaxAmount, extraCostsTotal, grandTotal };
+  return {
+    subtotal: subtotalPreTax,
+    taxAmount: totalTaxAmount,
+    extraCostsTotal,
+    grandTotal,
+    taxLines,
+  };
 };
 
 export const calculateInvoiceTotal = (invoice) => {

@@ -1343,12 +1343,12 @@ Totaal                            €1.000,00`}
   {
     slug: 'btw-berekenen-excel',
     cluster: 'btw',
-    seoTitle: 'Btw berekenen in Excel: formules voor 21%, 9% en 0% btw',
-    title: 'Btw berekenen in Excel: zo bereken je btw inclusief en exclusief',
+    seoTitle: 'BTW berekenen in Excel: formule voor 21% en 9%',
+    title: 'BTW berekenen in Excel',
     excerpt:
-      'Btw berekenen in Excel? Leer formules voor 21%, 9% en 0% btw, inclusief en exclusief bedragen, en bereken sneller met de gratis BTW calculator.',
+      'BTW berekenen in Excel? Bekijk de formules voor 21% en 9% btw, btw erbij optellen en btw uit een inclusief bedrag halen. Met voorbeelden.',
     keywords:
-      'btw berekenen excel, btw formule excel, 21% btw excel, btw inclusief exclusief excel, factuur excel btw, btw terugrekenen excel',
+      'btw berekenen excel, excel btw berekenen formule, btw formule excel, formule btw berekenen, btw berekenen 21 procent formule, hoe haal je 21 btw uit een bedrag, btw berekenen formule, btw in excel, bedrag exclusief btw berekenen',
     tool: {
       href: '/tools/btw-calculator',
       label: 'Bereken direct btw',
@@ -1356,246 +1356,284 @@ Totaal                            €1.000,00`}
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Btw%20berekenen%20in%20Excel.jpg',
-      alt: 'Btw berekenen in Excel met spreadsheet en formules',
+      alt: 'BTW berekenen in Excel met spreadsheet en formules',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
-    relatedSlugs: ['factuur-templates-zzp', 'btw-factuur-zzp'],
-    relatedGuideSlugs: ['btw-terugrekenen', 'inclusief-btw-naar-exclusief-btw', 'welke-btw-rekenen-zzper'],
+    dateModified: '2026-08-28',
+    relatedSlugs: ['btw-factuur-zzp', 'factuur-templates-zzp'],
+    relatedGuideSlugs: [
+      'btw-terugrekenen',
+      'inclusief-btw-naar-exclusief-btw',
+      'verschil-9-en-21-btw',
+      'wanneer-gebruik-je-0-btw',
+      'btw-berekenen-buitenlandse-klanten',
+      'welke-btw-rekenen-zzper',
+    ],
     faq: [
       {
         question: 'Hoe bereken ik 21% btw in Excel?',
-        answer: 'Vermenigvuldig het bedrag exclusief btw met 21%. Voorbeeld: =100*21% geeft €21 btw.',
+        answer: 'Vermenigvuldig het bedrag exclusief btw met 21%. Voorbeeld: =1000*21% geeft €210 btw. Totaal inclusief btw: =1000*1,21 geeft €1.210.',
       },
       {
-        question: 'Hoe haal ik btw uit een bedrag in Excel?',
-        answer:
-          'Bij 21% btw: =Bedrag-(Bedrag/1,21) of deel het bedrag inclusief btw door 1,21 voor het bedrag exclusief btw.',
+        question: 'Hoe haal je 21% btw uit een bedrag in Excel?',
+        answer: 'Bij een bedrag inclusief 21% btw: btw = =A1*21/121. Bedrag exclusief btw = =A1/1,21. Bij €1.210 inclusief btw is de btw €210 en exclusief btw €1.000.',
+      },
+      {
+        question: 'Wat is de formule voor btw berekenen in Excel?',
+        answer: 'Btw over exclusief bedrag: =A1*21% of =A1*9%. Btw erbij: =A1*1,21 of =A1*1,09. Btw uit inclusief bedrag: =A1*21/121 of =A1*9/109. Bedrag excl. btw: =A1/1,21 of =A1/1,09.',
+      },
+      {
+        question: 'Welke formule gebruik ik voor 9% btw in Excel?',
+        answer: 'Gebruik =A1*9% voor het btw-bedrag over een exclusief bedrag, =A1*1,09 om 9% erbij te rekenen, of =A1*9/109 om btw uit een inclusief bedrag te halen.',
       },
       {
         question: 'Kan ik een factuur maken in Excel?',
-        answer:
-          'Ja, maar je moet zelf controleren of alle verplichte gegevens aanwezig zijn en of de btw correct wordt berekend.',
-      },
-      {
-        question: 'Welke formule gebruik ik voor 9% btw?',
-        answer: 'Gebruik dezelfde formule en verander het percentage naar 9%, bijvoorbeeld: =Bedrag*9%.',
+        answer: 'Ja, maar je moet zelf controleren of alle verplichte gegevens aanwezig zijn en of de btw correct wordt berekend en afgerond.',
       },
     ],
     content: (
       <>
         <p>
-          Veel zzp&apos;ers gebruiken Excel om hun administratie bij te houden of facturen voor te bereiden. Met een paar
-          eenvoudige formules kun je <strong>btw berekenen</strong> over bedragen exclusief of inclusief btw.
+          Wil je <strong>btw berekenen in Excel</strong>? Met een eenvoudige formule kun je 21% of 9% btw over een bedrag
+          berekenen. Je kunt ook btw bij een bedrag optellen of de btw uit een bedrag inclusief btw terugrekenen.
         </p>
         <p>
-          In deze uitleg laten we zien hoe je <strong>21%, 9% en 0% btw berekent in Excel</strong>, inclusief handige
-          formules en voorbeelden.
-        </p>
-        <p>
-          Wil je sneller rekenen zonder formules? Gebruik dan de gratis{' '}
+          Hieronder vind je de belangrijkste Excel-formules met voorbeelden. Wil je sneller rekenen zonder formules?
+          Gebruik de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
             BTW calculator
           </Link>{' '}
           van FactuurBaas.
         </p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
-
-        <h2>Btw berekenen over een bedrag exclusief btw in Excel</h2>
-        <p>Als je een bedrag hebt <strong>exclusief btw</strong> en daar btw bij wilt optellen, gebruik je deze formule:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =Bedrag*BTW-percentage
-        </pre>
-
-        <CalculationTable
-          rows={[
-            ['Bedrag excl. btw (A1)', '€100'],
-            ['Btw percentage (B1)', '21%'],
-            ['Btw bedrag', '€21'],
-          ]}
-        />
-
-        <p>De Excel-formule voor het btw-bedrag:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =A1*B1
-        </pre>
+        <h2>BTW berekenen in Excel: 21%</h2>
+        <p>Voorbeeld: bedrag exclusief btw is €1.000.</p>
         <p>
-          Resultaat: <strong>€21 btw</strong>
-        </p>
-
-        <p>Het totaal inclusief btw bereken je daarna met:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =A1+C1
-        </pre>
-        <p>Of direct:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =A1*(1+B1)
-        </pre>
-        <p>
-          Resultaat: <strong>€121 inclusief btw</strong>
-        </p>
-
-        <h2>Btw uit een bedrag inclusief btw halen in Excel</h2>
-        <p>
-          Heb je een bedrag inclusief btw en wil je weten hoeveel btw erin zit? Een klant betaalt bijvoorbeeld €121
-          inclusief 21% btw.
+          <strong>Btw-bedrag:</strong>
         </p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =Bedrag-(Bedrag/1,21)
+          =A1*21%
         </pre>
-        <p>Voorbeeld:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =121-(121/1,21)
-        </pre>
-        <p>Resultaat:</p>
-        <ul>
-          <li>Bedrag exclusief btw: €100</li>
-          <li>Btw: €21</li>
-        </ul>
         <p>
-          Meer uitleg:{' '}
-          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
-            Hoe bereken je btw terug?
-          </Link>{' '}
-          en{' '}
-          <Link href="/gidsen/inclusief-btw-naar-exclusief-btw" className="text-warm-orange hover:underline">
-            bedrag inclusief btw omrekenen naar exclusief
-          </Link>
-          .
+          Resultaat: <strong>€210 btw</strong>
         </p>
-
-        <h2>Btw percentage aanpassen in Excel</h2>
-        <p>Maak bijvoorbeeld een eenvoudige btw-berekening:</p>
-        <CalculationTable
-          rows={[
-            ['Bedrag', '€500'],
-            ['Btw percentage', '21%'],
-            ['Btw bedrag', '€105'],
-            ['Totaal', '€605'],
-          ]}
-        />
-
         <p>
-          <strong>Btw bedrag:</strong>
+          <strong>Totaal inclusief btw:</strong>
         </p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =A2*B2
+          =A1*1,21
+        </pre>
+        <p>
+          Resultaat: <strong>€1.210 inclusief btw</strong>
+        </p>
+
+        <h2>BTW berekenen in Excel: 9%</h2>
+        <p>Dezelfde aanpak voor het verlaagde tarief:</p>
+        <p>
+          <strong>Btw-bedrag:</strong>
+        </p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
+          =A1*9%
         </pre>
         <p>
           <strong>Totaal inclusief btw:</strong>
         </p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =A2+(A2*B2)
+          =A1*1,09
         </pre>
-        <p>Je kunt het btw-percentage eenvoudig aanpassen:</p>
+
+        <h2>BTW uit een bedrag halen in Excel</h2>
+        <p>
+          Dit is anders dan btw <em>erbij</em> rekenen. Stel: je hebt €1.210 inclusief 21% btw en wilt weten hoeveel btw
+          daarvan is.
+        </p>
+        <p>
+          <strong>Btw-bedrag (21/121-methode):</strong>
+        </p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
+          =A1*21/121
+        </pre>
+        <p>
+          Resultaat: <strong>€210 btw</strong>
+        </p>
+        <p>
+          <strong>Bedrag exclusief btw:</strong>
+        </p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
+          =A1/1,21
+        </pre>
+        <p>
+          Resultaat: <strong>€1.000 exclusief btw</strong>
+        </p>
+        <p>
+          Meer uitleg:{' '}
+          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
+            BTW terugrekenen
+          </Link>
+          .
+        </p>
+
+        <h2>BTW berekenen van een bedrag inclusief btw</h2>
+        <p>
+          De <strong>21/121-formule</strong> haalt btw uit een inclusief bedrag bij 21% btw. Bij 9% btw gebruik je{' '}
+          <strong>9/109</strong>:
+        </p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
+          =A1*9/109
+        </pre>
+        <p>
+          Zo bereken je het btw-bedrag direct uit een totaalbedrag inclusief btw — handig bij bonnetjes, offertes of
+          facturen waar alleen het eindbedrag staat.
+        </p>
+
+        <h2>Bedrag exclusief btw berekenen</h2>
+        <p>Heb je een bedrag inclusief btw en wil je het bedrag exclusief btw weten?</p>
         <ul>
           <li>
-            <strong>21%</strong> → standaard btw
+            <strong>21% btw:</strong> <code className="text-sm">=A1/1,21</code>
           </li>
           <li>
-            <strong>9%</strong> → verlaagd btw-tarief
+            <strong>9% btw:</strong> <code className="text-sm">=A1/1,09</code>
+          </li>
+        </ul>
+        <p>
+          Zie ook:{' '}
+          <Link href="/gidsen/inclusief-btw-naar-exclusief-btw" className="text-warm-orange hover:underline">
+            bedrag inclusief btw omrekenen naar exclusief btw
+          </Link>
+          .
+        </p>
+
+        <h2>BTW berekenen met een percentage in een aparte cel</h2>
+        <p>Handig in Excel: zet het btw-percentage in een aparte cel, zodat je de formule niet hoeft aan te passen.</p>
+        <CalculationTable
+          rows={[
+            ['Bedrag excl. btw (A2)', '€1.000'],
+            ['BTW-percentage (B2)', '21%'],
+            ['Btw-bedrag', '€210'],
+          ]}
+        />
+        <p>
+          <strong>Formule voor btw-bedrag:</strong>
+        </p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
+          =A2*B2
+        </pre>
+        <p>
+          Wijzig cel B2 naar 9% of 21% — de formule blijft hetzelfde. Gebruik altijd het procentteken (21%) en niet
+          alleen het getal 21.
+        </p>
+
+        <h2>BTW berekenen in Excel: overzicht formules</h2>
+        <p>Stel dat je bedrag in cel A1 staat:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[480px] text-sm text-slate-700">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Berekening
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Excel-formule (bedrag in A1)
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['21% btw berekenen', '=A1*21%'],
+                ['9% btw berekenen', '=A1*9%'],
+                ['21% erbij optellen', '=A1*1,21'],
+                ['9% erbij optellen', '=A1*1,09'],
+                ['21% btw uit inclusief bedrag halen', '=A1*21/121'],
+                ['9% btw uit inclusief bedrag halen', '=A1*9/109'],
+                ['Bedrag excl. btw bij 21%', '=A1/1,21'],
+                ['Bedrag excl. btw bij 9%', '=A1/1,09'],
+              ].map(([label, formula]) => (
+                <tr key={label} className="border-b border-slate-100 last:border-0">
+                  <td className="px-4 py-3 font-medium text-deep-blue">{label}</td>
+                  <td className="px-4 py-3 font-mono text-slate-800">{formula}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Meer uitleg over btw berekenen</h2>
+        <p>Elke gids behandelt één specifieke vraag — zo hoef je niet alles op één pagina te zoeken:</p>
+        <ul>
+          <li>
+            <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
+              BTW terugrekenen
+            </Link>{' '}
+            — btw uit een inclusief bedrag halen
           </li>
           <li>
-            <strong>0%</strong> → geen btw
+            <Link href="/gidsen/inclusief-btw-naar-exclusief-btw" className="text-warm-orange hover:underline">
+              Inclusief btw naar exclusief btw
+            </Link>{' '}
+            — een bedrag inclusief btw omrekenen
+          </li>
+          <li>
+            <Link href="/gidsen/verschil-9-en-21-btw" className="text-warm-orange hover:underline">
+              Verschil tussen 9% en 21% btw
+            </Link>{' '}
+            — wanneer gebruik je welk tarief?
+          </li>
+          <li>
+            <Link href="/gidsen/wanneer-gebruik-je-0-btw" className="text-warm-orange hover:underline">
+              Wanneer gebruik je 0% btw
+            </Link>
+          </li>
+          <li>
+            <Link href="/gidsen/btw-berekenen-buitenlandse-klanten" className="text-warm-orange hover:underline">
+              BTW berekenen voor buitenlandse klanten
+            </Link>
+          </li>
+          <li>
+            <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">
+              Welke btw moet ik rekenen als zzp&apos;er?
+            </Link>
           </li>
         </ul>
 
-        <h2>Btw berekenen met meerdere factuurregels in Excel</h2>
-        <p>Voor een factuur met meerdere regels maak je bijvoorbeeld:</p>
-        <CalculationTable
-          rows={[
-            ['Website ontwerp', '€750'],
-            ['Onderhoud', '€250'],
-            ['Totaal', '€1.000'],
-          ]}
-        />
-
-        <p>
-          <strong>Subtotaal:</strong>
-        </p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =SOM(B2:B3)
-        </pre>
-        <p>
-          <strong>Btw:</strong>
-        </p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =B4*21%
-        </pre>
-        <p>
-          <strong>Factuurtotaal:</strong>
-        </p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =B4+B5
-        </pre>
-        <p>Zo kun je een eenvoudige factuuradministratie in Excel maken.</p>
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
 
         <h2>Veelgemaakte fouten bij btw berekenen in Excel</h2>
-
         <h3>Het btw-percentage verkeerd invoeren</h3>
         <p>
           Gebruik <strong>21%</strong> en niet <strong>21</strong>. Excel ziet 21% als 0,21 — maar 21 zonder procentteken
           is eenentwintig keer het bedrag.
         </p>
-
         <h3>Btw afronden op de verkeerde plek</h3>
         <p>
           Bij meerdere factuurregels kan afronding verschillen. Een professionele factuurtool berekent btw meestal
           automatisch per regel volgens de juiste afrondingsregels.
         </p>
-
         <h3>Bedragen inclusief en exclusief btw door elkaar halen</h3>
         <p>
-          Controleer altijd of je startbedrag inclusief of exclusief btw is. Een bedrag van €121 inclusief 21% btw is
-          niet hetzelfde als €121 exclusief btw.
+          Controleer altijd of je startbedrag inclusief of exclusief btw is. €1.210 inclusief 21% btw is niet hetzelfde
+          als €1.210 exclusief btw.
         </p>
 
         <h2>Is Excel geschikt voor facturen?</h2>
-        <p>Excel kan handig zijn voor eenvoudige berekeningen, maar heeft ook beperkingen.</p>
-        <p>Met Excel moet je zelf letten op:</p>
-        <ul>
-          <li>juiste btw-berekeningen</li>
-          <li>factuurnummers</li>
-          <li>verplichte factuurgegevens</li>
-          <li>PDF-opmaak</li>
-          <li>wijzigingen bijhouden</li>
-        </ul>
         <p>
-          Voor een paar facturen per maand kan Excel prima werken. Groei je als ondernemer, dan wordt een online
-          factuurtool vaak makkelijker. Zie ook{' '}
-          <Link href="/blogs/factuur-templates-zzp" className="text-warm-orange hover:underline">
-            factuur templates voor zzp&apos;ers
-          </Link>
-          .
+          Excel is prima voor btw-berekeningen, maar voor facturen moet je zelf letten op factuurnummers, verplichte
+          gegevens en PDF-opmaak. Groei je als ondernemer, dan wordt een online factuurtool vaak makkelijker.
         </p>
 
         <h2>Btw berekenen zonder Excel</h2>
-        <p>Met de gratis BTW calculator van FactuurBaas bereken je direct:</p>
-        <ul>
-          <li>btw toevoegen aan een bedrag</li>
-          <li>btw terugrekenen uit een totaalbedrag</li>
-          <li>21%, 9% en 0% btw</li>
-        </ul>
-        <p>Geen formules nodig.</p>
-
+        <p>Met de gratis BTW calculator bereken je direct btw toevoegen, btw terugrekenen, en 21%, 9% of 0% btw — zonder formules.</p>
         <GuideToolCta href="/tools/btw-calculator" label="Bereken btw gratis →" />
 
         <h2>Veelgestelde vragen</h2>
         <h3>Hoe bereken ik 21% btw in Excel?</h3>
-        <p>Vermenigvuldig het bedrag exclusief btw met 21%. Voorbeeld: =100*21% — resultaat: €21 btw.</p>
-        <h3>Hoe haal ik btw uit een bedrag in Excel?</h3>
-        <p>
-          Bij 21% btw deel je het bedrag inclusief btw door 1,21 om het bedrag exclusief btw te vinden, of gebruik
-          =Bedrag-(Bedrag/1,21).
-        </p>
-        <h3>Kan ik een factuur maken in Excel?</h3>
-        <p>
-          Ja, maar je moet zelf controleren of alle verplichte gegevens aanwezig zijn en of de btw correct wordt
-          berekend.
-        </p>
+        <p>Vermenigvuldig het bedrag exclusief btw met 21%. Voorbeeld: =1000*21% — resultaat: €210 btw.</p>
+        <h3>Hoe haal je 21% btw uit een bedrag in Excel?</h3>
+        <p>Gebruik =A1*21/121 voor het btw-bedrag, of =A1/1,21 voor het bedrag exclusief btw.</p>
         <h3>Welke formule gebruik ik voor 9% btw?</h3>
-        <p>Gebruik dezelfde formule en verander het percentage: =Bedrag*9%</p>
+        <p>=A1*9% voor btw over exclusief, =A1*1,09 om 9% erbij te rekenen, =A1*9/109 om btw uit inclusief te halen.</p>
+        <h3>Kan ik een factuur maken in Excel?</h3>
+        <p>Ja, maar controleer zelf of alle verplichte gegevens kloppen en de btw correct is berekend.</p>
       </>
     ),
   },
@@ -4925,9 +4963,9 @@ Met vriendelijke groet,
     seoTitle: 'Offerte aanpassen: mag je een offerte wijzigen? | FactuurBaas',
     title: 'Offerte aanpassen: mag je een offerte wijzigen na verzending of akkoord?',
     excerpt:
-      'Een offerte aanpassen na verzending of akkoord? Lees wanneer dit mag, hoe je fouten corrigeert en hoe je eenvoudig een nieuwe offerte maakt.',
+      'Offerte aanpassen na verzending of akkoord? Lees wanneer dat mag, hoeveel een offerte mag afwijken, wanneer je opnieuw goedkeuring nodig hebt en hoe je een aangepaste offerte maakt.',
     keywords:
-      'offerte aanpassen, offerte wijzigen, offerte wijzigen na akkoord, prijs verhogen na offerte, fout in offerte herstellen, offerte corrigeren',
+      'offerte aanpassen, aangepaste offerte, offerte wijzigen na akkoord, hoeveel mag een offerte afwijken, prijs verhogen na offerte, offerte goedkeuren, is een offerte bindend, fout in offerte herstellen',
     tool: {
       href: '/tools/offerte-maker',
       label: 'Maak aangepaste offerte',
@@ -4940,7 +4978,7 @@ Met vriendelijke groet,
       alt: 'Offerte aanpassen: ondernemer wijzigt offerte op laptop',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-08-28',
     relatedSlugs: ['verschil-factuur-offerte', 'factuur-maken-zzp'],
     relatedGuideSlugs: ['offerte-accepteren-wat-gebeurt-er-na', 'wanneer-is-een-offerte-bindend', 'offerte-omzetten-naar-factuur'],
     faq: [
@@ -4952,12 +4990,22 @@ Met vriendelijke groet,
       {
         question: 'Mag ik een offerte aanpassen na akkoord?',
         answer:
-          'Niet zomaar. Na akkoord zijn de afspraken meestal vastgelegd. Bespreek wijzigingen altijd eerst met de klant.',
+          'Niet zomaar. Na akkoord geldt de afgesproken prijs, werkzaamheden en voorwaarden in principe als uitgangspunt. Bespreek wijzigingen altijd eerst met de klant en leg een nieuw akkoord schriftelijk vast.',
       },
       {
         question: 'Kan ik een prijs verhogen na een offerte?',
         answer:
           'Alleen als de klant hiermee akkoord gaat of als hierover vooraf afspraken zijn gemaakt.',
+      },
+      {
+        question: 'Hoeveel mag een offerte afwijken?',
+        answer:
+          'Een offerte mag niet zomaar afwijken van de gemaakte afspraken. Een hogere prijs kan gerechtvaardigd zijn bij extra werkzaamheden, meer uren of materialen, nacalculatie die vooraf in de offerte staat, of als de klant vooraf akkoord gaat met meerwerk.',
+      },
+      {
+        question: 'Moet een aangepaste offerte opnieuw worden goedgekeurd?',
+        answer:
+          'Ja, als de wijziging invloed heeft op prijs, werkzaamheden of andere belangrijke afspraken. Stuur de nieuwe versie met een duidelijk nieuw offertenummer en vermeld dat deze de vorige offerte vervangt.',
       },
       {
         question: 'Wat doe ik bij een fout in mijn offerte?',
@@ -5008,9 +5056,11 @@ Met vriendelijke groet,
 
         <h2>Offerte wijzigen na akkoord: kan dat?</h2>
         <p>
-          Wanneer een klant je offerte heeft geaccepteerd, zijn de afspraken meestal vastgelegd. Je kunt dan niet zomaar
-          eenzijdig:
+          Na akkoord kun je een offerte <strong>niet zomaar eenzijdig wijzigen</strong>. De klant heeft akkoord gegeven op
+          de afgesproken werkzaamheden, prijs en voorwaarden. Wil je daarvan afwijken, bespreek de wijziging dan met de
+          klant en leg het nieuwe akkoord schriftelijk vast.
         </p>
+        <p>Je kunt dan in principe niet eenzijdig:</p>
         <ul>
           <li>de prijs verhogen</li>
           <li>werkzaamheden aanpassen</li>
@@ -5050,6 +5100,38 @@ Met vriendelijke groet,
           maken.
         </p>
 
+        <h2>Hoeveel mag een offerte afwijken?</h2>
+        <p>
+          Een offerte mag <strong>niet zomaar afwijken</strong> van de afspraken die je met de klant hebt gemaakt. Heeft
+          de klant de offerte geaccepteerd, dan geldt de afgesproken prijs en inhoud in principe als uitgangspunt.
+        </p>
+        <p>Een hogere factuur kan bijvoorbeeld gerechtvaardigd zijn wanneer:</p>
+        <ul>
+          <li>de klant extra werkzaamheden heeft gevraagd;</li>
+          <li>er meer uren of materialen nodig zijn dan vooraf ingeschat;</li>
+          <li>de offerte duidelijk vermeldt dat bepaalde kosten op nacalculatie worden berekend;</li>
+          <li>de klant vooraf akkoord gaat met het meerwerk.</li>
+        </ul>
+        <p>
+          Kun je de extra kosten niet onderbouwen met de oorspronkelijke afspraken of aanvullende toestemming? Dan kan een
+          hogere factuur tot discussie met de klant leiden.
+        </p>
+        <p>
+          <strong>Voorbeeld:</strong> je offerte bedraagt €1.000. Tijdens de opdracht vraagt de klant om €250 aan extra
+          werkzaamheden. Bespreek dit vooraf en leg de aanvullende kosten vast. Je kunt vervolgens een aanvullende offerte
+          of duidelijke schriftelijke afspraak sturen.
+        </p>
+
+        <h2>Moet een aangepaste offerte opnieuw worden goedgekeurd?</h2>
+        <p>
+          <strong>Ja</strong>, als de wijziging invloed heeft op de prijs, werkzaamheden of andere belangrijke afspraken,
+          is het verstandig om de aangepaste offerte opnieuw door de klant te laten goedkeuren.
+        </p>
+        <p>
+          Stuur de nieuwe versie met een duidelijk nieuw offertenummer en vermeld dat deze de vorige offerte vervangt. Zo
+          is voor beide partijen duidelijk welke afspraken gelden.
+        </p>
+
         <h2>Fout in offerte herstellen</h2>
         <p>Een foutje in een offerte komt regelmatig voor. Denk aan:</p>
         <ul>
@@ -5087,8 +5169,16 @@ Met vriendelijke groet,
           ]}
         />
         <p>
-          Gebruik een nieuw offertenummer bij elke nieuwe versie (bijv. OFF-2026-002). Zo houd je je administratie
-          overzichtelijk.
+          Bij een nieuwe versie is een nieuw versienummer of offertenummer aan te raden, bijvoorbeeld OFF-2026-002. Zo
+          houd je je administratie overzichtelijk.
+        </p>
+        <p>
+          Is de offerte al uitgevoerd en is er daarna een fout op de factuur ontdekt? Dan gaat het om het corrigeren van
+          een factuur, niet om het aanpassen van de offerte. Lees{' '}
+          <Link href="/blogs/boetes-fouten-facturen" className="text-warm-orange hover:underline">
+            fouten op facturen: gevolgen en corrigeren
+          </Link>
+          .
         </p>
 
         <h2>Hoe voorkom je fouten in offertes?</h2>
@@ -5142,11 +5232,23 @@ Met vriendelijke groet,
         </p>
         <h3>Mag ik een offerte aanpassen na akkoord?</h3>
         <p>
-          Niet zomaar. Na akkoord zijn de afspraken meestal vastgelegd. Bespreek wijzigingen altijd eerst met de klant.
+          Niet zomaar. Na akkoord geldt de afgesproken prijs, werkzaamheden en voorwaarden in principe als uitgangspunt.
+          Bespreek wijzigingen altijd eerst met de klant en leg een nieuw akkoord schriftelijk vast.
         </p>
         <h3>Kan ik een prijs verhogen na een offerte?</h3>
         <p>
           Alleen als de klant hiermee akkoord gaat of als hierover vooraf afspraken zijn gemaakt.
+        </p>
+        <h3>Hoeveel mag een offerte afwijken?</h3>
+        <p>
+          Een offerte mag niet zomaar afwijken van de gemaakte afspraken. Een hogere prijs kan gerechtvaardigd zijn bij
+          extra werkzaamheden, meer uren of materialen, nacalculatie die vooraf in de offerte staat, of als de klant
+          vooraf akkoord gaat met meerwerk.
+        </p>
+        <h3>Moet een aangepaste offerte opnieuw worden goedgekeurd?</h3>
+        <p>
+          Ja, als de wijziging invloed heeft op prijs, werkzaamheden of andere belangrijke afspraken. Stuur de nieuwe
+          versie met een duidelijk nieuw offertenummer en vermeld dat deze de vorige offerte vervangt.
         </p>
         <h3>Wat doe ik bij een fout in mijn offerte?</h3>
         <p>

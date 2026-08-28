@@ -6,6 +6,7 @@ import { getGuideLinksByCluster } from '@/lib/guideData';
 import {
   OFFERTE_COMPARISON,
   OFFERTE_FAQS,
+  OFFERTE_METHOD_COMPARISON,
   OFFERTE_RELATED,
 } from '@/lib/offerteLanding';
 import { formatQuoteMoney } from '@/lib/quoteUtils';
@@ -44,6 +45,47 @@ function ComparisonTable({ comparison }) {
   );
 }
 
+const OFFERTE_STEPS = [
+  {
+    title: 'Vul je bedrijfsgegevens in',
+    text: 'Vermeld je bedrijfsnaam, adres en andere relevante gegevens.',
+  },
+  {
+    title: 'Voeg je klant toe',
+    text: 'Vul de gegevens van de opdrachtgever in, zodat duidelijk is voor wie de offerte bedoeld is.',
+  },
+  {
+    title: 'Beschrijf je werkzaamheden',
+    text: 'Omschrijf duidelijk welke diensten of producten je levert. Voeg eventueel aantallen, uren of eenheden toe.',
+  },
+  {
+    title: 'Bereken de prijs en btw',
+    text: 'Vermeld de prijs van je werkzaamheden en het toepasselijke btw-tarief.',
+  },
+  {
+    title: 'Voeg voorwaarden toe',
+    text: 'Vermeld bijvoorbeeld de geldigheidsduur, betalingstermijn en belangrijke afspraken.',
+  },
+  {
+    title: 'Download je offerte als PDF',
+    text: 'Controleer de offerte en download hem direct als professionele PDF.',
+  },
+];
+
+const OFFERTE_REQUIRED_ITEMS = [
+  'je bedrijfsnaam en contactgegevens',
+  'gegevens van je klant',
+  'offertenummer',
+  'datum van de offerte',
+  'omschrijving van je producten of diensten',
+  'aantallen, uren of eenheden',
+  'prijs exclusief btw',
+  'btw-percentage en btw-bedrag',
+  'totaalbedrag inclusief btw',
+  'geldigheidsduur van de offerte',
+  'eventuele betalings-, leverings- en andere voorwaarden',
+];
+
 export default function OfferteMakerSeoContent({
   toolHref = '/tools/offerte-maker/maken',
 }) {
@@ -51,54 +93,15 @@ export default function OfferteMakerSeoContent({
     <div className="space-y-14 sm:space-y-16">
       <section>
         <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          Wat is een offerte?
+          Gratis offerte maken: zo werkt het
         </h2>
-        <div className="mt-4 space-y-4 leading-relaxed text-slate-600">
-          <p>
-            Een offerte is een voorstel waarin je beschrijft welke werkzaamheden je uitvoert,
-            tegen welke prijs en onder welke voorwaarden.
-          </p>
-          <p>
-            Een goede offerte helpt ondernemers om duidelijke afspraken te maken met klanten en
-            voorkomt discussies achteraf.
-          </p>
-        </div>
-      </section>
-
-      <section>
-        <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          Hoe maak je een offerte als zzp&apos;er?
-        </h2>
-        <p className="mt-4 text-slate-600">
-          Een professionele offerte bevat meestal:
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Online offerte maken hoeft niet ingewikkeld te zijn. Met de gratis offerte maker van
+          FactuurBaas maak je in een paar stappen een duidelijke offerte voor je klant — zonder
+          account, direct als PDF.
         </p>
         <ol className="mt-6 space-y-4">
-          {[
-            {
-              title: 'Bedrijfsgegevens',
-              text: 'Vermeld je naam, adres, KvK-nummer en contactgegevens.',
-            },
-            {
-              title: 'Gegevens van je klant',
-              text: 'Voeg de gegevens van de opdrachtgever toe.',
-            },
-            {
-              title: 'Omschrijving van werkzaamheden',
-              text: 'Beschrijf duidelijk wat je levert.',
-            },
-            {
-              title: 'Prijs en BTW',
-              text: 'Vermeld bedragen exclusief BTW met apart BTW-bedrag.',
-            },
-            {
-              title: 'Geldigheidsduur',
-              text: 'Geef aan hoe lang de offerte geldig blijft.',
-            },
-            {
-              title: 'Voorwaarden',
-              text: 'Voeg afspraken toe over betaling, levering en wijzigingen.',
-            },
-          ].map((step, index) => (
+          {OFFERTE_STEPS.map((step, index) => (
             <li key={step.title} className="flex gap-4 rounded-xl border border-slate-200 bg-white p-4">
               <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-bold text-blue-700">
                 {index + 1}
@@ -110,6 +113,98 @@ export default function OfferteMakerSeoContent({
             </li>
           ))}
         </ol>
+        <div className="mt-6">
+          <Button asChild size="lg" className="rounded-xl px-8">
+            <Link href={toolHref}>
+              Maak gratis offerte
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
+          Hoe maak je een offerte?
+        </h2>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Een offerte maak je door je bedrijfsgegevens, klantgegevens, werkzaamheden, prijzen en
+          voorwaarden op één document te zetten. Je stuurt de offerte vóór de opdracht; pas na
+          akkoord ga je aan de slag en factureer je achteraf.
+        </p>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Met FactuurBaas hoef je geen Word- of Excel-sjabloon te bouwen: je vult de velden in de
+          offerte maker in en downloadt direct een professionele PDF. Meer uitleg vind je in onze
+          gids{' '}
+          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
+            hoe maak je een offerte
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
+          Wat moet er op een offerte staan?
+        </h2>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Een goede offerte bevat in ieder geval voldoende informatie om voor jou en je klant
+          duidelijk te maken wat je aanbiedt, tegen welke prijs en onder welke voorwaarden.
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-600">
+          {OFFERTE_REQUIRED_ITEMS.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Uitgebreide uitleg per onderdeel:{' '}
+          <Link
+            href="/gidsen/wat-moet-er-op-een-offerte-staan"
+            className="text-warm-orange hover:underline"
+          >
+            wat moet er op een offerte staan
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
+          Offerte maken als zzp&apos;er
+        </h2>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Als zzp&apos;er kun je zelf een offerte maken voordat je met een opdracht begint. Een
+          goede zzp-offerte maakt duidelijk wat je gaat leveren, hoeveel het kost en onder welke
+          voorwaarden — inclusief offertenummer, btw en geldigheidsduur.
+        </p>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Met de gratis offerte maker maak je als zzp&apos;er direct een professionele offerte en
+          download je deze als PDF. Na akkoord kun je eenvoudig door naar een factuur. Meer tips:{' '}
+          <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
+            offerte maken voor zzp&apos;ers
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
+          Offerte maken in Word, Excel of online
+        </h2>
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Veel ondernemers maken een offerte in Word of Excel. Dat kan, maar een online offerte
+          maker is vaak sneller als je vooral een professioneel document wilt opstellen en als PDF
+          wilt versturen.
+        </p>
+        <ComparisonTable comparison={OFFERTE_METHOD_COMPARISON} />
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Wil je vooral snel online offerte maken en als PDF versturen? Met FactuurBaas kun je dit
+          direct doen zonder account. Lees ook{' '}
+          <Link href="/gidsen/offerte-maken-in-pdf" className="text-warm-orange hover:underline">
+            offerte maken in PDF
+          </Link>
+          .
+        </p>
       </section>
 
       <section>
@@ -118,7 +213,7 @@ export default function OfferteMakerSeoContent({
         </h2>
         <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <p className="text-sm font-semibold text-slate-500">Voorbeeld offerte website ontwerp</p>
-          <p className="mt-1 text-sm text-slate-500">Offerte nummer: OFF-2026-001</p>
+          <p className="mt-1 text-sm text-slate-500">Offertenummer: OFF-2026-001</p>
           <div className="mt-6 border-t border-slate-100 pt-6">
             <p className="font-semibold text-deep-blue">Website ontwerp</p>
             <p className="text-sm text-slate-600">10 uur × {formatQuoteMoney(75)}</p>
@@ -138,17 +233,31 @@ export default function OfferteMakerSeoContent({
             </div>
           </div>
         </div>
+        <Link
+          href="/gidsen/offerte-voorbeeld"
+          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-warm-orange hover:underline"
+        >
+          Bekijk meer offerte voorbeelden
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </section>
 
       <section>
         <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
           Offerte maken of factuur maken?
         </h2>
-        <p className="mt-4 text-slate-600 leading-relaxed">
+        <p className="mt-4 leading-relaxed text-slate-600">
           Een offerte en factuur lijken op elkaar, maar hebben een ander doel. Bij akkoord op de
           offerte kun je de gegevens eenvoudig gebruiken voor een factuur.
         </p>
         <ComparisonTable comparison={OFFERTE_COMPARISON} />
+        <p className="mt-4 leading-relaxed text-slate-600">
+          Meer uitleg:{' '}
+          <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
+            verschil offerte en factuur
+          </Link>
+          .
+        </p>
       </section>
 
       <section>
@@ -213,7 +322,8 @@ export default function OfferteMakerSeoContent({
           Klaar om je offerte te maken?
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-slate-600 sm:text-base">
-          Maak gratis een professionele offerte en download direct als PDF. Geen account nodig.
+          Maak gratis online een professionele offerte en download direct als PDF. Geen account
+          nodig.
         </p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg" className="rounded-xl px-8">

@@ -1,11 +1,15 @@
 export const OFFERTE_FAQS = [
   {
-    q: 'Is een offerte verplicht?',
-    a: 'Nee, een offerte is meestal niet verplicht. Voor veel opdrachten is het wel verstandig om vooraf duidelijke afspraken te maken.',
+    q: 'Kan ik gratis een offerte maken?',
+    a: 'Ja. Met de gratis offerte maker van FactuurBaas maak je online een professionele offerte zonder account en download je deze direct als PDF.',
   },
   {
-    q: 'Kan ik gratis een offerte maken?',
-    a: 'Ja, met FactuurBaas maak je gratis een offerte zonder account en download je deze direct als PDF.',
+    q: 'Hoe maak ik online een offerte?',
+    a: 'Vul je bedrijfsgegevens, klantgegevens, werkzaamheden en prijzen in via de offerte maker. Controleer de offerte en download direct een PDF.',
+  },
+  {
+    q: 'Is een offerte verplicht?',
+    a: 'Nee, een offerte is meestal niet verplicht. Voor veel opdrachten is het wel verstandig om vooraf duidelijke afspraken te maken.',
   },
   {
     q: 'Wat moet er op een offerte staan?',
@@ -49,6 +53,15 @@ export const OFFERTE_RELATED = [
     description: 'Gebruik een professionele zzp-factuur template en download als PDF.',
   },
 ];
+
+export const OFFERTE_METHOD_COMPARISON = {
+  headers: ['Methode', 'Voordeel', 'Nadeel'],
+  rows: [
+    ['Word', 'Flexibel ontwerp', 'Bedragen zelf berekenen en opmaken'],
+    ['Excel', 'Handig voor berekeningen', 'Minder geschikt voor een professioneel document'],
+    ['Online offerte maker', 'Snel en automatisch opgemaakt', 'Afhankelijk van de tool'],
+  ],
+};
 
 export const OFFERTE_COMPARISON = {
   headers: ['', 'Offerte', 'Factuur'],
