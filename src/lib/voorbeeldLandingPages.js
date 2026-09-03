@@ -17,6 +17,8 @@ function examplePage(slug, config) {
     sections: config.sections,
     faqs: config.faqs,
     relatedLinks: [...(config.relatedLinks || []), ...sharedRelatedLinks],
+    closingTitle: config.closingTitle,
+    closingText: config.closingText,
   };
 }
 
@@ -90,12 +92,15 @@ export const voorbeeldPages = {
 
   bouw: examplePage('bouw', {
     h1: 'Factuur voorbeeld bouw',
-    metaTitle: 'Bouw factuur voorbeeld – Aannemer & schilder | FactuurBaas',
+    metaTitle: 'Factuur voorbeeld bouw | Gratis voorbeeld voor de bouw',
     metaDescription:
-      'Bekijk een factuur voorbeeld voor bouw, schilders en klusbedrijven. Materiaal en arbeid overzichtelijk op één factuur.',
+      'Bekijk een factuur voorbeeld voor de bouw, met arbeid, materiaal, btw en betaaltermijn. Ook uitleg over schilderwerk en btw verlegd voor onderaannemers.',
     intro:
-      'In de bouw factureer je vaak materiaal en arbeid op één factuur. Dit voorbeeld laat zien hoe je werkzaamheden en materiaalkosten overzichtelijk presenteert — professioneel en duidelijk voor je opdrachtgever.',
+      'Een goede bouwfactuur maakt duidelijk welke werkzaamheden en materialen je in rekening brengt. Hieronder zie je een factuur voorbeeld voor de bouw, met aparte regels voor arbeid en materiaal. Gebruik het voorbeeld als basis voor je eigen factuur en pas de werkzaamheden, bedragen en gegevens aan jouw situatie aan.',
     templateHref: '/factuur-template/bouw',
+    closingTitle: 'Maak gratis je eigen bouwfactuur',
+    closingText:
+      'Vul je bedrijfsgegevens in, voeg arbeid en materiaal toe, controleer de btw en download je factuur als PDF. Gratis en zonder account.',
     example: {
       layout: 'plain',
       invoiceNumber: '#2026-032',
@@ -108,51 +113,144 @@ export const voorbeeldPages = {
         { description: 'Materiaal (verf, lak)', quantity: '1', amount: '€ 185,00' },
       ],
       subtotal: '€ 1.435,00',
-      btwLabel: 'BTW 21%',
-      btwAmount: '€ 301,35',
-      total: '€ 1.736,35',
+      btwLabel: 'BTW 9%',
+      btwAmount: '€ 129,15',
+      total: '€ 1.564,15',
     },
     sections: [
       {
-        h2: 'Waarom dit voorbeeld werkt voor bouwbedrijven',
-        bullets: [
-          'Werkzaamheden en materiaal als aparte regels',
-          'Duidelijke omschrijving per post',
-          'Btw apart berekend over het totaal',
-          'Betalingstermijn van 30 dagen (gangbaar in de bouw)',
-        ],
-      },
-      {
-        h2: 'Materiaal en arbeid op één factuur',
+        h2: 'Voorbeeld factuur bouw',
         paragraphs: [
-          'Veel klusbedrijven combineren arbeidsuren en materiaalkosten. Door elke post apart te vermelden, weet je klant precies waarvoor hij betaalt — en voorkom je discussies achteraf.',
+          'Het voorbeeld hierboven toont een bouwfactuur met factuurnummer #2026-032, datum 5 juli 2026 en een betaaltermijn van 30 dagen. Schilderwerk woonkamer (€1.250) en materiaal (€185) staan als aparte regels, subtotaal €1.435, 9% btw (€129,15), totaal €1.564,15.',
+          'Let op: voor schilderwerk aan woningen ouder dan 2 jaar geldt onder voorwaarden het 9%-tarief. Voor andere werkzaamheden in de bouw kan een ander btw-tarief gelden.',
         ],
       },
       {
-        h2: 'Maak je eigen bouwfactuur',
+        h2: 'Wat staat er op een bouwfactuur?',
+        paragraphs: [
+          'Op een bouwfactuur vermeld je onder andere de onderstaande gegevens. Bij werkzaamheden in de bouw is het verstandig om arbeid, materiaal en eventuele meerwerkposten duidelijk van elkaar te onderscheiden.',
+        ],
         bullets: [
-          'Vul je bedrijfsgegevens en die van je klant in.',
-          'Voeg regels toe voor werk en materiaal.',
-          'Download als PDF en stuur naar je opdrachtgever.',
+          'je bedrijfsnaam en gegevens',
+          'de gegevens van je opdrachtgever',
+          'een uniek factuurnummer',
+          'de factuurdatum',
+          'een duidelijke omschrijving van de werkzaamheden',
+          'de hoeveelheid of het aantal uren, wanneer dat relevant is',
+          'het bedrag exclusief btw',
+          'het gebruikte btw-tarief',
+          'het btw-bedrag',
+          'het totaalbedrag',
+          'de betaaltermijn en betaalgegevens',
+        ],
+      },
+      {
+        h2: 'Arbeid en materiaal op één factuur',
+        paragraphs: [
+          "Als aannemer, klusbedrijf of zzp'er in de bouw kun je verschillende onderdelen van een opdracht op dezelfde factuur zetten. Geef iedere belangrijke post een duidelijke omschrijving. Zo ziet je opdrachtgever direct waar het factuurbedrag vandaan komt.",
+        ],
+        bullets: [
+          'arbeidsuren',
+          'materiaal',
+          'huur van materieel',
+          'voorrijkosten',
+          'meerwerk',
+          'andere kosten die onderdeel zijn van de opdracht',
+        ],
+        subsections: [
+          {
+            h3: 'Voorbeeld van een duidelijke omschrijving',
+            paragraphs: [
+              'In plaats van “Werkzaamheden €1.500” kun je bijvoorbeeld vermelden: “Schilderen woonkamer, inclusief voorbereiden, schuren en twee lagen verf – 1 opdracht – €1.250”. Hoe specifieker de omschrijving, hoe duidelijker de factuur voor je opdrachtgever is.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Welk btw-tarief gebruik je in de bouw?',
+        paragraphs: [
+          'Het btw-tarief hangt af van de werkzaamheden en de situatie. Voor bepaalde werkzaamheden aan woningen ouder dan 2 jaar geldt het 9%-tarief. Dit geldt bijvoorbeeld voor schilderen, stukadoren, behangen en bepaalde vormen van isoleren. Voor andere werkzaamheden aan woningen geldt 21%.',
+          'Bij een opdracht met verschillende werkzaamheden kunnen daarom verschillende btw-tarieven van toepassing zijn. Als dat zo is, splits je de werkzaamheden op de offerte en factuur uit. Twijfel je over het juiste tarief? Controleer dan altijd de actuele regels van de Belastingdienst.',
+        ],
+      },
+      {
+        h2: 'Btw verlegd in de bouw',
+        paragraphs: [
+          "Werk je als onderaannemer voor een hoofdaannemer? Dan kan de verleggingsregeling van toepassing zijn. In dat geval breng je als onderaannemer geen btw in rekening. Op de factuur vermeld je 'btw verlegd' en het btw-identificatienummer van je opdrachtgever. De vergoeding moet daarbij per btw-tarief worden vermeld.",
+          'De verleggingsregeling geldt niet automatisch voor iedere factuur in de bouw. Of je de regeling moet toepassen, hangt af van de werkzaamheden en de rol van de partijen.',
+        ],
+      },
+      {
+        h2: 'Factuur voor een aannemer of bouwbedrijf',
+        paragraphs: [
+          'Ook een aannemer of bouwbedrijf kan een factuur opbouwen uit verschillende onderdelen. Voor grote projecten kan het handig zijn om per fase of termijn te factureren. Vermeld dan duidelijk op welke werkzaamheden of termijn de factuur betrekking heeft.',
+        ],
+        bullets: [
+          'werkzaamheden',
+          'materialen',
+          'onderaannemers',
+          'meerwerk',
+          'termijnfacturen',
+          'eindafrekening',
+        ],
+      },
+      {
+        h2: 'Tussentijdse factuur in de bouw',
+        paragraphs: [
+          'Bij een langer bouwproject hoef je niet altijd te wachten tot het volledige werk klaar is. Je kunt bijvoorbeeld tussentijds factureren wanneer dat volgens de gemaakte afspraken gebeurt. Zet op de factuur duidelijk welke termijn of welk deel van het project je factureert.',
+          'Bijvoorbeeld: “Termijn 2 – 30% van de overeengekomen aanneemsom – werkzaamheden volgens offerte #2026-014”. Zo kan je opdrachtgever de factuur eenvoudig koppelen aan de oorspronkelijke opdracht.',
+        ],
+      },
+      {
+        h2: 'Factuur en offerte voor de bouw',
+        paragraphs: [
+          'Een offerte gebruik je meestal voordat je met het werk begint. Daarin beschrijf je wat je gaat uitvoeren en tegen welke prijs. Na akkoord kun je de werkzaamheden uitvoeren en vervolgens een factuur sturen.',
+          'Een offerte bouw voorbeeld is daarom iets anders dan een factuur voorbeeld bouw: de offerte is een voorstel, terwijl de factuur bedoeld is om uitgevoerd werk of geleverde prestaties in rekening te brengen. Lees hoe je een offerte maakt in onze offerte-gids.',
+        ],
+      },
+      {
+        h2: 'Maak gratis je eigen bouwfactuur',
+        paragraphs: [
+          "Met FactuurBaas maak je eenvoudig een factuur voor je bouwbedrijf, klusbedrijf of werkzaamheden als zzp'er. Je kunt direct beginnen zonder account.",
+        ],
+        bullets: [
+          'Vul je eigen bedrijfsgegevens in.',
+          'Voeg de gegevens van je opdrachtgever toe.',
+          'Voeg arbeid, materiaal en andere posten toe.',
+          'Controleer bedragen en btw.',
+          'Download je factuur als PDF.',
         ],
       },
     ],
     faqs: [
       {
-        q: 'Kan ik meerwerk op dezelfde factuur zetten?',
-        a: 'Ja. Voeg een extra regel toe met omschrijving en bedrag. Houd het overzichtelijk met korte, duidelijke omschrijvingen.',
+        q: 'Kan ik arbeid en materiaal op dezelfde factuur zetten?',
+        a: 'Ja. Je kunt arbeidskosten en materiaalkosten als afzonderlijke regels op dezelfde factuur vermelden. Een duidelijke omschrijving maakt inzichtelijk waarvoor je opdrachtgever betaalt.',
       },
       {
         q: 'Welk btw-tarief geldt voor schilderwerk?',
-        a: 'Meestal 21%, maar voor bepaalde renovatiewerkzaamheden kan 9% gelden. Check altijd de actuele regels bij de Belastingdienst.',
+        a: 'Voor schilderwerk aan woningen ouder dan 2 jaar geldt onder voorwaarden het 9%-tarief. Voor andere werkzaamheden kunnen andere regels gelden.',
       },
       {
-        q: 'Is dit geschikt voor aannemers?',
-        a: 'Ja. Het voorbeeld werkt voor schilders, aannemers, loodgieters en andere klusbedrijven.',
+        q: 'Wanneer is btw verlegd in de bouw?',
+        a: "Bij onderaanneming in de bouw kan de verleggingsregeling van toepassing zijn. De onderaannemer brengt dan geen btw in rekening en vermeldt 'btw verlegd' en het btw-identificatienummer van de afnemer op de factuur.",
+      },
+      {
+        q: 'Kan ik een tussentijdse factuur sturen voor een bouwproject?',
+        a: 'Ja, dat kan wanneer je volgens de gemaakte afspraken in termijnen factureert. Vermeld duidelijk welke termijn of welk deel van het project je in rekening brengt.',
+      },
+      {
+        q: "Is dit voorbeeld ook geschikt voor een zzp'er in de bouw?",
+        a: "Ja. Een zzp'er, klusbedrijf of aannemer kan dezelfde basis gebruiken. Pas de omschrijvingen, bedragen, btw en gegevens aan de eigen werkzaamheden en situatie aan.",
+      },
+      {
+        q: 'Kan ik ook een offerte voor een bouwproject maken?',
+        a: 'Ja. Een offerte gebruik je om vooraf afspraken te maken over werkzaamheden en prijs. Na akkoord kun je de uitgevoerde werkzaamheden factureren.',
       },
     ],
     relatedLinks: [
       { label: 'Bouw template', href: '/factuur-template/bouw' },
+      { label: 'Hoe maak je een offerte', href: '/gidsen/hoe-maak-je-een-offerte' },
       { label: 'ZZP voorbeeld', href: '/factuur-voorbeeld/zzp' },
       { label: 'Uren voorbeeld', href: '/factuur-voorbeeld/uren' },
     ],
@@ -230,11 +328,11 @@ export const voorbeeldPages = {
 
   consultant: examplePage('consultant', {
     h1: 'Factuur voorbeeld consultant',
-    metaTitle: 'Consultant factuur voorbeeld – Professioneel | FactuurBaas',
+    metaTitle: 'Factuur voorbeeld consultant | Gratis voorbeeld',
     metaDescription:
-      'Bekijk een professioneel consultant factuur voorbeeld. Geschikt voor adviseurs, coaches en consultants. Gratis nabouwen.',
+      'Bekijk een professioneel factuur voorbeeld voor consultants. Met projectprijs of uurtarief, btw en betaaltermijn. Maak gratis je eigen consultant factuur.',
     intro:
-      'Consultants en adviseurs hebben een strakke factuur nodig die vertrouwen uitstraalt. Dit voorbeeld toont een projectmatige factuur met een vaste prijs — professioneel en overzichtelijk.',
+      'Ben je consultant, adviseur of zelfstandig professional en zoek je een factuur voorbeeld voor je diensten? Hieronder zie je hoe een professionele consultant-factuur eruit kan zien. Het voorbeeld is gebaseerd op een project met een vaste prijs. Werk je met een uurtarief? Dan kun je dezelfde factuur ook gebruiken voor je gewerkte uren.',
     templateHref: '/factuur-template/consultant',
     example: {
       layout: 'corporate',
@@ -253,48 +351,119 @@ export const voorbeeldPages = {
     },
     sections: [
       {
-        h2: 'Wat maakt dit een consultant-factuur?',
-        bullets: [
-          'Zakelijke, strakke layout',
-          'Projectmatige omschrijving met vaste prijs',
-          'Btw apart vermeld',
-          'Betalingstermijn van 30 dagen',
+        h2: 'Factuur voorbeeld voor een consultant',
+        paragraphs: [
+          'Het voorbeeld hierboven toont een projectfactuur: factuurnummer 2026-051, datum 3 juli 2026, betaaltermijn 30 dagen, en één regel “Strategisch adviestraject Q2” van €4.500 excl. btw (€945 btw, totaal €5.445).',
+          'Een goede factuur voor consultancy maakt duidelijk welke dienst is geleverd, tegen welk bedrag en onder welke betaalvoorwaarden.',
         ],
       },
       {
-        h2: 'Per uur of per project?',
+        h2: 'Wat zet je op een factuur als consultant?',
         paragraphs: [
-          'Dit voorbeeld toont projectmatige facturatie. Factureer je op uurbasis? Bekijk dan het uren-voorbeeld. Beide modellen kun je maken in dezelfde gratis tool.',
+          'Op een consultant-factuur vermeld je onder andere de onderstaande gegevens. Een duidelijke omschrijving is vooral bij consultancy belangrijk: schrijf niet alleen “advies”, maar omschrijf de opdracht specifieker, zoals “Strategisch adviestraject Q2” of “Advies en begeleiding implementatie CRM”.',
+        ],
+        bullets: [
+          'Je bedrijfsnaam en adres',
+          'De gegevens van je klant',
+          'Een uniek factuurnummer',
+          'De factuurdatum',
+          'Een duidelijke omschrijving van je advies of werkzaamheden',
+          'Het bedrag exclusief btw',
+          'Het btw-bedrag en btw-tarief, wanneer van toepassing',
+          'Het totaalbedrag inclusief btw',
+          'De betaaltermijn',
+          'Je betaalgegevens',
+        ],
+      },
+      {
+        h2: 'Consultant factuur per uur of per project?',
+        paragraphs: [
+          'Consultants kunnen hun werkzaamheden op verschillende manieren factureren.',
+        ],
+        subsections: [
+          {
+            h3: 'Factureren met een vaste projectprijs',
+            paragraphs: [
+              'Bij een projectprijs spreek je vooraf een vast bedrag af voor een bepaalde opdracht, bijvoorbeeld “Strategisch adviestraject — €4.500”. Je hoeft dan niet alle gewerkte uren op de factuur te zetten, zolang de geleverde dienst duidelijk is omschreven.',
+            ],
+          },
+          {
+            h3: 'Factureren met een uurtarief',
+            paragraphs: [
+              'Werk je op basis van uren? Dan kun je de gewerkte uren op je factuur specificeren, bijvoorbeeld 20 uur consultancy à €100 = €2.000 exclusief btw. Bekijk ook het uren-voorbeeld of bereken wat je uurtarief oplevert.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur voorbeeld voor adviesdiensten',
+        paragraphs: [
+          'Een consultant-factuur hoeft niet ingewikkeld te zijn. Het belangrijkste is dat voor je klant duidelijk is welke adviesdienst wordt gefactureerd. Kies een omschrijving die past bij de werkzaamheden die je daadwerkelijk hebt uitgevoerd.',
+        ],
+        bullets: [
+          'Strategisch advies',
+          'Managementadvies',
+          'Marketingadvies',
+          'Financieel advies',
+          'IT-consultancy',
+          'Implementatiebegeleiding',
+          'Projectbegeleiding',
+          'Coaching en begeleiding',
+          'Advies en ondersteuning',
+        ],
+      },
+      {
+        h2: 'Factuur en offerte voor consultants',
+        paragraphs: [
+          'Een offerte en factuur hebben verschillende functies. Met een offerte beschrijf je vooraf wat je gaat leveren en tegen welke prijs. Na uitvoering van de opdracht stuur je vervolgens een factuur om de afgesproken werkzaamheden in rekening te brengen.',
+          'Bij een project met een vaste prijs kan de factuur bijvoorbeeld aansluiten op het bedrag uit de offerte. Wil je naast een factuur ook een offerte maken? Gebruik dan de offerte maker van FactuurBaas.',
         ],
       },
       {
         h2: 'Maak je eigen consultant-factuur',
+        paragraphs: [
+          'Je hoeft deze factuur niet zelf in Word of Excel na te bouwen. Met FactuurBaas maak je online een professionele factuur en download je deze direct als PDF. Gratis en zonder account.',
+        ],
         bullets: [
-          'Upload je logo voor een professionele uitstraling.',
+          'Vul je eigen bedrijfs- en klantgegevens in.',
+          'Voeg je diensten en bedragen toe.',
           'Kies een zakelijke layout.',
-          'Download en mail direct naar je klant.',
+          'Download je factuur als PDF.',
         ],
       },
     ],
     faqs: [
       {
-        q: 'Kan ik ook per uur factureren als consultant?',
-        a: 'Ja. Kies in de tool voor uurtarief en voeg je gewerkte uren toe. Bekijk het uren-voorbeeld voor inspiratie.',
+        q: 'Kan ik als consultant per uur factureren?',
+        a: 'Ja. Je kunt je gewerkte uren en uurtarief op de factuur vermelden. Je kunt bijvoorbeeld 20 uur × €100 = €2.000 exclusief btw factureren.',
       },
       {
-        q: 'Hoe factureer ik aan buitenlandse klanten?',
-        a: 'Bij diensten aan buitenlandse bedrijven kan btw verlegd worden. Vermeld dit expliciet op je factuur.',
+        q: 'Kan ik als consultant een vaste projectprijs factureren?',
+        a: 'Ja. Bij een vaste projectprijs kun je de volledige adviesopdracht als één factuurregel opnemen, bijvoorbeeld “Strategisch adviestraject – €4.500”.',
       },
       {
-        q: 'Welke layout past bij een consultant?',
-        a: 'Kies een zakelijke layout zoals in dit voorbeeld. Je kunt ook minimalistisch of modern kiezen.',
+        q: 'Welke btw zet ik op een consultant-factuur?',
+        a: 'Dat hangt af van de dienst, de situatie van jou en je klant en bijvoorbeeld of je klant in Nederland of in het buitenland gevestigd is. Voor veel diensten aan Nederlandse zakelijke klanten geldt 21% btw, maar er zijn uitzonderingen.',
+      },
+      {
+        q: 'Kan ik een consultant-factuur naar een buitenlandse klant sturen?',
+        a: 'Ja. Bij buitenlandse klanten kunnen andere btw-regels gelden. Welke btw-vermelding je gebruikt, hangt onder andere af van het land van je klant en of het om een zakelijke of particuliere klant gaat.',
+      },
+      {
+        q: 'Moet een consultant een offerte sturen voordat hij factureert?',
+        a: 'Niet altijd. Een offerte kan handig zijn om vooraf afspraken over werkzaamheden en prijs vast te leggen, maar de factuur is het document waarmee je de geleverde dienst in rekening brengt.',
       },
     ],
     relatedLinks: [
       { label: 'Consultant template', href: '/factuur-template/consultant' },
       { label: 'Uren voorbeeld', href: '/factuur-voorbeeld/uren' },
-      { label: 'Freelance voorbeeld', href: '/factuur-voorbeeld/freelance' },
+      { label: 'Offerte maker', href: '/tools/offerte-maker' },
+      { label: 'Uurtarief berekenen', href: '/tools/uurtarief-naar-inkomen' },
+      { label: 'Buitenlandse klanten', href: '/blogs/buitenlandse-klanten-factureren' },
     ],
+    closingTitle: 'Maak gratis je eigen factuur',
+    closingText:
+      'Gebruik dit voorbeeld als inspiratie. Vul je gegevens in, voeg je adviesdiensten toe en download je factuur direct als PDF. Gratis, zonder account en klaar in een paar minuten.',
   }),
 
   freelance: examplePage('freelance', {

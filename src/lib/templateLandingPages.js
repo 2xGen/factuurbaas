@@ -186,117 +186,308 @@ export const templatePages = {
 
   excel: {
     slug: 'excel',
-    h1: 'Factuur template Excel',
-    metaTitle: 'Factuur template Excel gratis – Online alternatief | FactuurBaas',
+    h1: 'Factuur template Excel: gratis voorbeeld',
+    metaTitle: 'Factuur template Excel: gratis voorbeeld en alternatief',
     metaDescription:
-      'Factuur template Excel downloaden? Maak gratis een factuur online zonder formules. Direct PDF, geen account. Sneller dan Excel.',
+      'Op zoek naar een factuur template in Excel? Bekijk een voorbeeld van een Excel-factuur en ontdek hoe je gratis een factuur als PDF maakt.',
     intro:
-      'Een factuur template Excel met formules lijkt efficiënt, maar je bent snel uren kwijt aan opmaak, fouten in cellen en het exporteren naar PDF. Met FactuurBaas maak je gratis een factuur online — zonder Excel, zonder account en met automatische btw-berekening.',
+      'Zoek je een factuur template in Excel? Hieronder zie je een voorbeeld van hoe een factuur in Excel kan worden opgebouwd, inclusief factuurnummer, bedragen, btw en totaal. Wil je niet zelf met Excel-formules en opmaak werken? Met FactuurBaas maak je dezelfde soort factuur gratis online en download je hem direct als PDF — zonder account.',
     previewLayout: 'corporate',
     sections: [
       {
-        h2: 'Nadelen van een Excel-factuur template',
+        h2: 'Voorbeeld van een factuur in Excel',
         paragraphs: [
-          'Excel-templates zijn fragiel: een per ongeluk verwijderde formule, verkeerd btw-tarief of kopie van een oude factuur met verkeerde gegevens komt vaak voor. Bovendien ziet een Excel-bestand er minder professioneel uit dan een nette PDF-factuur.',
-        ],
-        bullets: [
-          'Formules kunnen stukgaan bij kopiëren',
-          'Opmaak verschuift snel bij wijzigingen',
-          'PDF maken kost extra stappen',
-          'Geen standaard professionele uitstraling',
+          'Rechts op deze pagina zie je het soort factuur dat je ook met een Excel-factuurtemplate kunt maken: factuurnummer 2026-001, datum, betaaltermijn 14 dagen, omschrijving, 10 uur, €750 excl. btw, 21% btw (€157,50) en totaal €907,50.',
+          'Dit is slechts een voorbeeld. Je eigen factuur bevat natuurlijk je eigen bedrijfs- en klantgegevens.',
         ],
       },
       {
-        h2: 'Excel vs. online factuur tool',
+        h2: 'Wat staat er in een Excel-factuur?',
+        paragraphs: [
+          'Een goed factuursjabloon in Excel bevat in ieder geval ruimte voor de onderstaande onderdelen. Je kunt een Excel-factuur vervolgens opslaan en eventueel als PDF exporteren om naar je klant te sturen.',
+        ],
+        bullets: [
+          'Je naam of bedrijfsnaam en adres',
+          'De gegevens van je klant',
+          'Een uniek factuurnummer',
+          'De factuurdatum',
+          'Een omschrijving van je producten of diensten',
+          'Aantal uren of producten',
+          'Bedragen exclusief btw',
+          'Het btw-tarief en btw-bedrag',
+          'Het totaalbedrag',
+          'Je betaalgegevens en betaaltermijn',
+        ],
+      },
+      {
+        h2: 'Factuur maken in Excel',
+        paragraphs: [
+          'Wil je zelf een factuur in Excel maken? Dan kun je dit als basis gebruiken. Bij een uitgebreider Excel-sjabloon kun je hiervoor formules gebruiken.',
+        ],
+        bullets: [
+          'Maak een tabel met je producten of diensten.',
+          'Voeg kolommen toe voor aantal, prijs en btw.',
+          'Bereken het subtotaal.',
+          'Bereken de btw.',
+          'Tel het totaalbedrag uit.',
+          'Voeg je bedrijfs- en klantgegevens toe.',
+          'Controleer het factuurnummer en de factuurdatum.',
+          'Exporteer de factuur eventueel als PDF.',
+        ],
+        subsections: [
+          {
+            h3: 'Voorbeeld van een btw-formule in Excel',
+            paragraphs: [
+              'Stel dat het bedrag exclusief btw in cel B2 staat en je 21% btw wilt berekenen: =B2*21%. Voor een bedrag van €750 is de btw dan €157,50.',
+              'Het totaal inclusief btw kun je bijvoorbeeld berekenen met: =B2+(B2*21%). Een bestaand Excel-factuursjabloon kan deze berekeningen automatisch uitvoeren. Meer formules vind je in de gids over btw berekenen in Excel.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Excel factuur of online factuur maken?',
+        paragraphs: [
+          'Excel is handig als je graag zelf je facturen beheert en een eigen template wilt aanpassen. Maar voor iedere factuur moet je vervolgens wel controleren of de gegevens en berekeningen goed staan. Met een online factuurtool hoef je de Excel-opmaak en formules niet zelf te onderhouden.',
+        ],
         comparison: {
-          headers: ['', 'Excel template', 'FactuurBaas (online)'],
+          headers: ['', 'Excel factuur', 'FactuurBaas'],
           rows: [
-            ['Formules nodig', 'Ja', 'Nee'],
-            ['Btw automatisch', 'Als formule goed staat', 'Altijd'],
-            ['PDF export', 'Handmatig', 'Direct'],
-            ['Gratis', 'Vaak', 'Ja'],
+            ['Zelf een template maken', 'Ja', 'Nee'],
+            ['Formules onderhouden', 'Vaak nodig', 'Nee'],
+            ['Btw berekenen', 'Met formule', 'Automatisch'],
+            ['PDF maken', 'Exporteren', 'Direct downloaden'],
             ['Account nodig', 'Nee', 'Nee'],
+            ['Gratis', 'Kan', 'Ja'],
           ],
         },
       },
       {
-        h2: 'Wat moet er op je factuur staan?',
-        bullets: requiredInvoiceFields,
+        h2: 'Factuur in Excel als PDF opslaan',
+        paragraphs: [
+          'Een Excel-factuur kun je meestal exporteren of opslaan als PDF. Dat is handig wanneer je een vaste factuur naar een klant wilt sturen. Controleer vóór het versturen wel of de PDF er correct uitziet en of alle gegevens en bedragen kloppen.',
+          'Met FactuurBaas wordt de factuur direct als PDF gegenereerd nadat je je gegevens en factuurregels hebt ingevuld.',
+        ],
       },
-      stepsSection,
+      {
+        h2: 'Is een Excel-factuur geschikt voor zzp’ers?',
+        paragraphs: [
+          'Ja. Als zzp’er kun je je facturen bijvoorbeeld met Excel maken, zolang je factuur aan de geldende factuureisen voldoet en je administratie goed wordt bijgehouden.',
+          'Voor iemand die maar af en toe een factuur maakt kan Excel prima werken. Als je regelmatig facturen maakt, kan een online factuurtool tijd besparen doordat je gegevens en berekeningen niet iedere keer opnieuw hoeft op te bouwen.',
+        ],
+      },
+      {
+        h2: 'Factuur template Excel vs. online factuur',
+        paragraphs: [
+          'Een Excel-template geeft je veel vrijheid om de factuur zelf aan te passen. Daar staat tegenover dat je zelf verantwoordelijk bent voor de formules, opmaak en controle van iedere factuur. Met FactuurBaas vul je alleen je gegevens en factuurregels in en download je daarna direct een PDF.',
+        ],
+      },
     ],
     faqs: [
       {
         q: 'Is er een gratis factuur template voor Excel?',
-        a: 'Er zijn gratis Excel-sjablonen te vinden, maar je moet formules en opmaak zelf controleren. FactuurBaas biedt een gratis online alternatief zonder Excel.',
+        a: 'Je kunt een factuur in Excel zelf opbouwen met een tabel voor omschrijving, aantal, bedrag en btw. Controleer altijd of het template alle benodigde factuurgegevens bevat. Wil je geen Excel-template onderhouden? Met FactuurBaas maak je gratis online een factuur en download je deze als PDF.',
       },
       {
-        q: 'Kan ik uren factureren zonder Excel?',
-        a: 'Ja. Vul je uren en uurtarief in de tool in — de berekening gaat automatisch.',
+        q: 'Hoe maak ik een factuur in Excel?',
+        a: 'Maak een overzicht met je bedrijfsgegevens, klantgegevens, factuurnummer, datum, diensten of producten, bedragen en btw. Gebruik vervolgens Excel-formules om btw en het totaal te berekenen.',
       },
       {
-        q: 'Hoe download ik mijn factuur als PDF?',
-        a: 'Na het invullen klik je op downloaden. Je krijgt direct een PDF die je naar je klant kunt sturen.',
+        q: 'Hoe bereken ik btw in een Excel-factuur?',
+        a: 'Bij 21% btw kun je bijvoorbeeld =B2*21% gebruiken wanneer het bedrag exclusief btw in cel B2 staat. Voor andere btw-tarieven pas je het percentage aan.',
+      },
+      {
+        q: 'Kan ik een Excel-factuur als PDF versturen?',
+        a: 'Ja. Je kunt een factuur vanuit Excel als PDF opslaan of exporteren. Controleer de PDF voordat je deze naar je klant stuurt.',
+      },
+      {
+        q: 'Kan ik uren factureren met Excel?',
+        a: 'Ja. Je kunt bijvoorbeeld het aantal gewerkte uren, je uurtarief en het totaalbedrag in afzonderlijke kolommen opnemen.',
+      },
+      {
+        q: 'Is een online factuurtool makkelijker dan Excel?',
+        a: 'Dat hangt af van je voorkeur. Excel geeft je veel controle over je eigen template. Een online factuurtool kan handiger zijn als je niet zelf formules, opmaak en PDF-export wilt beheren.',
       },
     ],
     relatedLinks: [
       { label: 'Word template', href: '/factuur-template/word' },
       { label: 'PDF template', href: '/factuur-template/pdf' },
       { label: 'Uren factuur', href: '/factuur-template/uren' },
-      ...sharedRelatedLinks,
+      { label: 'BTW in Excel', href: '/gidsen/btw-berekenen-excel' },
+      { label: 'Alle templates', href: '/factuur-template' },
+      { label: 'Gratis factuur maken', href: '/tools/factuur-maken' },
     ],
   },
 
   pdf: {
     slug: 'pdf',
-    h1: 'Factuur template PDF',
-    metaTitle: 'Factuur template PDF gratis downloaden | FactuurBaas',
+    h1: 'Factuur template PDF: gratis voorbeeld en download',
+    metaTitle: 'Factuur template PDF: gratis voorbeeld en download',
     metaDescription:
-      'Gratis factuur template PDF maken. Geen account nodig. Maak je factuur online en download direct een professionele PDF.',
+      'Op zoek naar een factuur template PDF? Bekijk een gratis factuurvoorbeeld en maak direct je eigen factuur als PDF. Zonder account.',
     intro:
-      'Zoek je een factuur template PDF die je direct kunt gebruiken? Met FactuurBaas maak je je factuur online en download je meteen een professionele PDF — gratis, zonder account en zonder tussenstappen via Word of Excel.',
+      'Zoek je een factuur template PDF die je direct kunt gebruiken? Met FactuurBaas maak je eenvoudig online een factuur en download je deze meteen als professionele PDF. Geen Word- of Excel-omweg: vul je gegevens in en download direct. Gratis, zonder account.',
     previewLayout: 'plain',
     sections: [
       {
-        h2: 'Direct een PDF-factuur, zonder omweg',
+        h2: 'Gratis factuur template als PDF',
         paragraphs: [
-          'In plaats van eerst een Word- of Excel-bestand te maken en dat daarna om te zetten, maak je bij FactuurBaas meteen een factuur die klaar is om te versturen. Ideaal als je zoekt op "factuur maken pdf" of "gratis factuur pdf".',
+          'Een factuurtemplate is handig als je snel een nette factuur wilt maken zonder zelf een document op te bouwen. Met FactuurBaas hoef je deze onderdelen niet zelf in Word of Excel te ontwerpen: je vult ze online in en de factuur wordt voor je opgebouwd.',
         ],
-      },
-      {
-        h2: 'Voordelen van een online PDF-template',
         bullets: [
-          'Direct downloaden, geen exportstappen',
-          'Professionele layout',
-          'Btw en totalen automatisch berekend',
-          'Gratis zonder account',
-          'Geschikt voor zzp en kleine ondernemers',
+          'je bedrijfsgegevens;',
+          'de gegevens van je klant;',
+          'een uniek factuurnummer;',
+          'de factuurdatum;',
+          'een omschrijving van je diensten of producten;',
+          'bedragen en aantallen;',
+          'het btw-tarief en btw-bedrag, als van toepassing;',
+          'het totaalbedrag;',
+          'de betaaltermijn.',
         ],
       },
       {
-        h2: 'Verplichte gegevens op je PDF-factuur',
-        bullets: requiredInvoiceFields,
+        h2: 'Factuur PDF voorbeeld',
+        paragraphs: [
+          'Rechts op deze pagina zie je een voorbeeld van een eenvoudige PDF-factuur: factuurnummer, datum, bedrijfs- en klantgegevens, omschrijving, btw 21% en totaal. Dit is slechts een voorbeeld — je eigen factuur bevat natuurlijk je eigen gegevens.',
+          'Wil je zelf zo’n factuur maken? Vul je gegevens in de factuurmaker in en download direct als PDF.',
+        ],
       },
-      stepsSection,
+      {
+        h2: 'Factuur maken en downloaden als PDF',
+        paragraphs: [
+          'Bij FactuurBaas werkt het in drie eenvoudige stappen. Je hoeft geen apart PDF-bestand te maken of een Word-document naar PDF om te zetten.',
+        ],
+        subsections: [
+          {
+            h3: '1. Vul je gegevens in',
+            paragraphs: ['Vul je eigen bedrijfsgegevens en de gegevens van je klant in.'],
+          },
+          {
+            h3: '2. Voeg je diensten of producten toe',
+            paragraphs: [
+              'Vul bijvoorbeeld je gewerkte uren, producten of projectwerkzaamheden in. Btw en totalen worden automatisch berekend.',
+            ],
+          },
+          {
+            h3: '3. Download je factuur als PDF',
+            paragraphs: [
+              'Als je factuur klaar is, kun je deze direct als PDF downloaden en naar je klant sturen.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur template PDF of Word?',
+        paragraphs: [
+          'Je kunt een factuur natuurlijk zelf maken in Word of Excel en deze daarna als PDF opslaan. Voor een eenmalige factuur kan dat prima werken. Een online factuurmaker heeft echter een aantal voordelen.',
+          'Wil je vooral snel een factuur als PDF maken? Dan is een online factuurmaker meestal eenvoudiger.',
+        ],
+        comparison: {
+          headers: ['Online factuurmaker', 'Word/Excel-template'],
+          rows: [
+            ['Btw en totalen automatisch berekend', 'Zelf berekenen'],
+            ['Direct PDF downloaden', 'Eerst exporteren naar PDF'],
+            ['Gegevens in een vaste layout', 'Zelf opmaak controleren'],
+            ['Minder kans op rekenfouten', 'Formules of berekeningen controleren'],
+            ['Geen template nodig', 'Template downloaden en aanpassen'],
+          ],
+        },
+      },
+      {
+        h2: 'Welke gegevens moeten op een PDF-factuur staan?',
+        paragraphs: [
+          'Een factuur moet bepaalde gegevens bevatten. Welke gegevens precies op je factuur moeten staan, kan afhangen van je situatie. Denk bijvoorbeeld aan:',
+        ],
+        bullets: [
+          'je volledige naam of bedrijfsnaam en adres;',
+          'het KvK-nummer, als dit op jou van toepassing is;',
+          'je btw-identificatienummer, als dit op jou van toepassing is;',
+          'de gegevens van je klant;',
+          'een uniek en opeenvolgend factuurnummer;',
+          'de factuurdatum;',
+          'de datum van levering of uitvoering, als die afwijkt;',
+          'een duidelijke omschrijving van de geleverde goederen of diensten;',
+          'het bedrag exclusief btw;',
+          'het btw-tarief en btw-bedrag, als btw van toepassing is;',
+          'het totaalbedrag;',
+          'eventuele informatie die in jouw specifieke situatie verplicht is.',
+        ],
+      },
+      {
+        h2: 'Is een PDF-factuur geldig?',
+        paragraphs: [
+          'Ja. Een factuur die je als PDF naar je klant stuurt kan gewoon als factuur worden gebruikt. Zorg er wel voor dat de factuur alle gegevens bevat die voor jouw situatie verplicht zijn en dat je administratie op orde is.',
+          'Een PDF is vooral handig omdat je klant het document eenvoudig kan openen, bewaren en verwerken.',
+        ],
+      },
+      {
+        h2: 'Kan ik een factuur zonder account maken?',
+        paragraphs: [
+          'Ja. Met FactuurBaas kun je direct een factuur maken zonder eerst een account aan te maken. Je vult je gegevens in, maakt de factuur en downloadt deze als PDF.',
+        ],
+      },
+      {
+        h2: 'Kan ik een factuur met btw maken?',
+        paragraphs: [
+          'Ja. Je kunt btw op je factuur verwerken en het btw-bedrag wordt automatisch berekend. FactuurBaas ondersteunt onder andere de btw-tarieven 0%, 9% en 21%. Welke btw-regels op jouw factuur van toepassing zijn, hangt af van je situatie.',
+        ],
+      },
+      {
+        h2: 'Kan ik mijn logo op de factuur zetten?',
+        paragraphs: [
+          'Als de factuurtool een logo-optie biedt, kun je je eigen huisstijl gebruiken. Je kunt de beschikbare opties direct bekijken wanneer je een factuur maakt.',
+        ],
+      },
+      {
+        h2: 'Kan ik de PDF naar mijn klant mailen?',
+        paragraphs: [
+          'Ja. Nadat je de factuur als PDF hebt gedownload, kun je deze bijvoorbeeld als bijlage naar je klant sturen. FactuurBaas hoeft de factuur dus niet voor je te versturen.',
+        ],
+      },
+      {
+        h2: 'Factuur template voor zzp’ers',
+        paragraphs: [
+          'Een factuurtemplate is vooral handig wanneer je als zzp’er regelmatig facturen maakt. Of je nu freelancer, consultant, marketeer, webdesigner, fotograaf, coach, timmerman of een andere zelfstandige ondernemer bent: de basis van een factuur blijft grotendeels hetzelfde.',
+          'Je kunt je eigen diensten, uren of producten toevoegen en vervolgens de PDF-factuur downloaden.',
+        ],
+      },
+      {
+        h2: 'Gratis factuur PDF maken',
+        paragraphs: [
+          'Wil je niet zelf een Word- of Excel-template aanpassen? Maak dan direct online je eigen factuur. Geen account nodig. Geen ingewikkeld sjabloon. Gewoon je gegevens invullen en je PDF downloaden.',
+        ],
+      },
     ],
     faqs: [
       {
-        q: 'Is de PDF-factuur gratis?',
-        a: 'Ja. Je kunt gratis facturen maken en als PDF downloaden zonder account.',
+        q: 'Waar kan ik een gratis factuur template PDF vinden?',
+        a: 'Je kunt een voorbeeld gebruiken als basis, maar met een online factuurmaker kun je direct je eigen factuur maken en als PDF downloaden.',
       },
       {
-        q: 'Kan ik mijn logo toevoegen?',
-        a: 'Ja. Je kunt je logo uploaden in de factuurtool voor een professionele uitstraling.',
+        q: 'Hoe maak ik een factuur als PDF?',
+        a: 'Vul je factuur online in, voeg je factuurregels en btw toe en download de factuur vervolgens als PDF. Met FactuurBaas kan dit zonder account.',
       },
       {
-        q: 'Is de PDF geschikt om te mailen naar klanten?',
-        a: 'Absoluut. De PDF is direct klaar om als bijlage te versturen.',
+        q: 'Kan ik een factuur in Word maken en als PDF opslaan?',
+        a: 'Ja. Je kunt een factuur in Word maken en deze vervolgens als PDF opslaan. Een online factuurmaker kan dit eenvoudiger maken doordat berekeningen en de opmaak automatisch worden verwerkt.',
+      },
+      {
+        q: 'Is een gratis PDF-factuur geschikt voor een zzp’er?',
+        a: 'Ja, zolang de factuur de gegevens bevat die voor jouw situatie verplicht zijn en je administratie correct wordt bijgehouden.',
+      },
+      {
+        q: 'Wat is het verschil tussen een factuurtemplate en een factuurmaker?',
+        a: 'Een template is een voorbeeld of sjabloon dat je zelf invult. Met een factuurmaker maak je de factuur direct online en worden onderdelen zoals btw, totalen en de opmaak automatisch verwerkt.',
       },
     ],
     relatedLinks: [
+      { label: 'Alle factuur templates', href: '/factuur-template' },
       { label: 'Word template', href: '/factuur-template/word' },
       { label: 'Excel template', href: '/factuur-template/excel' },
-      ...sharedRelatedLinks,
+      { label: 'Factuur template zzp', href: '/factuur-template/zzp' },
+      { label: 'Factuur voorbeeld', href: '/blogs/factuur-templates-zzp' },
+      { label: 'BTW calculator', href: '/tools/btw-calculator' },
+      { label: 'Gratis factuur maken', href: '/tools/factuur-maken' },
     ],
   },
 

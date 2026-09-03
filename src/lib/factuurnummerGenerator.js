@@ -4,31 +4,36 @@ export const PREFIX_EXAMPLES = ['FACT', 'INV', ''];
 
 export const FACTUURNUMMER_FAQS = [
   {
+    q: 'Wat is een goed factuurnummer?',
+    a: 'Een goed factuurnummer is uniek, logisch opgebouwd en eenvoudig terug te vinden in je administratie. Bijvoorbeeld 2026-001 of FACT-2026-001.',
+  },
+  {
+    q: "Welk factuurnummer moet ik gebruiken als zzp'er?",
+    a: 'Er is niet één verplicht formaat. Je kunt zelf een logisch nummeringssysteem kiezen, zolang je factuurnummers uniek zijn en onderdeel zijn van een opeenvolgende reeks.',
+  },
+  {
+    q: 'Mag ik ieder jaar opnieuw beginnen met 001?',
+    a: 'Ja, je kunt ervoor kiezen om per jaar een nieuwe reeks te beginnen, bijvoorbeeld 2026-001 en daarna 2027-001. Je kunt ook doorlopend nummeren. Kies een systeem dat duidelijk en controleerbaar is.',
+  },
+  {
     q: 'Moet een factuurnummer uniek zijn?',
-    a: 'Ja. Elke factuur moet een eigen, uniek en opeenvolgend nummer hebben. Gebruik hetzelfde nummer nooit twee keer — ook niet voor verschillende klanten.',
+    a: 'Ja. Gebruik ieder factuurnummer maar één keer voor één factuur.',
   },
   {
-    q: 'Mag ik opnieuw beginnen met nummeren?',
-    a: 'Voor een nieuwe onderneming of een nieuw boekjaar kun je soms opnieuw beginnen met 001. Zorg wel dat je administratie duidelijk blijft en dat je geen gaten of dubbele nummers maakt.',
+    q: 'Mag een factuurnummer letters bevatten?',
+    a: 'Ja. Een voorvoegsel zoals FACT of INV kan onderdeel zijn van je nummering.',
   },
   {
-    q: 'Welk factuurnummer formaat moet ik gebruiken?',
-    a: 'Er is geen wettelijk verplicht formaat, zolang het nummer uniek en opevolgend is. Veel zzp\'ers kiezen voor 2026-001, FACT-2026-001 of een eigen voorvoegsel met jaar en volgnummer.',
-  },
-  {
-    q: 'Kan ik letters in mijn factuurnummer gebruiken?',
-    a: 'Ja, een voorvoegsel zoals FACT of INV is toegestaan. Het volgnummer moet wel logisch en opeenvolgend blijven.',
-  },
-  {
-    q: 'Wat als ik een factuurnummer oversla?',
-    a: 'Vermijd gaten in je nummering waar mogelijk. Als je per ongeluk een nummer overslaat, noteer dat in je administratie zodat je boekhouding klopt.',
+    q: 'Wat is een voorbeeld van een factuurnummer?',
+    a: 'Een voorbeeld is FACT-2026-001. Andere mogelijkheden zijn 2026-001, 001 of INV-2026-001.',
   },
 ];
 
 export const FACTUURNUMMER_FORMAT_EXAMPLES = [
   ['Jaar + nummer', '2026-001', 'Eenvoudig en overzichtelijk'],
-  ['Met voorvoegsel', 'FACT-2026-001', 'Herkenbaar als factuur'],
-  ['Internationaal', 'INV-2026-001', 'Gebruikelijk bij export'],
+  ['Voorvoegsel + jaar + nummer', 'FACT-2026-001', 'Duidelijk herkenbaar'],
+  ['Alleen volgnummer', '1001', 'Simpel bij een doorlopende administratie'],
+  ['INV + jaar + nummer', 'INV-2026-001', 'Handig bij internationale klanten'],
 ];
 
 export function parseStartNumber(value) {

@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 import {
+  KOR_BELASTINGDIENST_URL,
   KOR_REVENUE_LIMIT,
   MONTHS_PER_YEAR,
   REVENUE_PERIOD_OPTIONS,
@@ -97,10 +98,11 @@ export default function KorCalculator() {
     <div className="space-y-8">
       <div>
         <h1 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          KOR calculator
+          KOR check
         </h1>
         <p className="mt-2 text-slate-600">
-          Bereken of de kleineondernemersregeling (KOR) mogelijk interessant is voor jouw onderneming.
+          Vergelijk je verwachte omzet met de KOR-grens van {formatEuro(KOR_REVENUE_LIMIT)} per
+          kalenderjaar. De uitkomst is een indicatie.
         </p>
       </div>
 
@@ -264,7 +266,7 @@ export default function KorCalculator() {
             <p className="mt-5 text-xs leading-relaxed text-slate-500">
               Dit is een indicatie, geen fiscaal advies. Check altijd de actuele regels bij de{' '}
               <a
-                href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/hoe_werkt_de_btw_voor_mij/kleineondernemersregeling/"
+                href={KOR_BELASTINGDIENST_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-warm-orange hover:underline"

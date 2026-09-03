@@ -181,7 +181,7 @@ export default function OfferteMakerSeoContent({
           Met de gratis offerte maker maak je als zzp&apos;er direct een professionele offerte en
           download je deze als PDF. Na akkoord kun je eenvoudig door naar een factuur. Meer tips:{' '}
           <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
-            offerte maken voor zzp&apos;ers
+            offerte sturen als zzp&apos;er
           </Link>
           .
         </p>

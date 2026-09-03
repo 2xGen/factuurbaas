@@ -3,9 +3,11 @@ import { getKorFaqSchema } from '@/lib/korCalculator';
 import KorCalculatorSeoContent from '@/components/tools/KorCalculatorSeoContent';
 
 export const metadata = {
-  title: 'KOR calculator | Kleineondernemersregeling berekenen voor zzp\'ers',
+  title: 'KOR berekenen: doe de gratis KOR check | €20.000 omzet',
   description:
-    'Bereken gratis of de kleineondernemersregeling (KOR) bij jouw omzet past. Check of je onder de €20.000-grens blijft en of btw-vrijstelling interessant is.',
+    "KOR berekenen als zzp'er? Doe de gratis KOR check en bekijk of je omzet onder de €20.000 grens blijft. Inclusief uitleg over voorwaarden en btw.",
+  keywords:
+    'KOR berekenen, KOR check, kleineondernemersregeling, KOR calculator, €20000 omzet, KOR zzp, KOR voorwaarden, EU-KOR',
   alternates: { canonical: 'https://factuurbaas.nl/tools/kor-calculator' },
 };
 
@@ -15,18 +17,18 @@ export default function KorCalculatorGatePage() {
   return (
     <ToolGatePage
       breadcrumbLabel="KOR calculator"
-      h1="Bereken of de kleineondernemersregeling (KOR) bij jou past"
-      intro="Bereken of de kleineondernemersregeling (KOR) mogelijk interessant is voor jouw onderneming op basis van je verwachte jaaromzet."
-      introExtra="De KOR geldt bij maximaal €20.000 omzet per jaar. Je rekent dan geen btw aan klanten en doet geen btw-aangifte — maar mag ook geen btw aftrekken."
+      h1="KOR berekenen: doe de gratis KOR check"
+      intro="Wil je weten of de kleineondernemersregeling (KOR) mogelijk bij jouw onderneming past? Met deze gratis KOR check kun je je verwachte omzet vergelijken met de Nederlandse omzetgrens van €20.000 per kalenderjaar."
+      introExtra="De uitkomst is een indicatie. Of je daadwerkelijk aan alle voorwaarden voor de KOR voldoet, hangt ook af van je situatie en de regels van de Belastingdienst."
       trustPoints={[
         'Gratis',
         'Geen account nodig',
         'Direct resultaat',
-        "Voor zzp'ers en starters",
         'Indicatie op basis van omzetgrens',
+        "Voor zzp'ers en starters",
       ]}
       toolHref={TOOL_HREF}
-      toolCtaLabel="Open KOR calculator"
+      toolCtaLabel="Doe de gratis KOR check"
       secondaryHref="/tools/btw-calculator"
       secondaryCtaLabel="BTW calculator"
       faqSchema={getKorFaqSchema()}

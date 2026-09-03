@@ -39,14 +39,14 @@ const toolLinks = [
   {
     label: 'Uurtarief naar inkomen',
     href: '/tools/uurtarief-naar-inkomen',
-    description: 'Bereken je maandelijkse omzet en winst op basis van je uurtarief en werkuren.',
+    description: 'Bereken wat je uurtarief oplevert: maandelijkse omzet en geschatte winst vóór belasting.',
     tag: 'Beschikbaar',
     footerLabel: 'Meer info',
   },
   {
     label: 'Factuurnummer generator',
     href: '/tools/factuurnummer-generator',
-    description: 'Genereer een uniek, professioneel factuurnummer voor je volgende factuur.',
+    description: 'Voorbeelden, regels en een generator voor een uniek factuurnummer.',
     tag: 'Beschikbaar',
     footerLabel: 'Meer info',
   },
@@ -67,7 +67,7 @@ const toolLinks = [
   {
     label: 'KOR calculator',
     href: '/tools/kor-calculator',
-    description: 'Check of de kleineondernemersregeling (KOR) bij jouw verwachte jaaromzet past.',
+    description: 'Gratis KOR check: vergelijk je omzet met de €20.000-grens.',
     tag: 'Beschikbaar',
     footerLabel: 'Meer info',
   },
@@ -88,7 +88,7 @@ export default function ToolsHubPage() {
       relatedLinks={[
         {
           href: '/gidsen/deze-7-tools-zijn-heel-handig-voor-zzpers',
-          label: "Deze 7 tools zijn heel handig voor zzp'ers",
+          label: "7 handige tools voor zzp'ers",
         },
       ]}
     />

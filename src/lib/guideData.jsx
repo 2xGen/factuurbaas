@@ -22,7 +22,7 @@ function CalculationTable({ rows }) {
       <table className="min-w-full border-collapse border border-slate-200 text-sm">
         <tbody>
           {rows.map(([label, value], index) => (
-            <tr key={label} className={index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}>
+            <tr key={`${label}-${index}`} className={index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}>
               <td className="border border-slate-200 px-4 py-2 font-medium text-slate-700">{label}</td>
               <td className="border border-slate-200 px-4 py-2 text-slate-800">{value}</td>
             </tr>
@@ -636,211 +636,512 @@ export const guides = [
   {
     slug: 'verschil-9-en-21-btw',
     cluster: 'btw',
-    seoTitle: 'Verschil tussen 9% en 21% btw | Uitleg btw-tarieven voor zzp\'ers',
-    title: 'Verschil tussen 9% en 21% btw: welk btw-tarief gebruik je?',
+    seoTitle: '9% of 21% btw: wat valt eronder en welk tarief geldt?',
+    title: '9% of 21% btw: wat valt eronder?',
     excerpt:
-      'Wat is het verschil tussen 9% en 21% btw? Bekijk wanneer je welk btw-tarief gebruikt en bereken btw eenvoudig met de gratis BTW calculator.',
+      'Wat valt onder 9% en 21% btw? Bekijk voorbeelden van producten en diensten, ontdek wanneer je 9% of 21% gebruikt en bereken direct de btw.',
     keywords:
-      'verschil 9% en 21% btw, btw tarief zzp, 21% btw, 9% btw, verlaagd btw tarief, standaard btw tarief, welk btw tarief, btw op factuur',
+      '9% of 21% btw, wat valt onder 9% btw, wat valt onder 21% btw, verschil 9% en 21% btw, btw tarief, verlaagd btw tarief, standaard btw tarief, btw op factuur',
     tool: {
       href: '/tools/btw-calculator',
-      label: 'Bereken direct btw',
-      ctaLabel: 'Open gratis BTW calculator',
+      label: 'Bereken btw',
+      ctaLabel: 'Open gratis btw calculator',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Verschil%20tussen%209%20en%2021%20btw.jpg',
-      alt: 'Verschil tussen 9% en 21% btw: euro biljetten en munten',
+      alt: '9% of 21% btw: wat valt eronder — euro biljetten en munten',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['btw-factuur-zzp', 'factureren-zonder-account'],
-    relatedGuideSlugs: ['btw-terugrekenen', 'inclusief-btw-naar-exclusief-btw', 'welke-btw-rekenen-zzper'],
+    relatedGuideSlugs: [
+      'btw-terugrekenen',
+      'inclusief-btw-naar-exclusief-btw',
+      'welke-btw-rekenen-zzper',
+      'wanneer-gebruik-je-0-btw',
+    ],
     faq: [
       {
         question: 'Wanneer gebruik je 21% btw?',
-        answer:
-          '21% btw is het standaardtarief en geldt voor de meeste producten en diensten in Nederland.',
+        answer: '21% is het algemene btw-tarief en geldt voor de meeste producten en diensten.',
       },
       {
         question: 'Wanneer gebruik je 9% btw?',
         answer:
-          '9% btw geldt alleen voor bepaalde producten en diensten die onder het verlaagde btw-tarief vallen, zoals sommige voedingsmiddelen, boeken en culturele activiteiten.',
+          '9% geldt voor specifieke producten en diensten die volgens de btw-regels onder het verlaagde tarief vallen.',
       },
       {
-        question: 'Kan een zzp\'er kiezen tussen 9% en 21% btw?',
+        question: 'Wat valt onder 9% en 21% btw?',
         answer:
-          'Nee. Het btw-tarief wordt bepaald door wat je levert. Je kiest het tarief niet zelf op basis van voorkeur.',
+          'Onder 21% vallen veel algemene producten en diensten, waaronder veel zakelijke dienstverlening. 9% geldt alleen voor specifiek aangewezen producten en diensten, zoals bepaalde voedingsmiddelen, publicaties en bepaalde werkzaamheden aan woningen.',
       },
       {
-        question: 'Welk btw-tarief gebruik ik op mijn factuur?',
+        question: 'Kan een zzp\'er kiezen tussen 9% en 21%?',
         answer:
-          'Dat hangt af van je product of dienst. De meeste zakelijke diensten vallen onder 21% btw. Controleer altijd welk tarief voor jouw levering geldt.',
+          'Nee. Het toepasselijke btw-tarief wordt bepaald door de aard van de prestatie en de geldende btw-regels.',
+      },
+      {
+        question: 'Welk btw-tarief geldt voor een garage?',
+        answer:
+          'Voor reparatie en onderhoud aan auto\'s geldt in het algemeen 21% btw. Controleer bij bijzondere situaties altijd de actuele btw-regels.',
+      },
+      {
+        question: 'Welk btw-tarief geldt voor catering?',
+        answer:
+          'Dat hangt af van wat precies wordt geleverd. Bij catering kunnen verschillende btw-regels relevant zijn. Kijk daarom naar de specifieke prestatie in plaats van automatisch 9% of 21% over de volledige opdracht te rekenen.',
+      },
+      {
+        question: 'Kan één factuur zowel 9% als 21% btw bevatten?',
+        answer:
+          'Ja. Wanneer verschillende prestaties onder verschillende btw-tarieven vallen, moeten de bedragen per toepasselijk tarief worden uitgesplitst.',
+      },
+      {
+        question: 'Is 9% btw altijd voordeliger?',
+        answer:
+          'Voor de klant betekent 9% bij dezelfde prijs exclusief btw een lager btw-bedrag. Als ondernemer is het echter niet toegestaan om zelf voor 9% te kiezen wanneer jouw prestatie onder 21% valt.',
+      },
+      {
+        question: 'Hoe bereken ik 21% btw?',
+        answer: 'Vermenigvuldig een bedrag exclusief btw met 0,21. Bijvoorbeeld €500 × 0,21 = €105 btw.',
+      },
+      {
+        question: 'Hoe bereken ik 9% btw?',
+        answer: 'Vermenigvuldig een bedrag exclusief btw met 0,09. Bijvoorbeeld €500 × 0,09 = €45 btw.',
       },
     ],
     content: (
       <>
         <p>
-          In Nederland zijn er verschillende btw-tarieven. Het meest voorkomende verschil is tussen het{' '}
-          <strong>21% btw-tarief</strong> en het <strong>9% btw-tarief</strong>.
+          In Nederland zijn <strong>9% en 21% btw</strong> de twee belangrijkste btw-tarieven. Maar wanneer gebruik je
+          9% en wanneer 21%?
         </p>
         <p>
-          Als ondernemer moet je het juiste btw-tarief gebruiken op je offertes en facturen. Het verkeerde tarief kan zorgen
-          voor fouten in je administratie en btw-aangifte.
+          Het antwoord hangt af van <strong>wat je precies levert</strong>. Als ondernemer kun je niet zelf kiezen welk
+          btw-tarief je gebruikt. Voor de meeste producten en diensten geldt 21%, terwijl 9% alleen geldt voor
+          specifieke producten en diensten die onder het verlaagde tarief vallen.
         </p>
         <p>
           Met de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
-            BTW calculator
+            btw calculator
           </Link>{' '}
-          van FactuurBaas bereken je eenvoudig hoeveel btw je moet rekenen bij 9% of 21%.
+          van FactuurBaas bereken je eenvoudig hoeveel btw je moet rekenen.
         </p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw →" />
+
+        <h2>Kort verschil tussen 9% en 21% btw</h2>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Btw-tarief
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wanneer?
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Voorbeelden
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">21%</td>
+                <td className="px-4 py-3">Het algemene tarief</td>
+                <td className="px-4 py-3">Veel zakelijke diensten, producten en werkzaamheden</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">9%</td>
+                <td className="px-4 py-3">Voor specifieke producten en diensten</td>
+                <td className="px-4 py-3">
+                  Onder andere bepaalde voedingsmiddelen, boeken en bepaalde werkzaamheden aan woningen
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Er zijn daarnaast situaties waarin <strong>0% btw</strong>, btw-vrijstelling of{' '}
+          <strong>btw verlegd</strong> van toepassing is. Dat is iets anders dan 9% btw.
+        </p>
 
         <h2>21% btw: het standaardtarief</h2>
         <p>
-          Het tarief van <strong>21% btw</strong> is het algemene btw-tarief in Nederland. Dit geldt voor de meeste producten
-          en diensten.
+          <strong>21% btw is het algemene btw-tarief in Nederland.</strong> Het geldt voor het grootste deel van de
+          producten en diensten.
         </p>
-        <p>Voorbeelden:</p>
+        <p>Voorbeelden zijn onder andere:</p>
         <ul>
-          <li>zakelijke dienstverlening</li>
-          <li>advieswerk</li>
+          <li>advies en zakelijke dienstverlening</li>
           <li>marketingdiensten</li>
           <li>webdesign</li>
-          <li>software en abonnementen</li>
+          <li>veel software en digitale diensten</li>
           <li>veel producten en materialen</li>
-          <li>bouw- en installatiewerkzaamheden (meestal)</li>
+          <li>veel reparatie- en onderhoudswerkzaamheden</li>
+          <li>veel bouw- en installatiewerkzaamheden</li>
         </ul>
-
-        <h3>Voorbeeld: factuur met 21% btw</h3>
-        <p>Een zzp&apos;er stuurt een factuur voor een website:</p>
-        <p>Werkzaamheden: €1.000 exclusief btw</p>
-        <p>BTW 21%: €210</p>
         <p>
-          <strong>Totaal: €1.210 inclusief btw</strong>
+          Dat betekent niet dat ieder product of iedere dienst van een bepaalde beroepsgroep automatisch 21% is. Het{' '}
+          <strong>onderwerp van de levering of dienst</strong> bepaalt welk tarief geldt.
         </p>
+
+        <h3>Voorbeeld 21% btw</h3>
+        <p>Je brengt als webdesigner €1.000 exclusief btw in rekening.</p>
+        <p>
+          <strong>€1.000 × 21% = €210 btw</strong>
+        </p>
+        <p>De klant betaalt:</p>
+        <p>
+          <strong>€1.210 inclusief btw</strong>
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Exclusief btw</td>
+                <td className="px-4 py-3 text-right">€1.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">21% btw</td>
+                <td className="px-4 py-3 text-right">€210</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Inclusief btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.210</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <h2>9% btw: het verlaagde tarief</h2>
         <p>
-          Het tarief van <strong>9% btw</strong> geldt voor bepaalde producten en diensten die door de overheid zijn
-          aangewezen.
+          Het <strong>9%-tarief</strong> geldt niet voor een hele beroepsgroep, maar voor specifieke producten en
+          diensten waarvoor het verlaagde tarief is vastgesteld.
         </p>
-        <p>Voorbeelden kunnen zijn:</p>
+        <p>Voorbeelden zijn onder andere bepaalde:</p>
         <ul>
-          <li>bepaalde voedingsmiddelen</li>
-          <li>boeken en digitale publicaties (onder voorwaarden)</li>
-          <li>bepaalde culturele activiteiten</li>
-          <li>sommige werkzaamheden aan woningen</li>
-          <li>specifieke diensten in de zorg</li>
+          <li>voedingsmiddelen</li>
+          <li>boeken en andere publicaties</li>
+          <li>culturele prestaties</li>
+          <li>werkzaamheden aan woningen die aan de voorwaarden voldoen</li>
+          <li>andere specifiek aangewezen goederen en diensten</li>
         </ul>
         <p>
-          Niet elke ondernemer mag automatisch 9% btw rekenen. Het hangt af van wat je levert — controleer altijd de actuele
-          regels bij de Belastingdienst.
+          De precieze voorwaarden kunnen per product of dienst verschillen. Controleer daarom bij twijfel de actuele
+          regels van de Belastingdienst.
         </p>
 
-        <h2>Voorbeeld: verschil tussen 9% en 21% btw</h2>
-        <p>Stel je verkoopt een dienst van €100 exclusief btw.</p>
-
+        <h3>Voorbeeld 9% btw</h3>
+        <p>Je levert een dienst of product waarvoor het 9%-tarief geldt voor €1.000 exclusief btw.</p>
         <p>
-          <strong>Bij 21% btw:</strong>
+          <strong>€1.000 × 9% = €90 btw</strong>
         </p>
-        <CalculationTable
-          rows={[
-            ['Exclusief btw', '€100'],
-            ['BTW', '€21'],
-            ['Totaal', '€121'],
-          ]}
-        />
-
+        <p>De klant betaalt:</p>
         <p>
-          <strong>Bij 9% btw:</strong>
+          <strong>€1.090 inclusief btw</strong>
         </p>
-        <CalculationTable
-          rows={[
-            ['Exclusief btw', '€100'],
-            ['BTW', '€9'],
-            ['Totaal', '€109'],
-          ]}
-        />
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Exclusief btw</td>
+                <td className="px-4 py-3 text-right">€1.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">9% btw</td>
+                <td className="px-4 py-3 text-right">€90</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Inclusief btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.090</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
+        <h2>Wat valt onder 9% en 21% btw?</h2>
         <p>
-          Het verschil: bij hetzelfde bedrag exclusief btw betaalt de klant bij 21% btw <strong>€12 meer btw</strong>.
+          De vraag <strong>&quot;wat valt onder 9 en 21 btw?&quot;</strong> is niet met één algemene lijst voor iedere
+          ondernemer te beantwoorden. Het tarief hangt af van het product of de dienst.
+        </p>
+        <p>Een paar praktische voorbeelden:</p>
+
+        <h3>Zakelijke dienstverlening</h3>
+        <p>
+          Diensten zoals advies, marketing, consultancy en veel andere zakelijke diensten vallen doorgaans onder{' '}
+          <strong>21% btw</strong>.
         </p>
 
-        <h2>Welk btw-tarief gebruik je als zzp&apos;er?</h2>
+        <h3>Voeding en horeca</h3>
         <p>
-          Als zzp&apos;er bepaal je het btw-tarief op basis van de dienst of het product dat je levert, niet op basis van je
-          beroep.
+          Voor bepaalde voedingsmiddelen geldt 9% btw. Bij horeca en catering moet je echter kijken naar{' '}
+          <strong>wat precies wordt geleverd</strong>. Niet iedere horeca- of cateringprestatie valt automatisch
+          volledig onder 9%.
         </p>
+
+        <h3>Werkzaamheden aan woningen</h3>
+        <p>
+          Voor bepaalde werkzaamheden aan woningen kan 9% gelden als aan de voorwaarden wordt voldaan. Dit geldt
+          bijvoorbeeld voor bepaalde schilder-, stukadoors- en isolatiewerkzaamheden aan woningen die oud genoeg zijn
+          om voor het verlaagde tarief in aanmerking te komen.
+        </p>
+        <p>Andere werkzaamheden kunnen gewoon onder 21% vallen.</p>
+
+        <h3>Reparaties</h3>
+        <p>Een reparatie valt niet automatisch onder 9% omdat het om een reparatie gaat.</p>
+        <p>
+          Bijvoorbeeld een garage die een auto repareert, gebruikt niet simpelweg 9% omdat het om onderhoud of
+          reparatie gaat. Voor een dergelijke dienst is in het algemeen het standaardtarief van 21% van toepassing.
+        </p>
+        <p>Het soort product of dienst en de specifieke btw-regels bepalen het tarief.</p>
+
+        <h2>9% of 21% btw bij één opdracht?</h2>
+        <p>
+          Soms bevat één opdracht onderdelen waarvoor verschillende btw-tarieven gelden. Bijvoorbeeld bij
+          werkzaamheden waarbij een deel van de prestaties onder 9% valt en een ander deel onder 21%.
+        </p>
+        <p>
+          In zo&apos;n situatie moet je de prestaties correct onderscheiden en de btw per toepasselijk tarief
+          berekenen. Zet de verschillende tarieven daarom duidelijk op je offerte of factuur.
+        </p>
+
+        <h2>Voorbeeld: 9% en 21% op dezelfde factuur</h2>
+        <p>Stel dat een opdracht bestaat uit:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Btw
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Prestatie A</td>
+                <td className="px-4 py-3 text-right">€500</td>
+                <td className="px-4 py-3 text-right">9%</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Prestatie B</td>
+                <td className="px-4 py-3 text-right">€500</td>
+                <td className="px-4 py-3 text-right">21%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dan bereken je de btw afzonderlijk:</p>
+        <p>
+          <strong>Prestatie A:</strong>
+          <br />
+          €500 × 9% = €45 btw
+        </p>
+        <p>
+          <strong>Prestatie B:</strong>
+          <br />
+          €500 × 21% = €105 btw
+        </p>
+        <p>
+          <strong>Totale btw: €150</strong>
+        </p>
+        <p>
+          <strong>Totaal inclusief btw: €1.150</strong>
+        </p>
+        <p>Zo blijft duidelijk welk deel van de factuur onder welk tarief valt.</p>
+
+        <h2>Kan een zzp&apos;er kiezen tussen 9% en 21%?</h2>
+        <p>Nee.</p>
+        <p>
+          Je kiest het btw-tarief niet op basis van wat financieel aantrekkelijker is voor jou of je klant. Het tarief
+          wordt bepaald door <strong>wat je levert en welke btw-regels daarop van toepassing zijn</strong>.
+        </p>
+        <p>
+          Een klant kan dus niet vragen om 9% btw wanneer jouw dienst onder 21% valt. Andersom mag je ook niet zomaar
+          21% rekenen wanneer voor jouw prestatie het 9%-tarief verplicht van toepassing is.
+        </p>
+
+        <h2>Btw berekenen over je prijs</h2>
+        <p>Btw bereken je over het bedrag exclusief btw.</p>
         <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>€500 exclusief btw × 21% = €105 btw</strong>
+        </p>
+        <p>Het totaal is dan:</p>
+        <p>
+          <strong>€605 inclusief btw</strong>
+        </p>
+        <p>Bij 9%:</p>
+        <p>
+          <strong>€500 × 9% = €45 btw</strong>
+        </p>
+        <p>Het totaal is:</p>
+        <p>
+          <strong>€545 inclusief btw</strong>
+        </p>
+        <p>
+          Wil je vanuit een bedrag inclusief btw terugrekenen? Gebruik dan de juiste formule of de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            btw calculator
+          </Link>
+          .
+        </p>
+
+        <h2>9% versus 21%: hoeveel verschil is het?</h2>
+        <p>Bij dezelfde prijs exclusief btw is het verschil eenvoudig te berekenen.</p>
+        <p>
+          Bij <strong>€100 exclusief btw</strong>:
+        </p>
         <ul>
-          <li>Een fotograaf kan verschillende btw-tarieven tegenkomen afhankelijk van de situatie.</li>
+          <li>9% btw = €9</li>
+          <li>21% btw = €21</li>
           <li>
-            Een aannemer kan meestal 21% rekenen, maar voor bepaalde werkzaamheden aan woningen kunnen uitzonderingen gelden.
+            verschil = <strong>€12</strong>
           </li>
         </ul>
-        <p>Controleer daarom altijd welk tarief bij jouw specifieke situatie hoort.</p>
-
-        <h2>Btw op je factuur vermelden</h2>
-        <p>Op een correcte factuur vermeld je:</p>
+        <p>
+          Bij <strong>€1.000 exclusief btw</strong>:
+        </p>
         <ul>
-          <li>het btw-bedrag</li>
-          <li>het btw-tarief (bijvoorbeeld 21%)</li>
-          <li>het bedrag exclusief btw</li>
-          <li>het totaalbedrag inclusief btw</li>
+          <li>9% btw = €90</li>
+          <li>21% btw = €210</li>
+          <li>
+            verschil = <strong>€120</strong>
+          </li>
         </ul>
-        <p>Voorbeeld:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-{`Website ontwerp       €1.000,00
-BTW 21%                 €210,00
-─────────────────────────────
-Totaal                 €1.210,00`}
+        <p>
+          Het verschil zit dus niet in je verkoopprijs exclusief btw, maar in het btw-bedrag dat bovenop die prijs
+          komt.
+        </p>
+
+        <h2>Btw op je factuur</h2>
+        <p>
+          Als je btw rekent, moet je op je factuur duidelijk aangeven welk btw-tarief van toepassing is en welk
+          btw-bedrag daarbij hoort.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre">
+{`Website ontwerp             €1.000,00
+BTW 21%                       €210,00
+────────────────────────────────────
+Totaal                       €1.210,00`}
         </pre>
         <p>
-          Meer uitleg in{' '}
+          Gebruik je meerdere btw-tarieven, dan moet je de bedragen per tarief duidelijk uitsplitsen.
+        </p>
+        <p>
+          Lees ook{' '}
           <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
-            Btw op je factuur: zo doe je het goed als zzp&apos;er
+            btw op je factuur: zo doe je het goed als zzp&apos;er
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten met btw-tarieven</h2>
+        <h2>9%, 21%, 0% of geen btw?</h2>
+        <p>9% en 21% zijn niet de enige situaties die je op een factuur kunt tegenkomen.</p>
 
-        <h3>1. Altijd 21% rekenen</h3>
-        <p>
-          Veel ondernemers gebruiken automatisch 21%, maar sommige producten en diensten vallen onder 9% of 0%. Controleer
-          daarom altijd welk tarief geldt.
-        </p>
+        <h3>21% btw</h3>
+        <p>Het algemene btw-tarief voor de meeste producten en diensten.</p>
 
-        <h3>2. Btw berekenen over het verkeerde bedrag</h3>
-        <p>Het btw-percentage wordt berekend over het bedrag exclusief btw.</p>
+        <h3>9% btw</h3>
+        <p>Het verlaagde tarief voor specifiek aangewezen producten en diensten.</p>
+
+        <h3>0% btw</h3>
         <p>
-          Bijvoorbeeld: <strong>€500 exclusief btw × 21% = €105 btw</strong>
+          Het nultarief geldt in specifieke situaties, bijvoorbeeld bij bepaalde internationale leveringen en
+          diensten.
         </p>
-        <p>Niet: €500 inclusief btw × 21%.</p>
         <p>
-          Zie ook{' '}
-          <Link href="/gidsen/inclusief-btw-naar-exclusief-btw" className="text-warm-orange hover:underline">
-            bedrag inclusief btw omrekenen naar exclusief btw
+          Lees meer over{' '}
+          <Link href="/gidsen/wanneer-gebruik-je-0-btw" className="text-warm-orange hover:underline">
+            wanneer je 0% btw gebruikt
           </Link>
           .
         </p>
 
-        <h3>3. Het btw-tarief aanpassen omdat een klant daarom vraagt</h3>
-        <p>Het btw-tarief wordt bepaald door de regels, niet door de voorkeur van de klant.</p>
+        <h3>Btw verlegd</h3>
+        <p>
+          Bij btw verlegd brengt de leverancier geen btw in rekening omdat de btw-heffing volgens de regels naar de
+          afnemer wordt verlegd. Dit is bijvoorbeeld bij bepaalde werkzaamheden in de bouw relevant.
+        </p>
+        <p>
+          <strong>0% btw en btw verlegd zijn dus niet hetzelfde.</strong>
+        </p>
 
-        <h2>Btw berekenen voor je factuur</h2>
-        <p>Met de gratis BTW calculator van FactuurBaas bereken je direct:</p>
+        <h3>Btw-vrijstelling</h3>
+        <p>
+          Bij een vrijgestelde prestatie wordt geen btw in rekening gebracht en gelden andere regels voor de
+          btw-aftrek.
+        </p>
+        <p>
+          De{' '}
+          <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
+            KOR
+          </Link>{' '}
+          is weer een aparte regeling waarbij je, als je ervoor in aanmerking komt en eraan deelneemt, geen btw aan
+          klanten in rekening brengt.
+        </p>
+
+        <h2>Veelgemaakte fouten met 9% en 21% btw</h2>
+
+        <h3>1. Altijd 21% gebruiken</h3>
+        <p>
+          21% is het standaardtarief, maar niet iedere prestatie valt daaronder. Controleer daarom of jouw product of
+          dienst onder 9%, 0% of een vrijstelling valt.
+        </p>
+
+        <h3>2. Zelf het laagste tarief kiezen</h3>
+        <p>
+          Je mag niet zelf kiezen voor 9% omdat dat voor je klant goedkoper is. Het juiste tarief volgt uit de
+          btw-regels.
+        </p>
+
+        <h3>3. Een beroep koppelen aan één btw-tarief</h3>
+        <p>
+          Het feit dat je schilder, cateraar, fotograaf of consultant bent, bepaalt niet automatisch welk btw-tarief
+          je voor iedere opdracht gebruikt. Kijk naar de specifieke prestatie.
+        </p>
+
+        <h3>4. Verschillende tarieven niet uitsplitsen</h3>
+        <p>
+          Als binnen één opdracht verschillende tarieven van toepassing zijn, maak dan duidelijk welk bedrag onder
+          welk tarief valt.
+        </p>
+
+        <h3>5. Btw berekenen over een bedrag inclusief btw</h3>
+        <p>
+          Een percentage van 21% bereken je niet door simpelweg 21% van een inclusief-btw-bedrag te nemen. Gebruik bij
+          terugrekenen een geschikte formule of calculator.
+        </p>
+
+        <h2>Btw berekenen met FactuurBaas</h2>
+        <p>
+          Met de gratis{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            btw calculator
+          </Link>{' '}
+          kun je snel bedragen met 9%, 21% of 0% btw berekenen.
+        </p>
+        <p>Je kunt bijvoorbeeld berekenen:</p>
         <ul>
-          <li>21% btw</li>
+          <li>btw over een bedrag exclusief btw</li>
+          <li>totaal inclusief btw</li>
+          <li>bedrag exclusief btw vanuit inclusief btw</li>
           <li>9% btw</li>
+          <li>21% btw</li>
           <li>0% btw</li>
-          <li>inclusief en exclusief btw bedragen</li>
         </ul>
-        <p>Daarna maak je direct een professionele factuur als PDF.</p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Open gratis BTW calculator →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Open gratis btw calculator →" />
+
+        <p>Daarna kun je je factuur maken met de juiste btw-bedragen.</p>
 
         <div className="my-8 text-center not-prose">
           <Button
@@ -854,488 +1155,1006 @@ Totaal                 €1.210,00`}
 
         <h2>Veelgestelde vragen</h2>
         <h3>Wanneer gebruik je 21% btw?</h3>
-        <p>21% btw is het standaardtarief en geldt voor de meeste producten en diensten in Nederland.</p>
+        <p>21% is het algemene btw-tarief en geldt voor de meeste producten en diensten.</p>
         <h3>Wanneer gebruik je 9% btw?</h3>
-        <p>9% btw geldt alleen voor bepaalde producten en diensten die onder het verlaagde btw-tarief vallen.</p>
-        <h3>Kan een zzp&apos;er kiezen tussen 9% en 21% btw?</h3>
-        <p>Nee. Het btw-tarief wordt bepaald door wat je levert. Je kiest het tarief niet zelf.</p>
-        <h3>Welk btw-tarief gebruik ik op mijn factuur?</h3>
-        <p>Dat hangt af van je product of dienst. De meeste zakelijke diensten vallen onder 21% btw.</p>
+        <p>
+          9% geldt voor specifieke producten en diensten die volgens de btw-regels onder het verlaagde tarief vallen.
+        </p>
+        <h3>Wat valt onder 9% en 21% btw?</h3>
+        <p>
+          Onder 21% vallen veel algemene producten en diensten, waaronder veel zakelijke dienstverlening. 9% geldt
+          alleen voor specifiek aangewezen producten en diensten, zoals bepaalde voedingsmiddelen, publicaties en
+          bepaalde werkzaamheden aan woningen.
+        </p>
+        <h3>Kan een zzp&apos;er kiezen tussen 9% en 21%?</h3>
+        <p>
+          Nee. Het toepasselijke btw-tarief wordt bepaald door de aard van de prestatie en de geldende btw-regels.
+        </p>
+        <h3>Welk btw-tarief geldt voor een garage?</h3>
+        <p>
+          Voor reparatie en onderhoud aan auto&apos;s geldt in het algemeen 21% btw. Controleer bij bijzondere
+          situaties altijd de actuele btw-regels.
+        </p>
+        <h3>Welk btw-tarief geldt voor catering?</h3>
+        <p>
+          Dat hangt af van wat precies wordt geleverd. Bij catering kunnen verschillende btw-regels relevant zijn.
+          Kijk daarom naar de specifieke prestatie in plaats van automatisch 9% of 21% over de volledige opdracht te
+          rekenen.
+        </p>
+        <h3>Kan één factuur zowel 9% als 21% btw bevatten?</h3>
+        <p>
+          Ja. Wanneer verschillende prestaties onder verschillende btw-tarieven vallen, moeten de bedragen per
+          toepasselijk tarief worden uitgesplitst.
+        </p>
+        <h3>Is 9% btw altijd voordeliger?</h3>
+        <p>
+          Voor de klant betekent 9% bij dezelfde prijs exclusief btw een lager btw-bedrag. Als ondernemer is het
+          echter niet toegestaan om zelf voor 9% te kiezen wanneer jouw prestatie onder 21% valt.
+        </p>
+        <h3>Hoe bereken ik 21% btw?</h3>
+        <p>Vermenigvuldig een bedrag exclusief btw met 0,21. Bijvoorbeeld €500 × 0,21 = €105 btw.</p>
+        <h3>Hoe bereken ik 9% btw?</h3>
+        <p>Vermenigvuldig een bedrag exclusief btw met 0,09. Bijvoorbeeld €500 × 0,09 = €45 btw.</p>
+
+        <h2>Welk btw-tarief moet je gebruiken?</h2>
+        <p>
+          Het juiste btw-tarief hangt af van <strong>wat je verkoopt of welke dienst je uitvoert</strong>.
+        </p>
+        <p>
+          21% is het algemene tarief. 9% geldt alleen voor specifieke producten en diensten. In andere situaties kan
+          bijvoorbeeld 0% btw, btw verlegd of een vrijstelling van toepassing zijn.
+        </p>
+        <p>
+          Twijfel je over een specifieke situatie? Controleer dan de actuele regels van de Belastingdienst.
+        </p>
+        <p>
+          Wil je alleen het btw-bedrag berekenen? Gebruik dan de gratis btw calculator van FactuurBaas.
+        </p>
+
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken je btw gratis →" />
       </>
     ),
   },
   {
     slug: 'wanneer-gebruik-je-0-btw',
     cluster: 'btw',
-    seoTitle: 'Wanneer gebruik je 0% btw? Uitleg btw-tarief 0 procent voor zzp\'ers',
-    title: 'Wanneer gebruik je 0% btw? Uitleg voor zzp\'ers en ondernemers',
+    seoTitle: '0% btw: wanneer mag je het 0%-tarief gebruiken?',
+    title: '0% btw: wanneer mag je het 0%-tarief gebruiken?',
     excerpt:
-      'Wanneer mag je 0% btw rekenen? Lees wanneer het 0%-tarief geldt, wat het verschil is met btw-vrijgesteld en hoe je dit op je factuur vermeldt.',
+      'Wanneer mag je 0% btw rekenen? Bekijk voorbeelden voor buitenlandse facturen en het verschil tussen 0% btw, btw verlegd en btw-vrijstelling.',
     keywords:
-      '0% btw, wanneer 0% btw, btw tarief 0 procent, nultarief btw, btw verlegd, btw vrijgesteld, export btw, intracommunautaire levering',
+      '0% btw, wanneer 0% btw, 0%-tarief, nultarief btw, btw verlegd, btw vrijgesteld, export btw, intracommunautaire levering, buitenlandse factuur btw',
     tool: {
       href: '/tools/btw-calculator',
-      label: 'Bereken direct btw',
-      ctaLabel: 'Open gratis BTW calculator',
+      label: 'Bereken btw',
+      ctaLabel: 'Open de gratis btw calculator',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Wanneer%20gebruik%20je%200%20btw.jpg',
-      alt: 'Wanneer gebruik je 0% btw: euro biljetten op wereldkaart',
+      alt: '0% btw: wanneer mag je het 0%-tarief gebruiken?',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['btw-factuur-zzp', 'buitenlandse-klanten-factureren'],
-    relatedGuideSlugs: ['verschil-9-en-21-btw', 'wanneer-gebruik-je-0-btw', 'welke-btw-rekenen-zzper'],
+    relatedGuideSlugs: ['verschil-9-en-21-btw', 'welke-btw-rekenen-zzper', 'btw-berekenen-buitenlandse-klanten'],
     faq: [
       {
         question: 'Wanneer mag ik 0% btw rekenen?',
         answer:
-          'Je mag 0% btw rekenen wanneer je levering of dienst onder een specifieke regeling valt, bijvoorbeeld bepaalde internationale leveringen naar het buitenland.',
-      },
-      {
-        question: 'Moet ik 0% btw op mijn factuur vermelden?',
-        answer:
-          'Ja. Vermeld duidelijk dat het btw-tarief 0% is en zorg dat je factuur aan de regels voldoet, inclusief je btw-nummer waar van toepassing.',
+          'Alleen wanneer jouw levering of dienst onder een regeling valt waarvoor het 0%-tarief geldt. Het is geen algemeen tarief dat je kunt kiezen wanneer je geen btw wilt rekenen.',
       },
       {
         question: 'Is 0% btw hetzelfde als geen btw?',
         answer:
-          'Nee. Bij 0% btw pas je een btw-tarief toe van nul procent. Geen btw of btw-vrijgesteld (zoals de KOR) zijn andere situaties.',
+          'Nee. Bij 0% btw pas je een btw-tarief van 0% toe. “Geen btw” kan bijvoorbeeld betrekking hebben op btw-vrijstelling, btw-verlegging of de KOR.',
       },
       {
-        question: 'Kan een zzp\'er altijd 0% btw gebruiken?',
+        question: 'Is een factuur naar het buitenland altijd 0% btw?',
         answer:
-          'Nee. Het hangt af van wat je levert en aan wie je levert. Een buitenlandse klant betekent niet automatisch 0% btw.',
+          'Nee. De btw-behandeling hangt onder andere af van wat je levert, of je klant ondernemer of particulier is, en in welk land de prestatie voor de btw belast is.',
+      },
+      {
+        question: 'Is btw verlegd hetzelfde als 0% btw?',
+        answer:
+          'Nee. Bij btw-verlegging breng je geen btw in rekening omdat de btw naar de afnemer wordt verlegd. Bij 0% btw pas je het 0%-tarief toe.',
+      },
+      {
+        question: 'Kan ik 0% btw gebruiken voor een buitenlandse klant?',
+        answer:
+          'Dat kan in bepaalde situaties, maar niet alleen omdat de klant buiten Nederland woont. Controleer eerst welke btw-regels op de levering of dienst van toepassing zijn.',
+      },
+      {
+        question: 'Moet ik 0% btw op mijn factuur zetten?',
+        answer:
+          'Als het 0%-tarief van toepassing is, moet je de factuur correct opstellen en waar nodig de reden of relevante wettelijke verwijzing vermelden. Welke gegevens nodig zijn, hangt af van de specifieke situatie.',
+      },
+      {
+        question: "Kan een zzp'er 0% btw rekenen?",
+        answer:
+          'Ja, maar alleen wanneer de betreffende prestatie onder een regeling voor het 0%-tarief valt. Het is niet een tarief dat iedere zzp\'er vrij kan kiezen.',
       },
     ],
     content: (
       <>
         <p>
-          Het <strong>0% btw-tarief</strong> betekent dat je wel btw rekent, maar dat het btw-bedrag op de factuur{' '}
-          <strong>€0</strong> is.
+          Wanneer mag je als zzp&apos;er of ondernemer <strong>0% btw</strong> op een factuur zetten? Dat is vooral
+          relevant bij bepaalde internationale leveringen en specifieke goederen en diensten.
         </p>
         <p>
-          Het 0%-tarief wordt gebruikt in specifieke situaties, bijvoorbeeld bij bepaalde leveringen aan het buitenland.
+          Let op: <strong>0% btw is niet hetzelfde als btw verlegd, btw-vrijstelling of de KOR</strong>. Je mag niet
+          simpelweg 0% btw gebruiken omdat je geen btw wilt rekenen.
         </p>
-        <p>Het is belangrijk om onderscheid te maken tussen:</p>
-        <ul>
-          <li>0% btw</li>
-          <li>btw vrijgesteld</li>
-          <li>geen btw door de KOR</li>
-        </ul>
-        <p>Deze situaties lijken op elkaar, maar hebben verschillende gevolgen voor je administratie.</p>
+        <p>
+          In deze gids leggen we uit wanneer het 0%-tarief kan gelden, hoe je 0% btw op een factuur vermeldt en wat het
+          verschil is met een factuur zonder btw door btw-verlegging.
+        </p>
         <p>
           Met de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
-            BTW calculator
+            btw calculator van FactuurBaas
           </Link>{' '}
-          van FactuurBaas bereken je eenvoudig bedragen met verschillende btw-tarieven.
+          kun je bedragen met verschillende btw-tarieven berekenen.
         </p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw →" />
 
         <h2>Wat betekent 0% btw?</h2>
-        <p>Bij 0% btw blijft je factuur een btw-factuur, maar het btw-bedrag is nul.</p>
-        <p>Voorbeeld: je levert een dienst ter waarde van €1.000 exclusief btw.</p>
-        <p>Btw 0%: €0 — Totaal: €1.000</p>
-
-        <CalculationTable
-          rows={[
-            ['Bedrag exclusief btw', '€1.000'],
-            ['BTW 0%', '€0'],
-            ['Totaal', '€1.000'],
-          ]}
-        />
-
-        <h2>Wanneer gebruik je 0% btw?</h2>
-        <p>Het 0%-tarief geldt vooral in situaties waarbij goederen of diensten internationaal worden geleverd.</p>
-
-        <h3>1. Leveringen naar het buitenland</h3>
         <p>
-          Een veelvoorkomende situatie is export naar landen buiten de Europese Unie. Een Nederlandse ondernemer verkoopt
-          goederen aan een bedrijf buiten de EU — onder voorwaarden kan het 0%-tarief worden toegepast.
+          Bij het 0%-tarief is het btw-bedrag <strong>€0</strong>, terwijl de prestatie wel onder het btw-systeem valt.
+        </p>
+        <p>Voorbeeld:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Bedrag exclusief btw</td>
+                <td className="px-4 py-3 text-right">€1.000,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">BTW 0%</td>
+                <td className="px-4 py-3 text-right">€0,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.000,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je klant betaalt in dit voorbeeld dus €1.000.</p>
+        <p>
+          Het belangrijke verschil met een vrijgestelde prestatie is dat een prestatie met 0% btw wel belast is tegen
+          een btw-tarief van 0%.
         </p>
 
-        <h3>2. Intracommunautaire levering binnen de EU</h3>
-        <p>Bij verkoop van goederen aan een ondernemer in een ander EU-land kan het 0%-tarief gelden. Voorwaarden zijn onder andere:</p>
+        <h2>Wanneer mag je 0% btw rekenen?</h2>
+        <p>
+          Het 0%-tarief geldt niet voor iedere ondernemer en ook niet automatisch voor iedere buitenlandse klant.
+        </p>
+        <p>
+          Er zijn specifieke situaties waarin het 0%-tarief kan worden toegepast. Voor ondernemers zijn vooral
+          internationale leveringen van goederen relevant.
+        </p>
+
+        <h3>1. Goederen naar een land buiten de EU</h3>
+        <p>Bij de uitvoer van goederen naar een land buiten de Europese Unie kan het 0%-tarief gelden.</p>
+        <p>
+          Je brengt dan geen Nederlandse btw aan je klant in rekening, maar je moet wel kunnen aantonen dat aan de
+          voorwaarden voor het 0%-tarief is voldaan.
+        </p>
+        <p>Bewaar daarom de relevante administratie en bewijsstukken van de uitvoer.</p>
+
+        <h3>2. Goederen aan een ondernemer in een ander EU-land</h3>
+        <p>
+          Lever je goederen aan een ondernemer in een ander EU-land? Dan kan het 0%-tarief gelden als aan de
+          voorwaarden voor een intracommunautaire levering wordt voldaan.
+        </p>
+        <p>Onder andere moet:</p>
         <ul>
-          <li>de klant heeft een geldig btw-nummer</li>
-          <li>de goederen worden naar een ander EU-land vervoerd</li>
-          <li>de levering wordt correct verwerkt in de administratie</li>
+          <li>de klant ondernemer zijn en een geldig btw-identificatienummer hebben</li>
+          <li>je de goederen naar een ander EU-land vervoeren of laten vervoeren</li>
+          <li>je kunnen aantonen dat de goederen naar het andere EU-land zijn gegaan</li>
+          <li>je de levering correct verwerken in je btw-administratie</li>
         </ul>
+        <p>
+          Bij een intracommunautaire levering vermeld je onder andere je eigen btw-identificatienummer en het
+          btw-identificatienummer van je klant op de factuur.
+        </p>
 
         <h3>3. Bepaalde internationale diensten</h3>
+        <p>Voor sommige specifieke diensten geldt het 0%-tarief.</p>
         <p>
-          Voor sommige diensten aan buitenlandse ondernemers gelden speciale btw-regels. Een Nederlandse ondernemer levert een
-          zakelijke dienst aan een bedrijf in een ander EU-land — in veel gevallen wordt dan{' '}
-          <strong>btw verlegd</strong> in plaats van 0% btw toegepast.
+          Denk bijvoorbeeld aan bepaalde diensten die samenhangen met internationale handel en het vervoer van goederen.
+          Voor dergelijke diensten gelden specifieke voorwaarden.
         </p>
         <p>
-          Meer hierover:{' '}
+          Bij diensten aan buitenlandse klanten is het daarom belangrijk om eerst te bepalen{' '}
+          <strong>waar de dienst voor de btw belast is</strong>. Een buitenlandse klant betekent namelijk niet
+          automatisch dat je 0% btw rekent. Meer hierover in{' '}
           <Link href="/blogs/buitenlandse-klanten-factureren" className="text-warm-orange hover:underline">
-            Buitenlandse klanten factureren
+            buitenlandse klanten factureren
           </Link>
           .
         </p>
 
-        <h2>0% btw is niet hetzelfde als btw verlegd</h2>
-        <p>Dit is een veelgemaakte verwarring.</p>
+        <h2>Buitenlandse klant zonder btw: 0% of btw verlegd?</h2>
+        <p>Dit is een belangrijk onderscheid.</p>
         <p>
-          <strong>0% btw:</strong> je zet op de factuur btw-tarief 0% en btw-bedrag €0.
+          Stel: je bent een Nederlandse zzp&apos;er en levert een gewone zakelijke dienst aan een ondernemer in
+          Duitsland.
         </p>
         <p>
-          <strong>Btw verlegd:</strong> de klant berekent zelf de btw in zijn eigen land. Op de factuur vermeld je bijvoorbeeld
-          &quot;Btw verlegd&quot;. Dit is een andere situatie.
+          Dan betekent het feit dat je geen Nederlandse btw op de factuur zet{' '}
+          <strong>niet automatisch dat je 0% btw toepast</strong>.
+        </p>
+        <p>
+          Bij veel B2B-diensten aan ondernemers in een ander EU-land wordt de btw juist{' '}
+          <strong>verlegd naar de klant</strong>. Je stuurt dan een factuur zonder btw en vermeldt daarop bijvoorbeeld:
+        </p>
+        <p>
+          <strong>Btw verlegd</strong>
+        </p>
+        <p>
+          De klant verwerkt de btw vervolgens in zijn eigen land. Voor intracommunautaire diensten moet je de prestatie
+          bovendien correct aangeven in je Nederlandse btw-aangifte en Opgaaf intracommunautaire prestaties.
+        </p>
+
+        <h3>Kort gezegd</h3>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[520px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Situatie
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wat kan van toepassing zijn?
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Goederen exporteren buiten de EU</td>
+                <td className="px-4 py-3">0% btw, als aan de voorwaarden is voldaan</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Goederen aan ondernemer in ander EU-land</td>
+                <td className="px-4 py-3">
+                  0% btw bij een intracommunautaire levering, als aan de voorwaarden is voldaan
+                </td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Gewone B2B-dienst aan ondernemer in ander EU-land</td>
+                <td className="px-4 py-3">Vaak btw verlegd</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Vrijgestelde activiteit</td>
+                <td className="px-4 py-3">Btw-vrijstelling</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">KOR</td>
+                <td className="px-4 py-3">Geen btw in rekening brengen onder de KOR-regeling</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Dit zijn algemene voorbeelden. De btw-behandeling hangt altijd af van wat je levert, aan wie je levert en waar
+          de prestatie voor de btw plaatsvindt.
+        </p>
+
+        <h2>0% btw is niet hetzelfde als btw verlegd</h2>
+        <p>
+          Bij <strong>0% btw</strong> pas je een btw-tarief van 0% toe.
+        </p>
+        <p>
+          Bij <strong>btw verlegd</strong> breng je zelf geen btw in rekening omdat de btw naar de afnemer wordt
+          verlegd.
+        </p>
+        <p>
+          Bij een verlegde btw-factuur vermeld je onder andere <strong>&quot;btw verlegd&quot;</strong> en het
+          btw-identificatienummer van de afnemer wanneer de regeling van toepassing is.
+        </p>
+        <p>
+          Daarom moet je op een buitenlandse factuur niet zomaar <strong>&quot;0% btw&quot;</strong> invullen omdat je
+          klant in het buitenland zit.
         </p>
 
         <h2>0% btw is niet hetzelfde als btw-vrijgesteld</h2>
         <p>
-          <strong>0% btw:</strong> je valt onder het btw-systeem en rekent een btw-tarief van 0%. Vaak behoud je recht op
-          btw-aftrek.
+          Bij een vrijgestelde prestatie hoef je geen btw in rekening te brengen omdat de activiteit onder een
+          btw-vrijstelling valt.
         </p>
+        <p>Dat is iets anders dan het 0%-tarief.</p>
         <p>
-          <strong>Btw-vrijgesteld:</strong> je brengt geen btw in rekening omdat jouw activiteit is vrijgesteld. Bij
-          vrijgestelde prestaties gelden andere regels voor btw-aftrek.
-        </p>
-        <p>
-          Zie ook{' '}
+          Het onderscheid is belangrijk voor je btw-administratie en bijvoorbeeld voor de vraag of je btw op zakelijke
+          kosten als voorbelasting kunt aftrekken. Zie ook{' '}
           <Link href="/gidsen/verschil-9-en-21-btw" className="text-warm-orange hover:underline">
-            verschil tussen 9% en 21% btw
+            9% of 21% btw: wat valt eronder
           </Link>
           .
         </p>
 
-        <h2>0% btw op je factuur zetten</h2>
-        <p>Als je 0% btw toepast, vermeld je duidelijk:</p>
-        <ul>
-          <li>het btw-tarief</li>
-          <li>waarom het 0%-tarief geldt (indien vereist)</li>
-          <li>je btw-nummer wanneer van toepassing</li>
-        </ul>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-{`Dienstverlening buitenland       €1.000,00
-BTW 0%                              €0,00
-─────────────────────────────────────────
-Totaal                            €1.000,00`}
-        </pre>
+        <h2>0% btw is ook niet hetzelfde als de KOR</h2>
+        <p>De kleineondernemersregeling (KOR) is weer een andere situatie.</p>
         <p>
-          Meer over btw op je factuur:{' '}
-          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
-            Btw op je factuur: zo doe je het goed als zzp&apos;er
+          Als je deelneemt aan de KOR, breng je geen btw in rekening aan je klanten. Je brengt dan dus niet simpelweg
+          &quot;0% btw&quot; in rekening omdat je een 0%-tarief toepast.
+        </p>
+        <p>
+          Bij de KOR gelden aparte regels voor onder andere btw-aangifte en het aftrekken van btw op zakelijke kosten.
+        </p>
+        <p>
+          Lees meer in de{' '}
+          <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
+            KOR calculator
           </Link>
           .
+        </p>
+
+        <h2>Hoe zet je 0% btw op een factuur?</h2>
+        <p>Als het 0%-tarief op jouw levering of dienst van toepassing is, moet je de factuur correct opstellen.</p>
+        <p>Een eenvoudig voorbeeld:</p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap">
+{`Website-ontwerp                    €1.000,00
+BTW 0%                                  €0,00
+────────────────────────────────────────────
+Totaal                              €1.000,00`}
+        </pre>
+        <p>
+          Afhankelijk van de reden waarom je 0% btw toepast, kunnen aanvullende vermeldingen of bewijsstukken nodig
+          zijn.
+        </p>
+        <p>
+          Gebruik daarom niet alleen het btw-tarief als uitgangspunt, maar controleer ook{' '}
+          <strong>waarom het 0%-tarief van toepassing is</strong>. Meer over btw op je factuur in{' '}
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
+            btw op je factuur als zzp&apos;er
+          </Link>
+          .
+        </p>
+
+        <h2>Factuur naar het buitenland zonder btw</h2>
+        <p>Een buitenlandse factuur zonder btw kan dus verschillende oorzaken hebben.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>0% btw</strong>
+        </p>
+        <p>
+          Je past daadwerkelijk het 0%-tarief toe omdat je levering of dienst onder een regeling voor 0% valt.
+        </p>
+        <p>
+          <strong>Btw verlegd</strong>
+        </p>
+        <p>Je brengt geen btw in rekening omdat de btw naar je zakelijke klant wordt verlegd.</p>
+        <p>
+          <strong>Vrijgesteld</strong>
+        </p>
+        <p>Je verricht een activiteit die onder een btw-vrijstelling valt.</p>
+        <p>
+          <strong>KOR</strong>
+        </p>
+        <p>Je neemt deel aan de kleineondernemersregeling en brengt daarom geen btw in rekening.</p>
+        <p>
+          De factuur kan er in sommige gevallen vergelijkbaar uitzien, maar de btw-behandeling en administratie zijn
+          verschillend.
         </p>
 
         <h2>Veelgemaakte fouten met 0% btw</h2>
 
-        <h3>1. 0% btw gebruiken omdat je geen btw wilt rekenen</h3>
+        <h3>1. 0% gebruiken omdat je geen btw wilt rekenen</h3>
         <p>
-          Je mag niet zomaar 0% btw gebruiken omdat je klant geen btw wil betalen. Het tarief hangt af van de situatie.
+          Je mag niet zelf bepalen dat een factuur 0% btw krijgt. Het 0%-tarief moet op jouw levering of dienst van
+          toepassing zijn.
         </p>
 
-        <h3>2. 0% btw verwarren met de KOR</h3>
+        <h3>2. Iedere buitenlandse klant 0% btw geven</h3>
+        <p>Een klant in het buitenland betekent niet automatisch dat je 0% btw rekent.</p>
         <p>
-          Bij de kleineondernemersregeling (KOR) breng je geen btw in rekening omdat je bent vrijgesteld van btw-heffing. Dat
-          is iets anders dan een factuur met 0% btw.
+          Bij een dienst moet je onder andere kijken naar het soort klant en de plaats waar de dienst voor de btw
+          belast is.
         </p>
+        <p>Bij een B2B-dienst binnen de EU kan bijvoorbeeld btw-verlegging gelden.</p>
+
+        <h3>3. Btw verlegd verwarren met 0% btw</h3>
         <p>
-          Lees ook:{' '}
-          <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
-            KOR calculator — check of de KOR bij jou past
-          </Link>
-          .
+          Een factuur zonder btw kan zowel bij 0% btw als bij btw-verlegging voorkomen, maar dat betekent niet dat beide
+          regelingen hetzelfde zijn.
         </p>
 
-        <h3>3. Buitenlandse klant betekent niet automatisch 0% btw</h3>
-        <p>Een buitenlandse klant betekent niet altijd dat je 0% btw toepast. De regels hangen af van:</p>
-        <ul>
-          <li>EU of buiten EU</li>
-          <li>particulier of ondernemer</li>
-          <li>product of dienst</li>
-        </ul>
+        <h3>4. Geen bewijs bewaren</h3>
+        <p>
+          Bij bepaalde toepassingen van het 0%-tarief moet je kunnen aantonen dat je terecht 0% hebt toegepast.
+        </p>
+        <p>Zorg daarom dat je de relevante documenten en administratie bewaart.</p>
 
         <h2>Btw berekenen voor je factuur</h2>
-        <p>Met de gratis BTW calculator van FactuurBaas kun je:</p>
+        <p>Wil je controleren hoeveel btw je over een bedrag moet berekenen?</p>
+        <p>
+          Met de gratis{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            btw calculator van FactuurBaas
+          </Link>{' '}
+          kun je onder andere rekenen met:
+        </p>
         <ul>
-          <li>0% btw berekenen</li>
-          <li>9% btw berekenen</li>
-          <li>21% btw berekenen</li>
-          <li>bedragen inclusief en exclusief btw controleren</li>
+          <li>0% btw</li>
+          <li>9% btw</li>
+          <li>21% btw</li>
+          <li>bedragen inclusief btw</li>
+          <li>bedragen exclusief btw</li>
         </ul>
-        <p>Daarna maak je direct een professionele factuur zonder account.</p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Open gratis BTW calculator →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Open de gratis btw calculator →" />
 
+        <p>Wil je daarna een factuur maken? Dat kan ook direct met FactuurBaas.</p>
         <div className="my-8 text-center not-prose">
           <Button
             asChild
             variant="outline"
             className="border-deep-blue text-deep-blue hover:bg-deep-blue hover:text-white font-bold py-3 px-6 rounded-lg text-lg"
           >
-            <Link href="/create-invoice">Maak gratis factuur →</Link>
+            <Link href="/create-invoice">Maak gratis een factuur →</Link>
           </Button>
         </div>
 
-        <h2>Veelgestelde vragen</h2>
+        <h2>Veelgestelde vragen over 0% btw</h2>
         <h3>Wanneer mag ik 0% btw rekenen?</h3>
         <p>
-          Je mag 0% btw rekenen wanneer je levering of dienst onder een specifieke regeling valt, bijvoorbeeld bepaalde
-          internationale leveringen.
+          Alleen wanneer jouw levering of dienst onder een regeling valt waarvoor het 0%-tarief geldt. Het is geen
+          algemeen tarief dat je kunt kiezen wanneer je geen btw wilt rekenen.
         </p>
-        <h3>Moet ik 0% btw op mijn factuur vermelden?</h3>
-        <p>Ja. Vermeld duidelijk dat het btw-tarief 0% is en zorg dat je factuur aan de regels voldoet.</p>
         <h3>Is 0% btw hetzelfde als geen btw?</h3>
         <p>
-          Nee. Bij 0% btw pas je een btw-tarief toe van nul procent. Geen btw of btw-vrijgesteld zijn andere situaties.
+          Nee. Bij 0% btw pas je een btw-tarief van 0% toe. &quot;Geen btw&quot; kan bijvoorbeeld betrekking hebben op
+          btw-vrijstelling, btw-verlegging of de KOR.
         </p>
-        <h3>Kan een zzp&apos;er altijd 0% btw gebruiken?</h3>
-        <p>Nee. Het hangt af van wat je levert en aan wie je levert.</p>
+        <h3>Is een factuur naar het buitenland altijd 0% btw?</h3>
+        <p>
+          Nee. De btw-behandeling hangt onder andere af van wat je levert, of je klant ondernemer of particulier is, en
+          in welk land de prestatie voor de btw belast is.
+        </p>
+        <h3>Is btw verlegd hetzelfde als 0% btw?</h3>
+        <p>
+          Nee. Bij btw-verlegging breng je geen btw in rekening omdat de btw naar de afnemer wordt verlegd. Bij 0% btw
+          pas je het 0%-tarief toe.
+        </p>
+        <h3>Kan ik 0% btw gebruiken voor een buitenlandse klant?</h3>
+        <p>
+          Dat kan in bepaalde situaties, maar niet alleen omdat de klant buiten Nederland woont. Controleer eerst
+          welke btw-regels op de levering of dienst van toepassing zijn.
+        </p>
+        <h3>Moet ik 0% btw op mijn factuur zetten?</h3>
+        <p>
+          Als het 0%-tarief van toepassing is, moet je de factuur correct opstellen en waar nodig de reden of relevante
+          wettelijke verwijzing vermelden. Welke gegevens nodig zijn, hangt af van de specifieke situatie.
+        </p>
+        <h3>Kan een zzp&apos;er 0% btw rekenen?</h3>
+        <p>
+          Ja, maar alleen wanneer de betreffende prestatie onder een regeling voor het 0%-tarief valt. Het is niet een
+          tarief dat iedere zzp&apos;er vrij kan kiezen.
+        </p>
       </>
     ),
   },
   {
     slug: 'welke-btw-rekenen-zzper',
     cluster: 'btw',
-    seoTitle: 'Welke btw moet ik rekenen als zzp\'er? | Uitleg 21%, 9% en 0%',
-    title: 'Welke btw moet ik rekenen als zzp\'er?',
+    seoTitle: "Welke btw moet ik rekenen als zzp'er? 9%, 21% of 0%",
+    title: "Welke btw moet ik rekenen als zzp'er?",
     excerpt:
-      'Welk btw-tarief gebruik je als zzp\'er? Lees wanneer je 21%, 9% of 0% btw rekent, wanneer de KOR geldt en bereken btw direct met de gratis calculator.',
+      "Welke btw moet je als zzp'er rekenen? Bekijk wanneer je 21%, 9% of 0% btw gebruikt en hoe je btw op je factuur vermeldt.",
     keywords:
-      'welke btw zzp, btw tarief zzp, btw rekenen zzp, 21% btw zzp, 9% btw zzp, 0% btw zzp, btw op factuur zzp, kor zzp',
+      "welke btw zzp, btw rekenen zzp, 21% btw zzp, 9% btw zzp, 0% btw zzp, btw op factuur zzp, btw verlegd, kor zzp, exclusief btw",
     tool: {
       href: '/tools/btw-calculator',
-      label: 'Bereken direct btw',
-      ctaLabel: 'Bereken btw gratis',
+      label: 'Bereken btw',
+      ctaLabel: 'Bereken gratis btw',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Welke%20btw%20moet%20ik%20rekenen%20als%20zzp%20er.jpg',
-      alt: 'Welke btw moet ik rekenen als zzp\'er? Calculator en administratie',
+      alt: "Welke btw moet ik rekenen als zzp'er?",
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['btw-factuur-zzp', 'buitenlandse-klanten-factureren'],
     relatedGuideSlugs: ['verschil-9-en-21-btw', 'wanneer-gebruik-je-0-btw', 'btw-terugrekenen'],
     faq: [
       {
-        question: 'Moet iedere zzp\'er btw rekenen?',
+        question: "Moet iedere zzp'er btw rekenen?",
         answer:
-          'Nee. De meeste zzp\'ers zijn btw-plichtig, maar sommige ondernemers gebruiken bijvoorbeeld de KOR of vallen onder een btw-vrijstelling.',
+          "Nee. De meeste zzp'ers zijn btw-plichtig, maar er zijn uitzonderingen. Je kunt bijvoorbeeld onder voorwaarden gebruikmaken van de KOR of een btw-vrijgestelde activiteit uitvoeren.",
       },
       {
-        question: 'Welk btw-tarief gebruiken de meeste freelancers?',
-        answer: 'De meeste freelancers gebruiken het standaardtarief van 21% btw op zakelijke diensten.',
+        question: "Welk btw-tarief gebruiken de meeste zzp'ers?",
+        answer:
+          "Voor veel zzp'ers die reguliere zakelijke diensten leveren is 21% btw het toepasselijke tarief. Het hangt uiteindelijk af van wat je precies levert.",
+      },
+      {
+        question: 'Wat is het verschil tussen 9% en 21% btw?',
+        answer:
+          '21% is het algemene btw-tarief. 9% is een verlaagd tarief dat alleen geldt voor bepaalde goederen en diensten.',
       },
       {
         question: 'Moet ik btw rekenen aan particulieren?',
         answer:
-          'Als je btw-plichtig bent, moet je meestal ook aan particulieren btw rekenen. De klant betaalt het bedrag inclusief btw.',
+          'Als je btw-plichtig bent, moet je meestal ook btw rekenen aan particuliere klanten. Het btw-tarief hangt af van wat je levert.',
       },
       {
-        question: 'Kan ik een fout btw-tarief later aanpassen?',
+        question: 'Is een uurtarief inclusief of exclusief btw?',
         answer:
-          'Ja, maar fouten kunnen gevolgen hebben voor je btw-aangifte. Corrigeer fouten zo snel mogelijk met een creditnota of gecorrigeerde factuur.',
+          'Een zakelijk uurtarief wordt vaak exclusief btw gecommuniceerd. De btw komt dan bovenop het genoemde tarief als je btw in rekening moet brengen.',
+      },
+      {
+        question: 'Kan ik zelf kiezen tussen 9% en 21% btw?',
+        answer:
+          'Nee. Het toepasselijke btw-tarief wordt bepaald door de btw-regels voor de specifieke goederen of diensten die je levert.',
+      },
+      {
+        question: 'Wat moet ik doen als ik het verkeerde btw-tarief heb gebruikt?',
+        answer:
+          'Corrigeer de fout zo snel mogelijk. De manier waarop je een fout corrigeert hangt onder andere af van wanneer je de fout ontdekt en hoe de factuur en btw-aangifte zijn verwerkt.',
       },
     ],
     content: (
       <>
         <p>
-          Als zzp&apos;er moet je meestal btw (belasting over de toegevoegde waarde) rekenen over je diensten of producten.
-          Maar <strong>welk btw-tarief</strong> gebruik je? In Nederland zijn er drie belangrijke btw-tarieven:{' '}
-          <strong>21% btw</strong>, <strong>9% btw</strong> en <strong>0% btw</strong>.
+          Welke btw moet je als zzp&apos;er rekenen? In Nederland zijn de belangrijkste btw-tarieven{' '}
+          <strong>21%, 9% en 0%</strong>. Welk tarief je gebruikt, hangt af van wat je levert en aan wie je levert.
         </p>
         <p>
-          Het juiste btw-tarief hangt af van wat je verkoopt, aan wie je levert en waar je klant gevestigd is. Met onze
-          gratis{' '}
+          Voor veel zzp&apos;ers die diensten leveren aan Nederlandse klanten is <strong>21% btw</strong> het
+          standaardtarief. Maar voor bepaalde producten en diensten geldt 9%, terwijl in specifieke situaties het
+          0%-tarief of een andere btw-regeling van toepassing kan zijn.
+        </p>
+        <p>
+          Ook zijn er situaties waarin je helemaal geen btw op je factuur zet, bijvoorbeeld door de{' '}
+          <strong>KOR</strong>, een btw-vrijstelling of btw-verlegging.
+        </p>
+        <p>
+          Met de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
-            BTW calculator
+            btw calculator van FactuurBaas
           </Link>{' '}
-          bereken je eenvoudig hoeveel btw je moet toevoegen aan je factuur.
+          bereken je eenvoudig hoeveel btw je over een bedrag moet rekenen.
         </p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken direct btw →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw →" />
 
-        <h2>De meeste zzp&apos;ers gebruiken 21% btw</h2>
-        <p>Voor de meeste diensten geldt het standaardtarief van <strong>21% btw</strong>.</p>
-        <p>Voorbeelden:</p>
+        <h2>Welke btw-tarieven zijn er?</h2>
+        <p>De belangrijkste btw-tarieven in Nederland zijn:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[420px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Btw-tarief
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wanneer?
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">21%</td>
+                <td className="px-4 py-3">Het algemene btw-tarief voor de meeste goederen en diensten</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">9%</td>
+                <td className="px-4 py-3">
+                  Bepaalde goederen en diensten waarvoor het verlaagde tarief geldt
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">0%</td>
+                <td className="px-4 py-3">
+                  Specifieke situaties, onder andere bij bepaalde internationale leveringen
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Daarnaast bestaan er <strong>btw-vrijstellingen</strong> en situaties waarin btw wordt{' '}
+          <strong>verlegd</strong>. Dat zijn geen extra btw-tarieven, maar andere btw-regels.
+        </p>
+
+        <h2>De meeste zzp&apos;ers rekenen 21% btw</h2>
+        <p>
+          Het algemene btw-tarief is <strong>21%</strong>.
+        </p>
+        <p>Voorbeelden van diensten waarvoor vaak 21% btw geldt:</p>
         <ul>
-          <li>webdesign en websites bouwen</li>
-          <li>marketing en social media diensten</li>
+          <li>webdesign</li>
+          <li>websites bouwen</li>
+          <li>marketing</li>
+          <li>social media diensten</li>
           <li>advies en consultancy</li>
           <li>fotografie</li>
           <li>softwareontwikkeling</li>
-          <li>coaching en trainingen</li>
           <li>zakelijke dienstverlening</li>
-          <li>onderhoud en reparaties</li>
+          <li>veel freelance werkzaamheden</li>
         </ul>
-
-        <h3>Voorbeeld: freelance marketeer</h3>
-        <p>Je werkt als freelance marketeer en rekent €75 per uur voor 10 uur.</p>
-        <CalculationTable
-          rows={[
-            ['Uren', '10 uur'],
-            ['Tarief', '€75'],
-            ['Bedrag exclusief btw', '€750'],
-            ['21% btw', '€157,50'],
-            ['Totaal factuur', '€907,50'],
-          ]}
-        />
+        <p>Voorbeeld:</p>
+        <p>Je werkt 10 uur als freelance marketeer voor €75 per uur.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">10 uur × €75</td>
+                <td className="px-4 py-3 text-right">€750,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">BTW 21%</td>
+                <td className="px-4 py-3 text-right">€157,50</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€907,50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
-          Je klant betaalt €907,50. De €157,50 btw draag je later af via je btw-aangifte — dit is niet je inkomen.
+          Je klant betaalt €907,50. De btw die je in rekening brengt is niet hetzelfde als je eigen inkomen. Je
+          verwerkt deze btw in je btw-administratie en btw-aangifte.
         </p>
 
         <h2>Wanneer gebruik je 9% btw?</h2>
         <p>
-          Het verlaagde btw-tarief van <strong>9%</strong> geldt alleen voor bepaalde producten en diensten.
+          Het <strong>9%-tarief</strong> geldt alleen voor bepaalde goederen en diensten. Je kunt dus niet zelf kiezen
+          tussen 9% en 21%.
         </p>
-        <p>Voorbeelden:</p>
+        <p>Voorbeelden van situaties waarin 9% btw kan gelden zijn bepaalde:</p>
         <ul>
-          <li>sommige voedingsmiddelen</li>
-          <li>boeken en digitale publicaties</li>
-          <li>schilderwerk aan woningen ouder dan 2 jaar</li>
-          <li>bepaalde werkzaamheden in de zorg</li>
-          <li>bepaalde culturele diensten</li>
+          <li>voedingsmiddelen</li>
+          <li>boeken en andere publicaties</li>
+          <li>werkzaamheden aan woningen onder bepaalde voorwaarden</li>
+          <li>culturele diensten</li>
+          <li>werkzaamheden in specifieke sectoren</li>
         </ul>
-        <p>Voor veel zzp&apos;ers in zakelijke dienstverlening is 9% btw niet van toepassing.</p>
+        <p>De voorwaarden verschillen per soort product of dienst.</p>
 
         <h3>Voorbeeld: schilderwerk</h3>
-        <p>Een schilder werkt aan een woning ouder dan 2 jaar.</p>
-        <CalculationTable
-          rows={[
-            ['Schilderwerk', '€1.000'],
-            ['9% btw', '€90'],
-            ['Totaal', '€1.090'],
-          ]}
-        />
         <p>
-          Let op: niet al het schilderwerk valt automatisch onder 9%. Controleer altijd de voorwaarden. Meer in{' '}
+          Voor bepaalde schilderwerkzaamheden aan woningen die aan de voorwaarden voldoen, kan 9% btw gelden.
+        </p>
+        <p>Bij €1.000 exclusief btw:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Schilderwerk</td>
+                <td className="px-4 py-3 text-right">€1.000,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">BTW 9%</td>
+                <td className="px-4 py-3 text-right">€90,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.090,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Niet ieder schilderwerk valt automatisch onder 9%. Controleer daarom altijd of jouw specifieke werkzaamheden
+          aan de voorwaarden voldoen.
+        </p>
+        <p>
+          Lees ook:{' '}
           <Link href="/gidsen/verschil-9-en-21-btw" className="text-warm-orange hover:underline">
-            verschil tussen 9% en 21% btw
+            9% of 21% btw: wat valt eronder
           </Link>
           .
         </p>
+
+        <h2>9% of 21% btw: hoe weet ik welk tarief geldt?</h2>
+        <p>De belangrijkste regel is:</p>
+        <p>
+          <strong>Kijk eerst naar wat je precies verkoopt of levert.</strong>
+        </p>
+        <p>
+          Het feit dat je zzp&apos;er bent, bepaalt niet welk btw-tarief je gebruikt. Hetzelfde geldt voor je
+          functietitel.
+        </p>
+        <p>
+          Een fotograaf kan bijvoorbeeld voor verschillende soorten prestaties met verschillende btw-regels te maken
+          krijgen. Een schilder kan onder bepaalde voorwaarden 9% rekenen, terwijl veel andere zakelijke diensten onder
+          21% vallen.
+        </p>
+        <p>Twijfel je? Zoek dan de specifieke prestatie op in de actuele btw-regels van de Belastingdienst.</p>
 
         <h2>Wanneer gebruik je 0% btw?</h2>
-        <p>Het <strong>0%-tarief</strong> wordt vooral gebruikt bij bepaalde internationale transacties.</p>
-        <p>Voorbeelden:</p>
-        <ul>
-          <li>goederen leveren aan ondernemers in andere EU-landen</li>
-          <li>bepaalde internationale diensten</li>
-          <li>export buiten de EU</li>
-        </ul>
         <p>
-          Bij 0% btw bereken je geen btw aan je klant, maar de prestatie valt wel onder de btw-regels. Lees{' '}
+          Het <strong>0%-tarief</strong> geldt in specifieke situaties. Het wordt onder andere gebruikt bij bepaalde
+          internationale leveringen.
+        </p>
+        <p>
+          Bijvoorbeeld bij een levering van goederen aan een ondernemer in een ander EU-land wanneer aan de voorwaarden
+          voor een intracommunautaire levering is voldaan.
+        </p>
+        <p>Ook bij bepaalde exporttransacties buiten de EU kan 0% btw gelden.</p>
+        <p>
+          Belangrijk: <strong>een buitenlandse klant betekent niet automatisch 0% btw</strong>.
+        </p>
+        <p>
+          Bij veel B2B-diensten aan ondernemers in een ander EU-land wordt bijvoorbeeld de btw{' '}
+          <strong>verlegd</strong> in plaats van dat je 0% btw toepast.
+        </p>
+        <p>
+          Lees meer over{' '}
           <Link href="/gidsen/wanneer-gebruik-je-0-btw" className="text-warm-orange hover:underline">
-            wanneer gebruik je 0% btw?
+            wanneer je 0% btw gebruikt
           </Link>
           .
         </p>
 
-        <h3>Voorbeeld: dienst aan ondernemer in Duitsland</h3>
-        <CalculationTable
-          rows={[
-            ['Dienst', '€1.000'],
-            ['Btw', '€0'],
-            ['Totaal', '€1.000'],
-          ]}
-        />
-        <p>Op de factuur vermeld je bijvoorbeeld dat de btw is verlegd.</p>
+        <h2>0% btw, btw verlegd of geen btw?</h2>
+        <p>Een factuur zonder een btw-bedrag kan verschillende oorzaken hebben.</p>
 
-        <h2>Wanneer hoef je geen btw te rekenen?</h2>
-        <p>Sommige ondernemers rekenen helemaal geen btw.</p>
+        <h3>0% btw</h3>
+        <p>Je past daadwerkelijk het 0%-tarief toe omdat jouw prestatie onder een regeling voor 0% valt.</p>
 
-        <h3>Kleineondernemersregeling (KOR)</h3>
+        <h3>Btw verlegd</h3>
         <p>
-          Als je gebruikmaakt van de KOR, breng je geen btw in rekening aan klanten. Je mag dan ook geen btw terugvragen
-          over zakelijke kosten. Check met de{' '}
+          De btw wordt naar je klant verlegd. Dit komt bijvoorbeeld bij bepaalde internationale B2B-diensten voor.
+        </p>
+
+        <h3>Btw-vrijstelling</h3>
+        <p>
+          Je activiteit valt onder een btw-vrijstelling. Je brengt dan geen btw in rekening en voorbelasting kan onder
+          voorwaarden niet aftrekbaar zijn.
+        </p>
+
+        <h3>KOR</h3>
+        <p>
+          Als je deelneemt aan de kleineondernemersregeling, breng je geen btw in rekening aan je klanten en kun je de
+          btw op zakelijke kosten en investeringen niet aftrekken. Check met de{' '}
           <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
             KOR calculator
           </Link>{' '}
-          of de KOR bij jou past.
+          of die regeling bij jou past.
+        </p>
+        <p>
+          Dit zijn dus <strong>verschillende situaties</strong>, ook al staat er op de factuur geen normaal
+          btw-bedrag zoals 21%.
         </p>
 
-        <h3>Btw-vrijgestelde activiteiten</h3>
-        <p>Voor sommige beroepen en diensten gelden vrijstellingen, bijvoorbeeld bepaalde zorgdiensten, onderwijsactiviteiten
-          en financiële diensten. Niet iedere zzp&apos;er kan gebruikmaken van een btw-vrijstelling.</p>
-
-        <h2>Btw berekenen op je factuur</h2>
-        <p>Op een correcte factuur vermeld je:</p>
+        <h2>Wanneer hoef je geen btw te rekenen?</h2>
+        <p>Niet iedere zzp&apos;er brengt btw in rekening.</p>
+        <p>Dat kan bijvoorbeeld wanneer:</p>
         <ul>
-          <li>het btw-tarief (bijvoorbeeld 21%, 9% of 0%)</li>
-          <li>het bedrag exclusief btw</li>
-          <li>het btw-bedrag</li>
-          <li>het totaal inclusief btw</li>
+          <li>je gebruikmaakt van de KOR</li>
+          <li>je werkzaamheden onder een btw-vrijstelling vallen</li>
+          <li>de btw naar je klant wordt verlegd</li>
+          <li>een specifieke regeling voor 0% btw van toepassing is</li>
         </ul>
-
-        <CalculationTable
-          rows={[
-            ['Dienstverlening', '€500'],
-            ['21% btw', '€105'],
-            ['Totaal', '€605'],
-          ]}
-        />
         <p>
-          Met een goede factuur voorkom je fouten bij je btw-aangifte. Zie{' '}
+          De reden waarom je geen btw rekent, is belangrijk voor je administratie en de manier waarop je de factuur
+          opstelt.
+        </p>
+
+        <h2>Btw op je factuur als zzp&apos;er</h2>
+        <p>
+          Als je btw rekent, moet je op je factuur duidelijk laten zien hoe het bedrag is opgebouwd.
+        </p>
+        <p>Bijvoorbeeld bij 21% btw:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Diensten</td>
+                <td className="px-4 py-3 text-right">€500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">BTW 21%</td>
+                <td className="px-4 py-3 text-right">€105,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€605,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je kunt je uurtarief bijvoorbeeld communiceren als:</p>
+        <p>
+          <strong>€75 per uur exclusief btw</strong>
+        </p>
+        <p>De klant betaalt bij 21% btw vervolgens €90,75 per uur inclusief btw.</p>
+
+        <h3>Factuur exclusief btw</h3>
+        <p>
+          Wanneer je als zzp&apos;er een prijs noemt <strong>exclusief btw</strong>, betekent dit dat de btw nog
+          bovenop het genoemde bedrag komt als je btw in rekening moet brengen.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>€1.000 exclusief btw</strong>
+        </p>
+        <p>Bij 21% btw:</p>
+        <ul>
+          <li>€1.000 exclusief btw</li>
+          <li>€210 btw</li>
+          <li>€1.210 inclusief btw</li>
+        </ul>
+        <p>
+          Dit maakt het verschil tussen bedragen <strong>exclusief btw</strong> en <strong>inclusief btw</strong>{' '}
+          duidelijk voor je klant. Meer hierover in{' '}
           <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
-            Btw op je factuur: zo doe je het goed als zzp&apos;er
+            btw op je factuur als zzp&apos;er
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten met btw door zzp&apos;ers</h2>
-
-        <h3>Het verkeerde btw-tarief gebruiken</h3>
-        <p>Niet iedere dienst valt automatisch onder 21%. Controleer of jouw werkzaamheden onder een uitzondering vallen.</p>
-
-        <h3>Btw vergeten op de factuur</h3>
-        <p>Als je btw-plichtig bent, moet je btw correct vermelden op je facturen.</p>
-
-        <h3>Btw als inkomen zien</h3>
-        <p>De btw die je ontvangt is niet je omzet. Dit bedrag moet je later afdragen aan de Belastingdienst.</p>
-
-        <h3>Geen rekening houden met buitenlandse klanten</h3>
+        <h2>Hoe bereken je btw?</h2>
+        <p>Je kunt btw eenvoudig berekenen met een percentage.</p>
+        <p>Bij €500 exclusief btw en 21%:</p>
         <p>
-          Bij klanten buiten Nederland kunnen andere btw-regels gelden. Lees{' '}
+          <strong>€500 × 21% = €105 btw</strong>
+        </p>
+        <p>Totaal:</p>
+        <p>
+          <strong>€500 + €105 = €605</strong>
+        </p>
+        <p>
+          Wil je een bedrag inclusief btw terugrekenen naar exclusief btw? Dan gebruik je een andere berekening. Zie
+          ook{' '}
+          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
+            hoe bereken je btw terug
+          </Link>
+          .
+        </p>
+        <p>
+          Met de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            gratis btw calculator van FactuurBaas
+          </Link>{' '}
+          kun je beide berekeningen snel controleren.
+        </p>
+
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw →" />
+
+        <h2>Veelgemaakte fouten met btw</h2>
+
+        <h3>Je gebruikt altijd 21%</h3>
+        <p>21% is het algemene tarief, maar niet iedere prestatie valt automatisch onder 21%.</p>
+        <p>Controleer of jouw product of dienst onder een verlaagd tarief, 0%-tarief of vrijstelling valt.</p>
+
+        <h3>Je gebruikt 9% omdat je minder btw wilt rekenen</h3>
+        <p>
+          Je kunt niet zelf kiezen voor 9%. Het verlaagde tarief geldt alleen voor specifieke goederen en diensten.
+        </p>
+
+        <h3>Je gebruikt 0% voor iedere buitenlandse klant</h3>
+        <p>Een buitenlandse klant betekent niet automatisch dat je 0% btw moet rekenen.</p>
+        <p>
+          Bij internationale diensten gelden aparte regels, waaronder regels over btw-verlegging. Lees{' '}
           <Link href="/blogs/buitenlandse-klanten-factureren" className="text-warm-orange hover:underline">
-            Buitenlandse klanten factureren
+            buitenlandse klanten factureren
           </Link>
           .
         </p>
 
-        <h2>Welke btw moet ik rekenen? Overzicht</h2>
-        <CalculationTable
-          rows={[
-            ['Algemene diensten', '21%'],
-            ['Sommige producten en specifieke diensten', '9%'],
-            ['Internationale situaties', '0% of btw verlegd'],
-            ['KOR', 'Geen btw rekenen'],
-          ]}
-        />
-        <p>Twijfel je? Controleer altijd de specifieke regels voor jouw branche bij de Belastingdienst.</p>
-
-        <h2>Bereken direct hoeveel btw je moet rekenen</h2>
+        <h3>Je verwart exclusief en inclusief btw</h3>
         <p>
-          Met de gratis BTW calculator van FactuurBaas bereken je eenvoudig bedragen inclusief of exclusief btw. Vul een
-          bedrag in, kies het btw-tarief en zie direct hoeveel btw je moet toevoegen.
+          €1.000 exclusief btw is bij 21% btw <strong>€1.210 inclusief btw</strong>.
+        </p>
+        <p>
+          Zet daarom op offertes en prijsafspraken duidelijk of je bedragen inclusief of exclusief btw noemt.
         </p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw gratis →" />
+        <h3>Je vergeet btw op je factuur</h3>
+        <p>
+          Als je btw-plichtig bent en btw moet rekenen, moet je het btw-bedrag correct op je factuur verwerken.
+        </p>
+
+        <h2>Welk btw-tarief moet ik gebruiken? Kort overzicht</h2>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[420px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Situatie
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Btw
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">De meeste diensten en goederen</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">21%</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Specifieke goederen en diensten</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">9%</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Specifieke internationale situaties</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">0%</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw wordt naar de klant verlegd</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">Btw verlegd</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">KOR</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">Geen btw in rekening brengen</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Vrijgestelde activiteit</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">Geen btw in rekening brengen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Dit is een vereenvoudigd overzicht. Het juiste btw-regime hangt af van je specifieke product of dienst, je
+          klant en soms het land van de klant.
+        </p>
+
+        <h2>Btw berekenen met de gratis calculator</h2>
+        <p>Wil je snel controleren hoeveel btw je moet rekenen?</p>
+        <p>
+          Met de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            btw calculator van FactuurBaas
+          </Link>{' '}
+          kun je bedragen berekenen met 0%, 9% en 21% btw en bedragen inclusief en exclusief btw controleren.
+        </p>
+
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken gratis btw →" />
+
+        <p>Daarna kun je je factuur direct online maken met FactuurBaas.</p>
+        <div className="my-8 text-center not-prose">
+          <Button
+            asChild
+            variant="outline"
+            className="border-deep-blue text-deep-blue hover:bg-deep-blue hover:text-white font-bold py-3 px-6 rounded-lg text-lg"
+          >
+            <Link href="/create-invoice">Maak gratis een factuur →</Link>
+          </Button>
+        </div>
 
         <h2>Veelgestelde vragen</h2>
         <h3>Moet iedere zzp&apos;er btw rekenen?</h3>
         <p>
-          Nee. De meeste zzp&apos;ers zijn btw-plichtig, maar sommige ondernemers gebruiken bijvoorbeeld de KOR of vallen
-          onder een btw-vrijstelling.
+          Nee. De meeste zzp&apos;ers zijn btw-plichtig, maar er zijn uitzonderingen. Je kunt bijvoorbeeld onder
+          voorwaarden gebruikmaken van de KOR of een btw-vrijgestelde activiteit uitvoeren.
         </p>
-        <h3>Welk btw-tarief gebruiken de meeste freelancers?</h3>
-        <p>De meeste freelancers gebruiken het standaardtarief van 21%.</p>
+        <h3>Welk btw-tarief gebruiken de meeste zzp&apos;ers?</h3>
+        <p>
+          Voor veel zzp&apos;ers die reguliere zakelijke diensten leveren is 21% btw het toepasselijke tarief. Het
+          hangt uiteindelijk af van wat je precies levert.
+        </p>
+        <h3>Wat is het verschil tussen 9% en 21% btw?</h3>
+        <p>
+          21% is het algemene btw-tarief. 9% is een verlaagd tarief dat alleen geldt voor bepaalde goederen en diensten.
+        </p>
         <h3>Moet ik btw rekenen aan particulieren?</h3>
         <p>
-          Als je btw-plichtig bent, moet je meestal ook aan particulieren btw rekenen. De klant betaalt het bedrag
-          inclusief btw.
+          Als je btw-plichtig bent, moet je meestal ook btw rekenen aan particuliere klanten. Het btw-tarief hangt af
+          van wat je levert.
         </p>
-        <h3>Kan ik een fout btw-tarief later aanpassen?</h3>
+        <h3>Is een uurtarief inclusief of exclusief btw?</h3>
         <p>
-          Ja, maar fouten kunnen gevolgen hebben voor je btw-aangifte. Corrigeer fouten zo snel mogelijk.
+          Een zakelijk uurtarief wordt vaak exclusief btw gecommuniceerd. De btw komt dan bovenop het genoemde tarief
+          als je btw in rekening moet brengen.
+        </p>
+        <h3>Kan ik zelf kiezen tussen 9% en 21% btw?</h3>
+        <p>
+          Nee. Het toepasselijke btw-tarief wordt bepaald door de btw-regels voor de specifieke goederen of diensten
+          die je levert.
+        </p>
+        <h3>Wat moet ik doen als ik het verkeerde btw-tarief heb gebruikt?</h3>
+        <p>
+          Corrigeer de fout zo snel mogelijk. De manier waarop je een fout corrigeert hangt onder andere af van wanneer
+          je de fout ontdekt en hoe de factuur en btw-aangifte zijn verwerkt.
         </p>
       </>
     ),
@@ -1575,7 +2394,7 @@ Totaal                            €1.000,00`}
           </li>
           <li>
             <Link href="/gidsen/verschil-9-en-21-btw" className="text-warm-orange hover:underline">
-              Verschil tussen 9% en 21% btw
+              9% of 21% btw: wat valt eronder
             </Link>{' '}
             — wanneer gebruik je welk tarief?
           </li>
@@ -1640,12 +2459,12 @@ Totaal                            €1.000,00`}
   {
     slug: 'veelgemaakte-fouten-btw-berekenen',
     cluster: 'btw',
-    seoTitle: 'Veelgemaakte fouten bij btw berekenen (en hoe je ze voorkomt)',
-    title: 'Veelgemaakte fouten bij btw berekenen (en hoe je ze voorkomt)',
+    seoTitle: 'Veelgemaakte fouten bij btw berekenen: 9 fouten uitgelegd',
+    title: 'Veelgemaakte fouten bij btw berekenen',
     excerpt:
-      'Welke fouten maken ondernemers bij btw berekenen? Van verkeerde tarieven tot afrondingsfouten — lees hoe je ze voorkomt en bereken btw direct met de gratis calculator.',
+      'Welke fouten worden vaak gemaakt bij het berekenen van btw? Bekijk 9 veelgemaakte btw-fouten en leer hoe je btw correct berekent en op je factuur verwerkt.',
     keywords:
-      'fouten btw berekenen, btw berekenen fout, verkeerd btw tarief, btw op factuur fout, btw terugrekenen fout, btw afronden, kor btw fout',
+      'veelgemaakte fouten bij btw berekenen, btw verkeerd berekend, btw terugrekenen, btw doorberekenen, verkeerd btw-tarief, btw berekenen inclusief exclusief, btw op factuur fout, kor btw',
     tool: {
       href: '/tools/btw-calculator',
       label: 'Bereken direct btw',
@@ -1656,104 +2475,148 @@ Totaal                            €1.000,00`}
       alt: 'Veelgemaakte fouten bij btw berekenen: ondernemer met administratie',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
-    relatedSlugs: ['btw-factuur-zzp', 'factuur-fouten-voorkomen'],
-    relatedGuideSlugs: ['btw-terugrekenen', 'welke-btw-rekenen-zzper', 'btw-berekenen-excel'],
+    dateModified: '2026-09-03',
+    relatedSlugs: ['btw-factuur-zzp', 'factuur-fouten-voorkomen', 'buitenlandse-klanten-factureren'],
+    relatedGuideSlugs: [
+      'btw-terugrekenen',
+      'welke-btw-rekenen-zzper',
+      'btw-berekenen-excel',
+      'verschil-9-en-21-btw',
+      'wanneer-gebruik-je-0-btw',
+      'hoe-rond-je-btw-af',
+    ],
     faq: [
       {
-        question: 'Hoe weet ik welk btw-tarief ik moet gebruiken?',
+        question: 'Wat gebeurt er als ik een verkeerd btw-tarief heb gebruikt?',
         answer:
-          'Dit hangt af van je product, dienst en situatie. Voor de meeste zzp-diensten geldt 21% btw. Controleer altijd of 9% of 0% van toepassing is.',
+          'Een verkeerd btw-tarief kan betekenen dat je te veel of te weinig btw hebt berekend. Wat je vervolgens moet doen, hangt af van de situatie en of de fout al in je btw-aangifte is verwerkt. Controleer de actuele informatie van de Belastingdienst of vraag advies aan een boekhouder.',
+      },
+      {
+        question: 'Hoe bereken ik btw terug uit een bedrag inclusief btw?',
+        answer:
+          'Bij 21% btw deel je een bedrag inclusief btw door 1,21 om het bedrag exclusief btw te berekenen. Bijvoorbeeld: €121 ÷ 1,21 = €100 exclusief btw. Het verschil van €21 is de btw.',
+      },
+      {
+        question: 'Moet ik btw altijd doorberekenen aan mijn klant?',
+        answer:
+          'Als je btw-plichtig bent, moet je in veel gevallen btw in rekening brengen. Er zijn uitzonderingen, bijvoorbeeld bij bepaalde vrijstellingen, de KOR en bepaalde internationale transacties.',
       },
       {
         question: 'Waarom klopt mijn btw-berekening niet?',
         answer:
-          'Meestal komt dit door een verkeerde uitgangswaarde (inclusief of exclusief btw), een verkeerd percentage of afrondingsverschillen.',
+          'Controleer eerst of je met een bedrag inclusief of exclusief btw werkt. Controleer daarna het gebruikte btw-tarief en kijk of er sprake is van afrondingsverschillen.',
       },
       {
-        question: 'Moet ik btw altijd doorberekenen aan klanten?',
+        question: 'Kan een fout in mijn btw-berekening gevolgen hebben?',
         answer:
-          'Als je btw-plichtig bent meestal wel. Er zijn uitzonderingen zoals de KOR of bepaalde vrijstellingen.',
-      },
-      {
-        question: 'Kan een btw-fout gevolgen hebben?',
-        answer:
-          'Ja. Een verkeerde btw-aangifte kan leiden tot correcties, naheffingen of rente bij de Belastingdienst.',
+          'Ja. Een fout kan ertoe leiden dat je te veel of te weinig btw hebt aangegeven of afgedragen. Afhankelijk van de situatie kan dit moeten worden gecorrigeerd. Bij twijfel over een concrete fout: controleer de actuele regels van de Belastingdienst.',
       },
     ],
     content: (
       <>
         <p>
-          Btw berekenen lijkt eenvoudig, maar veel ondernemers maken fouten bij het toevoegen, terugrekenen of verwerken
-          van btw op facturen.
+          Btw berekenen lijkt eenvoudig, maar een kleine fout kan ervoor zorgen dat je factuur niet klopt of dat je een
+          verkeerd bedrag in je btw-aangifte verwerkt.
         </p>
         <p>
-          Een verkeerd btw-tarief, een verkeerde berekening of een fout op je factuur kan leiden tot problemen met je
-          administratie en btw-aangifte. In deze gids bespreken we de meest voorkomende fouten bij btw berekenen en hoe je
-          ze voorkomt.
+          Vooral het verschil tussen bedragen <strong>inclusief en exclusief btw</strong>, het kiezen van het juiste
+          btw-tarief en het verwerken van btw op facturen zorgt regelmatig voor verwarring.
         </p>
         <p>
-          Met de gratis{' '}
+          In deze gids bespreken we <strong>9 veelgemaakte fouten bij het berekenen van btw</strong> en leggen we uit hoe
+          je ze voorkomt.
+        </p>
+        <p>
+          Wil je direct een bedrag inclusief of exclusief btw berekenen? Gebruik dan onze gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
-            BTW calculator
-          </Link>{' '}
-          van FactuurBaas bereken je eenvoudig bedragen inclusief of exclusief btw.
+            btw calculator
+          </Link>
+          .
         </p>
 
         <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
 
-        <h2>1. Btw berekenen over een bedrag inclusief btw</h2>
-        <p>Een veelgemaakte fout is dat ondernemers 21% berekenen over een bedrag waar de btw al in zit.</p>
+        <h2>1. 21% btw berekenen over een bedrag inclusief btw</h2>
+        <p>Dit is een van de meest voorkomende fouten bij btw berekenen.</p>
         <p>
-          Voorbeeld: je ontvangt een bedrag van <strong>€121 inclusief btw</strong>.
+          Stel dat een bedrag <strong>€121 inclusief 21% btw</strong> is. Je kunt dan niet simpelweg 21% van €121 nemen.
         </p>
+        <h3>Foutieve berekening</h3>
+        <p>€121 × 21% = €25,41 btw</p>
+        <h3>Juiste berekening</h3>
+        <p>€121 ÷ 1,21 = €100 exclusief btw</p>
         <p>
-          <strong>Foutieve berekening:</strong> €121 × 21% = €25,41 btw — dat klopt niet.
+          €121 − €100 = <strong>€21 btw</strong>
         </p>
+        <p>Het bedrag van €121 bestaat dus uit €100 exclusief btw en €21 btw.</p>
         <p>
-          <strong>Juiste berekening:</strong> €121 ÷ 1,21 = €100 exclusief btw. €121 − €100 = <strong>€21 btw</strong>.
-        </p>
-        <p>
-          Meer uitleg:{' '}
+          Dit is het verschil tussen <strong>btw toevoegen</strong> en{' '}
           <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
-            Hoe bereken je btw terug?
+            btw terugrekenen
           </Link>
           .
         </p>
 
         <h2>2. Het verkeerde btw-tarief gebruiken</h2>
-        <p>Niet iedere dienst valt automatisch onder 21% btw.</p>
-        <CalculationTable
-          rows={[
-            ['21%', 'Meeste producten en diensten'],
-            ['9%', 'Bepaalde producten en diensten'],
-            ['0%', 'Sommige internationale situaties'],
-          ]}
-        />
+        <p>Niet iedere ondernemer gebruikt automatisch 21% btw. In Nederland zijn onder andere deze tarieven van belang:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Btw-tarief
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wanneer?
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">21%</td>
+                <td className="px-4 py-3">Het algemene btw-tarief voor de meeste goederen en diensten</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">9%</td>
+                <td className="px-4 py-3">Voor bepaalde goederen en diensten</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-deep-blue">0%</td>
+                <td className="px-4 py-3">
+                  Onder bepaalde omstandigheden, bijvoorbeeld bij bepaalde internationale transacties
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
-          Een verkeerde keuze kan betekenen dat je te veel of te weinig btw afdraagt. Zie{' '}
+          Welk tarief je moet gebruiken, hangt af van wat je levert en van de omstandigheden van de transactie. Een
+          verkeerd btw-tarief kan ervoor zorgen dat je te veel of te weinig btw in rekening brengt.
+        </p>
+        <p>
+          Twijfel je welk tarief je moet gebruiken? Lees{' '}
           <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">
             welke btw moet ik rekenen als zzp&apos;er?
           </Link>{' '}
           en{' '}
           <Link href="/gidsen/verschil-9-en-21-btw" className="text-warm-orange hover:underline">
-            verschil tussen 9% en 21% btw
+            9% of 21% btw: wat valt eronder
           </Link>
           .
         </p>
 
-        <h2>3. Het btw-percentage verkeerd invoeren</h2>
-        <p>Bij berekeningen in Excel of een calculator gaat dit regelmatig mis.</p>
+        <h2>3. Een percentage verkeerd invoeren</h2>
+        <p>Een fout in een calculator, spreadsheet of boekhoudprogramma kan een groot verschil maken.</p>
+        <p>
+          Voor een berekening met 21% gebruik je bijvoorbeeld: <strong>21% = 0,21</strong>
+        </p>
+        <p>Een veelgemaakte fout is om 21 in plaats van 0,21 als percentage te gebruiken. Hetzelfde geldt voor andere percentages:</p>
         <ul>
-          <li>
-            <strong>Goed:</strong> 21% = 0,21
-          </li>
-          <li>
-            <strong>Fout:</strong> 21 = 21 (100× te hoog)
-          </li>
+          <li>9% = 0,09</li>
+          <li>21% = 0,21</li>
         </ul>
         <p>
-          Lees ook{' '}
+          Controleer daarom altijd of een programma om een percentage of een decimaal getal vraagt. Meer uitleg in{' '}
           <Link href="/gidsen/btw-berekenen-excel" className="text-warm-orange hover:underline">
             btw berekenen in Excel
           </Link>
@@ -1761,11 +2624,7 @@ Totaal                            €1.000,00`}
         </p>
 
         <h2>4. Btw vergeten op de factuur</h2>
-        <p>Sommige startende zzp&apos;ers sturen een factuur met alleen het bedrag van hun werkzaamheden.</p>
-        <p>
-          <strong>Fout:</strong> Website ontwerp €1.000 — Totaal €1.000
-        </p>
-        <p>Als je btw-plichtig bent, moet daar meestal nog btw bij:</p>
+        <p>Als je btw-plichtig bent, moet je btw in veel gevallen afzonderlijk op je factuur vermelden. Bijvoorbeeld:</p>
         <CalculationTable
           rows={[
             ['Website ontwerp', '€1.000'],
@@ -1773,112 +2632,230 @@ Totaal                            €1.000,00`}
             ['Totaal', '€1.210'],
           ]}
         />
-        <p>Een correcte factuur vermeldt duidelijk bedrag exclusief btw, btw-tarief, btw-bedrag en totaal inclusief btw.</p>
-
-        <h2>5. Btw als omzet of inkomen zien</h2>
-        <p>De btw die je ontvangt van je klant is geen inkomen.</p>
-        <p>Je stuurt een factuur: dienst €1.000, btw €210 — klant betaalt €1.210.</p>
         <p>
-          Die €210 btw is bedoeld voor je btw-aangifte. Je omzet is <strong>€1.000</strong>, niet €1.210.
+          Een factuur moet duidelijk maken welk bedrag exclusief btw wordt berekend, welk btw-tarief wordt toegepast en
+          hoeveel btw in rekening wordt gebracht. Lees ook{' '}
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
+            btw op je factuur als zzp&apos;er
+          </Link>
+          .
+        </p>
+        <p>
+          Er zijn wel situaties waarin je geen Nederlandse btw in rekening brengt. Denk bijvoorbeeld aan bepaalde
+          vrijstellingen, de KOR of bepaalde internationale transacties.
         </p>
 
-        <h2>6. Btw afronden op de verkeerde manier</h2>
-        <p>
-          Bij meerdere factuurregels kunnen afrondingsverschillen ontstaan. Als je eerst alle bedragen optelt en daarna
-          btw berekent, kan het resultaat verschillen van btw berekenen per regel. Vooral bij grotere facturen is
-          correcte afronding belangrijk.
-        </p>
-
-        <h2>7. Geen rekening houden met buitenlandse klanten</h2>
-        <p>Bij klanten buiten Nederland gelden soms andere btw-regels:</p>
+        <h2>5. Btw verwarren met omzet of inkomen</h2>
+        <p>Btw die je aan een klant in rekening brengt, is niet hetzelfde als je omzet.</p>
+        <p>Stel dat je een dienst levert voor €1.000 exclusief btw en daar 21% btw over rekent. Dan betaalt je klant:</p>
         <ul>
-          <li>zakelijke klant in een ander EU-land</li>
-          <li>export buiten de EU</li>
-          <li>btw verlegd</li>
+          <li>Omzet: €1.000</li>
+          <li>Btw: €210</li>
+          <li>Totaal: €1.210</li>
         </ul>
         <p>
-          Een factuur naar een buitenlandse ondernemer kan anders worden opgesteld dan een normale Nederlandse factuur.
-          Zie{' '}
+          Je omzet is <strong>€1.000</strong>. De €210 is btw die je van je klant ontvangt en die je vervolgens in je
+          btw-administratie verwerkt.
+        </p>
+        <p>
+          Dit betekent ook dat je voorzichtig moet zijn met het uitgeven van ontvangen btw. Afhankelijk van je situatie
+          kan een deel daarvan later moeten worden afgedragen.
+        </p>
+
+        <h2>6. Btw verkeerd afronden</h2>
+        <p>Bij meerdere factuurregels kunnen afrondingsverschillen ontstaan.</p>
+        <p>
+          Stel dat je een factuur met veel verschillende producten of diensten maakt. Je kunt btw per regel berekenen en
+          afronden, maar ook eerst bepaalde bedragen optellen en vervolgens de btw berekenen. Daardoor kunnen kleine
+          verschillen ontstaan.
+        </p>
+        <p>
+          Vooral bij grotere facturen is het daarom belangrijk om consequent dezelfde berekeningsmethode te gebruiken en
+          te controleren of het btw-bedrag op de factuur klopt. Meer uitleg in{' '}
+          <Link href="/gidsen/hoe-rond-je-btw-af" className="text-warm-orange hover:underline">
+            hoe rond je btw af?
+          </Link>
+          . Een goede factuurtool kan hierbij helpen.
+        </p>
+
+        <h2>7. Btw bij buitenlandse klanten verkeerd verwerken</h2>
+        <p>Een buitenlandse klant betekent niet automatisch dat je 0% btw moet rekenen. De btw-behandeling hangt onder andere af van:</p>
+        <ul>
+          <li>of je klant een ondernemer of particulier is;</li>
+          <li>in welk land je klant gevestigd is;</li>
+          <li>wat je verkoopt of welke dienst je levert;</li>
+          <li>of het om een levering of dienst gaat;</li>
+          <li>welke btw-regels voor de specifieke situatie gelden.</li>
+        </ul>
+        <p>
+          Bij bepaalde zakelijke diensten aan ondernemers in een ander EU-land kan bijvoorbeeld sprake zijn van{' '}
+          <strong>btw verlegd</strong>. In andere situaties kunnen weer andere regels gelden.
+        </p>
+        <p>
+          Gebruik daarom niet zomaar 0% btw omdat je klant buiten Nederland zit. Lees{' '}
           <Link href="/gidsen/wanneer-gebruik-je-0-btw" className="text-warm-orange hover:underline">
             wanneer gebruik je 0% btw?
           </Link>{' '}
           en{' '}
           <Link href="/blogs/buitenlandse-klanten-factureren" className="text-warm-orange hover:underline">
-            Buitenlandse klanten factureren
+            buitenlandse klanten factureren
           </Link>
           .
         </p>
 
-        <h2>8. Btw rekenen terwijl je gebruikmaakt van de KOR</h2>
+        <h2>8. Btw rekenen terwijl je onder een vrijstelling of regeling valt</h2>
         <p>
-          Ondernemers die gebruikmaken van de kleineondernemersregeling (KOR) rekenen geen btw aan klanten. Een
-          veelgemaakte fout: KOR gebruiken, maar toch 21% btw op de factuur zetten. Dat mag niet.
+          Niet iedere ondernemer brengt btw in rekening. Een voorbeeld is de{' '}
+          <strong>kleineondernemersregeling (KOR)</strong>. Ondernemers die deelnemen aan de KOR brengen in principe geen
+          btw in rekening aan hun klanten. Ook zijn er verschillende btw-vrijstellingen.
         </p>
         <p>
-          Controleer met de{' '}
+          Het is daarom belangrijk om eerst te bepalen of je btw moet rekenen voordat je een percentage op je factuur zet.
+        </p>
+        <p>
+          Let op: of de KOR of een vrijstelling op jouw situatie van toepassing is, hangt af van de voorwaarden. Gebruik
+          een calculator alleen als hulpmiddel en controleer de actuele regels bij de Belastingdienst. Een eerste
+          inschatting maak je met de{' '}
           <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
             KOR calculator
-          </Link>{' '}
-          of je btw-plichtig bent of onder een regeling valt.
+          </Link>
+          .
         </p>
 
-        <h2>9. Btw vergeten te reserveren</h2>
+        <h2>9. Btw niet goed doorberekenen aan je klant</h2>
         <p>
-          Je ontvangt btw van klanten, maar dit geld is niet volledig beschikbaar om uit te geven. Veel ondernemers zetten
-          de ontvangen btw apart zodat ze voldoende geld hebben voor de btw-aangifte.
+          Een andere veelgemaakte fout ontstaat wanneer je een prijs afspreekt zonder duidelijk te bepalen of deze{' '}
+          <strong>inclusief of exclusief btw</strong> is.
+        </p>
+        <p>
+          Stel dat je met een klant €1.000 afspreekt en later blijkt dat dit bedrag inclusief btw moet zijn. Bij 21% btw
+          is je omzet dan niet €1.000. Je moet de btw uit het totaalbedrag terugrekenen:
+        </p>
+        <p>€1.000 ÷ 1,21 = €826,45 exclusief btw</p>
+        <p>
+          Btw: €1.000 − €826,45 = <strong>€173,55</strong>
+        </p>
+        <p>
+          Maak daarom bij offertes en prijsafspraken duidelijk of bedragen inclusief of exclusief btw zijn. Meer over de
+          formule in{' '}
+          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
+            btw terugrekenen
+          </Link>
+          .
         </p>
 
-        <h2>Hoe voorkom je fouten met btw?</h2>
+        <h2>Hoe voorkom je fouten bij btw berekenen?</h2>
+        <p>Met een paar eenvoudige controles kun je veel btw-fouten voorkomen:</p>
         <ol>
-          <li>Controleer welk btw-tarief bij je dienst hoort.</li>
-          <li>Bereken btw altijd over het juiste bedrag.</li>
-          <li>Vermeld btw duidelijk op je factuur.</li>
-          <li>Houd btw-inkomsten apart.</li>
-          <li>Gebruik een betrouwbare calculator of factuurtool.</li>
+          <li>
+            <strong>Controleer of je bedrag inclusief of exclusief btw is.</strong>
+          </li>
+          <li>
+            <strong>Controleer welk btw-tarief van toepassing is.</strong>
+          </li>
+          <li>
+            <strong>Gebruik het juiste percentage</strong>, bijvoorbeeld 0,21 voor 21%.
+          </li>
+          <li>
+            <strong>Controleer of je btw-plichtig bent</strong> en of er een vrijstelling of regeling geldt.
+          </li>
+          <li>
+            <strong>Maak duidelijk of je prijzen inclusief of exclusief btw zijn.</strong>
+          </li>
+          <li>
+            <strong>Controleer je factuur voordat je deze naar de klant stuurt.</strong>
+          </li>
+          <li>
+            <strong>Let extra goed op bij buitenlandse klanten en btw verlegd.</strong>
+          </li>
         </ol>
         <p>
-          Meer tips:{' '}
+          Meer over factuurfouten in het algemeen:{' '}
           <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">
             7 veelgemaakte fouten op facturen
           </Link>
           .
         </p>
 
-        <h2>Bereken btw zonder fouten</h2>
-        <p>Met de gratis BTW calculator van FactuurBaas controleer je snel:</p>
+        <h2>Btw berekenen zonder ingewikkelde formules</h2>
+        <p>
+          Wil je snel controleren hoeveel btw er op een bedrag zit? Met de gratis{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            BTW calculator van FactuurBaas
+          </Link>{' '}
+          kun je onder andere:
+        </p>
         <ul>
-          <li>btw toevoegen aan een bedrag</li>
-          <li>btw terugrekenen uit een inclusief bedrag</li>
-          <li>21%, 9% en 0% btw berekenen</li>
+          <li>btw bij een bedrag optellen;</li>
+          <li>btw uit een inclusief bedrag terugrekenen;</li>
+          <li>21% btw berekenen;</li>
+          <li>9% btw berekenen;</li>
+          <li>0% btw berekenen.</li>
         </ul>
-        <p>Geen Excel-formules nodig.</p>
+        <p>Zo hoef je niet iedere keer zelf met een formule te rekenen.</p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw gratis →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Gebruik de gratis btw calculator →" />
 
-        <h2>Veelgestelde vragen</h2>
-        <h3>Hoe weet ik welk btw-tarief ik moet gebruiken?</h3>
-        <p>Dit hangt af van je product, dienst en situatie. Voor de meeste zzp-diensten geldt 21% btw.</p>
+        <h2>Veelgestelde vragen over fouten met btw</h2>
+        <h3>Wat gebeurt er als ik een verkeerd btw-tarief heb gebruikt?</h3>
+        <p>
+          Een verkeerd btw-tarief kan betekenen dat je te veel of te weinig btw hebt berekend. Wat je vervolgens moet
+          doen, hangt af van de situatie en of de fout al in je btw-aangifte is verwerkt. Controleer bij een concrete
+          fout de actuele informatie van de Belastingdienst of vraag advies aan een boekhouder of belastingadviseur.
+        </p>
+        <h3>Hoe bereken ik btw terug uit een bedrag inclusief btw?</h3>
+        <p>
+          Bij 21% btw deel je een bedrag inclusief btw door <strong>1,21</strong> om het bedrag exclusief btw te
+          berekenen. Bijvoorbeeld: €121 ÷ 1,21 = €100 exclusief btw. Het verschil van €21 is de btw.
+        </p>
+        <h3>Moet ik btw altijd doorberekenen aan mijn klant?</h3>
+        <p>
+          Als je btw-plichtig bent, moet je in veel gevallen btw in rekening brengen. Er zijn echter uitzonderingen,
+          bijvoorbeeld bij bepaalde vrijstellingen, de KOR en bepaalde internationale transacties.
+        </p>
         <h3>Waarom klopt mijn btw-berekening niet?</h3>
         <p>
-          Meestal door een verkeerde uitgangswaarde (inclusief of exclusief btw), een verkeerd percentage of
-          afrondingsverschillen.
+          Controleer eerst of je met een bedrag inclusief of exclusief btw werkt. Controleer daarna het gebruikte
+          btw-tarief en kijk of er sprake is van afrondingsverschillen.
         </p>
-        <h3>Moet ik btw altijd doorberekenen aan klanten?</h3>
-        <p>Als je btw-plichtig bent meestal wel. Er zijn uitzonderingen zoals de KOR of bepaalde vrijstellingen.</p>
-        <h3>Kan een btw-fout gevolgen hebben?</h3>
-        <p>Ja. Een verkeerde btw-aangifte kan leiden tot correcties, naheffingen of rente.</p>
+        <h3>Kan een fout in mijn btw-berekening gevolgen hebben?</h3>
+        <p>
+          Ja. Een fout kan ertoe leiden dat je te veel of te weinig btw hebt aangegeven of afgedragen. Afhankelijk van de
+          situatie kan dit moeten worden gecorrigeerd. Bij twijfel over een concrete btw-fout is het verstandig om de
+          actuele regels van de Belastingdienst te controleren.
+        </p>
+
+        <h2>Btw berekenen of een factuur maken?</h2>
+        <p>Met FactuurBaas kun je niet alleen btw berekenen, maar ook gratis facturen en offertes maken.</p>
+        <ul>
+          <li>
+            <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+              Gratis btw berekenen
+            </Link>
+          </li>
+          <li>
+            <Link href="/tools/factuur-maken" className="text-warm-orange hover:underline">
+              Gratis factuur maken
+            </Link>
+          </li>
+          <li>
+            <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
+              Gratis offerte maken
+            </Link>
+          </li>
+        </ul>
       </>
     ),
   },
   {
     slug: 'hoe-rond-je-btw-af',
     cluster: 'btw',
-    seoTitle: 'Hoe rond je btw af? Uitleg over btw afronden op facturen',
-    title: 'Hoe rond je btw af? Uitleg over btw afronden op facturen',
+    seoTitle: 'Btw afronden: zo rond je btw correct af',
+    title: 'Btw afronden: zo rond je btw correct af',
     excerpt:
-      'Hoe rond je btw af op facturen? Lees wanneer je per regel of over het totaal afrondt, welke Excel-formule je gebruikt en bereken btw direct met de gratis calculator.',
+      'Hoe rond je btw af op een factuur? Lees hoe btw op twee decimalen wordt afgerond en wat het verschil is tussen afronden per factuurregel en over het totaal.',
     keywords:
-      'btw afronden, hoe rond je btw af, btw afronden factuur, afronden op twee decimalen, btw berekenen afronden, AFRONDEN excel btw',
+      'btw afronden, btw afronden op 2 decimalen, btw afronden per regel, btw afronden over totaal, btw afronding factuur, btw afronden Excel, btw berekenen en afronden, afrondingsverschil btw',
     tool: {
       href: '/tools/btw-calculator',
       label: 'Bereken direct btw',
@@ -1886,192 +2863,256 @@ Totaal                            €1.000,00`}
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Hoe%20rond%20je%20btw%20af.jpg',
-      alt: 'Hoe rond je btw af: geld tellen en administratie',
+      alt: 'Btw afronden: zo rond je btw correct af op een factuur',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['btw-factuur-zzp', 'factuur-fouten-voorkomen'],
     relatedGuideSlugs: ['veelgemaakte-fouten-btw-berekenen', 'btw-berekenen-excel', 'btw-terugrekenen'],
     faq: [
       {
-        question: 'Op hoeveel decimalen rond je btw af?',
-        answer: 'Btw-bedragen worden normaal afgerond op twee decimalen op Nederlandse facturen.',
-      },
-      {
-        question: 'Rond je btw per regel of over het totaal af?',
+        question: 'Rond je btw af op twee decimalen?',
         answer:
-          'Beide methodes kunnen voorkomen. Het belangrijkste is dat je consequent dezelfde methode gebruikt in je facturen en administratie.',
+          'Ja, btw-bedragen op een factuur worden normaal gesproken weergegeven op twee decimalen. Bijvoorbeeld €21,43.',
       },
       {
-        question: 'Mag een factuur een verschil van een paar cent hebben?',
+        question: 'Rond je btw per factuurregel af?',
         answer:
-          'Kleine afrondingsverschillen kunnen voorkomen, maar je administratie en btw-aangifte moeten uiteindelijk correct aansluiten.',
+          'Dat kan onderdeel zijn van de gekozen factuur- en boekhoudmethode. Bij meerdere regels kan afronden per regel een ander resultaat geven dan btw berekenen over het totaal.',
       },
       {
-        question: 'Hoe rond ik btw af in Excel?',
-        answer: 'Gebruik de functie AFRONDEN(getal;2) om een bedrag op twee decimalen af te ronden.',
+        question: 'Wat is een afrondingsverschil bij btw?',
+        answer:
+          'Een afrondingsverschil ontstaat doordat een btw-berekening meer decimalen kan opleveren dan op een factuur worden weergegeven. Bij meerdere regels kan daardoor een verschil van enkele centen ontstaan.',
+      },
+      {
+        question: 'Hoe rond je btw af in Excel?',
+        answer: 'Gebruik bijvoorbeeld =AFRONDEN(12,34*21%;2) om de btw over €12,34 op twee decimalen af te ronden.',
+      },
+      {
+        question: 'Waarom klopt mijn btw-totaal niet met de afzonderlijke regels?',
+        answer:
+          'Controleer of je de btw per factuurregel afrondt of eerst alle bedragen optelt en daarna de btw berekent. Bij meerdere regels kan daardoor een klein verschil ontstaan.',
       },
     ],
     content: (
       <>
         <p>
-          Bij het maken van een factuur moet je btw correct afronden. Vooral bij facturen met meerdere regels kunnen
-          kleine afrondingsverschillen ontstaan.
+          Hoe rond je btw af op een factuur? Bij een eenvoudige factuur is het meestal vanzelfsprekend, maar bij
+          meerdere factuurregels kunnen er <strong>afrondingsverschillen van een paar cent</strong> ontstaan.
         </p>
         <p>
-          Een verschil van een paar cent lijkt onbelangrijk, maar een correcte btw-berekening zorgt ervoor dat je
-          factuur aansluit bij je administratie en btw-aangifte.
+          In dit artikel lees je hoe je btw afrondt op twee decimalen, wat het verschil is tussen afronden{' '}
+          <strong>per factuurregel</strong> en <strong>over het totaal</strong>, en hoe je btw in Excel afrondt.
         </p>
         <p>
-          Met de gratis{' '}
+          Wil je btw direct berekenen? Gebruik de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
-            BTW calculator
-          </Link>{' '}
-          van FactuurBaas bereken je eenvoudig btw-bedragen en totalen.
+            btw calculator van FactuurBaas
+          </Link>
+          .
         </p>
 
-        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Bereken btw gratis →" />
 
-        <h2>Rond je btw af op twee decimalen</h2>
-        <p>In Nederland worden bedragen op facturen normaal gesproken afgerond op <strong>twee decimalen</strong>.</p>
-        <p>Voorbeelden: €10,00 · €21,50 · €157,35</p>
+        <h2>Op hoeveel decimalen rond je btw af?</h2>
         <p>
-          Een btw-bedrag mag dus niet worden weergegeven als €21,428571, maar als <strong>€21,43</strong>.
+          Op een factuur worden bedragen normaal gesproken weergegeven op <strong>twee decimalen</strong>. Bijvoorbeeld
+          €10,00, €21,50 of €157,35.
         </p>
-        <p>De standaardregel:</p>
+        <p>Bij het afronden van een bedrag kijk je naar de derde decimaal:</p>
         <ul>
-          <li>derde decimaal <strong>5 of hoger</strong> → naar boven afronden</li>
-          <li>derde decimaal <strong>4 of lager</strong> → naar beneden afronden</li>
+          <li>
+            <strong>5 of hoger:</strong> naar boven afronden
+          </li>
+          <li>
+            <strong>4 of lager:</strong> naar beneden afronden
+          </li>
+        </ul>
+        <p>Voorbeelden:</p>
+        <ul>
+          <li>€21,425 → €21,43</li>
+          <li>€21,424 → €21,42</li>
+          <li>€157,499 → €157,50</li>
         </ul>
         <p>
-          Voorbeeld: €21,425 → €21,43 · €21,424 → €21,42
+          Het gaat hierbij om de manier waarop het bedrag op de factuur wordt weergegeven. Bij een berekening kunnen
+          tussenstappen meer decimalen bevatten voordat het uiteindelijke bedrag wordt afgerond.
         </p>
 
         <h2>Btw afronden per factuurregel of over het totaal?</h2>
-        <p>Bij facturen met meerdere producten of diensten zijn er twee manieren om btw te berekenen.</p>
+        <p>
+          Bij een factuur met meerdere regels kan de btw op verschillende momenten worden afgerond. Daardoor kan een
+          klein verschil ontstaan tussen de btw die je krijgt door iedere regel afzonderlijk af te ronden en de btw die
+          je berekent over het totale bedrag.
+        </p>
 
-        <h3>Methode 1: btw per regel afronden</h3>
-        <p>Bij deze methode bereken je eerst de btw per factuurregel.</p>
+        <h3>Btw per factuurregel afronden</h3>
+        <p>Je berekent eerst de btw over iedere afzonderlijke factuurregel en rondt die vervolgens af.</p>
+        <p>Bijvoorbeeld drie diensten van €0,01:</p>
         <CalculationTable
           rows={[
-            ['Dienst 1 — excl. btw', '€10,00'],
-            ['Btw 21%', '€2,10'],
-            ['Dienst 2 — excl. btw', '€10,00'],
-            ['Btw 21%', '€2,10'],
-            ['Dienst 3 — excl. btw', '€10,00'],
-            ['Btw 21%', '€2,10'],
-            ['Totaal btw', '€6,30'],
+            ['Dienst 1 — excl. btw', '€0,01'],
+            ['Dienst 1 — 21% btw', '€0,00'],
+            ['Dienst 2 — excl. btw', '€0,01'],
+            ['Dienst 2 — 21% btw', '€0,00'],
+            ['Dienst 3 — excl. btw', '€0,01'],
+            ['Dienst 3 — 21% btw', '€0,00'],
+            ['Totaal excl. btw', '€0,03'],
+            ['Totaal btw (per regel)', '€0,00'],
           ]}
         />
-        <p>Deze methode wordt vaak gebruikt bij facturatieprogramma&apos;s.</p>
 
-        <h3>Methode 2: btw over het totaal berekenen</h3>
-        <p>Hier tel je eerst alle bedragen exclusief btw op.</p>
-        <CalculationTable
-          rows={[
-            ['Subtotaal', '€30,00'],
-            ['21% btw', '€6,30'],
-            ['Totaal', '€36,30'],
-          ]}
-        />
-        <p>Bij eenvoudige bedragen geeft dit hetzelfde resultaat.</p>
-
-        <h2>Waarom ontstaan afrondingsverschillen?</h2>
-        <p>Bij meerdere regels kan de uitkomst verschillen.</p>
-        <p>Voorbeeld met drie regels van €12,34 exclusief btw:</p>
+        <h3>Btw over het totaal berekenen</h3>
+        <p>Je kunt ook eerst de bedragen exclusief btw optellen en vervolgens de btw over het totaal berekenen.</p>
         <p>
-          <strong>Per regel afronden:</strong> €12,34 × 21% = €2,5914 → €2,59. 3 × €2,59 = <strong>€7,77 btw</strong>.
+          Bij €0,03 exclusief btw: €0,03 × 21% = €0,0063 → <strong>€0,01 btw</strong>
         </p>
         <p>
-          <strong>Eerst optellen:</strong> €37,02 × 21% = €7,7742 → <strong>€7,77 btw</strong>.
+          Hier ontstaat dus een verschil van één cent. Bij grotere facturen kan hetzelfde principe een verschil van
+          enkele centen veroorzaken.
+        </p>
+
+        <h2>Waarom ontstaan afrondingsverschillen bij btw?</h2>
+        <p>Het btw-percentage levert regelmatig een bedrag met meer dan twee decimalen op. Bijvoorbeeld:</p>
+        <p>
+          <strong>€12,34 × 21% = €2,5914</strong> — op de factuur wordt dat afgerond naar <strong>€2,59</strong>.
         </p>
         <p>
-          In dit voorbeeld is er geen verschil, maar bij andere bedragen kan dat wel gebeuren. Zie ook{' '}
+          Als je dit bij meerdere regels doet, kan de som van de afzonderlijk afgeronde btw-bedragen verschillen van de
+          btw die je krijgt wanneer je eerst alle bedragen optelt en daarna de btw berekent.
+        </p>
+        <p>
+          Daarom is het belangrijk dat je facturatie en administratie dezelfde berekeningsmethode volgen. Meer over
+          veelvoorkomende rekenfouten in{' '}
           <Link href="/gidsen/veelgemaakte-fouten-btw-berekenen" className="text-warm-orange hover:underline">
             veelgemaakte fouten bij btw berekenen
           </Link>
           .
         </p>
 
-        <h2>Welke afrondingsmethode moet je gebruiken?</h2>
-        <p>Voor de meeste zzp&apos;ers geldt:</p>
-        <ul>
-          <li>gebruik één vaste methode voor al je facturen</li>
-          <li>zorg dat je factuur en administratie dezelfde berekening gebruiken</li>
-          <li>gebruik een factuurprogramma als je veel facturen maakt</li>
-        </ul>
+        <h2>Hoeveel cent verschil mag er ontstaan?</h2>
         <p>
-          FactuurBaas berekent btw automatisch en zorgt ervoor dat bedragen correct worden weergegeven op je PDF-factuur.
+          Een afrondingsverschil van een paar cent kan ontstaan door de manier waarop btw per regel of over het totaal
+          wordt berekend.
+        </p>
+        <p>
+          Het belangrijkste is dat je <strong>berekening controleerbaar is en aansluit bij je administratie</strong>.
+          Bij structurele verschillen is het verstandig om te controleren welke afrondingsmethode je factuurprogramma en
+          boekhouding gebruiken.
         </p>
 
         <h2>Btw afronden in Excel</h2>
-        <p>In Excel kun je afronden met de functie:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
-          =AFRONDEN(getal;2)
-        </pre>
-        <p>Voorbeeld:</p>
+        <p>
+          Wil je een btw-bedrag in Excel afronden op twee decimalen? Dan kun je de functie <code>AFRONDEN</code>{' '}
+          gebruiken. Bijvoorbeeld:
+        </p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
           =AFRONDEN(100*21%;2)
         </pre>
         <p>
-          Resultaat: €21,00. De <code>2</code> betekent dat Excel afrondt op twee decimalen. Meer in{' '}
+          Dit geeft <strong>€21,00</strong>. De <code>2</code> betekent dat Excel afrondt op twee decimalen.
+        </p>
+        <p>Voor een bedrag van €12,34 exclusief btw:</p>
+        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800">
+          =AFRONDEN(12,34*21%;2)
+        </pre>
+        <p>
+          Resultaat: <strong>€2,59</strong>
+        </p>
+        <p>
+          Let bij Excel vooral op het verschil tussen afronden van iedere regel en eerst optellen en daarna afronden.
+          Dat kan bij meerdere factuurregels een ander totaal opleveren. Meer formules in{' '}
           <Link href="/gidsen/btw-berekenen-excel" className="text-warm-orange hover:underline">
             btw berekenen in Excel
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten bij btw afronden</h2>
-
-        <h3>Te veel decimalen gebruiken</h3>
-        <p>
-          Een factuur met &quot;Btw: €157,499999&quot; is niet duidelijk voor je klant. Gebruik altijd twee decimalen.
-        </p>
-
-        <h3>Afronden tijdens de berekening</h3>
-        <p>
-          Bij complexe berekeningen kan te vroeg afronden kleine verschillen veroorzaken. Meestal is het beter om eerst te
-          rekenen en pas het eindresultaat af te ronden.
-        </p>
-
-        <h3>Verschillende methodes gebruiken</h3>
-        <p>
-          Als je factuurtool per regel afrondt en je administratie over het totaal rekent, kunnen verschillen ontstaan.
-        </p>
-
-        <h2>Btw afronden op je factuur</h2>
-        <p>Een professionele factuur toont meestal:</p>
+        <h2>Btw afronden op een factuur</h2>
+        <p>Een eenvoudige factuur kan er bijvoorbeeld zo uitzien:</p>
         <CalculationTable
           rows={[
-            ['Subtotaal', '€750,00'],
+            ['Subtotaal excl. btw', '€750,00'],
             ['BTW 21%', '€157,50'],
-            ['Totaal', '€907,50'],
+            ['Totaal incl. btw', '€907,50'],
           ]}
         />
-        <p>De klant ziet direct hoe het totaal is opgebouwd.</p>
-
-        <h2>Bereken btw automatisch</h2>
         <p>
-          Met de gratis BTW calculator van FactuurBaas hoef je zelf geen btw-formules of afrondingen uit te rekenen.
-          Bereken eenvoudig btw toevoegen, btw terugrekenen, 21%/9%/0% btw en bedragen inclusief en exclusief btw.
+          De klant ziet hierdoor duidelijk welk bedrag exclusief btw wordt berekend, hoeveel btw wordt toegevoegd en wat
+          het totaalbedrag is. Lees ook{' '}
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
+            btw op je factuur als zzp&apos;er
+          </Link>
+          .
+        </p>
+
+        <h2>Veelgemaakte fouten bij btw afronden</h2>
+        <h3>1. Te veel decimalen op de factuur tonen</h3>
+        <p>
+          Een bedrag zoals €157,499999 is voor een klant niet duidelijk. Toon bedragen op de factuur normaal gesproken
+          met twee decimalen.
+        </p>
+        <h3>2. Iedere tussenstap te vroeg afronden</h3>
+        <p>
+          Door tijdens een berekening steeds af te ronden kunnen onnodige verschillen ontstaan. Rond daarom op het
+          juiste moment af volgens de methode die je facturatie gebruikt.
+        </p>
+        <h3>3. Verschillende afrondingsmethodes gebruiken</h3>
+        <p>
+          Als je factuur per regel afrondt, maar je administratie de btw opnieuw over het totaal berekent, kunnen
+          verschillen ontstaan.
+        </p>
+        <h3>4. Een afrondingsverschil als btw-fout zien</h3>
+        <p>
+          Een verschil van één of enkele centen betekent niet automatisch dat het btw-tarief verkeerd is toegepast.
+          Controleer eerst hoe de btw is berekend en afgerond.
+        </p>
+
+        <h2>Btw berekenen en automatisch afronden</h2>
+        <p>
+          Wil je niet iedere btw-berekening zelf uitrekenen? Met de gratis{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            btw calculator van FactuurBaas
+          </Link>{' '}
+          kun je eenvoudig btw berekenen,{' '}
+          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
+            btw terugrekenen
+          </Link>{' '}
+          en bedragen inclusief en exclusief btw berekenen. Je kunt onder andere rekenen met 21%, 9% en 0% btw.
         </p>
 
         <GuideToolCta href="/tools/btw-calculator" label="Bereken btw gratis →" />
 
-        <h2>Veelgestelde vragen</h2>
-        <h3>Op hoeveel decimalen rond je btw af?</h3>
-        <p>Btw-bedragen worden normaal afgerond op twee decimalen.</p>
-        <h3>Rond je btw per regel of over het totaal af?</h3>
-        <p>Beide methodes kunnen voorkomen. Het belangrijkste is dat je consequent dezelfde methode gebruikt.</p>
-        <h3>Mag een factuur een verschil van een paar cent hebben?</h3>
+        <h2>Veelgestelde vragen over btw afronden</h2>
+        <h3>Rond je btw af op twee decimalen?</h3>
+        <p>Ja, btw-bedragen op een factuur worden normaal gesproken weergegeven op twee decimalen. Bijvoorbeeld €21,43.</p>
+        <h3>Rond je btw per factuurregel af?</h3>
         <p>
-          Kleine afrondingsverschillen kunnen voorkomen, maar je administratie en btw-aangifte moeten uiteindelijk
-          correct aansluiten.
+          Dat kan onderdeel zijn van de gekozen factuur- en boekhoudmethode. Bij meerdere regels kan afronden per regel
+          een ander resultaat geven dan btw berekenen over het totaal.
         </p>
-        <h3>Hoe rond ik btw af in Excel?</h3>
+        <h3>Wat is een afrondingsverschil bij btw?</h3>
         <p>
-          Gebruik de functie <code>AFRONDEN(getal;2)</code> om een bedrag op twee decimalen af te ronden.
+          Een afrondingsverschil ontstaat doordat een btw-berekening meer decimalen kan opleveren dan op een factuur
+          worden weergegeven. Bij meerdere regels kan daardoor een verschil van enkele centen ontstaan.
         </p>
+        <h3>Hoe rond je btw af in Excel?</h3>
+        <p>
+          Gebruik bijvoorbeeld <code>=AFRONDEN(12,34*21%;2)</code> om de btw over €12,34 op twee decimalen af te ronden.
+        </p>
+        <h3>Waarom klopt mijn btw-totaal niet met de afzonderlijke regels?</h3>
+        <p>
+          Controleer of je de btw per factuurregel afrondt of eerst alle bedragen optelt en daarna de btw berekent. Bij
+          meerdere regels kan daardoor een klein verschil ontstaan.
+        </p>
+
+        <h2>Bereken je btw gratis</h2>
+        <p>
+          Btw berekenen en afronden hoeft niet ingewikkeld te zijn. Gebruik de gratis btw calculator van FactuurBaas om
+          btw toe te voegen, btw terug te rekenen en bedragen inclusief of exclusief btw te berekenen.
+        </p>
+        <GuideToolCta href="/tools/btw-calculator" label="Open de gratis btw calculator →" />
       </>
     ),
   },
@@ -2313,221 +3354,421 @@ Totaal                            €1.000,00`}
   {
     slug: 'hoe-maak-je-een-offerte',
     cluster: 'offertes',
-    seoTitle: 'Hoe maak je een offerte? Stappenplan voor zzp\'ers en ondernemers',
-    title: 'Hoe maak je een offerte? Stappenplan voor zzp\'ers en ondernemers',
+    seoTitle: "Offerte maken: stappenplan en voorbeeld voor zzp'ers",
+    title: "Offerte maken: eenvoudig stappenplan voor zzp'ers",
     excerpt:
-      'Hoe maak je een professionele offerte als zzp\'er? Stap-voor-stap uitleg met voorbeeld, verplichte onderdelen en gratis offerte maker zonder account.',
+      "Een offerte maken als zzp'er of ondernemer? Volg dit eenvoudige stappenplan, bekijk een offertevoorbeeld en maak gratis een professionele offerte als PDF.",
     keywords:
-      'hoe maak je een offerte, offerte maken zzp, offerte maken, professionele offerte, offerte stappenplan, gratis offerte maken, offerte voorbeeld',
+      "offerte maken, offerte maken zzp, hoe maak je een offerte, offerte stappenplan, offerte voorbeeld, gratis offerte maken, professionele offerte",
     tool: {
       href: '/tools/offerte-maker',
-      label: 'Maak gratis offerte',
-      ctaLabel: 'Maak gratis offerte',
+      label: 'Maak gratis een offerte',
+      ctaLabel: 'Maak gratis een offerte',
       relatedTitle: 'Offerte maker',
       relatedExcerpt: 'Maak gratis een professionele offerte en download direct als PDF. Geen account nodig.',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Hoe%20maak%20je%20een%20offerte.jpg',
-      alt: 'Hoe maak je een offerte: ondernemer bespreekt offerte met klant',
+      alt: "Offerte maken: eenvoudig stappenplan voor zzp'ers",
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['verschil-factuur-offerte', 'factuur-maken-zzp'],
     relatedGuideSlugs: ['wat-moet-er-op-een-offerte-staan', 'offerte-voorbeeld', 'wanneer-is-een-offerte-bindend'],
     faq: [
       {
-        question: 'Is een offerte verplicht?',
+        question: 'Hoe maak ik een professionele offerte?',
         answer:
-          'Nee, een offerte is meestal niet wettelijk verplicht. Het is wel handig om vooraf duidelijke afspraken te maken met je klant.',
+          'Begin met je bedrijfs- en klantgegevens en beschrijf vervolgens zo concreet mogelijk wat je gaat leveren. Voeg de prijs, btw, geldigheidsduur en belangrijkste voorwaarden toe. Zorg tot slot voor een duidelijke en professionele opmaak.',
       },
       {
-        question: 'Kan ik een offerte gratis maken?',
-        answer: 'Ja. Met FactuurBaas maak je gratis een professionele offerte zonder account.',
+        question: 'Wat moet er in een offerte staan?',
+        answer:
+          'Een goede offerte bevat onder andere een offertenummer, datum, bedrijfsgegevens, klantgegevens, omschrijving van de opdracht, prijzen, btw, geldigheidsduur en relevante betalings- en leveringsvoorwaarden.',
+      },
+      {
+        question: 'Is een offerte verplicht?',
+        answer:
+          'Nee, voor veel opdrachten ben je niet verplicht om vooraf een offerte te maken. Het kan wel verstandig zijn om vooraf duidelijke afspraken over de opdracht en prijs vast te leggen.',
       },
       {
         question: 'Hoe lang moet een offerte geldig zijn?',
-        answer: 'Dat bepaal je zelf. Veel ondernemers gebruiken een termijn van 14 of 30 dagen.',
+        answer:
+          'Dat bepaal je zelf. Een geldigheidsduur van bijvoorbeeld 14 of 30 dagen is gebruikelijk, maar je kunt een andere termijn kiezen die bij je opdracht past.',
       },
       {
-        question: 'Kan ik van een offerte een factuur maken?',
-        answer: 'Ja. Na akkoord kun je de gegevens gebruiken om een factuur te maken in FactuurBaas.',
+        question: 'Kan een klant een offerte weigeren?',
+        answer:
+          'Ja. Een offerte is een voorstel aan de klant. De klant kan ermee akkoord gaan, de offerte afwijzen of eventueel vragen om aanpassingen.',
+      },
+      {
+        question: 'Kan ik na een offerte een factuur maken?',
+        answer:
+          'Ja. Nadat de klant akkoord is gegaan en je de opdracht hebt uitgevoerd, kun je een factuur sturen. Bij FactuurBaas kun je een goedgekeurde offerte als basis gebruiken voor een factuur.',
+      },
+      {
+        question: 'Kan ik gratis een offerte maken?',
+        answer:
+          'Ja. Met de gratis offerte maker van FactuurBaas kun je online een offerte maken en als PDF downloaden, zonder account.',
       },
     ],
     content: (
       <>
         <p>
-          Een goede offerte helpt je om duidelijke afspraken te maken met je klant voordat je start met een opdracht. In
-          een offerte leg je vast <strong>wat je gaat leveren, hoeveel het kost en onder welke voorwaarden je werkt</strong>.
+          Een goede offerte maakt vooraf duidelijk{' '}
+          <strong>wat je gaat leveren, wat het kost en welke afspraken gelden</strong>. Daarmee weet je klant precies
+          waar hij aan toe is en verklein je de kans op misverstanden.
         </p>
         <p>
-          Voor veel zzp&apos;ers is een offerte de eerste stap richting een nieuwe klant. Met een professionele offerte wek
-          je vertrouwen en voorkom je misverstanden achteraf.
+          Een offerte maken hoeft niet ingewikkeld te zijn. In dit stappenplan lees je welke onderdelen je nodig hebt,
+          hoe je de prijs en btw vermeldt en hoe je een professionele offerte opstelt.
         </p>
         <p>
           Met de gratis{' '}
           <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            offerte maker
+            offerte maker van FactuurBaas
           </Link>{' '}
-          van FactuurBaas maak je eenvoudig een professionele offerte, download je deze als PDF en zet je een
-          goedgekeurde offerte later om naar een factuur.
+          maak je online een offerte, bereken je automatisch de btw en download je de offerte als PDF.
         </p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte →" />
 
-        <h2>Wat is een offerte?</h2>
-        <p>Een offerte is een voorstel aan een klant waarin je beschrijft:</p>
+        <h2>Hoe maak je een offerte?</h2>
+        <p>
+          Een goede offerte bevat in ieder geval duidelijke informatie over jou, je klant, de werkzaamheden, de prijs
+          en de voorwaarden.
+        </p>
+        <p>Je kunt deze 7 stappen volgen:</p>
+        <ol>
+          <li>Vul je eigen bedrijfsgegevens in</li>
+          <li>Voeg de gegevens van je klant toe</li>
+          <li>Geef de offerte een nummer en datum</li>
+          <li>Beschrijf wat je gaat leveren</li>
+          <li>Vermeld de prijs en btw</li>
+          <li>Geef de geldigheidsduur aan</li>
+          <li>Voeg belangrijke voorwaarden en afspraken toe</li>
+        </ol>
+        <p>Hieronder leggen we iedere stap uit.</p>
+
+        <h2>1. Vul je bedrijfsgegevens in</h2>
+        <p>Begin met de gegevens van je eigen onderneming. Denk bijvoorbeeld aan:</p>
         <ul>
-          <li>welke werkzaamheden of producten je levert</li>
-          <li>wat de kosten zijn</li>
-          <li>wanneer je de opdracht uitvoert</li>
-          <li>welke voorwaarden gelden</li>
+          <li>bedrijfsnaam</li>
+          <li>adres</li>
+          <li>KvK-nummer</li>
+          <li>btw-nummer, als dat van toepassing is</li>
+          <li>e-mailadres</li>
+          <li>telefoonnummer</li>
         </ul>
         <p>
-          Een offerte is meestal bedoeld om een klant akkoord te laten gaan met een opdracht. Pas na akkoord ontstaat er
-          vaak een opdrachtbevestiging of overeenkomst.
+          Zo kan je klant gemakkelijk zien van wie de offerte afkomstig is en hoe hij contact met je kan opnemen.
         </p>
 
-        <h2>Wanneer maak je een offerte?</h2>
-        <p>
-          Een offerte wordt vooral gebruikt bij opdrachten waarbij vooraf duidelijkheid nodig is over de prijs en
-          werkzaamheden.
-        </p>
-        <p>Voorbeelden:</p>
+        <h2>2. Voeg de gegevens van je klant toe</h2>
+        <p>Vermeld vervolgens voor wie de offerte bedoeld is.</p>
+        <p>Bij een zakelijke klant kun je bijvoorbeeld de volgende gegevens opnemen:</p>
         <ul>
-          <li>een website laten bouwen</li>
-          <li>een verbouwing of schilderwerk</li>
-          <li>marketingdiensten</li>
-          <li>advieswerk</li>
-          <li>fotografie</li>
-          <li>freelance opdrachten</li>
-          <li>zakelijke projecten</li>
+          <li>bedrijfsnaam</li>
+          <li>naam van de contactpersoon</li>
+          <li>adres</li>
+          <li>e-mailadres</li>
         </ul>
         <p>
-          Voor kleine werkzaamheden kan een directe factuur voldoende zijn, maar bij grotere opdrachten geeft een offerte
-          meer zekerheid.
+          Controleer de gegevens voordat je de offerte verstuurt. Zeker bij zakelijke opdrachten is het handig om de
+          offerte op naam van de juiste onderneming te zetten.
         </p>
 
-        <h2>Hoe maak je een offerte? Stap voor stap</h2>
-
-        <h3>1. Voeg je bedrijfsgegevens toe</h3>
-        <p>Een professionele offerte begint met je eigen gegevens: bedrijfsnaam, adres, KvK-nummer, btw-nummer, e-mail en telefoon.</p>
-
-        <h3>2. Voeg de gegevens van je klant toe</h3>
-        <p>Vermeld bedrijfsnaam, contactpersoon, adres en e-mail. Controleer altijd of de gegevens correct zijn.</p>
-
-        <h3>3. Beschrijf de werkzaamheden duidelijk</h3>
+        <h2>3. Geef de offerte een nummer en datum</h2>
         <p>
-          Vermijd algemene omschrijvingen zoals &quot;Website werkzaamheden&quot;. Beter: &quot;Ontwerp en ontwikkeling van
-          een nieuwe bedrijfswebsite inclusief vijf pagina&apos;s, mobiel ontwerp en basis SEO-instellingen.&quot;
+          Geef iedere offerte een herkenbaar offertenummer, bijvoorbeeld: <strong>OFF-2026-001</strong>. Vermeld
+          daarnaast de datum waarop je de offerte uitbrengt.
         </p>
-
-        <h3>4. Vermeld de prijs en btw</h3>
-        <p>Een offerte moet duidelijk laten zien wat de klant betaalt.</p>
-        <CalculationTable
-          rows={[
-            ['Website ontwerp', '€2.000'],
-            ['BTW 21%', '€420'],
-            ['Totaal', '€2.420'],
-          ]}
-        />
-        <p>Vermeld altijd of bedragen inclusief of exclusief btw zijn.</p>
-
-        <h3>5. Voeg een geldigheidsduur toe</h3>
         <p>
-          Veel ondernemers gebruiken: &quot;Deze offerte is 14 dagen geldig.&quot; Een geldigheidsduur voorkomt dat
-          prijzen maanden later nog hetzelfde moeten zijn.
+          Een vaste nummering maakt je administratie overzichtelijk en maakt het later eenvoudiger om een goedgekeurde
+          offerte aan een opdracht of factuur te koppelen.
         </p>
 
-        <h3>6. Voeg voorwaarden toe</h3>
-        <p>Denk aan betalingstermijn, planning, wijzigingen, annulering en levering. Bijvoorbeeld: &quot;Betaling binnen 14 dagen na factuurdatum.&quot;</p>
+        <h2>4. Beschrijf duidelijk wat je gaat leveren</h2>
+        <p>Dit is een van de belangrijkste onderdelen van een offerte.</p>
+        <p>Vermijd vage omschrijvingen zoals:</p>
+        <blockquote>Website werkzaamheden</blockquote>
+        <p>Maak liever concreet wat de klant krijgt:</p>
+        <blockquote>
+          Ontwerp en ontwikkeling van een bedrijfswebsite met vijf pagina&apos;s, responsive ontwerp en basis
+          SEO-instellingen.
+        </blockquote>
+        <p>Bij een dienst kun je eventueel ook aangeven:</p>
+        <ul>
+          <li>welke werkzaamheden je uitvoert</li>
+          <li>hoeveel uren of dagen je verwacht nodig te hebben</li>
+          <li>welke producten of materialen inbegrepen zijn</li>
+          <li>wat wel en niet binnen de opdracht valt</li>
+          <li>wanneer je de werkzaamheden uitvoert</li>
+        </ul>
+        <p>Hoe duidelijker de omschrijving, hoe kleiner de kans op discussie achteraf.</p>
+
+        <h2>5. Vermeld de prijs en btw</h2>
+        <p>
+          Laat duidelijk zien hoeveel de verschillende onderdelen kosten en of de bedragen inclusief of exclusief btw
+          zijn.
+        </p>
+        <p>Een eenvoudige offerte kan bijvoorbeeld zo worden opgebouwd:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwerp</td>
+                <td className="px-4 py-3 text-right">€2.000,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">BTW 21%</td>
+                <td className="px-4 py-3 text-right">€420,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.420,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Werk je met meerdere diensten of producten? Dan kun je ieder onderdeel afzonderlijk vermelden.</p>
+        <p>
+          Bij een uurtarief kun je bijvoorbeeld aangeven: <strong>10 uur × €75 = €750</strong>. Vermeld vervolgens het
+          btw-bedrag en het totaalbedrag.
+        </p>
+
+        <h2>6. Geef aan hoe lang de offerte geldig is</h2>
+        <p>
+          Een offerte hoeft niet onbeperkt geldig te blijven. Je kunt daarom een geldigheidsduur opnemen, bijvoorbeeld:{' '}
+          <strong>Deze offerte is geldig tot en met 24 juli 2026.</strong>
+        </p>
+        <p>
+          Een termijn van 14 of 30 dagen komt bijvoorbeeld vaak voor, maar je bepaalt zelf welke termijn bij jouw
+          situatie past.
+        </p>
+        <p>
+          Een geldigheidsduur is vooral handig wanneer prijzen, beschikbaarheid of andere omstandigheden kunnen
+          veranderen.
+        </p>
+
+        <h2>7. Voeg belangrijke voorwaarden en afspraken toe</h2>
+        <p>Bij een grotere opdracht is het verstandig om ook de belangrijkste afspraken in de offerte te zetten.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>betalingstermijn</li>
+          <li>verwachte startdatum</li>
+          <li>planning of levertijd</li>
+          <li>aantal inbegrepen revisies</li>
+          <li>afspraken over meerwerk</li>
+          <li>annulering</li>
+          <li>geldigheid van de offerte</li>
+          <li>toepasselijke algemene voorwaarden</li>
+        </ul>
+        <p>Je kunt bijvoorbeeld opnemen:</p>
+        <blockquote>Betaling dient binnen 14 dagen na factuurdatum te worden voldaan.</blockquote>
+        <p>
+          Als je algemene voorwaarden gebruikt, kun je in de offerte aangeven dat deze van toepassing zijn en hoe de
+          klant ze kan bekijken.
+        </p>
 
         <h2>Wat moet er op een offerte staan?</h2>
         <p>
-          Lees de volledige uitleg in{' '}
+          Er is niet één algemene wettelijke checklist met precies dezelfde verplichte gegevens voor iedere offerte. Een
+          offerte is vooral een <strong>voorstel met duidelijke afspraken over een opdracht</strong>.
+        </p>
+        <p>Voor een professionele offerte zijn in ieder geval deze onderdelen verstandig:</p>
+        <ul>
+          <li>offertenummer</li>
+          <li>datum</li>
+          <li>jouw bedrijfsgegevens</li>
+          <li>klantgegevens</li>
+          <li>omschrijving van de werkzaamheden of producten</li>
+          <li>prijs</li>
+          <li>btw en totaalbedrag, indien van toepassing</li>
+          <li>geldigheidsduur</li>
+          <li>betalingsafspraken</li>
+          <li>relevante voorwaarden</li>
+        </ul>
+        <p>
+          Wil je specifiek weten welke onderdelen je op een offerte kunt zetten? Bekijk dan ook{' '}
           <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
             wat moet er op een offerte staan
           </Link>
           .
         </p>
-        <ul>
-          <li>Offertenummer</li>
-          <li>Datum</li>
-          <li>Geldigheidsduur</li>
-          <li>Bedrijfsgegevens</li>
-          <li>Klantgegevens</li>
-          <li>Omschrijving van werkzaamheden</li>
-          <li>Prijzen en btw-bedrag</li>
-          <li>Algemene voorwaarden</li>
-          <li>Betalingsafspraken</li>
-        </ul>
 
         <h2>Offerte voorbeeld</h2>
-        <p>Een eenvoudige offerte kan er zo uitzien:</p>
+        <p>Een eenvoudige offerte voor een zakelijke dienst kan er bijvoorbeeld zo uitzien:</p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap">
-{`Offerte OFF-2026-001
+{`OFF-2026-001
+Datum: 10 juli 2026
 
-Van: Studio Jansen
-Aan: Klant BV
+Van:
+Studio Jansen
+Voorbeeldstraat 10
+1234 AB Amsterdam
+KvK: 12345678
+BTW: NL123456789B01
 
-Website ontwerp — 10 uur × €75
+Aan:
+Klant BV
+Voorbeeldlaan 20
+1234 CD Utrecht
 
-Subtotaal:  €750,00
-BTW 21%:    €157,50
-Totaal:     €907,50
+Website ontwerp en ontwikkeling
+10 uur × €75,00                 €750,00
 
-Geldig tot: 24 juli 2026`}
+BTW 21%                         €157,50
+Totaal                          €907,50
+
+Deze offerte is geldig tot en met
+24 juli 2026.
+
+Betaling: binnen 14 dagen na
+factuurdatum.`}
         </pre>
-
-        <h2>Wat gebeurt er na akkoord op een offerte?</h2>
         <p>
-          Wanneer een klant akkoord gaat, kun je starten met de opdracht. Na afronding stuur je meestal een factuur. Met
-          FactuurBaas gebruik je de offerte als basis, zodat gegevens niet opnieuw ingevoerd hoeven te worden.
+          Het exacte ontwerp kan natuurlijk verschillen. Het belangrijkste is dat de klant snel kan zien{' '}
+          <strong>wat je aanbiedt, wat het kost en onder welke voorwaarden</strong>.
+        </p>
+
+        <h2>Offerte maken voor een zzp-opdracht</h2>
+        <p>Als zzp&apos;er maak je bijvoorbeeld een offerte voor:</p>
+        <ul>
+          <li>een website</li>
+          <li>marketingwerkzaamheden</li>
+          <li>advies</li>
+          <li>fotografie</li>
+          <li>tekstschrijven</li>
+          <li>ontwerpwerk</li>
+          <li>bouw- of schilderwerk</li>
+          <li>coaching</li>
+          <li>een ander freelance project</li>
+        </ul>
+        <p>
+          Bij een opdracht met een vaste prijs is het handig om vooraf precies te omschrijven wat binnen die prijs valt.
         </p>
         <p>
-          Lees ook{' '}
+          Werk je op uurbasis? Dan kun je je uurtarief, het verwachte aantal uren en eventueel een inschatting van de
+          totale kosten vermelden.
+        </p>
+        <p>
+          Bijvoorbeeld: <strong>20 uur × €75 = €1.500 exclusief btw</strong>
+        </p>
+        <p>
+          Als het uiteindelijke aantal uren kan afwijken, maak dan duidelijk dat het om een inschatting gaat en spreek
+          af hoe je met extra uren omgaat.
+        </p>
+
+        <h2>Offerte maken in Word of Excel</h2>
+        <p>
+          Je kunt een offerte natuurlijk zelf opmaken in Word of Excel. Dat werkt prima als je maar af en toe een
+          offerte maakt.
+        </p>
+        <p>Je moet dan wel zelf zorgen voor:</p>
+        <ul>
+          <li>de juiste bedrijfs- en klantgegevens</li>
+          <li>een nette opmaak</li>
+          <li>correcte berekening van btw</li>
+          <li>een offertenummer</li>
+          <li>de geldigheidsduur</li>
+          <li>een PDF-versie die je naar de klant kunt sturen</li>
+        </ul>
+        <p>
+          Maak je regelmatig offertes? Dan kan een online{' '}
+          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
+            offerte maker
+          </Link>{' '}
+          handiger zijn. Je vult de gegevens in, voegt je producten of diensten toe en kunt de offerte vervolgens als
+          PDF downloaden.
+        </p>
+
+        <h2>Wat gebeurt er nadat de klant akkoord gaat?</h2>
+        <p>
+          Een offerte is een voorstel. Zodra je klant akkoord gaat, kunnen de afspraken uit de offerte onderdeel worden
+          van de overeenkomst tussen jou en je klant.
+        </p>
+        <p>Daarna kun je met de opdracht beginnen volgens de afgesproken planning en voorwaarden.</p>
+        <p>Na het uitvoeren van de werkzaamheden stuur je meestal een factuur.</p>
+        <p>
+          Met FactuurBaas kun je een goedgekeurde offerte later als basis voor een factuur gebruiken, zodat je gegevens
+          niet opnieuw hoeft in te voeren.
+        </p>
+        <p>
+          Lees ook:{' '}
           <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
-            verschil tussen offerte en factuur
+            wat is het verschil tussen een offerte en een factuur?
           </Link>
-          .
         </p>
 
-        <h2>Offerte maken in Word of Excel?</h2>
-        <p>Veel ondernemers beginnen met Word of Excel, maar dit heeft nadelen:</p>
-        <ul>
-          <li>zelf alles opmaken</li>
-          <li>btw handmatig berekenen</li>
-          <li>geen vaste layout</li>
-          <li>grotere kans op fouten</li>
-        </ul>
+        <h2>Gratis een offerte maken</h2>
         <p>
-          Een online offerte maker maakt het eenvoudiger: vul gegevens in, voeg werkzaamheden toe, bereken automatisch
-          btw en download als PDF.
+          Wil je niet zelf een offerte in Word of Excel opmaken? Met de gratis{' '}
+          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
+            offerte maker van FactuurBaas
+          </Link>{' '}
+          maak je online een professionele offerte.
         </p>
-
-        <h2>Maak gratis een offerte</h2>
-        <p>Met de gratis offerte maker van FactuurBaas maak je in enkele minuten een professionele offerte. Geen account nodig:</p>
+        <p>Je kunt:</p>
         <ul>
-          <li>gratis gebruiken</li>
-          <li>direct PDF downloaden</li>
-          <li>automatische btw-berekening</li>
-          <li>offerte later omzetten naar factuur</li>
+          <li>gratis een offerte maken</li>
+          <li>je eigen gegevens en klantgegevens toevoegen</li>
+          <li>producten of diensten toevoegen</li>
+          <li>btw automatisch laten berekenen</li>
+          <li>de offerte als PDF downloaden</li>
+          <li>een goedgekeurde offerte later gebruiken als basis voor een factuur</li>
         </ul>
+        <p>Je hebt geen account nodig om een offerte te maken.</p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte →" />
 
-        <h2>Veelgestelde vragen</h2>
+        <h2>Veelgestelde vragen over offertes maken</h2>
+        <h3>Hoe maak ik een professionele offerte?</h3>
+        <p>
+          Begin met je bedrijfs- en klantgegevens en beschrijf vervolgens zo concreet mogelijk wat je gaat leveren. Voeg
+          de prijs, btw, geldigheidsduur en belangrijkste voorwaarden toe. Zorg tot slot voor een duidelijke en
+          professionele opmaak.
+        </p>
+        <h3>Wat moet er in een offerte staan?</h3>
+        <p>
+          Een goede offerte bevat onder andere een offertenummer, datum, bedrijfsgegevens, klantgegevens, omschrijving
+          van de opdracht, prijzen, btw, geldigheidsduur en relevante betalings- en leveringsvoorwaarden.
+        </p>
         <h3>Is een offerte verplicht?</h3>
         <p>
-          Nee, een offerte is meestal niet wettelijk verplicht. Het is wel handig om vooraf duidelijke afspraken te maken.
+          Nee, voor veel opdrachten ben je niet verplicht om vooraf een offerte te maken. Het kan wel verstandig zijn om
+          vooraf duidelijke afspraken over de opdracht en prijs vast te leggen.
         </p>
-        <h3>Kan ik een offerte gratis maken?</h3>
-        <p>Ja. Met FactuurBaas maak je gratis een professionele offerte zonder account.</p>
         <h3>Hoe lang moet een offerte geldig zijn?</h3>
-        <p>Dat bepaal je zelf. Veel ondernemers gebruiken een termijn van 14 of 30 dagen.</p>
+        <p>
+          Dat bepaal je zelf. Een geldigheidsduur van bijvoorbeeld 14 of 30 dagen is gebruikelijk, maar je kunt een
+          andere termijn kiezen die bij je opdracht past.
+        </p>
         <h3>Kan een klant een offerte weigeren?</h3>
-        <p>Ja. Een offerte is een voorstel totdat de klant akkoord gaat.</p>
-        <h3>Kan ik van een offerte een factuur maken?</h3>
-        <p>Ja. Na akkoord kun je de gegevens gebruiken om een factuur te maken.</p>
+        <p>
+          Ja. Een offerte is een voorstel aan de klant. De klant kan ermee akkoord gaan, de offerte afwijzen of
+          eventueel vragen om aanpassingen.
+        </p>
+        <h3>Kan ik na een offerte een factuur maken?</h3>
+        <p>
+          Ja. Nadat de klant akkoord is gegaan en je de opdracht hebt uitgevoerd, kun je een factuur sturen. Bij
+          FactuurBaas kun je een goedgekeurde offerte als basis gebruiken voor een factuur.
+        </p>
+        <h3>Kan ik gratis een offerte maken?</h3>
+        <p>
+          Ja. Met de gratis offerte maker van FactuurBaas kun je online een offerte maken en als PDF downloaden, zonder
+          account.
+        </p>
       </>
     ),
   },
@@ -3003,19 +4244,19 @@ Totaal:     €774,40`}
           </Link>
         </p>
 
-        <h3>Diensten offerte voorbeeld</h3>
+        <h3>Offerte voorbeeld dienstverlening</h3>
         <p>
           Voor consultants, coaches, bureaus en zakelijke dienstverlening.{' '}
           <Link href="/offerte-voorbeeld/diensten" className="text-warm-orange hover:underline">
-            Bekijk diensten offerte voorbeeld →
+            Bekijk offerte voorbeeld dienstverlening →
           </Link>
         </p>
 
-        <h3>Horeca offerte voorbeeld</h3>
+        <h3>Offerte voorbeeld horeca en catering</h3>
         <p>
           Voor catering en horeca — bruiloften, events en feesten.{' '}
           <Link href="/offerte-voorbeeld/horeca" className="text-warm-orange hover:underline">
-            Bekijk horeca offerte voorbeeld →
+            Bekijk offerte voorbeeld horeca en catering →
           </Link>
         </p>
 
@@ -3310,267 +4551,457 @@ Totaal:     €774,40`}
   {
     slug: 'offerte-maken-voor-zzper',
     cluster: 'offertes',
-    seoTitle: 'Offerte maken voor zzp\'ers | Tips, regels en veelgemaakte fouten',
-    title: 'Offerte maken voor zzp\'ers: tips, regels en veelgemaakte fouten',
+    seoTitle: 'Offerte sturen als zzp\'er: zo doe je dat professioneel',
+    title: 'Offerte sturen als zzp\'er: zo doe je dat',
     excerpt:
-      'Offerte maken als zzp\'er? Lees praktische tips, belangrijke regels en veelgemaakte fouten. Maak gratis een professionele offerte met FactuurBaas.',
+      'Hoe stuur je een offerte als zzp\'er? Lees hoe je een offerte maakt, als PDF verstuurt, akkoord vraagt en daarna de opdracht en factuur afhandelt.',
     keywords:
-      'offerte maken zzp, offerte zzp, zzp offerte maken, offerte tips zzp, offerte fouten, professionele offerte zzp, gratis offerte zzp',
+      'offerte sturen zzp, offerte versturen, offerte per email, offerte pdf zzp, offerte akkoord, offerte maken zzp, gratis offerte zzp',
     tool: {
       href: '/tools/offerte-maker',
-      label: 'Maak gratis offerte',
+      label: 'Maak gratis een offerte',
       ctaLabel: 'Open gratis offerte maker',
       relatedTitle: 'Offerte maker',
       relatedExcerpt: 'Maak gratis een professionele offerte en download direct als PDF. Geen account nodig.',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/offerte%20maken%20voor%20zzper.jpg',
-      alt: 'Offerte maken voor zzp\'er: zelfstandige werkt aan professionele offerte',
+      alt: 'Offerte sturen als zzp\'er: zelfstandige verstuurt professionele offerte per e-mail',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['factuur-maken-zzp', 'verschil-factuur-offerte', 'factureren-zonder-account'],
     relatedGuideSlugs: ['hoe-maak-je-een-offerte', 'wat-moet-er-op-een-offerte-staan', 'offerte-voorbeeld'],
     faq: [
       {
+        question: 'Hoe stuur ik een offerte als zzp\'er?',
+        answer:
+          'Maak eerst een duidelijke offerte, controleer de gegevens en prijzen en verstuur het document bijvoorbeeld als PDF per e-mail. Vraag de klant om akkoord en bewaar de verstuurde offerte en het akkoord in je administratie.',
+      },
+      {
         question: 'Moet een zzp\'er altijd een offerte sturen?',
         answer:
-          'Nee, een offerte is niet verplicht. Bij grotere of langdurige opdrachten is het wel verstandig om vooraf duidelijke afspraken vast te leggen.',
+          'Nee. Een offerte is niet voor iedere opdracht verplicht. Bij grotere, complexere of duurdere opdrachten is het vaak verstandig om vooraf duidelijke afspraken over werkzaamheden en prijs vast te leggen.',
       },
       {
-        question: 'Wat moet er minimaal op een zzp-offerte staan?',
+        question: 'Kan ik een offerte gewoon per e-mail sturen?',
         answer:
-          'Minimaal je bedrijfsgegevens, klantgegevens, omschrijving van werkzaamheden, prijzen, btw-vermelding, datum en geldigheidsduur.',
+          'Ja. Een offerte kan bijvoorbeeld als PDF bij een e-mail worden meegestuurd. Zorg ervoor dat de offerte duidelijk is en dat je klant weet hoe hij akkoord kan gaan.',
       },
       {
-        question: 'Kan ik als zzp\'er gratis een offerte maken?',
+        question: 'Moet een offerte ondertekend worden?',
         answer:
-          'Ja. Met FactuurBaas maak je gratis een professionele offerte zonder account en download je deze direct als PDF.',
+          'Niet iedere offerte hoeft per se met een handtekening te worden geaccepteerd. Een klant kan een aanbod ook op een andere manier accepteren. Bij belangrijke opdrachten kan schriftelijk akkoord wel handig zijn als bewijs van de gemaakte afspraken.',
       },
       {
-        question: 'Wat is de grootste fout bij offertes voor zzp\'ers?',
+        question: 'Hoe lang moet een offerte geldig zijn?',
         answer:
-          'Te vage omschrijvingen van werkzaamheden. Daardoor ontstaan discussies over wat wel of niet is inbegrepen.',
+          'Dat bepaal je zelf. Een geldigheidsduur van bijvoorbeeld 14 of 30 dagen komt vaak voor, maar bij iedere opdracht kan een andere termijn passend zijn.',
+      },
+      {
+        question: 'Wanneer stuur ik de factuur?',
+        answer:
+          'Meestal factureer je volgens de afspraken uit de offerte nadat de opdracht of een afgesproken deel daarvan is uitgevoerd. Bij grotere opdrachten kunnen ook aanbetalingen of termijnfacturen worden afgesproken.',
+      },
+      {
+        question: 'Kan ik gratis een offerte maken als zzp\'er?',
+        answer:
+          'Ja. Met de gratis offerte maker van FactuurBaas kun je een offerte maken en als PDF downloaden zonder account.',
       },
     ],
     content: (
       <>
         <p>
-          Als zzp&apos;er wil je snel duidelijke afspraken maken met een klant voordat je aan een opdracht begint. Een
-          goede offerte helpt je om <strong>verwachtingen scherp te stellen, discussies te voorkomen en professioneel over
-          te komen</strong>.
+          Een klant vraagt je om een prijs voor een opdracht. Je maakt een offerte, maar hoe stuur je die vervolgens op
+          een professionele manier?
         </p>
         <p>
-          In deze gids lees je praktische tips, belangrijke regels en veelgemaakte fouten bij{' '}
-          <strong>offerte maken voor zzp&apos;ers</strong>. Met de gratis{' '}
-          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            offerte maker
-          </Link>{' '}
-          van FactuurBaas maak je direct een professionele offerte als PDF.
+          Als zzp&apos;er kun je een offerte bijvoorbeeld als PDF per e-mail versturen. Zorg ervoor dat duidelijk is wat
+          je gaat leveren, wat het kost, hoelang de offerte geldig is en welke afspraken gelden.
+        </p>
+        <p>
+          In deze gids lees je <strong>hoe je een offerte maakt en verstuurt als zzp&apos;er</strong>, wat je in de
+          begeleidende e-mail zet en wat je doet nadat de klant akkoord gaat.
         </p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte →" />
 
-        <h2>Wanneer maakt een zzp&apos;er een offerte?</h2>
-        <p>Een offerte is vooral handig bij opdrachten waarbij vooraf duidelijkheid nodig is over prijs en werkzaamheden.</p>
-        <p>Typische situaties voor zzp&apos;ers:</p>
+        <h2>Hoe stuur je een offerte als zzp&apos;er?</h2>
+        <p>Een eenvoudige werkwijze is:</p>
+        <ol>
+          <li>Bespreek de opdracht en wensen van de klant.</li>
+          <li>Maak een duidelijke offerte.</li>
+          <li>Controleer werkzaamheden, prijzen en btw.</li>
+          <li>Sla de offerte op als PDF.</li>
+          <li>Stuur de PDF naar de klant met een korte begeleidende e-mail.</li>
+          <li>Geef aan tot wanneer de offerte geldig is.</li>
+          <li>Bewaar de verstuurde offerte in je administratie.</li>
+          <li>Verwerk het akkoord en start daarna met de opdracht.</li>
+        </ol>
+        <p>
+          Een offerte per e-mail als PDF is voor veel zzp&apos;ers een eenvoudige manier om afspraken schriftelijk vast
+          te leggen.
+        </p>
+
+        <h2>Wat zet je in een offerte voor een zzp&apos;er?</h2>
+        <p>
+          De exacte inhoud van een offerte bepaal je grotendeels zelf. Zorg in ieder geval dat de klant goed kan zien
+          wat je aanbiedt en tegen welke voorwaarden.
+        </p>
+        <p>Denk aan:</p>
         <ul>
-          <li>een nieuw project met een vaste prijs of ureninschatting</li>
-          <li>meerdere werkzaamheden in één opdracht</li>
-          <li>langdurige samenwerking of terugkerend werk</li>
-          <li>opdrachten bij zakelijke klanten die een offerte verwachten</li>
+          <li>je bedrijfsnaam en contactgegevens</li>
+          <li>de gegevens van je klant</li>
+          <li>offertenummer</li>
+          <li>datum</li>
+          <li>omschrijving van de opdracht</li>
+          <li>werkzaamheden of producten</li>
+          <li>eventuele uren of aantallen</li>
+          <li>prijs per onderdeel</li>
+          <li>subtotaal en totaal</li>
+          <li>btw, als dat van toepassing is</li>
+          <li>geldigheidsduur van de offerte</li>
+          <li>leverings- en betalingsafspraken</li>
+          <li>eventuele algemene voorwaarden</li>
         </ul>
         <p>
-          Voor kleine, eenmalige klussen kan een directe factuur soms voldoende zijn. Bij twijfel is een offerte meestal
-          de veiligere keuze.
+          Bij een complexe opdracht is het vooral belangrijk om duidelijk te beschrijven{' '}
+          <strong>wat wel en niet binnen de prijs valt</strong>.
         </p>
-
-        <h2>Tips voor een professionele zzp-offerte</h2>
-
-        <h3>1. Beschrijf werkzaamheden concreet</h3>
         <p>
-          Vermijd algemene termen zoals &quot;advies&quot; of &quot;website werkzaamheden&quot;. Beschrijf wat je precies
-          levert, hoeveel uren of deliverables het betreft en wat niet is inbegrepen.
-        </p>
-
-        <h3>2. Werk met een vast offertenummer</h3>
-        <p>
-          Gebruik een duidelijk nummer zoals OFF-2026-001. Dat helpt bij je administratie en maakt het later makkelijker om
-          een factuur aan dezelfde opdracht te koppelen.
-        </p>
-
-        <h3>3. Stel een geldigheidsduur</h3>
-        <p>
-          Veel zzp&apos;ers kiezen 14 of 30 dagen. Zo voorkom je dat een klant maanden later nog dezelfde prijs verwacht
-          terwijl jouw kosten inmiddels zijn gestegen.
-        </p>
-
-        <h3>4. Toon prijzen en btw apart</h3>
-        <p>
-          Vermeld subtotaal, btw-tarief, btw-bedrag en totaal. Gebruik je de KOR? Vermeld dan duidelijk dat je
-          btw-vrijgesteld bent.
-        </p>
-
-        <h3>5. Voeg betalingsafspraken toe</h3>
-        <p>
-          Leg vast wanneer de klant betaalt, bijvoorbeeld na oplevering of in twee termijnen. Een offerte is geen
-          betalingsverzoek — na akkoord factureer je meestal apart.
-        </p>
-
-        <h3>6. Stuur je offerte als PDF</h3>
-        <p>
-          Een PDF blijft netjes opgemaakt en kan niet zomaar worden aangepast. Lees{' '}
-          <Link href="/gidsen/offerte-maken-in-pdf" className="text-warm-orange hover:underline">
-            offerte maken in PDF
-          </Link>{' '}
-          voor Word, Excel en online opties.
-        </p>
-
-        <h3>7. Bewaar een kopie in je administratie</h3>
-        <p>
-          Sla elke verstuurde offerte op met datum, klant en status (verstuurd, akkoord, afgewezen). Zo houd je overzicht
-          wanneer je later een factuur maakt.
-        </p>
-
-        <h2>Belangrijke regels bij offertes voor zzp&apos;ers</h2>
-        <ul>
-          <li>
-            <strong>Controleer klantgegevens</strong> — verkeerde naam of adres leidt tot verwarring en vertraging.
-          </li>
-          <li>
-            <strong>Wees consistent met je tarieven</strong> — afwijkende prijzen zonder uitleg wekken wantrouwen.
-          </li>
-          <li>
-            <strong>Vermeld wat niet is inbegrepen</strong> — revisierondes, reiskosten of extra uren kun je apart
-            benoemen.
-          </li>
-          <li>
-            <strong>Gebruik realistische planning</strong> — beloof geen opleverdatum die je niet kunt halen.
-          </li>
-          <li>
-            <strong>Houd rekening met btw-regels</strong> — reken je 21%, 9% of 0% btw? Leg dit duidelijk vast op je
-            offerte.
-          </li>
-          <li>
-            <strong>Wacht op akkoord voordat je start</strong> — begin niet met grote werkzaamheden zonder bevestiging
-            van de klant.
-          </li>
-        </ul>
-        <p>
-          Welke gegevens verplicht zijn en wat je minimaal moet opnemen, lees je in{' '}
+          Bekijk ook{' '}
           <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
-            wat moet er op een offerte staan
+            wat er op een offerte moet staan
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten bij zzp-offertes</h2>
-
-        <h3>Te vage omschrijving</h3>
-        <p>
-          &quot;Marketing ondersteuning&quot; zegt weinig. Beter: &quot;Opzet en uitvoering van een social media campagne
-          van 3 maanden inclusief 12 posts en maandelijkse rapportage.&quot;
-        </p>
-
-        <h3>Geen geldigheidsduur</h3>
-        <p>
-          Zonder einddatum kan een klant maanden later nog akkoord gaan tegen een prijs die niet meer actueel is.
-        </p>
-
-        <h3>Btw vergeten of verkeerd berekenen</h3>
-        <p>
-          Controleer of bedragen exclusief of inclusief btw zijn. Handmatig rekenen in Word of Excel leidt snel tot
-          afrondingsfouten.
-        </p>
-
-        <h3>Geen offertenummer</h3>
-        <p>
-          Zonder nummer is het lastig om offertes terug te vinden, vooral als je meerdere klanten tegelijk hebt.
-        </p>
-
-        <h3>Direct beginnen zonder akkoord</h3>
-        <p>
-          Een offerte is een voorstel. Wacht op een e-mailbevestiging of handtekening voordat je veel uren investeert.
-        </p>
-
-        <h3>Offerte en factuur door elkaar halen</h3>
-        <p>
-          Een offerte vraagt om akkoord; een factuur vraagt om betaling. Lees het{' '}
-          <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
-            verschil tussen offerte en factuur
-          </Link>
-          .
-        </p>
-
-        <h3>Slechte opmaak of onprofessionele layout</h3>
-        <p>
-          Een rommelige offerte wekt minder vertrouwen. Gebruik een vaste structuur of een{' '}
-          <Link href="/offerte-template" className="text-warm-orange hover:underline">
-            offerte template
-          </Link>{' '}
-          voor een professionele uitstraling.
-        </p>
-
-        <h2>Checklist: goede zzp-offerte</h2>
+        <h2>Offerte als PDF versturen</h2>
+        <p>Een PDF is handig omdat de opmaak van je offerte op verschillende apparaten hetzelfde blijft.</p>
+        <p>Controleer voordat je de offerte verstuurt:</p>
         <ul>
-          <li>bedrijfsnaam, KvK en contactgegevens</li>
-          <li>klantgegevens en contactpersoon</li>
-          <li>offertenummer en datum</li>
-          <li>duidelijke omschrijving van werkzaamheden</li>
-          <li>prijsopbouw met subtotaal, btw en totaal</li>
-          <li>geldigheidsduur</li>
-          <li>betalings- en leveringsafspraken</li>
-          <li>voorwaarden of verwijzing naar algemene voorwaarden</li>
+          <li>klopt de naam van de klant?</li>
+          <li>klopt het bedrag?</li>
+          <li>zijn alle werkzaamheden opgenomen?</li>
+          <li>zijn extra kosten duidelijk vermeld?</li>
+          <li>klopt het btw-tarief?</li>
+          <li>staat de geldigheidsduur erbij?</li>
+          <li>zijn eventuele algemene voorwaarden toegevoegd of correct vermeld?</li>
+        </ul>
+        <p>Geef de offerte een duidelijke bestandsnaam, bijvoorbeeld:</p>
+        <p>
+          <strong>Offerte-OFF-2026-024-Bedrijf-X.pdf</strong>
+        </p>
+        <p>Zo kunnen jij en je klant het document later gemakkelijk terugvinden.</p>
+
+        <h2>Wat schrijf je in de e-mail bij een offerte?</h2>
+        <p>
+          Je hoeft geen lange e-mail te schrijven. Leg kort uit wat je meestuurt en wat de klant kan doen als hij
+          akkoord is.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          Beste Jan,
+          <br />
+          <br />
+          Zoals besproken stuur ik hierbij de offerte voor de werkzaamheden aan jullie website.
+          <br />
+          <br />
+          In de bijlage vind je de offerte met de werkzaamheden, planning en prijs.
+          <br />
+          <br />
+          De offerte is geldig tot 30 september 2026. Als je akkoord bent, kun je dit per e-mail bevestigen.
+          <br />
+          <br />
+          Met vriendelijke groet,
+          <br />
+          Matthijs
+        </blockquote>
+        <p>
+          De offerte zelf bevat de inhoudelijke afspraken. Houd de begeleidende e-mail daarom meestal kort.
+        </p>
+
+        <h2>Hoe vraag je akkoord op een offerte?</h2>
+        <p>Maak duidelijk hoe de klant akkoord kan geven.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          “Als je akkoord gaat met deze offerte, kun je dit per e-mail bevestigen onder vermelding van het
+          offertenummer.”
+        </blockquote>
+        <p>
+          Bij grotere opdrachten kan een ondertekende offerte of een aparte overeenkomst handig zijn.
+        </p>
+        <p>
+          Bewaar het akkoord samen met de offerte. Zo heb je later een duidelijke administratie van wat er is
+          afgesproken.
+        </p>
+        <p>
+          Een geaccepteerde offerte kan onderdeel zijn van de overeenkomst tussen jou en je klant. De precieze
+          juridische situatie hangt af van de inhoud van het aanbod en de manier waarop de klant akkoord gaat.
+        </p>
+
+        <h2>Wat doe je nadat de klant akkoord is?</h2>
+        <p>Na akkoord kun je de opdracht uitvoeren volgens de gemaakte afspraken.</p>
+        <p>Afhankelijk van de opdracht kun je:</p>
+        <ul>
+          <li>een startdatum bevestigen</li>
+          <li>een opdrachtbevestiging sturen</li>
+          <li>een aanbetaling of eerste termijn factureren</li>
+          <li>de werkzaamheden uitvoeren</li>
+          <li>tussentijds factureren</li>
+          <li>na oplevering de eindfactuur sturen</li>
         </ul>
         <p>
-          Bekijk een ingevuld voorbeeld op onze{' '}
+          Bij een eenvoudige opdracht kan een aparte opdrachtbevestiging niet nodig zijn. Bij grotere projecten kan
+          het juist prettig zijn om de afspraken nog een keer overzichtelijk te bevestigen.
+        </p>
+
+        <h2>Offerte en factuur: wat is het verschil?</h2>
+        <p>
+          Een <strong>offerte</strong> is een voorstel voor een opdracht. Je beschrijft wat je gaat leveren en tegen
+          welke prijs.
+        </p>
+        <p>
+          Een <strong>factuur</strong> gebruik je om een bedrag in rekening te brengen voor geleverde goederen of
+          diensten.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>1. Offerte</strong>
+          <br />
+          Je spreekt met een klant af dat je een website bouwt voor €3.000.
+        </p>
+        <p>
+          <strong>2. Akkoord</strong>
+          <br />
+          De klant accepteert je offerte.
+        </p>
+        <p>
+          <strong>3. Uitvoering</strong>
+          <br />
+          Je bouwt de website volgens de afgesproken werkzaamheden.
+        </p>
+        <p>
+          <strong>4. Factuur</strong>
+          <br />
+          Je brengt de afgesproken €3.000, eventueel in termijnen, in rekening.
+        </p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
+            verschil tussen een offerte en een factuur
+          </Link>
+          .
+        </p>
+
+        <h2>Offerte sturen met algemene voorwaarden</h2>
+        <p>
+          Gebruik je algemene voorwaarden? Vermeld dan in je offerte dat deze van toepassing zijn en zorg dat je
+          klant ze kan bekijken voordat de overeenkomst wordt gesloten.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          “Op deze offerte zijn onze algemene voorwaarden van toepassing. Deze zijn als bijlage toegevoegd.”
+        </blockquote>
+        <p>
+          Algemene voorwaarden moeten op de juiste manier aan de klant beschikbaar worden gesteld. Alleen ergens op
+          je website vermelden dat je voorwaarden hebt, is niet altijd voldoende. KVK adviseert onder meer om de
+          klant duidelijk te informeren en de voorwaarden beschikbaar te stellen voordat de overeenkomst wordt
+          gesloten.
+        </p>
+
+        <h2>Hoe lang moet een offerte geldig zijn?</h2>
+        <p>Dat bepaal je zelf. Je kunt bijvoorbeeld kiezen voor 14 of 30 dagen.</p>
+        <p>
+          Bij opdrachten waarbij prijzen sterk kunnen veranderen, kan een kortere geldigheidsduur verstandig zijn.
+          Vermeld altijd duidelijk <strong>tot welke datum</strong> de klant kan reageren.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>Deze offerte is geldig tot en met 30 september 2026.</blockquote>
+        <p>
+          Een offerte kan ook onder voorwaarden worden uitgebracht, bijvoorbeeld wanneer materiaalprijzen of andere
+          kosten sterk kunnen fluctueren.
+        </p>
+
+        <h2>Btw op een zzp-offerte</h2>
+        <p>
+          Bereken je als zzp&apos;er btw? Vermeld dan duidelijk welke bedragen exclusief btw zijn, welk btw-tarief
+          wordt toegepast en wat het totaal inclusief btw is.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Werkzaamheden</td>
+                <td className="px-4 py-3 text-right">€ 1.000,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">21% btw</td>
+                <td className="px-4 py-3 text-right">€ 210,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€ 1.210,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Gebruik je de KOR, dan breng je geen btw in rekening. De Belastingdienst geeft aan dat deelnemers aan de
+          KOR geen btw aan hun klanten berekenen.
+        </p>
+        <p>
+          Het juiste btw-tarief hangt af van de werkzaamheden en situatie. Controleer bij twijfel de actuele
+          btw-regels.
+        </p>
+
+        <h2>Offerte maken in Word, Excel of online</h2>
+        <p>
+          Je kunt een offerte maken in Word of Excel, een template gebruiken of een online offerte maker gebruiken.
+        </p>
+        <p>Word en Excel geven je veel vrijheid, maar je moet zelf letten op:</p>
+        <ul>
+          <li>berekeningen</li>
+          <li>btw</li>
+          <li>nummering</li>
+          <li>opmaak</li>
+          <li>versies</li>
+          <li>het opslaan van verstuurde offertes</li>
+        </ul>
+        <p>
+          Een online offerte maker kan dit proces eenvoudiger maken doordat je vanuit een vaste structuur werkt.
+        </p>
+
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte met FactuurBaas →" />
+
+        <h2>Veelgemaakte fouten bij het sturen van een offerte</h2>
+
+        <h3>De offerte zonder begeleidende uitleg versturen</h3>
+        <p>
+          Stuur niet alleen een PDF zonder context. Een korte e-mail maakt duidelijk waarom je de offerte stuurt en
+          wat de volgende stap is.
+        </p>
+
+        <h3>Niet duidelijk aangeven wat inbegrepen is</h3>
+        <p>
+          Een lage prijs kan aantrekkelijk lijken, maar als onduidelijk is wat binnen de opdracht valt, ontstaan
+          later gemakkelijk discussies.
+        </p>
+
+        <h3>Geen geldigheidsduur vermelden</h3>
+        <p>Zet duidelijk tot welke datum je prijsvoorstel geldig is.</p>
+
+        <h3>Geen akkoord bewaren</h3>
+        <p>
+          Bewaar de offerte én het bericht waarin de klant akkoord gaat. Dat maakt je administratie overzichtelijker.
+        </p>
+
+        <h3>Offerte en factuur verwarren</h3>
+        <p>
+          Een offerte is een voorstel. Een factuur is bedoeld om een bedrag in rekening te brengen. Stuur dus niet
+          zomaar een factuur wanneer de klant alleen om een offerte heeft gevraagd.
+        </p>
+
+        <h3>Algemene voorwaarden pas achteraf sturen</h3>
+        <p>Gebruik je algemene voorwaarden, zorg dan dat de klant ze op tijd kan inzien.</p>
+
+        <h2>Checklist voordat je een offerte verstuurt</h2>
+        <p>Controleer deze punten voordat je op verzenden klikt:</p>
+        <ul>
+          <li>juiste klantgegevens</li>
+          <li>duidelijk offertenummer</li>
+          <li>datum</li>
+          <li>duidelijke omschrijving van de opdracht</li>
+          <li>alle belangrijke werkzaamheden opgenomen</li>
+          <li>prijs en eventuele bijkomende kosten duidelijk</li>
+          <li>btw correct vermeld</li>
+          <li>geldigheidsduur</li>
+          <li>leverings- en betalingsafspraken</li>
+          <li>algemene voorwaarden, indien van toepassing</li>
+          <li>offerte opgeslagen als PDF</li>
+          <li>begeleidende e-mail toegevoegd</li>
+        </ul>
+
+        <h2>Voorbeeld van een zzp-offerte</h2>
+        <p>Wil je eerst zien hoe een complete offerte eruitziet?</p>
+        <p>
+          Bekijk ons{' '}
           <Link href="/offerte-voorbeeld/zzp" className="text-warm-orange hover:underline">
             ZZP offerte voorbeeld
           </Link>{' '}
-          pagina of volg het stappenplan{' '}
+          voor een ingevuld voorbeeld.
+        </p>
+        <p>
+          Wil je zelf een offerte maken? Bekijk dan ook het{' '}
           <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
-            hoe maak je een offerte
+            stappenplan voor een offerte maken
           </Link>
           .
         </p>
 
-        <h2>Offerte maken als zzp&apos;er met FactuurBaas</h2>
-        <p>Met FactuurBaas hoef je geen Word- of Excel-template te bouwen. Je kunt:</p>
-        <ul>
-          <li>je bedrijfsgegevens eenmalig invullen</li>
-          <li>klant en werkzaamheden toevoegen</li>
-          <li>btw automatisch laten berekenen</li>
-          <li>een professionele offerte PDF downloaden</li>
-          <li>na akkoord de offerte omzetten naar een factuur</li>
-        </ul>
-        <p>Gratis, zonder account en klaar in een paar minuten.</p>
+        <h2>Offerte sturen als zzp&apos;er met FactuurBaas</h2>
+        <p>
+          Met FactuurBaas maak je online een professionele offerte. Vul je gegevens en de opdracht in, controleer de
+          bedragen en download je offerte als PDF.
+        </p>
+        <p>Je kunt direct beginnen zonder account.</p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis zzp-offerte →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis je offerte →" />
 
         <h2>Veelgestelde vragen</h2>
+        <h3>Hoe stuur ik een offerte als zzp&apos;er?</h3>
+        <p>
+          Maak eerst een duidelijke offerte, controleer de gegevens en prijzen en verstuur het document bijvoorbeeld
+          als PDF per e-mail. Vraag de klant om akkoord en bewaar de verstuurde offerte en het akkoord in je
+          administratie.
+        </p>
         <h3>Moet een zzp&apos;er altijd een offerte sturen?</h3>
         <p>
-          Nee, een offerte is niet verplicht. Bij grotere of langdurige opdrachten is het wel verstandig om vooraf
-          duidelijke afspraken vast te leggen.
+          Nee. Een offerte is niet voor iedere opdracht verplicht. Bij grotere, complexere of duurdere opdrachten is
+          het vaak verstandig om vooraf duidelijke afspraken over werkzaamheden en prijs vast te leggen.
         </p>
-        <h3>Wat moet er minimaal op een zzp-offerte staan?</h3>
+        <h3>Kan ik een offerte gewoon per e-mail sturen?</h3>
         <p>
-          Minimaal je bedrijfsgegevens, klantgegevens, omschrijving van werkzaamheden, prijzen, btw-vermelding, datum en
-          geldigheidsduur.
+          Ja. Een offerte kan bijvoorbeeld als PDF bij een e-mail worden meegestuurd. Zorg ervoor dat de offerte
+          duidelijk is en dat je klant weet hoe hij akkoord kan gaan.
         </p>
-        <h3>Hoe lang is een offerte geldig?</h3>
-        <p>Dat bepaal je zelf. Veel zzp&apos;ers kiezen 14 of 30 dagen.</p>
-        <h3>Kan ik een offerte gratis maken als zzp&apos;er?</h3>
-        <p>Ja. Met FactuurBaas maak je gratis een professionele offerte zonder account.</p>
-        <h3>Wat is de grootste fout bij offertes?</h3>
+        <h3>Moet een offerte ondertekend worden?</h3>
         <p>
-          Te vage omschrijvingen van werkzaamheden. Daardoor ontstaan discussies over wat wel of niet is inbegrepen.
+          Niet iedere offerte hoeft per se met een handtekening te worden geaccepteerd. Een klant kan een aanbod ook
+          op een andere manier accepteren. Bij belangrijke opdrachten kan schriftelijk akkoord wel handig zijn als
+          bewijs van de gemaakte afspraken.
+        </p>
+        <h3>Hoe lang moet een offerte geldig zijn?</h3>
+        <p>
+          Dat bepaal je zelf. Een geldigheidsduur van bijvoorbeeld 14 of 30 dagen komt vaak voor, maar bij iedere
+          opdracht kan een andere termijn passend zijn.
+        </p>
+        <h3>Wanneer stuur ik de factuur?</h3>
+        <p>
+          Meestal factureer je volgens de afspraken uit de offerte nadat de opdracht of een afgesproken deel daarvan
+          is uitgevoerd. Bij grotere opdrachten kunnen ook aanbetalingen of termijnfacturen worden afgesproken.
+        </p>
+        <h3>Kan ik gratis een offerte maken als zzp&apos;er?</h3>
+        <p>
+          Ja. Met de gratis offerte maker van FactuurBaas kun je een offerte maken en als PDF downloaden zonder
+          account.
         </p>
 
         <h2>Maak direct je zzp-offerte</h2>
         <p>
-          Vermijd veelgemaakte fouten en maak een duidelijke, professionele offerte. Download direct als PDF — gratis en
-          zonder account.
+          Maak duidelijke afspraken voordat je aan je opdracht begint. Maak je offerte, controleer de gegevens en
+          stuur hem professioneel als PDF naar je klant.
         </p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Open gratis offerte maker →" />
@@ -3771,9 +5202,9 @@ Totaal:     €774,40`}
           </li>
         </ul>
         <p>
-          Meer tips voor zzp&apos;ers lees je in{' '}
+          Meer over professioneel versturen lees je in{' '}
           <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
-            offerte maken voor zzp&apos;ers
+            offerte sturen als zzp&apos;er
           </Link>
           .
         </p>
@@ -4050,9 +5481,9 @@ Totaal:     €774,40`}
           <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
             wat moet er op een offerte staan
           </Link>
-          . Meer zzp-tips vind je in{' '}
+          . Meer over professioneel versturen vind je in{' '}
           <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
-            offerte maken voor zzp&apos;ers
+            offerte sturen als zzp&apos;er
           </Link>
           .
         </p>
@@ -4334,9 +5765,9 @@ Totaal:     €774,40`}
           <li>wacht op akkoord voordat je verder werkt</li>
         </ul>
         <p>
-          Zo voorkom je discussies over onverwachte kosten. Meer tips voor zzp&apos;ers vind je in{' '}
+          Zo voorkom je discussies over onverwachte kosten. Meer over professioneel versturen vind je in{' '}
           <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
-            offerte maken voor zzp&apos;ers
+            offerte sturen als zzp&apos;er
           </Link>
           .
         </p>
@@ -4404,15 +5835,15 @@ Totaal:     €774,40`}
   {
     slug: 'offerte-omzetten-naar-factuur',
     cluster: 'offertes',
-    seoTitle: 'Offerte omzetten naar factuur | Zo werkt het stap voor stap',
+    seoTitle: 'Offerte omzetten naar factuur: zo werkt het',
     title: 'Offerte omzetten naar factuur: zo doe je dat',
     excerpt:
-      'Offerte omzetten naar factuur? Lees wanneer je factureert, wat er overgaat van offerte naar factuur en hoe je dit gratis doet met FactuurBaas.',
+      'Van offerte naar factuur? Lees wanneer je factureert, wat je overneemt en hoe je voorschot- en deelfacturen maakt na een akkoord.',
     keywords:
-      'offerte omzetten naar factuur, offerte naar factuur, factuur maken van offerte, offerte factuur, geaccepteerde offerte factureren',
+      'offerte omzetten naar factuur, van offerte naar factuur, voorschotfactuur, deelfactuur, offerte naar factuur, meerwerk factureren, geaccepteerde offerte factureren',
     tool: {
       href: '/tools/offerte-maker',
-      label: 'Maak offerte en factuur',
+      label: 'Maak gratis een offerte en factuur',
       ctaLabel: 'Open gratis offerte maker',
       relatedTitle: 'Offerte maker',
       relatedExcerpt: 'Maak een offerte en zet deze met één klik om naar een factuur. Gratis en zonder account.',
@@ -4422,538 +5853,920 @@ Totaal:     €774,40`}
       alt: 'Offerte omzetten naar factuur: ondernemer berekent bedragen voor factuur',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-03',
     relatedSlugs: ['verschil-factuur-offerte', 'factuur-maken-zzp', 'factuur-pdf-downloaden'],
-    relatedGuideSlugs: ['offerte-accepteren-wat-gebeurt-er-na', 'offerte-maken-in-pdf', 'digitale-offertes-versturen'],
+    relatedGuideSlugs: ['offerte-accepteren-wat-gebeurt-er-na', 'hoe-maak-je-een-offerte', 'wanneer-is-een-offerte-bindend'],
     faq: [
       {
-        question: 'Kan ik een offerte omzetten naar een factuur?',
+        question: 'Kan ik een offerte direct omzetten naar een factuur?',
         answer:
-          'Ja. Nadat een klant akkoord gaat met je offerte, kun je de gegevens gebruiken om een factuur te maken. Met FactuurBaas gaat dat met één klik.',
+          'Ja, een offerte kan de basis vormen voor een factuur. Controleer wel eerst of volgens de gemaakte afspraken het moment is aangebroken om te factureren.',
       },
       {
-        question: 'Wanneer zet je een offerte om naar een factuur?',
+        question: 'Moet een factuur altijd hetzelfde bedrag hebben als de offerte?',
         answer:
-          'Meestal na (deel van) de levering van het werk, volgens de betalingsafspraken op je offerte. Bij een voorschot kun je eerder factureren.',
+          'Niet altijd. Bij een voorschot of deelfactuur factureer je slechts een deel. Ook afgesproken meerwerk kan het uiteindelijke bedrag veranderen.',
       },
       {
-        question: 'Moet een factuur hetzelfde bedrag hebben als de offerte?',
+        question: 'Hoe maak ik een voorschotfactuur?',
         answer:
-          'In principe wel, tenzij er extra werk is afgesproken of de scope is gewijzigd. Extra werk factureer je apart.',
+          'Maak een factuur voor het afgesproken voorschotbedrag en vermeld duidelijk dat het om een voorschot gaat en op welke opdracht of offerte het betrekking heeft.',
       },
       {
-        question: 'Wat is het verschil tussen een offerte en een factuur?',
+        question: 'Hoe maak ik een deelfactuur?',
         answer:
-          'Een offerte is een voorstel vóór de opdracht. Een factuur is een betalingsverzoek na (deel van) de levering.',
+          'Gebruik de oorspronkelijke offerte als basis en factureer het afgesproken deel van de opdracht. Vermeld duidelijk welke termijn, fase of werkzaamheden je factureert.',
+      },
+      {
+        question: 'Kan ik meerdere facturen maken van één offerte?',
+        answer:
+          'Ja. Bij termijnbetalingen, voorschotten en grotere projecten kunnen meerdere facturen bij één offerte horen. Iedere factuur krijgt een eigen factuurnummer.',
+      },
+      {
+        question: 'Wat gebeurt er als er meerwerk is?',
+        answer:
+          'Leg het extra werk en de prijs eerst duidelijk vast. Na akkoord kun je het meerwerk volgens de gemaakte afspraken factureren.',
+      },
+      {
+        question: 'Wat is het verschil tussen een voorschotfactuur en een deelfactuur?',
+        answer:
+          'Bij een voorschot betaal je een afgesproken bedrag vooraf. Een deelfactuur brengt een afgesproken deel van de opdracht in rekening, bijvoorbeeld na het behalen van een bepaalde projectfase.',
+      },
+      {
+        question: 'Kan ik een offerte en factuur online maken?',
+        answer:
+          'Ja. Met een online tool kun je offertes en facturen maken zonder zelf Word- of Excel-bestanden te onderhouden.',
       },
     ],
     content: (
       <>
         <p>
-          Is je klant akkoord met je offerte? Dan is de volgende stap vaak: <strong>offerte omzetten naar
-          factuur</strong>. Zo hoef je gegevens niet opnieuw in te voeren en stuur je een correct betalingsverzoek naar
-          je klant.
+          Is je klant akkoord met je offerte? Dan volgt vaak de volgende stap: <strong>van offerte naar factuur</strong>
+          .
         </p>
         <p>
-          In deze gids lees je wanneer je factureert, wat er overgaat van offerte naar factuur en hoe je dit gratis doet
-          met de{' '}
-          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            offerte maker
-          </Link>{' '}
-          van FactuurBaas.
+          Je gebruikt de offerte als basis voor je factuur, maar een factuur is een ander document. Het factuurnummer,
+          de factuurdatum en de betalingsafspraken moeten bijvoorbeeld correct worden verwerkt.
+        </p>
+        <p>
+          In deze gids lees je wanneer je een offerte omzet naar een factuur, welke gegevens je overneemt en hoe je
+          omgaat met <strong>voorschotten, deelfacturen en extra werk</strong>.
         </p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak offerte en factuur →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte en factuur →" />
 
-        <h2>Wat is het verschil tussen offerte en factuur?</h2>
-        <CalculationTable
-          rows={[
-            ['Offerte', 'Voorstel vóór de opdracht — klant geeft akkoord'],
-            ['Factuur', 'Betalingsverzoek na (deel van) levering'],
-            ['Moment', 'Offerte eerst, factuur daarna'],
-            ['Doel', 'Afspraken maken → betaling ontvangen'],
-          ]}
-        />
+        <h2>Van offerte naar factuur: hoe werkt het?</h2>
+        <p>De meest gebruikelijke volgorde is:</p>
+        <p>
+          <strong>Offerte → akkoord → uitvoering → factuur</strong>
+        </p>
+        <p>Maar bij grotere opdrachten kan het ook zo gaan:</p>
+        <p>
+          <strong>Offerte → akkoord → voorschotfactuur → werkzaamheden → deelfacturen → eindfactuur</strong>
+        </p>
+        <p>Welke route je gebruikt, hangt af van de afspraken met je klant.</p>
+        <p>
+          Een offerte is een voorstel voor een opdracht. Een factuur gebruik je om een bedrag in rekening te brengen.
+        </p>
+
+        <h2>Wat is het verschil tussen een offerte en een factuur?</h2>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Onderdeel
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Offerte
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Factuur
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-slate-700">Doel</td>
+                <td className="px-4 py-3">Voorstel voor een opdracht</td>
+                <td className="px-4 py-3">Bedrag in rekening brengen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-slate-700">Moment</td>
+                <td className="px-4 py-3">Voor of bij het aangaan van de opdracht</td>
+                <td className="px-4 py-3">Volgens de afgesproken betalingsmomenten</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-slate-700">Nummer</td>
+                <td className="px-4 py-3">Offertenummer</td>
+                <td className="px-4 py-3">Factuurnummer</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-slate-700">Betaling</td>
+                <td className="px-4 py-3">Nog geen betalingsverzoek</td>
+                <td className="px-4 py-3">Betalingsverzoek</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-slate-700">Status</td>
+                <td className="px-4 py-3">Wachten op akkoord</td>
+                <td className="px-4 py-3">Te betalen door klant</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           Meer uitleg vind je in{' '}
           <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
-            verschil tussen offerte en factuur
+            het verschil tussen een offerte en een factuur
           </Link>
           .
         </p>
 
         <h2>Wanneer zet je een offerte om naar een factuur?</h2>
-        <p>
-          Je factureert meestal <strong>niet direct</strong> bij akkoord op de offerte, maar volgens de afspraken die je
-          hebt gemaakt:
-        </p>
+        <p>Je maakt een factuur wanneer daar volgens de gemaakte afspraken aanleiding voor is.</p>
+        <p>Dat kan bijvoorbeeld zijn:</p>
         <ul>
-          <li>
-            <strong>Na oplevering</strong> — het meest voorkomend bij zzp&apos;ers
-          </li>
-          <li>
-            <strong>Voorschot</strong> — bijvoorbeeld 50% bij start, 50% na oplevering
-          </li>
-          <li>
-            <strong>In termijnen</strong> — per milestone of per maand bij langere projecten
-          </li>
-          <li>
-            <strong>Na akkoord</strong> — alleen als dat expliciet op de offerte staat
-          </li>
+          <li>na volledige oplevering</li>
+          <li>na levering van een product of dienst</li>
+          <li>bij een afgesproken voorschot</li>
+          <li>bij een afgesproken termijnbetaling</li>
+          <li>na een bepaalde mijlpaal in een project</li>
         </ul>
         <p>
-          Lees ook{' '}
-          <Link href="/gidsen/offerte-accepteren-wat-gebeurt-er-na" className="text-warm-orange hover:underline">
-            offerte accepteren: wat gebeurt er daarna
-          </Link>{' '}
-          voor het volledige stappenplan na acceptatie.
+          Een akkoord op de offerte betekent dus niet automatisch dat je het volledige offertebedrag direct moet
+          factureren.
+        </p>
+        <p>Staat in je offerte bijvoorbeeld:</p>
+        <blockquote>50% bij aanvang en 50% na oplevering</blockquote>
+        <p>
+          dan kun je na akkoord een voorschotfactuur voor de eerste 50% sturen. De overige 50% factureer je volgens de
+          afgesproken voorwaarden.
         </p>
 
-        <h2>Wat gaat er over van offerte naar factuur?</h2>
-        <p>Bij het omzetten van een offerte naar een factuur komen meestal deze gegevens mee:</p>
+        <h2>Wat neem je over van de offerte?</h2>
+        <p>De offerte vormt de basis voor de factuur. Veel gegevens kun je daarom opnieuw gebruiken.</p>
+        <p>Denk aan:</p>
         <ul>
-          <li>jouw bedrijfsgegevens</li>
+          <li>bedrijfsgegevens</li>
           <li>klantgegevens</li>
-          <li>omschrijving van werkzaamheden of producten</li>
-          <li>aantal, prijzen en regels</li>
-          <li>btw-tarief en btw-bedrag</li>
-          <li>subtotaal en totaalbedrag</li>
-        </ul>
-        <p>Wat <strong>wél verandert</strong> op de factuur:</p>
-        <ul>
-          <li>documenttype: van offerte naar factuur</li>
-          <li>factuurnummer in plaats van offertenummer</li>
-          <li>factuurdatum (en vaak leveringsdatum)</li>
-          <li>betaaltermijn en betaalgegevens</li>
+          <li>omschrijving van de werkzaamheden</li>
+          <li>producten of diensten</li>
+          <li>aantallen</li>
+          <li>prijzen</li>
+          <li>btw-tarieven</li>
+          <li>eventuele afgesproken kosten</li>
         </ul>
         <p>
-          Controleer altijd of bedragen en omschrijvingen nog kloppen voordat je de factuur verstuurt — vooral bij
-          langere projecten of gewijzigde scope.
+          Controleer deze gegevens wel voordat je de factuur verstuurt. Een offerte kan bijvoorbeeld maanden eerder
+          zijn gemaakt of tijdens het project zijn gewijzigd.
+        </p>
+
+        <h3>Wat verandert er?</h3>
+        <p>Een aantal gegevens hoort specifiek bij de factuur:</p>
+        <ul>
+          <li>
+            <strong>offertenummer → factuurnummer</strong>
+          </li>
+          <li>
+            <strong>offertedatum → factuurdatum</strong>
+          </li>
+          <li>eventuele leverings- of uitvoeringsdatum</li>
+          <li>betaaltermijn</li>
+          <li>betaalgegevens</li>
+          <li>het bedrag dat daadwerkelijk wordt gefactureerd</li>
+        </ul>
+        <p>
+          Ook kan het factuurbedrag verschillen van het oorspronkelijke offertebedrag wanneer er bijvoorbeeld meerwerk
+          of andere wijzigingen zijn afgesproken.
         </p>
 
         <h2>Offerte omzetten naar factuur in FactuurBaas</h2>
-        <p>Met FactuurBaas zet je een offerte in een paar stappen om naar een factuur:</p>
+        <p>In FactuurBaas kun je een offerte als basis gebruiken voor een factuur.</p>
+        <p>De werkwijze:</p>
         <ol>
           <li>
-            Open de{' '}
+            Maak je offerte met de{' '}
             <Link href="/tools/offerte-maker/maken" className="text-warm-orange hover:underline">
               offerte maker
-            </Link>{' '}
-            en maak je offerte (of open een bestaande).
+            </Link>
+            .
           </li>
-          <li>Wacht op akkoord van je klant.</li>
-          <li>Klik op <strong>Maak factuur van deze offerte</strong> in de sidebar.</li>
-          <li>Je wordt doorgestuurd naar de factuurmaker met ingevulde gegevens.</li>
-          <li>Controleer factuurnummer, datum en betaaltermijn.</li>
-          <li>Download de factuur als PDF en verstuur naar je klant.</li>
+          <li>Laat je klant de offerte beoordelen en akkoord geven.</li>
+          <li>Maak wanneer het betalingsmoment is aangebroken een factuur van de offerte.</li>
+          <li>Controleer het factuurnummer, de datum en de bedragen.</li>
+          <li>Controleer de btw en betaaltermijn.</li>
+          <li>Download de factuur als PDF.</li>
+          <li>Stuur de factuur naar je klant.</li>
         </ol>
-        <p>Gratis, zonder account — en je hoeft geen gegevens dubbel in te voeren.</p>
+        <p>Zo hoef je gegevens die al in je offerte staan niet opnieuw over te typen.</p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Zet offerte om naar factuur →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis je offerte en factuur →" />
 
-        <h2>Handmatig omzetten (Word of Excel)</h2>
-        <p>Gebruik je Word of Excel voor je offerte? Dan moet je handmatig overstappen:</p>
-        <ol>
-          <li>Open je geaccepteerde offerte.</li>
-          <li>Kopieer bedrijfsgegevens, klantgegevens en regels naar een factuurtemplate.</li>
-          <li>Vervang het offertenummer door een nieuw factuurnummer.</li>
-          <li>Voeg factuurdatum, leveringsdatum en betaaltermijn toe.</li>
-          <li>Controleer btw-berekening opnieuw.</li>
-          <li>Sla op als PDF en verstuur.</li>
-        </ol>
+        <h2>Voorschotfactuur na een offerte</h2>
         <p>
-          Dit kost meer tijd en vergroot de kans op fouten. Een online tool met offerte-naar-factuur functie is meestal
-          sneller en betrouwbaarder. Lees ook{' '}
-          <Link href="/gidsen/offerte-maken-in-pdf" className="text-warm-orange hover:underline">
-            offerte maken in PDF
-          </Link>{' '}
-          en{' '}
-          <Link href="/blogs/factuur-pdf-downloaden" className="text-warm-orange hover:underline">
-            factuur PDF downloaden
-          </Link>
-          .
+          Een <strong>voorschotfactuur</strong> is een factuur waarmee je een afgesproken bedrag vooraf in rekening
+          brengt.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Totale opdracht volgens offerte:</strong> €4.000 exclusief btw
+          <br />
+          <strong>Voorschot:</strong> 50%
+          <br />
+          <strong>Voorschotfactuur:</strong> €2.000 exclusief btw
+        </p>
+        <p>Je factureert hiermee dus niet automatisch de volledige opdracht.</p>
+        <p>
+          Zorg dat op de factuur duidelijk staat dat het om een voorschot gaat en op welke opdracht of offerte het
+          voorschot betrekking heeft.
         </p>
 
-        <h2>Checklist vóór je factureert</h2>
+        <h3>Hoe maak je een voorschotfactuur?</h3>
+        <p>
+          Controleer eerst wat je in de offerte hebt afgesproken. Staat er bijvoorbeeld dat 50% vooraf wordt betaald,
+          dan kun je die eerste termijn factureren nadat de opdracht tot stand is gekomen.
+        </p>
+        <p>Vermeld bijvoorbeeld:</p>
+        <blockquote>Voorschot – 50% van opdracht volgens offerte OFF-2026-024</blockquote>
+        <p>Daarna factureer je het resterende bedrag volgens de gemaakte afspraken.</p>
+
+        <h2>Deelfactuur maken van een offerte</h2>
+        <p>Bij grotere projecten kun je één offerte gebruiken als basis voor meerdere facturen.</p>
+        <p>Bijvoorbeeld:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[420px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Factuur
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag excl. btw
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Factuur 1</td>
+                <td className="px-4 py-3">Voorschot 30%</td>
+                <td className="px-4 py-3 text-right">€1.500</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Factuur 2</td>
+                <td className="px-4 py-3">Termijn 40%</td>
+                <td className="px-4 py-3 text-right">€2.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Factuur 3</td>
+                <td className="px-4 py-3">Eindfactuur 30%</td>
+                <td className="px-4 py-3 text-right">€1.500</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€5.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Elke factuur krijgt een <strong>eigen factuurnummer</strong>.
+        </p>
+        <p>
+          Vermeld duidelijk welke termijn of welk deel van de opdracht je factureert. Zo voorkom je dat jij of je
+          klant later niet meer weet welk bedrag al is gefactureerd.
+        </p>
+
+        <h2>Kun je meerdere facturen van één offerte maken?</h2>
+        <p>Ja. Dat kan bijvoorbeeld bij:</p>
         <ul>
-          <li>klant heeft akkoord gegeven op de offerte</li>
-          <li>werk is geleverd volgens afspraak (of voorschot is verschuldigd)</li>
-          <li>bedragen en omschrijvingen kloppen nog</li>
-          <li>nieuw, uniek factuurnummer</li>
-          <li>factuurdatum en betaaltermijn ingevuld</li>
-          <li>btw en totaalbedrag gecontroleerd</li>
-          <li>factuur verstuurd als PDF</li>
+          <li>termijnbetalingen</li>
+          <li>voorschotten</li>
+          <li>grote projecten</li>
+          <li>maandelijkse werkzaamheden</li>
+          <li>verschillende oplevermomenten</li>
         </ul>
         <p>
-          Welke gegevens op een factuur verplicht zijn, lees je in{' '}
-          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">
-            factuur maken als zzp&apos;er
+          Gebruik de oorspronkelijke offerte als referentie, maar factureer per factuur alleen het bedrag dat volgens
+          de afspraken op dat moment verschuldigd is.
+        </p>
+
+        <h2>Wat doe je met meerwerk?</h2>
+        <p>Extra werkzaamheden vallen niet automatisch onder het oorspronkelijke offertebedrag.</p>
+        <p>
+          Stel dat je een website bouwt voor €3.000 en de klant later vraagt om extra functionaliteit van €500. Leg
+          dan eerst duidelijk vast wat het extra werk kost en vraag waar nodig akkoord voordat je het uitvoert.
+        </p>
+        <p>Het extra bedrag kun je vervolgens volgens de gemaakte afspraken factureren.</p>
+        <p>Je kunt het meerwerk bijvoorbeeld als aparte regel op dezelfde factuur zetten:</p>
+        <blockquote>Meerwerk – extra functionaliteit volgens akkoord 12 september – €500</blockquote>
+        <p>Of je kunt voor het meerwerk een aanvullende offerte gebruiken.</p>
+        <p>
+          Het belangrijkste is dat de klant weet <strong>wat het extra werk kost en waarmee hij akkoord gaat</strong>.
+        </p>
+
+        <h2>Offertenummer en factuurnummer</h2>
+        <p>Een offerte en een factuur hebben een eigen nummering.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Offerte:</strong> OFF-2026-024
+          <br />
+          <strong>Factuur:</strong> 2026-042
+        </p>
+        <p>Gebruik niet hetzelfde nummer voor beide documenten.</p>
+        <p>
+          Een offertenummer helpt je om de oorspronkelijke afspraak terug te vinden. Het factuurnummer hoort bij de
+          uiteindelijke factuur.
+        </p>
+        <p>
+          Bekijk ook onze uitleg over{' '}
+          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
+            offertenummers bepalen
+          </Link>{' '}
+          en{' '}
+          <Link href="/tools/factuurnummer-generator" className="text-warm-orange hover:underline">
+            factuurnummers maken
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten</h2>
-
-        <h3>Te vroeg factureren</h3>
+        <h2>Offerte en factuur online maken</h2>
         <p>
-          Een offerte is geen factuur. Stuur pas een factuur wanneer de betalingsafspraak dat toelaat — meestal na
-          levering.
+          Gebruik je Word of Excel, dan moet je gegevens vaak handmatig van je offerte naar je factuur kopiëren.
         </p>
+        <p>Dat betekent dat je opnieuw moet controleren:</p>
+        <ul>
+          <li>klantgegevens</li>
+          <li>omschrijvingen</li>
+          <li>aantallen</li>
+          <li>bedragen</li>
+          <li>btw</li>
+          <li>nummering</li>
+          <li>betaaltermijn</li>
+        </ul>
+        <p>
+          Met een online tool kun je dit proces eenvoudiger maken doordat je met dezelfde gegevens kunt werken.
+        </p>
+
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte →" />
+
+        <h2>Checklist voordat je de factuur verstuurt</h2>
+        <p>Controleer:</p>
+        <ul>
+          <li>klant heeft akkoord gegeven op de offerte</li>
+          <li>het juiste betalingsmoment is aangebroken</li>
+          <li>juiste klantgegevens</li>
+          <li>nieuw en uniek factuurnummer</li>
+          <li>juiste factuurdatum</li>
+          <li>juiste omschrijving</li>
+          <li>alleen het afgesproken deel gefactureerd</li>
+          <li>meerwerk is afgesproken en duidelijk vermeld</li>
+          <li>btw correct berekend</li>
+          <li>betaaltermijn ingevuld</li>
+          <li>betaalgegevens gecontroleerd</li>
+          <li>PDF gecontroleerd voordat je deze verstuurt</li>
+        </ul>
+
+        <h2>Veelgemaakte fouten bij offerte en factuur</h2>
+
+        <h3>Het volledige offertebedrag direct factureren</h3>
+        <p>
+          Een klant kan akkoord zijn met een offerte zonder dat het volledige bedrag meteen verschuldigd is.
+        </p>
+        <p>Controleer daarom eerst de afgesproken betalingsmomenten.</p>
 
         <h3>Hetzelfde nummer gebruiken</h3>
         <p>
-          Een offerte heeft een offertenummer (bijv. OFF-2026-001). Een factuur krijgt een apart factuurnummer (bijv.
-          2026-042).
+          Gebruik een apart offertenummer en factuurnummer. Bijvoorbeeld OFF-2026-024 voor de offerte en 2026-042 voor
+          de factuur.
         </p>
 
-        <h3>Extra werk niet apart factureren</h3>
+        <h3>Een voorschot als volledige factuur behandelen</h3>
         <p>
-          Werk buiten de offerte valt niet automatisch op dezelfde factuur. Maak een aanvullende offerte of aparte
-          factuurregels.
+          Een voorschot is slechts een deel van de afgesproken opdracht. Vermeld duidelijk dat het om een voorschot
+          gaat.
         </p>
 
-        <h3>Gegevens niet controleren</h3>
+        <h3>Een deelfactuur niet duidelijk omschrijven</h3>
         <p>
-          Bij langere projecten kunnen prijzen of scope zijn gewijzigd. Controleer altijd vóór je de factuur verstuurt.
+          Zet bijvoorbeeld “Termijn 2 – werkzaamheden fase 2” op de factuur, zodat duidelijk is welk deel van de
+          opdracht je factureert.
         </p>
 
-        <h2>Deelfactuur na een offerte</h2>
+        <h3>Meerwerk zonder akkoord factureren</h3>
         <p>
-          Bij grote projecten factureer je soms in delen. De eerste factuur kan bijvoorbeeld 40% van het offertebedrag
-          zijn, de tweede 60% na oplevering. Gebruik de offerte als basis, maar pas het bedrag aan per factuur en
-          vermeld duidelijk welk deel je factureert.
+          Extra werkzaamheden kunnen tot discussie leiden wanneer vooraf niet duidelijk is afgesproken wat ze kosten.
+          Leg meerwerk daarom vooraf vast.
+        </p>
+
+        <h3>De offerte niet bewaren</h3>
+        <p>
+          Bewaar de offerte, eventuele wijzigingen en het akkoord samen met de facturen. Zo kun je later aantonen
+          welke afspraken aan de factuur ten grondslag lagen.
         </p>
 
         <h2>Veelgestelde vragen</h2>
         <h3>Kan ik een offerte direct omzetten naar een factuur?</h3>
         <p>
-          Technisch wel in FactuurBaas, maar factureer pas wanneer dat volgens je afspraken mag — meestal na levering of
-          bij een afgesproken voorschot.
+          Ja, een offerte kan de basis vormen voor een factuur. Controleer wel eerst of volgens de gemaakte afspraken
+          het moment is aangebroken om te factureren.
         </p>
-        <h3>Moet het factuurbedrag gelijk zijn aan de offerte?</h3>
+        <h3>Moet een factuur altijd hetzelfde bedrag hebben als de offerte?</h3>
         <p>
-          In principe wel, tenzij er extra werk of wijzigingen zijn afgesproken. Extra werk factureer je apart.
+          Niet altijd. Bij een voorschot of deelfactuur factureer je slechts een deel. Ook afgesproken meerwerk kan
+          het uiteindelijke bedrag veranderen.
         </p>
-        <h3>Wat als de klant nog niet akkoord is?</h3>
+        <h3>Hoe maak ik een voorschotfactuur?</h3>
         <p>
-          Wacht op acceptatie voordat je start met grote werkzaamheden of factureert. Lees{' '}
-          <Link href="/gidsen/wanneer-is-een-offerte-bindend" className="text-warm-orange hover:underline">
-            wanneer is een offerte bindend
-          </Link>
-          .
+          Maak een factuur voor het afgesproken voorschotbedrag en vermeld duidelijk dat het om een voorschot gaat en
+          op welke opdracht of offerte het betrekking heeft.
+        </p>
+        <h3>Hoe maak ik een deelfactuur?</h3>
+        <p>
+          Gebruik de oorspronkelijke offerte als basis en factureer het afgesproken deel van de opdracht. Vermeld
+          duidelijk welke termijn, fase of werkzaamheden je factureert.
         </p>
         <h3>Kan ik meerdere facturen maken van één offerte?</h3>
         <p>
-          Ja, bij termijnbetalingen of deelopleveringen. Elke factuur krijgt een eigen factuurnummer.
+          Ja. Bij termijnbetalingen, voorschotten en grotere projecten kunnen meerdere facturen bij één offerte horen.
+          Iedere factuur krijgt een eigen factuurnummer.
         </p>
-
-        <h2>Start met een offerte, sluit af met een factuur</h2>
+        <h3>Wat gebeurt er als er meerwerk is?</h3>
         <p>
-          Maak je offerte in FactuurBaas, ontvang akkoord en zet de gegevens met één klik om naar een factuur. Gratis,
-          zonder account en direct als PDF.
+          Leg het extra werk en de prijs eerst duidelijk vast. Na akkoord kun je het meerwerk volgens de gemaakte
+          afspraken factureren.
         </p>
-
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Open gratis offerte maker →" />
-
+        <h3>Wat is het verschil tussen een voorschotfactuur en een deelfactuur?</h3>
         <p>
-          Nog geen offerte gemaakt? Begin met{' '}
-          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
-            hoe maak je een offerte
-          </Link>{' '}
-          of bekijk een{' '}
-          <Link href="/gidsen/offerte-voorbeeld" className="text-warm-orange hover:underline">
-            offerte voorbeeld
-          </Link>
-          .
+          Bij een voorschot betaal je een afgesproken bedrag vooraf. Een deelfactuur brengt een afgesproken deel van
+          de opdracht in rekening, bijvoorbeeld na het behalen van een bepaalde projectfase.
         </p>
+        <h3>Kan ik een offerte en factuur online maken?</h3>
+        <p>
+          Ja. Met een online tool kun je offertes en facturen maken zonder zelf Word- of Excel-bestanden te
+          onderhouden.
+        </p>
+
+        <h2>Van offerte naar factuur met FactuurBaas</h2>
+        <p>
+          Een offerte is het begin van de opdracht. Daarna volgen, afhankelijk van je afspraken, een voorschot, één of
+          meerdere termijnfacturen en uiteindelijk de eindfactuur.
+        </p>
+        <p>
+          Met FactuurBaas kun je je offerte maken en deze als basis gebruiken voor je factuur. Zo hoef je gegevens
+          niet steeds opnieuw in te voeren.
+        </p>
+
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis je offerte →" />
       </>
     ),
   },
   {
     slug: 'digitale-offertes-versturen',
     cluster: 'offertes',
-    seoTitle: 'Digitale offertes versturen | Tips voor e-mail en PDF',
-    title: 'Digitale offertes versturen: zo stuur je een professionele offerte per e-mail',
+    seoTitle: 'Online offerte maken: gratis digitaal versturen',
+    title: 'Online offerte maken en digitaal versturen',
     excerpt:
-      'Digitale offertes versturen? Lees hoe je een offerte als PDF per e-mail verstuurt, wat je in je bericht zet en hoe je opvolgt na verzending.',
+      'Online een offerte maken? Maak gratis een professionele offerte, download als PDF en verstuur deze digitaal per e-mail. Zonder account.',
     keywords:
-      'digitale offertes versturen, offerte versturen, offerte per email, offerte mailen, offerte pdf versturen, offerte digitaal verzenden',
+      'online offerte maken, offerte online maken, gratis offerte maken, offerte digitaal versturen, offerte pdf, offerte per email, digitale offerte',
     tool: {
       href: '/tools/offerte-maker',
-      label: 'Maak en verstuur offerte',
-      ctaLabel: 'Open gratis offerte maker',
+      label: 'Maak gratis een offerte online',
+      ctaLabel: 'Maak gratis een offerte',
       relatedTitle: 'Offerte maker',
-      relatedExcerpt: 'Maak een professionele offerte, download als PDF en verstuur direct per e-mail.',
+      relatedExcerpt: 'Maak online een professionele offerte, download als PDF en verstuur digitaal. Gratis en zonder account.',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Digitale%20offertes%20versturen.jpg',
-      alt: 'Digitale offertes versturen: ondernemer verstuurt offerte via smartphone',
+      alt: 'Online offerte maken: ondernemer maakt en verstuurt offerte digitaal',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
-    relatedSlugs: ['verschil-factuur-offerte', 'factureren-zonder-account', 'sneller-betalen-factuur'],
-    relatedGuideSlugs: ['offerte-maken-in-pdf', 'offerte-accepteren-wat-gebeurt-er-na', 'offerte-aanpassen'],
+    dateModified: '2026-09-03',
+    relatedSlugs: ['verschil-factuur-offerte', 'factureren-zonder-account'],
+    relatedGuideSlugs: [
+      'offerte-maken-in-pdf',
+      'offerte-maken-voor-zzper',
+      'offerte-omzetten-naar-factuur',
+      'wanneer-is-een-offerte-bindend',
+    ],
     faq: [
       {
-        question: 'Hoe verstuur ik een offerte digitaal?',
+        question: 'Hoe maak ik online een offerte?',
         answer:
-          'Maak je offerte, download als PDF en verstuur het bestand per e-mail naar je klant. Voeg een korte, duidelijke toelichting toe in het bericht.',
+          'Je kunt online een offerte maken door je bedrijfsgegevens, klantgegevens, werkzaamheden en prijzen in te vullen. Met de gratis offerte maker van FactuurBaas kun je daarna je offerte als PDF downloaden.',
       },
       {
-        question: 'Moet een offerte als PDF worden verstuurd?',
+        question: 'Waar kan ik gratis een offerte maken?',
         answer:
-          'Een PDF is aan te raden omdat de opmaak hetzelfde blijft en de ontvanger het document niet per ongeluk kan aanpassen.',
+          'Met FactuurBaas kun je gratis online een offerte maken en als PDF downloaden. Een account is niet nodig.',
       },
       {
-        question: 'Wat zet ik in de e-mail bij een offerte?',
+        question: 'Hoe verstuur ik een digitale offerte?',
         answer:
-          'Vermeld kort waar de offerte over gaat, het offertenummer, de geldigheidsduur en hoe de klant akkoord kan geven.',
+          'De eenvoudigste manier is om je offerte als PDF te downloaden en deze als bijlage bij een e-mail naar je klant te sturen.',
       },
       {
-        question: 'Kan ik een offerte vanaf mijn telefoon versturen?',
+        question: 'Kan ik een offerte als PDF versturen?',
         answer:
-          'Ja. Maak je offerte online, download de PDF op je telefoon of computer en verstuur via e-mail of een berichten-app.',
+          'Ja. Je kunt een online gemaakte offerte als PDF downloaden en vervolgens per e-mail versturen.',
+      },
+      {
+        question: 'Kan ik een offerte digitaal laten ondertekenen?',
+        answer:
+          'Dat kan met een aparte digitale ondertekeningsoplossing of door de klant schriftelijk akkoord te laten geven, bijvoorbeeld per e-mail. De offerte maker van FactuurBaas maakt en downloadt de offerte als PDF, maar bevat geen digitale ondertekeningsfunctie.',
+      },
+      {
+        question: 'Kan ik een offerte online maken zonder account?',
+        answer:
+          'Ja. Met de gratis offerte maker van FactuurBaas kun je zonder account een offerte maken en als PDF downloaden.',
+      },
+      {
+        question: 'Kan ik een online offerte daarna omzetten naar een factuur?',
+        answer:
+          'Na akkoord kun je de opdracht factureren. FactuurBaas ondersteunt het maken van een factuur vanuit een offerte.',
       },
     ],
     content: (
       <>
         <p>
-          <strong>Digitale offertes versturen</strong> is de snelste manier om een professioneel voorstel naar je klant te
-          sturen. In plaats van een Word-bestand of geprinte versie, stuur je een <strong>PDF per e-mail</strong> — netjes
-          opgemaakt, makkelijk te openen en overal te bekijken.
+          Een <strong>online offerte maken</strong> is een snelle manier om een professioneel voorstel naar je klant te
+          sturen. Je vult je bedrijfsgegevens, klantgegevens, werkzaamheden en prijzen in, maakt de offerte online en
+          downloadt deze als PDF.
         </p>
         <p>
           Met de gratis{' '}
           <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
             offerte maker
           </Link>{' '}
-          van FactuurBaas maak je je offerte online, download je deze als PDF en verstuur je hem direct naar je klant.
+          van FactuurBaas maak je direct een offerte als PDF. Je hebt geen account nodig.
         </p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak offerte als PDF →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte online →" />
 
-        <h2>Waarom digitaal versturen?</h2>
-        <p>Een digitale offerte per e-mail heeft voordelen ten opzichte van papier of Word:</p>
+        <h2>Hoe maak je online een offerte?</h2>
+        <p>Een goede digitale offerte maken kan in een paar stappen:</p>
+
+        <h3>1. Vul je bedrijfsgegevens in</h3>
+        <p>Vermeld de gegevens van je bedrijf, zoals:</p>
         <ul>
-          <li>de klant ontvangt je offerte direct</li>
-          <li>de opmaak blijft hetzelfde op elke computer of telefoon</li>
-          <li>PDF&apos;s kunnen niet zomaar worden aangepast</li>
-          <li>je bespaart print- en postkosten</li>
-          <li>je kunt sneller opvolgen en archiveren</li>
+          <li>bedrijfsnaam</li>
+          <li>adres</li>
+          <li>e-mailadres</li>
+          <li>telefoonnummer</li>
+          <li>KVK-nummer</li>
+          <li>btw-id, indien van toepassing</li>
+        </ul>
+        <p>Zo weet de klant direct van wie de offerte afkomstig is.</p>
+
+        <h3>2. Vul de klantgegevens in</h3>
+        <p>
+          Voeg de gegevens van de klant toe. Bij een zakelijke klant vermeld je bijvoorbeeld de bedrijfsnaam,
+          contactpersoon en het adres.
+        </p>
+        <p>Controleer het e-mailadres goed voordat je de offerte verstuurt.</p>
+
+        <h3>3. Geef de offerte een nummer</h3>
+        <p>
+          Gebruik een uniek offertenummer, bijvoorbeeld <strong>OFF-2026-014</strong>. Een vaste nummering maakt
+          offertes makkelijker terug te vinden en helpt bij je administratie.
+        </p>
+
+        <h3>4. Beschrijf de werkzaamheden</h3>
+        <p>Maak duidelijk wat je gaat leveren.</p>
+        <p>Bijvoorbeeld:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Aantal
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Prijs
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Adviesgesprek</td>
+                <td className="px-4 py-3 text-right">2 uur</td>
+                <td className="px-4 py-3 text-right">€150</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Uitwerking advies</td>
+                <td className="px-4 py-3 text-right">1</td>
+                <td className="px-4 py-3 text-right">€500</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Rapportage</td>
+                <td className="px-4 py-3 text-right">1</td>
+                <td className="px-4 py-3 text-right">€100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Een klant moet op basis van je offerte kunnen begrijpen wat wel en niet binnen de opdracht valt.
+        </p>
+
+        <h3>5. Vermeld de prijs en btw</h3>
+        <p>
+          Geef duidelijk aan wat de werkzaamheden kosten en welk btw-tarief van toepassing is.
+        </p>
+        <p>Vermeld bijvoorbeeld het bedrag exclusief btw, de btw en het totaal inclusief btw.</p>
+
+        <h3>6. Voeg een geldigheidsduur toe</h3>
+        <p>Geef aan tot wanneer je aanbod geldig is. Bijvoorbeeld:</p>
+        <p>
+          <strong>Deze offerte is geldig tot en met 30 september 2026.</strong>
+        </p>
+        <p>Dat voorkomt onduidelijkheid wanneer een klant pas weken later reageert.</p>
+
+        <h3>7. Download en verstuur de offerte</h3>
+        <p>
+          Controleer de offerte en download deze als PDF. Geef het bestand een duidelijke naam, bijvoorbeeld:
+        </p>
+        <p>
+          <strong>Offerte-OFF-2026-014-Klant-BV.pdf</strong>
+        </p>
+        <p>Daarna kun je de PDF per e-mail naar je klant sturen.</p>
+
+        <h2>Waarom een offerte online maken?</h2>
+        <p>Een online offerte heeft een aantal praktische voordelen:</p>
+        <ul>
+          <li>je kunt de offerte snel maken</li>
+          <li>je hoeft geen Word- of Excel-bestand op te maken</li>
+          <li>de offerte kan als PDF worden verstuurd</li>
+          <li>de opmaak blijft hetzelfde bij de ontvanger</li>
+          <li>je kunt overal een offerte maken</li>
+          <li>je kunt een kopie van de verstuurde offerte bewaren</li>
         </ul>
         <p>
-          Lees ook{' '}
+          Voor veel zzp&apos;ers is een online offerte daarom eenvoudiger dan steeds zelf een document in Word of Excel
+          opmaken.
+        </p>
+
+        <h2>Een offerte digitaal versturen</h2>
+        <p>Nadat je de offerte online hebt gemaakt, kun je hem digitaal naar je klant sturen.</p>
+        <p>De eenvoudigste manier is:</p>
+        <ol>
+          <li>Maak de offerte online.</li>
+          <li>Controleer alle gegevens.</li>
+          <li>Download de offerte als PDF.</li>
+          <li>Open je e-mail.</li>
+          <li>Voeg de PDF toe als bijlage.</li>
+          <li>Gebruik een duidelijk onderwerp met het offertenummer.</li>
+          <li>Vraag de klant om te laten weten of hij akkoord gaat.</li>
+        </ol>
+
+        <h3>Voorbeeld van een e-mail</h3>
+        <p>
+          <strong>Onderwerp: Offerte OFF-2026-014 – adviestraject</strong>
+        </p>
+        <blockquote>
+          Beste [naam],
+          <br />
+          <br />
+          Hierbij stuur ik je de offerte voor [omschrijving van de opdracht].
+          <br />
+          <br />
+          In de bijlage vind je de volledige offerte. Het totaalbedrag bedraagt €907,50 inclusief btw.
+          <br />
+          <br />
+          De offerte is geldig tot en met 30 september 2026.
+          <br />
+          <br />
+          Heb je nog vragen? Laat het gerust weten. Als je akkoord bent, kun je dit per e-mail bevestigen.
+          <br />
+          <br />
+          Met vriendelijke groet,
+          <br />
+          <br />
+          [naam]
+          <br />
+          [bedrijfsnaam]
+          <br />
+          [telefoonnummer]
+          <br />
+          [e-mailadres]
+        </blockquote>
+        <p>
+          Houd de e-mail kort. De volledige omschrijving, prijsopbouw en voorwaarden staan in de offerte zelf.
+        </p>
+
+        <h2>Offerte als PDF versturen</h2>
+        <p>
+          Een <strong>PDF-offerte</strong> is handig omdat de opmaak niet afhankelijk is van het programma waarmee de
+          klant de offerte opent.
+        </p>
+        <p>
+          Een Word-bestand kan door de ontvanger worden gewijzigd en de opmaak kan verschillen tussen programma&apos;s.
+          Bij een PDF blijft de offerte doorgaans in dezelfde vorm zichtbaar.
+        </p>
+        <p>
+          Daarom is een PDF vaak een praktische keuze voor het digitaal versturen van een offerte.
+        </p>
+        <p>
+          Meer informatie over verschillende manieren om een offerte als PDF te maken vind je in{' '}
           <Link href="/gidsen/offerte-maken-in-pdf" className="text-warm-orange hover:underline">
             offerte maken in PDF
-          </Link>{' '}
-          voor Word, Excel en online opties.
-        </p>
-
-        <h2>Hoe verstuur je een digitale offerte? Stap voor stap</h2>
-
-        <h3>Stap 1: Maak je offerte</h3>
-        <p>
-          Vul je bedrijfsgegevens, klantgegevens, werkzaamheden en prijzen in. Voeg een offertenummer, datum en
-          geldigheidsduur toe. Lees{' '}
-          <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
-            wat moet er op een offerte staan
-          </Link>{' '}
-          voor het volledige overzicht.
-        </p>
-
-        <h3>Stap 2: Download als PDF</h3>
-        <p>
-          Download je offerte als PDF via FactuurBaas. Geef het bestand een duidelijke naam, bijvoorbeeld{' '}
-          <strong>Offerte-OFF-2026-014-Klant-BV.pdf</strong>.
-        </p>
-
-        <h3>Stap 3: Schrijf een korte e-mail</h3>
-        <p>
-          Voeg de PDF toe als bijlage en schrijf een helder bericht. Houd het kort en professioneel — de offerte zelf
-          bevat de details.
-        </p>
-
-        <h3>Stap 4: Verstuur naar de juiste persoon</h3>
-        <p>
-          Stuur je offerte naar de contactpersoon die beslist over de opdracht. Controleer het e-mailadres en vermeld
-          eventueel een t.a.v.-regel.
-        </p>
-
-        <h3>Stap 5: Vraag om bevestiging</h3>
-        <p>
-          Vraag de klant om schriftelijk akkoord te geven, bijvoorbeeld per e-mail. Lees{' '}
-          <Link href="/gidsen/offerte-accepteren-wat-gebeurt-er-na" className="text-warm-orange hover:underline">
-            offerte accepteren: wat gebeurt er daarna
           </Link>
           .
         </p>
 
-        <h3>Stap 6: Bewaar een kopie</h3>
+        <h2>Kun je een offerte digitaal laten ondertekenen?</h2>
         <p>
-          Sla de verstuurde offerte op in je administratie, samen met datum van verzending en eventuele reacties van de
-          klant.
+          Een offerte kan digitaal worden geaccepteerd. Hoe je dat praktisch regelt, hangt af van je werkwijze en de
+          afspraken met je klant.
+        </p>
+        <p>Je kunt bijvoorbeeld vragen om een schriftelijke bevestiging per e-mail:</p>
+        <blockquote>
+          &quot;Hierbij bevestig ik dat ik akkoord ga met offerte OFF-2026-014.&quot;
+        </blockquote>
+        <p>
+          Voor sommige opdrachten kan een digitale handtekening of een aparte ondertekeningsdienst handig zijn.
+        </p>
+        <p>
+          <strong>FactuurBaas maakt en downloadt je offerte als PDF.</strong> Het digitaal ondertekenen van de offerte
+          is geen onderdeel van de offerte maker.
+        </p>
+        <p>
+          Een schriftelijke bevestiging van de klant kan wel handig zijn om later duidelijk te kunnen aantonen wat er
+          is afgesproken.
+        </p>
+        <p>
+          Lees ook{' '}
+          <Link href="/gidsen/wanneer-is-een-offerte-bindend" className="text-warm-orange hover:underline">
+            wanneer is een offerte bindend
+          </Link>
+          .
         </p>
 
-        <h2>Voorbeeld e-mail bij een offerte</h2>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap">
-{`Onderwerp: Offerte OFF-2026-014 – [omschrijving opdracht]
-
-Beste [naam],
-
-Hierbij stuur ik je de offerte voor [omschrijving].
-Het totaalbedrag is €907,50 inclusief btw.
-
-Deze offerte is geldig tot 23 juli 2026.
-
-Laat me weten of je akkoord gaat, dan plannen we de opdracht in.
-
-Met vriendelijke groet,
-[naam]
-[bedrijfsnaam]`}
-        </pre>
-        <p>Pas de tekst aan naar jouw situatie. Houd het kort — alle details staan in de PDF.</p>
-
-        <h2>Wat zet je in de e-mail (en wat niet)?</h2>
-        <CalculationTable
-          rows={[
-            ['Wel vermelden', 'Offertenummer, korte omschrijving, geldigheidsduur, totaalbedrag, vraag om akkoord'],
-            ['In de PDF', 'Volledige prijsopbouw, btw, voorwaarden en alle regels'],
-            ['Niet nodig', 'Hele offerte in de e-mailtekst plakken'],
-            ['Vermijden', 'Vage onderwerpregels zoals "Offerte" zonder nummer'],
-          ]}
-        />
-
-        <h2>Offerte versturen vanaf je telefoon</h2>
+        <h2>Offerte online maken voor zzp&apos;ers</h2>
         <p>
-          Als zzp&apos;er ben je vaak onderweg. Je kunt een offerte ook vanaf je telefoon versturen:
+          Als zzp&apos;er hoef je een offerte niet ingewikkeld te maken. Zorg vooral dat je klant begrijpt:
         </p>
-        <ol>
-          <li>Open de offerte maker in je browser.</li>
-          <li>Maak of controleer je offerte.</li>
-          <li>Download de PDF op je telefoon.</li>
-          <li>Voeg de PDF toe in je e-mailapp of berichten-app.</li>
-          <li>Verstuur naar je klant.</li>
-        </ol>
+        <ul>
+          <li>wat je gaat doen</li>
+          <li>wat het kost</li>
+          <li>wat wel en niet inbegrepen is</li>
+          <li>wanneer je de werkzaamheden uitvoert</li>
+          <li>hoe lang de offerte geldig is</li>
+          <li>welke voorwaarden gelden</li>
+        </ul>
         <p>
-          Zo hoef je niet achter je laptop te zitten om een professionele offerte te versturen. Meer zzp-tips vind je in{' '}
+          Een duidelijke offerte verkleint de kans op misverstanden en maakt het voor de klant eenvoudiger om akkoord
+          te gaan.
+        </p>
+        <p>
+          Lees ook{' '}
           <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
             offerte maken voor zzp&apos;ers
           </Link>
           .
         </p>
 
-        <h2>PDF, Word of link?</h2>
-        <p>De meest gebruikte manieren om digitaal te versturen:</p>
-        <ul>
-          <li>
-            <strong>PDF per e-mail</strong> — meest professioneel en het meest gebruikt
-          </li>
-          <li>
-            <strong>Word-bijlage</strong> — kan worden aangepast door de ontvanger, minder aan te raden
-          </li>
-          <li>
-            <strong>Cloudlink</strong> — handig bij grote bestanden, maar PDF per e-mail is meestal voldoende
-          </li>
-        </ul>
+        <h2>Online offerte maken: gratis en zonder account</h2>
         <p>
-          Voor de meeste zzp&apos;ers en mkb-bedrijven is <strong>PDF per e-mail</strong> de beste keuze.
-        </p>
-
-        <h2>Hoe vraag je om akkoord?</h2>
-        <p>Formuleer duidelijk hoe de klant kan reageren:</p>
-        <ul>
-          <li>&quot;Laat me weten of je akkoord gaat per e-mail.&quot;</li>
-          <li>&quot;Bevestig je akkoord op offerte OFF-2026-014.&quot;</li>
-          <li>&quot;Teken de offerte digitaal en stuur deze retour.&quot;</li>
-        </ul>
-        <p>
-          Schriftelijke acceptatie voorkomt misverstanden. Lees{' '}
-          <Link href="/gidsen/wanneer-is-een-offerte-bindend" className="text-warm-orange hover:underline">
-            wanneer is een offerte bindend
+          Met de gratis{' '}
+          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
+            offerte maker
           </Link>{' '}
-          voor uitleg over acceptatie.
+          van FactuurBaas kun je online een offerte maken en deze als PDF downloaden.
+        </p>
+        <p>Je hoeft hiervoor geen account aan te maken.</p>
+
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis je offerte →" />
+
+        <h2>Offerte versturen via e-mail, WhatsApp of een link</h2>
+        <p>
+          Een PDF per e-mail is voor zakelijke offertes meestal de meest overzichtelijke optie. De klant ontvangt één
+          duidelijk document met alle afspraken.
+        </p>
+        <p>
+          In sommige situaties kun je een offerte ook via WhatsApp of een andere berichtenapp delen. Bij zakelijke
+          opdrachten is e-mail vaak praktischer omdat je de verzending en correspondentie eenvoudiger kunt
+          terugvinden.
+        </p>
+        <p>
+          Welke methode je ook gebruikt: zorg dat de klant de volledige offerte ontvangt en dat je zelf een kopie
+          bewaart.
         </p>
 
-        <h2>Opvolgen na verzending</h2>
-        <p>Geen reactie van je klant? Een korte opvolging is normaal en professioneel:</p>
+        <h2>Wat doe je nadat de klant akkoord is?</h2>
+        <p>
+          Heeft de klant akkoord gegeven? Dan kun je de opdracht uitvoeren volgens de gemaakte afspraken.
+        </p>
+        <p>Afhankelijk van de opdracht kun je daarna bijvoorbeeld:</p>
         <ul>
-          <li>wacht een paar werkdagen na verzending</li>
-          <li>stuur een korte herinnering met offertenummer</li>
-          <li>vraag of er vragen zijn over de offerte</li>
-          <li>vermeld de geldigheidsdatum als die nadert</li>
+          <li>de werkzaamheden inplannen</li>
+          <li>een aanbetaling of voorschot factureren als dat is afgesproken</li>
+          <li>een deelfactuur sturen</li>
+          <li>na afronding de eindfactuur sturen</li>
         </ul>
         <p>
-          <strong>Voorbeeld opvolging:</strong> &quot;Ik wilde even checken of je de offerte OFF-2026-014 hebt ontvangen.
-          Heb je nog vragen? De offerte is geldig tot 23 juli.&quot;
+          Een geaccepteerde offerte kan onderdeel zijn van de afspraken met je klant. Zorg daarom dat je offerte
+          duidelijk omschrijft wat je aanbiedt.
+        </p>
+        <p>
+          Lees{' '}
+          <Link href="/gidsen/offerte-omzetten-naar-factuur" className="text-warm-orange hover:underline">
+            offerte omzetten naar factuur
+          </Link>{' '}
+          voor de volgende stap.
         </p>
 
-        <h2>Veelgemaakte fouten bij digitaal versturen</h2>
-        <ul>
-          <li>
-            <strong>Verkeerd e-mailadres</strong> — controleer altijd vóór verzending
-          </li>
-          <li>
-            <strong>Geen offertenummer in het onderwerp</strong> — maakt opvolging lastiger
-          </li>
-          <li>
-            <strong>Word-bestand in plaats van PDF</strong> — oogt minder professioneel
-          </li>
-          <li>
-            <strong>Geen geldigheidsduur vermelden</strong> — klant weet niet tot wanneer het aanbod geldt
-          </li>
-          <li>
-            <strong>Geen kopie bewaren</strong> — lastig bij administratie of discussies
-          </li>
-          <li>
-            <strong>Direct beginnen zonder akkoord</strong> — wacht op bevestiging van de klant
-          </li>
-        </ul>
+        <h2>Veelgemaakte fouten bij online offertes</h2>
 
-        <h2>Checklist digitale offerte</h2>
-        <ul>
-          <li>offerte gecontroleerd op fouten</li>
-          <li>PDF gedownload met duidelijke bestandsnaam</li>
-          <li>e-mail met offertenummer in onderwerp</li>
-          <li>geldigheidsduur vermeld in e-mail</li>
-          <li>PDF als bijlage toegevoegd</li>
-          <li>verzonden naar juiste contactpersoon</li>
-          <li>kopie bewaard in administratie</li>
-        </ul>
+        <h3>Een onduidelijke omschrijving</h3>
+        <p>&quot;Advieswerk €1.000&quot; zegt weinig. Beschrijf liever wat het advies precies omvat.</p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak en verstuur offerte →" />
+        <h3>Geen geldigheidsduur</h3>
+        <p>Zonder geldigheidsduur kan onduidelijkheid ontstaan over hoe lang je aanbod blijft staan.</p>
+
+        <h3>Geen duidelijke prijsopbouw</h3>
+        <p>Laat zien waar het totaalbedrag uit bestaat, zeker bij grotere opdrachten.</p>
+
+        <h3>De verkeerde bijlage</h3>
+        <p>Controleer voordat je op verzenden klikt of je de juiste PDF hebt toegevoegd.</p>
+
+        <h3>Verkeerd e-mailadres</h3>
+        <p>Controleer het e-mailadres van de contactpersoon voordat je de offerte verstuurt.</p>
+
+        <h3>Geen kopie bewaren</h3>
+        <p>Bewaar de verzonden offerte en relevante communicatie met de klant in je administratie.</p>
+
+        <h2>Checklist voor een digitale offerte</h2>
+        <p>Controleer voor verzending:</p>
+        <ul>
+          <li>bedrijfsgegevens ingevuld</li>
+          <li>klantgegevens gecontroleerd</li>
+          <li>offertenummer toegevoegd</li>
+          <li>datum vermeld</li>
+          <li>werkzaamheden duidelijk omschreven</li>
+          <li>prijzen gecontroleerd</li>
+          <li>btw gecontroleerd</li>
+          <li>geldigheidsduur vermeld</li>
+          <li>voorwaarden toegevoegd indien van toepassing</li>
+          <li>PDF gecontroleerd</li>
+          <li>juiste e-mailadres gebruikt</li>
+          <li>kopie van de offerte bewaard</li>
+        </ul>
 
         <h2>Veelgestelde vragen</h2>
-        <h3>Hoe verstuur ik een offerte per e-mail?</h3>
+        <h3>Hoe maak ik online een offerte?</h3>
         <p>
-          Maak je offerte, download als PDF, voeg het toe als bijlage en schrijf een korte toelichting met offertenummer
-          en geldigheidsduur.
+          Je kunt online een offerte maken door je bedrijfsgegevens, klantgegevens, werkzaamheden en prijzen in te
+          vullen. Met de gratis offerte maker van FactuurBaas kun je daarna je offerte als PDF downloaden.
         </p>
-        <h3>Moet ik mijn offerte printen en opsturen?</h3>
+        <h3>Waar kan ik gratis een offerte maken?</h3>
         <p>
-          Nee. Digitaal versturen per e-mail is sneller, goedkoper en gebruikelijker — zeker bij zzp&apos;ers en
-          mkb-bedrijven.
+          Met FactuurBaas kun je gratis online een offerte maken en als PDF downloaden. Een account is niet nodig.
         </p>
-        <h3>Kan ik een offerte via WhatsApp sturen?</h3>
+        <h3>Hoe verstuur ik een digitale offerte?</h3>
         <p>
-          Ja, dat kan bij informele klanten. Voor zakelijke opdrachten is e-mail meestal professioneler en beter
-          traceerbaar voor je administratie.
+          De eenvoudigste manier is om je offerte als PDF te downloaden en deze als bijlage bij een e-mail naar je
+          klant te sturen.
         </p>
-        <h3>Wat als de klant akkoord geeft?</h3>
+        <h3>Kan ik een offerte als PDF versturen?</h3>
         <p>
-          Bevestig het akkoord schriftelijk, start met de opdracht en zet later de offerte om naar een factuur. Lees{' '}
+          Ja. Je kunt een online gemaakte offerte als PDF downloaden en vervolgens per e-mail versturen.
+        </p>
+        <h3>Kan ik een offerte digitaal laten ondertekenen?</h3>
+        <p>
+          Dat kan met een aparte digitale ondertekeningsoplossing of door de klant schriftelijk akkoord te laten
+          geven, bijvoorbeeld per e-mail. De offerte maker van FactuurBaas maakt en downloadt de offerte als PDF, maar
+          bevat geen digitale ondertekeningsfunctie.
+        </p>
+        <h3>Kan ik een offerte online maken zonder account?</h3>
+        <p>
+          Ja. Met de gratis offerte maker van FactuurBaas kun je zonder account een offerte maken en als PDF
+          downloaden.
+        </p>
+        <h3>Kan ik een online offerte daarna omzetten naar een factuur?</h3>
+        <p>
+          Na akkoord kun je de opdracht factureren. FactuurBaas ondersteunt het maken van een factuur vanuit een
+          offerte. Bekijk ook{' '}
           <Link href="/gidsen/offerte-omzetten-naar-factuur" className="text-warm-orange hover:underline">
             offerte omzetten naar factuur
           </Link>
           .
         </p>
 
-        <h2>Verstuur je volgende offerte digitaal</h2>
+        <h2>Maak je volgende offerte online</h2>
         <p>
-          Maak een professionele offerte, download als PDF en verstuur per e-mail. Gratis, zonder account en klaar in een
-          paar minuten.
+          Maak je offerte online, controleer de gegevens en download hem als professionele PDF. Daarna kun je hem
+          direct digitaal naar je klant versturen.
         </p>
 
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Open gratis offerte maker →" />
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte →" />
       </>
     ),
   },
@@ -5155,7 +6968,7 @@ Met vriendelijke groet,
         <p>
           Bespreek de fout met de klant en maak eventueel een nieuwe afspraak of aanvullende offerte. Lees{' '}
           <Link href="/gidsen/digitale-offertes-versturen" className="text-warm-orange hover:underline">
-            digitale offertes versturen
+            online offerte maken
           </Link>{' '}
           voor tips over het opnieuw versturen.
         </p>
@@ -5194,7 +7007,7 @@ Met vriendelijke groet,
         <p>
           Meer tips vind je in{' '}
           <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
-            offerte maken voor zzp&apos;ers
+            offerte sturen als zzp&apos;er
           </Link>{' '}
           en{' '}
           <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
@@ -5286,282 +7099,417 @@ Met vriendelijke groet,
   {
     slug: 'welk-uurtarief-moet-ik-rekenen',
     cluster: 'uurtarief',
-    seoTitle: "Welk uurtarief moet ik rekenen als zzp'er? Bereken het juiste tarief",
-    title: "Welk uurtarief moet ik rekenen als zzp'er? Bereken het juiste tarief",
+    seoTitle: 'Uurtarief zzp berekenen: zo bepaal je je tarief',
+    title: 'Uurtarief zzp berekenen: zo bepaal je je tarief',
     excerpt:
-      "Welk uurtarief moet je vragen als zzp'er? Leer hoe je je tarief bepaalt op basis van inkomen, kosten en factureerbare uren — met gratis calculator.",
+      "Welk uurtarief moet je als zzp'er rekenen? Bereken je minimale uurtarief op basis van je kosten, gewenste inkomen en factureerbare uren.",
     keywords:
-      "welk uurtarief moet ik rekenen, uurtarief zzp, uurtarief berekenen, gemiddeld uurtarief zzp, uurtarief calculator, uurtarief exclusief btw, goed uurtarief zzp",
+      'uurtarief zzp berekenen, welk uurtarief moet ik rekenen, minimaal uurtarief zzp, uurtarief calculator, gemiddeld uurtarief zzp, uurtarief exclusief btw, goed uurtarief zzp',
     tool: {
       href: '/tools/uurtarief-calculator',
       label: 'Bereken je uurtarief',
-      ctaLabel: 'Open gratis uurtarief calculator',
+      ctaLabel: 'Bereken je uurtarief',
       relatedTitle: 'Uurtarief calculator',
       relatedExcerpt:
-        "Bereken welk uurtarief je nodig hebt op basis van inkomen, kosten en werkuren. Gratis en zonder account.",
+        'Bereken welk uurtarief je nodig hebt op basis van inkomen, kosten en werkuren. Gratis en zonder account.',
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/welk%20uur%20tarief.jpg',
-      alt: "Welk uurtarief moet ik rekenen: zakhorloge op eurobiljetten",
+      alt: 'Uurtarief zzp berekenen: zo bepaal je je tarief',
     },
     datePublished: '2026-07-31',
-    dateModified: '2026-07-31',
+    dateModified: '2026-09-03',
     relatedSlugs: ['factuur-maken-zzp', 'hoeveel-geld-apart-belasting-zzper'],
     relatedGuideSlugs: [],
     faq: [
       {
         question: "Wat is een goed uurtarief voor een zzp'er?",
         answer:
-          'Een goed uurtarief is een tarief waarmee je je kosten kunt betalen, belasting kunt reserveren en voldoende inkomen overhoudt. Het juiste bedrag verschilt per beroep en situatie.',
+          'Een goed uurtarief is hoog genoeg om je zakelijke kosten te betalen en het inkomen te ondersteunen dat je wilt bereiken. Het juiste bedrag verschilt per beroep, ervaring en persoonlijke situatie.',
       },
       {
-        question: 'Hoe bereken ik mijn minimale uurtarief?',
+        question: "Hoe bereken ik mijn uurtarief als zzp'er?",
         answer:
-          'Bereken hoeveel omzet je nodig hebt per maand en deel dit door het aantal uren dat je daadwerkelijk kunt factureren.',
+          'Een eenvoudige basis is: benodigde omzet ÷ factureerbare uren = minimaal uurtarief. Bepaal eerst hoeveel omzet je nodig hebt en schat vervolgens realistisch hoeveel uren je per maand aan klanten kunt factureren.',
       },
       {
-        question: 'Moet ik btw bovenop mijn uurtarief rekenen?',
+        question: 'Wat is een normaal zzp-uurtarief?',
         answer:
-          "Ja, meestal vermeld je als zzp'er je uurtarief exclusief btw. De btw wordt apart op je factuur gezet.",
+          "Er is geen vast normaal uurtarief voor zzp'ers. Het tarief verschilt sterk per sector, beroep, ervaring, specialisatie en type klant.",
       },
       {
-        question: 'Kan ik mijn uurtarief verhogen?',
+        question: "Wat is een goed uurtarief voor een startende zzp'er?",
         answer:
-          'Ja. Je kunt je tarief verhogen wanneer je meer ervaring hebt, meer waarde levert of wanneer je kosten stijgen.',
+          'Een starter kan ervoor kiezen om met een lager tarief te beginnen om ervaring en een portfolio op te bouwen. Zorg er wel voor dat het tarief voldoende ruimte biedt voor je zakelijke kosten en dat je niet structureel onder je benodigde tarief werkt.',
+      },
+      {
+        question: 'Moet ik mijn uurtarief inclusief of exclusief btw noemen?',
+        answer:
+          'Als je btw in rekening brengt, wordt een zakelijk uurtarief meestal exclusief btw gecommuniceerd. De btw wordt vervolgens afzonderlijk aan de klant in rekening gebracht.',
+      },
+      {
+        question: 'Kan ik mijn uurtarief later verhogen?',
+        answer:
+          'Ja. Je kunt je tarief aanpassen wanneer je meer ervaring hebt, je specialisatie groeit, je kosten veranderen of je meer waarde voor klanten levert.',
       },
     ],
     content: (
       <>
         <p>
-          Als zzp&apos;er is één van de belangrijkste vragen: <strong>welk uurtarief moet ik vragen?</strong> Een te laag
-          tarief betekent dat je misschien hard werkt maar onvoldoende overhoudt. Een te hoog tarief zonder goede
-          onderbouwing kan ervoor zorgen dat klanten afhaken.
+          Welk uurtarief moet je als zzp&apos;er rekenen? Dat hangt af van je beroep, ervaring, zakelijke kosten en het
+          inkomen dat je wilt overhouden.
         </p>
         <p>
-          Je uurtarief moet passen bij je ervaring, branche, kosten en het inkomen dat je wilt bereiken.
+          Een tarief van €50 per uur kan voor de ene ondernemer voldoende zijn, terwijl een andere zzp&apos;er €100 of
+          meer nodig heeft. Daarom is het beter om je uurtarief niet alleen te baseren op wat anderen vragen, maar eerst
+          te berekenen <strong>wat jij minimaal nodig hebt</strong>.
+        </p>
+        <p>De basis is eenvoudig:</p>
+        <p>
+          <strong>Benodigde omzet ÷ factureerbare uren = minimaal uurtarief</strong>
+        </p>
+        <p>
+          Daarna kun je je tarief aanpassen aan je ervaring, specialisatie, markt en de waarde die je voor klanten
+          levert.
         </p>
         <p>
           Met de gratis{' '}
           <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
             uurtarief calculator van FactuurBaas
           </Link>{' '}
-          bereken je eenvoudig welk uurtarief je nodig hebt op basis van je gewenste inkomen, kosten en werkuren.
+          kun je je benodigde uurtarief berekenen op basis van je eigen situatie.
         </p>
 
-        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken direct je uurtarief →" />
+        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken je uurtarief →" />
 
-        <h2>Hoe bepaal je je uurtarief?</h2>
+        <h2>Hoe bepaal je je uurtarief als zzp&apos;er?</h2>
         <p>
-          Een goed uurtarief bestaat uit meer dan alleen wat je graag wilt verdienen. Als ondernemer betaal je namelijk
-          zelf voor zaken die bij een werknemer vaak geregeld zijn, zoals:
+          Je uurtarief moet genoeg omzet opleveren om je zakelijke kosten te betalen en je gewenste inkomen mogelijk te
+          maken.
         </p>
+        <p>
+          Daarnaast werk je als zzp&apos;er niet ieder uur voor een klant. Je besteedt ook tijd aan administratie,
+          acquisitie, offertes, marketing, opleiding en andere werkzaamheden.
+        </p>
+        <p>Daarom zijn vooral deze factoren belangrijk:</p>
         <ul>
-          <li>pensioen</li>
-          <li>verzekeringen</li>
-          <li>vakantiedagen</li>
-          <li>administratie</li>
-          <li>marketing</li>
-          <li>opleidingen</li>
-          <li>apparatuur en software</li>
-          <li>periodes zonder opdrachten</li>
+          <li>je gewenste inkomen</li>
+          <li>je zakelijke kosten</li>
+          <li>het aantal uren dat je werkt</li>
+          <li>het aantal uren dat je daadwerkelijk kunt factureren</li>
+          <li>je beroep en specialisatie</li>
+          <li>je ervaring</li>
+          <li>het soort klanten waarvoor je werkt</li>
         </ul>
+
+        <h2>Uurtarief berekenen in 5 stappen</h2>
+
+        <h3>1. Bepaal hoeveel je wilt overhouden</h3>
+        <p>Begin met het inkomen dat je als ondernemer wilt bereiken.</p>
         <p>
-          Je uurtarief moet daarom voldoende ruimte geven om deze kosten te betalen én winst over te houden.
+          Bijvoorbeeld: je wilt uiteindelijk ongeveer <strong>€3.500 per maand</strong> overhouden.
         </p>
-
-        <h2>Bereken je uurtarief in 5 stappen</h2>
-
-        <h3>1. Bepaal hoeveel inkomen je wilt verdienen</h3>
-        <p>Begin met je gewenste netto inkomen per maand.</p>
-        <p>Bijvoorbeeld:</p>
-        <p>Je wilt netto €3.500 per maand overhouden.</p>
         <p>
-          Dit betekent niet automatisch dat je €3.500 omzet nodig hebt. Als zzp&apos;er moet je ook rekening houden met
-          belasting en zakelijke kosten.
+          Je omzet hoeft dan niet €3.500 per maand te zijn. Vanuit je omzet moeten namelijk ook zakelijke kosten en
+          belastingen worden betaald.
         </p>
+        <p>Je benodigde omzet ligt daarom hoger dan het bedrag dat je privé wilt overhouden.</p>
 
-        <h3>2. Tel je zakelijke kosten erbij op</h3>
-        <p>Zakelijke kosten verminderen je winst, maar moeten wel betaald worden vanuit je omzet.</p>
-        <p>Voorbeelden:</p>
+        <h3>2. Bereken je zakelijke kosten</h3>
+        <p>Maak een overzicht van de kosten die je als ondernemer verwacht te maken.</p>
+        <p>Denk bijvoorbeeld aan:</p>
         <ul>
-          <li>laptop en apparatuur</li>
+          <li>laptop en andere apparatuur</li>
+          <li>software en abonnementen</li>
           <li>website en hosting</li>
-          <li>boekhoudsoftware</li>
-          <li>telefoonabonnement</li>
-          <li>auto of vervoer</li>
+          <li>telefoon</li>
+          <li>vervoer</li>
           <li>verzekeringen</li>
+          <li>administratie</li>
+          <li>opleidingen</li>
+          <li>marketing</li>
         </ul>
         <p>
-          Heb je bijvoorbeeld €500 kosten per maand? Dan moet je uurtarief voldoende omzet opleveren om deze kosten te
-          dekken.
+          Stel dat je gemiddeld <strong>€500 per maand</strong> aan zakelijke kosten hebt. Dan moet je omzet voldoende
+          zijn om deze kosten te betalen voordat je bepaalt wat je uiteindelijk overhoudt.
         </p>
 
-        <h3>3. Bepaal hoeveel uur je kunt factureren</h3>
-        <p>Niet alle uren die je werkt kun je doorberekenen aan klanten.</p>
-        <p>Een werkweek van 40 uur bestaat bijvoorbeeld uit:</p>
+        <h3>3. Bepaal je factureerbare uren</h3>
+        <p>Dit is een van de belangrijkste onderdelen van je uurtarief.</p>
+        <p>
+          Een werkweek van 40 uur betekent namelijk niet dat je 40 uur aan klanten kunt factureren.
+        </p>
+        <p>Je hebt bijvoorbeeld ook tijd nodig voor:</p>
         <ul>
-          <li>klantwerk</li>
           <li>administratie</li>
-          <li>offertes maken</li>
-          <li>gesprekken</li>
+          <li>offertes</li>
+          <li>klantgesprekken</li>
+          <li>acquisitie</li>
           <li>marketing</li>
           <li>planning</li>
-          <li>ontwikkeling</li>
+          <li>opleiding</li>
+          <li>vakantie en vrije dagen</li>
         </ul>
         <p>
-          Veel zzp&apos;ers kunnen niet elke gewerkte minuut factureren. Daarom is het belangrijk om realistisch te kijken
-          naar je factureerbare uren.
+          Stel dat je gemiddeld <strong>100 uur per maand</strong> daadwerkelijk aan klanten kunt factureren. Dan moet
+          je je benodigde omzet delen door 100 en niet door alle uren die je aan je onderneming besteedt.
         </p>
 
-        <h3>4. Kijk naar je branche</h3>
-        <p>Het gemiddelde uurtarief verschilt sterk per beroep.</p>
-        <p>Voorbeelden:</p>
-        <ul>
-          <li>een startende freelancer kan bijvoorbeeld een lager tarief rekenen om ervaring op te bouwen</li>
-          <li>een specialist met jaren ervaring kan vaak een hoger tarief vragen</li>
-          <li>technische beroepen hebben vaak andere tarieven dan creatieve diensten</li>
-        </ul>
-        <p>Vergelijk jezelf daarom niet alleen met anderen, maar kijk ook naar de waarde die je levert.</p>
+        <h3>4. Bereken je minimale uurtarief</h3>
+        <p>De eenvoudige basisformule is:</p>
+        <p>
+          <strong>Benodigde omzet ÷ factureerbare uren = uurtarief</strong>
+        </p>
+        <p>Stel dat je €8.000 omzet per maand nodig hebt en 100 uur kunt factureren:</p>
+        <p>
+          <strong>€8.000 ÷ 100 = €80 per uur</strong>
+        </p>
+        <p>
+          Je minimale uurtarief is in dit voorbeeld dus ongeveer <strong>€80 per uur exclusief btw</strong>.
+        </p>
+        <p>
+          Dit is een rekenkundig uitgangspunt. Je uiteindelijke tarief kan hoger liggen als je bijvoorbeeld meer waarde
+          levert, gespecialiseerd werk doet of een hogere winstmarge wilt.
+        </p>
 
-        <h3>5. Controleer of je tarief haalbaar is</h3>
-        <p>Een uurtarief moet niet alleen goed voelen, maar ook financieel werken.</p>
-        <p>Vraag jezelf af:</p>
-        <ul>
-          <li>Kan ik mijn kosten hiermee betalen?</li>
-          <li>Houd ik genoeg over voor belasting?</li>
-          <li>Past dit bij mijn ervaring?</li>
-          <li>Past dit bij mijn klanten?</li>
-        </ul>
+        <h2>Voorbeeld: €50, €75 of €100 per uur</h2>
+        <p>Het verschil tussen een uurtarief van €50 en €100 is groot.</p>
+        <p>Bij 100 factureerbare uren per maand:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Uurtarief
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Factureerbare uren
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Omzet per maand
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 text-right">€50</td>
+                <td className="px-4 py-3 text-right">100</td>
+                <td className="px-4 py-3 text-right">€5.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 text-right">€75</td>
+                <td className="px-4 py-3 text-right">100</td>
+                <td className="px-4 py-3 text-right">€7.500</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 text-right">€100</td>
+                <td className="px-4 py-3 text-right">100</td>
+                <td className="px-4 py-3 text-right">€10.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Dit zijn bedragen <strong>exclusief btw</strong>.
+        </p>
+        <p>
+          Je omzet is bovendien niet hetzelfde als je inkomen. Van je omzet betaal je onder andere je zakelijke kosten
+          en belastingen. Wil je zien wat een tarief ongeveer oplevert? Gebruik dan{' '}
+          <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
+            uurtarief naar inkomen
+          </Link>
+          .
+        </p>
 
-        <h2>Wat is een normaal uurtarief voor zzp&apos;ers?</h2>
-        <p>Het gemiddelde zzp-uurtarief verschilt per sector.</p>
-        <p>Een aantal factoren bepalen je tarief:</p>
+        <h2>Wat is een goed uurtarief voor een zzp&apos;er?</h2>
+        <p>Er bestaat geen universeel goed zzp-uurtarief.</p>
+        <p>Een passend tarief hangt onder andere af van je beroep, ervaring en type klant.</p>
 
-        <h3>Ervaring</h3>
-        <p>Een starter rekent vaak minder dan iemand met jaren ervaring en een sterk portfolio.</p>
+        <h3>Starter</h3>
+        <p>
+          Als starter heb je misschien nog weinig ervaring of een beperkt portfolio. Een lager tarief kan dan een manier
+          zijn om ervaring en referenties op te bouwen.
+        </p>
+        <p>Dat betekent niet dat je structureel te goedkoop moet werken.</p>
 
-        <h3>Specialisatie</h3>
-        <p>Een specialist met unieke kennis kan vaak meer vragen dan iemand die algemene diensten aanbiedt.</p>
+        <h3>Ervaren zzp&apos;er</h3>
+        <p>
+          Met meer ervaring, een sterk portfolio en bewezen resultaten kun je vaak een hoger tarief onderbouwen.
+        </p>
 
-        <h3>Type klant</h3>
-        <p>Zakelijke klanten hebben vaak andere budgetten dan particuliere klanten.</p>
+        <h3>Specialist</h3>
+        <p>
+          Specialistische kennis kan een hoger uurtarief rechtvaardigen, zeker wanneer er relatief weinig aanbieders
+          zijn of wanneer je kennis voor de klant veel waarde heeft.
+        </p>
 
-        <h3>Verantwoordelijkheid</h3>
-        <p>Meer verantwoordelijkheid of complexiteit betekent meestal een hoger tarief.</p>
+        <h3>Zakelijke klanten</h3>
+        <p>
+          Het budget en de verwachtingen kunnen verschillen per type klant. Een opdracht voor een grote organisatie kan
+          bijvoorbeeld een andere prijsstructuur hebben dan werk voor een kleine ondernemer of particulier.
+        </p>
+
+        <h2>Wat is het gemiddelde uurtarief van een zzp&apos;er?</h2>
+        <p>Het gemiddelde uurtarief zegt niet automatisch wat jij zou moeten rekenen.</p>
+        <p>
+          Uurtarieven verschillen sterk per beroep en sector. Een ICT-specialist, marketeer, fotograaf, consultant en
+          bouwvakker hebben bijvoorbeeld verschillende werkzaamheden, kosten en markten.
+        </p>
+        <p>
+          Gebruik gemiddelden daarom vooral als <strong>referentie</strong>, niet als berekening van jouw eigen tarief.
+        </p>
+        <p>Je eigen kosten en factureerbare uren zijn belangrijker voor het bepalen van je minimale tarief.</p>
+
+        <h2>Uurtarief voor een zzp&apos;er in de ICT</h2>
+        <p>
+          Voor ICT&apos;ers kunnen uurtarieven sterk verschillen afhankelijk van specialisatie en ervaring.
+        </p>
+        <p>
+          Een junior freelancer en een ervaren specialist met specifieke technische kennis hebben bijvoorbeeld niet
+          automatisch hetzelfde tarief.
+        </p>
+        <p>
+          Kijk daarom niet alleen naar wat andere ICT-zzp&apos;ers rekenen. Bereken eerst welk tarief jij nodig hebt en
+          vergelijk dat vervolgens met de markt.
+        </p>
 
         <h2>Uurtarief inclusief of exclusief btw?</h2>
         <p>
-          Als zzp&apos;er communiceer je meestal je uurtarief <strong>exclusief btw</strong>.
+          Als je btw-plichtig bent, vermeld je je zakelijke uurtarief meestal <strong>exclusief btw</strong>.
         </p>
-        <p>Voorbeeld:</p>
-        <p>Je rekent €75 per uur exclusief btw.</p>
-        <p>Met 21% btw betaalt je klant:</p>
-        <p>€75 + €15,75 btw = €90,75 inclusief btw.</p>
+        <p>Bijvoorbeeld:</p>
         <p>
-          De btw is geen inkomen voor jou. Deze draag je later af via je btw-aangifte. Lees meer in onze gids over{' '}
+          <strong>Uurtarief: €75 exclusief btw</strong>
+        </p>
+        <p>Bij 21% btw betaalt een klant:</p>
+        <ul>
+          <li>Uurtarief: €75,00</li>
+          <li>BTW 21%: €15,75</li>
+          <li>Totaal: €90,75</li>
+        </ul>
+        <p>
+          De €15,75 btw is geen omzet die je zelf houdt. De btw wordt afzonderlijk op de factuur vermeld en wordt
+          vervolgens verwerkt in je btw-aangifte.
+        </p>
+        <p>
+          Niet iedere ondernemer rekent echter op dezelfde manier btw. Er kunnen bijvoorbeeld andere btw-regels of
+          vrijstellingen gelden. Lees meer in{' '}
           <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">
             welke btw je als zzp&apos;er rekent
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten bij het bepalen van een uurtarief</h2>
+        <h2>Veelgemaakte fouten bij het bepalen van je uurtarief</h2>
 
-        <h3>Je kijkt alleen naar wat anderen vragen</h3>
+        <h3>Je neemt het tarief van een concurrent over</h3>
         <p>
-          Iedere ondernemer heeft andere kosten en doelen. Een tarief dat voor iemand anders werkt, hoeft niet voor jou te
-          werken.
+          Wat voor een andere zzp&apos;er werkt, hoeft niet voor jou te werken. Kosten, ervaring, aantal factureerbare
+          uren en gewenste inkomsten verschillen.
         </p>
 
-        <h3>Je vergeet niet-factureerbare tijd</h3>
-        <p>Administratie, acquisitie en voorbereiding horen ook bij ondernemen.</p>
+        <h3>Je rekent met alle gewerkte uren</h3>
+        <p>Als je 40 uur per week werkt, kun je die 40 uur niet automatisch allemaal factureren.</p>
 
-        <h3>Je rekent jezelf te goedkoop</h3>
+        <h3>Je vergeet zakelijke kosten</h3>
         <p>
-          Een laag tarief lijkt aantrekkelijk om opdrachten binnen te halen, maar kan ervoor zorgen dat je uiteindelijk te
-          weinig verdient.
+          Software, apparatuur, verzekeringen, vervoer en andere kosten moeten uiteindelijk uit je omzet worden betaald.
+        </p>
+
+        <h3>Je houdt geen rekening met rustige periodes</h3>
+        <p>
+          Als je niet iedere week of maand volledig volgeboekt bent, moet je tarief voldoende ruimte bieden voor
+          periodes met minder opdrachten.
+        </p>
+
+        <h3>Je kijkt alleen naar je inkomen</h3>
+        <p>
+          Je uurtarief moet eerst voldoende omzet opleveren om alle zakelijke kosten en andere financiële verplichtingen
+          van je onderneming te kunnen dragen.
         </p>
 
         <h3>Je verhoogt je tarief nooit</h3>
-        <p>Veel zzp&apos;ers houden jarenlang hetzelfde tarief terwijl hun ervaring en waarde groeien.</p>
-
-        <h2>Uurtarief berekenen met de gratis calculator</h2>
         <p>
-          Met de FactuurBaas{' '}
-          <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
-            uurtarief calculator
-          </Link>{' '}
-          bereken je eenvoudig welk tarief past bij jouw situatie.
+          Je ervaring, specialisatie en de waarde die je levert kunnen in de loop van de tijd groeien. Het is daarom
+          verstandig je tarief regelmatig opnieuw te beoordelen.
         </p>
-        <p>Vul in:</p>
+
+        <h2>Bereken je uurtarief met de gratis calculator</h2>
+        <p>Wil je weten welk uurtarief bij jouw situatie past?</p>
+        <p>
+          Met de gratis{' '}
+          <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
+            uurtarief calculator van FactuurBaas
+          </Link>{' '}
+          kun je je tarief berekenen op basis van onder andere:
+        </p>
         <ul>
-          <li>gewenst netto inkomen</li>
+          <li>gewenst inkomen</li>
           <li>zakelijke kosten</li>
           <li>werkuren</li>
-          <li>aantal factureerbare uren</li>
+          <li>factureerbare uren</li>
         </ul>
-        <p>Je ziet direct welk uurtarief je ongeveer nodig hebt.</p>
+        <p>Je krijgt een indicatie van het uurtarief dat je nodig hebt.</p>
 
         <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken gratis je uurtarief →" />
 
-        <h2>Veelgestelde vragen</h2>
+        <h2>Veelgestelde vragen over uurtarieven</h2>
         <h3>Wat is een goed uurtarief voor een zzp&apos;er?</h3>
         <p>
-          Een goed uurtarief is een tarief waarmee je je kosten kunt betalen, belasting kunt reserveren en voldoende
-          inkomen overhoudt. Het juiste bedrag verschilt per beroep en situatie.
+          Een goed uurtarief is hoog genoeg om je zakelijke kosten te betalen en het inkomen te ondersteunen dat je wilt
+          bereiken. Het juiste bedrag verschilt per beroep, ervaring en persoonlijke situatie.
         </p>
-        <h3>Hoe bereken ik mijn minimale uurtarief?</h3>
+        <h3>Hoe bereken ik mijn uurtarief als zzp&apos;er?</h3>
+        <p>Een eenvoudige basis is:</p>
         <p>
-          Bereken hoeveel omzet je nodig hebt per maand en deel dit door het aantal uren dat je daadwerkelijk kunt
-          factureren.
+          <strong>Benodigde omzet ÷ factureerbare uren = minimaal uurtarief.</strong>
         </p>
-        <h3>Moet ik btw bovenop mijn uurtarief rekenen?</h3>
         <p>
-          Ja, meestal vermeld je als zzp&apos;er je uurtarief exclusief btw. De btw wordt apart op je factuur gezet.
+          Bepaal eerst hoeveel omzet je nodig hebt en schat vervolgens realistisch hoeveel uren je per maand aan klanten
+          kunt factureren.
         </p>
-        <h3>Kan ik mijn uurtarief verhogen?</h3>
+        <h3>Wat is een normaal zzp-uurtarief?</h3>
         <p>
-          Ja. Je kunt je tarief verhogen wanneer je meer ervaring hebt, meer waarde levert of wanneer je kosten stijgen.
+          Er is geen vast normaal uurtarief voor zzp&apos;ers. Het tarief verschilt sterk per sector, beroep, ervaring,
+          specialisatie en type klant.
+        </p>
+        <h3>Wat is een goed uurtarief voor een startende zzp&apos;er?</h3>
+        <p>
+          Een starter kan ervoor kiezen om met een lager tarief te beginnen om ervaring en een portfolio op te bouwen.
+          Zorg er wel voor dat het tarief voldoende ruimte biedt voor je zakelijke kosten en dat je niet structureel
+          onder je benodigde tarief werkt.
+        </p>
+        <h3>Moet ik mijn uurtarief inclusief of exclusief btw noemen?</h3>
+        <p>
+          Als je btw in rekening brengt, wordt een zakelijk uurtarief meestal exclusief btw gecommuniceerd. De btw wordt
+          vervolgens afzonderlijk aan de klant in rekening gebracht.
+        </p>
+        <h3>Kan ik mijn uurtarief later verhogen?</h3>
+        <p>
+          Ja. Je kunt je tarief aanpassen wanneer je meer ervaring hebt, je specialisatie groeit, je kosten veranderen
+          of je meer waarde voor klanten levert.
         </p>
 
-        <h2>Bereken jouw ideale uurtarief</h2>
+        <h2>Bereken jouw zzp-uurtarief</h2>
+        <p>Weet je nog niet welk uurtarief je nodig hebt?</p>
         <p>
-          Weet je nog niet welk tarief bij jouw situatie past? Gebruik de gratis uurtarief calculator van FactuurBaas en
-          ontdek welk bedrag je nodig hebt.
+          Bereken eerst je benodigde omzet en factureerbare uren en gebruik daarna de gratis uurtarief calculator van
+          FactuurBaas om een indicatie van je tarief te krijgen.
         </p>
 
         <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken je uurtarief →" />
-
-        <p>Lees ook:</p>
-        <ul>
-          <li>
-            <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
-              Uurtarief naar inkomen berekenen
-            </Link>
-          </li>
-          <li>
-            <Link href="/blogs/hoeveel-geld-apart-belasting-zzper" className="text-warm-orange hover:underline">
-              Hoeveel geld apart zetten voor belasting als zzp&apos;er?
-            </Link>
-          </li>
-          <li>
-            <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">
-              Factuur maken als zzp&apos;er
-            </Link>
-          </li>
-        </ul>
       </>
     ),
   },
   {
     slug: 'deze-7-tools-zijn-heel-handig-voor-zzpers',
     cluster: 'tools',
-    seoTitle: "Deze 7 tools zijn heel handig voor zzp'ers | Gratis online tools",
-    title: "Deze 7 tools zijn heel handig voor zzp'ers (thuiswerken & administratie)",
+    seoTitle: "7 handige tools voor zzp'ers | Gratis online tools",
+    title: "7 handige tools voor zzp'ers",
     excerpt:
-      "Deze 7 tools zijn heel handig voor zzp'ers die vanuit huis werken: factuur maken, offerte, btw, uurtarief, factuurnummer, betaaltermijn en KOR — gratis en zonder account.",
+      "Ontdek 7 handige gratis tools voor zzp'ers. Maak facturen en offertes, bereken btw en je uurtarief en regel je administratie eenvoudig online.",
     keywords:
-      "deze 7 tools zijn heel handig om thuis mee te werken als zzp'er, 7 tools zzp, handige tools zzp, gratis tools zzp, tools voor zzp'ers, tools thuiswerken zzp, factuur tools zzp",
+      "7 handige tools voor zzp'ers, handige tools zzp, gratis tools zzp, tools voor zzp'ers, gratis online tools zzp, factuur maken, offerte maken, btw berekenen, uurtarief berekenen",
     tool: {
       href: '/tools',
       label: 'Bekijk alle tools',
@@ -5572,10 +7520,10 @@ Met vriendelijke groet,
     },
     image: {
       url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/tools%20voor%20zzpers.jpg',
-      alt: "Deze 7 tools zijn heel handig voor zzp'ers — werken vanaf de laptop",
+      alt: "7 handige tools voor zzp'ers — factuur, offerte, btw en uurtarief",
     },
     datePublished: '2026-08-03',
-    dateModified: '2026-08-03',
+    dateModified: '2026-09-03',
     relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'factureren-zonder-account'],
     relatedGuideSlugs: [
       'welke-btw-rekenen-zzper',
@@ -5584,180 +7532,242 @@ Met vriendelijke groet,
     ],
     faq: [
       {
-        question: "Welke tools zijn handig voor zzp'ers die thuiswerken?",
+        question: "Welke tools zijn handig voor zzp'ers?",
         answer:
-          'Voor je administratie zijn een factuurtool, offerte maker, btw calculator, uurtarief calculator, factuurnummer generator, betaaltermijn calculator en KOR-check het handigst. Die vind je gratis bij FactuurBaas.',
+          'Voor je administratie zijn een factuurmaker, offerte maker, btw-calculator, uurtariefcalculator, factuurnummergenerator, betaaltermijncalculator en KOR-calculator het handigst. Die vind je gratis bij FactuurBaas.',
       },
       {
-        question: 'Heb ik een account nodig om FactuurBaas-tools te gebruiken?',
+        question: 'Heb ik een account nodig om deze tools te gebruiken?',
         answer:
-          'Nee. Je kunt facturen, offertes en calculators direct gebruiken zonder account. Wil je facturen opslaan, dan kun je optioneel inloggen.',
+          'Nee. Je kunt facturen, offertes en calculators direct online gebruiken zonder account. Wil je facturen opslaan, dan kun je optioneel inloggen.',
       },
       {
-        question: 'Zijn deze 7 tools echt gratis?',
+        question: "Zijn deze 7 tools voor zzp'ers echt gratis?",
         answer:
           'Ja. De tools op FactuurBaas zijn gratis te gebruiken. Je downloadt facturen en offertes direct als PDF.',
       },
       {
-        question: 'Wat is het verschil met Zoom, Slack of Trello?',
+        question: 'Welke tool gebruik ik het eerst als ik net start als zzp\'er?',
         answer:
-          'Tools zoals Zoom en Slack helpen bij communicatie. FactuurBaas focust op administratie: factureren, offertes, btw, uurtarieven en betaaltermijnen.',
+          'Begin meestal met de factuurmaker. Heb je een nieuwe opdracht, start dan met de offerte maker. Voor tarieven en btw gebruik je de calculators.',
       },
     ],
     content: (
       <>
         <p>
-          <strong>Deze 7 tools zijn heel handig voor zzp&apos;ers</strong> die vanuit huis werken — of gewoon hun
-          administratie snel willen regelen zonder duur softwarepakket. Geen videobellen of projectborden, maar tools
-          die je direct helpen met facturen, offertes, btw en tarieven.
+          Als zzp&apos;er wil je je administratie waarschijnlijk zo eenvoudig mogelijk houden. Een factuur maken, een
+          offerte opstellen, je btw berekenen of bepalen welk uurtarief je nodig hebt: het zijn kleine taken, maar
+          samen kunnen ze behoorlijk wat tijd kosten.
         </p>
         <p>
-          Op FactuurBaas vind je gratis online tools zonder account. Hieronder de zeven die je als zzp&apos;er het
-          meest gebruikt.
+          Daarom hebben we 7 handige gratis tools voor zzp&apos;ers verzameld. Je kunt ze direct online gebruiken,
+          zonder ingewikkelde software of lange installatie.
         </p>
 
         <GuideToolCta href="/tools" label="Bekijk alle gratis tools →" />
 
         <h2>1. Factuur maken</h2>
         <p>
-          De basis van je administratie: een nette factuur met bedrijfsgegevens, klant, regels, btw en betaaltermijn.
-          Met de{' '}
-          <Link href="/factuur-maken" className="text-warm-orange hover:underline">
-            factuur maken tool
+          Een professionele factuur maken hoeft niet ingewikkeld te zijn. Met een{' '}
+          <Link href="/tools/factuur-maken" className="text-warm-orange hover:underline">
+            online factuurmaker
           </Link>{' '}
-          maak je in een paar minuten een PDF — ideaal als je thuis werkt en snel iets naar een klant wilt sturen.
+          vul je je bedrijfsgegevens, klantgegevens, factuurregels en btw in en maak je snel een duidelijke factuur.
         </p>
-        <ul>
-          <li>Geen account nodig</li>
-          <li>Direct downloaden als PDF</li>
-          <li>Optioneel opslaan in je dashboard</li>
-        </ul>
-        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur →" />
-
-        <h2>2. Offerte maker</h2>
         <p>
-          Voor nieuwe opdrachten stuur je eerst een offerte. De{' '}
+          Met de gratis FactuurBaas factuurmaker kun je direct een factuur maken en als PDF downloaden. Je kunt daarbij
+          verschillende btw-tarieven gebruiken, zoals 0%, 9% en 21%.
+        </p>
+        <p>
+          <strong>Handig voor:</strong> zzp&apos;ers die snel een factuur willen maken zonder een uitgebreid
+          boekhoudprogramma.
+        </p>
+        <GuideToolCta href="/tools/factuur-maken" label="Gratis factuur maken →" />
+
+        <h2>2. Offerte maken</h2>
+        <p>
+          Voordat je een opdracht uitvoert, wil je je klant natuurlijk eerst een duidelijke offerte kunnen sturen. Een
+          goede offerte maakt inzichtelijk wat je gaat leveren, hoeveel het kost en welke voorwaarden gelden.
+        </p>
+        <p>
+          Met een{' '}
           <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            offerte maker
+            online offerte maker
           </Link>{' '}
-          helpt je met een professionele prijsopgave, inclusief geldigheidsduur. Na akkoord zet je de gegevens eenvoudig
-          om naar een factuur.
+          kun je eenvoudig een professionele offerte opstellen. Zo hoef je niet iedere keer zelf een document vanaf nul
+          te maken.
         </p>
         <p>
-          Lees ook:{' '}
-          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
-            Hoe maak je een offerte?
-          </Link>
+          <strong>Handig voor:</strong> zzp&apos;ers die regelmatig nieuwe klanten of opdrachten binnenhalen.
         </p>
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak een offerte →" />
+        <GuideToolCta href="/tools/offerte-maker" label="Gratis offerte maken →" />
 
-        <h2>3. BTW calculator</h2>
+        <h2>3. Btw berekenen</h2>
         <p>
-          Thuiswerken betekent ook: snel checken of een bedrag klopt. Met de{' '}
+          Btw berekenen is een van de meest voorkomende administratieve taken voor ondernemers. Vooral wanneer je
+          bedragen inclusief en exclusief btw wilt omrekenen, is een snelle calculator handig.
+        </p>
+        <p>
+          Met een{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
-            BTW calculator
+            btw-calculator
           </Link>{' '}
-          reken je 21%, 9% of een eigen percentage — inclusief of exclusief btw.
+          kun je bijvoorbeeld berekenen hoeveel 21% of 9% btw over een bedrag is en wat het bedrag inclusief of
+          exclusief btw wordt.
         </p>
         <p>
-          Handig bij offertes, facturen en als je btw wilt terugrekenen uit een totaalbedrag. Meer uitleg in{' '}
-          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
-            btw terugrekenen
-          </Link>
-          .
+          <strong>Handig voor:</strong> iedere zzp&apos;er die snel btw wil berekenen zonder zelf met percentages te
+          rekenen.
         </p>
-        <GuideToolCta href="/tools/btw-calculator/berekenen" label="Bereken btw →" />
+        <GuideToolCta href="/tools/btw-calculator" label="Btw berekenen met de gratis btw-calculator →" />
 
-        <h2>4. Uurtarief calculator</h2>
+        <h2>4. Uurtarief berekenen</h2>
+        <p>Wat moet je als zzp&apos;er eigenlijk per uur verdienen?</p>
         <p>
-          Welk uurtarief moet je vragen? De{' '}
+          Je uurtarief hangt niet alleen af van wat je netto wilt overhouden. Je moet ook rekening houden met belasting,
+          vakantiedagen, pensioen, verzekeringen, zakelijke kosten en het aantal uren dat je daadwerkelijk kunt
+          factureren.
+        </p>
+        <p>
+          Met een{' '}
           <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
-            uurtarief calculator
+            uurtariefcalculator
           </Link>{' '}
-          rekent terug vanuit gewenst inkomen, kosten en factureerbare uren — zodat je niet te laag zit.
+          kun je daarom beter inschatten welk tarief bij jouw gewenste inkomen past.
         </p>
         <p>
-          Dieper lezen:{' '}
-          <Link href="/gidsen/welk-uurtarief-moet-ik-rekenen" className="text-warm-orange hover:underline">
-            Welk uurtarief moet ik rekenen?
-          </Link>
+          <strong>Handig voor:</strong> startende zzp&apos;ers en ondernemers die hun huidige uurtarief opnieuw willen
+          bepalen.
         </p>
-        <GuideToolCta href="/tools/uurtarief-calculator/maken" label="Bereken je uurtarief →" />
+        <GuideToolCta href="/tools/uurtarief-calculator" label="Bereken je uurtarief →" />
 
-        <h2>5. Factuurnummer generator</h2>
+        <h2>5. Factuurnummer genereren</h2>
         <p>
-          Elke factuur heeft een uniek nummer nodig. De{' '}
+          Elke factuur heeft een uniek factuurnummer nodig. Als je net begint als zzp&apos;er kan het lastig zijn om een
+          logische nummering te kiezen.
+        </p>
+        <p>
+          Een eenvoudige nummering, bijvoorbeeld 2026-001, 2026-002 en 2026-003, maakt je administratie overzichtelijk.
+        </p>
+        <p>
+          Met een{' '}
           <Link href="/tools/factuurnummer-generator" className="text-warm-orange hover:underline">
-            factuurnummer generator
+            factuurnummergenerator
           </Link>{' '}
-          helpt je aan een duidelijk, professioneel nummer — handig als je zelf je reeks bijhoudt.
+          kun je snel een geschikt factuurnummer genereren.
         </p>
-        <GuideToolCta href="/tools/factuurnummer-generator/maken" label="Genereer een factuurnummer →" />
-
-        <h2>6. Betaaltermijn calculator</h2>
         <p>
-          Wanneer moet de klant betalen? Met de{' '}
-          <Link href="/tools/betaaltermijn-calculator" className="text-warm-orange hover:underline">
-            betaaltermijn calculator
-          </Link>{' '}
-          bereken je de vervaldatum op basis van factuurdatum en termijn (bijv. 14 of 30 dagen). Zo zet je altijd de
-          juiste datum op je factuur.
+          <strong>Handig voor:</strong> startende ondernemers die een eenvoudige en overzichtelijke factuurnummering
+          willen gebruiken.
         </p>
-        <GuideToolCta href="/tools/betaaltermijn-calculator/berekenen" label="Bereken vervaldatum →" />
+        <GuideToolCta href="/tools/factuurnummer-generator" label="Genereer een factuurnummer →" />
+
+        <h2>6. Betaaltermijn berekenen</h2>
+        <p>Wanneer moet je klant een factuur uiterlijk betalen?</p>
+        <p>
+          Bij een betaaltermijn van bijvoorbeeld 14 of 30 dagen kan het handig zijn om direct de uiterste betaaldatum te
+          berekenen. Zo weet je wanneer je betaling verwacht en wanneer je eventueel een herinnering kunt sturen.
+        </p>
+        <p>
+          Met een{' '}
+          <Link href="/tools/betaaltermijn-calculator" className="text-warm-orange hover:underline">
+            betaaltermijncalculator
+          </Link>{' '}
+          bereken je eenvoudig de vervaldatum van een factuur.
+        </p>
+        <p>
+          <strong>Handig voor:</strong> zzp&apos;ers die hun facturen en openstaande betalingen overzichtelijk willen
+          bijhouden.
+        </p>
+        <GuideToolCta href="/tools/betaaltermijn-calculator" label="Bereken een betaaltermijn →" />
 
         <h2>7. KOR calculator</h2>
         <p>
-          Past de kleineondernemersregeling bij jouw omzet? De{' '}
+          De kleineondernemersregeling (KOR) kan interessant zijn voor bepaalde ondernemers met een relatief lage
+          omzet. Als je aan de voorwaarden voldoet, hoef je onder de KOR in principe geen btw aan klanten in rekening te
+          brengen.
+        </p>
+        <p>
+          Of de KOR interessant voor je is, hangt echter van je persoonlijke en zakelijke situatie af. Een calculator
+          kan daarom vooral helpen om snel een eerste inschatting te maken.
+        </p>
+        <p>
+          Met de{' '}
           <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
-            KOR calculator
+            KOR-calculator
           </Link>{' '}
-          geeft snel inzicht of de KOR bij jouw verwachte jaaromzet past — nuttig bij plannen vanuit huis of bij een
-          nieuwe start.
+          kun je bekijken hoe je verwachte omzet zich verhoudt tot de omzetgrens van de regeling.
         </p>
-        <GuideToolCta href="/tools/kor-calculator/berekenen" label="Check de KOR →" />
-
-        <h2>Bonus: nog meer handige tools</h2>
-        <p>Naast deze zeven vind je op FactuurBaas ook:</p>
-        <ul>
-          <li>
-            <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
-              Uurtarief naar inkomen
-            </Link>{' '}
-            — wat levert je tarief per maand op?
-          </li>
-          <li>
-            <Link href="/tools/marge-calculator" className="text-warm-orange hover:underline">
-              Marge calculator
-            </Link>{' '}
-            — winstmarge op inkoop/verkoop
-          </li>
-        </ul>
-
-        <h2>Waarom deze tools handig zijn als je thuiswerkt</h2>
         <p>
-          Als zzp&apos;er werk je vaak alleen — thuis, bij de klant of onderweg. Dan wil je geen zware software, maar
-          snelle tools die je administratie afmaken:
+          <strong>Handig voor:</strong> zzp&apos;ers en kleine ondernemers die willen onderzoeken of de KOR mogelijk
+          relevant voor hen is.
         </p>
-        <ul>
-          <li>factuur of offerte in PDF, klaar om te mailen</li>
-          <li>btw en tarieven zonder Excel-rommel</li>
-          <li>duidelijke factuurnummers en betaaltermijnen</li>
-          <li>alles gratis, in de browser</li>
-        </ul>
         <p>
-          Communicatie-apps (zoals videobellen of chat) blijven nuttig. Voor je geldzaken en papieren werk zijn deze
-          zeven FactuurBaas-tools een sterke basis.
+          Let op: een calculator geeft alleen een indicatie. Controleer altijd de actuele voorwaarden bij de{' '}
+          <a
+            href="https://www.belastingdienst.nl"
+            className="text-warm-orange hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Belastingdienst
+          </a>
+          .
+        </p>
+        <GuideToolCta href="/tools/kor-calculator" label="Gebruik de KOR calculator →" />
+
+        <h2>Extra handige calculators voor zzp&apos;ers</h2>
+        <p>
+          Naast deze 7 tools zijn er nog andere calculators die handig kunnen zijn wanneer je je administratie of
+          financiële planning wilt verbeteren.
         </p>
 
-        <h2>Direct aan de slag</h2>
+        <h3>Van uurtarief naar inkomen</h3>
         <p>
-          Begin met de tool die je nu nodig hebt, of open het overzicht op{' '}
+          Benieuwd wat een bepaald uurtarief ongeveer betekent voor je inkomen? Met deze calculator kun je verschillende
+          scenario&apos;s naast elkaar zetten.
+        </p>
+        <p>
+          <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
+            Bereken je inkomen op basis van je uurtarief
+          </Link>
+        </p>
+
+        <h3>Marge berekenen</h3>
+        <p>
+          Verkoop je producten of diensten en wil je weten hoeveel marge je overhoudt? Met een margecalculator kun je
+          snel je verkoopprijs, inkoopprijs en marge met elkaar vergelijken.
+        </p>
+        <p>
+          <Link href="/tools/marge-calculator" className="text-warm-orange hover:underline">
+            Bereken je marge
+          </Link>
+        </p>
+
+        <h2>Waarom online tools handig zijn voor zzp&apos;ers</h2>
+        <p>
+          Als zzp&apos;er hoef je niet voor iedere kleine berekening een uitgebreid boekhoudprogramma te openen. Voor
+          veel dagelijkse taken is een eenvoudige online tool voldoende.
+        </p>
+        <p>
+          Een calculator kan je helpen om snel een bedrag uit te rekenen. Een factuurmaker helpt je een professionele
+          factuur op te stellen. En met een offerte maker kun je een nieuwe opdracht netjes aan je klant presenteren.
+        </p>
+        <p>Het voordeel is vooral dat je deze tools direct kunt gebruiken wanneer je ze nodig hebt.</p>
+
+        <h2>Alle gratis zzp-tools op één plek</h2>
+        <p>
+          Wil je meer van dit soort hulpmiddelen gebruiken? Bekijk dan alle{' '}
           <Link href="/tools" className="text-warm-orange hover:underline">
-            /tools
+            gratis tools van FactuurBaas
           </Link>
           .
         </p>
-        <GuideToolCta href="/create-invoice" label="Maak je eerste factuur →" />
+        <p>
+          Van facturen en offertes tot btw, uurtarieven en andere berekeningen: de tools zijn gemaakt om de
+          administratie van zzp&apos;ers zo eenvoudig mogelijk te maken.
+        </p>
+        <GuideToolCta href="/tools" label="Bekijk alle gratis tools voor zzp'ers →" />
       </>
     ),
   },

@@ -117,6 +117,28 @@ export default function VoorbeeldLandingPage({ page }) {
                     {p}
                   </p>
                 ))}
+                {section.subsections?.map((sub) => (
+                  <div key={sub.h3} className="mb-6">
+                    <h3 className="mb-2 font-heading text-lg font-semibold text-deep-blue">
+                      {sub.h3}
+                    </h3>
+                    {sub.paragraphs?.map((p) => (
+                      <p key={p.slice(0, 40)} className="mb-3 leading-relaxed text-slate-600">
+                        {p}
+                      </p>
+                    ))}
+                    {sub.bullets && (
+                      <ul className="space-y-2">
+                        {sub.bullets.map((item) => (
+                          <li key={item} className="flex gap-2.5 text-slate-600">
+                            <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-warm-orange" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
                 {section.bullets && (
                   <ul className="space-y-2">
                     {section.bullets.map((item) => (
@@ -159,11 +181,11 @@ export default function VoorbeeldLandingPage({ page }) {
 
           <div className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm sm:p-8">
             <h2 className="font-heading text-xl font-bold text-deep-blue sm:text-2xl">
-              Maak deze factuur zelf
+              {page.closingTitle || 'Maak deze factuur zelf'}
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-slate-600 sm:text-base">
-              Vul je eigen gegevens in, kies een layout en download direct als PDF. Gratis en zonder
-              account — klaar in onder 2 minuten.
+              {page.closingText ||
+                'Vul je eigen gegevens in, kies een layout en download direct als PDF. Gratis en zonder account — klaar in onder 2 minuten.'}
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button asChild size="lg" className="rounded-xl px-8">

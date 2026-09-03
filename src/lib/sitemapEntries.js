@@ -31,7 +31,7 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/tools/factuurnummer-generator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/marge-calculator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/betaaltermijn-calculator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${SITEMAP_BASE_URL}/tools/kor-calculator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/tools/kor-calculator`, lastModified: new Date('2026-09-03'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/factuur-maken`, lastModified: new Date('2026-07-09'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/premium`, lastModified: new Date('2026-02-05'), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITEMAP_BASE_URL}/blogs`, lastModified: new Date('2026-02-05'), changeFrequency: 'weekly', priority: 0.8 },

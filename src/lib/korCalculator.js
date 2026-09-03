@@ -1,25 +1,39 @@
 export const KOR_REVENUE_LIMIT = 20000;
 
+export const KOR_BELASTINGDIENST_URL =
+  'https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/hoe_werkt_de_btw_voor_mij/kleineondernemersregeling/';
+
+export const EU_KOR_BELASTINGDIENST_URL =
+  'https://www.belastingdienst.nl/wps/wcm/connect/nl/btw/content/kleineondernemersregeling-in-de-europese-unie-eu-kor';
+
 export const KOR_FAQS = [
   {
-    q: 'Wat is de kleineondernemersregeling (KOR)?',
-    a: 'De KOR is een btw-vrijstelling voor kleine ondernemers met maximaal €20.000 omzet per kalenderjaar. Je rekent geen btw aan klanten, doet geen btw-aangifte en kunt geen btw terugvragen op zakelijke kosten.',
+    q: 'Wat is de KOR?',
+    a: 'De kleineondernemersregeling is een btw-vrijstelling voor kleine ondernemingen. Bij deelname bereken je geen btw aan klanten en kun je de btw op zakelijke kosten en investeringen niet aftrekken.',
   },
   {
     q: 'Tot welk bedrag geldt de KOR?',
-    a: 'Je mag deelnemen als je omzet niet meer dan €20.000 per kalenderjaar bedraagt. Zodra je in een jaar boven die grens komt, moet je je afmelden voor de KOR.',
+    a: 'Voor de Nederlandse KOR geldt een omzetgrens van €20.000 per kalenderjaar. Er gelden daarnaast andere voorwaarden.',
   },
   {
-    q: 'Wanneer is de KOR financieel interessant?',
-    a: 'Vooral als je voornamelijk aan particulieren of btw-vrijgestelde klanten levert en weinig btw op zakelijke kosten hebt. Heb je veel btw-aftrek op inkopen? Dan kan btw-plicht voordeliger zijn.',
+    q: 'Hoe kan ik de KOR berekenen?',
+    a: 'Je kunt beginnen door je omzet te vergelijken met de €20.000 omzetgrens. Onze calculator geeft een eerste indicatie. Controleer daarna of je ook aan de overige voorwaarden voldoet.',
   },
   {
-    q: 'Hoe meld ik me aan voor de KOR?',
-    a: 'Dien je aanvraag minimaal 4 weken vóór de start van een nieuw kwartaal in bij de Belastingdienst. De wijziging gaat in vanaf het volgende kwartaal.',
+    q: "Kan ik de KOR checken als startende zzp'er?",
+    a: 'Ja. Ook als starter kun je bekijken of de KOR mogelijk interessant is. Houd er rekening mee dat de voorwaarden niet alleen afhangen van je verwachte omzet.',
   },
   {
-    q: 'Geldt de KOR ook in andere EU-landen?',
-    a: 'Sinds 1 januari 2025 is er ook een EU-KOR voor ondernemers die in meerdere EU-landen zakendoen. Check de voorwaarden op de website van de Belastingdienst.',
+    q: 'Is de KOR financieel voordelig?',
+    a: 'Dat verschilt per onderneming. Je brengt geen btw in rekening, maar je kunt de btw op zakelijke kosten en investeringen ook niet aftrekken. Kijk daarom naar zowel je omzet als je kosten en investeringen.',
+  },
+  {
+    q: 'Moet ik btw-aangifte doen als ik aan de KOR meedoe?',
+    a: 'Bij deelname aan de KOR doe je in principe geen btw-aangifte. Er kunnen echter bijzondere situaties zijn waarin je toch met btw-verplichtingen te maken krijgt.',
+  },
+  {
+    q: 'Wat moet ik doen als ik boven €20.000 omzet kom?',
+    a: 'Kom je tijdens deelname aan de KOR boven €20.000 omzet in een kalenderjaar, dan moet je je direct afmelden en vanaf het overschrijdende moment de normale btw-regels toepassen.',
   },
 ];
 

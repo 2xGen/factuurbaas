@@ -49,7 +49,7 @@ export const guideHubIntro = {
 export const guideHubFaqs = [
   {
     question: 'Hoe maak je een offerte als zzp\'er?',
-    answer: 'Voeg bedrijfs- en klantgegevens toe, beschrijf je werkzaamheden, vermeld prijs en btw, en stel een geldigheidsduur in.',
+    answer: 'Vul je bedrijfs- en klantgegevens in, geef de offerte een nummer, beschrijf wat je levert, vermeld prijs en btw, en voeg geldigheidsduur en voorwaarden toe.',
     guideSlug: 'hoe-maak-je-een-offerte',
   },
   {
@@ -69,7 +69,8 @@ export const guideHubFaqs = [
   },
   {
     question: 'Kan ik een offerte omzetten naar een factuur?',
-    answer: 'Ja. Na akkoord kun je de gegevens van je offerte gebruiken om een factuur te maken in FactuurBaas.',
+    answer:
+      'Ja. Na akkoord kun je de offerte als basis gebruiken voor een factuur. Factureer volgens de afgesproken betalingsmomenten — bijvoorbeeld na oplevering of bij een voorschot.',
     guideSlug: 'offerte-omzetten-naar-factuur',
   },
   {
@@ -88,23 +89,25 @@ export const guideHubFaqs = [
     guideSlug: 'wanneer-is-een-offerte-bindend',
   },
   {
-    question: 'Wat is het verschil tussen 9% en 21% btw?',
-    answer: '21% is het standaardtarief; 9% geldt voor een beperkt aantal producten en diensten, zoals voeding en boeken.',
+    question: 'Wat valt onder 9% en 21% btw?',
+    answer:
+      '21% is het algemene tarief voor de meeste producten en diensten. 9% geldt alleen voor specifiek aangewezen producten en diensten, zoals bepaalde voeding, publicaties en bepaalde werkzaamheden aan woningen.',
     guideSlug: 'verschil-9-en-21-btw',
   },
   {
-    question: 'Hoe verstuur ik een offerte digitaal?',
-    answer: 'Download je offerte als PDF en verstuur per e-mail met offertenummer en geldigheidsduur in je bericht.',
+    question: 'Hoe maak ik online een offerte?',
+    answer:
+      'Vul bedrijfs- en klantgegevens, werkzaamheden en prijzen in. Met FactuurBaas download je de offerte gratis als PDF en verstuur je hem digitaal — zonder account.',
     guideSlug: 'digitale-offertes-versturen',
   },
   {
     question: "Welk uurtarief moet ik rekenen als zzp'er?",
     answer:
-      'Bereken je benodigde omzet (inkomen + kosten + belastingreservering) en deel door je factureerbare uren. Gebruik de gratis uurtarief calculator voor jouw situatie.',
+      'Bereken je benodigde omzet en deel die door je factureerbare uren. Dat geeft je minimale uurtarief. Gebruik de gratis uurtarief calculator voor jouw situatie.',
     guideSlug: 'welk-uurtarief-moet-ik-rekenen',
   },
   {
-    question: "Welke tools zijn handig voor zzp'ers die thuiswerken?",
+    question: "Welke tools zijn handig voor zzp'ers?",
     answer:
       'Voor je administratie: factuur maken, offerte maker, btw calculator, uurtarief calculator, factuurnummer generator, betaaltermijn calculator en KOR-check — allemaal gratis bij FactuurBaas.',
     guideSlug: 'deze-7-tools-zijn-heel-handig-voor-zzpers',

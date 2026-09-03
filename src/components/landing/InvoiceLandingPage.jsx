@@ -124,6 +124,28 @@ export default function InvoiceLandingPage({ page, hubHref, hubLabel }) {
                         {p}
                       </p>
                     ))}
+                    {section.subsections?.map((sub) => (
+                      <div key={sub.h3} className="mb-6">
+                        <h3 className="mb-2 font-heading text-lg font-semibold text-deep-blue">
+                          {sub.h3}
+                        </h3>
+                        {sub.paragraphs?.map((p) => (
+                          <p key={p.slice(0, 40)} className="mb-3 leading-relaxed text-slate-600">
+                            {p}
+                          </p>
+                        ))}
+                        {sub.bullets && (
+                          <ul className="space-y-2">
+                            {sub.bullets.map((item) => (
+                              <li key={item} className="flex gap-2.5 text-slate-600">
+                                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-warm-orange" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
                     {section.bullets && (
                       <ul className="space-y-2">
                         {section.bullets.map((item) => (
