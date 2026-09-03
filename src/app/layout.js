@@ -34,6 +34,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" type="image/svg+xml" href="/crown-favicon.svg" />
         <meta name="google-site-verification" content="fSZ1o8tGJa7pjbJW1I2MsHR4xBnmfMu57OzH8rmO3Lo" />
+        <meta name="impact-site-verification" value="e72d300b-d7ad-48db-ba1f-dd5a6a7d196f" />
       </head>
       <body>
         <Providers>
