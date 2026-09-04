@@ -113,67 +113,259 @@ function professionTemplate(slug, config) {
 export const templatePages = {
   word: {
     slug: 'word',
-    h1: 'Factuur template Word',
-    metaTitle: 'Factuur template Word gratis – Online alternatief | FactuurBaas',
+    h1: 'Factuur template Word: gratis voorbeeld',
+    metaTitle: 'Factuur template Word: gratis voorbeeld en sjabloon',
     metaDescription:
-      'Zoek je een factuur template voor Word? Maak gratis een professionele factuur online. Geen Word nodig, direct PDF downloaden. Geen account vereist.',
+      'Op zoek naar een factuur template voor Word? Bekijk een gratis voorbeeld, ontdek welke gegevens op een factuur staan en maak daarna eenvoudig je factuur als PDF.',
     intro:
-      'Veel ondernemers zoeken een factuur template Word om zelf een factuur op te stellen. Dat kan — maar een online factuurtool is vaak sneller, overzichtelijker en minder foutgevoelig. Met FactuurBaas maak je gratis een professionele factuur zonder Word, zonder account en met directe PDF-download.',
+      'Op zoek naar een factuur template voor Word? Met een Word-sjabloon kun je zelf een factuur opmaken, je bedrijfsgegevens invullen en de factuur vervolgens als PDF opslaan. Hieronder vind je een voorbeeld van een factuur in Word, inclusief de belangrijkste onderdelen. Wil je niet zelf met Word werken? Met FactuurBaas maak je gratis online een factuur en download je deze direct als PDF.',
     previewLayout: 'minimalist',
     sections: [
       {
-        h2: 'Waarom steeds minder ondernemers Word gebruiken',
+        h2: 'Voorbeeld factuur in Word',
         paragraphs: [
-          'Een Word-factuur template lijkt handig, maar je moet zelf opmaken controleren, btw berekenen en elke keer opnieuw gegevens invullen. Eén verkeerde formule of vergeten btw-regel kan problemen geven bij je administratie of belastingaangifte.',
-          'Een online factuur template doet het zware werk voor je: structuur, layout en berekening staan goed. Jij vult alleen je klant- en bedrijfsgegevens in.',
+          'Een eenvoudige factuur in Word kan er bijvoorbeeld zo uitzien:',
+          'FACTUUR — Factuurnummer: 2026-001 · Factuurdatum: 9 juli 2026 · Betaaltermijn: 14 dagen.',
         ],
-      },
-      {
-        h2: 'Word template vs. online factuur tool',
+        subsections: [
+          {
+            h3: 'Van',
+            paragraphs: [
+              'Studio Jansen · Voorbeeldstraat 10 · 1234 AB Amsterdam · KvK: 12345678 · Btw-id: NL123456789B01',
+            ],
+          },
+          {
+            h3: 'Aan',
+            paragraphs: ['Klant BV · Klantstraat 20 · 1011 AA Amsterdam'],
+          },
+        ],
         comparison: {
-          headers: ['', 'Word template', 'FactuurBaas (online)'],
+          headers: ['Omschrijving', 'Aantal', 'Bedrag'],
           rows: [
-            ['Gratis gebruiken', 'Ja', 'Ja'],
-            ['Account nodig', 'Nee', 'Nee'],
-            ['Btw automatisch berekend', 'Nee', 'Ja'],
-            ['PDF direct downloaden', 'Via export', 'Ja, in 1 klik'],
-            ['Factuurnummering', 'Handmatig', 'Zelf in te vullen'],
-            ['Professionele layouts', 'Beperkt', 'Meerdere stijlen'],
+            ['Website ontwerp', '10 uur', '€750,00'],
+            ['Subtotaal', '', '€750,00'],
+            ['Btw 21%', '', '€157,50'],
+            ['Totaal', '', '€907,50'],
           ],
         },
       },
       {
-        h2: 'Wat moet er op een factuur staan?',
+        h2: 'Betaling en toelichting bij het voorbeeld',
         paragraphs: [
-          'Of je nu een Word-sjabloon of onze online tool gebruikt — deze gegevens zijn verplicht op een Nederlandse factuur:',
+          'Betaling: binnen 14 dagen op IBAN NL00 BANK 0000 0000 00.',
+          'Dit is een eenvoudig voorbeeld. Afhankelijk van je situatie kunnen extra gegevens of andere btw-vermeldingen nodig zijn.',
         ],
-        bullets: requiredInvoiceFields,
       },
       {
-        h2: 'Zo maak je je factuur in 3 stappen',
+        h2: 'Wat zet je in een Word factuur?',
+        paragraphs: [
+          'Een Nederlandse factuur moet bepaalde gegevens bevatten. Denk onder andere aan:',
+        ],
         bullets: [
-          'Klik op "Maak gratis factuur" en vul je bedrijfs- en klantgegevens in.',
-          'Kies een layout die bij je past (minimalistisch, zakelijk of modern).',
-          'Download je factuur direct als PDF en stuur hem naar je klant.',
+          'jouw naam of bedrijfsnaam en adres',
+          'de naam en het adres van je klant',
+          'je btw-identificatienummer wanneer dat voor jouw situatie vereist is',
+          'je KvK-nummer wanneer je onderneming in het Handelsregister staat',
+          'een uniek factuurnummer',
+          'de factuurdatum',
+          'een duidelijke omschrijving van de geleverde goederen of diensten',
+          'de datum waarop de goederen of diensten zijn geleverd wanneer die afwijkt van de factuurdatum',
+          'het bedrag exclusief btw',
+          'het btw-tarief en btw-bedrag wanneer btw wordt berekend',
+          'het totaalbedrag',
+        ],
+      },
+      {
+        h2: 'Extra gegevens en bijzondere btw-situaties',
+        paragraphs: [
+          'Andere gegevens, zoals je IBAN, betaaltermijn of een verwijzing naar algemene voorwaarden, zijn vaak handig om op je factuur te zetten.',
+          'Bij bijzondere situaties, zoals de KOR, btw-verlegging of vrijgestelde prestaties, gelden aanvullende of afwijkende btw-vermeldingen.',
+        ],
+      },
+      {
+        h2: 'Factuur maken in Word',
+        paragraphs: ['Wil je zelf een factuur in Word maken? Dan kun je deze stappen volgen:'],
+        subsections: [
+          {
+            h3: '1. Maak een nieuw Word-document',
+            paragraphs: [
+              'Open Microsoft Word en begin met een leeg document of een bestaand factuursjabloon.',
+            ],
+          },
+          {
+            h3: '2. Voeg je bedrijfsgegevens toe',
+            paragraphs: [
+              'Zet je naam of bedrijfsnaam, adres en de relevante bedrijfs- en btw-gegevens bovenaan de factuur.',
+            ],
+          },
+          {
+            h3: '3. Voeg de klantgegevens toe',
+            paragraphs: ['Vermeld de naam en het adres van de klant.'],
+          },
+          {
+            h3: '4. Geef de factuur een nummer en datum',
+            paragraphs: [
+              'Gebruik een duidelijke en unieke factuurnummering. Voeg ook de factuurdatum toe.',
+            ],
+          },
+          {
+            h3: '5. Beschrijf wat je hebt geleverd',
+            paragraphs: [
+              'Zet de werkzaamheden, producten of diensten duidelijk op de factuur. Bij werkzaamheden op uurbasis kun je bijvoorbeeld het aantal uren en je uurtarief vermelden.',
+            ],
+          },
+          {
+            h3: '6. Bereken de btw',
+            paragraphs: [
+              'Vermeld het bedrag exclusief btw, het toepasselijke btw-tarief en het btw-bedrag. Controleer of voor jouw product of dienst 21%, 9%, 0% of een andere btw-behandeling geldt.',
+            ],
+          },
+          {
+            h3: '7. Sla de factuur op als PDF',
+            paragraphs: [
+              'Controleer de factuur voordat je hem verstuurt en sla hem bij voorkeur op als PDF, zodat de opmaak niet verandert.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Gratis factuur template Word',
+        paragraphs: [
+          'Een Word-template is handig als je af en toe een eenvoudige factuur maakt en zelf de opmaak en berekeningen wilt beheren.',
+          'Je kunt zo’n indeling zelf in Word namaken of een bestaand Word-sjabloon gebruiken.',
+        ],
+        comparison: {
+          headers: ['Onderdeel', 'Voorbeeld'],
+          rows: [
+            ['Factuurnummer', '2026-001'],
+            ['Factuurdatum', '9 juli 2026'],
+            ['Omschrijving', 'Website ontwerp'],
+            ['Bedrag excl. btw', '€750'],
+            ['Btw', '21%'],
+            ['Btw-bedrag', '€157,50'],
+            ['Totaal', '€907,50'],
+          ],
+        },
+      },
+      {
+        h2: 'Factuur format Word',
+        paragraphs: [
+          'Een goed factuurformat hoeft niet ingewikkeld te zijn. Zorg vooral voor een duidelijke indeling. Een duidelijke layout maakt het voor je klant makkelijker om te zien wat er betaald moet worden.',
+        ],
+        subsections: [
+          {
+            h3: 'Bovenaan',
+            bullets: ['bedrijfsgegevens', 'klantgegevens', 'factuurnummer', 'factuurdatum'],
+          },
+          {
+            h3: 'In het midden',
+            bullets: ['omschrijving', 'aantal of uren', 'prijs', 'eventueel korting'],
+          },
+          {
+            h3: 'Onderaan',
+            bullets: [
+              'subtotaal',
+              'btw',
+              'totaal',
+              'betaalgegevens',
+              'betaaltermijn en eventuele andere voorwaarden',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur template downloaden',
+        paragraphs: [
+          'Zoek je specifiek naar een factuur template om te downloaden? Dan is een Word-bestand handig als je de factuur zelf wilt aanpassen.',
+          'Let er wel op dat je na het downloaden de gegevens, berekeningen en btw-vermeldingen zelf controleert. Een template zorgt er namelijk niet automatisch voor dat je factuur voor jouw situatie correct is.',
+          'Wil je liever geen Word-bestand aanpassen? Met FactuurBaas kun je je factuur online invullen en direct als PDF downloaden.',
+        ],
+      },
+      {
+        h2: 'Word factuur template of online factuur maken?',
+        paragraphs: [
+          'Word is vooral handig wanneer je zelf volledige controle over de opmaak wilt. Een online factuurtool kan praktischer zijn wanneer je regelmatig facturen maakt.',
+          'Met FactuurBaas vul je je gegevens online in, kies je een layout en download je de factuur direct als PDF.',
+        ],
+        comparison: {
+          headers: ['', 'Word-template', 'FactuurBaas'],
+          rows: [
+            ['Zelf opmaken', 'Ja', 'Beperkt'],
+            ['Bedragen en btw zelf invoeren', 'Ja', 'Ja'],
+            ['Btw automatisch berekenen', 'Zelf controleren', 'Ja'],
+            ['PDF maken', 'Via Word', 'Direct'],
+            ['Account nodig', 'Nee', 'Nee'],
+            ['Professionele layouts', 'Via template', 'Meerdere layouts'],
+          ],
+        },
+      },
+      {
+        h2: 'Factuur maken zonder Word',
+        paragraphs: [
+          'Wil je geen Word-factuur maken? Dan kun je ook direct online een factuur maken.',
+          'Met FactuurBaas vul je je bedrijfs- en klantgegevens in, voeg je producten, diensten of uren toe, wordt de btw berekend, kies je een factuurlayout en download je de factuur als PDF. Je hebt hiervoor geen account nodig.',
+        ],
+      },
+      {
+        h2: 'Factuur in Word maken als zzp’er',
+        paragraphs: [
+          'Ook als zzp’er kun je prima een Word-template gebruiken. Vooral wanneer je maar enkele facturen per maand verstuurt, kan een eenvoudig sjabloon voldoende zijn.',
+          'Let wel op dat je iedere factuur controleert. Een fout in een gekopieerde Word-factuur is namelijk snel gemaakt.',
+        ],
+        bullets: [
+          'het juiste factuurnummer',
+          'de juiste klantgegevens',
+          'de juiste bedragen',
+          'het juiste btw-tarief',
+          'de juiste btw-vermelding',
+          'de juiste betaalgegevens',
+        ],
+      },
+      {
+        h2: 'Factuur voorbeeld Word versus factuur template Word',
+        paragraphs: [
+          'De termen worden vaak door elkaar gebruikt. Zoek je een voorbeeld om te zien hoe een factuur eruitziet? Gebruik dan het voorbeeld hierboven. Zoek je een bestand om zelf te bewerken? Dan heb je een daadwerkelijk Word-sjabloon nodig.',
+        ],
+        bullets: [
+          'Factuur voorbeeld Word → een ingevulde voorbeeldfactuur om te bekijken of als basis te gebruiken.',
+          'Factuur template Word → een sjabloon dat je zelf kunt invullen.',
+          'Word factuur sjabloon → hetzelfde als een Word-factuurtemplate.',
+          'Factuur format Word → de indeling of structuur van een factuur.',
+          'Factuur layout → de visuele opmaak van de factuur.',
+        ],
+      },
+      {
+        h2: 'Liever geen Word-template?',
+        paragraphs: [
+          'Als je liever niet zelf met tabellen, btw-berekeningen en opmaak in Word werkt, kun je direct online een factuur maken.',
+          'Bekijk ook alle factuur templates voor andere formaten en situaties.',
         ],
       },
     ],
     faqs: [
       {
         q: 'Is er een gratis factuur template voor Word?',
-        a: 'Je kunt online zoeken naar gratis Word-sjablonen, maar je moet zelf controleren of alles klopt. Met FactuurBaas maak je gratis een factuur online — zonder Word — en download je direct een PDF.',
+        a: 'Ja. Je kunt zelf een eenvoudig factuurformat in Word maken of een bestaand sjabloon gebruiken. Controleer altijd of het sjabloon alle gegevens bevat die voor jouw factuur nodig zijn.',
       },
       {
-        q: 'Kan ik een Word-factuur omzetten naar PDF?',
-        a: 'Ja, via Word kun je exporteren naar PDF. Met FactuurBaas sla je die stap over: je maakt de factuur online en downloadt meteen een PDF.',
+        q: 'Hoe maak ik een factuur in Word?',
+        a: 'Maak een document met je bedrijfsgegevens, klantgegevens, factuurnummer, factuurdatum, omschrijving, bedragen en btw. Controleer de factuur en sla hem daarna op als PDF.',
       },
       {
-        q: 'Heb ik een account nodig?',
-        a: 'Nee. FactuurBaas werkt zonder registratie. Je vult je gegevens in en downloadt je factuur direct.',
+        q: 'Kan ik een Word-factuur als PDF opslaan?',
+        a: 'Ja. In Microsoft Word kun je een document als PDF opslaan of exporteren.',
       },
       {
-        q: 'Is een online factuur template geschikt voor zzp\'ers?',
-        a: 'Ja. De tool is gemaakt voor zzp\'ers en kleine ondernemers die snel een correcte factuur willen maken zonder boekhoudpakket.',
+        q: 'Wat moet er op een factuur staan?',
+        a: 'Op een Nederlandse factuur moeten onder andere de gegevens van jou en je klant, een uniek factuurnummer, factuurdatum, omschrijving, bedragen en de juiste btw-informatie staan. Welke btw-gegevens precies nodig zijn, hangt af van je situatie.',
+      },
+      {
+        q: 'Heb ik Word nodig om een factuur te maken?',
+        a: 'Nee. Je kunt ook online een factuur maken. Met FactuurBaas maak je gratis een factuur zonder Word en download je deze direct als PDF.',
+      },
+      {
+        q: 'Kan ik een factuur gratis maken?',
+        a: 'Ja. Met FactuurBaas kun je gratis online een factuur maken en als PDF downloaden.',
       },
     ],
     relatedLinks: [
@@ -634,51 +826,166 @@ export const templatePages = {
     ],
   }),
 
-  consultant: professionTemplate('consultant', {
+  consultant: {
+    slug: 'consultant',
     h1: 'Factuur template consultant',
-    shortTitle: 'Consultant factuur',
-    metaTitle: 'Consultant factuur template – Gratis online | FactuurBaas',
+    metaTitle: 'Factuur template consultant | Gratis voorbeeld',
     metaDescription:
-      'Professionele factuur template voor consultants en adviseurs. Gratis online maken, direct PDF.',
+      'Op zoek naar een factuur template voor consultants? Bekijk een professioneel factuurvoorbeeld en maak gratis je eigen consultantfactuur als PDF.',
     intro:
-      'Consultants en adviseurs hebben een strakke, professionele factuur nodig die vertrouwen uitstraalt. Deze template is geschikt voor adviesdiensten, projectmatig werk en uurbasis facturatie — zonder Word of Excel.',
+      'Op zoek naar een factuur template voor een consultant of adviseur? Hieronder vind je een professioneel factuurvoorbeeld voor adviesdiensten, projectwerk en consultancy op uurbasis. Je kunt het voorbeeld gebruiken als basis voor je eigen factuur. Met FactuurBaas maak je gratis een factuur en download je deze direct als PDF. Geen account nodig.',
     previewLayout: 'corporate',
-    sectionIntro: 'Op een consultantfactuur staan typisch:',
-    bullets: [
-      'Duidelijke omschrijving van advies, traject of project',
-      'Uurtarief of vaste projectprijs',
-      'Btw (21% of verlegd bij buitenlandse klanten)',
-      'Factuurnummer, datum en betalingstermijn',
-      'Je logo en zakelijke contactgegevens',
-    ],
-    extraSections: [
+    sections: [
       {
-        h2: 'Consultant factureren: uur of project?',
+        h2: 'Voorbeeld factuur consultant',
         paragraphs: [
-          'Beide modellen komen vaak voor. Bij uurbasis facturatie vermeld je uren en tarief; bij een projectprijs werk je met een vaste omschrijving en totaalbedrag. Kies wat je met je klant hebt afgesproken.',
+          'Een consultant kan bijvoorbeeld een vast adviestraject, losse adviesuren of een combinatie daarvan factureren.',
+          'Het voorbeeld hiernaast toont factuurnummer 2026-051 van 3 juli 2026 met betaaltermijn 30 dagen. Adviseur Partners factureert TechCorp BV: strategisch adviestraject Q3 (€3.500) plus 10 uur adviesuren en projectbegeleiding (€1.000). Subtotaal €4.500, 21% btw €945, totaal €5.445.',
+          'Betaling: binnen 30 dagen op het vermelde rekeningnummer. Dit is een voorbeeld — welke btw je moet rekenen en welke betaaltermijn je gebruikt, hangt af van je situatie en de afspraken met je klant.',
+        ],
+      },
+      {
+        h2: 'Wat staat er op een consultantfactuur?',
+        paragraphs: [
+          'Een factuur voor consultancy of adviesdiensten bevat onder andere:',
+          'Je kunt daarnaast bijvoorbeeld je logo, IBAN, website, e-mailadres en betaalinstructies vermelden. Deze maken een factuur duidelijker en professioneler, maar zijn niet allemaal wettelijke verplichte factuurgegevens.',
+        ],
+        bullets: [
+          'je naam of bedrijfsnaam en adres',
+          'de gegevens van je klant',
+          'een uniek factuurnummer',
+          'de factuurdatum',
+          'een duidelijke omschrijving van de geleverde diensten',
+          'het bedrag exclusief btw',
+          'het btw-tarief en btw-bedrag, als je btw in rekening brengt',
+          'het totaalbedrag',
+          'de overige gegevens die in jouw situatie op de factuur verplicht zijn',
+        ],
+      },
+      {
+        h2: 'Consultant factureren per uur of per project',
+        paragraphs: ['Als consultant kun je op verschillende manieren factureren.'],
+        subsections: [
+          {
+            h3: 'Per uur',
+            paragraphs: [
+              'Bij een uurtarief vermeld je bijvoorbeeld: Advies en projectbegeleiding — 12 uur × €100 = €1.200. Dit maakt voor je klant duidelijk hoeveel tijd je hebt besteed en welk tarief is afgesproken.',
+            ],
+          },
+          {
+            h3: 'Vaste projectprijs',
+            paragraphs: [
+              'Heb je vooraf een vaste prijs afgesproken? Dan kun je bijvoorbeeld één regel gebruiken: Strategisch adviestraject — €3.500. Een vaste projectprijs hoeft niet te worden opgesplitst in uren als je dat niet met je klant hebt afgesproken.',
+            ],
+          },
+          {
+            h3: 'Combinatie',
+            paragraphs: [
+              'Je kunt ook een vast bedrag combineren met losse uren, bijvoorbeeld voor extra werkzaamheden buiten de afgesproken scope.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur template voor zzp-consultants',
+        paragraphs: [
+          'Werk je als zelfstandig consultant of adviseur? Dan kun je dezelfde basis gebruiken voor je factuur.',
+          'De omschrijving op je factuur moet duidelijk maken welke dienst je hebt geleverd. Gebruik daarom liever een concrete omschrijving dan alleen “consultancy”.',
+          'Minder duidelijk: Consultancy — €2.500. Duidelijker: Strategisch advies en begeleiding bij implementatie van het nieuwe verkoopproces — €2.500.',
+        ],
+        bullets: [
+          'strategisch advies',
+          'interim consultancy',
+          'managementadvies',
+          'IT-consultancy',
+          'financieel advies',
+          'projectbegeleiding',
+          'coaching of begeleiding',
+          'onderzoek en analyse',
+        ],
+      },
+      {
+        h2: 'Factuur template Word of Excel',
+        paragraphs: [
+          'Je kunt een consultantfactuur natuurlijk zelf maken in Word of Excel. Dat geeft je veel vrijheid, maar je moet de opmaak, berekeningen en nummering zelf bijhouden.',
+          'Voor een enkele factuur kan Word of Excel prima werken. Als je regelmatig factureert, kan een online factuurtool makkelijker zijn.',
+        ],
+        comparison: {
+          headers: ['', 'Word / Excel', 'FactuurBaas'],
+          rows: [
+            ['Gratis gebruiken', 'Ja', 'Ja'],
+            ['Account nodig', 'Nee', 'Nee'],
+            ['Btw automatisch berekend', 'Nee', 'Ja'],
+            ['PDF maken', 'Via export', 'Direct'],
+            ['Professionele layouts', 'Zelf opmaken', 'Beschikbaar'],
+            ['Factuur opnieuw gebruiken', 'Zelf beheren', 'Online aanmaken'],
+          ],
+        },
+      },
+      {
+        h2: 'Consultant factuur maken als PDF',
+        paragraphs: [
+          'Wil je een factuur als PDF versturen? Met FactuurBaas vul je je bedrijfs- en klantgegevens in, voeg je je diensten toe en kies je een layout. Daarna kun je de factuur direct als PDF downloaden en zelf naar je klant sturen.',
+        ],
+      },
+      {
+        h2: 'Btw op een consultantfactuur',
+        paragraphs: [
+          'Voor veel advies- en consultancywerkzaamheden geldt het normale btw-tarief van 21% wanneer je in Nederland btw moet rekenen.',
+          'Bij buitenlandse klanten kan de btw-behandeling anders zijn. Bij bepaalde zakelijke diensten aan ondernemers in andere EU-landen kan bijvoorbeeld btw verlegd van toepassing zijn. Een buitenlandse klant betekent dus niet automatisch dat je 0% btw rekent.',
+          'Heb je een bijzondere btw-situatie, controleer dan welke regels op jouw dienst en klant van toepassing zijn.',
+        ],
+      },
+      {
+        h2: 'Wat is het verschil tussen een factuur en een offerte?',
+        paragraphs: [
+          'Een offerte gebruik je voordat je de opdracht uitvoert om werkzaamheden, prijs en voorwaarden voor te stellen.',
+          'Een factuur gebruik je om betaling te vragen voor geleverde diensten of werkzaamheden, of voor een afgesproken voorschot of termijn.',
+          'Wil je eerst een consultancy-offerte maken? Bekijk dan ook ons offerte voorbeeld voor dienstverlening.',
+        ],
+      },
+      {
+        h2: 'Gebruik deze consultant factuur template gratis',
+        paragraphs: [
+          'Gebruik het voorbeeld als inspiratie en maak vervolgens je eigen factuur. Vul je gegevens in, voeg je consultancywerkzaamheden toe, kies een layout en download je factuur direct als PDF.',
         ],
       },
     ],
     faqs: [
       {
-        q: 'Factureer ik als consultant per uur of per project?',
-        a: 'Beide kan. Kies wat je met je klant hebt afgesproken en vermeld dit duidelijk op de factuur.',
+        q: 'Kan ik een factuur template voor consultants gratis gebruiken?',
+        a: 'Ja. Met FactuurBaas kun je gratis een consultantfactuur maken en als PDF downloaden. Je hebt hiervoor geen account nodig.',
       },
       {
-        q: 'Hoe factureer ik aan buitenlandse klanten?',
-        a: 'Bij diensten aan buitenlandse bedrijven kan btw verlegd worden. Vermeld dit expliciet op de factuur.',
+        q: 'Kan ik een consultantfactuur per uur maken?',
+        a: 'Ja. Je kunt het aantal uren en je uurtarief als factuurregel opnemen. Bijvoorbeeld 15 uur × €100 per uur.',
       },
       {
-        q: 'Welke layout past bij een consultant?',
-        a: 'Kies een zakelijke, strakke layout. Met FactuurBaas kies je uit meerdere professionele stijlen.',
+        q: 'Kan ik ook een vaste projectprijs factureren?',
+        a: 'Ja. Als je een vaste prijs met je klant hebt afgesproken, kun je het project als één factuurregel opnemen.',
+      },
+      {
+        q: 'Welke btw geldt voor consultancy?',
+        a: 'Voor veel consultancy- en adviesdiensten geldt 21% btw wanneer je btw moet rekenen. Bij buitenlandse klanten kunnen andere btw-regels gelden.',
+      },
+      {
+        q: 'Kan ik mijn logo op de factuur zetten?',
+        a: 'Ja, als je factuurtemplate dit ondersteunt kun je je eigen branding gebruiken voor een professionelere factuur.',
+      },
+      {
+        q: 'Kan ik de factuur als PDF versturen?',
+        a: 'Ja. Je kunt de gemaakte factuur als PDF downloaden en deze vervolgens zelf naar je klant versturen.',
       },
     ],
     relatedLinks: [
       { label: 'Uren template', href: '/factuur-template/uren' },
       { label: 'Freelance template', href: '/factuur-template/freelance' },
       { label: 'ZZP template', href: '/factuur-template/zzp' },
+      { label: 'Offerte voorbeeld dienstverlening', href: '/offerte-voorbeeld/diensten' },
+      { label: 'Alle factuur templates', href: '/factuur-template' },
+      ...sharedRelatedLinks,
     ],
-  }),
+  },
 
   freelance: professionTemplate('freelance', {
     h1: 'Factuur template freelance',

@@ -241,12 +241,12 @@ export const guides = [
   {
     slug: 'btw-uit-bedrag-halen',
     cluster: 'btw',
-    seoTitle: 'Btw uit een bedrag halen – bereken inclusief naar exclusief (21% en 9%)',
-    title: 'Btw uit een bedrag halen: zo splits je een inclusief bedrag',
+    seoTitle: 'Btw uit een bedrag halen: btw terugrekenen met voorbeelden',
+    title: 'Btw uit een bedrag halen: zo reken je btw terug',
     excerpt:
-      'Hoe haal je btw uit een bedrag? Leer stap voor stap hoe je een inclusief bedrag omzet naar exclusief btw, met voorbeelden voor 21% en 9%. Gratis BTW calculator.',
+      'Btw uit een bedrag halen? Bereken het btw-bedrag en bedrag exclusief btw vanuit een prijs inclusief btw. Met voorbeelden voor 21% en 9% btw.',
     keywords:
-      'btw uit bedrag halen, btw uit inclusief bedrag halen, btw splitsen, inclusief naar exclusief btw, 21% btw uit bedrag, 9% btw uit bedrag, btw calculator',
+      'btw uit bedrag halen, btw terugrekenen, btw uit inclusief bedrag, inclusief naar exclusief btw, 21% btw terugrekenen, 9% btw terugrekenen, btw calculator',
     tool: {
       href: '/tools/btw-calculator',
       label: 'Bereken direct btw',
@@ -254,185 +254,384 @@ export const guides = [
     },
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Factuurbaas/Btw%20uit%20een%20bedrag%20halen.jpg',
-      alt: 'Btw uit een bedrag halen: calculator en euro biljetten',
+      alt: 'Btw uit een bedrag halen: zo reken je btw terug',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-04',
     relatedSlugs: ['btw-factuur-zzp', 'factureren-zonder-account'],
-    relatedGuideSlugs: ['btw-terugrekenen', 'inclusief-btw-naar-exclusief-btw', 'verschil-9-en-21-btw', 'welke-btw-rekenen-zzper'],
+    relatedGuideSlugs: [
+      'btw-terugrekenen',
+      'inclusief-btw-naar-exclusief-btw',
+      'verschil-9-en-21-btw',
+      'hoe-rond-je-btw-af',
+    ],
     faq: [
       {
         question: 'Hoe haal je btw uit een inclusief bedrag?',
         answer:
-          'Deel het totaalbedrag door 1,21 (bij 21% btw) of 1,09 (bij 9% btw). Het resultaat is het bedrag exclusief btw. Trek dat af van het totaalbedrag om het btw-deel te krijgen.',
+          'Bij 21% btw deel je het inclusief-bedrag door 1,21. Bij 9% btw deel je door 1,09. Het verschil tussen het inclusief-bedrag en het bedrag exclusief btw is het btw-bedrag.',
       },
       {
         question: 'Hoeveel btw zit er in €242 inclusief btw?',
-        answer:
-          'Bij 21% btw: €242 ÷ 1,21 = €200 exclusief btw. De btw is €242 − €200 = €42.',
+        answer: 'Bij 21% btw zit er €42 btw in €242. Het bedrag exclusief btw is €200.',
       },
       {
-        question: 'Wat is het verschil tussen btw uit een bedrag halen en btw terugrekenen?',
+        question: 'Hoe reken je €100 inclusief btw terug?',
         answer:
-          'Het is dezelfde berekening. "Btw uit een bedrag halen" benadrukt dat je het btw-deel uit een totaalbedrag wilt isoleren. "Btw terugrekenen" benadrukt dat je van inclusief naar exclusief wilt omrekenen.',
+          'Bij 21% btw: €100 ÷ 1,21 = €82,64 exclusief btw. Het btw-bedrag is dan €17,36.',
       },
       {
-        question: 'Mag je 21% van het totaalbedrag aftrekken?',
+        question: 'Hoe reken je btw terug van 9%?',
         answer:
-          'Nee. 21% btw wordt berekend over het bedrag exclusief btw, niet over het totaal inclusief btw. Deel daarom door 1,21 in plaats van 21% af te trekken.',
+          'Deel het bedrag inclusief 9% btw door 1,09. Het verschil tussen het oorspronkelijke bedrag en het bedrag exclusief btw is de btw.',
+      },
+      {
+        question: 'Is btw uit een bedrag halen hetzelfde als btw terugrekenen?',
+        answer:
+          'Ja. Met beide termen wordt meestal bedoeld dat je vanuit een bedrag inclusief btw het bedrag exclusief btw en het btw-deel berekent.',
+      },
+      {
+        question: 'Kan ik btw terugvragen over een zakelijke aankoop?',
+        answer:
+          'Of je btw op een zakelijke aankoop kunt aftrekken, hangt af van je situatie en de voorwaarden voor aftrek van voorbelasting. De berekening van het btw-bedrag betekent niet automatisch dat je dit bedrag ook volledig kunt aftrekken.',
       },
     ],
     content: (
       <>
         <p>
-          Staat er op een bon, factuur of offerte een bedrag <strong>inclusief btw</strong> en wil je weten hoeveel daarvan
-          btw is? Dan moet je <strong>btw uit een bedrag halen</strong>.
+          Heb je een bedrag <strong>inclusief btw</strong> en wil je weten hoeveel btw daarin zit? Dan kun je de btw
+          uit het bedrag halen door het inclusief-bedrag terug te rekenen naar het bedrag exclusief btw.
         </p>
-        <p>Dat is handig als je:</p>
+        <p>Dit is handig als je bijvoorbeeld:</p>
         <ul>
-          <li>een kassabon of inkoopfactuur wilt uitsplitsen</li>
-          <li>wilt weten hoeveel btw je als voorbelasting kunt aftrekken</li>
-          <li>een prijs inclusief btw wilt omzetten naar exclusief btw</li>
-          <li>controleert of het btw-bedrag op een factuur klopt</li>
+          <li>een zakelijke bon of inkoopfactuur wilt controleren</li>
+          <li>wilt weten hoeveel btw in een inclusief bedrag zit</li>
+          <li>een bedrag inclusief btw wilt omrekenen naar exclusief btw</li>
+          <li>een factuur wilt controleren</li>
+          <li>bedragen inclusief en exclusief btw met elkaar wilt vergelijken</li>
         </ul>
         <p>
           Met de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
             BTW calculator
           </Link>{' '}
-          van FactuurBaas splits je een inclusief bedrag direct in exclusief btw en het btw-deel.
+          van FactuurBaas kun je dit direct berekenen.
         </p>
 
         <GuideToolCta href="/tools/btw-calculator" label="Bereken direct btw →" />
 
-        <h2>Btw uit een bedrag halen: zo werkt het</h2>
+        <h2>Hoe haal je btw uit een bedrag?</h2>
         <p>
-          Bij 21% btw bestaat een inclusief bedrag uit <strong>100% grondslag + 21% btw</strong>. Het totaal is dus 121%.
-          Deel het inclusief bedrag door 1,21 om het deel exclusief btw te krijgen. Wat overblijft is het btw-bedrag.
-        </p>
-        <p>De formules:</p>
-        <p>
-          <strong>Exclusief btw = inclusief bedrag ÷ 1,21</strong>
+          Bij een bedrag inclusief <strong>21% btw</strong> bestaat het totaal uit 100% van het bedrag exclusief btw
+          plus 21% btw. Het totaal is daardoor 121% van het bedrag exclusief btw.
         </p>
         <p>
-          <strong>Btw = inclusief bedrag − exclusief btw</strong>
+          Om het bedrag exclusief btw terug te rekenen, deel je het inclusief-bedrag door <strong>1,21</strong>.
         </p>
 
-        <h2>Voorbeeld: btw uit €242 halen (21%)</h2>
-        <p>Je betaalt €242 inclusief btw voor zakelijke software.</p>
-        <p>Stap 1 — exclusief btw berekenen:</p>
-        <p>€242 ÷ 1,21 = <strong>€200 exclusief btw</strong></p>
-        <p>Stap 2 — btw-deel isoleren:</p>
-        <p>€242 − €200 = <strong>€42 btw</strong></p>
-
-        <CalculationTable
-          rows={[
-            ['Bedrag exclusief btw', '€200'],
-            ['Btw 21%', '€42'],
-            ['Totaal inclusief btw', '€242'],
-          ]}
-        />
-
-        <h2>Btw uit een bedrag halen bij 9% btw</h2>
-        <p>Bij het lage tarief deel je door <strong>1,09</strong> in plaats van 1,21.</p>
-        <p>Voorbeeld: een lunch of boek kost <strong>€54,50 inclusief 9% btw</strong>.</p>
-        <p>€54,50 ÷ 1,09 = <strong>€50 exclusief btw</strong></p>
-        <p>Btw: €54,50 − €50 = <strong>€4,50</strong></p>
-
-        <CalculationTable
-          rows={[
-            ['Exclusief btw', '€50,00'],
-            ['Btw 9%', '€4,50'],
-            ['Inclusief btw', '€54,50'],
-          ]}
-        />
-
-        <h2>Handig overzicht: welke factor gebruik je?</h2>
-        <CalculationTable
-          rows={[
-            ['Btw-tarief', 'Delen door', 'Voorbeeld inclusief → exclusief'],
-            ['21%', '1,21', '€121 → €100'],
-            ['9%', '1,09', '€109 → €100'],
-            ['0%', '1,00', '€100 → €100'],
-          ]}
-        />
-
-        <h2>Waar gebruik je dit als ondernemer voor?</h2>
-
-        <h3>Voorbelasting op inkoopfacturen</h3>
+        <h3>Bij 21% btw</h3>
         <p>
-          Een leverancier factureert €1.210 inclusief btw. Je wilt weten hoeveel btw je in je aangifte kunt verrekenen:
-          €1.210 ÷ 1,21 = <strong>€1.000 exclusief</strong>, btw = <strong>€210</strong>.
+          <strong>Bedrag exclusief btw = bedrag inclusief btw ÷ 1,21</strong>
         </p>
-
-        <h3>Prijzen vergelijken</h3>
+        <p>Daarna bereken je het btw-bedrag:</p>
         <p>
-          De ene aanbieder noemt een prijs inclusief btw, de andere exclusief. Door btw uit het inclusief bedrag te halen,
-          vergelijk je op basis van hetzelfde bedrag exclusief btw.
+          <strong>Btw = bedrag inclusief btw − bedrag exclusief btw</strong>
         </p>
 
-        <h3>Facturen controleren</h3>
-        <p>Check altijd of het btw-deel past bij het tarief op de regel:</p>
+        <h2>Voorbeeld: btw uit €242 halen</h2>
+        <p>
+          Je hebt een zakelijke aankoop van <strong>€242 inclusief 21% btw</strong>.
+        </p>
+        <p>Eerst bereken je het bedrag exclusief btw:</p>
+        <p>
+          <strong>€242 ÷ 1,21 = €200</strong>
+        </p>
+        <p>Daarna bereken je de btw:</p>
+        <p>
+          <strong>€242 − €200 = €42</strong>
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Exclusief btw</td>
+                <td className="px-4 py-3 text-right">€200,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€42,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Inclusief btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€242,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Er zit dus <strong>€42 btw</strong> in een bedrag van €242 inclusief 21% btw.
+        </p>
+
+        <h2>Btw uit een bedrag halen bij 9%</h2>
+        <p>
+          Ook bij 9% btw kun je vanuit een inclusief bedrag terugrekenen. Omdat 100% + 9% = 109%, deel je het
+          inclusief-bedrag door <strong>1,09</strong>.
+        </p>
+
+        <h3>Voorbeeld: €54,50 inclusief 9% btw</h3>
+        <p>
+          <strong>€54,50 ÷ 1,09 = €50,00 exclusief btw</strong>
+        </p>
+        <p>Het btw-bedrag is:</p>
+        <p>
+          <strong>€54,50 − €50,00 = €4,50</strong>
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Exclusief btw</td>
+                <td className="px-4 py-3 text-right">€50,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 9%</td>
+                <td className="px-4 py-3 text-right">€4,50</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Inclusief btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€54,50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Welke factor gebruik je om btw terug te rekenen?</h2>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Btw-tarief
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Inclusief bedrag delen door
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">21%</td>
+                <td className="px-4 py-3 text-right font-semibold">1,21</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">9%</td>
+                <td className="px-4 py-3 text-right font-semibold">1,09</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">0%</td>
+                <td className="px-4 py-3 text-right font-semibold">1,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Bij 0% btw verandert het bedrag door de btw niet: het bedrag inclusief btw is dan gelijk aan het bedrag
+          exclusief btw.
+        </p>
+        <p>
+          Let wel op dat je eerst moet vaststellen <strong>welk btw-tarief op de betreffende levering of dienst van
+          toepassing is</strong>. Niet ieder product of iedere dienst valt automatisch onder 21% of 9%.
+        </p>
+
+        <h2>Btw terugrekenen: wat is het verschil met btw berekenen?</h2>
+        <p>Bij <strong>btw berekenen</strong> begin je meestal met een bedrag exclusief btw.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>€200 × 21% = €42 btw</strong>
+        </p>
+        <p>Het bedrag inclusief btw is dan:</p>
+        <p>
+          <strong>€200 + €42 = €242</strong>
+        </p>
+        <p>
+          Bij <strong>btw terugrekenen</strong> begin je juist met het bedrag inclusief btw:
+        </p>
+        <p>
+          <strong>€242 ÷ 1,21 = €200 exclusief btw</strong>
+        </p>
+        <p>Daarna:</p>
+        <p>
+          <strong>€242 − €200 = €42 btw</strong>
+        </p>
+        <p>Het zijn dus twee kanten van dezelfde berekening.</p>
+
+        <h2>Btw uit een inclusief bedrag berekenen</h2>
+        <p>
+          Je kunt het btw-bedrag ook rechtstreeks berekenen zonder eerst het bedrag exclusief btw uit te rekenen.
+        </p>
+        <p>Bij 21% btw is het btw-deel van een inclusief bedrag:</p>
+        <p>
+          <strong>inclusief bedrag × 21 ÷ 121</strong>
+        </p>
+        <p>Bij €242:</p>
+        <p>
+          <strong>€242 × 21 ÷ 121 = €42</strong>
+        </p>
+        <p>Bij 9% btw:</p>
+        <p>
+          <strong>inclusief bedrag × 9 ÷ 109</strong>
+        </p>
+        <p>Bij €54,50:</p>
+        <p>
+          <strong>€54,50 × 9 ÷ 109 = €4,50</strong>
+        </p>
+        <p>
+          Voor dagelijks gebruik is delen door <strong>1,21</strong> of <strong>1,09</strong> meestal het
+          eenvoudigst.
+        </p>
+
+        <h2>Waarvoor gebruik je btw terugrekenen?</h2>
+
+        <h3>Een zakelijke aankoop controleren</h3>
+        <p>
+          Je koopt iets voor <strong>€1.210 inclusief 21% btw</strong>.
+        </p>
+        <p>Dan is:</p>
         <ul>
-          <li>klopt het percentage (21%, 9% of 0%)?</li>
-          <li>klopt het berekende btw-bedrag?</li>
-          <li>klopt het totaal inclusief btw?</li>
+          <li>€1.000 exclusief btw</li>
+          <li>€210 btw</li>
+          <li>€1.210 inclusief btw</li>
         </ul>
+        <p>Zo kun je controleren of het btw-bedrag op de factuur logisch is.</p>
+
+        <h3>Prijzen inclusief en exclusief btw vergelijken</h3>
         <p>
-          Meer hierover in{' '}
-          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
-            Btw op je factuur: zo doe je het goed als zzp&apos;er
-          </Link>
-          . Gerelateerd:{' '}
-          <Link href="/gidsen/btw-terugrekenen" className="text-warm-orange hover:underline">
-            Hoe bereken je btw terug?
+          Een leverancier kan een consumentenprijs inclusief btw tonen, terwijl een zakelijke leverancier een prijs
+          exclusief btw vermeldt. Door de btw uit het eerste bedrag te halen, kun je de prijzen op dezelfde basis
+          vergelijken.
+        </p>
+
+        <h3>Een factuur controleren</h3>
+        <p>Heb je een factuur met een bedrag inclusief btw? Controleer dan:</p>
+        <ol>
+          <li>welk btw-tarief van toepassing is;</li>
+          <li>of het bedrag inclusief btw klopt;</li>
+          <li>hoeveel btw daarin zit;</li>
+          <li>of het bedrag exclusief btw klopt.</li>
+        </ol>
+        <p>
+          Bij meerdere btw-tarieven op één factuur moet je de bedragen per tarief afzonderlijk bekijken.
+        </p>
+
+        <h2>Btw uit een bedrag halen met de calculator</h2>
+        <p>
+          Wil je niet zelf delen en aftrekken? Met de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
+            BTW calculator van FactuurBaas
+          </Link>{' '}
+          kun je een bedrag inclusief of exclusief btw direct omrekenen.
+        </p>
+        <p>Je kunt onder andere berekenen:</p>
+        <ul>
+          <li>btw uit een inclusief bedrag</li>
+          <li>bedrag exclusief btw</li>
+          <li>bedrag inclusief btw</li>
+          <li>21% btw</li>
+          <li>9% btw</li>
+          <li>0% btw</li>
+        </ul>
+
+        <GuideToolCta href="/tools/btw-calculator" label="Open de gratis BTW calculator →" />
+
+        <h2>Veelgemaakte fouten bij btw terugrekenen</h2>
+
+        <h3>1. 21% van het totaal aftrekken</h3>
+        <p>Een veelgemaakte fout is:</p>
+        <p>
+          <strong>€121 − 21% = €95,59</strong>
+        </p>
+        <p>Dat is niet de juiste manier om btw uit een inclusief bedrag te halen.</p>
+        <p>Bij €121 inclusief 21% btw is het bedrag exclusief btw namelijk:</p>
+        <p>
+          <strong>€121 ÷ 1,21 = €100</strong>
+        </p>
+        <p>
+          De btw is dus <strong>€21</strong>.
+        </p>
+
+        <h3>2. Delen door 21%</h3>
+        <p>Een inclusief bedrag deel je niet door 21% om de btw eruit te halen.</p>
+        <p>
+          Bij 21% btw moet je het inclusief-bedrag delen door <strong>1,21</strong> om het bedrag exclusief btw te
+          vinden.
+        </p>
+
+        <h3>3. Het verkeerde btw-tarief gebruiken</h3>
+        <p>
+          Gebruik niet automatisch 21%. Als op de betreffende levering of dienst bijvoorbeeld 9% btw geldt, gebruik
+          je <strong>1,09</strong>.
+        </p>
+        <p>Het juiste tarief hangt af van wat je levert en van de situatie.</p>
+
+        <h3>4. Afrondingsverschillen negeren</h3>
+        <p>
+          Bij btw-berekeningen kunnen kleine afrondingsverschillen ontstaan. Vooral wanneer je met meerdere
+          factuurregels werkt, is het belangrijk om consequent dezelfde afrondingsmethode te gebruiken.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/gidsen/hoe-rond-je-btw-af" className="text-warm-orange hover:underline">
+            Btw afronden: zo rond je btw correct af
           </Link>
           .
         </p>
 
-        <h2>Veelgemaakte fouten</h2>
-
-        <h3>Fout 1: 21% van het totaal aftrekken</h3>
-        <p>
-          €121 − 21% = €95,59 lijkt logisch, maar klopt niet. Btw wordt berekend over het bedrag <em>exclusief</em> btw,
-          niet over het totaal inclusief btw.
-        </p>
-
-        <h3>Fout 2: Verkeerd tarief toepassen</h3>
-        <p>
-          Gebruik 1,21 voor het standaardtarief, 1,09 voor het lage tarief en 1,00 bij 0% btw. Het verkeerde tarief geeft
-          een verkeerd btw-deel.
-        </p>
-
-        <h3>Fout 3: Niet afronden op centen</h3>
-        <p>Op facturen reken je bedragen af op twee decimalen. Kleine verschillen door afronding komen voor — noteer het correct.</p>
-
-        <h2>Direct btw uit een bedrag halen met de calculator</h2>
-        <p>Geen zin om zelf te delen en aftrekken? Met de BTW calculator van FactuurBaas bereken je in seconden:</p>
-        <ul>
-          <li>het btw-deel uit een inclusief bedrag</li>
-          <li>het bedrag exclusief btw</li>
-          <li>21%, 9% en 0% btw</li>
-          <li>totalen voor je factuur of administratie</li>
-        </ul>
-
-        <GuideToolCta href="/tools/btw-calculator" label="Open gratis BTW calculator →" />
-
         <h2>Veelgestelde vragen</h2>
         <h3>Hoe haal je btw uit een inclusief bedrag?</h3>
         <p>
-          Deel door 1,21 (21% btw) of 1,09 (9% btw). Het resultaat is exclusief btw. Het verschil met het originele bedrag
-          is het btw-deel.
+          Bij 21% btw deel je het inclusief-bedrag door <strong>1,21</strong>. Bij 9% btw deel je door{' '}
+          <strong>1,09</strong>. Het verschil tussen het inclusief-bedrag en het bedrag exclusief btw is het
+          btw-bedrag.
         </p>
         <h3>Hoeveel btw zit er in €242 inclusief btw?</h3>
-        <p>Bij 21% btw: €242 ÷ 1,21 = €200 exclusief. De btw is €42.</p>
-        <h3>Is btw uit een bedrag halen hetzelfde als btw terugrekenen?</h3>
-        <p>Ja, het is dezelfde berekening — alleen een andere benaming voor dezelfde handeling.</p>
-        <h3>Kan ik btw terugvragen als zzp&apos;er?</h3>
         <p>
-          Als btw-plichtige ondernemer kun je btw op zakelijke kosten meestal verrekenen via je btw-aangifte. Gebruik je de
-          KOR? Dan gelden andere regels.
+          Bij 21% btw zit er <strong>€42 btw</strong> in €242. Het bedrag exclusief btw is €200.
         </p>
+        <h3>Hoe reken je €100 inclusief btw terug?</h3>
+        <p>Bij 21% btw:</p>
+        <p>
+          <strong>€100 ÷ 1,21 = €82,64 exclusief btw</strong>
+        </p>
+        <p>
+          Het btw-bedrag is dan <strong>€17,36</strong>.
+        </p>
+        <h3>Hoe reken je btw terug van 9%?</h3>
+        <p>
+          Deel het bedrag inclusief 9% btw door <strong>1,09</strong>. Het verschil tussen het oorspronkelijke
+          bedrag en het bedrag exclusief btw is de btw.
+        </p>
+        <h3>Is btw uit een bedrag halen hetzelfde als btw terugrekenen?</h3>
+        <p>
+          Ja. Met beide termen wordt meestal bedoeld dat je vanuit een bedrag inclusief btw het bedrag exclusief btw
+          en het btw-deel berekent.
+        </p>
+        <h3>Kan ik btw terugvragen over een zakelijke aankoop?</h3>
+        <p>
+          Of je btw op een zakelijke aankoop kunt aftrekken, hangt af van je situatie en de voorwaarden voor aftrek
+          van voorbelasting. De berekening van het btw-bedrag betekent niet automatisch dat je dit bedrag ook volledig
+          kunt aftrekken.
+        </p>
+
+        <h2>Btw terugrekenen zonder zelf te rekenen</h2>
+        <p>
+          Heb je regelmatig bedragen inclusief btw die je wilt omrekenen? Gebruik dan de gratis BTW calculator van
+          FactuurBaas.
+        </p>
+        <p>
+          Vul het bedrag in, kies het btw-tarief en bereken direct het bedrag exclusief btw en het btw-deel.
+        </p>
+
+        <GuideToolCta href="/tools/btw-calculator" label="Open gratis BTW calculator →" />
       </>
     ),
   },
@@ -3119,12 +3318,12 @@ Totaal                              €1.000,00`}
   {
     slug: 'btw-berekenen-buitenlandse-klanten',
     cluster: 'btw',
-    seoTitle: 'Btw berekenen voor buitenlandse klanten | Factuur naar het buitenland',
-    title: 'Btw berekenen voor buitenlandse klanten: btw op facturen naar het buitenland',
+    seoTitle: 'Factuur naar buitenland: welke btw moet je rekenen?',
+    title: 'Factuur naar het buitenland: welke btw moet je rekenen?',
     excerpt:
-      'Hoe bereken je btw voor buitenlandse klanten? Lees wanneer je btw verlegt, 0% btw gebruikt of Nederlandse btw rekent — en maak direct een correcte factuur.',
+      'Een factuur naar het buitenland sturen? Lees wanneer je Nederlandse btw, buitenlandse btw of btw verlegd gebruikt bij klanten binnen en buiten de EU.',
     keywords:
-      'btw buitenlandse klanten, btw verlegd, factuur buitenland btw, export btw, intracommunautaire levering, btw eu klant, factuur buiten eu',
+      'factuur naar buitenland, factuur buitenland btw, btw verlegd, buitenlandse klanten factureren, 0% btw export, btw eu klant, factuur zonder btw buitenland',
     tool: {
       href: '/tools/btw-calculator',
       label: 'Bereken direct btw',
@@ -3135,198 +3334,355 @@ Totaal                              €1.000,00`}
       alt: 'Btw berekenen voor buitenlandse klanten: internationale handel',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-04',
     relatedSlugs: ['buitenlandse-klanten-factureren', 'btw-factuur-zzp'],
-    relatedGuideSlugs: ['wanneer-gebruik-je-0-btw', 'welke-btw-rekenen-zzper', 'veelgemaakte-fouten-btw-berekenen'],
+    relatedGuideSlugs: [
+      'wanneer-gebruik-je-0-btw',
+      'welke-btw-rekenen-zzper',
+      'veelgemaakte-fouten-btw-berekenen',
+    ],
     faq: [
       {
         question: 'Moet ik btw rekenen aan een buitenlandse klant?',
         answer:
-          'Dat hangt af van het land van je klant, of het een ondernemer of particulier is en wat je levert.',
+          'Niet altijd. Het hangt onder andere af van het land van de klant, of de klant ondernemer of particulier is en of je goederen of diensten levert.',
       },
       {
-        question: 'Wat betekent btw verlegd?',
+        question: 'Kan ik een factuur zonder btw naar het buitenland sturen?',
         answer:
-          'Bij btw verlegd bereken jij geen btw. De klant verwerkt de btw zelf in zijn eigen btw-aangifte.',
+          'Dat kan in bepaalde situaties. Bijvoorbeeld bij een B2B-dienst waarbij de btw wordt verlegd of bij een prestatie waarvoor het 0%-tarief geldt. Een factuur zonder btw betekent dus niet automatisch dat je 0% btw toepast.',
       },
       {
-        question: 'Kan ik een factuur zonder btw sturen naar een bedrijf in Duitsland?',
+        question: 'Kan ik een factuur zonder btw naar een bedrijf in Duitsland sturen?',
         answer:
-          'Vaak wel als het een zakelijke klant is met een geldig btw-nummer en je de btw-verlegging correct vermeldt.',
+          'Bij een gewone B2B-dienst aan een Duits bedrijf kan de btw vaak worden verlegd. Je vermeldt dan “btw verlegd” en de btw-identificatienummers van jou en je klant.',
       },
       {
-        question: 'Welk btw-tarief gebruik ik voor een buitenlandse klant?',
+        question: 'Moet ik btw rekenen aan een buitenlandse particulier?',
         answer:
-          'Dat kan 0%, Nederlandse btw of buitenlandse btw zijn afhankelijk van de situatie en het type levering.',
+          'Dat hangt af van de soort dienst of levering. Bij veel diensten aan particulieren in de EU is Nederlandse btw verschuldigd, maar er zijn uitzonderingen.',
+      },
+      {
+        question: 'Wat betekent btw verlegd bij een buitenlandse factuur?',
+        answer:
+          'Bij btw-verlegging berekent de leverancier geen btw op de factuur. De btw wordt door de klant aangegeven en betaald volgens de regels die op de transactie van toepassing zijn.',
+      },
+      {
+        question: 'Is btw verlegd hetzelfde als 0% btw?',
+        answer:
+          'Nee. Bij btw verlegd wordt de btw-heffing naar de afnemer verschoven. Het 0%-tarief is een afzonderlijk btw-tarief.',
+      },
+      {
+        question: 'Hoe bereken ik btw voor een buitenlandse klant?',
+        answer:
+          'Begin niet alleen met het btw-tarief. Bepaal eerst waar de levering of dienst voor de btw belast is. Daarna bepaal je of Nederlandse btw, buitenlandse btw, 0% of btw-verlegging van toepassing is.',
       },
     ],
     content: (
       <>
         <p>
-          Als zzp&apos;er kun je klanten hebben in Nederland én in het buitenland. Wanneer je een buitenlandse klant
-          factureert, gelden vaak andere btw-regels dan bij een Nederlandse klant.
+          Een factuur naar een klant in het buitenland werkt niet altijd hetzelfde als een Nederlandse factuur. Of je
+          btw moet rekenen, hangt onder andere af van{' '}
+          <strong>
+            waar je klant gevestigd is, of het een ondernemer of particulier is en of je goederen of diensten levert
+          </strong>
+          .
         </p>
-        <p>Of je btw moet rekenen hangt af van:</p>
+        <p>Bij een buitenlandse factuur kun je bijvoorbeeld te maken krijgen met:</p>
         <ul>
-          <li>waar je klant gevestigd is</li>
-          <li>of je klant een ondernemer of particulier is</li>
-          <li>of je goederen of diensten levert</li>
-          <li>of je klant binnen of buiten de EU zit</li>
+          <li>Nederlandse btw</li>
+          <li>buitenlandse btw</li>
+          <li>btw verlegd</li>
+          <li>het 0%-tarief</li>
+          <li>andere regels voor goederen en diensten</li>
         </ul>
         <p>
-          In deze gids leggen we uit hoe je btw berekent voor buitenlandse klanten en wat je op je factuur moet
-          vermelden.
+          In deze gids lees je welke btw je op een factuur naar het buitenland zet en wat je op de factuur vermeldt.
         </p>
         <p>
           Met de gratis{' '}
           <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">
             BTW calculator
           </Link>{' '}
-          van FactuurBaas bereken je eenvoudig bedragen inclusief en exclusief btw.
+          van FactuurBaas kun je bedragen inclusief en exclusief btw berekenen.
         </p>
 
         <GuideToolCta href="/tools/btw-calculator" label="Bereken btw direct →" />
 
-        <h2>Factuur aan een zakelijke klant binnen de EU</h2>
+        <h2>Welke btw op een factuur naar het buitenland?</h2>
         <p>
-          Lever je een dienst aan een ondernemer in een ander EU-land? Dan geldt vaak de regeling <strong>btw verlegd</strong>.
-          Je rekent dan meestal <strong>0% Nederlandse btw</strong>.
+          Er is geen algemene regel dat je bij een buitenlandse klant altijd 0% btw rekent. Kijk eerst naar:
         </p>
-        <p>Voorwaarden:</p>
-        <ul>
-          <li>je klant is een ondernemer</li>
-          <li>je klant heeft een geldig buitenlands btw-nummer</li>
-          <li>je vermeldt de btw-verlegging correct op de factuur</li>
-        </ul>
-        <p>Voorbeeld: je bent een Nederlandse freelance marketeer en werkt voor een bedrijf in Duitsland.</p>
+        <ol>
+          <li>Is je klant een ondernemer of particulier?</li>
+          <li>Zit de klant in Nederland, een ander EU-land of buiten de EU?</li>
+          <li>Lever je een dienst of een goed?</li>
+          <li>Waar is de levering of dienst voor de btw belast?</li>
+        </ol>
+        <p>
+          Voor veel zakelijke diensten aan ondernemers in een ander EU-land geldt bijvoorbeeld{' '}
+          <strong>btw-verlegging</strong>. Bij bepaalde goederenleveringen binnen de EU kan juist het{' '}
+          <strong>0%-tarief</strong> gelden.
+        </p>
+
+        <h2>Factuur aan een bedrijf in de EU</h2>
+        <p>
+          Lever je als Nederlandse ondernemer een gewone dienst aan een ondernemer in een ander EU-land? Dan wordt de
+          btw vaak naar de klant verlegd.
+        </p>
+        <p>
+          Bijvoorbeeld: je bent een Nederlandse freelance marketeer en levert marketingadvies aan een bedrijf in
+          Duitsland.
+        </p>
         <CalculationTable
           rows={[
             ['Marketingadvies', '€1.000'],
             ['Nederlandse btw', '€0'],
-            ['Totaal factuur', '€1.000'],
+            ['Totaal', '€1.000'],
           ]}
         />
         <p>
-          Op de factuur vermeld je bijvoorbeeld: <strong>&quot;Btw verlegd&quot;</strong>. De klant verwerkt de btw
-          vervolgens zelf in zijn eigen land. Meer in{' '}
+          Je vermeldt op de factuur <strong>&quot;btw verlegd&quot;</strong>. Bij een dergelijke intracommunautaire
+          dienst vermeld je ook het btw-identificatienummer van jou en je klant. Controleer het btw-nummer van je klant
+          voordat je de factuur verstuurt.
+        </p>
+        <p>De klant verwerkt de btw vervolgens volgens de regels in zijn eigen land.</p>
+
+        <h3>Btw verlegd is niet hetzelfde als 0% btw</h3>
+        <p>
+          Op de factuur staat in deze situatie niet simpelweg dat je 0% btw rekent. Het gaat om{' '}
+          <strong>btw-verlegging</strong>.
+        </p>
+        <p>Dat onderscheid is belangrijk:</p>
+        <ul>
+          <li>
+            <strong>Btw verlegd:</strong> de btw wordt door de afnemer aangegeven.
+          </li>
+          <li>
+            <strong>0% btw:</strong> je brengt btw in rekening tegen het 0%-tarief, maar het is wel een btw-belaste
+            prestatie.
+          </li>
+          <li>
+            <strong>Vrijgesteld:</strong> voor de prestatie geldt een btw-vrijstelling.
+          </li>
+        </ul>
+        <p>
+          Lees ook:{' '}
           <Link href="/gidsen/wanneer-gebruik-je-0-btw" className="text-warm-orange hover:underline">
-            wanneer gebruik je 0% btw?
+            Wanneer gebruik je 0% btw?
           </Link>
-          .
         </p>
 
-        <h2>Factuur aan een buitenlandse particulier binnen de EU</h2>
-        <p>Bij particuliere klanten binnen de EU kunnen andere regels gelden.</p>
+        <h2>Factuur naar een particulier in de EU</h2>
         <p>
-          Voor veel diensten geldt dat je Nederlandse btw moet rekenen, maar er zijn uitzonderingen — bijvoorbeeld bij
-          digitale diensten, online cursussen, software en bepaalde elektronische diensten. Bij deze diensten kan de btw
-          van het land van de klant gelden.
+          Verkoop je aan een particulier in een ander EU-land? Dan gelden andere regels dan bij een zakelijke klant.
         </p>
         <p>
-          Voorbeeld: je verkoopt een digitale dienst aan een consument in Frankrijk. Dan kan Franse btw van toepassing
-          zijn.
+          Voor veel diensten aan particulieren is Nederlandse btw verschuldigd. Maar er bestaan uitzonderingen,
+          bijvoorbeeld voor bepaalde digitale diensten en andere diensten waarvoor specifieke plaats-van-dienstregels
+          gelden.
+        </p>
+        <p>
+          Bij bepaalde diensten kan daardoor btw van het land van de consument verschuldigd zijn.
+        </p>
+        <p>
+          Verkoop je bijvoorbeeld een digitale dienst aan een consument in Frankrijk, dan moet je dus niet automatisch
+          21% Nederlandse btw rekenen. Controleer eerst waar de dienst voor de btw belast is.
         </p>
 
-        <h2>Factuur buiten de EU</h2>
-        <p>Lever je diensten aan een klant buiten de Europese Unie? Dan hoef je vaak geen Nederlandse btw te rekenen.</p>
-        <p>Voorbeeld: je levert een marketingdienst aan een bedrijf in de Verenigde Staten.</p>
+        <h2>Factuur aan een bedrijf buiten de EU</h2>
+        <p>
+          Lever je een dienst aan een ondernemer buiten de EU, bijvoorbeeld een bedrijf in de Verenigde Staten? Dan is
+          de dienst bij veel gewone B2B-diensten niet in Nederland belast.
+        </p>
+        <p>
+          Of dat daadwerkelijk zo is, hangt af van de soort dienst en de plaats waar de dienst volgens de btw-regels
+          belast is.
+        </p>
+        <p>Voor een gewone zakelijke dienst kan een factuur er bijvoorbeeld zo uitzien:</p>
         <CalculationTable
           rows={[
-            ['Dienstverlening', '€2.000'],
+            ['Marketingadvies', '€2.000'],
             ['Nederlandse btw', '€0'],
             ['Totaal', '€2.000'],
           ]}
         />
-        <p>Ook hierbij gelden specifieke regels afhankelijk van het soort dienst en de situatie.</p>
+        <p>
+          Let op: dit betekent niet automatisch dat je bij iedere buitenlandse klant buiten de EU geen btw hoeft te
+          rekenen. Voor bijzondere diensten kunnen andere regels gelden.
+        </p>
 
-        <h2>Btw bij goederen verkopen aan buitenlandse klanten</h2>
+        <h2>Factuur naar het buitenland zonder btw</h2>
+        <p>Een buitenlandse factuur zonder btw kan dus verschillende redenen hebben.</p>
+
+        <h3>1. Btw verlegd</h3>
+        <p>Bijvoorbeeld bij een gewone B2B-dienst aan een ondernemer in een ander EU-land.</p>
+        <p>
+          Je rekent geen Nederlandse btw en vermeldt <strong>&quot;btw verlegd&quot;</strong>.
+        </p>
+
+        <h3>2. Dienst is buiten Nederland belast</h3>
+        <p>
+          Bij bepaalde diensten aan klanten buiten de EU kan de dienst in het buitenland belast zijn.
+        </p>
+
+        <h3>3. 0%-tarief</h3>
+        <p>
+          Bij bepaalde internationale goederenleveringen en specifieke internationale diensten kan het 0%-tarief
+          gelden. Voor een goederenlevering naar een ondernemer in een ander EU-land gelden bijvoorbeeld voorwaarden
+          voordat je 0% mag toepassen.
+        </p>
+
+        <h3>4. Vrijstelling</h3>
+        <p>
+          Sommige prestaties zijn vrijgesteld van btw. Dat staat los van het feit dat de klant in het buitenland zit.
+        </p>
+        <p>
+          Daarom betekent <strong>&quot;factuur zonder btw&quot; niet automatisch &quot;0% btw&quot;</strong>.
+        </p>
+
+        <h2>Goederen verkopen aan een klant in het buitenland</h2>
         <p>Voor goederen gelden andere regels dan voor diensten.</p>
 
-        <h3>Goederen binnen de EU</h3>
+        <h3>Goederen naar een ondernemer in een ander EU-land</h3>
         <p>
-          Verkoop je goederen aan een ondernemer in een ander EU-land? Dan kan vaak het 0%-tarief of btw-verlegging
-          gelden.
+          Lever je goederen aan een ondernemer in een ander EU-land die aan de voorwaarden voldoet, dan kan het{' '}
+          <strong>0%-tarief</strong> van toepassing zijn.
+        </p>
+        <p>
+          Dit is dus iets anders dan de btw-verlegging die bij veel B2B-diensten wordt gebruikt.
         </p>
 
-        <h3>Export buiten de EU</h3>
+        <h3>Goederen exporteren buiten de EU</h3>
         <p>
-          Bij export naar landen buiten de EU geldt vaak het 0%-tarief als je aan de voorwaarden voldoet. Bewaar altijd
-          bewijs van de levering.
+          Bij export van goederen naar een land buiten de EU kan onder voorwaarden het 0%-tarief gelden.
         </p>
+        <p>Bewaar daarbij de administratie en bewijsstukken waarmee je de export kunt aantonen.</p>
 
         <h2>Wat moet er op een buitenlandse factuur staan?</h2>
-        <p>Een factuur naar een buitenlandse klant bevat meestal:</p>
+        <p>
+          Een buitenlandse factuur bevat in de basis dezelfde belangrijke factuurgegevens als een Nederlandse factuur:
+        </p>
         <ul>
-          <li>jouw bedrijfsgegevens</li>
-          <li>gegevens van de klant</li>
-          <li>factuurdatum en factuurnummer</li>
-          <li>omschrijving van de dienst of goederen</li>
-          <li>bedrag exclusief btw</li>
-          <li>btw-vermelding</li>
-          <li>eventueel btw-nummer van de klant</li>
+          <li>jouw bedrijfsnaam en adres</li>
+          <li>gegevens van je klant</li>
+          <li>factuurdatum</li>
+          <li>factuurnummer</li>
+          <li>omschrijving van de goederen of diensten</li>
+          <li>bedrag</li>
+          <li>btw-bedrag of de juiste btw-vermelding</li>
+          <li>btw-identificatienummer wanneer dat in de situatie vereist is</li>
         </ul>
         <p>
-          Bij btw-verlegging vermeld je bijvoorbeeld <strong>&quot;Btw verlegd&quot;</strong>. Zie ook{' '}
-          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">
-            Btw op je factuur: zo doe je het goed als zzp&apos;er
-          </Link>
-          .
+          Bij een B2B-dienst binnen de EU waarbij de btw wordt verlegd, vermeld je het btw-identificatienummer van jou
+          en je klant en <strong>&quot;btw verlegd&quot;</strong>.
         </p>
 
-        <h2>Buitenlandse btw of Nederlandse btw berekenen?</h2>
+        <h2>Voorbeeld factuur naar Duitsland</h2>
+        <p>
+          Stel: je bent een Nederlandse zzp&apos;er en levert €1.000 aan marketingadvies aan een Duits bedrijf met een
+          geldig btw-identificatienummer.
+        </p>
+        <p>Dan kan de factuur er bijvoorbeeld zo uitzien:</p>
+        <p>
+          <strong>Marketingadvies:</strong> €1.000
+          <br />
+          <strong>Btw:</strong> €0
+          <br />
+          <strong>Totaal:</strong> €1.000
+        </p>
+        <p>
+          <strong>Btw verlegd</strong>
+        </p>
+        <p>Het Duitse bedrijf verwerkt de verschuldigde btw volgens de regels in Duitsland.</p>
+        <p>Controleer vooraf het btw-identificatienummer van je klant.</p>
+
+        <h2>Nederlandse of buitenlandse btw?</h2>
+        <p>Een handige eerste indeling:</p>
         <CalculationTable
           rows={[
-            ['Nederlandse klant', 'Meestal wel'],
-            ['EU-bedrijf met geldig btw-nummer', 'Vaak btw verlegd'],
-            ['EU-particulier', 'Afhankelijk van dienst'],
-            ['Bedrijf buiten EU', 'Vaak geen Nederlandse btw'],
+            ['Nederlandse klant', 'Vaak Nederlandse btw'],
+            ['EU-bedrijf, gewone B2B-dienst', 'Vaak btw verlegd'],
+            ['EU-particulier', 'Afhankelijk van de dienst'],
+            ['Bedrijf buiten EU', 'Afhankelijk van de dienst'],
+            ['Goederen naar EU-bedrijf', 'Vaak 0% onder voorwaarden'],
+            ['Export buiten EU', 'Vaak 0% onder voorwaarden'],
           ]}
         />
         <p>
-          Let op: btw-regels verschillen per type levering. Meer achtergrond in{' '}
-          <Link href="/blogs/buitenlandse-klanten-factureren" className="text-warm-orange hover:underline">
-            Buitenlandse klanten factureren
-          </Link>
+          Dit is een vereenvoudigd overzicht. Bij internationale btw zijn er uitzonderingen en bijzondere regels per
+          type dienst of levering.
+        </p>
+        <p>
+          Wil je zeker weten waar jouw dienst of levering belast is? Gebruik daarvoor het{' '}
+          <a
+            href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/zakendoen_met_het_buitenland/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-warm-orange hover:underline"
+          >
+            hulpmiddel van de Belastingdienst voor zakendoen met het buitenland
+          </a>
           .
         </p>
 
-        <h2>Veelgemaakte fouten bij buitenlandse btw</h2>
-
-        <h3>Btw rekenen terwijl btw verlegd moet worden</h3>
+        <h2>Buitenlandse btw op je factuur</h2>
+        <p>Als je buitenlandse btw moet rekenen, kun je niet zomaar het Nederlandse btw-tarief gebruiken.</p>
+        <p>Je moet dan onder andere kijken naar:</p>
+        <ul>
+          <li>het land waar de btw verschuldigd is</li>
+          <li>het toepasselijke btw-tarief</li>
+          <li>de factuureisen van dat land</li>
+          <li>hoe en waar je de btw moet aangeven</li>
+        </ul>
         <p>
-          Een Nederlandse ondernemer brengt soms toch 21% btw in rekening aan een zakelijke EU-klant. Controleer altijd het
-          btw-nummer van je klant.
+          Bij bepaalde diensten aan EU-particulieren kan bijvoorbeeld btw van het land van de klant verschuldigd zijn.
+          Voor dergelijke situaties kan het Europese eenloketsysteem (OSS) relevant zijn.
         </p>
 
-        <h3>Geen btw-vermelding op de factuur zetten</h3>
-        <p>Bij btw-verlegging moet duidelijk op de factuur staan waarom geen btw wordt berekend.</p>
-
-        <h3>Buitenlandse klant als Nederlandse klant behandelen</h3>
+        <h2>Buitenlandse factuur en je btw-aangifte</h2>
+        <p>Een factuur naar het buitenland kan ook gevolgen hebben voor je Nederlandse btw-aangifte.</p>
         <p>
-          Een klant in België, Duitsland of Frankrijk kan andere btw-regels hebben dan een Nederlandse klant.
+          Bij intracommunautaire diensten aan ondernemers in andere EU-landen moet je de dienst bijvoorbeeld in je
+          btw-aangifte verwerken en kan een <strong>Opgaaf intracommunautaire prestaties (ICP)</strong> nodig zijn.
+        </p>
+        <p>
+          Daarom is alleen &quot;€0 btw op de factuur&quot; niet voldoende. De omzet moet ook op de juiste manier in je
+          administratie en aangifte worden verwerkt.
         </p>
 
-        <h3>Geen administratie bijhouden</h3>
-        <p>Bewaar gegevens zoals btw-nummers, facturen en bewijsstukken. Dit kan belangrijk zijn bij controles.</p>
+        <h2>Veelgemaakte fouten bij een buitenlandse factuur</h2>
+
+        <h3>Automatisch 0% btw gebruiken</h3>
+        <p>Een buitenlandse klant betekent niet automatisch dat je 0% btw mag rekenen.</p>
+
+        <h3>Btw verlegd en 0% door elkaar halen</h3>
+        <p>Btw verlegd en het 0%-tarief zijn verschillende btw-regelingen.</p>
+
+        <h3>Geen btw-nummer controleren</h3>
         <p>
-          Zie ook{' '}
-          <Link href="/gidsen/veelgemaakte-fouten-btw-berekenen" className="text-warm-orange hover:underline">
-            veelgemaakte fouten bij btw berekenen
-          </Link>
-          .
+          Bij een zakelijke EU-klant is het belangrijk om het btw-identificatienummer te controleren.
         </p>
 
-        <h2>Buitenlandse klanten en je btw-aangifte</h2>
+        <h3>Een buitenlandse particulier hetzelfde behandelen als een bedrijf</h3>
+        <p>Voor particulieren gelden vaak andere regels dan voor ondernemers.</p>
+
+        <h3>Alleen naar het land van de klant kijken</h3>
         <p>
-          Als je diensten levert aan ondernemers in andere EU-landen, moet je mogelijk een <strong>ICP-opgave</strong>{' '}
-          doen naast je btw-aangifte. Daarin geef je aan welke EU-ondernemers je hebt gefactureerd.
+          Ook het soort dienst of levering is bepalend. Een adviesdienst, onroerende zaak, evenement, cateringdienst
+          en goederenlevering kunnen verschillende btw-regels hebben.
         </p>
 
-        <h2>Maak eenvoudig een correcte factuur voor buitenlandse klanten</h2>
-        <p>
-          Met FactuurBaas maak je snel een professionele factuur met juiste bedragen, btw-vermelding, duidelijke
-          PDF-layout en alle belangrijke factuurgegevens.
-        </p>
+        <h2>Buitenlandse klant factureren met FactuurBaas</h2>
+        <p>Met FactuurBaas maak je snel een professionele factuur met:</p>
+        <ul>
+          <li>duidelijke factuurgegevens</li>
+          <li>bedragen exclusief en inclusief btw</li>
+          <li>btw-regels</li>
+          <li>een professionele PDF-layout</li>
+          <li>de benodigde klantgegevens</li>
+        </ul>
+        <p>Je kunt de factuur vervolgens als PDF downloaden en zelf naar je klant versturen.</p>
 
         <div className="my-8 text-center not-prose">
           <Button
@@ -3340,14 +3696,49 @@ Totaal                              €1.000,00`}
         <h2>Veelgestelde vragen</h2>
         <h3>Moet ik btw rekenen aan een buitenlandse klant?</h3>
         <p>
-          Dat hangt af van het land van je klant, of het een ondernemer of particulier is en wat je levert.
+          Niet altijd. Het hangt onder andere af van het land van de klant, of de klant ondernemer of particulier is
+          en of je goederen of diensten levert.
         </p>
-        <h3>Wat betekent btw verlegd?</h3>
-        <p>Bij btw verlegd bereken jij geen btw. De klant verwerkt de btw zelf in zijn eigen btw-aangifte.</p>
-        <h3>Kan ik een factuur zonder btw sturen naar een bedrijf in Duitsland?</h3>
-        <p>Vaak wel als het een zakelijke klant is met een geldig btw-nummer.</p>
-        <h3>Welk btw-tarief gebruik ik voor een buitenlandse klant?</h3>
-        <p>Dat kan 0%, Nederlandse btw of buitenlandse btw zijn afhankelijk van de situatie.</p>
+        <h3>Kan ik een factuur zonder btw naar het buitenland sturen?</h3>
+        <p>
+          Dat kan in bepaalde situaties. Bijvoorbeeld bij een B2B-dienst waarbij de btw wordt verlegd of bij een
+          prestatie waarvoor het 0%-tarief geldt. Een factuur zonder btw betekent dus niet automatisch dat je 0% btw
+          toepast.
+        </p>
+        <h3>Kan ik een factuur zonder btw naar een bedrijf in Duitsland sturen?</h3>
+        <p>
+          Bij een gewone B2B-dienst aan een Duits bedrijf kan de btw vaak worden verlegd. Je vermeldt dan &quot;btw
+          verlegd&quot; en de btw-identificatienummers van jou en je klant.
+        </p>
+        <h3>Moet ik btw rekenen aan een buitenlandse particulier?</h3>
+        <p>
+          Dat hangt af van de soort dienst of levering. Bij veel diensten aan particulieren in de EU is Nederlandse btw
+          verschuldigd, maar er zijn uitzonderingen.
+        </p>
+        <h3>Wat betekent btw verlegd bij een buitenlandse factuur?</h3>
+        <p>
+          Bij btw-verlegging berekent de leverancier geen btw op de factuur. De btw wordt door de klant aangegeven en
+          betaald volgens de regels die op de transactie van toepassing zijn.
+        </p>
+        <h3>Is btw verlegd hetzelfde als 0% btw?</h3>
+        <p>
+          Nee. Bij btw verlegd wordt de btw-heffing naar de afnemer verschoven. Het 0%-tarief is een afzonderlijk
+          btw-tarief.
+        </p>
+        <h3>Hoe bereken ik btw voor een buitenlandse klant?</h3>
+        <p>
+          Begin niet alleen met het btw-tarief. Bepaal eerst waar de levering of dienst voor de btw belast is. Daarna
+          bepaal je of Nederlandse btw, buitenlandse btw, 0% of btw-verlegging van toepassing is.
+        </p>
+
+        <div className="my-8 text-center not-prose">
+          <Button
+            asChild
+            className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
+          >
+            <Link href="/create-invoice">Maak gratis je factuur met FactuurBaas →</Link>
+          </Button>
+        </div>
       </>
     ),
   },
@@ -3775,12 +4166,12 @@ factuurdatum.`}
   {
     slug: 'wat-moet-er-op-een-offerte-staan',
     cluster: 'offertes',
-    seoTitle: 'Wat moet er op een offerte staan? Volledige uitleg voor zzp\'ers',
-    title: 'Wat moet er op een offerte staan? Volledige uitleg voor zzp\'ers',
+    seoTitle: 'Wat moet er op een offerte staan? Onderdelen en eisen',
+    title: 'Wat moet er op een offerte staan?',
     excerpt:
-      'Welke gegevens moeten op een offerte staan? Overzicht van alle onderdelen voor een professionele offerte als zzp\'er, met voorbeelden en gratis offerte maker.',
+      'Wat moet er op een offerte staan? Bekijk welke gegevens je opneemt, wat wettelijk verplicht is en welke onderdelen belangrijk zijn voor een duidelijke offerte.',
     keywords:
-      'wat moet er op een offerte staan, offerte gegevens, offerte onderdelen, professionele offerte, offerte zzp, offerte verplichte gegevens, offerte maken',
+      'wat moet er op een offerte staan, offerte onderdelen, offerte gegevens, offerte eisen, offerte checklist, professionele offerte, offerte zzp',
     tool: {
       href: '/tools/offerte-maker',
       label: 'Maak gratis offerte',
@@ -3793,260 +4184,555 @@ factuurdatum.`}
       alt: 'Wat moet er op een offerte staan: ondernemer overhandigt offerte aan klant',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-04',
     relatedSlugs: ['verschil-factuur-offerte', 'factuur-maken-zzp', 'factureren-zonder-account'],
-    relatedGuideSlugs: ['hoe-maak-je-een-offerte', 'offerte-voorbeeld', 'geldigheid-van-een-offerte'],
+    relatedGuideSlugs: [
+      'hoe-maak-je-een-offerte',
+      'offerte-omzetten-naar-factuur',
+      'geldigheid-van-een-offerte',
+    ],
     faq: [
       {
-        question: 'Is een offerte verplicht?',
+        question: 'Wat moet er minimaal op een offerte staan?',
         answer:
-          'Nee, een offerte is meestal niet verplicht. Voor veel opdrachten is het wel verstandig om vooraf afspraken vast te leggen.',
+          'Er is geen algemene wettelijke checklist die voor iedere offerte geldt. Zorg in ieder geval dat duidelijk is wie de offerte uitbrengt, voor wie deze bedoeld is, wat je levert, wat het kost en onder welke voorwaarden.',
       },
       {
-        question: 'Moet een offerte BTW bevatten?',
+        question: 'Welke onderdelen moet een offerte bevatten?',
         answer:
-          'Als je BTW rekent, moet je dit duidelijk vermelden op je offerte. Vermeld het BTW-tarief en het BTW-bedrag apart.',
+          'Een professionele offerte bevat meestal bedrijfs- en klantgegevens, een offertenummer, datum, omschrijving, prijs, btw-informatie, geldigheidsduur, voorwaarden en een manier om akkoord te geven.',
       },
       {
-        question: 'Hoe lang is een offerte geldig?',
-        answer: 'Je bepaalt zelf de geldigheidsduur. Veel ondernemers kiezen voor 14 of 30 dagen.',
+        question: 'Moet een offerte een offertenummer hebben?',
+        answer:
+          'Een offertenummer is vooral belangrijk voor je administratie en communicatie. Het maakt het eenvoudig om naar een specifieke offerte te verwijzen.',
       },
       {
-        question: 'Kan ik een offerte omzetten naar een factuur?',
+        question: 'Moet een offerte btw bevatten?',
         answer:
-          'Ja. Nadat een klant akkoord gaat met de offerte kun je de gegevens gebruiken om een factuur te maken.',
+          'Als je btw rekent, is het verstandig om duidelijk te vermelden of bedragen inclusief of exclusief btw zijn en welk btw-tarief van toepassing is.',
+      },
+      {
+        question: 'Is een offerte altijd vrijblijvend?',
+        answer:
+          'Nee. Of een offerte vrijblijvend of bindend is, hangt af van de inhoud van het aanbod, eventuele voorwaarden en de omstandigheden. Als je wilt dat een offerte vrijblijvend is, leg dat duidelijk vast.',
+      },
+      {
+        question: 'Hoe lang moet een offerte geldig zijn?',
+        answer:
+          'Je kunt zelf een geldigheidsduur bepalen. Veel ondernemers kiezen bijvoorbeeld voor 14 of 30 dagen, afhankelijk van het soort opdracht.',
+      },
+      {
+        question: 'Moet een offerte ondertekend worden?',
+        answer:
+          'Een handtekening is niet in iedere situatie noodzakelijk om een overeenkomst tot stand te laten komen. Zorg vooral voor een duidelijke manier waarop de klant de offerte kan accepteren en leg het akkoord goed vast.',
+      },
+      {
+        question: 'Kan ik een offerte later omzetten naar een factuur?',
+        answer:
+          'Ja. Na akkoord kun je de gegevens en afspraken uit de offerte gebruiken als basis voor de factuur.',
       },
     ],
     content: (
       <>
         <p>
-          Een goede offerte maakt duidelijk wat je gaat leveren, tegen welke prijs en onder welke voorwaarden. Hoewel een
-          offerte in Nederland niet aan dezelfde wettelijke eisen hoeft te voldoen als een factuur, zijn er wel belangrijke
-          onderdelen die je altijd moet opnemen om professioneel over te komen en misverstanden met klanten te voorkomen.
+          Wat moet er op een offerte staan als zzp&apos;er of ondernemer? Een offerte moet vooral duidelijk maken{' '}
+          <strong>wat je gaat leveren, wat het kost en onder welke voorwaarden je de opdracht uitvoert</strong>.
         </p>
         <p>
-          Met de gratis{' '}
-          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            offerte maker
-          </Link>{' '}
-          van FactuurBaas maak je eenvoudig een professionele offerte, vul je de gegevens in en download je deze direct als
-          PDF.
+          Anders dan bij een factuur is er in Nederland geen algemene wettelijke checklist met gegevens die op iedere
+          offerte moeten staan. Toch zijn er verschillende onderdelen die je vrijwel altijd wilt opnemen om afspraken
+          duidelijk vast te leggen en misverstanden te voorkomen.
         </p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
 
-        <h2>Welke gegevens moeten op een offerte staan?</h2>
-        <p>Een professionele offerte bevat meestal de volgende onderdelen:</p>
+        <h2>Welke onderdelen moet een offerte bevatten?</h2>
+        <p>Een goede offerte bevat meestal:</p>
+        <ol>
+          <li>je bedrijfsgegevens</li>
+          <li>de gegevens van je klant</li>
+          <li>een offertenummer</li>
+          <li>de datum</li>
+          <li>een duidelijke omschrijving van de werkzaamheden of producten</li>
+          <li>de prijs en eventuele btw</li>
+          <li>de geldigheidsduur</li>
+          <li>betalings- en andere voorwaarden</li>
+          <li>eventuele algemene voorwaarden</li>
+          <li>een duidelijke manier om akkoord te geven</li>
+        </ol>
+        <p>
+          Niet elk onderdeel is in iedere situatie wettelijk verplicht. Zie de lijst daarom vooral als een praktische
+          checklist voor een professionele offerte.
+        </p>
 
-        <h3>1. Bedrijfsgegevens</h3>
-        <p>Vermeld altijd duidelijk wie de offerte uitbrengt:</p>
-        <ul>
-          <li>bedrijfsnaam</li>
-          <li>naam van de ondernemer</li>
-          <li>adresgegevens</li>
-          <li>e-mailadres en telefoonnummer</li>
-          <li>KvK-nummer (indien van toepassing)</li>
-          <li>btw-nummer (indien van toepassing)</li>
-        </ul>
+        <h2>1. Bedrijfsgegevens</h2>
+        <p>Vermeld duidelijk wie de offerte uitbrengt.</p>
+        <p>Bijvoorbeeld:</p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap">
 {`Studio Jansen
 Jansen Webdesign
 Straatnaam 12
 1234 AB Amsterdam
 KvK: 12345678
-BTW: NL123456789B01`}
+E-mail: info@voorbeeld.nl
+Telefoon: 06-12345678`}
         </pre>
-        <p>Dit zorgt ervoor dat de klant weet met wie hij zaken doet.</p>
+        <p>Je kunt daarnaast bijvoorbeeld je website en btw-nummer vermelden wanneer dat relevant is.</p>
 
-        <h3>2. Gegevens van de klant</h3>
-        <p>Een offerte is gericht aan een specifieke opdrachtgever. Vermeld daarom de gegevens van de klant:</p>
-        <ul>
-          <li>bedrijfsnaam of naam particulier</li>
-          <li>contactpersoon</li>
-          <li>adres</li>
-          <li>e-mailadres</li>
-        </ul>
+        <h2>2. Gegevens van de klant</h2>
+        <p>Maak duidelijk voor wie de offerte bedoeld is.</p>
+        <p>Bij een zakelijke klant kun je bijvoorbeeld vermelden:</p>
         <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap">
 {`Klant BV
 T.a.v. Jan de Vries
 Klantstraat 45
-5678 CD Utrecht`}
+5678 CD Utrecht
+jan@klant.nl`}
         </pre>
+        <p>
+          Bij een particuliere klant vermeld je de naam en contactgegevens die nodig zijn om duidelijk vast te leggen
+          voor wie de offerte bestemd is.
+        </p>
 
-        <h3>3. Offertenummer</h3>
-        <p>Geef iedere offerte een uniek nummer, bijvoorbeeld:</p>
+        <h2>3. Offertenummer</h2>
+        <p>Geef iedere offerte een herkenbaar nummer.</p>
+        <p>Bijvoorbeeld:</p>
         <p>
           <strong>Offertenummer: OFF-2026-001</strong>
         </p>
-        <p>Een duidelijk nummer helpt bij communicatie met de klant, administratie, later terugvinden en omzetten naar een factuur.</p>
-        <p>Gebruik bijvoorbeeld een combinatie van jaar en volgnummer: OFF-2026-001, OFF-2026-002, OFF-2026-003.</p>
+        <p>Een nummer maakt het makkelijker om een offerte terug te vinden en er later naar te verwijzen.</p>
+        <p>Je kunt bijvoorbeeld werken met:</p>
+        <ul>
+          <li>OFF-2026-001</li>
+          <li>OFF-2026-002</li>
+          <li>OFF-2026-003</li>
+        </ul>
+        <p>Gebruik een systeem dat voor jou logisch en overzichtelijk is.</p>
 
-        <h3>4. Datum van de offerte</h3>
-        <p>Vermeld wanneer je de offerte hebt opgesteld, bijvoorbeeld:</p>
+        <h2>4. Datum van de offerte</h2>
+        <p>Vermeld de datum waarop je de offerte hebt opgesteld.</p>
+        <p>Bijvoorbeeld:</p>
         <p>
-          <strong>Offertedatum: 15 juli 2026</strong>
+          <strong>Offertedatum: 4 september 2026</strong>
         </p>
-        <p>De datum is belangrijk omdat deze vaak gekoppeld is aan de geldigheidsduur van de offerte.</p>
+        <p>De datum is ook handig wanneer je een geldigheidsduur aan de offerte koppelt.</p>
 
-        <h3>5. Omschrijving van werkzaamheden of producten</h3>
-        <p>Dit is één van de belangrijkste onderdelen van je offerte. Beschrijf duidelijk wat je levert, welke werkzaamheden je uitvoert en hoeveel tijd of producten het betreft.</p>
+        <h2>5. Omschrijving van de werkzaamheden</h2>
+        <p>Dit is één van de belangrijkste onderdelen van je offerte.</p>
+        <p>Beschrijf zo duidelijk mogelijk wat je gaat leveren.</p>
         <p>
-          Een slechte omschrijving: &quot;Website maken&quot;. Een betere omschrijving: &quot;Ontwerp en ontwikkeling van een
-          bedrijfswebsite inclusief 5 pagina&apos;s, mobiele optimalisatie en basis SEO-instellingen.&quot;
+          <strong>Te algemeen:</strong>
         </p>
-        <p>Hoe specifieker je offerte, hoe kleiner de kans op discussie achteraf.</p>
+        <blockquote>Website maken — €2.500</blockquote>
+        <p>
+          <strong>Duidelijker:</strong>
+        </p>
+        <blockquote>
+          Ontwerp en ontwikkeling van een bedrijfswebsite met 5 pagina&apos;s, responsive ontwerp, contactformulier
+          en basis technische SEO — €2.500
+        </blockquote>
+        <p>
+          Een duidelijke omschrijving helpt om later discussie te voorkomen over wat wel en niet binnen de opdracht
+          valt.
+        </p>
+        <p>Je kunt ook aangeven:</p>
+        <ul>
+          <li>welke werkzaamheden je uitvoert;</li>
+          <li>welke producten je levert;</li>
+          <li>hoeveel uren zijn inbegrepen;</li>
+          <li>welke materialen worden gebruikt;</li>
+          <li>wat buiten de opdracht valt;</li>
+          <li>wanneer de werkzaamheden worden uitgevoerd.</li>
+        </ul>
 
-        <h3>6. Prijs en btw</h3>
-        <p>Vermeld duidelijk de kosten. Een professionele offerte toont prijs per onderdeel, aantal uren of producten, subtotaal, btw-bedrag en totaal inclusief btw.</p>
-        <div className="my-6 overflow-x-auto not-prose">
-          <table className="min-w-full border-collapse border border-slate-200 text-sm">
+        <h2>6. Prijs en btw</h2>
+        <p>Vermeld duidelijk wat de klant betaalt.</p>
+        <p>Bij een offerte met meerdere onderdelen kun je bijvoorbeeld dit gebruiken:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
             <thead>
-              <tr className="bg-slate-100">
-                <th className="border border-slate-200 px-4 py-2 text-left font-medium text-slate-700">Omschrijving</th>
-                <th className="border border-slate-200 px-4 py-2 text-left font-medium text-slate-700">Aantal</th>
-                <th className="border border-slate-200 px-4 py-2 text-right font-medium text-slate-700">Bedrag</th>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Aantal
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-slate-50">
-                <td className="border border-slate-200 px-4 py-2 text-slate-800">Website ontwerp</td>
-                <td className="border border-slate-200 px-4 py-2 text-slate-800">10 uur</td>
-                <td className="border border-slate-200 px-4 py-2 text-right text-slate-800">€750</td>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwerp</td>
+                <td className="px-4 py-3 text-right">10 uur</td>
+                <td className="px-4 py-3 text-right">€750,00</td>
               </tr>
-              <tr className="bg-white">
-                <td className="border border-slate-200 px-4 py-2 text-slate-800">Subtotaal</td>
-                <td className="border border-slate-200 px-4 py-2 text-slate-800" />
-                <td className="border border-slate-200 px-4 py-2 text-right text-slate-800">€750</td>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwikkeling</td>
+                <td className="px-4 py-3 text-right">20 uur</td>
+                <td className="px-4 py-3 text-right">€1.500,00</td>
               </tr>
-              <tr className="bg-slate-50">
-                <td className="border border-slate-200 px-4 py-2 text-slate-800">BTW 21%</td>
-                <td className="border border-slate-200 px-4 py-2 text-slate-800" />
-                <td className="border border-slate-200 px-4 py-2 text-right text-slate-800">€157,50</td>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">Subtotaal</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.250,00</td>
               </tr>
-              <tr className="bg-white">
-                <td className="border border-slate-200 px-4 py-2 font-medium text-slate-800">Totaal</td>
-                <td className="border border-slate-200 px-4 py-2 text-slate-800" />
-                <td className="border border-slate-200 px-4 py-2 text-right font-medium text-slate-800">€907,50</td>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right">€472,50</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal inclusief btw</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.722,50</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p>
-          Gebruik je de KOR of ben je vrijgesteld van btw? Vermeld dit dan duidelijk op je offerte. Meer over btw lees je in
-          onze{' '}
-          <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">
-            btw-gids voor zzp&apos;ers
+          Als je btw rekent, is het verstandig om duidelijk te maken of genoemde prijzen inclusief of exclusief btw
+          zijn.
+        </p>
+        <p>
+          Heb je een bijzondere btw-situatie, bijvoorbeeld de KOR, een vrijstelling of btw verlegd? Zorg dan dat de
+          offerte daarbij aansluit.
+        </p>
+
+        <h2>7. Geldigheidsduur</h2>
+        <p>Geef aan hoe lang de offerte geldig is.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>Deze offerte is geldig tot en met 18 september 2026.</blockquote>
+        <p>Je kunt zelf een passende termijn kiezen, bijvoorbeeld 14 of 30 dagen.</p>
+        <p>
+          Een geldigheidsduur voorkomt dat een klant maanden later nog aanspraak denkt te kunnen maken op dezelfde
+          prijs terwijl omstandigheden inmiddels zijn veranderd.
+        </p>
+
+        <h2>8. Planning en levertijd</h2>
+        <p>Niet voor iedere offerte is een uitgebreide planning nodig, maar bij projecten is het vaak nuttig.</p>
+        <p>Je kunt bijvoorbeeld aangeven:</p>
+        <p>
+          <strong>Start:</strong> binnen 2 weken na akkoord
+          <br />
+          <strong>Verwachte oplevering:</strong> 4 weken na start
+        </p>
+        <p>Bij grotere projecten kun je de belangrijkste fases opnemen.</p>
+        <p>Bijvoorbeeld:</p>
+        <ol>
+          <li>intake</li>
+          <li>ontwerp</li>
+          <li>uitvoering</li>
+          <li>feedback</li>
+          <li>oplevering</li>
+        </ol>
+
+        <h2>9. Betalingsvoorwaarden</h2>
+        <p>Leg vast wanneer en hoe je betaling verwacht.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>Betaling binnen 14 dagen na factuurdatum.</blockquote>
+        <p>Of:</p>
+        <blockquote>50% bij aanvang van de opdracht en 50% na oplevering.</blockquote>
+        <p>
+          Een offerte is normaal gesproken <strong>geen factuur en geen betalingsverzoek</strong>. De daadwerkelijke
+          betaling wordt doorgaans via een factuur in rekening gebracht, tenzij je voor een bepaalde constructie iets
+          anders hebt afgesproken.
+        </p>
+
+        <h2>10. Algemene voorwaarden</h2>
+        <p>
+          Gebruik je algemene voorwaarden? Verwijs daar dan duidelijk naar en zorg ervoor dat je klant deze voorwaarden
+          op de juiste manier kan bekijken voordat de overeenkomst tot stand komt.
+        </p>
+        <p>Je kunt bijvoorbeeld op de offerte vermelden:</p>
+        <blockquote>Op deze offerte zijn onze algemene voorwaarden van toepassing.</blockquote>
+        <p>
+          Zet algemene voorwaarden niet alleen achteraf ergens op je website als de klant ze niet vooraf kan bekijken.
+          Als je je voorwaarden onderdeel wilt maken van de overeenkomst, is het belangrijk dat je ze op de juiste
+          manier ter beschikking stelt.
+        </p>
+
+        <h2>11. Akkoord</h2>
+        <p>Maak duidelijk hoe de klant akkoord kan gaan.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          Door deze offerte te ondertekenen verklaart de klant akkoord te gaan met de omschrijving, prijs en
+          voorwaarden.
+        </blockquote>
+        <p>
+          Je kunt ook werken met een schriftelijk akkoord per e-mail of een andere manier die duidelijk vastlegt dat de
+          klant de offerte accepteert.
+        </p>
+        <p>
+          Een offerte hoeft dus niet per se een fysieke handtekening te hebben om tot een overeenkomst te kunnen
+          leiden.
+        </p>
+
+        <h2>Wat is wettelijk verplicht op een offerte?</h2>
+        <p>Dit is een belangrijk verschil met een factuur.</p>
+        <p>
+          Voor een offerte bestaat <strong>geen algemene wettelijke lijst met verplichte factuurachtige gegevens</strong>{' '}
+          die in iedere situatie hetzelfde is.
+        </p>
+        <p>Daarom is het beter om onderscheid te maken tussen:</p>
+
+        <h3>Wettelijk of juridisch relevant</h3>
+        <p>
+          Afhankelijk van de situatie kunnen bijvoorbeeld afspraken over prijs, prestatie, voorwaarden en andere
+          contractuele informatie belangrijk zijn.
+        </p>
+
+        <h3>Praktisch belangrijk</h3>
+        <p>Voor vrijwel iedere professionele offerte zijn deze gegevens verstandig:</p>
+        <ul>
+          <li>jouw bedrijfsgegevens;</li>
+          <li>klantgegevens;</li>
+          <li>datum;</li>
+          <li>offertenummer;</li>
+          <li>omschrijving;</li>
+          <li>prijs;</li>
+          <li>btw-behandeling;</li>
+          <li>geldigheidsduur;</li>
+          <li>betalingsvoorwaarden;</li>
+          <li>planning indien relevant;</li>
+          <li>algemene voorwaarden indien van toepassing;</li>
+          <li>manier van akkoord.</li>
+        </ul>
+        <p>
+          Een offerte hoeft dus niet automatisch aan dezelfde formele eisen te voldoen als een factuur.
+        </p>
+
+        <h2>Is een offerte altijd vrijblijvend?</h2>
+        <p>Nee, je kunt niet simpelweg zeggen dat iedere offerte altijd vrijblijvend is.</p>
+        <p>
+          Of een offerte bindend is, hangt onder andere af van de inhoud van het aanbod, eventuele voorwaarden en de
+          omstandigheden waarin het is gedaan.
+        </p>
+        <p>Je kunt in je offerte daarom duidelijk opnemen:</p>
+        <blockquote>Deze offerte is geldig tot en met [datum].</blockquote>
+        <p>Of, wanneer je dat daadwerkelijk bedoelt:</p>
+        <blockquote>
+          Deze offerte is vrijblijvend en kan door ons worden ingetrokken zolang deze niet is aanvaard.
+        </blockquote>
+        <p>Gebruik een dergelijke formulering alleen als deze past bij jouw afspraken en voorwaarden.</p>
+        <p>
+          Wil je weten hoe een offerte na akkoord verdergaat? Bekijk dan ook{' '}
+          <Link href="/gidsen/offerte-omzetten-naar-factuur" className="text-warm-orange hover:underline">
+            offerte omzetten naar factuur
           </Link>
           .
         </p>
 
-        <h3>7. Geldigheidsduur van de offerte</h3>
-        <p>Een offerte hoeft niet onbeperkt geldig te blijven. Veel ondernemers gebruiken 14, 30 of 60 dagen.</p>
+        <h2>Hoe ziet een goede offerte eruit?</h2>
         <p>
-          <strong>Voorbeeld: Deze offerte is geldig tot 29 juli 2026.</strong>
+          Een goede offerte is vooral <strong>duidelijk en concreet</strong>.
         </p>
-        <p>
-          Dit voorkomt dat klanten maanden later dezelfde prijs verwachten terwijl kosten inmiddels veranderd kunnen zijn.
-        </p>
-
-        <h3>8. Betalingsvoorwaarden</h3>
-        <p>Maak duidelijk wanneer en hoe de klant moet betalen. Voorbeelden:</p>
+        <p>De klant moet na het lezen snel kunnen beantwoorden:</p>
         <ul>
-          <li>betaling binnen 14 dagen na factuurdatum</li>
-          <li>50% vooraf, 50% na oplevering</li>
-          <li>betaling na akkoord van de offerte</li>
+          <li>Wat krijg ik?</li>
+          <li>Wat kost het?</li>
+          <li>Wanneer wordt het geleverd?</li>
+          <li>Wat is wel en niet inbegrepen?</li>
+          <li>Hoe lang is de prijs geldig?</li>
+          <li>Wanneer moet ik betalen?</li>
+          <li>Hoe geef ik akkoord?</li>
         </ul>
         <p>
-          Let op: een offerte is meestal nog geen betalingsverzoek. Na uitvoering van de opdracht stuur je normaal gesproken
-          een factuur.
+          Een professionele offerte hoeft daarom niet tientallen pagina&apos;s lang te zijn. Voor een eenvoudige
+          opdracht kan één overzichtelijke pagina voldoende zijn.
         </p>
 
-        <h3>9. Algemene voorwaarden</h3>
-        <p>Veel ondernemers voegen algemene voorwaarden toe aan hun offerte. Hierin kun je afspraken vastleggen over:</p>
-        <ul>
-          <li>betaling</li>
-          <li>annulering</li>
-          <li>aansprakelijkheid</li>
-          <li>levering</li>
-          <li>wijzigingen in de opdracht</li>
-        </ul>
+        <h2>Voorbeeld van een offerte</h2>
+        <p>Stel dat je als webdesigner een website voor een klant gaat maken.</p>
+        <h3>OFFERTE</h3>
         <p>
-          Vermeld bijvoorbeeld: &quot;Op deze offerte zijn onze algemene voorwaarden van toepassing.&quot;
+          <strong>Offertenummer:</strong> OFF-2026-014
+          <br />
+          <strong>Datum:</strong> 4 september 2026
+          <br />
+          <strong>Geldig tot:</strong> 18 september 2026
         </p>
-
-        <h3>10. Handtekening of akkoord</h3>
-        <p>Een offerte wordt sterker wanneer de klant deze officieel accepteert. Dit kan bijvoorbeeld via:</p>
-        <ul>
-          <li>digitale ondertekening</li>
-          <li>e-mailbevestiging</li>
-          <li>akkoordknop</li>
-        </ul>
-        <p>Na akkoord ontstaat vaak een overeenkomst tussen jou en de klant.</p>
-
-        <h2>Wat is verplicht op een offerte?</h2>
         <p>
-          In tegenstelling tot een factuur heeft een offerte geen vaste wettelijke lijst met verplichte onderdelen. Toch is
-          het verstandig om minimaal op te nemen:
+          <strong>Van</strong>
+          <br />
+          Studio Jansen
+          <br />
+          Jansen Webdesign
+          <br />
+          Amsterdam
+          <br />
+          KvK 12345678
         </p>
-        <ul>
-          <li>jouw bedrijfsgegevens</li>
-          <li>klantgegevens</li>
-          <li>omschrijving van werkzaamheden</li>
-          <li>prijzen</li>
-          <li>btw-vermelding</li>
-          <li>offertedatum</li>
-          <li>geldigheidsduur</li>
-          <li>voorwaarden</li>
-        </ul>
-        <p>Zo weet iedereen precies wat is afgesproken.</p>
+        <p>
+          <strong>Aan</strong>
+          <br />
+          Klant BV
+          <br />
+          T.a.v. Jan de Vries
+          <br />
+          Utrecht
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[280px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Werkzaamheden
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwerp</td>
+                <td className="px-4 py-3 text-right">€750</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwikkeling</td>
+                <td className="px-4 py-3 text-right">€1.500</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">Subtotaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.250</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€472,50</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.722,50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Planning:</strong> start binnen 2 weken na akkoord.
+          <br />
+          <strong>Betaling:</strong> binnen 14 dagen na factuurdatum.
+          <br />
+          <strong>Geldigheid:</strong> deze offerte is geldig tot 18 september 2026.
+        </p>
+        <p>
+          <strong>Akkoord:</strong>
+          <br />
+          Naam: __________________
+          <br />
+          Datum: __________________
+        </p>
+        <p>
+          Dit is slechts een voorbeeld. De inhoud van een offerte moet aansluiten bij de opdracht en de afspraken met
+          je klant.
+        </p>
+        <p>
+          Bekijk ook ons{' '}
+          <Link href="/offerte-voorbeeld/diensten" className="text-warm-orange hover:underline">
+            offerte voorbeeld voor dienstverlening
+          </Link>
+          .
+        </p>
 
         <h2>Offerte maken als zzp&apos;er</h2>
-        <p>Als zzp&apos;er wil je vooral snel een duidelijke offerte kunnen maken zonder ingewikkelde software.</p>
-        <p>Met FactuurBaas kun je:</p>
+        <p>
+          Als zzp&apos;er kun je een offerte eenvoudig zelf opstellen, bijvoorbeeld in Word of Excel. Een online
+          offerte maker kan handig zijn als je snel een vaste structuur en professionele opmaak wilt gebruiken.
+        </p>
+        <p>Met de gratis offerte maker van FactuurBaas kun je:</p>
         <ul>
-          <li>je bedrijfsgegevens invullen</li>
-          <li>je klant toevoegen</li>
-          <li>werkzaamheden en prijzen invoeren</li>
-          <li>btw automatisch laten berekenen</li>
-          <li>de offerte downloaden als PDF</li>
+          <li>je bedrijfsgegevens invullen;</li>
+          <li>klantgegevens toevoegen;</li>
+          <li>werkzaamheden en prijzen invoeren;</li>
+          <li>btw laten berekenen;</li>
+          <li>je offerte als PDF downloaden.</li>
         </ul>
+
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
+
         <p>
           Lees ook{' '}
           <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
-            hoe maak je een offerte
-          </Link>{' '}
-          voor een stap-voor-stap stappenplan.
-        </p>
-
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis een offerte zonder account →" />
-
-        <h2>Veelgestelde vragen</h2>
-        <h3>Is een offerte verplicht?</h3>
-        <p>
-          Nee, een offerte is meestal niet verplicht. Voor veel opdrachten is het wel verstandig om vooraf afspraken vast te
-          leggen.
-        </p>
-        <h3>Moet een offerte btw bevatten?</h3>
-        <p>
-          Als je btw rekent, moet je dit duidelijk vermelden op je offerte. Vermeld het btw-tarief en het btw-bedrag apart.
-        </p>
-        <h3>Hoe lang is een offerte geldig?</h3>
-        <p>Je bepaalt zelf de geldigheidsduur. Veel ondernemers kiezen voor 14 of 30 dagen.</p>
-        <h3>Kan ik een offerte omzetten naar een factuur?</h3>
-        <p>
-          Ja. Nadat een klant akkoord gaat met de offerte kun je de gegevens gebruiken om een factuur te maken. Lees meer
-          over het{' '}
-          <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
-            verschil tussen offerte en factuur
+            hoe je een offerte maakt als zzp&apos;er
           </Link>
           .
         </p>
 
-        <h2>Maak direct je eigen offerte</h2>
+        <h2>Offerte en factuur: wat is het verschil?</h2>
         <p>
-          Maak een professionele offerte met je eigen gegevens, prijzen en voorwaarden. Download direct als PDF — gratis en
-          zonder account.
+          Een <strong>offerte</strong> is een voorstel voor een opdracht. Je beschrijft wat je wilt leveren en tegen
+          welke prijs en voorwaarden.
         </p>
+        <p>
+          Een <strong>factuur</strong> is een betalingsdocument waarmee je betaling vraagt voor geleverde goederen of
+          diensten, of voor een afgesproken voorschot of termijn.
+        </p>
+        <p>Een offerte kan na akkoord de basis vormen voor de uiteindelijke facturatie.</p>
+
+        <h2>Checklist: wat moet er op een offerte staan?</h2>
+        <p>Gebruik deze checklist voordat je een offerte verstuurt:</p>
+        <ul>
+          <li>Bedrijfsgegevens ingevuld</li>
+          <li>Klantgegevens ingevuld</li>
+          <li>Offertenummer toegevoegd</li>
+          <li>Datum toegevoegd</li>
+          <li>Werkzaamheden duidelijk omschreven</li>
+          <li>Prijzen gecontroleerd</li>
+          <li>Btw-behandeling gecontroleerd</li>
+          <li>Geldigheidsduur vermeld</li>
+          <li>Planning vermeld indien relevant</li>
+          <li>Betalingsvoorwaarden vermeld</li>
+          <li>Algemene voorwaarden toegevoegd of beschikbaar gesteld indien van toepassing</li>
+          <li>Akkoordmethode duidelijk</li>
+        </ul>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Wat moet er minimaal op een offerte staan?</h3>
+        <p>
+          Er is geen algemene wettelijke checklist die voor iedere offerte geldt. Zorg in ieder geval dat duidelijk is
+          wie de offerte uitbrengt, voor wie deze bedoeld is, wat je levert, wat het kost en onder welke voorwaarden.
+        </p>
+        <h3>Welke onderdelen moet een offerte bevatten?</h3>
+        <p>
+          Een professionele offerte bevat meestal bedrijfs- en klantgegevens, een offertenummer, datum, omschrijving,
+          prijs, btw-informatie, geldigheidsduur, voorwaarden en een manier om akkoord te geven.
+        </p>
+        <h3>Moet een offerte een offertenummer hebben?</h3>
+        <p>
+          Een offertenummer is vooral belangrijk voor je administratie en communicatie. Het maakt het eenvoudig om naar
+          een specifieke offerte te verwijzen.
+        </p>
+        <h3>Moet een offerte btw bevatten?</h3>
+        <p>
+          Als je btw rekent, is het verstandig om duidelijk te vermelden of bedragen inclusief of exclusief btw zijn en
+          welk btw-tarief van toepassing is.
+        </p>
+        <h3>Is een offerte altijd vrijblijvend?</h3>
+        <p>
+          Nee. Of een offerte vrijblijvend of bindend is, hangt af van de inhoud van het aanbod, eventuele voorwaarden
+          en de omstandigheden. Als je wilt dat een offerte vrijblijvend is, leg dat duidelijk vast.
+        </p>
+        <h3>Hoe lang moet een offerte geldig zijn?</h3>
+        <p>
+          Je kunt zelf een geldigheidsduur bepalen. Veel ondernemers kiezen bijvoorbeeld voor 14 of 30 dagen,
+          afhankelijk van het soort opdracht.
+        </p>
+        <h3>Moet een offerte ondertekend worden?</h3>
+        <p>
+          Een handtekening is niet in iedere situatie noodzakelijk om een overeenkomst tot stand te laten komen. Zorg
+          vooral voor een duidelijke manier waarop de klant de offerte kan accepteren en leg het akkoord goed vast.
+        </p>
+        <h3>Kan ik een offerte later omzetten naar een factuur?</h3>
+        <p>
+          Ja. Na akkoord kun je de gegevens en afspraken uit de offerte gebruiken als basis voor de factuur.
+        </p>
+
+        <h2>Maak direct een professionele offerte</h2>
+        <p>Maak je eigen offerte met je bedrijfsgegevens, werkzaamheden, prijzen en voorwaarden.</p>
+        <p>Met FactuurBaas maak je gratis een offerte en download je deze direct als PDF.</p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Open gratis offerte maker →" />
       </>
@@ -5011,12 +5697,12 @@ Totaal:     €774,40`}
   {
     slug: 'geldigheid-van-een-offerte',
     cluster: 'offertes',
-    seoTitle: 'Geldigheid van een offerte | Hoelang is een offerte geldig?',
-    title: 'Geldigheid van een offerte: hoelang is een offerte geldig?',
+    seoTitle: 'Hoe lang is een offerte geldig? Geldigheid en rechtsgeldigheid',
+    title: 'Hoe lang is een offerte geldig?',
     excerpt:
-      'Hoelang is een offerte geldig? Lees alles over de geldigheid van een offerte, gangbare termijnen (14, 30 of 60 dagen) en wat te doen als een offerte verloopt.',
+      'Hoe lang is een offerte geldig en wanneer is een offerte bindend? Lees alles over geldigheidsduur, akkoord, vrijblijvendheid en rechtsgeldigheid.',
     keywords:
-      'geldigheid offerte, hoelang is een offerte geldig, offerte geldigheidsduur, offerte geldig tot, offerte verlopen, offerte termijn',
+      'hoe lang is een offerte geldig, geldigheid offerte, offerte bindend, offerte vrijblijvend, offerte rechtsgeldig, offerte geldigheidsduur, offerte verlopen',
     tool: {
       href: '/tools/offerte-maker',
       label: 'Maak gratis offerte',
@@ -5029,257 +5715,455 @@ Totaal:     €774,40`}
       alt: 'Geldigheid van een offerte: ondernemer werkt aan professionele offerte',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-04',
     relatedSlugs: ['verschil-factuur-offerte', 'factuur-maken-zzp'],
-    relatedGuideSlugs: ['wat-moet-er-op-een-offerte-staan', 'wanneer-is-een-offerte-bindend', 'hoe-maak-je-een-offerte'],
+    relatedGuideSlugs: [
+      'wat-moet-er-op-een-offerte-staan',
+      'offerte-omzetten-naar-factuur',
+      'wanneer-is-een-offerte-bindend',
+    ],
     faq: [
       {
-        question: 'Hoelang is een offerte geldig?',
+        question: 'Hoe lang is een offerte geldig?',
         answer:
-          'Dat bepaal je zelf. Veel ondernemers kiezen 14, 30 of 60 dagen. Vermeld de geldigheidsduur altijd duidelijk op je offerte.',
+          'Dat bepaal je in principe zelf. Veel ondernemers kiezen bijvoorbeeld voor 14 of 30 dagen. Zet de termijn of einddatum duidelijk op de offerte.',
       },
       {
-        question: 'Is er een wettelijke termijn voor de geldigheid van een offerte?',
+        question: 'Hoe lang is een offerte wettelijk geldig?',
         answer:
-          'Nee. In Nederland is er geen vaste wettelijke termijn. Je mag zelf bepalen hoelang je offerte geldig blijft, zolang je dit duidelijk vermeldt.',
+          'Er is geen algemene wettelijke termijn die bepaalt dat iedere offerte bijvoorbeeld 14 of 30 dagen geldig is. De inhoud van de offerte en de omstandigheden zijn belangrijk.',
       },
       {
-        question: 'Wat gebeurt er als een offerte is verlopen?',
+        question: 'Is een offerte altijd vrijblijvend?',
         answer:
-          'Na de geldigheidsdatum hoef je de offerte niet meer tegen dezelfde prijs of voorwaarden uit te voeren. Je kunt een nieuwe offerte sturen.',
+          'Nee. Een offerte is niet automatisch vrijblijvend. Als je een aanbod vrijblijvend wilt doen, kun je dat duidelijk in de offerte aangeven.',
       },
       {
-        question: 'Kan ik de geldigheid van een offerte verlengen?',
+        question: 'Is een offerte bindend?',
         answer:
-          'Ja. Je kunt met de klant afspreken om de offerte te verlengen of een nieuwe offerte met een nieuwe datum en prijs te sturen.',
+          'Een offerte kan na aanvaarding leiden tot een bindende overeenkomst. Of en wanneer dat het geval is, hangt af van de inhoud van het aanbod, de acceptatie en de omstandigheden.',
+      },
+      {
+        question: 'Is een offerte rechtsgeldig?',
+        answer:
+          'Een offerte kan juridische gevolgen hebben en na aanvaarding onderdeel worden van een overeenkomst. Zorg daarom dat de werkzaamheden, prijs en voorwaarden duidelijk zijn.',
+      },
+      {
+        question: 'Wat is een goede geldigheidsduur voor een offerte?',
+        answer:
+          '14 of 30 dagen kan voor veel kleinere opdrachten praktisch zijn. Bij grotere projecten of sterk wisselende kosten kan een andere termijn beter passen.',
+      },
+      {
+        question: 'Wat als een klant na de geldigheidsdatum akkoord gaat?',
+        answer:
+          'Je kunt een nieuwe offerte sturen, de geldigheidsduur verlengen of schriftelijk bevestigen dat je de oorspronkelijke offerte alsnog accepteert. Kijk daarbij naar de inhoud van je oorspronkelijke offerte en de omstandigheden.',
+      },
+      {
+        question: 'Hoe lang is een getekende offerte geldig?',
+        answer:
+          'Na acceptatie gaat het niet alleen meer om de oorspronkelijke geldigheidsduur. De geaccepteerde afspraken kunnen onderdeel zijn van een overeenkomst. De precieze juridische gevolgen hangen af van de situatie.',
       },
     ],
     content: (
       <>
         <p>
-          Stuur je een offerte naar een klant, dan is het belangrijk om vast te leggen <strong>hoelang die offerte
-          geldig blijft</strong>. De <strong>geldigheid van een offerte</strong> bepaalt tot wanneer de klant akkoord kan
-          gaan tegen de genoemde prijs en voorwaarden.
+          Hoe lang blijft een offerte geldig? In Nederland bestaat er{' '}
+          <strong>geen algemene wettelijke termijn</strong> van bijvoorbeeld 14 of 30 dagen. Je kunt zelf bepalen
+          hoelang je aanbod geldig is en dit duidelijk op de offerte vermelden.
         </p>
         <p>
-          Zonder geldigheidsduur kan een klant maanden later nog akkoord gaan — terwijl jouw kosten, planning of
-          beschikbaarheid inmiddels veranderd kunnen zijn. Met de gratis{' '}
-          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            offerte maker
-          </Link>{' '}
-          van FactuurBaas voeg je eenvoudig een geldigheidsdatum toe aan je offerte.
-        </p>
-
-        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak offerte met geldigheidsduur →" />
-
-        <h2>Wat is de geldigheid van een offerte?</h2>
-        <p>
-          De geldigheid van een offerte is de periode waarin je voorstel geldig blijft. Binnen die termijn kan de klant
-          akkoord gaan met de prijs, werkzaamheden en voorwaarden die je hebt genoemd.
-        </p>
-        <p>Op een offerte vermeld je meestal:</p>
-        <ul>
-          <li>de offertedatum</li>
-          <li>een geldigheidsduur (bijv. 14 dagen)</li>
-          <li>of een concrete einddatum (bijv. geldig tot 23 juli 2026)</li>
-        </ul>
-        <p>
-          <strong>Voorbeeld:</strong> &quot;Deze offerte is geldig tot 23 juli 2026&quot; of &quot;Deze offerte is 30 dagen
-          geldig na offertedatum.&quot;
-        </p>
-
-        <h2>Hoelang is een offerte geldig?</h2>
-        <p>
-          Er is geen vaste wettelijke termijn in Nederland. Je bepaalt zelf hoelang een offerte geldig blijft. Wel zijn
-          er gangbare termijnen die veel ondernemers gebruiken:
-        </p>
-        <CalculationTable
-          rows={[
-            ['14 dagen', 'Korte termijn, bij snelle beslissingen of kleinere opdrachten'],
-            ['30 dagen', 'Meest gebruikte termijn voor zzp\'ers en mkb'],
-            ['60 dagen', 'Langere termijn bij grotere of complexe projecten'],
-            ['90 dagen', 'Minder gebruikelijk, vooral bij langdurige trajecten'],
-          ]}
-        />
-        <p>
-          Als zzp&apos;er kies je vaak voor <strong>14 of 30 dagen</strong>. Dat geeft de klant voldoende tijd om te
-          beslissen, zonder dat je maandenlang aan een oude prijs vastzit.
-        </p>
-
-        <h2>Waarom is een geldigheidsduur belangrijk?</h2>
-        <p>Een duidelijke geldigheidsduur op je offerte voorkomt problemen achteraf:</p>
-        <ul>
-          <li>
-            <strong>Bescherming tegen prijsstijgingen</strong> — materiaal-, uur- of inkoopkosten kunnen veranderen.
-          </li>
-          <li>
-            <strong>Duidelijke planning</strong> — je weet wanneer je een opdracht wel of niet kunt inplannen.
-          </li>
-          <li>
-            <strong>Minder discussie</strong> — de klant weet tot wanneer het aanbod geldt.
-          </li>
-          <li>
-            <strong>Professionele indruk</strong> — een complete offerte met datum en geldigheid oogt zorgvuldig.
-          </li>
-        </ul>
-        <p>
-          Lees ook{' '}
-          <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
-            wat moet er op een offerte staan
-          </Link>{' '}
-          voor alle verplichte onderdelen.
-        </p>
-
-        <h2>Wat gebeurt er na de geldigheidsdatum?</h2>
-        <p>
-          Is de geldigheidsdatum verstreken, dan is de offerte in principe <strong>verlopen</strong>. Dat betekent:
-        </p>
-        <ul>
-          <li>je bent niet meer gebonden aan de genoemde prijs</li>
-          <li>de klant kan niet automatisch verwachten dat alle voorwaarden hetzelfde blijven</li>
-          <li>je stuurt meestal een nieuwe offerte met actuele prijs en datum</li>
-        </ul>
-        <p>
-          Gaat een klant <em>na</em> de geldigheidsdatum alsnog akkoord? Dan kun je een nieuwe offerte opstellen of
-          schriftelijk bevestigen dat je de opdracht alsnog uitvoert tegen de oude of een aangepaste prijs.
-        </p>
-
-        <h2>Kan een klant akkoord gaan na afloop van de geldigheid?</h2>
-        <p>
-          Technisch kan een klant altijd interesse tonen, maar jij bent niet verplicht om de offerte te honoreren na de
-          vervaldatum. In de praktijk heb je drie opties:
-        </p>
-        <ol>
-          <li>
-            <strong>Nieuwe offerte sturen</strong> — met actuele prijs, datum en geldigheidsduur.
-          </li>
-          <li>
-            <strong>Offerte verlengen</strong> — spreek af dat dezelfde voorwaarden nog een periode gelden.
-          </li>
-          <li>
-            <strong>Aangepaste prijs aanbieden</strong> — als kosten inmiddels zijn gestegen.
-          </li>
-        </ol>
-        <p>
-          Leg verlengingen altijd schriftelijk vast via e-mail of een nieuwe offerte, zodat er geen misverstanden
-          ontstaan.
-        </p>
-
-        <h2>Hoe zet je de geldigheid op je offerte?</h2>
-        <p>Formuleer de geldigheidsduur duidelijk en concreet. Goede voorbeelden:</p>
-        <ul>
-          <li>&quot;Deze offerte is geldig tot 23 juli 2026.&quot;</li>
-          <li>&quot;Deze offerte is 14 dagen geldig na offertedatum.&quot;</li>
-          <li>&quot;Geldigheidsduur: 30 dagen vanaf 15 juli 2026.&quot;</li>
-        </ul>
-        <p>Vermijd vage formuleringen zoals:</p>
-        <ul>
-          <li>&quot;Geldig zolang de voorraad strekt&quot; (tenzij dat echt van toepassing is)</li>
-          <li>helemaal geen geldigheidsduur vermelden</li>
-        </ul>
-        <p>
-          Op onze{' '}
-          <Link href="/offerte-voorbeeld/zzp" className="text-warm-orange hover:underline">
-            ZZP offerte voorbeeld
-          </Link>{' '}
-          pagina zie je hoe een geldigheidsdatum er professioneel uitziet in een complete offerte.
-        </p>
-
-        <h2>Geldigheid per type opdracht</h2>
-        <p>De juiste termijn hangt af van je branche en type werk:</p>
-        <ul>
-          <li>
-            <strong>Kleine zzp-opdrachten</strong> — vaak 14 dagen
-          </li>
-          <li>
-            <strong>Consultancy of dienstverlening</strong> — vaak 30 dagen
-          </li>
-          <li>
-            <strong>Bouw of grotere projecten</strong> — vaak 30 tot 60 dagen
-          </li>
-          <li>
-            <strong>Offertes met materiaalkosten</strong> — kortere termijn (14–30 dagen) vanwege prijsfluctuaties
-          </li>
-        </ul>
-        <p>
-          Meer over professioneel versturen lees je in{' '}
-          <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
-            offerte sturen als zzp&apos;er
-          </Link>
-          .
-        </p>
-
-        <h2>Veelgemaakte fouten bij geldigheid</h2>
-        <ul>
-          <li>
-            <strong>Geen geldigheidsduur vermelden</strong> — de klant weet niet tot wanneer het aanbod geldt.
-          </li>
-          <li>
-            <strong>Te lange termijn</strong> — 6 maanden geldig maakt het lastig om prijzen later aan te passen.
-          </li>
-          <li>
-            <strong>Alleen &quot;30 dagen&quot; zonder startdatum</strong> — vermeld altijd de offertedatum of een
-            concrete einddatum.
-          </li>
-          <li>
-            <strong>Starten met werk vóór akkoord</strong> — wacht op bevestiging binnen de geldigheidsperiode.
-          </li>
-          <li>
-            <strong>Verlopen offerte niet opvolgen</strong> — stuur proactief een nieuwe offerte als de termijn bijna
-            afloopt.
-          </li>
-        </ul>
-
-        <h2>Offerte met geldigheidsduur maken</h2>
-        <p>Met FactuurBaas voeg je eenvoudig een geldigheidsdatum toe aan je offerte:</p>
-        <ol>
-          <li>Open de gratis offerte maker.</li>
-          <li>Vul je bedrijfs- en klantgegevens in.</li>
-          <li>Voeg werkzaamheden en prijzen toe.</li>
-          <li>Stel de geldigheidsdatum in.</li>
-          <li>Download je offerte als PDF en verstuur naar je klant.</li>
-        </ol>
-        <p>
-          Volg het volledige stappenplan in{' '}
-          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
-            hoe maak je een offerte
-          </Link>
-          .
+          Een geldigheidsduur is daarnaast niet hetzelfde als de vraag of een offerte{' '}
+          <strong>bindend of vrijblijvend</strong> is. Ook dat hangt af van de inhoud van de offerte, je voorwaarden en
+          de omstandigheden.
         </p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
 
+        <h2>Hoe lang is een offerte geldig?</h2>
+        <p>Je bepaalt in principe zelf de geldigheidsduur van je offerte.</p>
+        <p>Veel ondernemers kiezen bijvoorbeeld voor:</p>
+        <CalculationTable
+          rows={[
+            ['14 dagen', 'Kleine opdrachten of prijzen die snel kunnen veranderen'],
+            ['30 dagen', 'Veel reguliere diensten en projecten'],
+            ['60 dagen', 'Grotere of complexere opdrachten'],
+            ['90 dagen', 'Langere besluitvorming of grote projecten'],
+          ]}
+        />
+        <p>Er is dus niet één standaardtermijn die voor iedere offerte geldt.</p>
+        <p>Je kunt bijvoorbeeld op je offerte zetten:</p>
+        <blockquote>
+          <strong>Deze offerte is geldig tot en met 18 september 2026.</strong>
+        </blockquote>
+        <p>Of:</p>
+        <blockquote>
+          <strong>Deze offerte is 30 dagen geldig vanaf de offertedatum.</strong>
+        </blockquote>
+        <p>Een concrete einddatum is vaak het duidelijkst.</p>
+
+        <h2>Wat betekent de geldigheidsduur van een offerte?</h2>
+        <p>
+          De geldigheidsduur geeft aan <strong>tot wanneer je aanbod volgens de voorwaarden van de offerte geldt</strong>
+          .
+        </p>
+        <p>
+          Binnen die periode kan je klant de offerte accepteren. Wat er precies gebeurt na afloop van de termijn hangt
+          onder andere af van de inhoud van de offerte en het moment waarop de klant reageert.
+        </p>
+        <p>
+          Een geldigheidsduur is vooral praktisch belangrijk omdat prijzen, beschikbaarheid en omstandigheden kunnen
+          veranderen.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>je uurtarief kan veranderen;</li>
+          <li>materiaalkosten kunnen stijgen;</li>
+          <li>je planning kan vol raken;</li>
+          <li>een tijdelijke prijsafspraak kan verlopen.</li>
+        </ul>
+
+        <h2>Is een offerte altijd vrijblijvend?</h2>
+        <p>
+          <strong>Nee. Een offerte is niet automatisch altijd vrijblijvend.</strong>
+        </p>
+        <p>
+          Of een offerte vrijblijvend of bindend is, hangt af van de inhoud van het aanbod, eventuele voorwaarden en de
+          omstandigheden.
+        </p>
+        <p>Wil je dat een aanbod vrijblijvend is, dan kun je dit duidelijk in je offerte opnemen.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          <strong>
+            Deze offerte is vrijblijvend en kan worden ingetrokken zolang deze niet is aanvaard.
+          </strong>
+        </blockquote>
+        <p>
+          Gebruik zo&apos;n formulering alleen wanneer dit ook daadwerkelijk je bedoeling is en aansluit bij je
+          voorwaarden.
+        </p>
+        <p>
+          Een offerte met een geldigheidsdatum is bovendien niet automatisch een vrijblijvende offerte.{' '}
+          <strong>Geldigheid en vrijblijvendheid zijn twee verschillende onderwerpen.</strong>
+        </p>
+
+        <h2>Is een offerte bindend?</h2>
+        <p>
+          Een offerte kan onder omstandigheden leiden tot een <strong>bindende overeenkomst</strong> wanneer de klant
+          het aanbod aanvaardt.
+        </p>
+        <p>Daarom is het belangrijk dat je offerte duidelijk beschrijft:</p>
+        <ul>
+          <li>wat je levert;</li>
+          <li>tegen welke prijs;</li>
+          <li>wanneer je levert;</li>
+          <li>welke voorwaarden gelden;</li>
+          <li>hoe lang het aanbod geldt;</li>
+          <li>hoe de klant akkoord kan geven.</li>
+        </ul>
+        <p>
+          De precieze juridische gevolgen hangen af van de inhoud van de offerte en de omstandigheden.
+        </p>
+        <p>
+          Wil je voorkomen dat je klant denkt dat bepaalde werkzaamheden onderdeel van de opdracht zijn? Omschrijf dan
+          duidelijk wat <strong>wel en niet inbegrepen</strong> is.
+        </p>
+
+        <h2>Wanneer ontstaat er een overeenkomst?</h2>
+        <p>
+          Een offerte is een aanbod voor een opdracht. Wanneer een klant het aanbod aanvaardt, kan daarmee een
+          overeenkomst tot stand komen.
+        </p>
+        <p>
+          Een fysieke handtekening is niet in alle situaties de enige manier waarop een klant akkoord kan geven. Ook
+          een duidelijke schriftelijke acceptatie, bijvoorbeeld per e-mail, kan relevant zijn.
+        </p>
+        <p>Daarom is het verstandig om het akkoord goed te bewaren.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          “Akkoord met offerte OFF-2026-014. We gaan akkoord met de werkzaamheden en prijs zoals beschreven.”
+        </blockquote>
+        <p>
+          Na akkoord kun je de opdracht uitvoeren volgens de gemaakte afspraken en vervolgens factureren volgens de
+          afgesproken voorwaarden.
+        </p>
+        <p>
+          Lees ook{' '}
+          <Link href="/gidsen/offerte-omzetten-naar-factuur" className="text-warm-orange hover:underline">
+            offerte omzetten naar factuur
+          </Link>
+          .
+        </p>
+
+        <h2>Wat gebeurt er als de geldigheidsduur is verstreken?</h2>
+        <p>
+          Heeft je offerte een einddatum en reageert de klant pas daarna? Dan moet je niet automatisch aannemen dat je
+          nog precies dezelfde prijs en voorwaarden moet aanbieden.
+        </p>
+        <p>Je kunt bijvoorbeeld:</p>
+        <ol>
+          <li>
+            een <strong>nieuwe offerte</strong> sturen;
+          </li>
+          <li>
+            de bestaande offerte <strong>verlengen</strong>;
+          </li>
+          <li>schriftelijk bevestigen dat je de oorspronkelijke voorwaarden alsnog accepteert.</li>
+        </ol>
+        <p>Voorbeeld:</p>
+        <blockquote>
+          De offerte was geldig tot 18 september. De klant reageert op 25 september. Je kunt dan aangeven dat de
+          oorspronkelijke offerte is verlopen en een nieuwe offerte sturen met een actuele prijs en geldigheidsdatum.
+        </blockquote>
+        <p>
+          Wat juridisch precies geldt, kan afhangen van de formulering van de offerte en de omstandigheden.
+        </p>
+
+        <h2>Kan een klant na de geldigheidsdatum nog akkoord gaan?</h2>
+        <p>Een klant kan na de genoemde einddatum natuurlijk nog steeds aangeven dat hij de opdracht wil.</p>
+        <p>
+          Maar dat betekent niet automatisch dat je zonder meer dezelfde prijs en voorwaarden moet hanteren.
+        </p>
+        <p>Je kunt bijvoorbeeld antwoorden:</p>
+        <blockquote>
+          “Bedankt voor je akkoord. De geldigheidsduur van de offerte is inmiddels verstreken. Ik stuur je graag een
+          nieuwe offerte met de actuele prijs en planning.”
+        </blockquote>
+        <p>Wil je de oude offerte toch honoreren? Leg dan duidelijk vast dat je dat doet.</p>
+
+        <h2>Kan een offerte onbeperkt geldig zijn?</h2>
+        <p>
+          Je kunt ervoor kiezen geen einddatum te vermelden, maar voor veel ondernemers is een duidelijke
+          geldigheidsduur praktischer.
+        </p>
+        <p>
+          Zonder duidelijke termijn kan later discussie ontstaan over de vraag of je oorspronkelijke aanbod nog geldt.
+        </p>
+        <p>Vooral bij:</p>
+        <ul>
+          <li>materiaalprijzen;</li>
+          <li>reis- en transportkosten;</li>
+          <li>tijdelijke kortingen;</li>
+          <li>drukke planning;</li>
+          <li>uurtarieven</li>
+        </ul>
+        <p>kan een beperkte geldigheidsduur verstandig zijn.</p>
+
+        <h2>Welke geldigheidsduur kies je?</h2>
+        <p>Er is geen universeel beste termijn.</p>
+
+        <h3>Kleine zzp-opdracht</h3>
+        <p>
+          Bij een eenvoudige opdracht kan <strong>14 dagen</strong> voldoende zijn.
+        </p>
+
+        <h3>Consultancy en dienstverlening</h3>
+        <p>
+          Bij advies- of consultancywerk kan <strong>30 dagen</strong> een praktische termijn zijn.
+        </p>
+
+        <h3>Bouw en projecten</h3>
+        <p>
+          Bij grotere projecten kan een langere termijn nodig zijn, maar als prijzen van materiaal of onderaannemers
+          sterk kunnen veranderen kan een kortere termijn juist verstandig zijn.
+        </p>
+
+        <h3>Offerte met vaste materiaalkosten</h3>
+        <p>
+          Wanneer je prijs sterk afhankelijk is van actuele inkoopprijzen, kan een beperkte geldigheidsduur nuttig zijn.
+        </p>
+        <p>
+          Kies dus vooral een termijn die past bij <strong>je prijs, planning en risico</strong>.
+        </p>
+
+        <h2>Hoe vermeld je de geldigheid op een offerte?</h2>
+        <p>Gebruik een duidelijke formulering.</p>
+
+        <h3>Voorbeeld 1: einddatum</h3>
+        <blockquote>
+          <strong>Deze offerte is geldig tot en met 18 september 2026.</strong>
+        </blockquote>
+
+        <h3>Voorbeeld 2: aantal dagen</h3>
+        <blockquote>
+          <strong>Deze offerte is 30 dagen geldig vanaf de offertedatum.</strong>
+        </blockquote>
+
+        <h3>Voorbeeld 3: geldigheid en vrijblijvendheid</h3>
+        <blockquote>
+          <strong>Deze vrijblijvende offerte is geldig tot en met 18 september 2026.</strong>
+        </blockquote>
+        <p>
+          De derde formulering combineert twee verschillende dingen: de geldigheidsduur en het vrijblijvende karakter.
+        </p>
+        <p>
+          Gebruik &quot;vrijblijvend&quot; alleen wanneer je daadwerkelijk wilt dat het aanbod die betekenis heeft.
+        </p>
+
+        <h2>Wat is de offertedatum?</h2>
+        <p>
+          De <strong>offertedatum</strong> is de datum waarop je de offerte uitbrengt.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Offertedatum: 4 september 2026</strong>
+        </p>
+        <p>
+          Als je met een termijn van 30 dagen werkt, kun je daarnaast een concrete einddatum opnemen. Dat maakt voor jou
+          en je klant direct duidelijk wanneer de termijn afloopt.
+        </p>
+        <p>
+          Bekijk ook{' '}
+          <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
+            wat moet er op een offerte staan?
+          </Link>{' '}
+          voor de overige onderdelen van een professionele offerte.
+        </p>
+
+        <h2>Geldigheid van een getekende offerte</h2>
+        <p>
+          Heeft een klant een offerte ondertekend? Dan is het belangrijk om onderscheid te maken tussen de{' '}
+          <strong>geldigheidsduur van het oorspronkelijke aanbod</strong> en de afspraken die na acceptatie zijn
+          ontstaan.
+        </p>
+        <p>
+          Een getekende of op andere wijze geaccepteerde offerte kan onderdeel zijn van de overeenkomst tussen jou en
+          je klant.
+        </p>
+        <p>
+          De oorspronkelijke geldigheidsdatum betekent dan niet simpelweg dat alle afspraken na die datum automatisch
+          vervallen.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>offerte uitgebracht op 4 september;</li>
+          <li>geldig tot 18 september;</li>
+          <li>klant accepteert op 12 september;</li>
+          <li>werkzaamheden starten op 25 september.</li>
+        </ul>
+        <p>
+          Het feit dat de werkzaamheden na 18 september plaatsvinden, betekent niet automatisch dat de eerder gemaakte
+          afspraken daardoor vervallen.
+        </p>
+
+        <h2>Wat als je een offerte wilt verlengen?</h2>
+        <p>Je kunt een klant laten weten dat je de offerte langer wilt laten gelden.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          “De geldigheidsduur van offerte OFF-2026-014 wordt verlengd tot en met 30 september 2026. De overige
+          voorwaarden blijven ongewijzigd.”
+        </blockquote>
+        <p>Bewaar deze bevestiging bij de offerte.</p>
+        <p>Bij grotere opdrachten kan het praktischer zijn om een nieuwe offerte uit te brengen.</p>
+
+        <h2>Veelgemaakte fouten</h2>
+
+        <h3>1. Geen geldigheidsduur vermelden</h3>
+        <p>Een duidelijke termijn voorkomt onzekerheid over hoe lang je aanbod geldt.</p>
+
+        <h3>2. Een te lange termijn kiezen</h3>
+        <p>Bij sterk wisselende kosten kan een offerte van 90 dagen onhandig zijn.</p>
+
+        <h3>3. Geldigheid en vrijblijvendheid door elkaar halen</h3>
+        <p>
+          Een offerte kan een geldigheidsduur hebben en toch niet automatisch &quot;vrijblijvend&quot; zijn.
+        </p>
+
+        <h3>4. Niet duidelijk zijn over prijswijzigingen</h3>
+        <p>
+          Als prijzen afhankelijk zijn van actuele kosten, leg dan duidelijk vast hoe daarmee wordt omgegaan.
+        </p>
+
+        <h3>5. Akkoord niet bewaren</h3>
+        <p>
+          Bewaar de offerte en de bevestiging van de klant. Zo kun je later terugzien welke afspraken zijn gemaakt.
+        </p>
+
+        <h3>6. Beginnen zonder duidelijke opdrachtbevestiging</h3>
+        <p>
+          Zorg bij grotere opdrachten dat duidelijk is dat de klant akkoord is en welke werkzaamheden precies zijn
+          afgesproken.
+        </p>
+
+        <h2>Geldigheid van een offerte: kort samengevat</h2>
+        <ul>
+          <li>Er is geen algemene wettelijke geldigheidsduur van 14, 30 of 60 dagen.</li>
+          <li>Je kunt zelf een passende termijn bepalen.</li>
+          <li>Een concrete einddatum maakt de offerte duidelijk.</li>
+          <li>
+            <strong>Geldigheid is niet hetzelfde als vrijblijvendheid.</strong>
+          </li>
+          <li>Een offerte kan na acceptatie onderdeel worden van een overeenkomst.</li>
+          <li>
+            Na het verstrijken van de termijn kun je vaak een nieuwe offerte of verlenging gebruiken, maar de
+            juridische situatie hangt af van de omstandigheden.
+          </li>
+          <li>Bewaar het akkoord van je klant.</li>
+        </ul>
+
+        <h2>Offerte maken met een geldigheidsdatum</h2>
+        <p>
+          Met de gratis offerte maker van FactuurBaas kun je een professionele offerte maken en een geldigheidsdatum
+          toevoegen.
+        </p>
+        <ol>
+          <li>Vul je bedrijfsgegevens in.</li>
+          <li>Voeg de gegevens van je klant toe.</li>
+          <li>Voeg je werkzaamheden en prijzen toe.</li>
+          <li>Stel de geldigheidsdatum in.</li>
+          <li>Download de offerte als PDF.</li>
+        </ol>
+
+        <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
+
         <h2>Veelgestelde vragen</h2>
-        <h3>Hoelang is een offerte geldig?</h3>
+        <h3>Hoe lang is een offerte geldig?</h3>
         <p>
-          Dat bepaal je zelf. Veel ondernemers kiezen 14, 30 of 60 dagen. Vermeld de termijn altijd duidelijk op je
-          offerte.
+          Dat bepaal je in principe zelf. Veel ondernemers kiezen bijvoorbeeld voor 14 of 30 dagen. Zet de termijn of
+          einddatum duidelijk op de offerte.
         </p>
-        <h3>Is er een wettelijke termijn?</h3>
+        <h3>Hoe lang is een offerte wettelijk geldig?</h3>
         <p>
-          Nee. Er is geen vaste wettelijke geldigheidsduur voor offertes in Nederland. Je mag zelf bepalen hoelang je
-          offerte geldig blijft.
+          Er is geen algemene wettelijke termijn die bepaalt dat iedere offerte bijvoorbeeld 14 of 30 dagen geldig is.
+          De inhoud van de offerte en de omstandigheden zijn belangrijk.
         </p>
-        <h3>Wat als een klant te laat akkoord geeft?</h3>
+        <h3>Is een offerte altijd vrijblijvend?</h3>
         <p>
-          Na de geldigheidsdatum ben je niet meer gebonden aan de oude prijs. Stuur een nieuwe offerte of spreek een
-          verlenging af.
+          Nee. Een offerte is niet automatisch vrijblijvend. Als je een aanbod vrijblijvend wilt doen, kun je dat
+          duidelijk in de offerte aangeven.
         </p>
-        <h3>Kan ik een offerte onbeperkt geldig maken?</h3>
+        <h3>Is een offerte bindend?</h3>
         <p>
-          Dat kan, maar is meestal niet verstandig. Een termijn beschermt je tegen prijs- en planningswijzigingen.
+          Een offerte kan na aanvaarding leiden tot een bindende overeenkomst. Of en wanneer dat het geval is, hangt af
+          van de inhoud van het aanbod, de acceptatie en de omstandigheden.
         </p>
-        <h3>Moet de geldigheidsduur op elke offerte staan?</h3>
+        <h3>Is een offerte rechtsgeldig?</h3>
         <p>
-          Het is niet wettelijk verplicht, maar wel sterk aan te raden. Het voorkomt misverstanden en maakt je offerte
-          compleet.
+          Een offerte kan juridische gevolgen hebben en na aanvaarding onderdeel worden van een overeenkomst. Zorg
+          daarom dat de werkzaamheden, prijs en voorwaarden duidelijk zijn.
+        </p>
+        <h3>Wat is een goede geldigheidsduur voor een offerte?</h3>
+        <p>
+          14 of 30 dagen kan voor veel kleinere opdrachten praktisch zijn. Bij grotere projecten of sterk wisselende
+          kosten kan een andere termijn beter passen.
+        </p>
+        <h3>Wat als een klant na de geldigheidsdatum akkoord gaat?</h3>
+        <p>
+          Je kunt een nieuwe offerte sturen, de geldigheidsduur verlengen of schriftelijk bevestigen dat je de
+          oorspronkelijke offerte alsnog accepteert. Kijk daarbij naar de inhoud van je oorspronkelijke offerte en de
+          omstandigheden.
+        </p>
+        <h3>Hoe lang is een getekende offerte geldig?</h3>
+        <p>
+          Na acceptatie gaat het niet alleen meer om de oorspronkelijke geldigheidsduur. De geaccepteerde afspraken
+          kunnen onderdeel zijn van een overeenkomst. De precieze juridische gevolgen hangen af van de situatie.
         </p>
 
         <h2>Maak een offerte met duidelijke geldigheid</h2>
         <p>
-          Stel een geldigheidsduur in, download je offerte als PDF en verstuur een professioneel voorstel naar je klant.
-          Gratis en zonder account.
+          Bepaal een passende geldigheidsduur, leg je afspraken duidelijk vast en geef je klant een eenvoudige manier
+          om akkoord te gaan.
         </p>
+        <p>Met FactuurBaas maak je gratis een offerte en download je deze direct als PDF.</p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Open gratis offerte maker →" />
       </>

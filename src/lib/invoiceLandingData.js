@@ -51,7 +51,7 @@ export const popularTemplates = [
   {
     slug: 'consultant',
     title: 'Consultant factuur',
-    description: 'Professioneel voor adviseurs en consultants.',
+    description: 'Gratis template voor advies, projectprijs of uurtarief.',
     href: '/factuur-template/consultant',
     tag: 'Diensten',
   },

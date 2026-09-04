@@ -64,7 +64,8 @@ export const guideHubFaqs = [
   },
   {
     question: 'Wat moet er op een offerte staan?',
-    answer: 'Bedrijfsgegevens, klantgegevens, omschrijving, prijzen, btw, offertenummer, datum en geldigheidsduur.',
+    answer:
+      'Er is geen vaste wettelijke checklist. Neem in ieder geval bedrijfs- en klantgegevens, omschrijving, prijs, btw-info, datum, geldigheid en voorwaarden op.',
     guideSlug: 'wat-moet-er-op-een-offerte-staan',
   },
   {
@@ -74,8 +75,9 @@ export const guideHubFaqs = [
     guideSlug: 'offerte-omzetten-naar-factuur',
   },
   {
-    question: 'Hoelang is een offerte geldig?',
-    answer: 'Dat bepaal je zelf. Veel ondernemers kiezen 14 of 30 dagen en vermelden dit op de offerte.',
+    question: 'Hoe lang is een offerte geldig?',
+    answer:
+      'Er is geen vaste wettelijke termijn. Kies zelf een passende geldigheidsduur (vaak 14 of 30 dagen) en vermeld die duidelijk op de offerte.',
     guideSlug: 'geldigheid-van-een-offerte',
   },
   {

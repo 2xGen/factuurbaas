@@ -148,7 +148,7 @@ export default function DemoInvoicePreview({
             </div>
           ) : (
             <p className={cn('text-[9px] sm:text-[10px] leading-snug', theme.muted)}>
-              Btw vrijgesteld op grond van artikel 25 Wet OB
+              {data.exemptionNote || 'Btw vrijgesteld op grond van artikel 25 Wet OB'}
             </p>
           )}
           <div
