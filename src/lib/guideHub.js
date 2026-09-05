@@ -43,6 +43,13 @@ export const guideHubIntro = {
       'Alle FactuurBaas-tools zijn gratis. Kies een tool, lees hoe het werkt en download wat je nodig hebt.',
     ],
   },
+  boekhouden: {
+    title: "Boekhouden als zzp'er",
+    paragraphs: [
+      "Kun je zelf je boekhouding doen? Wanneer heb je een boekhoudprogramma nodig? En wat is het verschil tussen een factuurtool en boekhoudsoftware? In deze gidsen lees je hoe je als zzp'er je administratie regelt.",
+      'Doe ook de gratis boekhoudprogramma-check om te zien welk type oplossing bij jouw situatie past.',
+    ],
+  },
 };
 
 /** Hub FAQs with short answers; each links to a guide. */
@@ -114,6 +121,30 @@ export const guideHubFaqs = [
       'Voor je administratie: factuur maken, offerte maker, btw calculator, uurtarief calculator, factuurnummer generator, betaaltermijn calculator en KOR-check — allemaal gratis bij FactuurBaas.',
     guideSlug: 'deze-7-tools-zijn-heel-handig-voor-zzpers',
   },
+  {
+    question: "Kan ik als zzp'er zelf mijn boekhouding doen?",
+    answer:
+      'Ja. Je mag je administratie zelf bijhouden. Zorg wel dat je facturen, kosten, banktransacties en btw goed bijhoudt en bewaart.',
+    guideSlug: 'zelf-boekhouden-zzp',
+  },
+  {
+    question: "Wat moet een zzp'er bijhouden in de boekhouding?",
+    answer:
+      'Onder andere inkomsten, verkoopfacturen, zakelijke kosten, banktransacties, btw (indien van toepassing) en de bijbehorende bewijsstukken.',
+    guideSlug: 'boekhouding-zzp',
+  },
+  {
+    question: "Wat kost een boekhoudprogramma voor een zzp'er?",
+    answer:
+      'De prijs varieert van gratis of enkele euro’s per maand tot €20, €30 of €40+ per maand, afhankelijk van pakket en functies.',
+    guideSlug: 'kosten-boekhoudprogramma-zzp',
+  },
+  {
+    question: "Is er een gratis boekhoudprogramma voor zzp'ers?",
+    answer:
+      'Soms wel, maar controleer altijd welke functies echt gratis zijn. Een gratis factuurtool is niet hetzelfde als een volledig boekhoudprogramma.',
+    guideSlug: 'gratis-boekhoudprogramma-zzp',
+  },
 ];
 
 export function getBlogHubIntro(pillarId) {
@@ -142,5 +173,6 @@ export function clusterToPillarId(cluster) {
   if (cluster === 'btw') return 'btw-belasting';
   if (cluster === 'uurtarief') return 'uurtarief';
   if (cluster === 'tools') return 'tools';
+  if (cluster === 'boekhouden') return 'boekhouden';
   return null;
 }

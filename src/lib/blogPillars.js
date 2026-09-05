@@ -86,19 +86,37 @@ export const blogPillars = [
     slugs: ['factuur-templates-zzp', 'factuur-pdf-downloaden'],
   },
   {
+    id: 'boekhouden',
+    title: 'Boekhouden & administratie',
+    description:
+      "Zelf boekhouden als zzp'er, welk boekhoudprogramma past bij jou, en wanneer software of een boekhouder handig is.",
+    slugs: [
+      'wanneer-boekhoudsoftware-nodig-zzp',
+      'beste-boekhoudprogramma-zzp',
+      'gratis-factuurtool-vs-boekhoudprogramma',
+      'boekhoudprogramma-eenmanszaak',
+      'moneybird-vs-jortt',
+      'moneybird-vs-eboekhouden',
+      'jortt-vs-eboekhouden',
+    ],
+    guideSlugs: [
+      'zelf-boekhouden-zzp',
+      'boekhouding-zzp',
+      'kosten-boekhoudprogramma-zzp',
+      'gratis-boekhoudprogramma-zzp',
+    ],
+  },
+  {
     id: 'betaling-beheer',
     title: 'Betaling & beheer',
     description:
-      'Sneller betaald krijgen, factuurbeheer en wanneer je boekhoudsoftware nodig hebt.',
+      'Sneller betaald krijgen, factuurbeheer en je zakelijke rekening als zzp\'er.',
     slugs: [
       'factuur-niet-betaald-wat-mag-je-doen',
       'sneller-betalen-factuur',
       'factuurbeheer-overzicht',
       'zakelijke-rekening-zzp',
       'revolut-business-zzp-voordelen-nadelen',
-      'wanneer-boekhoudsoftware-nodig-zzp',
-      'beste-boekhoudprogramma-zzp',
-      'gratis-factuurtool-vs-boekhoudprogramma',
     ],
   },
 ];

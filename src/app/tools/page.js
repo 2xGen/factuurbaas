@@ -71,6 +71,14 @@ const toolLinks = [
     tag: 'Beschikbaar',
     footerLabel: 'Meer info',
   },
+  {
+    label: 'Boekhoudprogramma-check',
+    href: '/tools/boekhoudprogramma-check',
+    description:
+      "Welk boekhoudprogramma past bij jou? Doe de korte check voor zzp'ers.",
+    tag: 'Beschikbaar',
+    footerLabel: 'Meer info',
+  },
 ];
 
 export default function ToolsHubPage() {

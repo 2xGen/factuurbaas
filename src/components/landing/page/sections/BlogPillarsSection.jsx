@@ -22,6 +22,7 @@ const pillarIcons = {
   uurtarief: Clock,
   tools: FileStack,
   'templates-voorbeelden': FileStack,
+  boekhouden: Wallet,
   'betaling-beheer': Wallet,
 };
 

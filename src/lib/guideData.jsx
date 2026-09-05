@@ -4741,12 +4741,12 @@ jan@klant.nl`}
   {
     slug: 'offerte-voorbeeld',
     cluster: 'offertes',
-    seoTitle: 'Offerte voorbeeld | Professioneel voorbeeld voor ZZP\'ers',
-    title: 'Offerte voorbeeld: zo ziet een professionele offerte eruit (ZZP + bedrijven)',
+    seoTitle: "Offerte voorbeeld: professioneel voorbeeld voor zzp'ers",
+    title: "Offerte voorbeeld voor zzp'ers en bedrijven",
     excerpt:
-      'Bekijk een professioneel offerte voorbeeld voor zzp\'ers en bedrijven. Ontdek wat er op een offerte staat en maak gratis je eigen offerte als PDF met FactuurBaas.',
+      "Bekijk een professioneel offerte voorbeeld voor zzp'ers en bedrijven. Inclusief werkzaamheden, prijzen, btw, geldigheid, voorwaarden en handige voorbeeldteksten.",
     keywords:
-      'offerte voorbeeld, offerte voorbeeld zzp, professionele offerte, offerte template, gratis offerte voorbeeld, offerte pdf, offerte maken',
+      "offerte voorbeeld, offerte voorbeeld zzp, offerte tekst voorbeeld, offerte voorbeeld dienstverlening, offerte voorbeeld bouw, offerte pdf, professionele offerte",
     tool: {
       href: '/tools/offerte-maker',
       label: 'Maak gratis offerte',
@@ -4759,270 +4759,749 @@ jan@klant.nl`}
       alt: 'Offerte voorbeeld: ondernemer biedt professionele offerte aan klant',
     },
     datePublished: '2026-07-15',
-    dateModified: '2026-07-15',
+    dateModified: '2026-09-04',
     relatedSlugs: ['verschil-factuur-offerte', 'factuur-maken-zzp', 'factureren-zonder-account'],
-    relatedGuideSlugs: ['hoe-maak-je-een-offerte', 'wat-moet-er-op-een-offerte-staan', 'offerte-maken-in-pdf'],
+    relatedGuideSlugs: [
+      'hoe-maak-je-een-offerte',
+      'wat-moet-er-op-een-offerte-staan',
+      'geldigheid-van-een-offerte',
+      'offerte-omzetten-naar-factuur',
+    ],
     faq: [
       {
-        question: 'Is een offerte voorbeeld gratis te gebruiken?',
+        question: 'Hoe ziet een goede offerte eruit?',
         answer:
-          'Ja. Een voorbeeld kun je gebruiken als inspiratie voor je eigen offerte. Pas altijd de gegevens, prijzen en voorwaarden aan.',
+          'Een goede offerte is duidelijk opgebouwd en vermeldt onder andere de aanbieder, klant, werkzaamheden, prijs, eventuele btw, geldigheidsduur en relevante voorwaarden.',
       },
       {
-        question: 'Wat is het verschil tussen een offerte voorbeeld en een offerte template?',
+        question: 'Waar kan ik een offerte voorbeeld vinden?',
         answer:
-          'Een offerte voorbeeld is een ingevulde offerte zodat je ziet hoe deze eruitziet. Een offerte template is een lege basis die je zelf invult.',
+          "Op deze pagina staat een compleet voorbeeld voor een zzp'er of bedrijf. Daarnaast kun je voorbeelden bekijken voor onder andere bouw, dienstverlening, freelance werk, marketing, websites en horeca.",
       },
       {
-        question: 'Kan ik een offerte voorbeeld omzetten naar een echte offerte?',
+        question: 'Wat moet er in een offerte staan?',
         answer:
-          'Ja. Met de offerte maker van FactuurBaas kun je eenvoudig je eigen gegevens toevoegen en een professionele PDF maken.',
+          'Dat hangt af van de opdracht. Gebruikelijk zijn bedrijfs- en klantgegevens, een offertenummer en datum, een omschrijving van de werkzaamheden, prijs, btw indien van toepassing, geldigheidsduur en relevante voorwaarden.',
       },
       {
-        question: 'Moet een offerte btw bevatten?',
+        question: 'Hoe schrijf je een professionele offerte?',
         answer:
-          'Als je btw rekent, is het verstandig om het btw-tarief en btw-bedrag duidelijk te vermelden op je offerte.',
+          'Beschrijf duidelijk wat je gaat leveren, hoeveel het kost en wat binnen de opdracht valt. Voeg vervolgens de planning, geldigheidsduur en relevante voorwaarden toe.',
+      },
+      {
+        question: 'Kan ik een offerte voorbeeld kopiëren?',
+        answer:
+          'Je kunt een voorbeeld als inspiratie gebruiken, maar pas altijd de werkzaamheden, prijzen, gegevens en voorwaarden aan jouw eigen opdracht aan.',
+      },
+      {
+        question: 'Wat is het verschil tussen een offerte en een factuur?',
+        answer:
+          'Een offerte is een aanbod voor toekomstige werkzaamheden of levering. Een factuur gebruik je om een verschuldigd bedrag in rekening te brengen.',
+      },
+      {
+        question: 'Kan ik gratis een offerte maken?',
+        answer:
+          'Ja. Met FactuurBaas kun je gratis online een offerte maken, deze als PDF downloaden en vervolgens zelf versturen.',
       },
     ],
     content: (
       <>
         <p>
-          Een goed offerte voorbeeld helpt je om snel te zien hoe een professionele offerte eruitziet. Een offerte bevat
-          meestal je bedrijfsgegevens, de gegevens van je klant, een duidelijke omschrijving van je werkzaamheden, prijzen,
-          btw en voorwaarden.
+          Op zoek naar een <strong>offerte voorbeeld</strong>? Hieronder zie je hoe een professionele offerte voor een
+          zzp&apos;er of bedrijf eruit kan zien. Je vindt een compleet voorbeeld met werkzaamheden, prijzen, btw,
+          geldigheidsduur en voorwaarden.
         </p>
         <p>
-          Met{' '}
-          <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">
-            FactuurBaas
-          </Link>{' '}
-          maak je gratis een professionele offerte. Vul je gegevens in, kies een layout en download direct je offerte als
-          PDF.
+          Een goede offerte maakt duidelijk <strong>wat je gaat leveren, wat het kost en onder welke voorwaarden</strong>
+          .
+        </p>
+        <p>
+          Wil je daarna direct je eigen offerte maken? Met FactuurBaas maak je gratis een offerte, download je deze als
+          PDF en hoef je geen account aan te maken.
         </p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis offerte →" />
 
-        <h2>Voorbeeld van een offerte</h2>
+        <h2>Voorbeeld offerte</h2>
         <p>Een professionele offerte kan er bijvoorbeeld zo uitzien:</p>
-        <pre className="not-prose overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap">
-{`OFFERTE
 
-Offertenummer: OFF-2026-014
-Datum: 9 juli 2026
-Geldig tot: 23 juli 2026
-
-Van
-Studio Jansen
-Jansen Webdesign
-Amsterdam
-KvK: 12345678
-BTW: NL123456789B01
-
-Aan
-Klant BV
-T.a.v. Jan de Vries
-Utrecht
-
-Werkzaamheden
-Omschrijving              Aantal    Bedrag
-Website ontwerp en        8 uur     €640,00
-ontwikkeling
-
-Subtotaal:  €640,00
-BTW 21%:    €134,40
-Totaal:     €774,40`}
-        </pre>
+        <h3>OFFERTE</h3>
         <p>
-          Dit is een eenvoudig voorbeeld van een offerte voor een zzp&apos;er die uren factureert. Bekijk het volledige
-          voorbeeld met layout op onze{' '}
-          <Link href="/offerte-voorbeeld/zzp" className="text-warm-orange hover:underline">
-            ZZP offerte voorbeeld
-          </Link>{' '}
-          pagina.
+          <strong>Offertenummer:</strong> OFF-2026-014
+          <br />
+          <strong>Offertedatum:</strong> 9 juli 2026
+          <br />
+          <strong>Geldig tot:</strong> 23 juli 2026
+        </p>
+        <p>
+          <strong>Van</strong>
+          <br />
+          Studio Jansen
+          <br />
+          Jansen Webdesign
+          <br />
+          Voorbeeldstraat 10
+          <br />
+          1234 AB Amsterdam
+          <br />
+          KvK: 12345678
+          <br />
+          Btw-id: NL123456789B01
+        </p>
+        <p>
+          <strong>Aan</strong>
+          <br />
+          Klant BV
+          <br />
+          T.a.v. Jan de Vries
+          <br />
+          Klantstraat 20
+          <br />
+          3511 AA Utrecht
+        </p>
+
+        <h3>Werkzaamheden</h3>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Aantal
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwerp</td>
+                <td className="px-4 py-3 text-right">8 uur</td>
+                <td className="px-4 py-3 text-right">€640,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website ontwikkeling</td>
+                <td className="px-4 py-3 text-right">12 uur</td>
+                <td className="px-4 py-3 text-right">€960,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Technische oplevering</td>
+                <td className="px-4 py-3 text-right">1</td>
+                <td className="px-4 py-3 text-right">€250,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">Subtotaal</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.850,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">Btw 21%</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€388,50</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.238,50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Planning:</strong> start binnen 2 weken na akkoord.
+          <br />
+          <strong>Geldigheid:</strong> deze offerte is geldig tot 23 juli 2026.
+          <br />
+          <strong>Betaling:</strong> 14 dagen na factuurdatum.
+        </p>
+
+        <h3>Omschrijving</h3>
+        <p>
+          De opdracht bestaat uit het ontwerpen en ontwikkelen van een nieuwe website voor Klant BV. De werkzaamheden
+          omvatten het ontwerp van de belangrijkste pagina&apos;s, technische ontwikkeling en oplevering van de website.
+        </p>
+
+        <h3>Voorwaarden</h3>
+        <p>
+          Meerwerk buiten de hierboven beschreven werkzaamheden wordt alleen uitgevoerd na overleg met en akkoord van de
+          klant.
+        </p>
+        <p>
+          Dit is een voorbeeld. Je eigen offerte moet natuurlijk worden aangepast aan je bedrijf, opdracht, prijzen en
+          afspraken.
         </p>
 
         <h2>Wat staat er in een goed offerte voorbeeld?</h2>
-        <p>Een professionele offerte bevat meestal de volgende onderdelen:</p>
+        <p>Een professionele offerte kan onder andere deze onderdelen bevatten:</p>
 
         <h3>1. Bedrijfsgegevens</h3>
-        <p>Bovenaan vermeld je wie de offerte maakt: bedrijfsnaam, naam ondernemer, adres, e-mail, telefoon, KvK-nummer en btw-nummer (indien van toepassing).</p>
-        <p>Zo weet de klant precies van wie de offerte afkomstig is.</p>
+        <p>Vermeld wie de offerte uitbrengt. Denk aan:</p>
+        <ul>
+          <li>bedrijfsnaam</li>
+          <li>naam van de ondernemer of contactpersoon</li>
+          <li>adres</li>
+          <li>e-mailadres en telefoonnummer</li>
+          <li>KvK-nummer, wanneer van toepassing</li>
+          <li>btw-identificatienummer, wanneer relevant</li>
+        </ul>
 
-        <h3>2. Klantgegevens</h3>
-        <p>Een offerte richt je altijd aan een specifieke klant: bedrijfsnaam, contactpersoon, adres en e-mailadres. Dit voorkomt verwarring wanneer je meerdere offertes verstuurt.</p>
+        <h3>2. Gegevens van de klant</h3>
+        <p>Maak duidelijk voor wie de offerte bedoeld is. Vermeld bijvoorbeeld:</p>
+        <ul>
+          <li>bedrijfsnaam</li>
+          <li>naam van de contactpersoon</li>
+          <li>adres</li>
+          <li>e-mailadres</li>
+        </ul>
+        <p>
+          Een offerte die duidelijk aan één klant is gericht, komt bovendien professioneler over dan een algemeen
+          document.
+        </p>
 
         <h3>3. Offertenummer en datum</h3>
+        <p>Geef je offerte een herkenbaar nummer, bijvoorbeeld:</p>
+        <ul>
+          <li>OFF-2026-001</li>
+          <li>OFF-2026-002</li>
+          <li>OFFERTE-2026-15</li>
+        </ul>
+        <p>Een duidelijke nummering helpt bij je administratie.</p>
+
+        <h3>4. Omschrijving van de werkzaamheden</h3>
+        <p>Beschrijf zo concreet mogelijk wat je gaat leveren.</p>
         <p>
-          Een offerte krijgt vaak een uniek nummer, bijvoorbeeld OFF-2026-001 of OFF-2026-002. Een duidelijk nummer helpt bij
-          je administratie en maakt het later makkelijker om een factuur aan de offerte te koppelen.
+          <strong>Minder duidelijk:</strong>
+        </p>
+        <blockquote>Marketingwerkzaamheden</blockquote>
+        <p>
+          <strong>Duidelijker:</strong>
+        </p>
+        <blockquote>
+          Ontwikkeling van een online marketingstrategie, inclusief zoekwoordenonderzoek, contentplanning en een
+          maandelijkse rapportage gedurende drie maanden.
+        </blockquote>
+        <p>
+          De klant moet na het lezen van je offerte begrijpen wat wel en niet binnen de opdracht valt.
         </p>
 
-        <h3>4. Omschrijving van werkzaamheden</h3>
-        <p>
-          Een goede offerte beschrijft duidelijk wat je gaat leveren. Minder duidelijk: &quot;Marketing werkzaamheden&quot;.
-          Beter: &quot;Ontwikkeling en uitvoering van een social media campagne gedurende 3 maanden inclusief contentplanning,
-          advertenties en maandelijkse rapportage.&quot;
-        </p>
-        <p>Hoe duidelijker je omschrijving, hoe minder discussie achteraf.</p>
+        <h3>5. Prijs</h3>
+        <p>Laat zien hoe je tot het totaalbedrag komt.</p>
+        <p>Bij een uurtarief kun je bijvoorbeeld vermelden:</p>
+        <blockquote>10 uur advies × €75 = €750</blockquote>
+        <p>Bij een projectprijs kun je de verschillende onderdelen van het project opsommen.</p>
+        <p>Bij meerdere werkzaamheden is een tabel vaak het overzichtelijkst.</p>
 
-        <h3>5. Prijs en btw</h3>
-        <p>Een offerte voorbeeld laat duidelijk zien hoe de prijs is opgebouwd.</p>
+        <h3>6. Btw</h3>
+        <p>Als je btw rekent, vermeld je het toepasselijke btw-tarief en btw-bedrag duidelijk.</p>
+        <p>Bijvoorbeeld:</p>
         <CalculationTable
           rows={[
-            ['Werkzaamheden', '€1.000'],
-            ['BTW 21%', '€210'],
+            ['Subtotaal', '€1.000'],
+            ['Btw 21%', '€210'],
             ['Totaal', '€1.210'],
           ]}
         />
-        <p>Vermeld altijd of bedragen inclusief of exclusief btw zijn.</p>
-
-        <h3>6. Geldigheidsduur</h3>
         <p>
-          Een offerte blijft meestal niet onbeperkt geldig. Veel ondernemers gebruiken 14, 30 of 60 dagen. Bijvoorbeeld:
-          &quot;Deze offerte is geldig tot 23 juli 2026.&quot;
+          Niet iedere ondernemer rekent op dezelfde manier btw. Bij bijvoorbeeld de KOR, vrijgestelde prestaties of
+          btw-verlegging kunnen andere regels gelden.
         </p>
 
-        <h3>7. Voorwaarden</h3>
+        <h3>7. Geldigheidsduur</h3>
+        <p>Vermeld hoe lang je offerte geldig is.</p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>Deze offerte is geldig tot 30 september 2026.</blockquote>
+        <p>Een geldigheidsduur voorkomt onduidelijkheid over hoelang je aanbod geldt.</p>
+
+        <h3>8. Planning en levering</h3>
         <p>
-          Veel offertes bevatten afspraken over betaling, levering, wijzigingen, annulering en planning. Bij grotere
-          opdrachten worden vaak algemene voorwaarden toegevoegd.
+          Bij grotere opdrachten is het verstandig om aan te geven wanneer je verwacht te beginnen en wat de planning
+          ongeveer is.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          Na akkoord starten de werkzaamheden binnen twee weken. De verwachte doorlooptijd bedraagt ongeveer vier weken.
+        </blockquote>
+
+        <h3>9. Betaling</h3>
+        <p>Beschrijf de afgesproken betalingsvoorwaarden. Bijvoorbeeld:</p>
+        <blockquote>Betaling binnen 14 dagen na factuurdatum.</blockquote>
+        <p>
+          Bij grotere opdrachten kun je ook afspraken maken over een voorschot of betaling in termijnen.
+        </p>
+
+        <h3>10. Voorwaarden</h3>
+        <p>Afhankelijk van de opdracht kun je afspraken opnemen over bijvoorbeeld:</p>
+        <ul>
+          <li>meerwerk</li>
+          <li>annulering</li>
+          <li>planning</li>
+          <li>wijzigingen</li>
+          <li>levering</li>
+          <li>betaling</li>
+          <li>algemene voorwaarden</li>
+        </ul>
+        <p>Welke voorwaarden je nodig hebt, hangt af van de opdracht.</p>
+
+        <h2>Offerte tekst voorbeeld</h2>
+        <p>
+          Een goede offerte bestaat niet alleen uit cijfers. De tekst moet ook duidelijk beschrijven wat je aanbiedt.
+        </p>
+
+        <h3>Voorbeeld tekst voor dienstverlening</h3>
+        <blockquote>
+          Voor deze opdracht verzorgen wij het ontwerp en de ontwikkeling van een nieuwe website. De werkzaamheden
+          bestaan uit het ontwerpen van de belangrijkste pagina&apos;s, het bouwen van de website en de technische
+          oplevering. Na akkoord starten de werkzaamheden binnen twee weken.
+        </blockquote>
+
+        <h3>Voorbeeld tekst voor een marketingopdracht</h3>
+        <blockquote>
+          Wij ontwikkelen een online marketingplan gericht op het vergroten van de organische zichtbaarheid van uw
+          website. De opdracht bestaat uit zoekwoordenonderzoek, concurrentieanalyse, een contentplanning en
+          maandelijkse rapportage.
+        </blockquote>
+
+        <h3>Voorbeeld tekst voor een bouwopdracht</h3>
+        <blockquote>
+          De werkzaamheden bestaan uit het uitvoeren van schilderwerk aan de buitenzijde van de woning, inclusief
+          voorbereiding, twee lagen schilderwerk en het benodigde materiaal. Eventueel meerwerk wordt vooraf besproken.
+        </blockquote>
+        <p>
+          Het belangrijkste is dat de tekst concreet maakt <strong>wat je wel en niet aanbiedt</strong>.
+        </p>
+
+        <h2>Offerte voorbeeld zzp</h2>
+        <p>Als zzp&apos;er kun je een relatief eenvoudige offerte gebruiken.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>OFFERTE</strong>
         </p>
         <p>
-          Lees de volledige uitleg in{' '}
-          <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
-            wat moet er op een offerte staan
+          <strong>Werkzaamheden:</strong> Advies en begeleiding voor de implementatie van een nieuw CRM-systeem.
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Omschrijving
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Uren
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Tarief
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Bedrag
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Analyse huidige situatie</td>
+                <td className="px-4 py-3 text-right">4</td>
+                <td className="px-4 py-3 text-right">€85</td>
+                <td className="px-4 py-3 text-right">€340</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Advies en plan van aanpak</td>
+                <td className="px-4 py-3 text-right">6</td>
+                <td className="px-4 py-3 text-right">€85</td>
+                <td className="px-4 py-3 text-right">€510</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Begeleiding implementatie</td>
+                <td className="px-4 py-3 text-right">8</td>
+                <td className="px-4 py-3 text-right">€85</td>
+                <td className="px-4 py-3 text-right">€680</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal excl. btw</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.530</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Daaronder vermeld je de btw, het totaal, de geldigheidsduur en eventuele voorwaarden.
+        </p>
+        <p>
+          Dit soort offerte is geschikt voor bijvoorbeeld consultants, marketeers, developers, designers en andere
+          zelfstandige dienstverleners.
+        </p>
+        <p>
+          Bekijk ook het uitgebreide{' '}
+          <Link href="/offerte-voorbeeld/zzp" className="text-warm-orange hover:underline">
+            zzp offerte voorbeeld
           </Link>
           .
         </p>
 
-        <h2>Offerte voorbeeld per situatie</h2>
-        <p>
-          Niet iedere ondernemer gebruikt dezelfde offerte. Een bouwbedrijf heeft bijvoorbeeld andere informatie nodig dan
-          een freelancer. Op{' '}
-          <Link href="/offerte-voorbeeld" className="text-warm-orange hover:underline">
-            offerte voorbeelden
-          </Link>{' '}
-          vind je zes ingevulde voorbeelden per type werk:
-        </p>
-
-        <h3>ZZP offerte voorbeeld</h3>
-        <p>
-          Voor zelfstandigen die diensten leveren: freelance opdrachten, advies, ontwerp, administratie en marketing.{' '}
-          <Link href="/offerte-voorbeeld/zzp" className="text-warm-orange hover:underline">
-            Bekijk ZZP offerte voorbeeld →
-          </Link>
-        </p>
-
-        <h3>Bouw offerte voorbeeld</h3>
-        <p>
-          Voor aannemers, schilders, installatiebedrijven en klusbedrijven — vaak met materialen, uren en meerdere
-          werkzaamheden.{' '}
-          <Link href="/offerte-voorbeeld/bouw" className="text-warm-orange hover:underline">
-            Bekijk bouw offerte voorbeeld →
-          </Link>
-        </p>
-
-        <h3>Freelance offerte voorbeeld</h3>
-        <p>
-          Voor designers, developers, tekstschrijvers en marketeers — vaak gebaseerd op uren of een projectprijs.{' '}
-          <Link href="/offerte-voorbeeld/freelance" className="text-warm-orange hover:underline">
-            Bekijk freelance offerte voorbeeld →
-          </Link>
-        </p>
-
-        <h3>Offerte voorbeeld dienstverlening</h3>
-        <p>
-          Voor consultants, coaches, bureaus en zakelijke dienstverlening.{' '}
-          <Link href="/offerte-voorbeeld/diensten" className="text-warm-orange hover:underline">
-            Bekijk offerte voorbeeld dienstverlening →
-          </Link>
-        </p>
-
-        <h3>Offerte voorbeeld horeca en catering</h3>
-        <p>
-          Voor catering en horeca — bruiloften, events en feesten.{' '}
-          <Link href="/offerte-voorbeeld/horeca" className="text-warm-orange hover:underline">
-            Bekijk offerte voorbeeld horeca en catering →
-          </Link>
-        </p>
-
-        <h3>Marketing offerte voorbeeld</h3>
-        <p>
-          Voor social media, campagnes en online marketing.{' '}
-          <Link href="/offerte-voorbeeld/marketing" className="text-warm-orange hover:underline">
-            Bekijk marketing offerte voorbeeld →
-          </Link>
-        </p>
-
-        <h2>Offerte voorbeeld maken in plaats van kopiëren</h2>
-        <p>
-          Een voorbeeld helpt om de structuur te begrijpen, maar je offerte moet altijd aangepast worden aan jouw eigen
-          bedrijf en opdracht.
-        </p>
-        <p>Met FactuurBaas kun je:</p>
+        <h2>Offerte voorbeeld dienstverlening</h2>
+        <p>Voor zakelijke dienstverlening kan een offerte bijvoorbeeld bestaan uit:</p>
         <ul>
-          <li>je bedrijfsgegevens invullen</li>
-          <li>je klant toevoegen</li>
-          <li>werkzaamheden en prijzen invoeren</li>
-          <li>btw automatisch berekenen</li>
-          <li>de offerte downloaden als PDF</li>
+          <li>analyse of intake</li>
+          <li>advies</li>
+          <li>uitvoering</li>
+          <li>rapportage</li>
+          <li>eventuele nazorg</li>
         </ul>
         <p>
-          Liever een lege basis? Bekijk ook onze{' '}
+          Een consultant kan bijvoorbeeld een vaste projectprijs gebruiken, terwijl een freelancer met een uurtarief
+          werkt.
+        </p>
+        <p>
+          Bekijk ook het uitgebreide{' '}
+          <Link href="/offerte-voorbeeld/diensten" className="text-warm-orange hover:underline">
+            offerte voorbeeld dienstverlening
+          </Link>
+          .
+        </p>
+
+        <h2>Offerte voorbeeld bouw</h2>
+        <p>
+          Een bouwofferte is vaak uitgebreider omdat je verschillende werkzaamheden en materialen moet kunnen
+          specificeren.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <CalculationTable
+          rows={[
+            ['Voorbereiding', '€500'],
+            ['Arbeid', '€2.000'],
+            ['Materialen', '€1.500'],
+            ['Transport', '€250'],
+            ['Subtotaal', '€4.250'],
+          ]}
+        />
+        <p>
+          Bij bouwprojecten is het extra belangrijk om duidelijk te beschrijven welke werkzaamheden en materialen in de
+          prijs zijn inbegrepen.
+        </p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/offerte-voorbeeld/bouw" className="text-warm-orange hover:underline">
+            bouw offerte voorbeeld
+          </Link>
+          .
+        </p>
+
+        <h2>Offerte voorbeeld website</h2>
+        <p>Voor een websiteproject kun je de verschillende onderdelen afzonderlijk vermelden.</p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>ontwerp</li>
+          <li>ontwikkeling</li>
+          <li>mobiele optimalisatie</li>
+          <li>technische configuratie</li>
+          <li>testen</li>
+          <li>oplevering</li>
+        </ul>
+        <p>Zo ziet de klant precies waar de projectprijs uit bestaat.</p>
+        <p>
+          Het complete websitevoorbeeld staat bovenaan deze pagina. Bekijk ook het{' '}
+          <Link href="/offerte-voorbeeld/zzp" className="text-warm-orange hover:underline">
+            zzp offerte voorbeeld
+          </Link>{' '}
+          of het{' '}
+          <Link href="/offerte-voorbeeld/freelance" className="text-warm-orange hover:underline">
+            freelance offerte voorbeeld
+          </Link>{' '}
+          voor vergelijkbare projecten.
+        </p>
+
+        <h2>Offerte voorbeeld freelance</h2>
+        <p>
+          Een freelance offerte kan op uren, een vaste projectprijs of een combinatie daarvan gebaseerd zijn.
+        </p>
+        <p>Bij een uurtarief:</p>
+        <blockquote>20 uur × €75 = €1.500</blockquote>
+        <p>Bij een vaste projectprijs:</p>
+        <blockquote>Ontwerp en ontwikkeling website = €2.500</blockquote>
+        <p>
+          Bij een combinatie kun je bijvoorbeeld een vaste prijs voor het ontwerp en een uurtarief voor aanvullend werk
+          gebruiken.
+        </p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/offerte-voorbeeld/freelance" className="text-warm-orange hover:underline">
+            freelance offerte voorbeeld
+          </Link>
+          .
+        </p>
+
+        <h2>Offerte voorbeeld horeca en catering</h2>
+        <p>
+          Voor catering en horeca zijn onder andere het aantal personen, menu, personeel, materiaal en eventuele
+          transportkosten belangrijk.
+        </p>
+        <p>Een offerte kan bijvoorbeeld bevatten:</p>
+        <CalculationTable
+          rows={[
+            ['Catering 80 personen', '€3.200'],
+            ['Personeel', '€1.200'],
+            ['Materiaal', '€500'],
+            ['Transport', '€250'],
+            ['Subtotaal', '€5.150'],
+          ]}
+        />
+        <p>
+          Welke btw van toepassing is, hangt af van wat je precies levert. Bij een combinatie van eten, diensten en
+          andere onderdelen kunnen verschillende btw-tarieven gelden.
+        </p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/offerte-voorbeeld/horeca" className="text-warm-orange hover:underline">
+            offerte voorbeeld horeca en catering
+          </Link>
+          .
+        </p>
+
+        <h2>Offerte voorbeeld marketing</h2>
+        <p>Een marketingofferte kan bijvoorbeeld bestaan uit:</p>
+        <CalculationTable
+          rows={[
+            ['Strategie en onderzoek', '€500'],
+            ['Contentplanning', '€400'],
+            ['Campagnebeheer', '€750'],
+            ['Rapportage', '€250'],
+            ['Subtotaal', '€1.900'],
+          ]}
+        />
+        <p>Beschrijf vervolgens wat de klant precies voor deze prijs krijgt.</p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/offerte-voorbeeld/marketing" className="text-warm-orange hover:underline">
+            marketing offerte voorbeeld
+          </Link>
+          .
+        </p>
+
+        <h2>Offerte voorbeeld PDF</h2>
+        <p>
+          Veel ondernemers versturen hun offerte uiteindelijk als PDF. Dat is handig omdat de opmaak van het document
+          dan behouden blijft.
+        </p>
+        <p>Een offerte-PDF bevat bijvoorbeeld:</p>
+        <ul>
+          <li>bedrijfsgegevens</li>
+          <li>klantgegevens</li>
+          <li>offerte- en datumgegevens</li>
+          <li>werkzaamheden</li>
+          <li>prijzen</li>
+          <li>btw</li>
+          <li>geldigheidsduur</li>
+          <li>voorwaarden</li>
+        </ul>
+        <p>
+          Je kunt je offerte eerst in Word of een andere tekstverwerker maken en vervolgens als PDF opslaan. Met een
+          online offerteprogramma kun je de offerte ook direct als PDF maken.
+        </p>
+
+        <h2>Offerte voorbeeld versus offerte template</h2>
+        <p>
+          Een <strong>offerte voorbeeld</strong> is meestal een ingevulde offerte waarmee je kunt zien hoe een goede
+          offerte eruitziet.
+        </p>
+        <p>
+          Een <strong>offerte template</strong> is een lege basis die je zelf kunt invullen.
+        </p>
+        <p>Kort gezegd:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col" />
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Offerte voorbeeld
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Offerte template
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium">Ingevuld</td>
+                <td className="px-4 py-3">Ja</td>
+                <td className="px-4 py-3">Nee</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium">Doel</td>
+                <td className="px-4 py-3">Inspiratie</td>
+                <td className="px-4 py-3">Zelf invullen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium">Voorbeeldprijzen</td>
+                <td className="px-4 py-3">Vaak</td>
+                <td className="px-4 py-3">Eventueel</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium">Eigen gegevens toevoegen</td>
+                <td className="px-4 py-3">Als basis</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Wil je een lege basis gebruiken? Bekijk dan de{' '}
           <Link href="/offerte-template" className="text-warm-orange hover:underline">
             offerte templates
-          </Link>
-          . Lees{' '}
-          <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
-            hoe maak je een offerte
           </Link>{' '}
-          voor een stap-voor-stap stappenplan.
+          van FactuurBaas.
         </p>
+
+        <h2>Offerte voorbeeld of offerteaanvraag?</h2>
+        <p>
+          Een <strong>offerteaanvraag</strong> is iets anders dan een offerte.
+        </p>
+        <p>
+          Bij een offerteaanvraag vraagt een potentiële klant aan een ondernemer om een prijsvoorstel.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <blockquote>
+          Wij ontvangen graag een offerte voor het schilderen van onze woning, inclusief materiaal en voorbereiding.
+        </blockquote>
+        <p>
+          De ondernemer reageert vervolgens met een offerte waarin de werkzaamheden, prijs en voorwaarden worden
+          beschreven.
+        </p>
+
+        <h2>Is een offerte vrijblijvend?</h2>
+        <p>
+          Een offerte is niet automatisch altijd vrijblijvend. De precieze gevolgen hangen onder andere af van de inhoud
+          van het aanbod en de afspraken die je maakt.
+        </p>
+        <p>
+          Wil je duidelijkheid geven, vermeld dan bijvoorbeeld expliciet of je aanbod geldig is tot een bepaalde datum
+          en welke voorwaarden van toepassing zijn.
+        </p>
+        <p>
+          Lees meer over{' '}
+          <Link href="/gidsen/geldigheid-van-een-offerte" className="text-warm-orange hover:underline">
+            de geldigheid van een offerte
+          </Link>{' '}
+          en over{' '}
+          <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
+            wat er op een offerte moet staan
+          </Link>
+          .
+        </p>
+
+        <h2>Een professionele offerte maken</h2>
+        <p>Een goed offerte voorbeeld heeft vooral één doel: de klant moet snel kunnen begrijpen:</p>
+        <p>
+          <strong>Wat krijg ik?</strong>
+        </p>
+        <p>
+          <strong>Wat kost het?</strong>
+        </p>
+        <p>
+          <strong>Wanneer wordt het geleverd?</strong>
+        </p>
+        <p>
+          <strong>Welke voorwaarden gelden?</strong>
+        </p>
+        <p>
+          Vermijd daarom vage omschrijvingen en zorg dat de prijsopbouw en werkzaamheden duidelijk zijn.
+        </p>
+        <p>Met FactuurBaas kun je je eigen offerte online maken:</p>
+        <ol>
+          <li>Vul je bedrijfsgegevens in.</li>
+          <li>Voeg de klant toe.</li>
+          <li>Beschrijf de werkzaamheden.</li>
+          <li>Voeg prijzen en btw toe.</li>
+          <li>Kies een layout.</li>
+          <li>Download de offerte als PDF.</li>
+        </ol>
+        <p>Je kunt de offerte vervolgens zelf naar je klant versturen.</p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Maak gratis je eigen offerte →" />
 
         <h2>Veelgestelde vragen</h2>
-        <h3>Is een offerte voorbeeld gratis te gebruiken?</h3>
+        <h3>Hoe ziet een goede offerte eruit?</h3>
         <p>
-          Ja. Een voorbeeld kun je gebruiken als inspiratie voor je eigen offerte. Pas altijd de gegevens, prijzen en
-          voorwaarden aan.
+          Een goede offerte is duidelijk opgebouwd en vermeldt onder andere de aanbieder, klant, werkzaamheden, prijs,
+          eventuele btw, geldigheidsduur en relevante voorwaarden.
         </p>
-        <h3>Wat is het verschil tussen een offerte voorbeeld en een offerte template?</h3>
+        <h3>Waar kan ik een offerte voorbeeld vinden?</h3>
         <p>
-          Een offerte voorbeeld is een ingevulde offerte zodat je ziet hoe deze eruitziet. Een{' '}
-          <Link href="/offerte-template" className="text-warm-orange hover:underline">
-            offerte template
-          </Link>{' '}
-          is een lege basis die je zelf invult.
+          Op deze pagina staat een compleet voorbeeld voor een zzp&apos;er of bedrijf. Daarnaast kun je voorbeelden
+          bekijken voor onder andere bouw, dienstverlening, freelance werk, marketing, websites en horeca.
         </p>
-        <h3>Kan ik een offerte voorbeeld omzetten naar een echte offerte?</h3>
+        <h3>Wat moet er in een offerte staan?</h3>
         <p>
-          Ja. Met de offerte maker kun je eenvoudig je eigen gegevens toevoegen en een professionele PDF maken.
+          Dat hangt af van de opdracht. Gebruikelijk zijn bedrijfs- en klantgegevens, een offertenummer en datum, een
+          omschrijving van de werkzaamheden, prijs, btw indien van toepassing, geldigheidsduur en relevante voorwaarden.
         </p>
-        <h3>Moet een offerte btw bevatten?</h3>
+        <h3>Hoe schrijf je een professionele offerte?</h3>
         <p>
-          Als je btw rekent, is het verstandig om het btw-tarief en btw-bedrag duidelijk te vermelden.
+          Beschrijf duidelijk wat je gaat leveren, hoeveel het kost en wat binnen de opdracht valt. Voeg vervolgens de
+          planning, geldigheidsduur en relevante voorwaarden toe.
+        </p>
+        <h3>Kan ik een offerte voorbeeld kopiëren?</h3>
+        <p>
+          Je kunt een voorbeeld als inspiratie gebruiken, maar pas altijd de werkzaamheden, prijzen, gegevens en
+          voorwaarden aan jouw eigen opdracht aan.
+        </p>
+        <h3>Wat is het verschil tussen een offerte en een factuur?</h3>
+        <p>
+          Een offerte is een aanbod voor toekomstige werkzaamheden of levering. Een factuur gebruik je om een
+          verschuldigd bedrag in rekening te brengen.
+        </p>
+        <h3>Kan ik gratis een offerte maken?</h3>
+        <p>
+          Ja. Met FactuurBaas kun je gratis online een offerte maken, deze als PDF downloaden en vervolgens zelf
+          versturen.
         </p>
 
         <h2>Maak je eigen offerte</h2>
         <p>
-          Bekijk een voorbeeld, pas het aan naar jouw situatie en maak direct een professionele offerte. Gratis, zonder
-          account en direct downloaden als PDF.
+          Gebruik het voorbeeld hierboven als basis, pas de inhoud aan je eigen opdracht aan en maak vervolgens je
+          eigen professionele offerte.
         </p>
 
         <GuideToolCta href="/tools/offerte-maker/maken" label="Open gratis offerte maker →" />
 
-        <p>
-          Meer inspiratie? Bekijk ook{' '}
-          <Link href="/factuur-voorbeeld" className="text-warm-orange hover:underline">
-            factuur voorbeelden
-          </Link>{' '}
-          of lees het{' '}
-          <Link href="/blogs/verschil-factuur-offerte" className="text-warm-orange hover:underline">
-            verschil tussen offerte en factuur
-          </Link>
-          .
-        </p>
+        <p>Bekijk ook:</p>
+        <ul>
+          <li>
+            <Link href="/offerte-template" className="text-warm-orange hover:underline">
+              Offerte template
+            </Link>
+          </li>
+          <li>
+            <Link href="/gidsen/wat-moet-er-op-een-offerte-staan" className="text-warm-orange hover:underline">
+              Wat moet er op een offerte staan?
+            </Link>
+          </li>
+          <li>
+            <Link href="/gidsen/hoe-maak-je-een-offerte" className="text-warm-orange hover:underline">
+              Hoe maak je een offerte?
+            </Link>
+          </li>
+          <li>
+            <Link href="/gidsen/offerte-maken-voor-zzper" className="text-warm-orange hover:underline">
+              Offerte sturen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/gidsen/offerte-omzetten-naar-factuur" className="text-warm-orange hover:underline">
+              Offerte omzetten naar factuur
+            </Link>
+          </li>
+          <li>
+            <Link href="/factuur-voorbeeld" className="text-warm-orange hover:underline">
+              Factuur voorbeelden
+            </Link>
+          </li>
+        </ul>
       </>
     ),
   },
@@ -8652,6 +9131,2590 @@ Totaal:     €774,40`}
           administratie van zzp&apos;ers zo eenvoudig mogelijk te maken.
         </p>
         <GuideToolCta href="/tools" label="Bekijk alle gratis tools voor zzp'ers →" />
+      </>
+    ),
+  },
+  {
+    slug: 'zelf-boekhouden-zzp',
+    cluster: 'boekhouden',
+    seoTitle: "Zelf boekhouden als zzp'er: zo pak je het aan",
+    title: "Zelf boekhouden als zzp'er: zo pak je het aan",
+    excerpt:
+      "Zelf boekhouden als zzp'er? Lees wat je moet bijhouden, hoe je omgaat met facturen, kosten, btw en inkomstenbelasting en wanneer software handig is.",
+    keywords:
+      "zelf boekhouden zzp, zelf boekhouden als zzp'er, boekhouding zelf doen zzp, boekhouding zzp zelf doen, zelf administratie doen zzp",
+    tool: {
+      href: '/tools/boekhoudprogramma-check',
+      label: 'Doe de boekhoudprogramma-check',
+      ctaLabel: 'Doe de boekhoudprogramma-check',
+      relatedTitle: 'Boekhoudprogramma-check',
+      relatedExcerpt:
+        "Ontdek welk type boekhoudprogramma bij jouw zzp-administratie past. Gratis, 8 korte vragen, geen account nodig.",
+    },
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Blogs/Zelf%20boekhouden%20als%20zzp.jpg',
+      alt: "Zelf boekhouden als zzp'er: zo pak je het aan",
+    },
+    datePublished: '2026-09-05',
+    dateModified: '2026-09-05',
+    relatedSlugs: [
+      'wanneer-boekhoudsoftware-nodig-zzp',
+      'gratis-factuurtool-vs-boekhoudprogramma',
+      'beste-boekhoudprogramma-zzp',
+      'zakelijke-rekening-zzp',
+    ],
+    relatedGuideSlugs: ['boekhouding-zzp', 'kosten-boekhoudprogramma-zzp', 'gratis-boekhoudprogramma-zzp'],
+    faq: [
+      {
+        question: "Kan ik als zzp'er zelf mijn boekhouding doen?",
+        answer:
+          'Ja. Je kunt je administratie zelf bijhouden. Je bent niet verplicht om een boekhouder in te schakelen. Wel moet je ervoor zorgen dat je administratie goed wordt bijgehouden en dat je aan je fiscale verplichtingen voldoet.',
+      },
+      {
+        question: "Is boekhouden moeilijk als zzp'er?",
+        answer:
+          'Dat hangt af van je situatie. Een zzp\'er met weinig klanten en weinig kosten heeft meestal een veel eenvoudigere administratie dan iemand met veel transacties en verschillende soorten kosten.',
+      },
+      {
+        question: 'Kan ik mijn boekhouding in Excel doen?',
+        answer:
+          'Dat kan bij een eenvoudige administratie een praktische oplossing zijn. Naarmate je administratie groeit, kan een boekhoudprogramma handiger worden vanwege automatisering en overzicht.',
+      },
+      {
+        question: "Heb ik als zzp'er een boekhoudprogramma nodig?",
+        answer:
+          'Niet per se. Een boekhoudprogramma is een hulpmiddel. Als je administratie klein en overzichtelijk is, kun je deze ook op een andere manier bijhouden.',
+      },
+      {
+        question: 'Is een factuurprogramma hetzelfde als een boekhoudprogramma?',
+        answer:
+          'Nee. Een factuurprogramma richt zich vooral op het maken van verkoopfacturen. Een boekhoudprogramma is bedoeld voor een bredere administratie, zoals inkomsten, kosten, banktransacties en btw.',
+      },
+      {
+        question: 'Wanneer moet ik een boekhouder nemen?',
+        answer:
+          'Dat is afhankelijk van je administratie en hoeveel je zelf wilt doen. Een boekhouder kan interessant zijn als je weinig tijd of kennis hebt, je administratie complex wordt of je professionele controle wilt.',
+      },
+      {
+        question: "Hoeveel kost een boekhouder voor een zzp'er?",
+        answer:
+          'De kosten verschillen sterk per boekhouder en per hoeveelheid werk. Vraag daarom offertes op basis van jouw administratie in plaats van uit te gaan van één vast bedrag.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Kun je als zzp&apos;er zelf je boekhouding doen? <strong>Ja.</strong> Voor veel zzp&apos;ers is het prima
+          mogelijk om de administratie zelf bij te houden.
+        </p>
+        <p>
+          Je hoeft niet automatisch een boekhouder in te huren en je hoeft ook niet direct een uitgebreid
+          boekhoudprogramma te nemen. Wel moet je weten{' '}
+          <strong>wat je moet bijhouden, welke gegevens je moet bewaren en wanneer je aangifte moet doen</strong>.
+        </p>
+        <p>
+          In dit artikel lees je stap voor stap hoe je je boekhouding als zzp&apos;er zelf kunt doen, wat je nodig hebt
+          en wanneer het verstandig kan zijn om software of een boekhouder in te schakelen.
+        </p>
+
+        <h2>Kun je als zzp&apos;er zelf je boekhouding doen?</h2>
+        <p>Ja. Je mag als zzp&apos;er zelf je administratie bijhouden.</p>
+        <p>
+          Dat betekent niet dat je administratie vrijblijvend is. Je moet je zakelijke administratie goed bijhouden en
+          kunnen onderbouwen met bijvoorbeeld facturen, bonnetjes en andere bewijsstukken.
+        </p>
+        <p>
+          Wat je precies moet bijhouden en hoe uitgebreid je administratie is, hangt onder andere af van je
+          onderneming, je inkomsten, je kosten en je btw-situatie.
+        </p>
+        <p>
+          Voor een zzp&apos;er met een paar klanten en weinig kosten kan de administratie relatief eenvoudig zijn. Heb
+          je veel klanten, kosten en transacties, dan wordt het al snel uitgebreider.
+        </p>
+
+        <h2>Wat moet je als zzp&apos;er bijhouden?</h2>
+        <p>Een goede basisadministratie bestaat onder andere uit:</p>
+        <ul>
+          <li>
+            <strong>verkoopfacturen</strong> die je naar klanten stuurt;
+          </li>
+          <li>
+            <strong>inkoopfacturen</strong> en bonnetjes van zakelijke kosten;
+          </li>
+          <li>
+            <strong>banktransacties</strong>;
+          </li>
+          <li>
+            je <strong>btw-administratie</strong>, als je btw in rekening brengt;
+          </li>
+          <li>
+            gegevens die nodig zijn voor je <strong>inkomstenbelasting</strong>;
+          </li>
+          <li>afspraken en andere zakelijke documenten die onderdeel zijn van je administratie.</li>
+        </ul>
+        <p>
+          Het doel is dat je achteraf kunt zien waar je omzet vandaan komt, welke zakelijke kosten je hebt gemaakt en
+          hoe je onderneming ervoor staat.
+        </p>
+
+        <h2>1. Houd je verkoopfacturen bij</h2>
+        <p>Iedere keer dat je een klant factureert, moet je een administratie van die factuur hebben.</p>
+        <p>Bewaar daarom bijvoorbeeld:</p>
+        <ul>
+          <li>factuurnummer;</li>
+          <li>factuurdatum;</li>
+          <li>klantgegevens;</li>
+          <li>omschrijving van je werkzaamheden of producten;</li>
+          <li>bedragen;</li>
+          <li>btw;</li>
+          <li>betaalstatus;</li>
+          <li>en de uiteindelijke betaling.</li>
+        </ul>
+        <p>
+          Gebruik bij voorkeur een consequente nummering voor je facturen. Zo houd je makkelijk overzicht over welke
+          facturen je hebt gemaakt.
+        </p>
+        <p>
+          Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">
+            FactuurBaas
+          </Link>{' '}
+          kun je gratis online een professionele factuur maken. Je hebt daarvoor geen account nodig. Je downloadt de
+          factuur als PDF en verstuurt deze zelf naar je klant.
+        </p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur →" />
+
+        <h2>2. Bewaar je zakelijke kosten</h2>
+        <p>Niet alleen je inkomsten zijn belangrijk. Ook zakelijke uitgaven horen bij je administratie.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>softwareabonnementen;</li>
+          <li>telefoon en internet;</li>
+          <li>kantoorbenodigdheden;</li>
+          <li>zakelijke reiskosten;</li>
+          <li>apparatuur;</li>
+          <li>opleidingen;</li>
+          <li>zakelijke diensten;</li>
+          <li>en andere kosten die met je onderneming te maken hebben.</li>
+        </ul>
+        <p>Bewaar de bijbehorende facturen en bonnetjes.</p>
+        <p>
+          Het is handig om zakelijke en privé-uitgaven zoveel mogelijk gescheiden te houden. Een aparte{' '}
+          <Link href="/blogs/zakelijke-rekening-zzp" className="text-warm-orange hover:underline">
+            zakelijke bankrekening
+          </Link>{' '}
+          kan daarbij helpen, ook als je situatie dat niet per se verplicht stelt.
+        </p>
+
+        <h2>3. Houd je banktransacties bij</h2>
+        <p>Je bankrekening vormt een belangrijk onderdeel van je administratie.</p>
+        <p>Je moet kunnen verklaren welke bedragen je ontvangt en betaalt.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>€1.210 ontvangen van klant → betaling van factuur</strong>
+        </p>
+        <p>of:</p>
+        <p>
+          <strong>€121 betaald aan softwareleverancier → zakelijke kosten</strong>
+        </p>
+        <p>
+          Bij een kleine administratie kun je dit zelf overzichtelijk bijhouden. Heb je iedere maand tientallen of
+          honderden transacties, dan wordt handmatig verwerken steeds minder aantrekkelijk.
+        </p>
+        <p>Daar kan een boekhoudprogramma met een bankkoppeling veel werk besparen.</p>
+
+        <h2>4. Houd je btw bij</h2>
+        <p>Ben je btw-plichtig, dan moet je je btw-administratie bijhouden.</p>
+        <p>
+          Bij je verkoopfacturen registreer je bijvoorbeeld hoeveel btw je aan klanten in rekening hebt gebracht. Bij
+          zakelijke kosten kan er onder voorwaarden sprake zijn van aftrekbare voorbelasting.
+        </p>
+        <p>Je administratie moet uiteindelijk aansluiten op je btw-aangifte.</p>
+        <p>
+          Hoe vaak je btw-aangifte moet doen, hangt af van je situatie. Veel ondernemers doen dit per kwartaal.
+        </p>
+        <p>
+          <strong>Let op:</strong> de regels rondom btw en aftrek kunnen afhankelijk zijn van het soort kosten, de
+          klant, het land en je situatie. Controleer bij twijfel de actuele informatie van de Belastingdienst of vraag
+          advies aan een deskundige.
+        </p>
+
+        <h2>5. Houd rekening met je inkomstenbelasting</h2>
+        <p>
+          Naast je btw-administratie krijg je als zzp&apos;er te maken met de aangifte inkomstenbelasting.
+        </p>
+        <p>
+          Daarbij zijn niet alleen je facturen belangrijk. Ook je zakelijke kosten en andere gegevens uit je
+          administratie kunnen van belang zijn.
+        </p>
+        <p>
+          Een eenvoudige administratie waarin je omzet en kosten goed zijn bijgehouden, maakt het aan het einde van het
+          jaar een stuk makkelijker om je aangifte voor te bereiden.
+        </p>
+        <p>
+          Een boekhouder kan je hierbij helpen als je niet zeker weet welke gegevens voor jouw situatie van toepassing
+          zijn.
+        </p>
+
+        <h2>6. Bewaar je administratie goed</h2>
+        <p>Je administratie bestaat uit meer dan alleen je boekhoudprogramma.</p>
+        <p>Denk ook aan:</p>
+        <ul>
+          <li>facturen;</li>
+          <li>bonnetjes;</li>
+          <li>bankgegevens;</li>
+          <li>contracten;</li>
+          <li>urenregistratie als die relevant is;</li>
+          <li>zakelijke correspondentie;</li>
+          <li>en andere documenten die bij je onderneming horen.</li>
+        </ul>
+        <p>Bewaar je administratie op een manier waarop je gegevens later makkelijk kunt terugvinden.</p>
+        <p>
+          De Belastingdienst hanteert bewaartermijnen voor administratieve gegevens. Voor veel basisgegevens geldt een
+          bewaartermijn van zeven jaar, maar voor bepaalde gegevens kunnen andere regels gelden.
+        </p>
+
+        <h2>Hoe doe je zelf je boekhouding?</h2>
+        <p>Je kunt je administratie op verschillende manieren organiseren.</p>
+
+        <h3>Optie 1: Excel of spreadsheet</h3>
+        <p>Bij een kleine onderneming kun je inkomsten en kosten bijvoorbeeld in een spreadsheet bijhouden.</p>
+        <p>
+          <strong>Voordelen:</strong>
+        </p>
+        <ul>
+          <li>goedkoop;</li>
+          <li>flexibel;</li>
+          <li>je bepaalt zelf de indeling;</li>
+          <li>geschikt voor een eenvoudige administratie.</li>
+        </ul>
+        <p>
+          <strong>Nadelen:</strong>
+        </p>
+        <ul>
+          <li>veel moet je zelf invoeren;</li>
+          <li>meer kans op handmatige fouten;</li>
+          <li>minder automatisering;</li>
+          <li>btw en rapportages moet je zelf goed organiseren;</li>
+          <li>het kan snel onoverzichtelijk worden als je onderneming groeit.</li>
+        </ul>
+        <p>
+          Excel kan dus prima werken voor een eenvoudige administratie, maar is niet automatisch de beste oplossing
+          zodra je veel transacties krijgt.
+        </p>
+
+        <h3>Optie 2: Factuurtool + eigen administratie</h3>
+        <p>
+          Je kunt je facturen met een eenvoudige factuurtool maken en je overige administratie zelf bijhouden.
+        </p>
+        <p>
+          Dit kan interessant zijn als je vooral professionele facturen nodig hebt en verder weinig administratie hebt.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>FactuurBaas → verkoopfacturen</strong>
+        </p>
+        <p>
+          <strong>Excel/eigen administratie → inkomsten en kosten</strong>
+        </p>
+        <p>Dit kan voor een startende zzp&apos;er een eenvoudige manier zijn om te beginnen.</p>
+
+        <h3>Optie 3: Boekhoudprogramma</h3>
+        <p>Een boekhoudprogramma brengt meer van je administratie bij elkaar.</p>
+        <p>Afhankelijk van het programma kun je bijvoorbeeld werken met:</p>
+        <ul>
+          <li>verkoopfacturen;</li>
+          <li>inkoopfacturen;</li>
+          <li>kosten;</li>
+          <li>banktransacties;</li>
+          <li>btw;</li>
+          <li>financiële overzichten;</li>
+          <li>en automatische verwerking.</li>
+        </ul>
+        <p>Het voordeel is vooral dat je minder handmatig hoeft te doen.</p>
+        <p>Wil je weten of je voor jouw situatie eigenlijk een boekhoudprogramma nodig hebt?</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de boekhoudprogramma-check →" />
+
+        <h2>Wat is de beste manier om zelf te boekhouden?</h2>
+        <p>Er is geen methode die voor iedere zzp&apos;er het beste is.</p>
+        <p>Een eenvoudige manier kan bijvoorbeeld zijn:</p>
+        <p>
+          <strong>
+            Facturen maken → facturen bewaren → inkomsten en kosten bijhouden → btw bijhouden → administratie
+            controleren → aangiftes doen
+          </strong>
+        </p>
+        <p>Het belangrijkste is dat je administratie consequent wordt bijgehouden.</p>
+        <p>
+          Wacht niet tot het einde van het jaar om alles bij elkaar te zoeken. Een paar minuten of een uurtje
+          administratie per week of maand kan veel werk achteraf voorkomen.
+        </p>
+
+        <h2>Een eenvoudige maandelijkse routine</h2>
+        <p>Een praktische routine kan er bijvoorbeeld zo uitzien:</p>
+
+        <h3>Iedere keer dat je factureert</h3>
+        <p>Maak de factuur en bewaar een kopie.</p>
+
+        <h3>Iedere keer dat je iets zakelijks koopt</h3>
+        <p>Bewaar de factuur of bon en noteer de kosten in je administratie.</p>
+
+        <h3>Een keer per week of maand</h3>
+        <p>Controleer je banktransacties en werk je administratie bij.</p>
+
+        <h3>Voor je btw-aangifte</h3>
+        <p>Controleer je verkoopfacturen, zakelijke kosten en btw-bedragen.</p>
+
+        <h3>Aan het einde van het jaar</h3>
+        <p>
+          Controleer of je administratie compleet is en verzamel de gegevens die je nodig hebt voor je
+          inkomstenbelasting.
+        </p>
+        <p>
+          Hoe vaak je bepaalde handelingen moet uitvoeren, hangt af van je situatie. Het belangrijkste is dat je
+          administratie gedurende het jaar bijgehouden wordt.
+        </p>
+
+        <h2>Wat zijn de voordelen van zelf boekhouden?</h2>
+        <p>Zelf je boekhouding doen heeft een aantal duidelijke voordelen.</p>
+
+        <h3>Je bespaart geld</h3>
+        <p>Je hoeft niet voor iedere administratieve handeling een boekhouder te betalen.</p>
+
+        <h3>Je weet wat er in je bedrijf gebeurt</h3>
+        <p>
+          Omdat je zelf je inkomsten en uitgaven verwerkt, krijg je directer inzicht in je financiële situatie.
+        </p>
+
+        <h3>Je houdt controle</h3>
+        <p>Je weet waar je administratie staat en kunt zelf je cijfers controleren.</p>
+
+        <h3>Je kunt software gebruiken zonder alles uit te besteden</h3>
+        <p>
+          Je hoeft niet te kiezen tussen volledig zelf doen en alles aan een boekhouder geven. Je kunt software
+          gebruiken om het werk eenvoudiger te maken en alleen bepaalde onderdelen uitbesteden.
+        </p>
+
+        <h2>Wat zijn de nadelen van zelf boekhouden?</h2>
+        <p>Er zijn ook nadelen.</p>
+
+        <h3>Het kost tijd</h3>
+        <p>
+          Administratie hoort nu eenmaal bij ondernemen. Iedere factuur, kostenpost en banktransactie moet worden
+          verwerkt.
+        </p>
+
+        <h3>Je moet weten wat je doet</h3>
+        <p>
+          Een fout in je administratie kan gevolgen hebben voor bijvoorbeeld je btw-aangifte of inkomstenbelasting.
+        </p>
+
+        <h3>Je moet het blijven bijhouden</h3>
+        <p>Een administratie die maanden blijft liggen, wordt snel een vervelend en tijdrovend project.</p>
+
+        <h3>Je mist mogelijk fiscale kennis</h3>
+        <p>
+          Een boekhouder kan niet alleen cijfers verwerken, maar ook meedenken over fiscale en financiële
+          vraagstukken.
+        </p>
+        <p>
+          Daarom is zelf boekhouden vooral aantrekkelijk als je administratie overzichtelijk is en je bereid bent om
+          er tijd in te steken.
+        </p>
+
+        <h2>Wanneer is een boekhoudprogramma handig?</h2>
+        <p>Je hoeft niet automatisch een boekhoudprogramma te gebruiken omdat je zzp&apos;er bent.</p>
+        <p>Het wordt vooral interessant wanneer je administratie groeit.</p>
+        <p>Bijvoorbeeld wanneer:</p>
+        <ul>
+          <li>je steeds meer facturen verstuurt;</li>
+          <li>je veel zakelijke kosten hebt;</li>
+          <li>je veel bonnetjes moet verwerken;</li>
+          <li>je tientallen of honderden banktransacties hebt;</li>
+          <li>je een bankkoppeling wilt;</li>
+          <li>je btw-overzicht wilt automatiseren;</li>
+          <li>je inzicht wilt in omzet, kosten en resultaat;</li>
+          <li>of je steeds meer tijd kwijt bent aan administratie.</li>
+        </ul>
+        <p>Een belangrijk verschil is dus:</p>
+        <p>
+          <strong>Zelf boekhouden</strong> betekent niet noodzakelijk <strong>alles handmatig doen</strong>.
+        </p>
+        <p>
+          Je kunt prima zelf verantwoordelijk zijn voor je administratie en ondertussen software gebruiken om het werk
+          te automatiseren.
+        </p>
+        <GuideToolCta
+          href="/tools/boekhoudprogramma-check"
+          label="Ontdek welk boekhoudprogramma bij jouw situatie past →"
+        />
+
+        <h2>Wanneer is een boekhouder verstandig?</h2>
+        <p>Een boekhouder is niet alleen voor grote bedrijven.</p>
+        <p>Ook als zzp&apos;er kan het handig zijn om een boekhouder in te schakelen wanneer je:</p>
+        <ul>
+          <li>weinig tijd hebt;</li>
+          <li>boekhouden lastig vindt;</li>
+          <li>een complexere administratie hebt;</li>
+          <li>veel fiscale vragen hebt;</li>
+          <li>internationale klanten of transacties hebt;</li>
+          <li>of gewoon zekerheid wilt dat je administratie goed wordt verwerkt.</li>
+        </ul>
+        <p>Je kunt ook voor een tussenweg kiezen.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Zelf de dagelijkse administratie doen + boekhouder voor controle</strong>
+        </p>
+        <p>Of:</p>
+        <p>
+          <strong>Zelf facturen en kosten verwerken + boekhouder voor bepaalde aangiftes</strong>
+        </p>
+        <p>
+          Zo houd je een deel van de kosten laag terwijl je wel professionele hulp hebt waar dat nodig is.
+        </p>
+
+        <h2>Zelf boekhouden of uitbesteden?</h2>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[36rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col" />
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Zelf doen
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Uitbesteden
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Kosten', 'Lager', 'Hoger'],
+                ['Tijd', 'Meer', 'Minder'],
+                ['Controle', 'Hoog', 'Lager'],
+                ['Eigen kennis nodig', 'Ja', 'Minder'],
+                ['Flexibiliteit', 'Hoog', 'Afhankelijk van boekhouder'],
+                ['Geschikt voor eenvoudige administratie', 'Vaak', 'Kan, maar niet altijd nodig'],
+                ['Geschikt voor complexe administratie', 'Niet altijd', 'Vaak interessanter'],
+              ].map(([label, zelf, uitbesteden]) => (
+                <tr key={label} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-slate-800">{label}</td>
+                  <td className="px-4 py-3">{zelf}</td>
+                  <td className="px-4 py-3">{uitbesteden}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een eenvoudige onderneming kan zelf boekhouden een prima keuze zijn.</p>
+        <p>
+          Wordt je administratie complexer of kost het je steeds meer tijd? Dan kan uitbesteden aantrekkelijker worden.
+        </p>
+
+        <h2>Wanneer moet je overstappen?</h2>
+        <p>
+          Er is geen vast moment waarop iedere zzp&apos;er van Excel naar een boekhoudprogramma moet overstappen.
+        </p>
+        <p>Een goede reden om over te stappen is wanneer je merkt dat:</p>
+        <blockquote>
+          <p>
+            <strong>je meer tijd besteedt aan het bijhouden van je administratie dan je zou willen.</strong>
+          </p>
+        </blockquote>
+        <p>
+          Ook veel transacties, meerdere soorten inkomsten, veel zakelijke kosten of behoefte aan automatisering zijn
+          duidelijke signalen.
+        </p>
+        <p>Wil je weten welke oplossing bij jouw situatie past?</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de boekhoudprogramma-check →" />
+        <p>
+          De check kijkt onder andere naar je aantal facturen, zakelijke kosten, banktransacties, behoefte aan
+          automatisering en hoeveel van je administratie je zelf wilt doen.
+        </p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Kan ik als zzp&apos;er zelf mijn boekhouding doen?</h3>
+        <p>
+          Ja. Je kunt je administratie zelf bijhouden. Je bent niet verplicht om een boekhouder in te schakelen. Wel
+          moet je ervoor zorgen dat je administratie goed wordt bijgehouden en dat je aan je fiscale verplichtingen
+          voldoet.
+        </p>
+        <h3>Is boekhouden moeilijk als zzp&apos;er?</h3>
+        <p>
+          Dat hangt af van je situatie. Een zzp&apos;er met weinig klanten en weinig kosten heeft meestal een veel
+          eenvoudigere administratie dan iemand met veel transacties en verschillende soorten kosten.
+        </p>
+        <h3>Kan ik mijn boekhouding in Excel doen?</h3>
+        <p>
+          Dat kan bij een eenvoudige administratie een praktische oplossing zijn. Naarmate je administratie groeit, kan
+          een boekhoudprogramma handiger worden vanwege automatisering en overzicht.
+        </p>
+        <h3>Heb ik als zzp&apos;er een boekhoudprogramma nodig?</h3>
+        <p>
+          Niet per se. Een boekhoudprogramma is een hulpmiddel. Als je administratie klein en overzichtelijk is, kun je
+          deze ook op een andere manier bijhouden.
+        </p>
+        <p>
+          <Link href="/blogs/wanneer-boekhoudsoftware-nodig-zzp" className="text-warm-orange hover:underline">
+            Lees wanneer een boekhoudprogramma interessant wordt →
+          </Link>
+        </p>
+        <h3>Is een factuurprogramma hetzelfde als een boekhoudprogramma?</h3>
+        <p>
+          Nee. Een factuurprogramma richt zich vooral op het maken van verkoopfacturen. Een boekhoudprogramma is
+          bedoeld voor een bredere administratie, zoals inkomsten, kosten, banktransacties en btw.
+        </p>
+        <p>
+          <Link
+            href="/blogs/gratis-factuurtool-vs-boekhoudprogramma"
+            className="text-warm-orange hover:underline"
+          >
+            Bekijk het verschil tussen een factuurprogramma en boekhoudprogramma →
+          </Link>
+        </p>
+        <h3>Wanneer moet ik een boekhouder nemen?</h3>
+        <p>
+          Dat is afhankelijk van je administratie en hoeveel je zelf wilt doen. Een boekhouder kan interessant zijn als
+          je weinig tijd of kennis hebt, je administratie complex wordt of je professionele controle wilt.
+        </p>
+        <h3>Hoeveel kost een boekhouder voor een zzp&apos;er?</h3>
+        <p>
+          De kosten verschillen sterk per boekhouder en per hoeveelheid werk. Vraag daarom offertes op basis van jouw
+          administratie in plaats van uit te gaan van één vast bedrag.
+        </p>
+
+        <h2>Conclusie</h2>
+        <p>
+          <strong>Zelf boekhouden als zzp&apos;er kan prima</strong>, vooral wanneer je administratie overzichtelijk is
+          en je bereid bent om er regelmatig tijd aan te besteden.
+        </p>
+        <p>
+          Zorg in ieder geval dat je je{' '}
+          <strong>
+            facturen, zakelijke kosten, banktransacties, btw-administratie en gegevens voor je inkomstenbelasting
+          </strong>{' '}
+          goed bijhoudt en bewaart.
+        </p>
+        <p>
+          Je kunt klein beginnen met een eenvoudige administratie. Wordt je onderneming groter, dan kun je altijd
+          overstappen naar boekhoudsoftware of een deel van je administratie uitbesteden.
+        </p>
+        <p>Twijfel je over wat je nodig hebt?</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>Of begin eenvoudig met je facturen:</p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur met FactuurBaas →" />
+      </>
+    ),
+  },
+  {
+    slug: 'boekhouding-zzp',
+    cluster: 'boekhouden',
+    seoTitle: "Boekhouding voor zzp'ers: wat moet je bijhouden?",
+    title: "Boekhouding voor zzp'ers: wat moet je bijhouden?",
+    excerpt:
+      "Boekhouding voor zzp'ers uitgelegd. Lees wat je moet bijhouden van inkomsten, kosten, facturen, btw en banktransacties en hoe je je administratie organiseert.",
+    keywords:
+      "boekhouding zzp, boekhouding zzp bijhouden, boekhouding voor zzp, boekhouding zzp'er, administratie zzp",
+    tool: {
+      href: '/tools/boekhoudprogramma-check',
+      label: 'Doe de boekhoudprogramma-check',
+      ctaLabel: 'Doe de boekhoudprogramma-check',
+      relatedTitle: 'Boekhoudprogramma-check',
+      relatedExcerpt:
+        "Ontdek welk type boekhoudprogramma bij jouw zzp-administratie past. Gratis, 8 korte vragen, geen account nodig.",
+    },
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Blogs/Boekhouding%20voor%20zzp%20ers.jpg',
+      alt: "Boekhouding voor zzp'ers: wat moet je bijhouden?",
+    },
+    datePublished: '2026-09-05',
+    dateModified: '2026-09-05',
+    relatedSlugs: [
+      'wanneer-boekhoudsoftware-nodig-zzp',
+      'gratis-factuurtool-vs-boekhoudprogramma',
+      'beste-boekhoudprogramma-zzp',
+      'zakelijke-rekening-zzp',
+    ],
+    relatedGuideSlugs: ['zelf-boekhouden-zzp', 'kosten-boekhoudprogramma-zzp', 'gratis-boekhoudprogramma-zzp'],
+    faq: [
+      {
+        question: "Wat moet een zzp'er bijhouden in de boekhouding?",
+        answer:
+          'Je moet onder andere je inkomsten, verkoopfacturen, zakelijke kosten, banktransacties en – als dat voor jou van toepassing is – je btw-administratie bijhouden. Ook moet je relevante bewijsstukken en andere zakelijke documenten bewaren.',
+      },
+      {
+        question: "Moet een zzp'er een boekhouding hebben?",
+        answer:
+          'Als ondernemer moet je een administratie bijhouden. Je bent daarbij niet verplicht om een specifiek boekhoudprogramma of een boekhouder te gebruiken.',
+      },
+      {
+        question: 'Kan ik mijn boekhouding zelf doen?',
+        answer:
+          'Ja. Je kunt je administratie zelf bijhouden. Bij een eenvoudige onderneming kan dat bijvoorbeeld met een spreadsheet of een combinatie van een factuurtool en eigen administratie.',
+      },
+      {
+        question: "Heb ik een boekhoudprogramma nodig als zzp'er?",
+        answer:
+          'Niet per se. Een boekhoudprogramma is vooral een hulpmiddel. Het kan interessant worden wanneer je veel facturen, kosten of banktransacties hebt of wanneer je meer automatisering wilt.',
+      },
+      {
+        question: 'Is een factuurprogramma hetzelfde als een boekhoudprogramma?',
+        answer:
+          'Nee. Een factuurprogramma richt zich vooral op het maken van verkoopfacturen. Een boekhoudprogramma is bedoeld voor een bredere administratie, zoals inkomsten, kosten, banktransacties en btw.',
+      },
+      {
+        question: 'Hoe lang moet ik mijn boekhouding bewaren?',
+        answer:
+          'Voor veel administratieve basisgegevens geldt een bewaartermijn van zeven jaar. Voor sommige gegevens kunnen andere regels gelden. Controleer daarom de actuele bewaartermijnen van de Belastingdienst voor jouw situatie.',
+      },
+      {
+        question: 'Kan ik mijn boekhouding in Excel doen?',
+        answer:
+          'Bij een eenvoudige administratie kan Excel of een andere spreadsheet een praktische oplossing zijn. Naarmate je administratie groter wordt, kan een boekhoudprogramma meer overzicht en automatisering bieden.',
+      },
+      {
+        question: 'Wanneer heb ik een boekhouder nodig?',
+        answer:
+          "Er is niet één vast moment waarop je als zzp'er een boekhouder moet nemen. Het kan interessant zijn als je administratie complex wordt, je weinig tijd hebt, je fiscale vragen hebt of professionele controle wilt.",
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Als zzp&apos;er moet je je administratie goed bijhouden. Maar wat valt er precies onder je boekhouding?
+          Welke facturen, kosten en bonnetjes moet je bewaren? En moet je daarvoor een boekhoudprogramma of boekhouder
+          gebruiken?
+        </p>
+        <p>
+          Voor een kleine onderneming kan de boekhouding relatief eenvoudig zijn. Je moet vooral zorgen dat je{' '}
+          <strong>inkomsten, kosten, facturen, banktransacties en btw</strong> goed kunt terugvinden en onderbouwen.
+        </p>
+        <p>
+          In deze gids leggen we uit wat er bij een boekhouding voor zzp&apos;ers komt kijken, wat je moet bewaren en
+          welke manieren er zijn om je administratie bij te houden.
+        </p>
+
+        <h2>Wat is een boekhouding?</h2>
+        <p>Je boekhouding is het overzicht van de financiële administratie van je onderneming.</p>
+        <p>Daarin leg je bijvoorbeeld vast:</p>
+        <ul>
+          <li>welke omzet je hebt gemaakt;</li>
+          <li>welke facturen je hebt verstuurd;</li>
+          <li>welke zakelijke kosten je hebt gemaakt;</li>
+          <li>welke betalingen zijn binnengekomen en gedaan;</li>
+          <li>hoeveel btw je hebt ontvangen en betaald;</li>
+          <li>en welke gegevens je nodig hebt voor je belastingaangiften.</li>
+        </ul>
+        <p>
+          Een goede boekhouding zorgt ervoor dat je achteraf kunt zien{' '}
+          <strong>wat er financieel in je onderneming is gebeurd</strong>.
+        </p>
+        <p>
+          Je boekhouding hoeft niet ingewikkeld te zijn. De omvang hangt vooral af van je werkzaamheden, het aantal
+          klanten, je kosten en de manier waarop je onderneemt.
+        </p>
+
+        <h2>Wat moet je als zzp&apos;er bijhouden?</h2>
+        <p>Een zzp-administratie bestaat meestal uit verschillende onderdelen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[32rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Onderdeel
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wat houd je bij?
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Omzet', 'Je inkomsten uit je werkzaamheden of verkopen'],
+                ['Verkoopfacturen', 'Facturen die je naar klanten stuurt'],
+                ['Zakelijke kosten', 'Aankopen en andere zakelijke uitgaven'],
+                ['Bonnetjes en facturen', 'Bewijsstukken van je kosten'],
+                ['Banktransacties', 'Ontvangen en betaalde bedragen'],
+                ['Btw', 'In rekening gebrachte en betaalde btw'],
+                ['Contracten', 'Zakelijke overeenkomsten en afspraken'],
+                [
+                  'Overige administratie',
+                  'Gegevens die relevant zijn voor je onderneming en belastingaangiften',
+                ],
+              ].map(([onderdeel, wat]) => (
+                <tr key={onderdeel} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-slate-800">{onderdeel}</td>
+                  <td className="px-4 py-3">{wat}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Niet iedere zzp&apos;er heeft precies dezelfde administratie nodig. Een consultant met weinig kosten heeft
+          bijvoorbeeld een andere administratie dan een ondernemer met voorraad, een bedrijfsauto of veel zakelijke
+          aankopen.
+        </p>
+
+        <h2>1. Houd je inkomsten en omzet bij</h2>
+        <p>Een belangrijk onderdeel van je boekhouding is je omzet.</p>
+        <p>Iedere keer dat je een klant factureert, moet je kunnen terugvinden:</p>
+        <ul>
+          <li>aan wie je hebt gefactureerd;</li>
+          <li>wanneer je de factuur hebt verstuurd;</li>
+          <li>wat je hebt geleverd;</li>
+          <li>hoeveel je hebt gefactureerd;</li>
+          <li>hoeveel btw je hebt berekend, als dat van toepassing is;</li>
+          <li>en wanneer de factuur is betaald.</li>
+        </ul>
+        <p>Je verkoopfacturen vormen daarmee een belangrijk onderdeel van je administratie.</p>
+        <p>
+          Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">
+            FactuurBaas
+          </Link>{' '}
+          kun je gratis online een professionele factuur maken. Je hebt geen account nodig en kunt de factuur direct
+          als PDF downloaden en zelf naar je klant versturen.
+        </p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur →" />
+
+        <h3>Houd je factuurnummers overzichtelijk</h3>
+        <p>
+          Gebruik een consequente factuurnummering. Zo kun je later makkelijk terugvinden welke facturen je hebt
+          gemaakt en controleren of je administratie compleet is.
+        </p>
+        <p>Bewaar ook een kopie van de facturen die je hebt verstuurd.</p>
+
+        <h2>2. Houd je zakelijke kosten bij</h2>
+        <p>Naast je omzet horen ook je zakelijke uitgaven in je administratie.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>software;</li>
+          <li>telefoon en internet;</li>
+          <li>kantoorbenodigdheden;</li>
+          <li>apparatuur;</li>
+          <li>opleidingen;</li>
+          <li>zakelijke reiskosten;</li>
+          <li>marketing;</li>
+          <li>zakelijke verzekeringen;</li>
+          <li>diensten van andere ondernemers;</li>
+          <li>en andere kosten die met je onderneming te maken hebben.</li>
+        </ul>
+        <p>Bewaar de bijbehorende facturen en bonnetjes.</p>
+        <p>
+          Het is belangrijk om onderscheid te maken tussen zakelijke en privé-uitgaven. Niet iedere uitgave die je als
+          ondernemer doet, is automatisch volledig zakelijk of aftrekbaar.
+        </p>
+        <p>
+          Bij twijfel over een specifieke kostenpost kun je de actuele informatie van de Belastingdienst controleren of
+          advies vragen aan een boekhouder.
+        </p>
+
+        <h2>3. Bewaar facturen en bonnetjes</h2>
+        <p>
+          Je boekhouding bestaat niet alleen uit bedragen die je in een spreadsheet of boekhoudprogramma invoert.
+        </p>
+        <p>Ook de documenten achter die bedragen zijn belangrijk.</p>
+        <p>Bewaar bijvoorbeeld:</p>
+        <ul>
+          <li>verkoopfacturen;</li>
+          <li>inkoopfacturen;</li>
+          <li>kassabonnen;</li>
+          <li>betaalbewijzen;</li>
+          <li>contracten;</li>
+          <li>bankgegevens;</li>
+          <li>en andere relevante zakelijke documenten.</li>
+        </ul>
+        <p>Een praktische regel is:</p>
+        <blockquote>
+          <p>
+            <strong>
+              Zorg dat je voor belangrijke inkomsten en uitgaven kunt laten zien waar het bedrag vandaan komt.
+            </strong>
+          </p>
+        </blockquote>
+        <p>
+          Maak daarom bijvoorbeeld niet alleen een administratie met €250 softwarekosten, maar bewaar ook de factuur
+          waarop die €250 staat.
+        </p>
+
+        <h2>4. Houd je banktransacties bij</h2>
+        <p>Je bankrekening is een belangrijk onderdeel van je administratie.</p>
+        <p>Je moet kunnen verklaren welke bedragen je ontvangt en betaalt.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>€1.210 ontvangen → betaling van een klantfactuur</strong>
+        </p>
+        <p>of:</p>
+        <p>
+          <strong>€121 betaald → zakelijke softwarekosten</strong>
+        </p>
+        <p>Bij een kleine onderneming kun je dit overzicht zelf bijhouden.</p>
+        <p>
+          Heb je iedere maand veel transacties? Dan kan het steeds meer werk worden om alles handmatig te verwerken.
+          Een boekhoudprogramma met een bankkoppeling kan dan tijd besparen.
+        </p>
+        <p>
+          Een aparte{' '}
+          <Link href="/blogs/zakelijke-rekening-zzp" className="text-warm-orange hover:underline">
+            zakelijke bankrekening
+          </Link>{' '}
+          kan daarnaast helpen om je zakelijke en privétransacties overzichtelijk te houden.
+        </p>
+
+        <h2>5. Houd je btw-administratie bij</h2>
+        <p>Ben je btw-plichtig, dan is je btw-administratie een belangrijk onderdeel van je boekhouding.</p>
+        <p>
+          Bij je verkoopfacturen houd je bijvoorbeeld bij hoeveel btw je aan klanten in rekening hebt gebracht.
+        </p>
+        <p>
+          Bij zakelijke kosten kan er onder voorwaarden btw op de factuur staan die als voorbelasting aftrekbaar is.
+        </p>
+        <p>Je administratie moet uiteindelijk aansluiten op je btw-aangifte.</p>
+        <p>
+          Veel zzp&apos;ers doen per kwartaal btw-aangifte, maar de aangifteperiode kan per ondernemer verschillen.
+        </p>
+        <p>
+          De precieze btw-behandeling kan bovendien afhangen van bijvoorbeeld het soort kosten, je klant en het land
+          waarin je klant gevestigd is.
+        </p>
+        <p>
+          <strong>Let op:</strong> btw-regels kunnen veranderen en zijn afhankelijk van je situatie. Controleer bij
+          twijfel de actuele informatie van de Belastingdienst.
+        </p>
+
+        <h2>6. Houd rekening met je inkomstenbelasting</h2>
+        <p>Je boekhouding is ook belangrijk voor je inkomstenbelasting.</p>
+        <p>
+          Je omzet en zakelijke kosten geven je inzicht in het resultaat van je onderneming. Die gegevens heb je
+          vervolgens nodig bij het voorbereiden van je aangifte inkomstenbelasting.
+        </p>
+        <p>
+          Daarom is het verstandig om niet alleen je facturen te bewaren, maar gedurende het jaar ook je kosten en
+          andere relevante gegevens bij te houden.
+        </p>
+        <p>
+          Hoe beter je administratie gedurende het jaar is bijgewerkt, hoe minder werk je aan het einde van het jaar
+          hebt.
+        </p>
+
+        <h2>7. Bewaar je administratie</h2>
+        <p>Je moet je administratie bewaren en toegankelijk houden.</p>
+        <p>
+          Voor veel belangrijke basisgegevens geldt een bewaartermijn van <strong>zeven jaar</strong>. Voor bepaalde
+          gegevens kunnen andere bewaartermijnen gelden.
+        </p>
+        <p>
+          Bewaar je administratie daarom op een manier waarop je documenten later makkelijk kunt terugvinden.
+        </p>
+        <p>
+          Dat kan bijvoorbeeld digitaal. Zorg er dan voor dat bestanden niet zomaar verdwijnen en dat je belangrijke
+          documenten logisch ordent.
+        </p>
+        <p>Een mogelijke indeling is:</p>
+        <p>
+          <strong>2026 → Omzet → Kosten → Bank → Btw → Contracten</strong>
+        </p>
+        <p>
+          Het belangrijkste is niet welke mappenstructuur je gebruikt, maar dat je administratie compleet en
+          terugvindbaar blijft.
+        </p>
+
+        <h2>Hoe houd je je boekhouding als zzp&apos;er bij?</h2>
+        <p>Er zijn verschillende manieren om je boekhouding te organiseren.</p>
+        <p>
+          Welke oplossing het beste werkt, hangt af van de omvang en complexiteit van je administratie.
+        </p>
+
+        <h3>Optie 1: Zelf bijhouden in Excel</h3>
+        <p>Bij een eenvoudige administratie kun je inkomsten en kosten bijvoorbeeld in een spreadsheet bijhouden.</p>
+        <p>
+          <strong>Voordelen:</strong>
+        </p>
+        <ul>
+          <li>goedkoop;</li>
+          <li>flexibel;</li>
+          <li>je bepaalt zelf de indeling;</li>
+          <li>geschikt voor een eenvoudige administratie.</li>
+        </ul>
+        <p>
+          <strong>Nadelen:</strong>
+        </p>
+        <ul>
+          <li>veel handmatig werk;</li>
+          <li>grotere kans op invoerfouten;</li>
+          <li>weinig automatisering;</li>
+          <li>btw en rapportages moet je zelf goed organiseren;</li>
+          <li>minder handig wanneer je administratie groeit.</li>
+        </ul>
+        <p>
+          Voor een kleine onderneming kan een spreadsheet prima werken. Het is alleen belangrijk dat je administratie
+          ook daadwerkelijk compleet en consequent wordt bijgehouden.
+        </p>
+
+        <h3>Optie 2: Factuurtool + eigen administratie</h3>
+        <p>
+          Je kunt ook een eenvoudige factuurtool gebruiken voor je verkoopfacturen en de rest van je administratie zelf
+          bijhouden.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>FactuurBaas → verkoopfacturen</strong>
+        </p>
+        <p>
+          <strong>Eigen administratie → inkomsten, kosten en overige gegevens</strong>
+        </p>
+        <p>
+          Dit kan een praktische oplossing zijn als je vooral facturen wilt maken en je overige administratie beperkt
+          is.
+        </p>
+        <p>
+          Met FactuurBaas kun je gratis een factuur maken zonder account. Je downloadt de factuur als PDF en verstuurt
+          deze zelf naar je klant.
+        </p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur →" />
+
+        <h3>Optie 3: Boekhoudprogramma</h3>
+        <p>Een boekhoudprogramma is bedoeld om een groter deel van je administratie bij elkaar te brengen.</p>
+        <p>Afhankelijk van het programma kun je bijvoorbeeld werken met:</p>
+        <ul>
+          <li>verkoopfacturen;</li>
+          <li>inkoopfacturen;</li>
+          <li>kosten;</li>
+          <li>banktransacties;</li>
+          <li>btw;</li>
+          <li>financiële overzichten;</li>
+          <li>en andere administratieve gegevens.</li>
+        </ul>
+        <p>
+          Het grote voordeel is vooral <strong>overzicht en automatisering</strong>.
+        </p>
+        <p>
+          Je hoeft daardoor minder handmatig te verwerken en kunt je administratie makkelijker gedurende het jaar
+          bijhouden.
+        </p>
+        <p>Wil je weten welke oplossing waarschijnlijk bij jouw administratie past?</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+
+        <h2>Heb je als zzp&apos;er een boekhoudprogramma nodig?</h2>
+        <p>Niet automatisch.</p>
+        <p>
+          Een boekhoudprogramma is een hulpmiddel om je administratie te organiseren. Je bent niet verplicht om
+          specifiek een bepaald programma te gebruiken omdat je zzp&apos;er bent.
+        </p>
+        <p>Bij een kleine administratie kan zelf bijhouden voldoende zijn.</p>
+        <p>
+          Een boekhoudprogramma wordt vooral interessant wanneer je administratie groter of tijdrovender wordt.
+        </p>
+        <p>Bijvoorbeeld wanneer je:</p>
+        <ul>
+          <li>veel facturen verstuurt;</li>
+          <li>veel zakelijke kosten hebt;</li>
+          <li>veel bonnetjes moet verwerken;</li>
+          <li>veel banktransacties hebt;</li>
+          <li>een bankkoppeling wilt;</li>
+          <li>meer automatisering wilt;</li>
+          <li>of steeds meer tijd kwijt bent aan je administratie.</li>
+        </ul>
+        <p>Het verschil is dus niet simpelweg:</p>
+        <p>
+          <strong>kleine zzp&apos;er = geen software</strong>
+        </p>
+        <p>en</p>
+        <p>
+          <strong>grote zzp&apos;er = wel software.</strong>
+        </p>
+        <p>Het gaat vooral om hoeveel administratie je hebt en hoeveel werk je zelf wilt doen.</p>
+        <GuideToolCta
+          href="/tools/boekhoudprogramma-check"
+          label="Ontdek welke oplossing bij jouw administratie past →"
+        />
+
+        <h2>Zelf je boekhouding doen of een boekhouder inschakelen?</h2>
+        <p>
+          Je kunt je boekhouding zelf doen, maar je kunt deze ook geheel of gedeeltelijk uitbesteden. Meer hierover
+          lees je in{' '}
+          <Link href="/gidsen/zelf-boekhouden-zzp" className="text-warm-orange hover:underline">
+            zelf boekhouden als zzp&apos;er
+          </Link>
+          .
+        </p>
+
+        <h3>Zelf doen</h3>
+        <p>Zelf je boekhouding doen kan interessant zijn als:</p>
+        <ul>
+          <li>je administratie overzichtelijk is;</li>
+          <li>je kosten beperkt wilt houden;</li>
+          <li>je voldoende tijd hebt;</li>
+          <li>en je het prettig vindt om zelf inzicht te houden in je cijfers.</li>
+        </ul>
+        <p>
+          Je blijft dan zelf verantwoordelijk voor het bijhouden van je administratie en het aanleveren van de
+          benodigde gegevens voor je aangiften.
+        </p>
+
+        <h3>Boekhouder inschakelen</h3>
+        <p>Een boekhouder kan interessant zijn als:</p>
+        <ul>
+          <li>je weinig tijd hebt;</li>
+          <li>je administratie complexer wordt;</li>
+          <li>je veel fiscale vragen hebt;</li>
+          <li>je internationale klanten of transacties hebt;</li>
+          <li>of je gewoon professionele ondersteuning wilt.</li>
+        </ul>
+        <p>Een boekhouder kan ook helpen bij onderdelen die je liever niet zelf doet.</p>
+
+        <h3>Een combinatie kan ook</h3>
+        <p>Je hoeft niet alles zelf te doen of alles uit te besteden.</p>
+        <p>Een tussenweg kan bijvoorbeeld zijn:</p>
+        <p>
+          <strong>Zelf facturen en kosten bijhouden → boekhouder controleert de administratie</strong>
+        </p>
+        <p>Of:</p>
+        <p>
+          <strong>Zelf de dagelijkse administratie → boekhouder verzorgt bepaalde aangiftes</strong>
+        </p>
+        <p>
+          Welke combinatie verstandig is, hangt af van je situatie en hoeveel werk je zelf wilt doen.
+        </p>
+
+        <h2>Hoe vaak moet je je boekhouding bijwerken?</h2>
+        <p>Je hoeft niet iedere dag uren aan je boekhouding te besteden.</p>
+        <p>Het is vooral belangrijk dat je administratie niet maanden blijft liggen.</p>
+        <p>Een eenvoudige routine kan bijvoorbeeld zijn:</p>
+
+        <h3>Iedere keer dat je factureert</h3>
+        <p>Maak de factuur en bewaar een kopie.</p>
+
+        <h3>Iedere keer dat je iets zakelijks koopt</h3>
+        <p>Bewaar de factuur of bon.</p>
+
+        <h3>Iedere week of maand</h3>
+        <p>Werk je inkomsten en kosten bij en controleer je banktransacties.</p>
+
+        <h3>Voor je btw-aangifte</h3>
+        <p>Controleer je omzet, kosten en btw-bedragen.</p>
+
+        <h3>Aan het einde van het jaar</h3>
+        <p>
+          Controleer of je administratie compleet is en verzamel de gegevens die je nodig hebt voor je aangifte
+          inkomstenbelasting.
+        </p>
+        <p>
+          Hoe vaak je bepaalde onderdelen moet verwerken, hangt af van je administratie en aangifteverplichtingen.
+        </p>
+
+        <h2>Wat gebeurt er als je je boekhouding niet goed bijhoudt?</h2>
+        <p>
+          Een slechte administratie kan ervoor zorgen dat je niet goed weet hoeveel je hebt verdiend of uitgegeven.
+        </p>
+        <p>Daarnaast kan een onvolledige administratie problemen veroorzaken bij je belastingaangiften.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>ontbrekende facturen;</li>
+          <li>vergeten zakelijke kosten;</li>
+          <li>fouten in btw-bedragen;</li>
+          <li>transacties die je niet meer kunt verklaren;</li>
+          <li>of documenten die je niet meer kunt terugvinden.</li>
+        </ul>
+        <p>
+          Daarom is het meestal verstandiger om je administratie regelmatig bij te werken dan alles op het laatste
+          moment te doen.
+        </p>
+
+        <h2>Boekhouding voor een startende zzp&apos;er</h2>
+        <p>
+          Als je net begint als zzp&apos;er, hoef je je administratie niet direct onnodig ingewikkeld te maken.
+        </p>
+        <p>Begin met een duidelijke basis:</p>
+        <p>
+          <strong>1. Maak je facturen</strong>
+        </p>
+        <p>
+          <strong>2. Bewaar je facturen en bonnetjes</strong>
+        </p>
+        <p>
+          <strong>3. Houd je inkomsten en kosten bij</strong>
+        </p>
+        <p>
+          <strong>4. Controleer je banktransacties</strong>
+        </p>
+        <p>
+          <strong>5. Houd je btw bij als dat voor jou van toepassing is</strong>
+        </p>
+        <p>
+          <strong>6. Bewaar je administratie</strong>
+        </p>
+        <p>Naarmate je onderneming groeit, kun je je manier van werken aanpassen.</p>
+        <p>
+          Misschien is een spreadsheet eerst voldoende. Later kan een boekhoudprogramma tijd besparen. En als je
+          administratie complex wordt, kan een boekhouder een logische volgende stap zijn.
+        </p>
+
+        <h2>Wat is de beste oplossing voor jouw boekhouding?</h2>
+        <p>Er is niet één beste manier om de boekhouding van iedere zzp&apos;er te doen.</p>
+        <p>
+          Een zzp&apos;er met vijf facturen per maand en weinig kosten heeft een andere behoefte dan iemand met
+          tientallen klanten, veel zakelijke uitgaven en honderden banktransacties.
+        </p>
+        <p>Je kunt grofweg kiezen uit:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[32rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Situatie
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Mogelijke oplossing
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Weinig facturen en weinig kosten', 'Zelf bijhouden'],
+                ['Vooral facturen nodig', 'Factuurtool + eigen administratie'],
+                ['Regelmatig inkomsten en kosten', 'Boekhoudprogramma'],
+                ['Veel administratie of weinig tijd', 'Boekhoudprogramma + eventueel boekhouder'],
+                ['Complexe administratie', 'Boekhoudprogramma + professionele hulp'],
+              ].map(([situatie, oplossing]) => (
+                <tr key={situatie} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-slate-800">{situatie}</td>
+                  <td className="px-4 py-3">{oplossing}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Het belangrijkste is dat je oplossing past bij je{' '}
+          <strong>hoeveelheid administratie, kennis, tijd en behoefte aan automatisering</strong>.
+        </p>
+
+        <h2>Wil je weten wat bij jouw administratie past?</h2>
+        <p>
+          Twijfel je tussen zelf bijhouden, een factuurtool, een boekhoudprogramma of een boekhouder?
+        </p>
+        <p>Daarvoor hoef je niet meteen verschillende programma&apos;s uit te proberen.</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>
+          Beantwoord een paar vragen over je facturen, kosten, transacties en manier van werken. Je krijgt vervolgens
+          een indicatie welke oplossing waarschijnlijk het beste bij jouw situatie past en waarom.
+        </p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Wat moet een zzp&apos;er bijhouden in de boekhouding?</h3>
+        <p>
+          Je moet onder andere je inkomsten, verkoopfacturen, zakelijke kosten, banktransacties en – als dat voor jou
+          van toepassing is – je btw-administratie bijhouden. Ook moet je relevante bewijsstukken en andere zakelijke
+          documenten bewaren.
+        </p>
+        <h3>Moet een zzp&apos;er een boekhouding hebben?</h3>
+        <p>
+          Als ondernemer moet je een administratie bijhouden. Je bent daarbij niet verplicht om een specifiek
+          boekhoudprogramma of een boekhouder te gebruiken.
+        </p>
+        <h3>Kan ik mijn boekhouding zelf doen?</h3>
+        <p>
+          Ja. Je kunt je administratie zelf bijhouden. Bij een eenvoudige onderneming kan dat bijvoorbeeld met een
+          spreadsheet of een combinatie van een factuurtool en eigen administratie.
+        </p>
+        <h3>Heb ik een boekhoudprogramma nodig als zzp&apos;er?</h3>
+        <p>
+          Niet per se. Een boekhoudprogramma is vooral een hulpmiddel. Het kan interessant worden wanneer je veel
+          facturen, kosten of banktransacties hebt of wanneer je meer automatisering wilt.
+        </p>
+        <p>
+          <Link href="/blogs/wanneer-boekhoudsoftware-nodig-zzp" className="text-warm-orange hover:underline">
+            Lees wanneer een boekhoudprogramma interessant wordt →
+          </Link>
+        </p>
+        <h3>Is een factuurprogramma hetzelfde als een boekhoudprogramma?</h3>
+        <p>
+          Nee. Een factuurprogramma richt zich vooral op het maken van verkoopfacturen. Een boekhoudprogramma is
+          bedoeld voor een bredere administratie, zoals inkomsten, kosten, banktransacties en btw.
+        </p>
+        <p>
+          <Link
+            href="/blogs/gratis-factuurtool-vs-boekhoudprogramma"
+            className="text-warm-orange hover:underline"
+          >
+            Bekijk het verschil tussen een factuurprogramma en boekhoudprogramma →
+          </Link>
+        </p>
+        <h3>Hoe lang moet ik mijn boekhouding bewaren?</h3>
+        <p>
+          Voor veel administratieve basisgegevens geldt een bewaartermijn van zeven jaar. Voor sommige gegevens kunnen
+          andere regels gelden. Controleer daarom de actuele bewaartermijnen van de Belastingdienst voor jouw situatie.
+        </p>
+        <h3>Kan ik mijn boekhouding in Excel doen?</h3>
+        <p>
+          Bij een eenvoudige administratie kan Excel of een andere spreadsheet een praktische oplossing zijn. Naarmate
+          je administratie groter wordt, kan een boekhoudprogramma meer overzicht en automatisering bieden.
+        </p>
+        <h3>Wanneer heb ik een boekhouder nodig?</h3>
+        <p>
+          Er is niet één vast moment waarop je als zzp&apos;er een boekhouder moet nemen. Het kan interessant zijn als
+          je administratie complex wordt, je weinig tijd hebt, je fiscale vragen hebt of professionele controle wilt.
+        </p>
+
+        <h2>Conclusie</h2>
+        <p>
+          Een goede <strong>boekhouding voor zzp&apos;ers</strong> hoeft niet ingewikkeld te zijn, maar je moet wel
+          weten wat je moet bijhouden.
+        </p>
+        <p>Zorg in ieder geval dat je overzicht hebt over je:</p>
+        <ul>
+          <li>
+            <strong>inkomsten en omzet;</strong>
+          </li>
+          <li>
+            <strong>verkoopfacturen;</strong>
+          </li>
+          <li>
+            <strong>zakelijke kosten;</strong>
+          </li>
+          <li>
+            <strong>facturen en bonnetjes;</strong>
+          </li>
+          <li>
+            <strong>banktransacties;</strong>
+          </li>
+          <li>
+            <strong>btw-administratie, als die voor jou van toepassing is;</strong>
+          </li>
+          <li>en andere relevante zakelijke documenten.</li>
+        </ul>
+        <p>
+          Je kunt je administratie zelf bijhouden, een factuurtool gebruiken, overstappen naar een boekhoudprogramma of
+          bepaalde werkzaamheden uitbesteden aan een boekhouder.
+        </p>
+        <p>
+          <strong>De beste oplossing hangt af van jouw administratie.</strong>
+        </p>
+        <p>Wil je snel weten welke optie waarschijnlijk bij jou past?</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>Of begin met je facturen:</p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur met FactuurBaas →" />
+      </>
+    ),
+  },
+  {
+    slug: 'kosten-boekhoudprogramma-zzp',
+    cluster: 'boekhouden',
+    seoTitle: 'Kosten boekhoudprogramma zzp: wat betaal je?',
+    title: "Wat kost een boekhoudprogramma voor zzp'ers?",
+    excerpt:
+      "Wat kost een boekhoudprogramma voor zzp'ers? Vergelijk gratis, goedkope en uitgebreidere pakketten en ontdek wat je krijgt voor €5, €10, €20 of €40+ per maand.",
+    keywords:
+      'kosten boekhoudprogramma zzp, boekhoudprogramma zzp kosten, goedkoop boekhoudprogramma zzp, goedkoopste boekhoudprogramma zzp, kosten boekhouden zzp, boekhoudprogramma kosten, boekhoudprogramma zzp goedkoop, wat kost een boekhoudprogramma, gratis boekhoudprogramma zzp',
+    tool: {
+      href: '/tools/boekhoudprogramma-check',
+      label: 'Doe de boekhoudprogramma-check',
+      ctaLabel: 'Doe de boekhoudprogramma-check',
+      relatedTitle: 'Boekhoudprogramma-check',
+      relatedExcerpt:
+        "Ontdek welk type boekhoudprogramma bij jouw zzp-administratie past. Gratis, 8 korte vragen, geen account nodig.",
+    },
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Blogs/Wat%20kost%20een%20boekhoudprogramma%20voor%20zzp%20ers.jpg',
+      alt: "Wat kost een boekhoudprogramma voor zzp'ers?",
+    },
+    datePublished: '2026-09-05',
+    dateModified: '2026-09-05',
+    relatedSlugs: [
+      'beste-boekhoudprogramma-zzp',
+      'wanneer-boekhoudsoftware-nodig-zzp',
+      'gratis-factuurtool-vs-boekhoudprogramma',
+    ],
+    relatedGuideSlugs: ['boekhouding-zzp', 'zelf-boekhouden-zzp', 'gratis-boekhoudprogramma-zzp'],
+    faq: [
+      {
+        question: "Wat kost een boekhoudprogramma voor een zzp'er?",
+        answer:
+          'De prijs varieert van gratis of enkele euro’s per maand tot €20, €30 of €40+ per maand. De uiteindelijke prijs hangt af van het programma en het pakket dat je kiest.',
+      },
+      {
+        question: "Wat is een goedkoop boekhoudprogramma voor zzp'ers?",
+        answer:
+          'Goedkope boekhoudprogramma’s zijn onder andere te vinden in de prijsklasse van ongeveer €5 tot €10 per maand. Kijk wel naar welke functies en limieten bij die prijs horen.',
+      },
+      {
+        question: 'Wat is het goedkoopste boekhoudprogramma?',
+        answer:
+          'Dat hangt af van je situatie en van wat je onder goedkoop verstaat. Een lage maandprijs is niet automatisch de laagste totale kosten als je daardoor veel handmatig werk moet doen of snel een duurder pakket nodig hebt.',
+      },
+      {
+        question: 'Is een gratis boekhoudprogramma goed genoeg?',
+        answer:
+          'Voor een eenvoudige administratie kan een gratis oplossing voldoende zijn. Controleer wel of het daadwerkelijk om gratis gebruik gaat en welke functies en limieten daarbij horen.',
+      },
+      {
+        question: 'Hoeveel kost Moneybird?',
+        answer:
+          'Op het moment van schrijven worden de pakketten van Moneybird weergegeven vanaf €15 per maand. Er zijn daarnaast uitgebreidere pakketten van €29 en €41 per maand. De beschikbare functies en limieten verschillen per pakket.',
+      },
+      {
+        question: 'Hoeveel kost e-Boekhouden.nl?',
+        answer:
+          'Op het moment van schrijven wordt het ZZP-pakket weergegeven voor €4,98 per maand bij de aangeboden korting. Daarnaast worden pakketten weergegeven vanaf €7,25 per maand en €12 per maand voor boekhouden en factureren. Voor startende ondernemers is er bovendien een startersaanbod waarbij de eerste 15 maanden gratis kunnen zijn.',
+      },
+      {
+        question: 'Is een duurder boekhoudprogramma beter?',
+        answer:
+          'Niet automatisch. Een duurder programma biedt vaak meer functies, automatisering of hogere limieten. Als je die functies niet nodig hebt, kan een goedkoper programma beter bij je passen.',
+      },
+      {
+        question: 'Is een boekhouder goedkoper dan een boekhoudprogramma?',
+        answer:
+          'Niet per definitie. Een boekhouder kost meer dan alleen software, maar je krijgt daar persoonlijke dienstverlening en kennis voor terug. De juiste keuze hangt af van hoeveel administratie je zelf wilt doen.',
+      },
+      {
+        question: "Kan ik als zzp'er eerst goedkoop beginnen?",
+        answer:
+          'Ja. Je kunt bijvoorbeeld beginnen met een eenvoudige administratie en later overstappen naar uitgebreidere software wanneer je onderneming groeit.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Wat kost een boekhoudprogramma als zzp&apos;er? Dat hangt vooral af van hoeveel administratie je hebt en
+          welke functies je nodig hebt.
+        </p>
+        <p>
+          Je kunt al beginnen met een goedkope oplossing van een paar euro per maand. Andere boekhoudprogramma&apos;s
+          kosten €20, €30 of meer per maand. En als je je administratie grotendeels uitbesteedt aan een boekhouder,
+          lopen de totale kosten uiteraard verder op.
+        </p>
+        <p>
+          Maar <strong>goedkoop is niet automatisch beter</strong>. Het belangrijkste is wat je voor dat bedrag krijgt.
+        </p>
+        <p>
+          In deze gids bekijken we de verschillende prijsklassen van boekhoudsoftware voor zzp&apos;ers, wat je
+          daarvoor kunt verwachten en wanneer het de moeite waard is om meer te betalen.
+        </p>
+
+        <h2>Wat kost een boekhoudprogramma voor zzp&apos;ers?</h2>
+        <p>Voor een zzp&apos;er kun je grofweg rekening houden met deze prijsklassen:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[36rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Prijsklasse
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wat je meestal krijgt
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Geschikt voor
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Gratis', 'Basisadministratie of tijdelijke gratis periode', 'Starters en zeer kleine administraties'],
+                ['€5–€10 per maand', 'Basis boekhouden en soms factureren', 'Eenvoudige administratie'],
+                ['€10–€20 per maand', 'Uitgebreidere boekhouding en facturatie', "Veel zzp'ers"],
+                [
+                  '€20+ per maand',
+                  'Meer automatisering en uitgebreide functies',
+                  'Groeiende of uitgebreidere administratie',
+                ],
+                ['Boekhouder', 'Software + persoonlijke dienstverlening', 'Wie administratie wil uitbesteden'],
+              ].map(([prijs, krijgt, geschikt]) => (
+                <tr key={prijs} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-slate-800">{prijs}</td>
+                  <td className="px-4 py-3">{krijgt}</td>
+                  <td className="px-4 py-3">{geschikt}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Dit zijn geen vaste grenzen. Boekhoudprogramma&apos;s werken met verschillende pakketten, functies en
+          aanbiedingen.
+        </p>
+        <p>Ook kan een programma bijvoorbeeld goedkoper zijn wanneer je jaarlijks betaalt.</p>
+
+        <h2>Is een gratis boekhoudprogramma genoeg?</h2>
+        <p>Een gratis oplossing klinkt natuurlijk aantrekkelijk.</p>
+        <p>
+          Voor een startende zzp&apos;er met weinig facturen, weinig kosten en een eenvoudige administratie kan een
+          gratis of zeer goedkope oplossing voldoende zijn.
+        </p>
+        <p>
+          Maar kijk goed naar <strong>wat er daadwerkelijk gratis is</strong>.
+        </p>
+        <p>
+          Een gratis proefperiode is iets anders dan permanent gratis boekhouden. Ook kunnen bepaalde functies alleen
+          in een betaald pakket beschikbaar zijn.
+        </p>
+        <p>Let daarom niet alleen op de prijs, maar bijvoorbeeld ook op:</p>
+        <ul>
+          <li>factureren;</li>
+          <li>kosten verwerken;</li>
+          <li>banktransacties;</li>
+          <li>btw-administratie;</li>
+          <li>automatische verwerking;</li>
+          <li>aantal gebruikers;</li>
+          <li>aantal transacties;</li>
+          <li>rapportages;</li>
+          <li>en eventuele beperkingen.</li>
+        </ul>
+        <p>
+          Soms is €5 per maand voor een compleet pakket uiteindelijk voordeliger dan een gratis programma waarin je
+          veel handmatig moet doen.
+        </p>
+
+        <h2>Boekhoudprogramma voor €5 tot €10 per maand</h2>
+        <p>In deze prijsklasse vind je relatief goedkope boekhoudoplossingen.</p>
+        <p>
+          Een voorbeeld is <strong>e-Boekhouden.nl</strong>. Op het moment van schrijven wordt het ZZP-pakket
+          aangeboden voor €4,98 per maand bij de weergegeven aanbieding. Het pakket is gericht op boekhouden en
+          factureren en kent een maximum aantal boekingen.
+        </p>
+        <p>
+          e-Boekhouden.nl biedt daarnaast een Standaard-pakket voor €7,25 per maand bij de weergegeven aanbieding.
+          Daarmee krijg je onbeperkt boekhouden. Voor onbeperkt boekhouden én factureren wordt het pakket Standaard +
+          Factureren weergegeven voor €12 per maand.
+        </p>
+        <p>
+          Voor startende ondernemers wordt daarnaast een startersaanbod weergegeven waarbij e-Boekhouden.nl de eerste
+          15 maanden gratis kan zijn.
+        </p>
+        <p>
+          Let hierbij goed op het verschil tussen de <strong>reguliere prijs en een tijdelijke of startersaanbieding</strong>.
+        </p>
+
+        <h3>Wat krijg je in deze prijsklasse?</h3>
+        <p>Een goedkoop boekhoudprogramma kan al een groot deel van de basisadministratie afhandelen.</p>
+        <p>Denk aan:</p>
+        <ul>
+          <li>inkomsten verwerken;</li>
+          <li>kosten bijhouden;</li>
+          <li>boekhouden;</li>
+          <li>factureren;</li>
+          <li>btw-administratie;</li>
+          <li>en financiële overzichten.</li>
+        </ul>
+        <p>De precieze functies en limieten verschillen per programma en pakket.</p>
+        <p>Voor een zzp&apos;er met een relatief eenvoudige administratie kan dit al ruim voldoende zijn.</p>
+
+        <h2>Boekhoudprogramma voor €10 tot €20 per maand</h2>
+        <p>In deze prijsklasse kom je bij uitgebreidere pakketten terecht.</p>
+        <p>
+          Je betaalt dan niet alleen voor het kunnen bijhouden van je administratie, maar vaak ook voor meer gemak,
+          automatisering en extra functies.
+        </p>
+        <p>
+          Een goed voorbeeld is <strong>Moneybird</strong>. Het Start-pakket wordt op het moment van schrijven
+          weergegeven voor €15 per maand.
+        </p>
+        <p>
+          Dit pakket is gericht op freelancers en starters en bevat onder andere functies voor het verwerken van
+          documenten en bonnetjes. Er zijn ook limieten op bijvoorbeeld verwerkte transacties en gebruikers.
+        </p>
+        <p>Moneybird biedt daarnaast uitgebreidere pakketten aan voor €29 en €41 per maand.</p>
+        <p>
+          Dat laat goed zien dat de prijs van boekhoudsoftware niet alleen afhangt van het programma zelf, maar ook van{' '}
+          <strong>hoe uitgebreid je pakket moet zijn</strong>.
+        </p>
+
+        <h3>Wanneer is €10–€20 per maand interessant?</h3>
+        <p>Voor veel zzp&apos;ers is dit een interessante middenklasse.</p>
+        <p>
+          Je krijgt doorgaans meer gemak dan bij een heel eenvoudige oplossing, zonder meteen te betalen voor de meest
+          uitgebreide functies.
+        </p>
+        <p>Deze prijsklasse kan bijvoorbeeld interessant zijn als je:</p>
+        <ul>
+          <li>regelmatig factureert;</li>
+          <li>meerdere zakelijke kosten hebt;</li>
+          <li>je administratie online wilt bijhouden;</li>
+          <li>meer overzicht wilt;</li>
+          <li>of minder handmatig werk wilt doen.</li>
+        </ul>
+
+        <h2>Boekhoudprogramma voor €20 tot €30 per maand</h2>
+        <p>
+          Vanaf ongeveer €20 per maand wordt de nadruk vaak steeds meer gelegd op uitgebreidere functionaliteit en
+          automatisering.
+        </p>
+        <p>
+          Je kunt bijvoorbeeld meer gebruikers, bankrekeningen of transacties krijgen, afhankelijk van het pakket.
+        </p>
+        <p>
+          Moneybird heeft bijvoorbeeld een Groei-pakket dat op het moment van schrijven wordt weergegeven voor €29 per
+          maand.
+        </p>
+        <p>
+          Daarbij ligt de nadruk sterker op automatisering en samenwerken met meerdere gebruikers.
+        </p>
+        <p>
+          Dat kan interessant zijn wanneer je onderneming groeit en je administratie meer tijd begint te kosten.
+        </p>
+        <p>
+          Maar als je als zzp&apos;er maar een paar facturen per maand hebt, heb je waarschijnlijk niet automatisch zo&apos;n
+          uitgebreid pakket nodig.
+        </p>
+
+        <h2>Boekhoudprogramma van €30 of €40+ per maand</h2>
+        <p>Er zijn ook boekhoudpakketten die €30, €40 of meer per maand kosten.</p>
+        <p>Dat betekent niet dat zo&apos;n programma automatisch beter is voor iedere zzp&apos;er.</p>
+        <p>Je betaalt in deze prijsklasse vooral voor een uitgebreider pakket.</p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>meer automatisering;</li>
+          <li>meer bankrekeningen;</li>
+          <li>meer transacties;</li>
+          <li>meer gebruikers;</li>
+          <li>uitgebreidere administratie;</li>
+          <li>of minder beperkingen.</li>
+        </ul>
+        <p>
+          Moneybird heeft bijvoorbeeld een Compleet-pakket dat op het moment van schrijven €41 per maand kost.
+        </p>
+        <p>Dat pakket is gericht op onbeperkt boekhouden en uitgebreidere administraties.</p>
+        <p>
+          Voor een zzp&apos;er met een eenvoudige administratie kan dat onnodig duur zijn. Voor iemand met veel
+          transacties of een uitgebreidere administratie kan het juist interessant zijn.
+        </p>
+
+        <h2>Wat krijg je eigenlijk voor je geld?</h2>
+        <p>De belangrijkste vraag is daarom niet:</p>
+        <blockquote>
+          <p>
+            <strong>Wat is het goedkoopste boekhoudprogramma?</strong>
+          </p>
+        </blockquote>
+        <p>Maar:</p>
+        <blockquote>
+          <p>
+            <strong>Wat krijg ik voor mijn maandelijkse bedrag?</strong>
+          </p>
+        </blockquote>
+        <p>
+          Stel dat je €5 per maand betaalt voor software, maar iedere maand twee uur extra bezig bent met handmatig
+          werk.
+        </p>
+        <p>Dan is die €5 misschien niet de goedkoopste oplossing.</p>
+        <p>
+          Andersom kan een pakket van €30 per maand onnodig duur zijn als je maar vijf facturen per maand hebt en
+          nauwelijks kosten maakt.
+        </p>
+        <p>
+          Kijk daarom naar de combinatie van <strong>prijs, functies en tijdsbesparing</strong>.
+        </p>
+
+        <h2>Goedkoop boekhoudprogramma voor zzp&apos;ers</h2>
+        <p>
+          Als je specifiek op zoek bent naar een goedkoop boekhoudprogramma, kijk dan eerst naar de omvang van je
+          administratie.
+        </p>
+
+        <h3>Je hebt weinig administratie</h3>
+        <p>Heb je:</p>
+        <ul>
+          <li>weinig klanten;</li>
+          <li>weinig facturen;</li>
+          <li>weinig zakelijke kosten;</li>
+          <li>weinig banktransacties;</li>
+        </ul>
+        <p>dan kan een goedkoop basispakket voldoende zijn.</p>
+        <p>Misschien heb je zelfs nog geen uitgebreid boekhoudprogramma nodig.</p>
+
+        <h3>Je hebt een gemiddelde administratie</h3>
+        <p>Verstuur je regelmatig facturen en heb je iedere maand meerdere kosten en transacties?</p>
+        <p>Dan kan een pakket van ongeveer €10 tot €20 per maand interessant zijn.</p>
+        <p>
+          Je betaalt dan voor meer overzicht en gemak zonder direct voor de uitgebreidste functies te kiezen.
+        </p>
+
+        <h3>Je hebt veel administratie</h3>
+        <p>Heb je veel transacties, meerdere bankrekeningen, veel kosten of meerdere gebruikers?</p>
+        <p>Dan kan een uitgebreider pakket logischer zijn.</p>
+        <p>
+          In dat geval kan de hogere maandprijs zich terugverdienen doordat je minder handmatig hoeft te doen.
+        </p>
+
+        <h2>Wat is het goedkoopste boekhoudprogramma voor zzp&apos;ers?</h2>
+        <p>Er is niet één programma dat altijd het goedkoopste is.</p>
+        <p>Dat komt doordat de prijs afhankelijk is van:</p>
+        <ul>
+          <li>het pakket;</li>
+          <li>het aantal transacties;</li>
+          <li>het aantal gebruikers;</li>
+          <li>facturatie;</li>
+          <li>bankkoppelingen;</li>
+          <li>automatisering;</li>
+          <li>en eventuele tijdelijke aanbiedingen.</li>
+        </ul>
+        <p>
+          Een programma dat €5 per maand kost, kan bijvoorbeeld goedkoper lijken dan een programma van €15. Maar als je
+          voor belangrijke functies moet upgraden, verandert de vergelijking.
+        </p>
+        <p>
+          Daarom is het verstandiger om te kijken naar de <strong>totale kosten voor jouw situatie</strong>.
+        </p>
+
+        <h2>Let op tijdelijke aanbiedingen</h2>
+        <p>
+          Bij het vergelijken van prijzen moet je goed kijken naar het verschil tussen de normale prijs en een
+          aanbieding.
+        </p>
+        <p>Dat is vooral relevant bij starters.</p>
+        <p>
+          Een programma kan bijvoorbeeld de eerste maanden gratis zijn of tijdelijk met korting worden aangeboden. Dat
+          kan een uitstekende manier zijn om goedkoop te beginnen, maar kijk ook naar wat je daarna betaalt.
+        </p>
+        <p>Vraag jezelf dus af:</p>
+        <p>
+          <strong>Wat kost het programma na de actieperiode?</strong>
+        </p>
+        <p>En:</p>
+        <p>
+          <strong>Welke functies blijven beschikbaar in het pakket dat ik daarna gebruik?</strong>
+        </p>
+
+        <h2>Is gratis boekhouden goedkoper dan een betaald programma?</h2>
+        <p>Niet altijd.</p>
+        <p>Je kunt bijvoorbeeld gratis of goedkoop beginnen met:</p>
+        <ul>
+          <li>een spreadsheet;</li>
+          <li>een gratis factuurtool;</li>
+          <li>of een tijdelijk gratis boekhoudpakket.</li>
+        </ul>
+        <p>Daar staat tegenover dat je meer zelf moet doen.</p>
+        <p>
+          Een betaald boekhoudprogramma kan juist tijd besparen door bijvoorbeeld automatisering en koppelingen.
+        </p>
+        <p>Daarom kun je de kosten van boekhoudsoftware het beste op twee manieren bekijken:</p>
+        <p>
+          <strong>1. Wat betaal ik per maand?</strong>
+        </p>
+        <p>
+          <strong>2. Hoeveel tijd kost mijn administratie mij?</strong>
+        </p>
+        <p>
+          Als een programma je iedere maand een paar uur administratie bespaart, kan €10 of €20 per maand relatief
+          weinig zijn.
+        </p>
+
+        <h2>Wat kost boekhouden met een boekhouder?</h2>
+        <p>Een boekhouder is een andere kostenpost dan alleen boekhoudsoftware.</p>
+        <p>
+          Je betaalt dan niet alleen voor het programma, maar vooral voor de dienstverlening van de boekhouder.
+        </p>
+        <p>De prijs kan sterk verschillen afhankelijk van bijvoorbeeld:</p>
+        <ul>
+          <li>de omvang van je administratie;</li>
+          <li>het aantal transacties;</li>
+          <li>het aantal aangiftes;</li>
+          <li>de werkzaamheden die je uitbesteedt;</li>
+          <li>de complexiteit van je onderneming;</li>
+          <li>en de mate waarin je zelf je administratie bijhoudt.</li>
+        </ul>
+        <p>
+          Je kunt bijvoorbeeld zelf je facturen en kosten verwerken en een boekhouder alleen inschakelen voor controle
+          en bepaalde aangiftes.
+        </p>
+        <p>Of je kunt vrijwel je volledige administratie uitbesteden.</p>
+        <p>
+          Daarom is er geen zinvol universeel bedrag voor <strong>“een boekhouder voor een zzp&apos;er”</strong>.
+        </p>
+        <p>Vraag offertes op basis van je eigen situatie als je administratie wilt uitbesteden.</p>
+
+        <h2>Boekhoudprogramma + boekhouder</h2>
+        <p>Je hoeft ook niet te kiezen tussen alleen software of alleen een boekhouder.</p>
+        <p>Een combinatie kan juist handig zijn.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Boekhoudprogramma → dagelijkse administratie</strong>
+        </p>
+        <p>
+          <strong>Boekhouder → controle en aangiftes</strong>
+        </p>
+        <p>Of:</p>
+        <p>
+          <strong>Boekhoudprogramma → jij verwerkt alles</strong>
+        </p>
+        <p>
+          <strong>Boekhouder → controle één of enkele keren per jaar</strong>
+        </p>
+        <p>
+          Dit kan een goede middenweg zijn wanneer je zelf controle wilt houden, maar niet alle fiscale of
+          administratieve werkzaamheden wilt doen.
+        </p>
+
+        <h2>Hoeveel moet je als zzp&apos;er eigenlijk uitgeven?</h2>
+        <p>Voor veel zzp&apos;ers is een uitgebreid boekhoudpakket niet noodzakelijk.</p>
+        <p>
+          Als je administratie klein is, kan een goedkoop pakket of zelfs een eenvoudige eigen administratie voldoende
+          zijn.
+        </p>
+        <p>
+          Heb je meer transacties en wil je automatisering, dan kan €10 tot €20 per maand een logische prijsklasse zijn.
+        </p>
+        <p>Wordt je administratie uitgebreider, dan kan een duurder pakket de moeite waard zijn.</p>
+        <p>
+          En als je helemaal geen tijd of zin hebt om je boekhouding te doen, kan een boekhouder belangrijker zijn dan
+          het verschil tussen een programma van €10 en €20 per maand.
+        </p>
+        <p>De juiste vraag is daarom:</p>
+        <blockquote>
+          <p>
+            <strong>Hoeveel administratie heb ik en hoeveel daarvan wil ik zelf doen?</strong>
+          </p>
+        </blockquote>
+
+        <h2>Waar moet je op letten naast de prijs?</h2>
+        <p>Een boekhoudprogramma vergelijken op alleen de maandprijs is meestal niet genoeg.</p>
+        <p>Let bijvoorbeeld op:</p>
+
+        <h3>Factureren</h3>
+        <p>Kun je vanuit het programma professionele facturen maken?</p>
+
+        <h3>Kosten verwerken</h3>
+        <p>Kun je zakelijke kosten en bonnetjes makkelijk toevoegen?</p>
+
+        <h3>Bankkoppeling</h3>
+        <p>Kun je je bankrekening koppelen zodat transacties automatisch worden verwerkt?</p>
+
+        <h3>Btw</h3>
+        <p>Kun je je btw-administratie en aangifte goed bijhouden?</p>
+
+        <h3>Automatisering</h3>
+        <p>Hoeveel handmatig werk blijft er over?</p>
+
+        <h3>Gebruikers</h3>
+        <p>Kunnen jij en bijvoorbeeld je boekhouder of medewerker in hetzelfde systeem werken?</p>
+
+        <h3>Limieten</h3>
+        <p>
+          Zijn er beperkingen op het aantal transacties, facturen, klanten, gebruikers of bankrekeningen?
+        </p>
+
+        <h3>Ondersteuning</h3>
+        <p>Kun je hulp krijgen als je ergens niet uitkomt?</p>
+        <p>
+          Een programma van €5 per maand kan op papier aantrekkelijk zijn, maar als je tegen allerlei limieten
+          aanloopt, kan een duurder pakket uiteindelijk beter passen.
+        </p>
+
+        <h2>Wat kost een boekhoudprogramma per jaar?</h2>
+        <p>Het is makkelijk om alleen naar het maandbedrag te kijken.</p>
+        <p>Maar je kunt beter ook naar de jaarlijkse kosten kijken.</p>
+        <p>Bijvoorbeeld:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[20rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Per maand
+                </th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">
+                  Per jaar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['€5', '€60'],
+                ['€10', '€120'],
+                ['€15', '€180'],
+                ['€20', '€240'],
+                ['€30', '€360'],
+                ['€40', '€480'],
+              ].map(([maand, jaar]) => (
+                <tr key={maand} className="border-b border-slate-100">
+                  <td className="px-4 py-3 text-right font-medium text-slate-800">{maand}</td>
+                  <td className="px-4 py-3 text-right">{jaar}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>Een verschil van €10 per maand betekent dus €120 per jaar.</p>
+        <p>
+          Dat klinkt misschien aanzienlijk, maar als het duurdere programma je iedere maand tijd bespaart, kan dat
+          verschil relatief klein zijn.
+        </p>
+        <p>
+          Controleer bij jaarlijkse abonnementen ook of de prijs per maand alleen geldt bij een jaarbetaling.
+        </p>
+
+        <h2>Wat is de beste prijs voor een zzp&apos;er?</h2>
+        <p>Er is geen ideale prijs.</p>
+        <p>
+          Voor een zzp&apos;er met een eenvoudige administratie kan <strong>€5 tot €10 per maand</strong> al voldoende
+          zijn.
+        </p>
+        <p>
+          Voor iemand die meer automatisering en functies nodig heeft, kan <strong>€10 tot €20 per maand</strong> een
+          betere keuze zijn.
+        </p>
+        <p>
+          Voor uitgebreidere administraties kan <strong>€20+ per maand</strong> logisch zijn.
+        </p>
+        <p>
+          En als je je administratie grotendeels wilt uitbesteden, kunnen de kosten van een{' '}
+          <strong>boekhouder</strong> belangrijker worden dan de softwareprijs.
+        </p>
+        <p>Het doel is niet om zo weinig mogelijk te betalen.</p>
+        <p>
+          Het doel is om <strong>niet meer te betalen dan je nodig hebt</strong>.
+        </p>
+
+        <h2>Wil je niet alleen naar de prijs kijken?</h2>
+        <p>De goedkoopste optie is niet automatisch de beste optie.</p>
+        <p>
+          Misschien heb je helemaal geen uitgebreid boekhoudprogramma nodig. Of misschien is een goedkoop pakket juist
+          onhandig omdat je veel handmatig moet verwerken.
+        </p>
+        <p>Daarom kun je beter eerst bepalen wat voor administratie je hebt.</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>
+          Beantwoord een paar vragen over bijvoorbeeld je facturen, kosten, transacties en behoefte aan automatisering.
+          Je krijgt vervolgens een indicatie welke oplossing waarschijnlijk bij jouw situatie past en waarom.
+        </p>
+
+        <h2>Welke boekhoudprogramma&apos;s passen bij jouw situatie?</h2>
+        <p>
+          Heb je eenmaal bepaald welk type oplossing je nodig hebt, dan kun je de verschillende boekhoudprogramma&apos;s
+          met elkaar vergelijken.
+        </p>
+        <p>
+          Denk bijvoorbeeld aan programma&apos;s zoals <strong>Moneybird, Jortt en e-Boekhouden.nl</strong>.
+        </p>
+        <p>
+          Ze verschillen onder andere in prijs, functies, automatisering en de manier waarop ze hun pakketten opbouwen.
+        </p>
+        <p>
+          Bekijk daarom niet alleen welk programma het goedkoopste is, maar vooral welk programma aansluit op jouw
+          administratie.
+        </p>
+        <GuideToolCta
+          href="/blogs/beste-boekhoudprogramma-zzp"
+          label="Bekijk de beste boekhoudprogramma's voor zzp'ers →"
+        />
+        <p>
+          Daar vergelijken we verschillende boekhoudprogramma&apos;s op onder andere prijs, functies en gebruiksgemak.
+        </p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Wat kost een boekhoudprogramma voor een zzp&apos;er?</h3>
+        <p>
+          De prijs varieert van gratis of enkele euro&apos;s per maand tot €20, €30 of €40+ per maand. De uiteindelijke
+          prijs hangt af van het programma en het pakket dat je kiest.
+        </p>
+        <h3>Wat is een goedkoop boekhoudprogramma voor zzp&apos;ers?</h3>
+        <p>
+          Goedkope boekhoudprogramma&apos;s zijn onder andere te vinden in de prijsklasse van ongeveer €5 tot €10 per
+          maand. Kijk wel naar welke functies en limieten bij die prijs horen.
+        </p>
+        <h3>Wat is het goedkoopste boekhoudprogramma?</h3>
+        <p>
+          Dat hangt af van je situatie en van wat je onder goedkoop verstaat. Een lage maandprijs is niet automatisch
+          de laagste totale kosten als je daardoor veel handmatig werk moet doen of snel een duurder pakket nodig hebt.
+        </p>
+        <h3>Is een gratis boekhoudprogramma goed genoeg?</h3>
+        <p>
+          Voor een eenvoudige administratie kan een gratis oplossing voldoende zijn. Controleer wel of het daadwerkelijk
+          om gratis gebruik gaat en welke functies en limieten daarbij horen.
+        </p>
+        <h3>Hoeveel kost Moneybird?</h3>
+        <p>
+          Op het moment van schrijven worden de pakketten van Moneybird weergegeven vanaf €15 per maand. Er zijn
+          daarnaast uitgebreidere pakketten van €29 en €41 per maand. De beschikbare functies en limieten verschillen
+          per pakket.
+        </p>
+        <h3>Hoeveel kost e-Boekhouden.nl?</h3>
+        <p>
+          Op het moment van schrijven wordt het ZZP-pakket weergegeven voor €4,98 per maand bij de aangeboden korting.
+          Daarnaast worden pakketten weergegeven vanaf €7,25 per maand en €12 per maand voor boekhouden en factureren.
+          Voor startende ondernemers is er bovendien een startersaanbod waarbij de eerste 15 maanden gratis kunnen
+          zijn.
+        </p>
+        <h3>Is een duurder boekhoudprogramma beter?</h3>
+        <p>
+          Niet automatisch. Een duurder programma biedt vaak meer functies, automatisering of hogere limieten. Als je
+          die functies niet nodig hebt, kan een goedkoper programma beter bij je passen.
+        </p>
+        <h3>Is een boekhouder goedkoper dan een boekhoudprogramma?</h3>
+        <p>
+          Niet per definitie. Een boekhouder kost meer dan alleen software, maar je krijgt daar persoonlijke
+          dienstverlening en kennis voor terug. De juiste keuze hangt af van hoeveel administratie je zelf wilt doen.
+        </p>
+        <h3>Kan ik als zzp&apos;er eerst goedkoop beginnen?</h3>
+        <p>
+          Ja. Je kunt bijvoorbeeld beginnen met een eenvoudige administratie en later overstappen naar uitgebreidere
+          software wanneer je onderneming groeit.
+        </p>
+
+        <h2>Conclusie</h2>
+        <p>Een boekhoudprogramma voor zzp&apos;ers hoeft niet duur te zijn.</p>
+        <p>
+          Je vindt oplossingen van <strong>enkele euro&apos;s per maand</strong>, maar ook uitgebreidere pakketten van{' '}
+          <strong>€20, €30 of €40+ per maand</strong>. Daarnaast kun je ervoor kiezen om je administratie geheel of
+          gedeeltelijk uit te besteden aan een boekhouder.
+        </p>
+        <p>De belangrijkste vraag is daarom niet:</p>
+        <p>
+          <strong>“Wat is het goedkoopste boekhoudprogramma?”</strong>
+        </p>
+        <p>Maar:</p>
+        <p>
+          <strong>“Welke administratie heb ik en welke functies heb ik daadwerkelijk nodig?”</strong>
+        </p>
+        <p>Heb je weinig facturen en kosten? Dan kan een goedkope oplossing voldoende zijn.</p>
+        <p>
+          Heb je meer transacties en wil je automatisering? Dan kan een uitgebreider programma de extra kosten waard
+          zijn.
+        </p>
+        <p>
+          Wil je vooral zo min mogelijk tijd aan je administratie besteden? Dan kan een combinatie van software en een
+          boekhouder interessant zijn.
+        </p>
+        <p>
+          <strong>Wil je eerst bepalen welke oplossing bij jouw situatie past?</strong>
+        </p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>En als je weet welk type boekhoudprogramma je zoekt:</p>
+        <GuideToolCta
+          href="/blogs/beste-boekhoudprogramma-zzp"
+          label="Bekijk de beste boekhoudprogramma's voor zzp'ers →"
+        />
+      </>
+    ),
+  },
+  {
+    slug: 'gratis-boekhoudprogramma-zzp',
+    cluster: 'boekhouden',
+    seoTitle: 'Gratis boekhoudprogramma zzp: wat is echt gratis?',
+    title: "Gratis boekhoudprogramma voor zzp'ers: is gratis genoeg?",
+    excerpt:
+      'Op zoek naar een gratis boekhoudprogramma voor zzp? Ontdek wat gratis software kan, waar de beperkingen zitten en wanneer betaald boekhouden slimmer is.',
+    keywords:
+      'gratis boekhoudprogramma zzp, gratis boekhoudprogramma voor zzp, boekhoudprogramma zzp gratis, beste gratis boekhoudprogramma zzp, gratis boekhouden zzp, gratis boekhouding zzp, goedkoop boekhoudprogramma zzp',
+    tool: {
+      href: '/tools/boekhoudprogramma-check',
+      label: 'Doe de boekhoudprogramma-check',
+      ctaLabel: 'Doe de boekhoudprogramma-check',
+      relatedTitle: 'Boekhoudprogramma-check',
+      relatedExcerpt:
+        "Ontdek welk type boekhoudprogramma bij jouw zzp-administratie past. Gratis, 8 korte vragen, geen account nodig.",
+    },
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Blogs/Gratis%20boekhoudprogramma%20voor%20zzp%20ers.jpg',
+      alt: "Gratis boekhoudprogramma voor zzp'ers: is gratis genoeg?",
+    },
+    datePublished: '2026-09-05',
+    dateModified: '2026-09-05',
+    relatedSlugs: [
+      'beste-boekhoudprogramma-zzp',
+      'wanneer-boekhoudsoftware-nodig-zzp',
+      'gratis-factuurtool-vs-boekhoudprogramma',
+    ],
+    relatedGuideSlugs: [
+      'kosten-boekhoudprogramma-zzp',
+      'boekhouding-zzp',
+      'zelf-boekhouden-zzp',
+    ],
+    faq: [
+      {
+        question: "Is er een volledig gratis boekhoudprogramma voor zzp'ers?",
+        answer:
+          'Dat kan, maar je moet goed controleren welke functies daadwerkelijk gratis zijn. Sommige aanbieders hebben een gratis basisversie of tijdelijke gratis periode, terwijl uitgebreidere functies betaald zijn.',
+      },
+      {
+        question: "Wat is het beste gratis boekhoudprogramma voor zzp'ers?",
+        answer:
+          'Dat hangt af van je administratie. Als je alleen facturen nodig hebt, kan een gratis factuurtool voldoende zijn. Als je ook kosten, banktransacties en btw wilt verwerken, heb je meer uitgebreide software nodig.',
+      },
+      {
+        question: "Kan ik als zzp'er gratis boekhouden?",
+        answer:
+          'Ja, dat kan bij een eenvoudige administratie. Je kunt bijvoorbeeld je administratie zelf bijhouden met een spreadsheet of gebruikmaken van gratis of tijdelijk gratis software.',
+      },
+      {
+        question: 'Is FactuurBaas een gratis boekhoudprogramma?',
+        answer:
+          'Nee. FactuurBaas is een gratis online factuurtool. Je kunt er professionele facturen mee maken zonder account en als PDF downloaden. Voor een volledige boekhouding moet je je overige administratie op een andere manier bijhouden.',
+      },
+      {
+        question: 'Is een gratis boekhoudprogramma goed genoeg?',
+        answer:
+          'Voor sommige zzp’ers wel. Vooral wanneer je weinig facturen, kosten en transacties hebt. Wordt je administratie groter, dan kan betaald boekhoudprogramma interessanter worden vanwege extra functies en automatisering.',
+      },
+      {
+        question: "Wat is het goedkoopste boekhoudprogramma voor zzp'ers?",
+        answer:
+          'Er is geen programma dat in iedere situatie het goedkoopste is. Kijk naast de maandprijs ook naar functies, limieten en eventuele tijdelijke aanbiedingen.',
+      },
+      {
+        question: 'Is een gratis proefperiode hetzelfde als gratis boekhouden?',
+        answer:
+          'Nee. Bij een gratis proefperiode betaal je meestal niets gedurende een beperkte periode. Daarna begint het betaalde abonnement.',
+      },
+      {
+        question: 'Wanneer moet ik overstappen van gratis naar betaald?',
+        answer:
+          'Een logisch moment is wanneer je administratie groeit of wanneer je merkt dat je gratis oplossing je te veel handmatig werk kost.',
+      },
+      {
+        question: 'Heb ik als starter een boekhoudprogramma nodig?',
+        answer:
+          'Niet automatisch. Als je administratie klein is, kun je mogelijk beginnen met een eenvoudige oplossing. Naarmate je onderneming groeit, kun je altijd overstappen naar uitgebreidere software.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Ben je zzp&apos;er en zoek je een <strong>gratis boekhoudprogramma</strong>? Dan kom je al snel allerlei
+          programma&apos;s tegen die gratis lijken, maar waarbij belangrijke functies alleen in een betaald pakket
+          beschikbaar zijn.
+        </p>
+        <p>Daarnaast is er een andere vraag die je jezelf misschien eerst moet stellen:</p>
+        <p>
+          <strong>Heb ik eigenlijk wel een volledig boekhoudprogramma nodig?</strong>
+        </p>
+        <p>
+          Als je weinig facturen, kosten en transacties hebt, kan een eenvoudige administratie of een gratis
+          factuurtool misschien al voldoende zijn.
+        </p>
+        <p>
+          Heb je wel een uitgebreidere administratie, dan kan betaald boekhoudprogramma juist interessanter zijn.
+        </p>
+        <p>
+          In deze gids leggen we uit wat je van gratis boekhoudsoftware mag verwachten, waar de beperkingen zitten en
+          wanneer gratis boekhouden voor een zzp&apos;er voldoende is.
+        </p>
+
+        <h2>Wat is een gratis boekhoudprogramma?</h2>
+        <p>
+          Met een gratis boekhoudprogramma kun je zonder maandelijkse abonnementskosten je administratie bijhouden.
+        </p>
+        <p>Maar “gratis” kan verschillende dingen betekenen.</p>
+        <p>Een programma kan bijvoorbeeld:</p>
+        <ul>
+          <li>permanent gratis zijn;</li>
+          <li>alleen een gratis basispakket hebben;</li>
+          <li>tijdelijk gratis zijn;</li>
+          <li>een gratis proefperiode aanbieden;</li>
+          <li>of bepaalde functies gratis aanbieden terwijl andere functies betaald zijn.</li>
+        </ul>
+        <p>
+          Daarom is het belangrijk om niet alleen naar het woord <strong>gratis</strong> te kijken.
+        </p>
+        <p>Vraag vooral:</p>
+        <blockquote>
+          <p>
+            <strong>Welke administratie kan ik daadwerkelijk gratis bijhouden?</strong>
+          </p>
+        </blockquote>
+
+        <h2>Gratis factuurprogramma is niet hetzelfde als gratis boekhoudprogramma</h2>
+        <p>Dit verschil is belangrijk.</p>
+        <p>
+          Een <strong>factuurprogramma</strong> is vooral bedoeld om verkoopfacturen te maken.
+        </p>
+        <p>
+          Een <strong>boekhoudprogramma</strong> richt zich op een veel bredere administratie.
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[36rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col" />
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Gratis factuurtool
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Boekhoudprogramma
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Facturen maken', '✅', 'Vaak'],
+                ['Facturen bewaren', '✅', 'Vaak'],
+                ['Kosten bijhouden', 'Beperkt / zelf', '✅'],
+                ['Banktransacties', 'Zelf bijhouden', 'Vaak'],
+                ['Btw-administratie', 'Beperkt / zelf', 'Vaak'],
+                ['Financiële overzichten', 'Beperkt', 'Vaak'],
+                ['Automatisering', 'Beperkt', 'Vaak'],
+                ['Volledige boekhouding', '❌', '✅'],
+              ].map(([feature, factuur, boekhoud]) => (
+                <tr key={feature} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-slate-800">{feature}</td>
+                  <td className="px-4 py-3">{factuur}</td>
+                  <td className="px-4 py-3">{boekhoud}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Dat betekent dat een gratis factuurtool niet automatisch een gratis boekhoudprogramma is.
+        </p>
+        <p>En dat hoeft ook helemaal geen probleem te zijn.</p>
+        <p>
+          Als je alleen facturen hoeft te maken en je overige administratie klein en overzichtelijk is, heb je
+          misschien helemaal geen uitgebreid boekhoudprogramma nodig.
+        </p>
+        <p>
+          Meer over dit verschil lees je in{' '}
+          <Link
+            href="/blogs/gratis-factuurtool-vs-boekhoudprogramma"
+            className="text-warm-orange hover:underline"
+          >
+            factuurprogramma of boekhoudprogramma
+          </Link>
+          .
+        </p>
+
+        <h2>Wanneer is een gratis factuurtool genoeg?</h2>
+        <p>Een gratis factuurtool kan interessant zijn als je administratie eenvoudig is.</p>
+        <p>Bijvoorbeeld wanneer je:</p>
+        <ul>
+          <li>weinig klanten hebt;</li>
+          <li>weinig facturen verstuurt;</li>
+          <li>weinig zakelijke kosten hebt;</li>
+          <li>weinig banktransacties hebt;</li>
+          <li>en je overige administratie zelf overzichtelijk kunt bijhouden.</li>
+        </ul>
+        <p>
+          In dat geval kan het onnodig zijn om iedere maand te betalen voor functies die je nauwelijks gebruikt.
+        </p>
+
+        <h3>FactuurBaas als gratis factuurtool</h3>
+        <p>
+          Met <strong>FactuurBaas</strong> kun je gratis online facturen maken zonder account.
+        </p>
+        <p>Je maakt je factuur, downloadt deze als PDF en verstuurt hem zelf naar je klant.</p>
+        <p>
+          Dat maakt FactuurBaas vooral interessant voor zzp&apos;ers die{' '}
+          <strong>een gratis manier zoeken om professioneel te factureren</strong>, maar nog geen uitgebreide
+          boekhoudsoftware nodig hebben.
+        </p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur →" />
+        <p>Let wel op het verschil:</p>
+        <p>
+          <strong>FactuurBaas is een gratis factuurtool, geen volledig boekhoudprogramma.</strong>
+        </p>
+        <p>Je overige administratie moet je dus op een andere manier bijhouden.</p>
+
+        <h2>Wanneer is gratis boekhoudsoftware voldoende?</h2>
+        <p>
+          Een gratis boekhoudprogramma kan voldoende zijn wanneer je administratie klein is én de gratis versie alle
+          functies bevat die jij nodig hebt.
+        </p>
+        <p>Kijk bijvoorbeeld of je gratis:</p>
+        <ul>
+          <li>inkomsten kunt verwerken;</li>
+          <li>zakelijke kosten kunt registreren;</li>
+          <li>facturen kunt maken;</li>
+          <li>btw kunt bijhouden;</li>
+          <li>banktransacties kunt verwerken;</li>
+          <li>documenten kunt bewaren;</li>
+          <li>en de overzichten kunt maken die je nodig hebt.</li>
+        </ul>
+        <p>
+          Als één van deze functies achter een betaalde versie zit, moet je bepalen of je zonder die functie kunt
+          werken.
+        </p>
+
+        <h2>Wat zit er vaak niet in een gratis pakket?</h2>
+        <p>Gratis software heeft vaak beperkingen.</p>
+        <p>Welke beperkingen gelden, verschilt per programma, maar denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>een maximum aantal transacties;</li>
+          <li>een maximum aantal facturen;</li>
+          <li>geen of beperkte bankkoppelingen;</li>
+          <li>minder automatisering;</li>
+          <li>minder gebruikers;</li>
+          <li>beperkte rapportages;</li>
+          <li>geen uitgebreide facturatie;</li>
+          <li>of functies die pas in een betaald pakket beschikbaar zijn.</li>
+        </ul>
+        <p>
+          Daarom kan een gratis pakket prima zijn om te starten, maar minder geschikt worden zodra je onderneming
+          groeit.
+        </p>
+
+        <h2>Gratis betekent niet altijd gratis</h2>
+        <p>Let ook op het verschil tussen:</p>
+        <p>
+          <strong>Gratis</strong>
+        </p>
+        <p>en:</p>
+        <p>
+          <strong>Eerste maanden gratis.</strong>
+        </p>
+        <p>
+          Een gratis proefperiode kan handig zijn om software uit te proberen. Maar als je daarna €15, €25 of €40 per
+          maand betaalt, is het uiteindelijk geen gratis boekhoudprogramma.
+        </p>
+        <p>Kijk daarom altijd naar:</p>
+        <p>
+          <strong>Wat betaal ik na de gratis periode?</strong>
+        </p>
+        <p>En:</p>
+        <p>
+          <strong>Welke functies krijg ik daarna voor dat bedrag?</strong>
+        </p>
+        <p>Dat is vooral belangrijk wanneer je een startersaanbieding ziet.</p>
+
+        <h2>Een paar gratis opties voor zzp&apos;ers</h2>
+        <p>
+          Er zijn verschillende manieren waarop je als zzp&apos;er gratis of bijna gratis kunt beginnen.
+        </p>
+
+        <h3>1. Een gratis factuurtool</h3>
+        <p>Als je vooral facturen nodig hebt, kun je een gratis factuurtool gebruiken.</p>
+        <p>
+          Met FactuurBaas kun je bijvoorbeeld zonder account een professionele factuur maken en als PDF downloaden.
+        </p>
+        <p>
+          Daarmee hoef je niet direct een betaald boekhoudprogramma af te sluiten als je administratie verder
+          eenvoudig is.
+        </p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur met FactuurBaas →" />
+
+        <h3>2. Een spreadsheet</h3>
+        <p>
+          Je kunt je inkomsten en kosten ook zelf bijhouden in Excel, Google Sheets of een andere spreadsheet.
+        </p>
+        <p>Dit kost geen abonnementskosten als je de software al tot je beschikking hebt.</p>
+        <p>Het nadeel is dat je veel zelf moet verwerken.</p>
+        <p>
+          Voor een heel kleine administratie kan dat prima werken. Zodra je veel transacties krijgt, wordt het al
+          snel minder aantrekkelijk.
+        </p>
+
+        <h3>3. Een gratis of tijdelijk gratis boekhoudpakket</h3>
+        <p>
+          Sommige aanbieders hebben een gratis basisversie, gratis proefperiode of tijdelijke aanbieding.
+        </p>
+        <p>Dat kan interessant zijn wanneer je daadwerkelijk boekhoudsoftware nodig hebt.</p>
+        <p>
+          Controleer wel altijd welke functies onderdeel zijn van de gratis versie en wat je na een eventuele
+          actieperiode betaalt.
+        </p>
+
+        <h2>Gratis boekhouden versus goedkoop boekhouden</h2>
+        <p>Stel dat je kunt kiezen tussen:</p>
+        <p>
+          <strong>Gratis → veel zelf doen</strong>
+        </p>
+        <p>of:</p>
+        <p>
+          <strong>€10 per maand → meer automatisering</strong>
+        </p>
+        <p>Dan is gratis niet automatisch de goedkoopste optie.</p>
+        <p>
+          Als je door gratis software iedere maand twee uur extra administratie hebt, betaal je misschien met je
+          tijd.
+        </p>
+        <p>Daarom kun je beter kijken naar:</p>
+        <blockquote>
+          <p>
+            <strong>Wat kost de software + hoeveel tijd kost mijn administratie?</strong>
+          </p>
+        </blockquote>
+        <p>
+          Voor sommige zzp&apos;ers is €10 of €15 per maand een kleine prijs voor veel minder handmatig werk.
+        </p>
+        <p>
+          Voor anderen is dat geld juist onnodig als ze maar een paar facturen per maand hebben.
+        </p>
+
+        <h2>Wanneer is een betaald boekhoudprogramma de moeite waard?</h2>
+        <p>Een betaald programma wordt interessanter wanneer je administratie groeit.</p>
+        <p>Bijvoorbeeld als je:</p>
+        <ul>
+          <li>regelmatig facturen verstuurt;</li>
+          <li>veel zakelijke kosten hebt;</li>
+          <li>veel bonnetjes verwerkt;</li>
+          <li>veel banktransacties hebt;</li>
+          <li>een bankkoppeling wilt;</li>
+          <li>minder handmatig werk wilt;</li>
+          <li>automatisch meer van je administratie wilt verwerken;</li>
+          <li>of meer financiële overzichten nodig hebt.</li>
+        </ul>
+        <p>Dan betaal je niet alleen voor software.</p>
+        <p>
+          Je betaalt vooral voor <strong>tijdwinst, overzicht en automatisering</strong>.
+        </p>
+
+        <h2>Wat kost een goedkoop boekhoudprogramma?</h2>
+        <p>Je hoeft ook niet meteen €30 of €40 per maand uit te geven.</p>
+        <p>Er zijn boekhoudprogramma&apos;s in verschillende prijsklassen.</p>
+        <p>Je kunt grofweg denken aan:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full min-w-[32rem] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Prijs
+                </th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">
+                  Wat je kunt verwachten
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['€0', 'Basis of tijdelijke gratis oplossing'],
+                ['€5–€10 p/m', 'Eenvoudige boekhouding'],
+                ['€10–€20 p/m', 'Meer functies en gemak'],
+                ['€20–€30 p/m', 'Uitgebreidere administratie en automatisering'],
+                ['€30+ p/m', 'Uitgebreide pakketten en hogere limieten'],
+              ].map(([prijs, verwachting]) => (
+                <tr key={prijs} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-slate-800">{prijs}</td>
+                  <td className="px-4 py-3">{verwachting}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>De exacte functies verschillen per aanbieder.</p>
+        <p>
+          Een goedkoop betaald pakket kan daarom soms interessanter zijn dan een gratis pakket met veel beperkingen.
+        </p>
+        <GuideToolCta
+          href="/gidsen/kosten-boekhoudprogramma-zzp"
+          label="Lees wat een boekhoudprogramma voor zzp'ers kost →"
+        />
+
+        <h2>Gratis boekhoudprogramma voor starters</h2>
+        <p>
+          Als je net begint als zzp&apos;er, is de verleiding groot om alles gratis te willen doen.
+        </p>
+        <p>Dat is begrijpelijk.</p>
+        <p>Je hebt misschien maar een paar klanten en wilt nog geen vaste maandelijkse kosten.</p>
+        <p>Dat betekent niet dat je per se een gratis boekhoudprogramma nodig hebt.</p>
+        <p>Je kunt bijvoorbeeld beginnen met:</p>
+        <p>
+          <strong>Factuurtool + eenvoudige eigen administratie</strong>
+        </p>
+        <p>en later overstappen wanneer je administratie groter wordt.</p>
+        <p>
+          Of je kunt direct een goedkoop boekhoudprogramma gebruiken als je verwacht dat je veel facturen en kosten
+          krijgt.
+        </p>
+        <p>
+          Het is vooral belangrijk dat je <strong>niet betaalt voor functies die je niet nodig hebt</strong>, maar ook
+          niet te lang vasthoudt aan een gratis oplossing die je onnodig veel tijd kost.
+        </p>
+
+        <h2>Wat is het beste gratis boekhoudprogramma voor zzp&apos;ers?</h2>
+        <p>Er is geen gratis boekhoudprogramma dat voor iedere zzp&apos;er het beste is.</p>
+        <p>De juiste keuze hangt af van wat je onder “gratis” verstaat en wat je nodig hebt.</p>
+
+        <h3>Heb je vooral een factuur nodig?</h3>
+        <p>Dan kan een gratis factuurtool voldoende zijn.</p>
+        <p>
+          <strong>FactuurBaas</strong> is hiervoor een eenvoudige optie: je kunt zonder account gratis een factuur
+          maken en als PDF downloaden.
+        </p>
+
+        <h3>Wil je je volledige administratie bijhouden?</h3>
+        <p>Dan heb je een oplossing nodig die verder gaat dan alleen factureren.</p>
+        <p>Kijk dan bijvoorbeeld naar:</p>
+        <ul>
+          <li>inkomsten;</li>
+          <li>kosten;</li>
+          <li>btw;</li>
+          <li>banktransacties;</li>
+          <li>rapportages;</li>
+          <li>automatisering;</li>
+          <li>en eventuele limieten.</li>
+        </ul>
+
+        <h3>Wil je gratis beginnen, maar later uitbreiden?</h3>
+        <p>Dan kan een boekhoudprogramma met een gratis startersperiode interessant zijn.</p>
+        <p>
+          Let daarbij vooral op de prijs en functies nadat de gratis periode afgelopen is.
+        </p>
+
+        <h2>Wat is beter: gratis of betaald?</h2>
+        <p>Dat hangt af van je administratie.</p>
+
+        <h3>Gratis is waarschijnlijk voldoende als:</h3>
+        <ul>
+          <li>je weinig facturen hebt;</li>
+          <li>je weinig kosten hebt;</li>
+          <li>je administratie overzichtelijk is;</li>
+          <li>je weinig transacties hebt;</li>
+          <li>en je bereid bent om een deel van het werk zelf te doen.</li>
+        </ul>
+
+        <h3>Betaald is waarschijnlijk interessanter als:</h3>
+        <ul>
+          <li>je veel transacties hebt;</li>
+          <li>je veel kosten verwerkt;</li>
+          <li>je een bankkoppeling wilt;</li>
+          <li>je veel tijd kwijt bent aan administratie;</li>
+          <li>je meer automatisering wilt;</li>
+          <li>of je administratie groeit.</li>
+        </ul>
+        <p>Er is dus geen regel dat je als startende zzp&apos;er altijd gratis moet beginnen.</p>
+
+        <h2>Gratis boekhoudprogramma of boekhouder?</h2>
+        <p>Een boekhoudprogramma en een boekhouder lossen verschillende problemen op.</p>
+        <p>
+          Software helpt je om je administratie te organiseren en bepaalde werkzaamheden te automatiseren.
+        </p>
+        <p>Een boekhouder levert daarnaast persoonlijke kennis en ondersteuning.</p>
+        <p>Als je weinig administratie hebt en het zelf wilt doen, kan software voldoende zijn.</p>
+        <p>
+          Heb je weinig tijd, vind je administratie lastig of heb je een complexere onderneming? Dan kan een
+          boekhouder interessanter zijn.
+        </p>
+        <p>Je kunt beide ook combineren.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Boekhoudprogramma → dagelijkse administratie</strong>
+        </p>
+        <p>
+          <strong>Boekhouder → controle en aangiftes</strong>
+        </p>
+        <p>
+          Zo houd je een deel van de administratie zelf in de hand, maar heb je professionele hulp waar dat nodig is.
+        </p>
+
+        <h2>Wil je weten wat jij echt nodig hebt?</h2>
+        <p>
+          De vraag <strong>“Wat is het beste gratis boekhoudprogramma?”</strong> is misschien niet de beste eerste
+          vraag.
+        </p>
+        <p>Begin liever met:</p>
+        <blockquote>
+          <p>
+            <strong>“Hoe uitgebreid is mijn administratie?”</strong>
+          </p>
+        </blockquote>
+        <p>
+          Heb je vijf facturen per maand en nauwelijks kosten? Dan heb je waarschijnlijk andere behoeften dan iemand
+          met vijftig facturen, veel zakelijke uitgaven en honderden banktransacties.
+        </p>
+        <p>
+          Met de gratis <strong>boekhoudprogramma-check</strong> kun je kijken welke oplossing waarschijnlijk bij jouw
+          situatie past.
+        </p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>
+          Je krijgt een indicatie of een eenvoudige factuurtool, basis boekhoudsoftware, uitgebreider
+          boekhoudprogramma of een combinatie met een boekhouder waarschijnlijk het beste aansluit — en waarom.
+        </p>
+
+        <h2>Welke boekhoudprogramma&apos;s zijn geschikt?</h2>
+        <p>
+          Als uit de check blijkt dat je daadwerkelijk boekhoudsoftware nodig hebt, kun je daarna de verschillende
+          programma&apos;s vergelijken.
+        </p>
+        <p>
+          Voor zzp&apos;ers zijn bijvoorbeeld <strong>Moneybird, Jortt en e-Boekhouden.nl</strong> interessante opties
+          om naast elkaar te leggen.
+        </p>
+        <p>
+          Ze verschillen in prijs, functies, automatisering en de manier waarop hun pakketten zijn opgebouwd.
+        </p>
+        <GuideToolCta
+          href="/blogs/beste-boekhoudprogramma-zzp"
+          label="Bekijk de beste boekhoudprogramma's voor zzp'ers →"
+        />
+        <p>Daar kun je verder kijken welke programma&apos;s bij jouw situatie passen.</p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Is er een volledig gratis boekhoudprogramma voor zzp&apos;ers?</h3>
+        <p>
+          Dat kan, maar je moet goed controleren welke functies daadwerkelijk gratis zijn. Sommige aanbieders hebben
+          een gratis basisversie of tijdelijke gratis periode, terwijl uitgebreidere functies betaald zijn.
+        </p>
+        <h3>Wat is het beste gratis boekhoudprogramma voor zzp&apos;ers?</h3>
+        <p>
+          Dat hangt af van je administratie. Als je alleen facturen nodig hebt, kan een gratis factuurtool voldoende
+          zijn. Als je ook kosten, banktransacties en btw wilt verwerken, heb je meer uitgebreide software nodig.
+        </p>
+        <h3>Kan ik als zzp&apos;er gratis boekhouden?</h3>
+        <p>
+          Ja, dat kan bij een eenvoudige administratie. Je kunt bijvoorbeeld je administratie zelf bijhouden met een
+          spreadsheet of gebruikmaken van gratis of tijdelijk gratis software.
+        </p>
+        <h3>Is FactuurBaas een gratis boekhoudprogramma?</h3>
+        <p>
+          Nee. FactuurBaas is een gratis online factuurtool. Je kunt er professionele facturen mee maken zonder
+          account en als PDF downloaden. Voor een volledige boekhouding moet je je overige administratie op een andere
+          manier bijhouden.
+        </p>
+        <h3>Is een gratis boekhoudprogramma goed genoeg?</h3>
+        <p>
+          Voor sommige zzp&apos;ers wel. Vooral wanneer je weinig facturen, kosten en transacties hebt. Wordt je
+          administratie groter, dan kan betaald boekhoudprogramma interessanter worden vanwege extra functies en
+          automatisering.
+        </p>
+        <h3>Wat is het goedkoopste boekhoudprogramma voor zzp&apos;ers?</h3>
+        <p>
+          Er is geen programma dat in iedere situatie het goedkoopste is. Kijk naast de maandprijs ook naar functies,
+          limieten en eventuele tijdelijke aanbiedingen.
+        </p>
+        <h3>Is een gratis proefperiode hetzelfde als gratis boekhouden?</h3>
+        <p>
+          Nee. Bij een gratis proefperiode betaal je meestal niets gedurende een beperkte periode. Daarna begint het
+          betaalde abonnement.
+        </p>
+        <h3>Wanneer moet ik overstappen van gratis naar betaald?</h3>
+        <p>
+          Een logisch moment is wanneer je administratie groeit of wanneer je merkt dat je gratis oplossing je te veel
+          handmatig werk kost.
+        </p>
+        <h3>Heb ik als starter een boekhoudprogramma nodig?</h3>
+        <p>
+          Niet automatisch. Als je administratie klein is, kun je mogelijk beginnen met een eenvoudige oplossing.
+          Naarmate je onderneming groeit, kun je altijd overstappen naar uitgebreidere software.
+        </p>
+
+        <h2>Conclusie</h2>
+        <p>
+          Een <strong>gratis boekhoudprogramma voor zzp&apos;ers</strong> kan een goede oplossing zijn, maar gratis is
+          niet altijd nodig en ook niet altijd de goedkoopste keuze.
+        </p>
+        <p>
+          Heb je een eenvoudige administratie? Dan kun je mogelijk prima beginnen met een gratis factuurtool,
+          spreadsheet of eenvoudige boekhoudoplossing.
+        </p>
+        <p>
+          Heb je veel facturen, kosten en transacties? Dan kan betaald boekhoudprogramma interessanter zijn omdat je
+          meer automatisering en overzicht krijgt.
+        </p>
+        <p>Kijk daarom niet alleen naar de prijs.</p>
+        <p>Kijk naar:</p>
+        <p>
+          <strong>Wat heb ik nodig?</strong>
+        </p>
+        <p>
+          <strong>Hoeveel administratie heb ik?</strong>
+        </p>
+        <p>
+          <strong>Hoeveel wil ik zelf doen?</strong>
+        </p>
+        <p>
+          <strong>En hoeveel tijd bespaart software mij?</strong>
+        </p>
+        <p>Wil je eerst bepalen welke oplossing bij jouw administratie past?</p>
+        <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
+        <p>En als je daarna verschillende programma&apos;s wilt vergelijken:</p>
+        <GuideToolCta
+          href="/blogs/beste-boekhoudprogramma-zzp"
+          label="Bekijk de beste boekhoudprogramma's voor zzp'ers →"
+        />
+        <p>Of heb je alleen een professionele factuur nodig?</p>
+        <GuideToolCta href="/create-invoice" label="Maak gratis een factuur met FactuurBaas →" />
       </>
     ),
   },
