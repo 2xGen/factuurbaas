@@ -4,6 +4,17 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { getVoorbeeldPage } from '@/lib/voorbeeldLandingPages';
 
+function renderInline(text) {
+  if (!text || !text.includes('**')) return text;
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
 function ComparisonTable({ comparison }) {
   if (!comparison) return null;
 
@@ -13,7 +24,7 @@ function ComparisonTable({ comparison }) {
         <thead>
           <tr className="border-b border-slate-200 bg-slate-50">
             {comparison.headers.map((header) => (
-              <th key={header} className="px-4 py-3 font-semibold text-deep-blue">
+              <th key={header || 'empty'} className="px-4 py-3 font-semibold text-deep-blue">
                 {header}
               </th>
             ))}
@@ -59,9 +70,24 @@ function FaqJsonLd({ faqs }) {
   );
 }
 
+function BulletList({ items }) {
+  if (!items?.length) return null;
+  return (
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2.5 text-slate-600">
+          <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-warm-orange" />
+          <span>{renderInline(item)}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function InvoiceLandingPage({ page, hubHref, hubLabel }) {
   const voorbeeld = getVoorbeeldPage(page.slug);
   const previewExample = voorbeeld?.example;
+  const intros = Array.isArray(page.intro) ? page.intro : page.intro ? [page.intro] : [];
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -90,9 +116,11 @@ export default function InvoiceLandingPage({ page, hubHref, hubLabel }) {
           <h1 className="font-heading text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             {page.h1}
           </h1>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-blue-100 sm:text-lg">
-            {page.intro}
-          </p>
+          <div className="mt-5 max-w-3xl space-y-4 text-base leading-relaxed text-blue-100 sm:text-lg">
+            {intros.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)}>{renderInline(paragraph)}</p>
+            ))}
+          </div>
           <div className="mt-8">
             <Button
               asChild
@@ -119,11 +147,34 @@ export default function InvoiceLandingPage({ page, hubHref, hubLabel }) {
                     <h2 className="mb-4 font-heading text-xl font-bold text-deep-blue sm:text-2xl">
                       {section.h2}
                     </h2>
-                    {section.paragraphs?.map((p) => (
+                    {section.paragraphs?.slice(0, section.image?.src ? 1 : undefined).map((p) => (
                       <p key={p.slice(0, 40)} className="mb-4 leading-relaxed text-slate-600">
-                        {p}
+                        {renderInline(p)}
                       </p>
                     ))}
+                    {section.image?.src && (
+                      <figure className="not-prose my-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={section.image.src}
+                          alt={section.image.alt || ''}
+                          className="h-auto w-full object-cover object-top"
+                          loading="lazy"
+                        />
+                        {section.image.caption && (
+                          <figcaption className="border-t border-slate-100 px-4 py-3 text-sm font-medium text-slate-600">
+                            {section.image.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    )}
+                    {section.image?.src &&
+                      section.paragraphs?.slice(1).map((p) => (
+                        <p key={p.slice(0, 40)} className="mb-4 leading-relaxed text-slate-600">
+                          {renderInline(p)}
+                        </p>
+                      ))}
+                    <BulletList items={section.bullets} />
                     {section.subsections?.map((sub) => (
                       <div key={sub.h3} className="mb-6">
                         <h3 className="mb-2 font-heading text-lg font-semibold text-deep-blue">
@@ -131,32 +182,18 @@ export default function InvoiceLandingPage({ page, hubHref, hubLabel }) {
                         </h3>
                         {sub.paragraphs?.map((p) => (
                           <p key={p.slice(0, 40)} className="mb-3 leading-relaxed text-slate-600">
-                            {p}
+                            {renderInline(p)}
                           </p>
                         ))}
-                        {sub.bullets && (
-                          <ul className="space-y-2">
-                            {sub.bullets.map((item) => (
-                              <li key={item} className="flex gap-2.5 text-slate-600">
-                                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-warm-orange" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
+                        <BulletList items={sub.bullets} />
                       </div>
                     ))}
-                    {section.bullets && (
-                      <ul className="space-y-2">
-                        {section.bullets.map((item) => (
-                          <li key={item} className="flex gap-2.5 text-slate-600">
-                            <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-warm-orange" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                     <ComparisonTable comparison={section.comparison} />
+                    {section.paragraphsAfter?.map((p) => (
+                      <p key={p.slice(0, 40)} className="mb-4 mt-4 leading-relaxed text-slate-600">
+                        {renderInline(p)}
+                      </p>
+                    ))}
                   </div>
                 ))}
 
@@ -179,7 +216,9 @@ export default function InvoiceLandingPage({ page, hubHref, hubLabel }) {
                               </span>
                             </span>
                           </summary>
-                          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{a}</p>
+                          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                            {renderInline(a)}
+                          </p>
                         </details>
                       ))}
                     </div>

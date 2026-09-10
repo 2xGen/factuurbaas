@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default function TermsAndConditionsPage() {
-  const lastUpdatedDate = '2 augustus 2026';
+  const lastUpdatedDate = '10 september 2026';
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
@@ -45,10 +45,11 @@ export default function TermsAndConditionsPage() {
               PDF-bestand. De basisdienst is gratis en werkt zonder account (gastmodus).
             </p>
             <p>
-              Optioneel kunt u inloggen met Google om facturen en klanten op te slaan, statussen bij te houden en
-              een dashboard te gebruiken. Opslaan in de cloud gebeurt alleen wanneer u daarvoor kiest. Bij
-              accountgebruik kunnen we transactionele dienstmails sturen (bijv. welkom of bevestiging van
-              accountverwijdering); dit is geen marketingnewsletter.
+              Optioneel kunt u inloggen met Google om facturen en klanten op te slaan, statussen bij te houden,
+              een dashboard te gebruiken en deel te nemen aan Baas-status (uitnodigen van andere ondernemers via
+              een unieke Baas-link, met optionele unlocks zoals exclusieve factuurstijlen). Opslaan in de cloud
+              gebeurt alleen wanneer u daarvoor kiest. Bij accountgebruik kunnen we transactionele dienstmails
+              sturen (bijv. welkom of bevestiging van accountverwijdering); dit is geen marketingnewsletter.
             </p>
             <h2>3. Gebruik van de Dienst</h2>
             <p>
@@ -65,13 +66,31 @@ export default function TermsAndConditionsPage() {
               van uw klanten). FactuurBaas faciliteert opslag ten behoeve van uw administratie; u blijft zelf
               verantwoordelijk voor uw relatie met die klanten.
             </p>
-            <h2>4. Intellectueel Eigendom</h2>
+            <h2>4. Baas-status en referrals</h2>
+            <p>
+              Met een account kunt u een unieke Baas-link delen. Wanneer iemand via die link een account aanmaakt,
+              kan dat meetellen als referral voor uw Baas-status. Referrals (accounts via uw link) zijn de
+              primaire voortgangsmeting voor unlocks. Linkbezoeken kunnen apart worden getoond als secundaire
+              indicator en geven op zichzelf geen unlock.
+            </p>
+            <p>
+              Unlocks (zoals exclusieve factuurstijlen) zijn een gratis extra bij de Dienst. Wij mogen regels,
+              drempels, beloningen of beschikbaarheid van het programma wijzigen, pauzeren of beëindigen. Er
+              bestaat geen recht op een specifieke beloning of op voortzetting van een unlock als we het programma
+              aanpassen.
+            </p>
+            <p>
+              Misbruik is niet toegestaan, waaronder (niet limitatief): zelf-referrals, nepaccounts, geautomatiseerd
+              klikken of andere manipulatie van tellers. Bij vermoeden van misbruik kunnen we referrals, bezoeken
+              of unlocks corrigeren of intrekken.
+            </p>
+            <h2>5. Intellectueel Eigendom</h2>
             <p>
               Alle intellectuele eigendomsrechten met betrekking tot de Dienst, inclusief de website, software en
               content (exclusief door gebruikers ingevoerde data), berusten bij 2xGen LLC / FactuurBaas.nl of haar
               licentiegevers.
             </p>
-            <h2>5. Geen Garanties en Beperking van Aansprakelijkheid</h2>
+            <h2>6. Geen Garanties en Beperking van Aansprakelijkheid</h2>
             <p>
               De Dienst wordt geleverd &quot;zoals deze is&quot; (&quot;as is&quot;), zonder enige vorm van garantie. Wij garanderen niet
               dat de Dienst ononderbroken, foutloos of veilig zal zijn.
@@ -81,7 +100,7 @@ export default function TermsAndConditionsPage() {
               uit het gebruik van de Dienst, voor zover wettelijk toegestaan. Dit beperkt niet uw dwingende rechten
               als consument waar van toepassing.
             </p>
-            <h2>6. Gegevensprivacy en accounts</h2>
+            <h2>7. Gegevensprivacy en accounts</h2>
             <p>
               In gastmodus worden factuurgegevens niet op onze servers bewaard voor later gebruik. Met een account
               kunnen opgeslagen facturen en klanten wél worden bewaard totdat u ze of uw account verwijdert.
@@ -100,18 +119,19 @@ export default function TermsAndConditionsPage() {
               </Link>
               . Een ondertekende DPA is op verzoek beschikbaar via mail@factuurbaas.nl.
             </p>
-            <h2>7. Accountbeëindiging</h2>
+            <h2>8. Accountbeëindiging</h2>
             <p>
-              U kunt uw account en bijbehorende opgeslagen gegevens (facturen, klanten, profiel, logo) verwijderen
-              via uw profiel of door contact op te nemen via mail@factuurbaas.nl. Bij verwijdering kunnen we een
-              bevestigingsmail naar het accountadres sturen.
+              U kunt uw account en bijbehorende opgeslagen gegevens (facturen, klanten, profiel, logo,
+              referral-/Baas-statusgegevens) verwijderen via uw profiel of door contact op te nemen via
+              mail@factuurbaas.nl. Bij verwijdering kunnen we een bevestigingsmail naar het accountadres
+              sturen.
             </p>
-            <h2>8. Wijzigingen van de Dienst en Voorwaarden</h2>
+            <h2>9. Wijzigingen van de Dienst en Voorwaarden</h2>
             <p>
               Wij behouden ons het recht voor om de Dienst en deze algemene voorwaarden op elk moment te wijzigen.
               Gewijzigde voorwaarden worden van kracht zodra ze op de website zijn gepubliceerd.
             </p>
-            <h2>9. Toepasselijk recht en geschillen</h2>
+            <h2>10. Toepasselijk recht en geschillen</h2>
             <p>
               Omdat FactuurBaas.nl zich richt op ondernemers in Nederland, is op deze voorwaarden{' '}
               <strong>Nederlands recht</strong> van toepassing. Geschillen die uit of in verband met de Dienst

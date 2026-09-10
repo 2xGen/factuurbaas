@@ -62,6 +62,7 @@ const PrimaryDetailsSection = ({
         onInputChange={onInputChange}
         onDateChange={onDateChange}
         onPaymentTermChange={onPaymentTermChange}
+        isLoggedIn={isLoggedIn}
       />
     </InvoiceFormSection>
 

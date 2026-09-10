@@ -4,48 +4,22 @@ import { nl, enGB } from 'date-fns/locale';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
 import { formatMoney, getEffectiveTaxRate, getTaxDisplayLabel, resolveLineTax, INVOICE_LABELS, formatCompanyAddress, formatReceiverAddress } from '@/lib/invoiceConfig';
 import PdfBrandingFooter from '@/components/shared/PdfBrandingFooter';
-
-const layoutStyles = {
-  plain: {
-    bg: 'bg-white', text: 'text-gray-800', primary: 'text-blue-600', secondary: 'text-gray-600',
-    headerBg: 'bg-gray-100', tableHeaderBg: 'bg-gray-50', borderColor: 'border-gray-200',
-    fontFamily: 'font-sans', padding: 'p-6 md:p-8',
-  },
-  modern: {
-    bg: 'bg-gradient-to-br from-slate-900 to-slate-800', text: 'text-gray-100', primary: 'text-sky-400', secondary: 'text-gray-300',
-    headerBg: 'bg-slate-700/50', tableHeaderBg: 'bg-slate-700', borderColor: 'border-slate-600',
-    fontFamily: 'font-mono', padding: 'p-6 md:p-8',
-  },
-  classic: {
-    bg: 'bg-gradient-to-br from-stone-100 to-stone-200', text: 'text-gray-900', primary: 'text-stone-700', secondary: 'text-gray-700',
-    headerBg: 'bg-stone-200/50', tableHeaderBg: 'bg-stone-100', borderColor: 'border-stone-400',
-    fontFamily: 'font-serif', padding: 'p-6 md:p-8',
-  },
-  creative: {
-    bg: 'bg-gradient-to-tr from-purple-500 via-pink-500 to-red-500', text: 'text-white', primary: 'text-yellow-300', secondary: 'text-pink-100',
-    headerBg: 'bg-white/10', tableHeaderBg: 'bg-white/20', borderColor: 'border-white/30',
-    fontFamily: "font-['Comic_Sans_MS',_cursive]", padding: 'p-6 md:p-8',
-  },
-  minimalist: {
-    bg: 'bg-white', text: 'text-gray-700', primary: 'text-black', secondary: 'text-gray-500',
-    headerBg: 'bg-white', tableHeaderBg: 'bg-white', borderColor: 'border-gray-100',
-    fontFamily: "font-['Helvetica_Neue',_Helvetica,_Arial,_sans-serif]", padding: 'p-6 md:p-8',
-  },
-  corporate: {
-    bg: 'bg-blue-50', text: 'text-gray-800', primary: 'text-blue-800', secondary: 'text-gray-600',
-    headerBg: 'bg-blue-100', tableHeaderBg: 'bg-blue-200', borderColor: 'border-blue-300',
-    fontFamily: "font-['Arial',_sans-serif]", padding: 'p-6 md:p-8',
-  },
-};
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { useReferralCount } from '@/hooks/useReferralCount';
+import { INVOICE_LAYOUT_STYLES, resolveUsableLayoutId } from '@/lib/invoiceLayouts';
 
 const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
+  const { user } = useAuth();
+  const { referralCount } = useReferralCount();
   const { subtotal, taxAmount, grandTotal, taxLines = [] } = calculateInvoiceBreakdown(invoice);
-  const currentLayout = layoutStyles[invoice.layout] || layoutStyles.plain;
+  const layoutId = resolveUsableLayoutId(invoice.layout, referralCount, Boolean(user));
+  const currentLayout = INVOICE_LAYOUT_STYLES[layoutId] || INVOICE_LAYOUT_STYLES.plain;
   const overallTaxRate = getEffectiveTaxRate(invoice);
   const lang = invoice.pdfLanguage || 'nl';
   const labels = INVOICE_LABELS[lang] || INVOICE_LABELS.nl;
   const dateLocale = lang === 'en' ? enGB : nl;
   const currency = invoice.currency || 'EUR';
+  const showBranding = user ? invoice.showFactuurBaasBranding !== false : true;
   const receiver = invoice.receiverDetails || {
     companyName: invoice.receiverName || '',
     contactPerson: '',
@@ -322,7 +296,7 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
         </div>
 
         <PdfBrandingFooter
-          showBranding={invoice.showFactuurBaasBranding !== false}
+          showBranding={showBranding}
           language={lang}
           className={currentLayout.secondary}
         />

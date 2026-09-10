@@ -63,6 +63,303 @@ function mergeFaqs(configFaqs = []) {
   return merged;
 }
 
+const requiredNlInvoiceFields = [
+  'je naam of bedrijfsnaam en adres',
+  'de naam en het adres van je klant',
+  'je btw-identificatienummer wanneer dat voor jouw situatie vereist is',
+  'je KvK-nummer wanneer je onderneming in het Handelsregister staat',
+  'een uniek factuurnummer',
+  'de factuurdatum',
+  'een duidelijke omschrijving van de geleverde goederen of diensten',
+  'de datum waarop de goederen of diensten zijn geleverd wanneer die afwijkt van de factuurdatum',
+  'het bedrag exclusief btw',
+  'het btw-tarief en btw-bedrag wanneer btw wordt berekend',
+  'het totaalbedrag',
+];
+
+const sampleInvoiceSections = [
+  {
+    h2: 'Voorbeeld van een eenvoudige factuur',
+    paragraphs: ['Een eenvoudige factuur kan er bijvoorbeeld zo uitzien:'],
+    subsections: [
+      {
+        h3: 'FACTUUR',
+        paragraphs: [
+          'Factuurnummer: 2026-001 · Factuurdatum: 9 juli 2026 · Betaaltermijn: 14 dagen.',
+        ],
+      },
+      {
+        h3: 'Van',
+        paragraphs: [
+          'Studio Jansen · Voorbeeldstraat 10 · 1234 AB Amsterdam · KvK: 12345678 · Btw-id: NL123456789B01',
+        ],
+      },
+      {
+        h3: 'Aan',
+        paragraphs: ['Klant BV · Klantstraat 20 · 1011 AA Amsterdam'],
+      },
+    ],
+    comparison: {
+      headers: ['Omschrijving', 'Aantal', 'Bedrag'],
+      rows: [
+        ['Website ontwerp', '10 uur', '€750,00'],
+        ['Subtotaal', '', '€750,00'],
+        ['Btw 21%', '', '€157,50'],
+        ['Totaal', '', '€907,50'],
+      ],
+    },
+  },
+  {
+    h2: 'Betaling en toelichting bij het voorbeeld',
+    paragraphs: [
+      'Betaling: binnen 14 dagen op IBAN NL00 BANK 0000 0000 00.',
+      'Dit is een eenvoudig voorbeeld. Afhankelijk van je situatie kunnen extra gegevens of andere btw-vermeldingen nodig zijn.',
+    ],
+  },
+];
+
+function googleFormatTemplate(config) {
+  const {
+    slug,
+    name,
+    shortLabel,
+    kind,
+    previewLayout,
+    strength,
+    weakness,
+    steps,
+    formulaNote,
+  } = config;
+
+  const toolVs = `${name} versus FactuurBaas`;
+
+  return {
+    slug,
+    h1: `Factuur voorbeeld ${name}: gratis template`,
+    metaTitle: `Factuur voorbeeld ${name}: gratis template & alternatief`,
+    metaDescription: `Op zoek naar een factuur voorbeeld in ${name}? Bekijk hoe een ${shortLabel}-factuur eruitziet, wat erop moet staan en maak gratis een professionele factuur als PDF met FactuurBaas.`,
+    intro: [
+      `Op zoek naar een **factuur voorbeeld in ${name}**, een **factuur template voor ${name}** of een **factuur sjabloon voor ${name}**? Met ${name} kun je zelf een factuur opmaken, aanpassen en als PDF downloaden.`,
+      `Hieronder zie je hoe een factuur in ${name} eruit kan zien, wat je op een Nederlandse factuur moet zetten en hoe je eenvoudig een factuur maakt. Wil je liever niet zelf een ${kind} beheren? Met FactuurBaas maak je direct online een professionele factuur en download je deze als PDF.`,
+    ],
+    previewLayout,
+    sections: [
+      {
+        h2: `Factuur voorbeeld in ${name}`,
+        paragraphs: [
+          `Een factuur in ${name} kun je opmaken met een bestaand sjabloon of zelf een factuur opbouwen. Je kunt bijvoorbeeld je logo, bedrijfsgegevens, klantgegevens, factuurnummer, omschrijving, bedragen en btw toevoegen.`,
+          `Een ${shortLabel}-template is vooral handig als je ${strength}. Voor een eenvoudige factuur hoef je echter niet per se zelf een ${kind} te onderhouden.`,
+        ],
+      },
+      {
+        h2: `Factuur maken in ${name}`,
+        paragraphs: [`Wil je een factuur maken met ${name}? Dan kun je deze stappen volgen:`],
+        bullets: steps,
+        subsections: [
+          {
+            h3: `Let op bij een ${name} factuur template`,
+            paragraphs: [
+              `Een nette ${kind} betekent niet automatisch dat je factuur volledig of correct is. Controleer daarom altijd zelf of de factuur alle gegevens bevat die voor jouw situatie nodig zijn.`,
+              'Controleer bijvoorbeeld:',
+            ],
+            bullets: [
+              'de naam en het adres van jou en je klant',
+              'het factuurnummer',
+              'de factuurdatum',
+              'de omschrijving van de geleverde goederen of diensten',
+              'de bedragen',
+              'het juiste btw-tarief en btw-bedrag',
+              'eventuele bijzondere btw-vermeldingen',
+            ],
+          },
+          ...(formulaNote
+            ? [
+                {
+                  h3: 'Btw berekenen in Google Sheets',
+                  paragraphs: [formulaNote],
+                },
+              ]
+            : []),
+        ],
+      },
+      {
+        h2: `Is ${name} geschikt voor facturen?`,
+        paragraphs: [
+          `Ja. ${name} kan prima worden gebruikt om een eenvoudige factuur op te maken en als PDF te downloaden. ${weakness}`,
+          `Het nadeel is dat ${name} geen speciale factuurtool is. Je moet de gegevens, bedragen en btw zelf controleren. Als je regelmatig facturen maakt, kan een speciale factuurtool daarom praktischer zijn.`,
+        ],
+      },
+      {
+        h2: `Wat moet er op een ${shortLabel}-factuur staan?`,
+        paragraphs: [
+          `Of je een factuur in ${name}, Word, Excel of een online factuurtool maakt: het programma bepaalt niet welke gegevens op je factuur moeten staan.`,
+          'Een Nederlandse factuur moet afhankelijk van je situatie onder andere gegevens bevatten zoals:',
+        ],
+        bullets: requiredNlInvoiceFields,
+        subsections: [
+          {
+            h3: 'Bijzondere btw-situaties',
+            paragraphs: [
+              'Bij bijzondere situaties, zoals de KOR, btw-verlegging of vrijgestelde prestaties, kunnen aanvullende of afwijkende btw-vermeldingen gelden.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: `Factuur template ${name} of factuur sjabloon ${name}?`,
+        paragraphs: [
+          `De termen **factuur template ${name}**, **${name} factuur template** en **factuur sjabloon ${name}** worden meestal gebruikt voor hetzelfde soort document: een basisfactuur die je zelf kunt aanpassen.`,
+          'Een **factuurvoorbeeld** laat vooral zien hoe een factuur eruitziet. Een **template of sjabloon** gebruik je als basis voor je eigen factuur.',
+          'Het verschil is dus vooral:',
+        ],
+        bullets: [
+          `Factuur voorbeeld ${name} → een voorbeeld om te bekijken.`,
+          `Factuur template ${name} → een sjabloon dat je kunt aanpassen.`,
+          `Factuur sjabloon ${name} → een andere benaming voor een factuurtemplate.`,
+          `Factuur maken ${name} → een factuur opmaken en invullen in ${name}.`,
+          `Factuur downloaden ${name} → je ingevulde factuur exporteren, bijvoorbeeld als PDF.`,
+        ],
+      },
+      ...sampleInvoiceSections,
+      {
+        h2: `${name} factuur als PDF downloaden`,
+        paragraphs: [
+          `Wanneer je je factuur in ${name} hebt ingevuld, kun je het document exporteren of downloaden als PDF.`,
+          'Controleer de factuur voordat je deze verstuurt. Let vooral op:',
+        ],
+        bullets: [
+          'klantgegevens',
+          'factuurnummer',
+          'bedragen',
+          'btw',
+          'betaalgegevens',
+          'eventuele verplichte vermeldingen',
+        ],
+        subsections: [
+          {
+            h3: 'PDF versturen',
+            paragraphs: [
+              'Een PDF is meestal een praktisch formaat om een factuur per e-mail naar je klant te sturen.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: toolVs,
+        paragraphs: [
+          `${name} en FactuurBaas kunnen allebei worden gebruikt om een factuur als PDF te maken. Het belangrijkste verschil is waarvoor de tools zijn ontworpen.`,
+        ],
+        comparison: {
+          headers: ['', name, 'FactuurBaas'],
+          rows: [
+            ['Factuur online maken', 'Ja', 'Ja'],
+            ['PDF downloaden', 'Ja', 'Ja'],
+            ['Templates en layouts', 'Zelf opmaken of template', 'Meerdere'],
+            ['Btw automatisch berekenen', 'Zelf controleren', 'Ja'],
+            ['Account nodig', 'Google-account', 'Nee'],
+            ['Facturen bewaren', 'Google Drive', 'Gratis account'],
+            ['Klanten bewaren', 'Niet specifiek voor facturatie', 'Ja'],
+            ['Gericht op factureren', 'Nee', 'Ja'],
+          ],
+        },
+        paragraphsAfter: [
+          `${name} is vooral interessant als je zelf je factuur in Google wilt beheren. FactuurBaas is gericht op ondernemers die snel een factuur willen maken, berekenen en als PDF willen downloaden.`,
+        ],
+      },
+      {
+        h2: `Factuur maken zonder ${name}`,
+        paragraphs: [
+          `Wil je geen ${shortLabel}-template zoeken en zelf je factuur opmaken? Dan kun je ook direct online een factuur maken.`,
+          'Met FactuurBaas vul je je bedrijfs- en klantgegevens in, voeg je producten, diensten of uren toe en wordt de btw automatisch berekend. Daarna kies je een layout en download je de factuur als PDF.',
+          'Geen account nodig. Geen abonnement.',
+        ],
+      },
+      {
+        h2: 'Zo maak je een factuur in 3 stappen',
+        subsections: [
+          {
+            h3: '1. Vul je gegevens in',
+            paragraphs: ['Vul je bedrijfsgegevens en de gegevens van je klant in.'],
+          },
+          {
+            h3: '2. Voeg je werkzaamheden of producten toe',
+            paragraphs: [
+              'Voeg diensten, uren of producten toe en controleer de bedragen en btw.',
+            ],
+          },
+          {
+            h3: '3. Download je factuur',
+            paragraphs: [
+              'Kies een layout en download je professionele factuur direct als PDF.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: `Factuur maken met ${name} of direct online?`,
+        paragraphs: [
+          `Een ${shortLabel}-template is een goede keuze als je zelf controle wilt over de opmaak van je factuur in Google. Je moet de factuur daarna wel zelf invullen en controleren.`,
+          'Als je vooral snel een correcte factuur wilt maken, kan een online factuurtool eenvoudiger zijn.',
+          'Met FactuurBaas kun je:',
+        ],
+        bullets: [
+          'gratis een factuur maken',
+          'btw automatisch laten berekenen',
+          'verschillende layouts gebruiken',
+          'je factuur direct als PDF downloaden',
+          'zonder account beginnen',
+          'met een gratis account facturen en klanten bewaren',
+        ],
+      },
+      {
+        h2: `Liever geen ${shortLabel}-template?`,
+        paragraphs: [
+          'Wil je gewoon snel een professionele factuur maken zonder een template te zoeken of zelf een document op te maken?',
+          'Met FactuurBaas vul je je gegevens online in, kies je een layout en download je direct een PDF.',
+          'Bekijk ook alle factuur templates voor andere formaten en situaties.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: `Is er een gratis factuur template voor ${name}?`,
+        a: `Ja. Je kunt zelf een eenvoudig factuurformat in ${name} maken of een bestaand sjabloon gebruiken. Controleer wel zelf of alle benodigde gegevens en btw-vermeldingen op je factuur staan.`,
+      },
+      {
+        q: `Hoe maak ik een factuur in ${name}?`,
+        a: `Maak of open een factuurtemplate in ${name}, vul je bedrijfsgegevens, klantgegevens, factuurnummer, bedragen en btw in, controleer de factuur en download deze als PDF.`,
+      },
+      {
+        q: `Kan ik een ${shortLabel}-factuur als PDF downloaden?`,
+        a: `Ja. In ${name} kun je een document downloaden of exporteren als PDF. Controleer de PDF altijd voordat je deze naar je klant verstuurt.`,
+      },
+      {
+        q: `Controleert ${name} of mijn factuur correct is?`,
+        a: `${name} helpt je vooral bij het opmaken en bewaren van je document. Je moet zelf controleren of je factuur alle benodigde gegevens bevat en of de bedragen en btw correct zijn.`,
+      },
+      {
+        q: `Heb ik ${name} nodig om een factuur te maken?`,
+        a: 'Nee. Je kunt ook een Word-, Excel- of Canva-template gebruiken of direct online een factuur maken met een factuurtool zoals FactuurBaas.',
+      },
+      {
+        q: `Wat is beter: ${name} of FactuurBaas?`,
+        a: `Dat hangt af van wat je nodig hebt. ${name} is handig als je zelf een factuur in Google wilt opmaken. FactuurBaas is speciaal gericht op factureren en kan de btw automatisch berekenen, waarna je de factuur direct als PDF kunt downloaden.`,
+      },
+    ],
+    relatedLinks: [
+      { label: 'Word template', href: '/factuur-template/word' },
+      { label: 'Excel template', href: '/factuur-template/excel' },
+      { label: 'Canva template', href: '/factuur-template/canva' },
+      {
+        label: slug === 'google-docs' ? 'Google Sheets template' : 'Google Docs template',
+        href: slug === 'google-docs' ? '/factuur-template/google-sheets' : '/factuur-template/google-docs',
+      },
+      { label: 'PDF template', href: '/factuur-template/pdf' },
+      ...sharedRelatedLinks,
+    ],
+  };
+}
+
 function professionTemplate(slug, config) {
   return {
     slug,
@@ -371,10 +668,334 @@ export const templatePages = {
     relatedLinks: [
       { label: 'Excel template', href: '/factuur-template/excel' },
       { label: 'PDF template', href: '/factuur-template/pdf' },
+      { label: 'Canva template', href: '/factuur-template/canva' },
+      { label: 'Google Docs template', href: '/factuur-template/google-docs' },
+      { label: 'Google Sheets template', href: '/factuur-template/google-sheets' },
       { label: 'ZZP template', href: '/factuur-template/zzp' },
       ...sharedRelatedLinks,
     ],
   },
+
+  canva: {
+    slug: 'canva',
+    h1: 'Factuur voorbeeld Canva: gratis template',
+    metaTitle: 'Factuur voorbeeld Canva: gratis template & alternatief',
+    metaDescription:
+      'Op zoek naar een factuur voorbeeld in Canva? Bekijk hoe een Canva-factuur eruitziet, wat erop moet staan en maak gratis een professionele factuur als PDF met FactuurBaas.',
+    intro: [
+      'Op zoek naar een **factuur voorbeeld in Canva**, een **factuur template voor Canva** of een **factuur sjabloon voor Canva**? Met Canva kun je zelf een ontwerp voor je factuur kiezen, aanpassen en als PDF downloaden.',
+      'Hieronder zie je hoe een factuur in Canva eruit kan zien, wat je op een Nederlandse factuur moet zetten en hoe je eenvoudig een factuur maakt. Wil je liever niet zelf een ontwerp aanpassen? Met FactuurBaas maak je direct online een professionele factuur en download je deze als PDF.',
+    ],
+    previewLayout: 'modern',
+    sections: [
+      {
+        h2: 'Factuur voorbeeld in Canva',
+        paragraphs: [
+          'Een factuur in Canva kun je opmaken met een bestaand ontwerp of zelf een factuur ontwerpen. Je kunt bijvoorbeeld je logo, bedrijfsgegevens, klantgegevens, factuurnummer, omschrijving, bedragen en btw toevoegen.',
+          'Een Canva-template is vooral handig als je veel aandacht wilt besteden aan de vormgeving van je factuur. Voor een eenvoudige factuur hoef je echter niet per se zelf een ontwerp te maken.',
+        ],
+        image: {
+          src: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/canva%20screenshot.png',
+          alt: 'Factuur voorbeeld Canva: overzicht van factuurtemplates in Canva',
+          caption: 'Factuur voorbeeld Canva: overzicht van factuurtemplates in Canva',
+        },
+      },
+      {
+        h2: 'Factuur maken in Canva',
+        paragraphs: ['Wil je een factuur maken met Canva? Dan kun je deze stappen volgen:'],
+        bullets: [
+          'Open Canva en zoek naar een factuurtemplate.',
+          'Kies een ontwerp dat bij je bedrijf past.',
+          'Vul je bedrijfsgegevens en klantgegevens in.',
+          'Voeg je producten, diensten of gewerkte uren toe.',
+          'Vul de bedragen en het toepasselijke btw-tarief in.',
+          'Controleer de factuur en berekeningen.',
+          'Download de factuur als PDF.',
+        ],
+        subsections: [
+          {
+            h3: 'Let op bij een Canva factuur template',
+            paragraphs: [
+              'Een mooi ontwerp betekent niet automatisch dat je factuur volledig of correct is. Controleer daarom altijd zelf of de factuur alle gegevens bevat die voor jouw situatie nodig zijn.',
+              'Controleer bijvoorbeeld:',
+            ],
+            bullets: [
+              'de naam en het adres van jou en je klant',
+              'het factuurnummer',
+              'de factuurdatum',
+              'de omschrijving van de geleverde goederen of diensten',
+              'de bedragen',
+              'het juiste btw-tarief en btw-bedrag',
+              'eventuele bijzondere btw-vermeldingen',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Is Canva geschikt voor facturen?',
+        paragraphs: [
+          'Ja. Canva kan prima worden gebruikt om een eenvoudige factuur op te maken en als PDF te downloaden. Vooral wanneer je veel aandacht wilt besteden aan het uiterlijk van je factuur kan een Canva-template handig zijn.',
+          'Het nadeel is dat Canva in de eerste plaats een ontwerptool is. Je moet de gegevens, bedragen en btw zelf controleren. Als je regelmatig facturen maakt, kan een speciale factuurtool daarom praktischer zijn.',
+        ],
+      },
+      {
+        h2: 'Wat moet er op een Canva-factuur staan?',
+        paragraphs: [
+          'Of je een factuur in Canva, Word of een online factuurtool maakt: het programma bepaalt niet welke gegevens op je factuur moeten staan.',
+          'Een Nederlandse factuur moet afhankelijk van je situatie onder andere gegevens bevatten zoals:',
+        ],
+        bullets: [
+          'je naam of bedrijfsnaam en adres',
+          'de naam en het adres van je klant',
+          'je btw-identificatienummer wanneer dat voor jouw situatie vereist is',
+          'je KvK-nummer wanneer je onderneming in het Handelsregister staat',
+          'een uniek factuurnummer',
+          'de factuurdatum',
+          'een duidelijke omschrijving van de geleverde goederen of diensten',
+          'de datum waarop de goederen of diensten zijn geleverd wanneer die afwijkt van de factuurdatum',
+          'het bedrag exclusief btw',
+          'het btw-tarief en btw-bedrag wanneer btw wordt berekend',
+          'het totaalbedrag',
+        ],
+        subsections: [
+          {
+            h3: 'Bijzondere btw-situaties',
+            paragraphs: [
+              'Bij bijzondere situaties, zoals de KOR, btw-verlegging of vrijgestelde prestaties, kunnen aanvullende of afwijkende btw-vermeldingen gelden.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur template Canva of factuur sjabloon Canva?',
+        paragraphs: [
+          'De termen **factuur template Canva**, **Canva factuur template** en **factuur sjabloon Canva** worden meestal gebruikt voor hetzelfde soort ontwerp: een basisfactuur die je zelf kunt aanpassen.',
+          'Een **factuurvoorbeeld** laat vooral zien hoe een factuur eruitziet. Een **template of sjabloon** gebruik je als basis voor je eigen factuur.',
+          'Het verschil is dus vooral:',
+        ],
+        bullets: [
+          'Factuur voorbeeld Canva → een voorbeeld om te bekijken.',
+          'Factuur template Canva → een ontwerp dat je kunt aanpassen.',
+          'Factuur sjabloon Canva → een andere benaming voor een factuurtemplate.',
+          'Factuur maken Canva → een factuur ontwerpen en invullen in Canva.',
+          'Factuur downloaden Canva → je ingevulde factuur exporteren, bijvoorbeeld als PDF.',
+        ],
+      },
+      {
+        h2: 'Voorbeeld van een eenvoudige factuur',
+        paragraphs: ['Een eenvoudige factuur kan er bijvoorbeeld zo uitzien:'],
+        subsections: [
+          {
+            h3: 'FACTUUR',
+            paragraphs: [
+              'Factuurnummer: 2026-001 · Factuurdatum: 9 juli 2026 · Betaaltermijn: 14 dagen.',
+            ],
+          },
+          {
+            h3: 'Van',
+            paragraphs: [
+              'Studio Jansen · Voorbeeldstraat 10 · 1234 AB Amsterdam · KvK: 12345678 · Btw-id: NL123456789B01',
+            ],
+          },
+          {
+            h3: 'Aan',
+            paragraphs: ['Klant BV · Klantstraat 20 · 1011 AA Amsterdam'],
+          },
+        ],
+        comparison: {
+          headers: ['Omschrijving', 'Aantal', 'Bedrag'],
+          rows: [
+            ['Website ontwerp', '10 uur', '€750,00'],
+            ['Subtotaal', '', '€750,00'],
+            ['Btw 21%', '', '€157,50'],
+            ['Totaal', '', '€907,50'],
+          ],
+        },
+      },
+      {
+        h2: 'Betaling en toelichting bij het voorbeeld',
+        paragraphs: [
+          'Betaling: binnen 14 dagen op IBAN NL00 BANK 0000 0000 00.',
+          'Dit is een eenvoudig voorbeeld. Afhankelijk van je situatie kunnen extra gegevens of andere btw-vermeldingen nodig zijn.',
+        ],
+      },
+      {
+        h2: 'Canva factuur als PDF downloaden',
+        paragraphs: [
+          'Wanneer je je factuur in Canva hebt ingevuld, kun je het ontwerp exporteren als PDF.',
+          'Controleer de factuur voordat je deze verstuurt. Let vooral op:',
+        ],
+        bullets: [
+          'klantgegevens',
+          'factuurnummer',
+          'bedragen',
+          'btw',
+          'betaalgegevens',
+          'eventuele verplichte vermeldingen',
+        ],
+        subsections: [
+          {
+            h3: 'PDF versturen',
+            paragraphs: [
+              'Een PDF is meestal een praktisch formaat om een factuur per e-mail naar je klant te sturen.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Canva versus FactuurBaas',
+        paragraphs: [
+          'Canva en FactuurBaas kunnen allebei worden gebruikt om een factuur als PDF te maken. Het belangrijkste verschil is waarvoor de tools zijn ontworpen.',
+        ],
+        comparison: {
+          headers: ['', 'Canva', 'FactuurBaas'],
+          rows: [
+            ['Factuur online maken', 'Ja', 'Ja'],
+            ['PDF downloaden', 'Ja', 'Ja'],
+            ['Templates en layouts', 'Veel', 'Meerdere'],
+            ['Btw automatisch berekenen', 'Zelf controleren', 'Ja'],
+            ['Facturen bewaren', 'Canva-account', 'Gratis account'],
+            ['Klanten bewaren', 'Niet specifiek voor facturatie', 'Ja'],
+            ['Gericht op factureren', 'Nee', 'Ja'],
+          ],
+        },
+        paragraphsAfter: [
+          'Canva is vooral interessant als je zelf het ontwerp wilt bepalen. FactuurBaas is gericht op ondernemers die snel een factuur willen maken, berekenen en als PDF willen downloaden.',
+        ],
+      },
+      {
+        h2: 'Factuur maken zonder Canva',
+        paragraphs: [
+          'Wil je geen Canva-template zoeken en zelf je factuur opmaken? Dan kun je ook direct online een factuur maken.',
+          'Met FactuurBaas vul je je bedrijfs- en klantgegevens in, voeg je producten, diensten of uren toe en wordt de btw automatisch berekend. Daarna kies je een layout en download je de factuur als PDF.',
+          'Geen account nodig. Geen abonnement.',
+        ],
+      },
+      {
+        h2: 'Zo maak je een factuur in 3 stappen',
+        subsections: [
+          {
+            h3: '1. Vul je gegevens in',
+            paragraphs: ['Vul je bedrijfsgegevens en de gegevens van je klant in.'],
+          },
+          {
+            h3: '2. Voeg je werkzaamheden of producten toe',
+            paragraphs: [
+              'Voeg diensten, uren of producten toe en controleer de bedragen en btw.',
+            ],
+          },
+          {
+            h3: '3. Download je factuur',
+            paragraphs: [
+              'Kies een layout en download je professionele factuur direct als PDF.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur maken met Canva of direct online?',
+        paragraphs: [
+          'Een Canva-template is een goede keuze als je zelf controle wilt over het ontwerp van je factuur. Je moet de factuur daarna wel zelf invullen en controleren.',
+          'Als je vooral snel een correcte factuur wilt maken, kan een online factuurtool eenvoudiger zijn.',
+          'Met FactuurBaas kun je:',
+        ],
+        bullets: [
+          'gratis een factuur maken',
+          'btw automatisch laten berekenen',
+          'verschillende layouts gebruiken',
+          'je factuur direct als PDF downloaden',
+          'zonder account beginnen',
+          'met een gratis account facturen en klanten bewaren',
+        ],
+      },
+      {
+        h2: 'Liever geen Canva-template?',
+        paragraphs: [
+          'Wil je gewoon snel een professionele factuur maken zonder een template te zoeken of zelf een ontwerp op te maken?',
+          'Met FactuurBaas vul je je gegevens online in, kies je een layout en download je direct een PDF.',
+          'Bekijk ook alle factuur templates voor andere formaten en situaties.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'Is er een gratis factuur template voor Canva?',
+        a: 'Ja. In Canva zijn verschillende factuurtemplates beschikbaar. Je kunt een ontwerp kiezen en dit aanpassen aan je eigen bedrijf. Controleer wel zelf of alle benodigde gegevens en btw-vermeldingen op je factuur staan.',
+      },
+      {
+        q: 'Hoe maak ik een factuur in Canva?',
+        a: 'Kies in Canva een factuurtemplate, pas het ontwerp aan en vul je bedrijfsgegevens, klantgegevens, factuurnummer, bedragen en btw in. Controleer de factuur en download deze vervolgens als PDF.',
+      },
+      {
+        q: 'Kan ik een Canva-factuur als PDF downloaden?',
+        a: 'Ja. Een ingevulde factuur kun je vanuit Canva als PDF exporteren. Controleer de PDF altijd voordat je deze naar je klant verstuurt.',
+      },
+      {
+        q: 'Controleert Canva of mijn factuur correct is?',
+        a: 'Een Canva-template is vooral bedoeld voor het ontwerpen van documenten. Je moet zelf controleren of je factuur alle benodigde gegevens bevat en of de bedragen en btw correct zijn.',
+      },
+      {
+        q: 'Heb ik Canva nodig om een factuur te maken?',
+        a: 'Nee. Je kunt ook een Word- of Excel-template gebruiken of direct online een factuur maken met een factuurtool zoals FactuurBaas.',
+      },
+      {
+        q: 'Wat is beter: Canva of FactuurBaas?',
+        a: 'Dat hangt af van wat je nodig hebt. Canva is vooral geschikt als je zelf een factuurontwerp wilt maken. FactuurBaas is speciaal gericht op factureren en kan de btw automatisch berekenen, waarna je de factuur direct als PDF kunt downloaden.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Word template', href: '/factuur-template/word' },
+      { label: 'Excel template', href: '/factuur-template/excel' },
+      { label: 'PDF template', href: '/factuur-template/pdf' },
+      { label: 'Google Docs template', href: '/factuur-template/google-docs' },
+      { label: 'Google Sheets template', href: '/factuur-template/google-sheets' },
+      { label: 'ZZP template', href: '/factuur-template/zzp' },
+      ...sharedRelatedLinks,
+    ],
+  },
+
+  'google-docs': googleFormatTemplate({
+    slug: 'google-docs',
+    name: 'Google Docs',
+    shortLabel: 'Google Docs',
+    kind: 'document',
+    previewLayout: 'minimalist',
+    strength: 'je factuur online wilt opmaken en makkelijk wilt delen via Google Drive',
+    weakness:
+      'Vooral wanneer je al met Google werkt en een eenvoudig document wilt gebruiken, kan een Google Docs-template handig zijn.',
+    steps: [
+      'Open Google Docs en maak een nieuw document of open een factuursjabloon.',
+      'Voeg je bedrijfsgegevens en eventueel je logo toe.',
+      'Vul de klantgegevens in.',
+      'Zet factuurnummer, factuurdatum en betaaltermijn erbij.',
+      'Voeg een tabel toe met producten, diensten of gewerkte uren.',
+      'Vul de bedragen en het toepasselijke btw-tarief in.',
+      'Controleer de factuur en berekeningen.',
+      'Download de factuur als PDF via Bestand → Downloaden.',
+    ],
+  }),
+
+  'google-sheets': googleFormatTemplate({
+    slug: 'google-sheets',
+    name: 'Google Sheets',
+    shortLabel: 'Google Sheets',
+    kind: 'spreadsheet',
+    previewLayout: 'corporate',
+    strength: 'je bedragen en btw graag in een rekenblad wilt bijhouden',
+    weakness:
+      'Vooral wanneer je graag met tabellen en formules werkt, kan een Google Sheets-template handig zijn.',
+    formulaNote:
+      'Stel dat het bedrag exclusief btw in cel B2 staat en je 21% btw wilt berekenen: =B2*0,21. Voor een bedrag van €750 is de btw dan €157,50. Het totaal inclusief btw kun je bijvoorbeeld berekenen met: =B2+(B2*0,21). Controleer altijd of het juiste btw-tarief voor jouw situatie geldt.',
+    steps: [
+      'Open Google Sheets en maak een nieuw spreadsheet of open een factuursjabloon.',
+      'Zet je bedrijfsgegevens en klantgegevens bovenaan.',
+      'Voeg factuurnummer, factuurdatum en betaaltermijn toe.',
+      'Maak een tabel met omschrijving, aantal, prijs en bedrag.',
+      'Bereken het subtotaal, de btw en het totaalbedrag.',
+      'Controleer of alle verplichte factuurgegevens kloppen.',
+      'Download of exporteer de factuur als PDF.',
+    ],
+  }),
 
   excel: {
     slug: 'excel',
@@ -503,6 +1124,7 @@ export const templatePages = {
     relatedLinks: [
       { label: 'Word template', href: '/factuur-template/word' },
       { label: 'PDF template', href: '/factuur-template/pdf' },
+      { label: 'Canva template', href: '/factuur-template/canva' },
       { label: 'Uren factuur', href: '/factuur-template/uren' },
       { label: 'BTW in Excel', href: '/gidsen/btw-berekenen-excel' },
       { label: 'Alle templates', href: '/factuur-template' },
@@ -676,6 +1298,7 @@ export const templatePages = {
       { label: 'Alle factuur templates', href: '/factuur-template' },
       { label: 'Word template', href: '/factuur-template/word' },
       { label: 'Excel template', href: '/factuur-template/excel' },
+      { label: 'Canva template', href: '/factuur-template/canva' },
       { label: 'Factuur template zzp', href: '/factuur-template/zzp' },
       { label: 'Factuur voorbeeld', href: '/blogs/factuur-templates-zzp' },
       { label: 'BTW calculator', href: '/tools/btw-calculator' },

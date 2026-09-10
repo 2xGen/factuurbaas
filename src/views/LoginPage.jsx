@@ -9,6 +9,8 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import PrivacyConsentCheckbox from '@/components/auth/PrivacyConsentCheckbox';
 import NewsletterOptInCheckbox from '@/components/auth/NewsletterOptInCheckbox';
 import { markPrivacyConsentPending } from '@/lib/privacyConsent';
+import { recordReferralVisitOnce, storeReferralCode } from '@/lib/referral';
+import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 import { ArrowLeft, Crown, Loader2 } from 'lucide-react';
 
@@ -45,6 +47,13 @@ export default function LoginPage() {
   const [newsletterOptIn, setNewsletterOptIn] = useState(false);
 
   const next = searchParams.get('next') || '/dashboard';
+
+  useEffect(() => {
+    const ref = searchParams.get('ref');
+    if (!ref) return;
+    storeReferralCode(ref);
+    void recordReferralVisitOnce(supabase, ref);
+  }, [searchParams]);
 
   useEffect(() => {
     if (!loading && user) {

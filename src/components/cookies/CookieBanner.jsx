@@ -60,8 +60,9 @@ export default function CookieBanner() {
           <div className="container mx-auto px-4 py-4 sm:px-6 sm:py-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-slate-700">
-                Wij gebruiken cookies om de website te laten werken, het gebruik te analyseren en
-                waar relevant te personaliseren. U kiest zelf welke cookies we mogen plaatsen.{' '}
+                Wij gebruiken cookies en lokale opslag om de website te laten werken (inclusief
+                functionele referral-attributie), het gebruik te analyseren en waar relevant te
+                personaliseren. U kiest zelf welke optionele cookies we mogen plaatsen.{' '}
                 <Link
                   href="/privacybeleid"
                   className="font-medium text-deep-blue underline hover:text-warm-orange"
@@ -130,8 +131,9 @@ export default function CookieBanner() {
                   Noodzakelijke cookies
                 </Label>
                 <p className="text-sm text-slate-600">
-                  Vereist voor het functioneren van de website (sessie, voorkeuren, beveiliging).
-                  Deze kunnen niet worden uitgeschakeld.
+                  Vereist voor het functioneren van de website (sessie, beveiliging, cookievoorkeuren, en
+                  functionele local storage zoals een referralcode na een Baas-uitnodigingslink). Deze kunnen
+                  niet worden uitgeschakeld.
                 </p>
               </div>
               <Switch checked disabled className="data-[state=checked]:bg-slate-400" />

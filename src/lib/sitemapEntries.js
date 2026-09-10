@@ -25,7 +25,7 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/offerte-voorbeeld`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITEMAP_BASE_URL}/tools/btw-calculator`, lastModified: new Date('2026-07-09'), changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${SITEMAP_BASE_URL}/tools/offerte-maker`, lastModified: new Date('2026-07-09'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/tools/offerte-maker`, lastModified: new Date('2026-09-10'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/uurtarief-calculator`, lastModified: new Date('2026-07-09'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/uurtarief-naar-inkomen`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/factuurnummer-generator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },

@@ -31,6 +31,27 @@ const formatLinks = [
     tag: 'Formaat',
     format: 'pdf',
   },
+  {
+    label: 'Canva template',
+    href: '/factuur-template/canva',
+    description: 'Liever geen Canva? Vul online in, laat btw berekenen en download als PDF.',
+    tag: 'Formaat',
+    format: 'canva',
+  },
+  {
+    label: 'Google Docs template',
+    href: '/factuur-template/google-docs',
+    description: 'Liever geen Google Docs? Vul online in en download direct als PDF.',
+    tag: 'Formaat',
+    format: 'google-docs',
+  },
+  {
+    label: 'Google Sheets template',
+    href: '/factuur-template/google-sheets',
+    description: 'Geen formules in Sheets nodig. Vul in, reken automatisch en exporteer als PDF.',
+    tag: 'Formaat',
+    format: 'google-sheets',
+  },
 ];
 
 const professionLinks = popularTemplates.map((t) => {

@@ -4,82 +4,20 @@ import { nl } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { calculateQuoteBreakdown, formatQuoteMoney } from '@/lib/quoteUtils';
 import PdfBrandingFooter from '@/components/shared/PdfBrandingFooter';
-
-const layoutStyles = {
-  plain: {
-    bg: 'bg-white',
-    text: 'text-gray-800',
-    primary: 'text-blue-800',
-    secondary: 'text-gray-600',
-    muted: 'text-gray-500',
-    headerBg: 'bg-gray-50',
-    tableHeaderBg: 'bg-gray-50',
-    borderColor: 'border-gray-200',
-    termsBg: 'bg-gray-50',
-  },
-  modern: {
-    bg: 'bg-gradient-to-br from-slate-900 to-slate-800',
-    text: 'text-gray-100',
-    primary: 'text-sky-400',
-    secondary: 'text-gray-300',
-    muted: 'text-gray-400',
-    headerBg: 'bg-slate-700/50',
-    tableHeaderBg: 'bg-slate-700',
-    borderColor: 'border-slate-600',
-    termsBg: 'bg-slate-700/50',
-  },
-  classic: {
-    bg: 'bg-gradient-to-br from-stone-100 to-stone-200',
-    text: 'text-gray-900',
-    primary: 'text-stone-800',
-    secondary: 'text-gray-700',
-    muted: 'text-gray-600',
-    headerBg: 'bg-stone-200/50',
-    tableHeaderBg: 'bg-stone-100',
-    borderColor: 'border-stone-400',
-    termsBg: 'bg-stone-100',
-  },
-  creative: {
-    bg: 'bg-gradient-to-tr from-purple-500 via-pink-500 to-red-500',
-    text: 'text-white',
-    primary: 'text-yellow-300',
-    secondary: 'text-pink-100',
-    muted: 'text-pink-100',
-    headerBg: 'bg-white/10',
-    tableHeaderBg: 'bg-white/20',
-    borderColor: 'border-white/30',
-    termsBg: 'bg-white/10',
-  },
-  minimalist: {
-    bg: 'bg-white',
-    text: 'text-gray-700',
-    primary: 'text-black',
-    secondary: 'text-gray-500',
-    muted: 'text-gray-500',
-    headerBg: 'bg-white',
-    tableHeaderBg: 'bg-white',
-    borderColor: 'border-gray-100',
-    termsBg: 'bg-white',
-  },
-  corporate: {
-    bg: 'bg-blue-50',
-    text: 'text-gray-800',
-    primary: 'text-blue-800',
-    secondary: 'text-gray-600',
-    muted: 'text-gray-600',
-    headerBg: 'bg-blue-100',
-    tableHeaderBg: 'bg-blue-200',
-    borderColor: 'border-blue-300',
-    termsBg: 'bg-blue-100',
-  },
-};
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { useReferralCount } from '@/hooks/useReferralCount';
+import { QUOTE_LAYOUT_STYLES, resolveUsableLayoutId } from '@/lib/invoiceLayouts';
 
 const QuotePreview = React.forwardRef(({ quote }, ref) => {
+  const { user } = useAuth();
+  const { referralCount } = useReferralCount();
   const { subtotal, taxAmount, grandTotal } = calculateQuoteBreakdown(quote);
   const company = quote.companyDetails || {};
   const client = quote.clientDetails || {};
   const opts = quote.options || {};
-  const currentLayout = layoutStyles[quote.layout] || layoutStyles.plain;
+  const layoutId = resolveUsableLayoutId(quote.layout, referralCount, Boolean(user));
+  const currentLayout = QUOTE_LAYOUT_STYLES[layoutId] || QUOTE_LAYOUT_STYLES.plain;
+  const showBranding = user ? opts.showFactuurBaasBranding !== false : true;
 
   const companyLines = [
     company.street,
@@ -245,7 +183,7 @@ const QuotePreview = React.forwardRef(({ quote }, ref) => {
         )}
 
         <PdfBrandingFooter
-          showBranding={opts.showFactuurBaasBranding !== false}
+          showBranding={showBranding}
           language="nl"
           className={currentLayout.muted}
         />

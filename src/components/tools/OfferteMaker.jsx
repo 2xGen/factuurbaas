@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import FormInput from '@/components/invoice/formElements/FormInput';
 import FormTextarea from '@/components/invoice/formElements/FormTextarea';
@@ -8,6 +9,7 @@ import FormDatePicker from '@/components/invoice/formElements/FormDatePicker';
 import InvoiceFormSection from '@/components/invoice/formSections/InvoiceFormSection';
 import LayoutSelector from '@/components/invoice/LayoutSelector';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import {
   Building2,
   FileText,
@@ -22,6 +24,8 @@ import {
 } from 'lucide-react';
 
 export default function OfferteMaker({ form }) {
+  const { user } = useAuth();
+  const isLoggedIn = Boolean(user);
   const {
     quote,
     setQuote,
@@ -299,12 +303,7 @@ export default function OfferteMaker({ form }) {
             { key: 'showTerms', label: 'Algemene voorwaarden toevoegen' },
             { key: 'showSignature', label: 'Handtekening toevoegen' },
             { key: 'showPaymentTerms', label: 'Betalingsvoorwaarden toevoegen' },
-            {
-              key: 'showFactuurBaasBranding',
-              label: 'Toon “Gratis gemaakt met FactuurBaas.nl” op de PDF',
-              hint: 'Helpt ons groeien, zodat we meer gratis features kunnen maken. Je kunt dit uitzetten.',
-            },
-          ].map(({ key, label, hint }) => (
+          ].map(({ key, label }) => (
             <label key={key} className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
@@ -312,12 +311,43 @@ export default function OfferteMaker({ form }) {
                 onChange={() => toggleOption(key)}
                 className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600"
               />
-              <span className="text-sm leading-relaxed text-slate-700">
-                {label}
-                {hint && <span className="mt-0.5 block text-xs text-slate-500">{hint}</span>}
-              </span>
+              <span className="text-sm leading-relaxed text-slate-700">{label}</span>
             </label>
           ))}
+
+          <label
+            className={`flex items-start gap-3 ${
+              isLoggedIn ? 'cursor-pointer' : 'cursor-not-allowed'
+            }`}
+          >
+            <input
+              type="checkbox"
+              checked={isLoggedIn ? quote.options.showFactuurBaasBranding !== false : true}
+              disabled={!isLoggedIn}
+              onChange={isLoggedIn ? () => toggleOption('showFactuurBaasBranding') : undefined}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 disabled:cursor-not-allowed"
+            />
+            <span className="text-sm leading-relaxed text-slate-700">
+              Toon “Gratis gemaakt met FactuurBaas.nl” op de PDF
+              <span className="mt-0.5 block text-xs text-slate-500">
+                {isLoggedIn ? (
+                  'Helpt ons groeien, zodat we meer gratis features kunnen maken. Je kunt dit uitzetten.'
+                ) : (
+                  <>
+                    Helpt ons groeien, zodat we meer gratis features kunnen maken.{' '}
+                    <Link
+                      href="/login?next=/tools/offerte-maker/maken"
+                      className="font-medium text-warm-orange hover:underline"
+                    >
+                      Maak een gratis account
+                    </Link>{' '}
+                    om dit uit te zetten.
+                  </>
+                )}
+              </span>
+            </span>
+          </label>
+
           {quote.options.showTerms && (
             <FormTextarea
               label="Voorwaarden"

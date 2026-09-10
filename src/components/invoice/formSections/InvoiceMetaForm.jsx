@@ -17,8 +17,10 @@ const InvoiceMetaForm = ({
   onInputChange,
   onDateChange,
   onPaymentTermChange,
+  isLoggedIn = false,
 }) => {
   const hasAdvancedOptions = currency !== 'EUR' || pdfLanguage !== 'nl';
+  const brandingChecked = isLoggedIn ? showFactuurBaasBranding !== false : true;
 
   return (
     <div className="space-y-6">
@@ -98,18 +100,39 @@ const InvoiceMetaForm = ({
         </div>
       </MeerOpties>
 
-      <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-slate-50/80 px-3 py-3">
+      <label
+        className={`flex items-start gap-3 rounded-lg border px-3 py-3 ${
+          isLoggedIn
+            ? 'cursor-pointer border-slate-200 bg-slate-50/80'
+            : 'cursor-not-allowed border-slate-200 bg-slate-50/60'
+        }`}
+      >
         <input
           type="checkbox"
           name="showFactuurBaasBranding"
-          checked={showFactuurBaasBranding !== false}
-          onChange={onInputChange}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          checked={brandingChecked}
+          disabled={!isLoggedIn}
+          onChange={isLoggedIn ? onInputChange : undefined}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:cursor-not-allowed"
         />
         <span className="text-sm leading-relaxed text-slate-700">
-          Toon <span className="font-medium">“Gratis gemaakt met FactuurBaas.nl”</span> onderaan de PDF
+          Toon <span className="font-medium">“Gratis gemaakt met FactuurBaas.nl”</span> onderaan
+          de PDF
           <span className="mt-0.5 block text-xs text-slate-500">
-            Helpt ons groeien, zodat we meer gratis features kunnen maken. Je kunt dit uitzetten.
+            {isLoggedIn ? (
+              'Helpt ons groeien, zodat we meer gratis features kunnen maken. Je kunt dit uitzetten.'
+            ) : (
+              <>
+                Helpt ons groeien, zodat we meer gratis features kunnen maken.{' '}
+                <a
+                  href="/login?next=/create-invoice"
+                  className="font-medium text-warm-orange hover:underline"
+                >
+                  Maak een gratis account
+                </a>{' '}
+                om dit uit te zetten.
+              </>
+            )}
           </span>
         </span>
       </label>

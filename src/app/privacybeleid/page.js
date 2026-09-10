@@ -5,12 +5,12 @@ import { ArrowLeft, Shield, Crown } from 'lucide-react';
 export const metadata = {
   title: 'Privacybeleid | FactuurBaas',
   description:
-    'Privacybeleid van FactuurBaas.nl — EU-hosting (Stockholm), Resend (transactionele e-mail), beveiliging (RLS), Google-login, back-ups en AVG-rechten.',
+    'Privacybeleid van FactuurBaas.nl — EU-hosting (Stockholm), Resend, Baas-status/referrals, cookies/local storage, beveiliging (RLS), Google-login en AVG-rechten.',
   alternates: { canonical: 'https://factuurbaas.nl/privacybeleid' },
 };
 
 export default function PrivacyPolicyPage() {
-  const lastUpdatedDate = '2 augustus 2026';
+  const lastUpdatedDate = '10 september 2026';
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -60,9 +60,10 @@ export default function PrivacyPolicyPage() {
             </p>
             <h3>Met account (Google-login)</h3>
             <p>
-              Als u inlogt met Google, kunt u facturen opslaan, statussen en btw bijhouden, een dashboard gebruiken
-              en klanten bewaren voor sneller factureren. Opslaan in de cloud gebeurt alleen wanneer u daarvoor
-              kiest. Bij login/account vraagt u expliciet om akkoord met dit privacybeleid en onze voorwaarden.
+              Als u inlogt met Google, kunt u facturen opslaan, statussen en btw bijhouden, een dashboard gebruiken,
+              klanten bewaren voor sneller factureren, en optioneel meedoen aan Baas-status (referral-programma) met
+              unlocks zoals exclusieve factuurstijlen. Opslaan in de cloud gebeurt alleen wanneer u daarvoor kiest.
+              Bij login/account vraagt u expliciet om akkoord met dit privacybeleid en onze voorwaarden.
             </p>
 
             <h2>2. Welke gegevens we verwerken</h2>
@@ -105,6 +106,13 @@ export default function PrivacyPolicyPage() {
                 optionele conversiemeting (gast → account) zonder factuurinhoud; tijdstip/versie van
                 privacy-akkoord; of een welkomstmail is verzonden.
               </li>
+              <li>
+                <strong>Baas-status / referrals (met account):</strong> een unieke referralcode op uw profiel;
+                eventueel wie u heeft uitgenodigd (<em>referred_by</em> bij nieuwe accounts die via uw link
+                registreren); een teller van bezoeken aan uw Baas-link. We slaan bij linkbezoeken{' '}
+                <strong>geen</strong> namen of e-mailadressen van bezoekers op — alleen een aggregaat
+                (aantal bezoeken) gekoppeld aan de eigenaar van de link.
+              </li>
             </ul>
 
             <h2>3. Doeleinden en grondslag</h2>
@@ -118,18 +126,23 @@ export default function PrivacyPolicyPage() {
                 tips/nieuws (marketing) — <strong>alleen</strong> als u daar apart voor kiest via de optionele
                 checkbox bij login/account of in uw profiel;
               </li>
+              <li>
+                Baas-status / referral-programma: uitnodigingen toeschrijven, voortgang tonen, misbruik
+                tegengaan, en beloningen (zoals exclusieve factuurstijlen) vrijgeven;
+              </li>
               <li>uw account beveiligen en misbruik tegengaan;</li>
               <li>de website verbeteren (geanonimiseerde statistieken);</li>
               <li>wettelijke verplichtingen nakomen waar van toepassing;</li>
               <li>uw AVG-rechten uitvoeren (export, verwijderen).</li>
             </ul>
             <p>
-              Grondslag: uitvoering van de overeenkomst (dienst + bijbehorende transactionele e-mail),
-              gerechtvaardigd belang (beveiliging/statistiek), en toestemming waar we daar om vragen. We sturen
-              geen commercieel nieuwsbriefverkeer zonder aparte toestemming. Een nieuwsbrief-opt-in wordt op uw
-              profiel bewaard (met tijdstip); zolang we geen aparte mailingdienst koppelen, versturen we nog geen
-              nieuwsbrief. Bij accountverwijdering verdwijnt deze voorkeur mee, tenzij u later via een
-              externe mailinglijst bent ingeschreven.
+              Grondslag: uitvoering van de overeenkomst (dienst + bijbehorende transactionele e-mail +
+              referral-/unlock-functies bij accountgebruik), gerechtvaardigd belang (beveiliging/statistiek/
+              geaggregeerde linkbezoeken), en toestemming waar we daar om vragen. We sturen geen commercieel
+              nieuwsbriefverkeer zonder aparte toestemming. Een nieuwsbrief-opt-in wordt op uw profiel bewaard
+              (met tijdstip); zolang we geen aparte mailingdienst koppelen, versturen we nog geen nieuwsbrief.
+              Bij accountverwijdering verdwijnt deze voorkeur mee, tenzij u later via een externe mailinglijst
+              bent ingeschreven.
             </p>
 
             <h2>4. Waar staan uw gegevens? (locatie)</h2>
@@ -185,10 +198,11 @@ export default function PrivacyPolicyPage() {
 
             <h2>6. Bewaartermijn</h2>
             <p>
-              Opgeslagen facturen, klanten en profielgegevens bewaren we totdat u ze verwijdert of uw account
-              verwijdert. Gastmodus-gegevens verdwijnen met uw browsergegevens. Anonieme logs kunnen voor
-              statistiek worden bewaard, zonder factuurinhoud. Transactionele e-mails kunnen kort bij Resend
-              zichtbaar zijn in verzendlogs volgens hun retentie; wij gebruiken die niet voor marketing.
+              Opgeslagen facturen, klanten en profielgegevens (inclusief referralcode, referral-toeschrijving en
+              linkbezoekenteller) bewaren we totdat u ze verwijdert of uw account verwijdert. Gastmodus-gegevens
+              verdwijnen met uw browsergegevens. Anonieme logs kunnen voor statistiek worden bewaard, zonder
+              factuurinhoud. Transactionele e-mails kunnen kort bij Resend zichtbaar zijn in verzendlogs volgens
+              hun retentie; wij gebruiken die niet voor marketing.
             </p>
 
             <h2>7. Beveiliging, back-ups en beschikbaarheid</h2>
@@ -231,8 +245,28 @@ export default function PrivacyPolicyPage() {
 
             <h2>9. Cookies en lokale opslag</h2>
             <p>
-              Functionele cookies/local storage voor sessie, optionele voorkeuren en cookievoorkeuren. Zie de
-              cookiebanner waar van toepassing.
+              We gebruiken functionele cookies/local storage die nodig zijn voor de werking van de site, plus
+              optionele analytische/marketingcookies via de cookiebanner.
+            </p>
+            <ul>
+              <li>
+                <strong>Noodzakelijk / functioneel:</strong> login-sessie (Supabase Auth); cookievoorkeuren;
+                tijdelijke opslag van een referralcode (<code>fb_referral_code</code>) nadat u via een Baas-link
+                (<code>?ref=</code>) binnenkomt, zodat we de uitnodiging kunnen koppelen als u later een account
+                aanmaakt; session-markering om dubbele linkbezoeken in hetzelfde browsertabblad te beperken;
+                optioneel een tijdelijke markering dat u als gast een factuur heeft gemaakt (conversiemeting na
+                accountaanmaak, zonder factuurinhoud); privacy-akkoord in afwachting van login.
+              </li>
+              <li>
+                <strong>Analytisch / marketing (optioneel):</strong> alleen met uw toestemming via de
+                cookiebanner (bijv. anonieme pageviews via Vercel Analytics waar van toepassing).
+              </li>
+            </ul>
+            <p>
+              Referral-attribuut en linkbezoekentelling zijn <strong>first-party</strong> en horen bij de
+              Baas-statusfunctie; we gebruiken ze niet voor advertentienetwerken van derden. U kunt lokale
+              opslag wissen via uw browserinstellingen; dan kan een latere accountaanmaak mogelijk niet meer aan
+              de uitnodiging worden gekoppeld.
             </p>
 
             <h2>10. Kinderen</h2>

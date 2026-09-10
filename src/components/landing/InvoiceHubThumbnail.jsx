@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { FileSpreadsheet, FileText, FileType } from 'lucide-react';
+import { FileSpreadsheet, FileText, FileType, Palette, Table2 } from 'lucide-react';
 
 const layoutThemes = {
   plain: {
@@ -43,6 +43,9 @@ const formatMeta = {
   word: { label: 'Word', Icon: FileType, accent: 'text-blue-600', bg: 'bg-blue-50' },
   excel: { label: 'Excel', Icon: FileSpreadsheet, accent: 'text-emerald-600', bg: 'bg-emerald-50' },
   pdf: { label: 'PDF', Icon: FileText, accent: 'text-red-600', bg: 'bg-red-50' },
+  canva: { label: 'Canva', Icon: Palette, accent: 'text-violet-600', bg: 'bg-violet-50' },
+  'google-docs': { label: 'Docs', Icon: FileText, accent: 'text-sky-600', bg: 'bg-sky-50' },
+  'google-sheets': { label: 'Sheets', Icon: Table2, accent: 'text-green-600', bg: 'bg-green-50' },
 };
 
 function FormatThumbnail({ format = 'pdf', badge = 'Template' }) {

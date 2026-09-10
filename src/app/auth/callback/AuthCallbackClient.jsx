@@ -9,6 +9,7 @@ import {
   persistPrivacyAcceptance,
   persistNewsletterOptIn,
 } from '@/lib/privacyConsent';
+import { applyReferralCode, consumeReferralCode, storeReferralCode } from '@/lib/referral';
 import { requestWelcomeEmail } from '@/lib/requestWelcomeEmail';
 import { Loader2 } from 'lucide-react';
 
@@ -69,6 +70,22 @@ async function applyGuestConversionIfNeeded() {
   }
 }
 
+async function applyReferralIfNeeded() {
+  const code = consumeReferralCode();
+  if (!code) return;
+
+  try {
+    const result = await applyReferralCode(supabase, code);
+    if (result?.ok === false && result?.reason === 'invalid') {
+      // Keep nothing — invalid code
+    }
+  } catch (err) {
+    // Re-store so signup can be attributed once the migration is live
+    storeReferralCode(code);
+    console.warn('referral apply failed:', err?.message || err);
+  }
+}
+
 export default function AuthCallbackClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -102,6 +119,7 @@ export default function AuthCallbackClient() {
 
         await applyPrivacyConsentIfNeeded();
         await applyGuestConversionIfNeeded();
+        await applyReferralIfNeeded();
         // One-time welcome mail (server skips if already sent)
         void requestWelcomeEmail(supabase);
 

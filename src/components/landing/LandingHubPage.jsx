@@ -175,7 +175,9 @@ export default function LandingHubPage({
                     className={
                       group.links.length === 2
                         ? 'mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 sm:gap-5'
-                        : 'grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3'
+                        : group.links.length === 4
+                          ? 'grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4'
+                          : 'grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3'
                     }
                   >
                     {group.links.map((link) => (

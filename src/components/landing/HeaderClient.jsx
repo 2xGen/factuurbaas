@@ -10,6 +10,7 @@ import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 import {
   ArrowRight,
   Clock,
+  Crown,
   FilePlus2,
   FileText,
   LayoutDashboard,
@@ -131,7 +132,7 @@ export default function HeaderClient() {
         )}
 
         {!loading && isLoggedIn && (
-          <nav className="hidden items-center gap-6 md:flex lg:gap-8">
+          <nav className="hidden items-center gap-4 md:flex lg:gap-6">
             <NavLink href="/dashboard" active={pathname.startsWith('/dashboard')}>
               Dashboard
             </NavLink>
@@ -143,6 +144,9 @@ export default function HeaderClient() {
             </NavLink>
             <NavLink href="/klanten" active={pathname.startsWith('/klanten')}>
               Klanten
+            </NavLink>
+            <NavLink href="/baas-status" active={pathname.startsWith('/baas-status')}>
+              Baas status
             </NavLink>
             <NavLink href="/profile" active={pathname.startsWith('/profile')}>
               Profiel
@@ -254,6 +258,14 @@ export default function HeaderClient() {
                   >
                     <span className="inline-flex items-center gap-2">
                       <Users className="h-4 w-4" /> Klanten
+                    </span>
+                  </Link>
+                  <Link
+                    href="/baas-status"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Crown className="h-4 w-4" /> Baas status
                     </span>
                   </Link>
                   <Link

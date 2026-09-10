@@ -13,6 +13,8 @@ export default function ToolGatePage({
   toolCtaLabel,
   secondaryHref,
   secondaryCtaLabel,
+  footerTitle = 'Klaar om te starten?',
+  footerIntro = 'Open de gratis tool en ga direct aan de slag. Geen account nodig.',
   faqSchema,
   extraSchemas = [],
   children,
@@ -113,10 +115,10 @@ export default function ToolGatePage({
       <section className="border-t border-slate-200 bg-white py-10 sm:py-12">
         <div className="container mx-auto max-w-4xl px-4 text-center sm:px-6">
           <h2 className="font-heading text-xl font-bold text-deep-blue sm:text-2xl">
-            Klaar om te starten?
+            {footerTitle}
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-sm text-slate-600 sm:text-base">
-            Open de gratis tool en ga direct aan de slag. Geen account nodig.
+            {footerIntro}
           </p>
           <Button asChild size="lg" className="mt-6 rounded-xl px-8">
             <Link href={toolHref}>
