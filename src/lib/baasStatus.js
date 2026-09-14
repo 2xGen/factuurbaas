@@ -1,7 +1,14 @@
-export const REFERRAL_UNLOCK_GOAL = 3;
+export const REFERRAL_UNLOCK_GOAL = 1;
 export const REFERRAL_SUPER_GOAL = 10;
 
-/** Primary unlock progress: always /3 referrals. Visits are secondary elsewhere. */
+export function referralLabel(count, { capitalize = false } = {}) {
+  const n = Number(count) || 0;
+  const word = n === 1 ? 'referral' : 'referrals';
+  const label = `${n} ${word}`;
+  return capitalize ? label.charAt(0).toUpperCase() + label.slice(1) : label;
+}
+
+/** Primary unlock progress: /REFERRAL_UNLOCK_GOAL referrals. Visits are secondary elsewhere. */
 export function getReferralHeroProgress(referralCount) {
   const count = Number(referralCount) || 0;
   const unlocked = count >= REFERRAL_UNLOCK_GOAL;
@@ -14,7 +21,7 @@ export function getReferralHeroProgress(referralCount) {
       goal: REFERRAL_UNLOCK_GOAL,
       remaining: 0,
       unlocked: true,
-      title: `${REFERRAL_UNLOCK_GOAL} referrals`,
+      title: referralLabel(REFERRAL_UNLOCK_GOAL),
       description: 'Unlock vrijgespeeld',
       percent: 100,
     };
@@ -25,7 +32,7 @@ export function getReferralHeroProgress(referralCount) {
     goal: REFERRAL_UNLOCK_GOAL,
     remaining,
     unlocked: false,
-    title: `${REFERRAL_UNLOCK_GOAL} referrals = unlock`,
+    title: `${referralLabel(REFERRAL_UNLOCK_GOAL)} = unlock`,
     description: null,
     percent: Math.round((current / REFERRAL_UNLOCK_GOAL) * 100),
   };

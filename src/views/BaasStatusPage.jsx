@@ -33,7 +33,7 @@ import {
   ensureReferralCode,
   getMyReferralVisitCount,
 } from '@/lib/referral';
-import { getBadgeStates, getBaasLevel, getReferralHeroProgress, REFERRAL_UNLOCK_GOAL } from '@/lib/baasStatus';
+import { getBadgeStates, getBaasLevel, getReferralHeroProgress, referralLabel, REFERRAL_UNLOCK_GOAL } from '@/lib/baasStatus';
 import { cn } from '@/lib/utils';
 
 function WhatsAppIcon({ className }) {
@@ -319,7 +319,7 @@ export default function BaasStatusPage() {
             {referralHero.unlocked ? (
               <div className="mt-4">
                 <h2 className="font-heading text-2xl font-bold sm:text-3xl">
-                  {REFERRAL_UNLOCK_GOAL} referrals
+                  {referralLabel(REFERRAL_UNLOCK_GOAL)}
                 </h2>
                 <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-emerald-200 sm:text-base">
                   <Check className="h-4 w-4" />
@@ -329,12 +329,13 @@ export default function BaasStatusPage() {
             ) : (
               <div className="mt-4">
                 <h2 className="font-heading text-2xl font-bold sm:text-3xl">
-                  {REFERRAL_UNLOCK_GOAL} referrals = unlock
+                  {referralLabel(REFERRAL_UNLOCK_GOAL)} = unlock
                 </h2>
                 <div className="mt-6 max-w-md">
                   <div className="mb-2 flex items-end justify-between gap-3">
                     <p className="font-heading text-lg font-bold sm:text-xl">
-                      {referralHero.current} van {referralHero.goal} referrals
+                      {referralHero.current} van {referralHero.goal}{' '}
+                      {referralHero.goal === 1 ? 'referral' : 'referrals'}
                     </p>
                     <p className="text-xs text-blue-200">{referralProgressPct}%</p>
                   </div>

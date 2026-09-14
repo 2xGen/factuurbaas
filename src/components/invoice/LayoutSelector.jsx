@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useReferralCount } from '@/hooks/useReferralCount';
-import { REFERRAL_UNLOCK_GOAL } from '@/lib/baasStatus';
+import { REFERRAL_UNLOCK_GOAL, referralLabel } from '@/lib/baasStatus';
 import { supabase } from '@/lib/customSupabaseClient';
 import { buildReferralUrl, ensureReferralCode } from '@/lib/referral';
 import {
@@ -101,7 +101,7 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
           <p className="text-xs text-slate-500">
             3 exclusieve stijlen na{' '}
             <Link href="/baas-status" className="font-semibold text-warm-orange hover:underline">
-              {REFERRAL_UNLOCK_GOAL} referrals
+              {referralLabel(REFERRAL_UNLOCK_GOAL)}
             </Link>
           </p>
         ) : null}
@@ -132,7 +132,7 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
                 lock === 'account'
                   ? `${option.name} — maak gratis een account aan`
                   : lock === 'referrals'
-                    ? `${option.name} — gelocked tot ${REFERRAL_UNLOCK_GOAL} referrals`
+                    ? `${option.name} — gelocked tot ${referralLabel(REFERRAL_UNLOCK_GOAL)}`
                     : `Selecteer ${option.name} layout`
               }
               aria-disabled={isLocked}
@@ -178,7 +178,7 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
                     {/* Account CTA lives once in the header; only show referral goal when logged in */}
                     {lock === 'referrals' && (
                       <span className="text-[10px] font-bold uppercase tracking-wide text-white">
-                        {loadingUnlock ? '…' : `${REFERRAL_UNLOCK_GOAL} referrals`}
+                        {loadingUnlock ? '…' : referralLabel(REFERRAL_UNLOCK_GOAL)}
                       </span>
                     )}
                   </div>
@@ -208,8 +208,10 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
         <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-950">
           <p>
             Deze exclusieve stijlen unlock je alleen door je{' '}
-            <strong>Baas-link</strong> te delen. Nodig {REFERRAL_UNLOCK_GOAL} ondernemers uit — zodra
-            ze een account aanmaken, komen de stijlen vrij.
+            <strong>Baas-link</strong> te delen. Nodig{' '}
+            {REFERRAL_UNLOCK_GOAL === 1
+              ? '1 ondernemer uit — zodra die een account aanmaakt, komen de stijlen vrij.'
+              : `${REFERRAL_UNLOCK_GOAL} ondernemers uit — zodra ze een account aanmaken, komen de stijlen vrij.`}
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
             <Link
