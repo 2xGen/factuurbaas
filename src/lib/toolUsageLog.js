@@ -9,6 +9,7 @@ export const TOOL_LOG_TABLES = {
   marge: 'factuurbaas_marge_calculator',
   betaaltermijn: 'factuurbaas_betaaltermijn_calculator',
   kor: 'factuurbaas_kor_calculator',
+  hypotheek: 'factuurbaas_hypotheek_berekeningen',
 };
 
 // Invoices: insert into base table, read via view in admin dashboard.
@@ -71,6 +72,13 @@ export const TOOL_USAGE_ADMIN_SECTIONS = [
     table: TOOL_LOG_TABLES.kor,
     statsRpc: 'get_kor_calculator_stats',
     emptyMessage: 'Nog geen KOR-berekeningen geregistreerd.',
+  },
+  {
+    title: 'Hypotheek Berekeningen',
+    description: 'Statistieken van hypotheek-berekeningen als zzp\'er.',
+    table: TOOL_LOG_TABLES.hypotheek,
+    statsRpc: 'get_hypotheek_berekening_stats',
+    emptyMessage: 'Nog geen hypotheek-berekeningen geregistreerd.',
   },
 ];
 

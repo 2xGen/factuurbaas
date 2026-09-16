@@ -35,6 +35,10 @@ export const useInvoiceFormManagement = (initialInvoice) => {
         ...prev,
         workType: 'hourly',
         amount: String(Math.round(prefill.hourlyRate * 100) / 100),
+        items: [],
+        hoursWorked: [
+          { id: Date.now(), date: new Date(), taskDescription: '', hours: 0 },
+        ],
       }));
       return;
     }
@@ -48,6 +52,7 @@ export const useInvoiceFormManagement = (initialInvoice) => {
         ...prev,
         workType: 'hourly',
         ...(rate != null ? { amount: rate } : {}),
+        items: [],
         hoursWorked: prefill.hoursWorked.map((log, index) => ({
           id: log.id || Date.now() + index,
           date: log.date ? new Date(log.date) : new Date(),
@@ -254,18 +259,25 @@ export const useInvoiceFormManagement = (initialInvoice) => {
   }, []);
 
   const handleAddItem = useCallback(() => {
-    setInvoice((prev) => ({
-      ...prev,
-      items: [...(prev.items || []), {
-        id: Date.now(),
-        itemName: '',
-        itemDescription: '',
-        quantity: 1,
-        price: 0,
-        tax: prev.tax === 'exempt' || prev.tax === 'reverse' ? '21' : (prev.tax || '21'),
-        customTaxRate: prev.tax === 'custom' ? prev.customTaxRate : '',
-      }],
-    }));
+    setInvoice((prev) => {
+      const hasHours = (prev.hoursWorked || []).length > 0;
+      return {
+        ...prev,
+        workType: hasHours ? 'mixed' : 'fixed',
+        items: [
+          ...(prev.items || []),
+          {
+            id: Date.now(),
+            itemName: '',
+            itemDescription: '',
+            quantity: 1,
+            price: 0,
+            tax: prev.tax === 'exempt' || prev.tax === 'reverse' ? '21' : prev.tax || '21',
+            customTaxRate: prev.tax === 'custom' ? prev.customTaxRate : '',
+          },
+        ],
+      };
+    });
   }, []);
 
   const handleUpdateItem = useCallback((index, field, value) => {
@@ -277,17 +289,29 @@ export const useInvoiceFormManagement = (initialInvoice) => {
   }, []);
 
   const handleRemoveItem = useCallback((index) => {
-    setInvoice((prev) => ({
-      ...prev,
-      items: (prev.items || []).filter((_, i) => i !== index),
-    }));
+    setInvoice((prev) => {
+      const items = (prev.items || []).filter((_, i) => i !== index);
+      const hasHours = (prev.hoursWorked || []).length > 0;
+      return {
+        ...prev,
+        items,
+        workType: items.length && hasHours ? 'mixed' : hasHours ? 'hourly' : 'fixed',
+      };
+    });
   }, []);
 
   const handleAddWorkDay = useCallback(() => {
-    setInvoice((prev) => ({
-      ...prev,
-      hoursWorked: [...(prev.hoursWorked || []), { id: Date.now(), date: new Date(), taskDescription: '', hours: 0 }],
-    }));
+    setInvoice((prev) => {
+      const hasItems = (prev.items || []).length > 0;
+      return {
+        ...prev,
+        workType: hasItems ? 'mixed' : 'hourly',
+        hoursWorked: [
+          ...(prev.hoursWorked || []),
+          { id: Date.now(), date: new Date(), taskDescription: '', hours: 0 },
+        ],
+      };
+    });
   }, []);
 
   const handleUpdateWorkDay = useCallback((index, field, value) => {
@@ -303,35 +327,34 @@ export const useInvoiceFormManagement = (initialInvoice) => {
   }, []);
 
   const handleRemoveWorkDay = useCallback((index) => {
-    setInvoice((prev) => ({
-      ...prev,
-      hoursWorked: (prev.hoursWorked || []).filter((_, i) => i !== index),
-    }));
+    setInvoice((prev) => {
+      const hoursWorked = (prev.hoursWorked || []).filter((_, i) => i !== index);
+      const hasItems = (prev.items || []).length > 0;
+      return {
+        ...prev,
+        hoursWorked,
+        workType: hoursWorked.length && hasItems ? 'mixed' : hoursWorked.length ? 'hourly' : 'fixed',
+      };
+    });
   }, []);
 
   const handleAddItemBasedOnWorkType = useCallback(() => {
-    if (invoice.workType === 'fixed') {
-      handleAddItem();
-    } else if (invoice.workType === 'hourly') {
-      handleAddWorkDay();
-    }
-  }, [invoice.workType, handleAddItem, handleAddWorkDay]);
+    handleAddItem();
+  }, [handleAddItem]);
 
-  const handleUpdateItemBasedOnWorkType = useCallback((index, field, value) => {
-    if (invoice.workType === 'fixed') {
+  const handleUpdateItemBasedOnWorkType = useCallback(
+    (index, field, value) => {
       handleUpdateItem(index, field, value);
-    } else if (invoice.workType === 'hourly') {
-      handleUpdateWorkDay(index, field, value);
-    }
-  }, [invoice.workType, handleUpdateItem, handleUpdateWorkDay]);
+    },
+    [handleUpdateItem]
+  );
 
-  const handleRemoveItemBasedOnWorkType = useCallback((index) => {
-    if (invoice.workType === 'fixed') {
+  const handleRemoveItemBasedOnWorkType = useCallback(
+    (index) => {
       handleRemoveItem(index);
-    } else if (invoice.workType === 'hourly') {
-      handleRemoveWorkDay(index);
-    }
-  }, [invoice.workType, handleRemoveItem, handleRemoveWorkDay]);
+    },
+    [handleRemoveItem]
+  );
 
   return {
     invoice,

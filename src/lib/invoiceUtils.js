@@ -67,46 +67,51 @@ export const calculateInvoiceBreakdown = (invoice) => {
   const extraCostsTotal = getExtraCostsTotal(invoice);
   const taxBuckets = {};
 
-  if (invoice.workType === 'hourly') {
-    const totalHours = (invoice.hoursWorked || []).reduce(
-      (sum, day) => sum + parseFloat(day.hours || 0),
-      0
-    );
+  const hoursWorked = invoice.hoursWorked || [];
+  const items = invoice.items || [];
+
+  // Hours contribution (can combine with items on one invoice)
+  if (hoursWorked.length > 0) {
+    const totalHours = hoursWorked.reduce((sum, day) => sum + parseFloat(day.hours || 0), 0);
     const hourlyRate = parseFloat(invoice.amount) || 0;
     const baseSubtotal = totalHours * hourlyRate;
     const lineTax = resolveLineTax(null, invoice);
+    let hoursPreTax = 0;
+    let hoursTax = 0;
 
     if (invoice.taxIncluded) {
-      subtotalPreTax = overallTaxRate > 0 ? baseSubtotal / (1 + overallTaxRate) : baseSubtotal;
-      totalTaxAmount = baseSubtotal - subtotalPreTax;
+      hoursPreTax = overallTaxRate > 0 ? baseSubtotal / (1 + overallTaxRate) : baseSubtotal;
+      hoursTax = baseSubtotal - hoursPreTax;
     } else {
-      subtotalPreTax = baseSubtotal;
-      totalTaxAmount = subtotalPreTax * overallTaxRate;
+      hoursPreTax = baseSubtotal;
+      hoursTax = hoursPreTax * overallTaxRate;
     }
-    addTaxBucket(taxBuckets, lineTax, totalTaxAmount);
-  } else {
-    (invoice.items || []).forEach((item) => {
-      const itemPrice = parseFloat(item.price) || 0;
-      const itemQuantity = parseInt(item.quantity, 10) || 1;
-      const itemBasePrice = itemPrice * itemQuantity;
-      const lineTax = resolveLineTax(item, invoice);
-      let linePreTax = 0;
-      let lineTaxAmount = 0;
-
-      if (invoice.taxIncluded) {
-        linePreTax =
-          lineTax.rate > 0 ? itemBasePrice / (1 + lineTax.rate) : itemBasePrice;
-        lineTaxAmount = itemBasePrice - linePreTax;
-      } else {
-        linePreTax = itemBasePrice;
-        lineTaxAmount = itemBasePrice * lineTax.rate;
-      }
-
-      subtotalPreTax += linePreTax;
-      totalTaxAmount += lineTaxAmount;
-      addTaxBucket(taxBuckets, lineTax, lineTaxAmount);
-    });
+    subtotalPreTax += hoursPreTax;
+    totalTaxAmount += hoursTax;
+    addTaxBucket(taxBuckets, lineTax, hoursTax);
   }
+
+  // Items / materials contribution
+  items.forEach((item) => {
+    const itemPrice = parseFloat(item.price) || 0;
+    const itemQuantity = parseInt(item.quantity, 10) || 1;
+    const itemBasePrice = itemPrice * itemQuantity;
+    const lineTax = resolveLineTax(item, invoice);
+    let linePreTax = 0;
+    let lineTaxAmount = 0;
+
+    if (invoice.taxIncluded) {
+      linePreTax = lineTax.rate > 0 ? itemBasePrice / (1 + lineTax.rate) : itemBasePrice;
+      lineTaxAmount = itemBasePrice - linePreTax;
+    } else {
+      linePreTax = itemBasePrice;
+      lineTaxAmount = itemBasePrice * lineTax.rate;
+    }
+
+    subtotalPreTax += linePreTax;
+    totalTaxAmount += lineTaxAmount;
+    addTaxBucket(taxBuckets, lineTax, lineTaxAmount);
+  });
 
   const extraLineTax = resolveLineTax(null, invoice);
   if (extraCostsTotal > 0) {

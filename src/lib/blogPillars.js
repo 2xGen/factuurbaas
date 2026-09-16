@@ -107,6 +107,21 @@ export const blogPillars = [
     ],
   },
   {
+    id: 'hypotheek',
+    title: "Hypotheek als zzp'er",
+    description:
+      "Hoe werkt een hypotheek als zzp'er? Lees over toetsinkomen, documenten, NHG en bereken je maximale hypotheek.",
+    slugs: [
+      'hypotheek-als-zzper-hoe-werkt-het',
+      'hoeveel-hypotheek-kan-ik-krijgen-als-zzper',
+      'hypotheek-met-eenmanszaak',
+      'hypotheek-voor-startende-zzpers',
+      'hoe-lang-zzper-zijn-voor-hypotheek',
+      'welk-inkomen-telt-voor-hypotheek-als-zzper',
+      'winst-uit-onderneming-voor-hypotheek',
+    ],
+  },
+  {
     id: 'betaling-beheer',
     title: 'Betaling & beheer',
     description:

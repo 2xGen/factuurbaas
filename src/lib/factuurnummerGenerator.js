@@ -60,6 +60,12 @@ export function formatInvoiceNumber({ year, prefix = '', startNumber = 1, padLen
   return `${yr}-${padded}`;
 }
 
+/** Simple default for create-invoice: 2026-001 */
+export function createDefaultInvoiceNumber(date = new Date()) {
+  const year = date instanceof Date && !Number.isNaN(date.getTime()) ? date.getFullYear() : new Date().getFullYear();
+  return formatInvoiceNumber({ year, prefix: '', startNumber: 1, padLength: 3 });
+}
+
 export function getFactuurnummerFaqSchema() {
   return {
     '@context': 'https://schema.org',

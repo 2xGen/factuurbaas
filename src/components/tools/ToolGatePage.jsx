@@ -15,10 +15,12 @@ export default function ToolGatePage({
   secondaryCtaLabel,
   footerTitle = 'Klaar om te starten?',
   footerIntro = 'Open de gratis tool en ga direct aan de slag. Geen account nodig.',
+  footerCtaLabel,
   faqSchema,
   extraSchemas = [],
   children,
 }) {
+  const resolvedFooterCtaLabel = footerCtaLabel || toolCtaLabel;
   const jsonLdSchemas = [faqSchema, ...extraSchemas].filter(Boolean);
 
   return (
@@ -122,7 +124,7 @@ export default function ToolGatePage({
           </p>
           <Button asChild size="lg" className="mt-6 rounded-xl px-8">
             <Link href={toolHref}>
-              {toolCtaLabel}
+              {resolvedFooterCtaLabel}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

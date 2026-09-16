@@ -1,18 +1,21 @@
 import { addDays } from 'date-fns';
+import { createDefaultInvoiceNumber } from '@/lib/factuurnummerGenerator';
+
+const today = new Date();
 
 export const defaultInvoice = {
   id: `INV-${Date.now().toString().slice(-6)}`,
   invoiceName: '',
-  invoice_number: '',
-  invoiceDate: new Date(),
-  dueDate: addDays(new Date(), 14),
+  invoice_number: createDefaultInvoiceNumber(today),
+  invoiceDate: today,
+  dueDate: addDays(today, 14),
   paymentTermDays: '14',
   companyDetails: {
-    name: 'FactuurBaas.nl',
+    name: '',
     street: '',
     postalCode: '',
     city: '',
-    country: '',
+    country: 'Nederland',
     email: '',
     kvk: '',
     btw: '',
@@ -26,16 +29,22 @@ export const defaultInvoice = {
     street: '',
     postalCode: '',
     city: '',
-    country: '',
+    country: 'Nederland',
     kvk: '',
     btw: '',
   },
   items: [
-    { id: Date.now(), itemName: '', itemDescription: '', quantity: 1, price: 0, tax: '21', customTaxRate: '' },
+    {
+      id: Date.now(),
+      itemName: '',
+      itemDescription: '',
+      quantity: 1,
+      price: 0,
+      tax: '21',
+      customTaxRate: '',
+    },
   ],
-  hoursWorked: [
-    { id: Date.now(), date: new Date(), taskDescription: '', hours: 0 },
-  ],
+  hoursWorked: [],
   workType: 'fixed',
   amount: 0,
   description: '',
@@ -48,7 +57,7 @@ export const defaultInvoice = {
     shipping: 0,
     material: 0,
   },
-  notes: 'Bedankt voor uw opdracht!',
+  notes: '',
   terms: 'Betaling binnen 14 dagen.',
   layout: 'plain',
   pdfLanguage: 'nl',

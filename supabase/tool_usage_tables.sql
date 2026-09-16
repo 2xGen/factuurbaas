@@ -48,6 +48,11 @@ create table if not exists public.factuurbaas_kor_calculator (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.factuurbaas_hypotheek_berekeningen (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now()
+);
+
 -- ─── Indexes ────────────────────────────────────────────────────────────────
 
 create index if not exists factuurbaas_offertes_created_at_idx
@@ -66,6 +71,8 @@ create index if not exists factuurbaas_betaaltermijn_calculator_created_at_idx
   on public.factuurbaas_betaaltermijn_calculator (created_at desc);
 create index if not exists factuurbaas_kor_calculator_created_at_idx
   on public.factuurbaas_kor_calculator (created_at desc);
+create index if not exists factuurbaas_hypotheek_berekeningen_created_at_idx
+  on public.factuurbaas_hypotheek_berekeningen (created_at desc);
 
 -- ─── RLS + insert/read policies ─────────────────────────────────────────────
 
@@ -81,7 +88,8 @@ begin
     'factuurbaas_factuurnummer_generator',
     'factuurbaas_marge_calculator',
     'factuurbaas_betaaltermijn_calculator',
-    'factuurbaas_kor_calculator'
+    'factuurbaas_kor_calculator',
+    'factuurbaas_hypotheek_berekeningen'
   ]
   loop
     execute format('alter table public.%I enable row level security', t);
@@ -170,3 +178,8 @@ create or replace function public.get_kor_calculator_stats()
 returns table (period text, count bigint)
 language sql security definer set search_path = public
 as $$ select * from get_tool_log_stats('factuurbaas_kor_calculator'); $$;
+
+create or replace function public.get_hypotheek_berekening_stats()
+returns table (period text, count bigint)
+language sql security definer set search_path = public
+as $$ select * from get_tool_log_stats('factuurbaas_hypotheek_berekeningen'); $$;

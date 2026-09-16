@@ -36,8 +36,29 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
   const receiverAddress = formatReceiverAddress(receiver);
   const extra = invoice.extraCosts || {};
   const vatLabel = invoice.tax === 'exempt' || invoice.tax === 'reverse';
-  const showPerLineVat =
-    invoice.workType === 'fixed' && !vatLabel && taxLines.length > 1;
+  const hasHourRows = (invoice.hoursWorked || []).length > 0;
+  const hasItemRows = (invoice.items || []).length > 0;
+  const isMixed = hasHourRows && hasItemRows;
+  const showHours = hasHourRows;
+  const showItems = hasItemRows || !hasHourRows;
+  const showPerLineVat = showItems && !vatLabel && taxLines.length > 1;
+
+  const qtyHeader = isMixed
+    ? lang === 'en'
+      ? 'Qty / hrs'
+      : 'Aantal / uren'
+    : showHours && !showItems
+      ? labels.hours
+      : labels.quantity;
+  const priceHeader = isMixed
+    ? lang === 'en'
+      ? 'Rate / price'
+      : 'Tarief / prijs'
+    : showHours && !showItems
+      ? labels.pricePerHour
+      : labels.pricePerUnit;
+  const priceHeaderWithVat = `${priceHeader} (${invoice.taxIncluded ? labels.inclVat : labels.exclVat} ${labels.vat})`;
+  const extraColSpan = showPerLineVat ? 4 : 3;
 
   const fmt = (amount) => formatMoney(amount, currency);
 
@@ -157,80 +178,95 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
           <table className="w-full text-[10px] md:text-xs">
             <thead className={currentLayout.tableHeaderBg}>
               <tr className={`${currentLayout.borderColor} border-b`}>
-                <th className={`text-left py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>{labels.description}</th>
-                {invoice.workType === 'hourly' ? (
-                  <>
-                    <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>{labels.hours}</th>
-                    <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
-                      {labels.pricePerHour} ({invoice.taxIncluded ? labels.inclVat : labels.exclVat} {labels.vat})
-                    </th>
-                  </>
-                ) : (
-                  <>
-                    <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>{labels.quantity}</th>
-                    <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
-                      {labels.pricePerUnit} ({invoice.taxIncluded ? labels.inclVat : labels.exclVat} {labels.vat})
-                    </th>
-                    {showPerLineVat && (
-                      <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
-                        {labels.vat}
-                      </th>
-                    )}
-                  </>
+                <th className={`text-left py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
+                  {labels.description}
+                </th>
+                <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
+                  {qtyHeader}
+                </th>
+                <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
+                  {priceHeaderWithVat}
+                </th>
+                {showPerLineVat && (
+                  <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
+                    {labels.vat}
+                  </th>
                 )}
-                <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>{labels.totalInclVat}</th>
+                <th className={`text-right py-1.5 px-1.5 md:px-2 font-semibold ${currentLayout.text}`}>
+                  {labels.totalInclVat}
+                </th>
               </tr>
             </thead>
             <tbody>
-              {invoice.workType === 'hourly'
-                ? (invoice.hoursWorked || []).map((log, index) => {
-                    const { displayRate, lineTotal } = getHourlyDisplayRateAndTotal(log);
-                    return (
-                      <tr key={index} className={`${currentLayout.borderColor} border-b`}>
-                        <td className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
-                          {log.taskDescription || '-'}
-                          {log.date && (
-                            <span className="block text-[9px] opacity-75">
-                              {format(new Date(log.date), 'd MMM yy', { locale: dateLocale })}
-                            </span>
-                          )}
-                        </td>
-                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{log.hours || 0}</td>
-                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(displayRate)}</td>
-                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(lineTotal)}</td>
-                      </tr>
-                    );
-                  })
-                : (invoice.items || []).map((item, index) => {
-                    const { displayPrice, lineTotal, vatPctLabel } = getItemDisplayPriceAndTotal(item);
-                    return (
-                      <tr key={index} className={`${currentLayout.borderColor} border-b`}>
-                        <td className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
-                          {item.itemName || '-'}
-                          {item.itemDescription && (
-                            <span className="block text-[9px] opacity-75">{item.itemDescription}</span>
-                          )}
-                        </td>
-                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{item.quantity || 1}</td>
-                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(displayPrice)}</td>
-                        {showPerLineVat && (
-                          <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
-                            {vatPctLabel}
-                          </td>
+              {showHours &&
+                (invoice.hoursWorked || []).map((log, index) => {
+                  const { displayRate, lineTotal } = getHourlyDisplayRateAndTotal(log);
+                  return (
+                    <tr key={`hour-${log.id || index}`} className={`${currentLayout.borderColor} border-b`}>
+                      <td className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {log.taskDescription || '-'}
+                        {log.date && (
+                          <span className="block text-[9px] opacity-75">
+                            {format(new Date(log.date), 'd MMM yy', { locale: dateLocale })}
+                          </span>
                         )}
-                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(lineTotal)}</td>
-                      </tr>
-                    );
-                  })}
+                      </td>
+                      <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {log.hours || 0}
+                      </td>
+                      <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {fmt(displayRate)}
+                      </td>
+                      {showPerLineVat && (
+                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                          {resolveLineTax(null, invoice).label}
+                        </td>
+                      )}
+                      <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {fmt(lineTotal)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              {showItems &&
+                (invoice.items || []).map((item, index) => {
+                  const { displayPrice, lineTotal, vatPctLabel } = getItemDisplayPriceAndTotal(item);
+                  return (
+                    <tr key={`item-${item.id || index}`} className={`${currentLayout.borderColor} border-b`}>
+                      <td className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {item.itemName || '-'}
+                        {item.itemDescription && (
+                          <span className="block text-[9px] opacity-75">{item.itemDescription}</span>
+                        )}
+                      </td>
+                      <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {item.quantity || 1}
+                      </td>
+                      <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {fmt(displayPrice)}
+                      </td>
+                      {showPerLineVat && (
+                        <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                          {vatPctLabel}
+                        </td>
+                      )}
+                      <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                        {fmt(lineTotal)}
+                      </td>
+                    </tr>
+                  );
+                })}
               {extraRows.map((row) => (
                 <tr key={row.key} className={`${currentLayout.borderColor} border-b`}>
                   <td
                     className={`py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}
-                    colSpan={invoice.workType === 'hourly' ? 3 : showPerLineVat ? 4 : 3}
+                    colSpan={extraColSpan}
                   >
                     {row.label}
                   </td>
-                  <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>{fmt(row.value)}</td>
+                  <td className={`text-right py-1.5 px-1.5 md:px-2 ${currentLayout.secondary}`}>
+                    {fmt(row.value)}
+                  </td>
                 </tr>
               ))}
             </tbody>

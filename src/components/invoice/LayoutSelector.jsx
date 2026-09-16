@@ -17,7 +17,12 @@ import {
   isPremiumLayout,
 } from '@/lib/invoiceLayouts';
 
-const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Factuur Stijl:' }) => {
+const LayoutSelector = ({
+  currentLayout,
+  onSelectLayout,
+  styleLabel = 'Factuurstijl',
+  compact = false,
+}) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { referralCount, loading: loadingUnlock } = useReferralCount();
@@ -26,6 +31,7 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
   const [showReferralHint, setShowReferralHint] = useState(false);
   const [referralCode, setReferralCode] = useState('');
   const [copying, setCopying] = useState(false);
+  const [expanded, setExpanded] = useState(!compact);
 
   useEffect(() => {
     if (!isLoggedIn || premiumUnlocked) {
@@ -86,28 +92,56 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
     onSelectLayout(option.id);
   };
 
-  return (
-    <div className="mb-6">
-      <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
-        <p className="block text-sm font-medium text-gray-700">{styleLabel}</p>
-        {!isLoggedIn ? (
-          <p className="text-xs text-slate-500">
-            Meer stijlen beschikbaar met een{' '}
-            <Link href="/login" className="font-semibold text-warm-orange hover:underline">
-              gratis account
-            </Link>
-          </p>
-        ) : !premiumUnlocked ? (
-          <p className="text-xs text-slate-500">
-            3 exclusieve stijlen na{' '}
-            <Link href="/baas-status" className="font-semibold text-warm-orange hover:underline">
-              {referralLabel(REFERRAL_UNLOCK_GOAL)}
-            </Link>
-          </p>
-        ) : null}
-      </div>
+  const currentName =
+    LAYOUT_OPTIONS.find((opt) => opt.id === currentLayout)?.name || 'Standaard';
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+  return (
+    <div className={compact ? 'mb-2' : 'mb-6'}>
+      {compact && !expanded ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{styleLabel}</p>
+            <p className="mt-0.5 text-sm font-semibold text-deep-blue">{currentName}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="text-sm font-semibold text-warm-orange hover:underline"
+          >
+            Wijzigen
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+            <p className="block text-sm font-medium text-gray-700">{styleLabel}</p>
+            {compact && (
+              <button
+                type="button"
+                onClick={() => setExpanded(false)}
+                className="text-xs font-medium text-slate-500 hover:text-slate-700"
+              >
+                Inklappen
+              </button>
+            )}
+            {!isLoggedIn ? (
+              <p className="text-xs text-slate-500">
+                Meer stijlen beschikbaar met een{' '}
+                <Link href="/login" className="font-semibold text-warm-orange hover:underline">
+                  gratis account
+                </Link>
+              </p>
+            ) : !premiumUnlocked ? (
+              <p className="text-xs text-slate-500">
+                3 exclusieve stijlen na{' '}
+                <Link href="/baas-status" className="font-semibold text-warm-orange hover:underline">
+                  {referralLabel(REFERRAL_UNLOCK_GOAL)}
+                </Link>
+              </p>
+            ) : null}
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {LAYOUT_OPTIONS.map((option) => {
           const lock = getLayoutLockReason(option.id, { isLoggedIn, referralCount });
           const isLocked = lock !== 'unlocked';
@@ -239,6 +273,8 @@ const LayoutSelector = ({ currentLayout, onSelectLayout, styleLabel = 'Kies Fact
             <p className="mt-2 break-all text-xs text-amber-800/80">{referralUrl}</p>
           ) : null}
         </div>
+      )}
+        </>
       )}
     </div>
   );

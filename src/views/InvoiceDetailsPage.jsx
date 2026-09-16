@@ -355,9 +355,9 @@ function InvoiceDetailsInner() {
               onDateChange={form.handleDateChange}
               onPaymentTermChange={form.handlePaymentTermChange}
               onRememberChange={form.handleRememberCompanyChange}
-              onAddItem={form.handleAddItemBasedOnWorkType}
-              onUpdateItem={form.handleUpdateItemBasedOnWorkType}
-              onRemoveItem={form.handleRemoveItemBasedOnWorkType}
+              onAddItem={form.handleAddItem}
+              onUpdateItem={form.handleUpdateItem}
+              onRemoveItem={form.handleRemoveItem}
               onWorkTypeChange={form.handleWorkTypeChange}
               onSelectLayout={form.handleSelectLayout}
               onAddWorkDay={form.handleAddWorkDay}
@@ -380,6 +380,7 @@ function InvoiceDetailsInner() {
               onSave={handleSave}
               isSaving={isSaving}
               isLoggedIn={Boolean(user)}
+              onInputChange={form.handleInputChange}
             />
           </div>
         </div>

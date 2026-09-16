@@ -115,6 +115,10 @@ function logoForDb(logo) {
 /** Map form invoice → DB payload. Logo = storage path only. */
 export function invoiceToRow(invoice, userId, { includeId = true } = {}) {
   const breakdown = calculateInvoiceBreakdown(invoice);
+  const hasItems = (invoice.items || []).length > 0;
+  const hasHours = (invoice.hoursWorked || []).length > 0;
+  const derivedWorkType =
+    hasItems && hasHours ? 'mixed' : hasHours ? 'hourly' : invoice.workType || 'fixed';
   const row = {
     user_id: userId,
     invoice_number: invoice.invoice_number || null,
@@ -127,7 +131,7 @@ export function invoiceToRow(invoice, userId, { includeId = true } = {}) {
     receiver_details: invoice.receiverDetails || {},
     items: invoice.items || [],
     hours_worked: invoice.hoursWorked || [],
-    work_type: invoice.workType || 'fixed',
+    work_type: derivedWorkType,
     amount: Number(invoice.amount) || 0,
     description: invoice.description || null,
     currency: invoice.currency || 'EUR',

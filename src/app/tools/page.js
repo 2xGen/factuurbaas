@@ -79,6 +79,14 @@ const toolLinks = [
     tag: 'Beschikbaar',
     footerLabel: 'Meer info',
   },
+  {
+    label: "Hypotheek voor zzp'ers",
+    href: '/tools/hypotheek-zzp',
+    description:
+      "Hoe werkt een hypotheek als zzp'er? Lees de uitleg en bereken je maximale hypotheek.",
+    tag: 'Beschikbaar',
+    footerLabel: 'Meer info',
+  },
 ];
 
 export default function ToolsHubPage() {
