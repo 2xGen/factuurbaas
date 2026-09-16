@@ -40,6 +40,7 @@ function MoneyInput({ id, label, hint, value, onChange }) {
 
 export default function HypotheekZzpCalculator() {
   const [inkomen, setInkomen] = useState('');
+  const [inkomenPartner, setInkomenPartner] = useState('');
   const [verplichtingen, setVerplichtingen] = useState('');
   const [rente, setRente] = useState('4');
 
@@ -47,16 +48,19 @@ export default function HypotheekZzpCalculator() {
     () =>
       calculateMaxHypotheek({
         toetsinkomen: parseAmount(inkomen),
+        inkomenPartner: parseAmount(inkomenPartner) || 0,
         maandelijkseVerplichtingen: parseAmount(verplichtingen) || 0,
         rentePercent: parseAmount(rente) ?? 4,
       }),
-    [inkomen, verplichtingen, rente]
+    [inkomen, inkomenPartner, verplichtingen, rente]
   );
 
   const calculationFingerprint = result
-    ? `${result.toetsinkomen}-${result.maandelijkseVerplichtingen}-${result.rentePercent}`
+    ? `${result.totaalToetsinkomen}-${result.maandelijkseVerplichtingen}-${result.rentePercent}`
     : null;
-  useDebouncedCalculationLog(TOOL_LOG_TABLES.hypotheek, calculationFingerprint);
+  useDebouncedCalculationLog(TOOL_LOG_TABLES.hypotheek, calculationFingerprint, 1500, {
+    oncePerVisit: true,
+  });
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -89,10 +93,17 @@ export default function HypotheekZzpCalculator() {
         <div className="grid gap-5 sm:grid-cols-2">
           <MoneyInput
             id="toetsinkomen"
-            label="Toetsinkomen per jaar"
+            label="Jouw toetsinkomen per jaar"
             hint="Bijvoorbeeld je vastgestelde ondernemersinkomen of winstindicatie."
             value={inkomen}
             onChange={setInkomen}
+          />
+          <MoneyInput
+            id="inkomen-partner"
+            label="Inkomen partner per jaar"
+            hint="Optioneel. Wordt bij jouw toetsinkomen opgeteld."
+            value={inkomenPartner}
+            onChange={setInkomenPartner}
           />
           <MoneyInput
             id="verplichtingen"
@@ -101,7 +112,7 @@ export default function HypotheekZzpCalculator() {
             value={verplichtingen}
             onChange={setVerplichtingen}
           />
-          <div className="sm:col-span-2 sm:max-w-xs">
+          <div>
             <label htmlFor="rente" className="mb-2 block text-sm font-medium text-slate-700">
               Rente (indicatief)
             </label>
@@ -132,6 +143,14 @@ export default function HypotheekZzpCalculator() {
                 {formatEuro(result.maxHypotheek)}
               </p>
               <dl className="mt-4 grid gap-2 text-sm text-slate-600 sm:grid-cols-2">
+                {result.inkomenPartner > 0 && (
+                  <div className="flex justify-between gap-2 sm:block">
+                    <dt>Totaal toetsinkomen</dt>
+                    <dd className="font-medium text-slate-800">
+                      {formatEuro(result.totaalToetsinkomen)}
+                    </dd>
+                  </div>
+                )}
                 <div className="flex justify-between gap-2 sm:block">
                   <dt>Max. maandlast (indicatief)</dt>
                   <dd className="font-medium text-slate-800">{formatEuro(result.maxMaandlast)}</dd>

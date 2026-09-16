@@ -44,16 +44,24 @@ function annuityLoan(monthlyPayment, annualRatePercent, years = 30) {
 }
 
 /**
- * @param {{ toetsinkomen: number|null, maandelijkseVerplichtingen?: number|null, rentePercent?: number|null }} input
+ * @param {{
+ *   toetsinkomen: number|null,
+ *   inkomenPartner?: number|null,
+ *   maandelijkseVerplichtingen?: number|null,
+ *   rentePercent?: number|null
+ * }} input
  */
 export function calculateMaxHypotheek({
   toetsinkomen,
+  inkomenPartner = 0,
   maandelijkseVerplichtingen = 0,
   rentePercent = 4,
 }) {
   if (toetsinkomen == null || toetsinkomen <= 0) return null;
 
-  const income = toetsinkomen;
+  const ownIncome = toetsinkomen;
+  const partnerIncome = Math.max(0, inkomenPartner || 0);
+  const income = ownIncome + partnerIncome;
   const debts = Math.max(0, maandelijkseVerplichtingen || 0);
   const rate = rentePercent == null || rentePercent <= 0 ? 4 : rentePercent;
 
@@ -63,7 +71,9 @@ export function calculateMaxHypotheek({
   const maxHypotheek = annuityLoan(availableMonthly, rate, 30);
 
   return {
-    toetsinkomen: income,
+    toetsinkomen: ownIncome,
+    inkomenPartner: partnerIncome,
+    totaalToetsinkomen: income,
     maandelijkseVerplichtingen: debts,
     rentePercent: rate,
     woonquote,
