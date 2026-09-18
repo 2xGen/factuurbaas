@@ -132,10 +132,15 @@ export const blogPillars = [
     description:
       "Arbeidsongeschiktheidsverzekering voor zzp'ers: dekking, wachttijd, kosten en vergelijken — met gratis calculator.",
     slugs: [
+      'aov-zzp',
       'wat-kost-een-aov-voor-zzpers',
       'aov-voor-startende-zzpers',
       'aov-verplicht-voor-zzpers',
-      'aov-vergelijken',
+      'aov-zonder-medische-keuring',
+      'aov-met-korte-wachttijd',
+      'aov-met-lange-wachttijd',
+      'hoeveel-aov-heb-ik-nodig',
+      'aov-berekenen-voor-zzpers',
     ],
   },
   {

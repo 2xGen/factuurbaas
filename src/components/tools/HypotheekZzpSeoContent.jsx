@@ -61,6 +61,7 @@ const MORE_LINKS = [
   { label: "Hypotheek als zzp'er zonder 3 jaar cijfers", href: '/blogs/hypotheek-zzp-zonder-3-jaar-cijfers' },
   { label: "Hypotheek berekenen als zzp'er", href: '/blogs/hypotheek-berekenen-als-zzper' },
   { label: "Hypotheekadviseur voor zzp'ers", href: '/blogs/hypotheekadviseur-voor-zzpers' },
+  { label: 'AOV zzp: heb je die nodig?', href: '/blogs/aov-zzp' },
   { label: 'AOV voor zzp\'ers', href: '/tools/aov-zzp' },
   { label: 'Pensioen opbouwen als zzp\'er', href: '/tools' },
   { label: 'Zakelijke verzekeringen voor zzp\'ers', href: '/tools' },

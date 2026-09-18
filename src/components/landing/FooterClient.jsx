@@ -33,7 +33,7 @@ export default function FooterClient() {
               <li><Link href="/tools" className="text-sm transition-colors hover:text-warm-orange">Tools</Link></li>
               <li><Link href="/blogs" className="text-sm transition-colors hover:text-warm-orange">Gidsen</Link></li>
               <li><Link href="/blogs/hypotheek-als-zzper" className="text-sm transition-colors hover:text-warm-orange">Hypotheek als zzp&apos;er</Link></li>
-              <li><Link href="/tools/aov-zzp" className="text-sm transition-colors hover:text-warm-orange">AOV voor zzp&apos;ers</Link></li>
+              <li><Link href="/blogs/aov-zzp" className="text-sm transition-colors hover:text-warm-orange">AOV zzp</Link></li>
               <li><Link href="/waarom-gratis" className="text-sm transition-colors hover:text-warm-orange">Waarom gratis</Link></li>
             </ul>
           </div>

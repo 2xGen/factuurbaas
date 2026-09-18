@@ -220,10 +220,8 @@ export default function AovZzpSeoContent() {
           situatie, risico&apos;s en persoonlijke voorkeuren.
         </p>
         <p className="mt-4 text-slate-600 leading-relaxed">
-          Wil je weten waar je als starter op moet letten?{' '}
-          <TextLink href="/blogs/aov-voor-startende-zzpers">
-            Lees: AOV voor startende zzp&apos;ers →
-          </TextLink>
+          Meer over de afweging:{' '}
+          <TextLink href="/blogs/aov-zzp">AOV zzp: heb je die nodig?</TextLink>
         </p>
       </section>
 
@@ -241,10 +239,8 @@ export default function AovZzpSeoContent() {
           toekomstige regelgeving.
         </p>
         <p className="mt-4 text-slate-600 leading-relaxed">
-          Lees hierover:{' '}
-          <TextLink href="/blogs/aov-verplicht-voor-zzpers">
-            Lees: Is een AOV verplicht voor zzp&apos;ers? →
-          </TextLink>
+          Lees hierover op{' '}
+          <TextLink href="/blogs/aov-zzp">AOV zzp: heb je die nodig?</TextLink>
         </p>
       </section>
 
@@ -315,7 +311,8 @@ export default function AovZzpSeoContent() {
           voorwaarden bepalen mede wat je daadwerkelijk verzekert.
         </p>
         <p className="mt-4 text-slate-600 leading-relaxed">
-          <TextLink href="/blogs/aov-vergelijken">Lees: AOV vergelijken voor zzp&apos;ers →</TextLink>
+          Meer context:{' '}
+          <TextLink href="/blogs/aov-zzp">AOV zzp: heb je die nodig?</TextLink>
         </p>
       </section>
 
@@ -356,7 +353,7 @@ export default function AovZzpSeoContent() {
         <h2 className="font-heading text-xl font-bold text-deep-blue">Gerelateerde tools & artikelen</h2>
         <ul className="mt-4 space-y-2">
           <li>
-            <TextLink href="/tools/aov-berekenen-zzp">AOV-calculator</TextLink>
+            <TextLink href="/blogs/aov-zzp">AOV zzp: heb je die nodig?</TextLink>
           </li>
           <li>
             <TextLink href="/blogs/wat-kost-een-aov-voor-zzpers">
@@ -370,11 +367,36 @@ export default function AovZzpSeoContent() {
           </li>
           <li>
             <TextLink href="/blogs/aov-verplicht-voor-zzpers">
-              Is een AOV verplicht voor zzp&apos;ers?
+              AOV verplicht voor zzp&apos;ers?
             </TextLink>
           </li>
           <li>
-            <TextLink href="/blogs/aov-vergelijken">AOV vergelijken</TextLink>
+            <TextLink href="/blogs/aov-zonder-medische-keuring">
+              AOV zonder medische keuring
+            </TextLink>
+          </li>
+          <li>
+            <TextLink href="/blogs/aov-met-korte-wachttijd">
+              AOV met korte wachttijd
+            </TextLink>
+          </li>
+          <li>
+            <TextLink href="/blogs/aov-met-lange-wachttijd">
+              AOV met lange wachttijd
+            </TextLink>
+          </li>
+          <li>
+            <TextLink href="/blogs/hoeveel-aov-heb-ik-nodig">
+              Hoeveel AOV heb ik nodig?
+            </TextLink>
+          </li>
+          <li>
+            <TextLink href="/blogs/aov-berekenen-voor-zzpers">
+              AOV berekenen voor zzp&apos;ers
+            </TextLink>
+          </li>
+          <li>
+            <TextLink href="/tools/aov-berekenen-zzp">AOV-calculator</TextLink>
           </li>
           <li>
             <TextLink href="/tools/uurtarief-naar-inkomen">Uurtarief naar inkomen</TextLink>
