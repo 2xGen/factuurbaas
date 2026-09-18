@@ -1,4 +1,8 @@
-import { submitUrlsToIndexNow } from '../src/lib/indexnow.js';
+import {
+  INDEXNOW_KEY,
+  INDEXNOW_KEY_LOCATION,
+  submitUrlsToIndexNow,
+} from '../src/lib/indexnow.js';
 
 const DEFAULT_SITEMAP_URL = 'https://factuurbaas.nl/sitemap.xml';
 
@@ -21,7 +25,13 @@ async function fetchSitemapUrls(sitemapUrl) {
 }
 
 async function main() {
+  if (!INDEXNOW_KEY) {
+    throw new Error('Set INDEXNOW_API_KEY in .env.local');
+  }
+
   const sitemapUrl = process.env.INDEXNOW_SITEMAP_URL || DEFAULT_SITEMAP_URL;
+  console.log(`IndexNow key: ${INDEXNOW_KEY}`);
+  console.log(`Key location: ${INDEXNOW_KEY_LOCATION}`);
   console.log(`Reading URLs from ${sitemapUrl}...`);
 
   const urlList = await fetchSitemapUrls(sitemapUrl);
@@ -29,7 +39,7 @@ async function main() {
 
   const result = await submitUrlsToIndexNow(urlList);
 
-  if (result.ok) {
+  if (result.ok || result.status === 202) {
     console.log(`IndexNow: ${result.status} ${result.statusText} — URLs submitted successfully.`);
     process.exit(0);
   }

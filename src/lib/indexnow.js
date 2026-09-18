@@ -1,7 +1,8 @@
-export const INDEXNOW_HOST = 'factuurbaas.nl';
+export const INDEXNOW_HOST = process.env.INDEXNOW_HOST || 'factuurbaas.nl';
 
-/** Public verification key — hosted at /{key}.txt per IndexNow protocol. */
-export const INDEXNOW_KEY = 'f355b468714d4f7696d7bd0171da2518';
+/** Public verification key — also hosted at /{key}.txt per IndexNow protocol. */
+export const INDEXNOW_KEY =
+  process.env.INDEXNOW_API_KEY || 'd2836c5bc5764a5dbf2850612a232052';
 
 export const INDEXNOW_KEY_LOCATION = `https://${INDEXNOW_HOST}/${INDEXNOW_KEY}.txt`;
 
@@ -27,6 +28,10 @@ export async function submitUrlsToIndexNow(urlList) {
       status: 400,
       statusText: `Too many URLs (${urls.length}). Max ${MAX_URLS_PER_REQUEST} per request.`,
     };
+  }
+
+  if (!INDEXNOW_KEY) {
+    return { ok: false, status: 400, statusText: 'INDEXNOW_API_KEY is not set' };
   }
 
   const response = await fetch(INDEXNOW_API_URL, {
