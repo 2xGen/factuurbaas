@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MONEYBIRD_URL, JORTT_URL, E_BOEKHOUDEN_URL } from '@/lib/affiliateLinks';
+import { aovArticles } from '@/lib/aovBlogData';
 
 const CtaButton = () => (
     <div className="my-8 text-center">
@@ -55,6 +56,16 @@ const HypotheekCta = ({ label = "Bereken je maximale hypotheek als zzp'er →" }
             <Link href="/tools/hypotheek-berekenen-zzp">{label}</Link>
         </Button>
     </div>
+);
+
+const HypotheekHubLink = () => (
+  <p>
+    Of bekijk het overzicht:{' '}
+    <Link href="/blogs/hypotheek-als-zzper" className="text-warm-orange hover:underline">
+      Hypotheek als zzp&apos;er
+    </Link>
+    .
+  </p>
 );
 
 const MoneybirdJorttCtas = () => (
@@ -6344,6 +6355,11 @@ export const articles = [
       'hoe-lang-zzper-zijn-voor-hypotheek',
       'welk-inkomen-telt-voor-hypotheek-als-zzper',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
       'zakelijke-rekening-zzp',
       'hoeveel-geld-apart-belasting-zzper',
       'factureren-startende-zzper',
@@ -6536,7 +6552,7 @@ export const articles = [
           Heb je een onderneming die nog maar kort bestaat, dan is het daarom belangrijk om
           specifiek te kijken naar de voorwaarden die voor jouw situatie en hypotheekaanvraag
           gelden. Meer uitleg vind je ook op onze pagina over{' '}
-          <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
             hypotheek zonder 3 jaar cijfers
           </Link>
           .
@@ -6591,9 +6607,11 @@ export const articles = [
           alleen naar je meest recente jaar kijkt.
         </p>
         <p>
-          Het is daarom verstandig om niet zelf alleen uit te gaan van je hoogste recente winst. Het
-          inkomen dat uiteindelijk voor de hypotheek wordt gebruikt, wordt vastgesteld volgens de
-          regels van de geldverstrekker of de relevante inkomensmethodiek.
+          Lees meer in{' '}
+          <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek met wisselend inkomen als zzp&apos;er
+          </Link>
+          .
         </p>
 
         <h2>Welke documenten heb je nodig?</h2>
@@ -6602,7 +6620,11 @@ export const articles = [
         </p>
         <p>
           Bij een hypotheekaanvraag als ondernemer kunnen financiële documenten over je onderneming
-          nodig zijn. Denk bijvoorbeeld aan jaarcijfers en belastinggegevens.
+          nodig zijn. Denk bijvoorbeeld aan jaarcijfers en belastinggegevens. Lees meer in{' '}
+          <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+          </Link>
+          .
         </p>
         <p>
           Bij een NHG-aanvraag waarbij de Inkomensverklaring Ondernemer wordt gebruikt, wordt de
@@ -6749,6 +6771,7 @@ export const articles = [
         <p>Wil je weten welke maximale hypotheek bij jouw inkomen zou kunnen passen?</p>
         <p>Gebruik onze gratis calculator voor een eerste indicatie.</p>
         <HypotheekCta label="Hypotheek berekenen als zzp'er →" />
+        <HypotheekHubLink />
         <p>
           Houd er rekening mee dat een online berekening geen hypotheekadvies of offerte is. De
           uiteindelijke beoordeling wordt uitgevoerd door de geldverstrekker op basis van je
@@ -6788,7 +6811,17 @@ export const articles = [
             </Link>
           </li>
           <li>
-            <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
               Hypotheek zonder 3 jaar cijfers
             </Link>
           </li>
@@ -6815,6 +6848,11 @@ export const articles = [
       'hoe-lang-zzper-zijn-voor-hypotheek',
       'welk-inkomen-telt-voor-hypotheek-als-zzper',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
       'zakelijke-rekening-zzp',
       'hoeveel-geld-apart-belasting-zzper',
       'factureren-startende-zzper',
@@ -7256,6 +7294,7 @@ export const articles = [
 
         <h2>Meer over een hypotheek als zzp&apos;er</h2>
         <p>Wil je meer weten over het aanvragen van een hypotheek als ondernemer? Bekijk ook:</p>
+        <HypotheekHubLink />
         <ul>
           <li>
             <Link href="/blogs/hypotheek-als-zzper-hoe-werkt-het" className="text-warm-orange hover:underline">
@@ -7283,18 +7322,23 @@ export const articles = [
             </Link>
           </li>
           <li>
-            <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
               Hypotheek zonder 3 jaar cijfers
             </Link>
           </li>
           <li>
             <Link href="/blogs/hypotheek-met-eenmanszaak" className="text-warm-orange hover:underline">
               Hypotheek met een eenmanszaak
-            </Link>
-          </li>
-          <li>
-            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
-              Hypotheek met wisselend inkomen als zzp&apos;er
             </Link>
           </li>
         </ul>
@@ -7317,6 +7361,11 @@ export const articles = [
       'hoe-lang-zzper-zijn-voor-hypotheek',
       'welk-inkomen-telt-voor-hypotheek-als-zzper',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
       'zakelijke-rekening-zzp',
       'hoeveel-geld-apart-belasting-zzper',
     ],
@@ -7498,7 +7547,7 @@ export const articles = [
         <p>
           Als je onderneming bijvoorbeeld pas anderhalf jaar bestaat, zal de beoordeling daarom
           anders verlopen dan bij een onderneming die al tien jaar bestaat. Meer hierover op{' '}
-          <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
             hypotheek zonder 3 jaar cijfers
           </Link>
           .
@@ -7807,6 +7856,7 @@ export const articles = [
 
         <h2>Meer over hypotheken voor zzp&apos;ers</h2>
         <p>Wil je meer weten over een hypotheek als ondernemer? Bekijk ook:</p>
+        <HypotheekHubLink />
         <ul>
           <li>
             <Link href="/blogs/hypotheek-als-zzper-hoe-werkt-het" className="text-warm-orange hover:underline">
@@ -7839,13 +7889,18 @@ export const articles = [
             </Link>
           </li>
           <li>
-            <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
-              Hypotheek zonder 3 jaar cijfers
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
             </Link>
           </li>
           <li>
-            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
-              Hypotheek met wisselend inkomen als zzp&apos;er
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+              Hypotheek zonder 3 jaar cijfers
             </Link>
           </li>
         </ul>
@@ -7868,6 +7923,11 @@ export const articles = [
       'hoe-lang-zzper-zijn-voor-hypotheek',
       'welk-inkomen-telt-voor-hypotheek-als-zzper',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
       'factureren-startende-zzper',
       'zakelijke-rekening-zzp',
     ],
@@ -8038,7 +8098,7 @@ export const articles = [
           Wel geldt dat een kortere historie minder financiële informatie geeft over de ontwikkeling
           van je onderneming. Het inkomen moet daarom op basis van de beschikbare gegevens kunnen
           worden vastgesteld. Lees ook{' '}
-          <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
             hypotheek zonder 3 jaar cijfers
           </Link>
           .
@@ -8365,6 +8425,7 @@ export const articles = [
 
         <h2>Meer over hypotheken voor zzp&apos;ers</h2>
         <p>Lees ook:</p>
+        <HypotheekHubLink />
         <ul>
           <li>
             <Link href="/blogs/hypotheek-als-zzper-hoe-werkt-het" className="text-warm-orange hover:underline">
@@ -8397,13 +8458,18 @@ export const articles = [
             </Link>
           </li>
           <li>
-            <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
-              Hypotheek zonder 3 jaar cijfers
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
             </Link>
           </li>
           <li>
-            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
-              Hypotheek met wisselend inkomen als zzp&apos;er
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+              Hypotheek zonder 3 jaar cijfers
             </Link>
           </li>
         </ul>
@@ -8426,6 +8492,11 @@ export const articles = [
       'hypotheek-met-eenmanszaak',
       'welk-inkomen-telt-voor-hypotheek-als-zzper',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
       'factureren-startende-zzper',
     ],
     title: "Hoe lang moet je zzp'er zijn voor een hypotheek?",
@@ -8572,7 +8643,7 @@ export const articles = [
           Een korte ondernemershistorie betekent daarom niet automatisch &quot;geen hypotheek&quot;,
           maar je aanvraag kan wel anders worden beoordeeld dan die van een ondernemer met een
           langere historie. Meer hierover op{' '}
-          <Link href="/tools/hypotheek-zzp#zonder-3-jaar" className="text-warm-orange hover:underline">
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
             hypotheek zonder 3 jaar cijfers
           </Link>
           .
@@ -8772,6 +8843,7 @@ export const articles = [
           je eerst bekijken wat je op basis van je inkomen ongeveer zou kunnen lenen.
         </p>
         <HypotheekCta label="Bereken je hypotheek als zzp'er →" />
+        <HypotheekHubLink />
         <p>Bekijk daarnaast:</p>
         <ul>
           <li>
@@ -8817,6 +8889,11 @@ export const articles = [
       'hypotheek-met-eenmanszaak',
       'hypotheek-voor-startende-zzpers',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
     ],
     title: "Welk inkomen telt voor een hypotheek als zzp'er?",
     excerpt:
@@ -9257,7 +9334,16 @@ export const articles = [
           Heb je al een vastgesteld toetsinkomen? Dan kun je daarmee een eerste indicatie van je
           maximale hypotheek berekenen.
         </p>
+        <p>
+          Wil je weten hoe dat inkomen vervolgens wordt gebruikt om je maximale hypotheek te
+          berekenen? Lees{' '}
+          <Link href="/blogs/hypotheek-berekenen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek berekenen als zzp&apos;er
+          </Link>
+          .
+        </p>
         <HypotheekCta label="Hypotheek berekenen als zzp'er →" />
+        <HypotheekHubLink />
         <p>Meer over hypotheken als zzp&apos;er:</p>
         <ul>
           <li>
@@ -9290,6 +9376,11 @@ export const articles = [
               Winst uit onderneming voor hypotheek
             </Link>
           </li>
+          <li>
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
         </ul>
       </>
     ),
@@ -9302,6 +9393,11 @@ export const articles = [
       'hoe-lang-zzper-zijn-voor-hypotheek',
       'hypotheek-met-eenmanszaak',
       'hypotheek-voor-startende-zzpers',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
     ],
     title: 'Winst uit onderneming voor hypotheek',
     metaTitle: 'Winst uit onderneming voor hypotheek: hoe telt het mee?',
@@ -9852,7 +9948,16 @@ export const articles = [
           Heb je een indicatie van je toetsinkomen? Dan kun je daarmee een eerste berekening maken
           van je maximale hypotheek.
         </p>
+        <p>
+          Wil je weten hoe dat inkomen vervolgens wordt gebruikt om je maximale hypotheek te
+          berekenen? Lees{' '}
+          <Link href="/blogs/hypotheek-berekenen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek berekenen als zzp&apos;er
+          </Link>
+          .
+        </p>
         <HypotheekCta label="Hypotheek berekenen als zzp'er →" />
+        <HypotheekHubLink />
         <p>Meer lezen:</p>
         <ul>
           <li>
@@ -9880,10 +9985,3414 @@ export const articles = [
               Hypotheek voor startende zzp&apos;ers
             </Link>
           </li>
+          <li>
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
         </ul>
       </>
     ),
   },
+  {
+    slug: 'hypotheek-met-wisselend-inkomen-als-zzper',
+    relatedSlugs: [
+      'welk-inkomen-telt-voor-hypotheek-als-zzper',
+      'winst-uit-onderneming-voor-hypotheek',
+      'hoe-lang-zzper-zijn-voor-hypotheek',
+      'hypotheek-voor-startende-zzpers',
+      'hoeveel-hypotheek-kan-ik-krijgen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
+    ],
+    title: "Hypotheek met wisselend inkomen als zzp'er",
+    excerpt:
+      "Heb je als zzp'er een wisselend inkomen? Lees hoe je gemiddelde winst, een goed of slecht jaar en je actuele inkomen meetellen voor je hypotheek.",
+    keywords:
+      "hypotheek wisselend inkomen zzp, hypotheek met wisselend inkomen als zzp'er, wisselend inkomen zzp hypotheek, hypotheek zzp wisselende inkomsten, hypotheek met wisselende inkomsten, inkomen wisselt zzp hypotheek, onregelmatig inkomen zzp hypotheek, fluctuerend inkomen zzp hypotheek, wisselende winst hypotheek, gemiddelde winst hypotheek zzp, hypotheek op basis van gemiddelde winst",
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/Hypotheek%20met%20wisselend%20inkomen%20als%20zzper.jpg',
+      alt: "Hypotheek met wisselend inkomen als zzp'er: hoe gemiddelde winst en actueel inkomen meetellen.",
+    },
+    datePublished: '2026-09-18',
+    dateModified: '2026-09-18',
+    faq: [
+      {
+        question: "Kun je een hypotheek krijgen met een wisselend inkomen als zzp'er?",
+        answer:
+          'Ja, dat kan. Een wisselend inkomen sluit een hypotheek niet automatisch uit. Bij NHG wordt het ondernemersinkomen beoordeeld via de Inkomensverklaring Ondernemer.',
+      },
+      {
+        question: 'Wordt het gemiddelde van mijn inkomen gebruikt?',
+        answer:
+          'Bij NHG is het gemiddelde inkomen over de laatste drie kalenderjaren het uitgangspunt. Er gelden daarnaast regels voor het laatste jaar en het lopende boekjaar.',
+      },
+      {
+        question: 'Wat als mijn laatste jaar slechter was?',
+        answer:
+          'Als je laatste jaar lager is dan het gemiddelde, kan het inkomen van het laatste jaar als uitgangspunt gelden voor het toetsinkomen.',
+      },
+      {
+        question: 'Wat als mijn laatste jaar veel beter was?',
+        answer:
+          'Een beter laatste jaar betekent niet automatisch dat je volledige winst van dat jaar als toetsinkomen wordt gebruikt. De inkomensbeoordeling kijkt ook naar de eerdere jaren en het lopende boekjaar.',
+      },
+      {
+        question: 'Telt het lopende jaar mee?',
+        answer:
+          'Ja. Het actuele inkomen wordt binnen de NHG-beoordeling gecontroleerd en moet minstens in lijn zijn met het gemiddelde.',
+      },
+      {
+        question: "Kan ik als startende zzp'er met wisselende inkomsten een hypotheek krijgen?",
+        answer:
+          'Dat kan mogelijk. Voor NHG kan de Inkomensverklaring Ondernemer worden gebruikt vanaf minimaal 12 maanden ondernemerschap. Bij een jongere onderneming wordt de beschikbare financiële historie beoordeeld.',
+      },
+      {
+        question: 'Wordt naar omzet of winst gekeken?',
+        answer:
+          'Voor een IB-ondernemer vormt de fiscale winst een belangrijke basis voor de inkomensbeoordeling. Omzet en winst zijn dus niet hetzelfde voor een hypotheek.',
+      },
+      {
+        question: 'Kan ik met een wisselend inkomen een hypotheek zonder NHG krijgen?',
+        answer:
+          'Dat kan mogelijk, maar de voorwaarden kunnen per geldverstrekker verschillen. De NHG-regels voor de Inkomensverklaring Ondernemer gelden niet automatisch voor iedere hypotheek zonder NHG.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Als zzp&apos;er kan je inkomen van jaar tot jaar behoorlijk verschillen. Het ene jaar maak
+          je bijvoorbeeld €70.000 winst en het volgende jaar €45.000. Of je hebt een paar sterke
+          maanden gevolgd door een periode met weinig opdrachten.
+        </p>
+        <p>
+          Een wisselend inkomen betekent niet automatisch dat je geen hypotheek kunt krijgen.
+        </p>
+        <p>
+          Voor een hypotheek moet eerst worden vastgesteld welk <strong>toetsinkomen</strong> voor
+          jouw situatie geldt. Bij een hypotheek met NHG wordt het ondernemersinkomen vastgesteld
+          met een Inkomensverklaring Ondernemer. Daarbij wordt doorgaans gekeken naar de financiële
+          resultaten van de afgelopen drie jaar, of naar een kortere periode als je onderneming
+          jonger is.
+        </p>
+        <p>
+          Een wisselend inkomen kan wel invloed hebben op het bedrag waarmee uiteindelijk wordt
+          gerekend.
+        </p>
+
+        <h2>Kun je een hypotheek krijgen met een wisselend inkomen?</h2>
+        <p>Ja, een wisselend inkomen sluit een hypotheek niet automatisch uit.</p>
+        <p>
+          Als ondernemer wordt juist gekeken naar je financiële historie en de ontwikkeling van je
+          inkomen. Bij NHG wordt het ondernemersinkomen vastgesteld op basis van de
+          Inkomensverklaring Ondernemer.
+        </p>
+        <p>Daarbij wordt niet simpelweg alleen je beste jaar gebruikt.</p>
+        <p>Dat is belangrijk als je bijvoorbeeld:</p>
+        <ul>
+          <li>het ene jaar €40.000 winst maakt;</li>
+          <li>het volgende jaar €65.000;</li>
+          <li>en daarna €50.000.</li>
+        </ul>
+        <p>
+          Je inkomen is dan wisselend, maar er is wel een financiële historie waaruit een
+          toetsinkomen kan worden vastgesteld.
+        </p>
+
+        <h2>Hoe wordt een wisselend inkomen berekend?</h2>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer geldt als uitgangspunt het{' '}
+          <strong>gemiddelde inkomen over de laatste drie kalenderjaren</strong>.
+        </p>
+        <p>
+          Voor een IB-ondernemer vormt de fiscale winst daarbij de basis. Het laatste jaar vormt
+          daarbij een maximum: een hoger gemiddelde kan niet zomaar leiden tot een toetsinkomen dat
+          hoger ligt dan de winst van het laatste jaar.
+        </p>
+        <p>Daarnaast wordt gekeken naar het lopende boekjaar.</p>
+        <p>Het gaat dus niet alleen om:</p>
+        <blockquote>
+          <p>&quot;Wat was mijn beste jaar?&quot;</p>
+        </blockquote>
+        <p>
+          maar om de ontwikkeling van je inkomen over meerdere jaren en je actuele situatie. Lees ook{' '}
+          <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Welk inkomen telt voor een hypotheek als zzp&apos;er?
+          </Link>{' '}
+          en{' '}
+          <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+            Winst uit onderneming voor hypotheek
+          </Link>
+          .
+        </p>
+
+        <h2>Voorbeeld: inkomen stijgt en daalt</h2>
+        <p>Stel dat je als zzp&apos;er de volgende winsten hebt:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€40.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€65.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€50.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het gemiddelde van deze drie jaren is €51.667.</p>
+        <p>Het laatste jaar bedraagt €50.000.</p>
+        <p>
+          Omdat het laatste jaar lager is dan het gemiddelde, is het laatste jaar relevant voor het
+          bepalen van het toetsinkomen. Binnen het NHG-toetskader geldt bij een lager inkomen in het
+          laatste jaar het laatste jaar als uitgangspunt.
+        </p>
+        <p>
+          Dit laat zien waarom je niet automatisch met het gemiddelde van je drie beste jaren kunt
+          rekenen.
+        </p>
+
+        <h2>Wat als je laatste jaar veel slechter was?</h2>
+        <p>Dit is één van de belangrijkste situaties bij een wisselend inkomen.</p>
+        <p>Stel:</p>
+        <ul>
+          <li>jaar 1: €45.000;</li>
+          <li>jaar 2: €70.000;</li>
+          <li>jaar 3: €40.000.</li>
+        </ul>
+        <p>
+          Je gemiddelde over drie jaar is €51.667, maar je laatste volledige jaar ligt daar duidelijk
+          onder.
+        </p>
+        <p>
+          Binnen de NHG-systematiek geldt dan niet zomaar het hogere gemiddelde als toetsinkomen. Het
+          lagere inkomen van het laatste jaar kan het uitgangspunt worden.
+        </p>
+        <p>
+          Dat kan dus betekenen dat een tijdelijk goed jaar niet volledig kan worden gebruikt om je
+          maximale hypotheek te verhogen.
+        </p>
+
+        <h2>Wat als je inkomen juist stijgt?</h2>
+        <p>Een stijgend inkomen kan een ander beeld geven.</p>
+        <p>Stel:</p>
+        <ul>
+          <li>jaar 1: €35.000;</li>
+          <li>jaar 2: €45.000;</li>
+          <li>jaar 3: €60.000.</li>
+        </ul>
+        <p>Je laatste jaar is dan hoger dan het gemiddelde van de drie jaren.</p>
+        <p>
+          Dat betekent niet automatisch dat je volledige €60.000 als toetsinkomen wordt gebruikt. De
+          inkomensbeoordeling volgt het geldende toetskader en kijkt ook naar het lopende boekjaar.
+        </p>
+        <p>
+          Het is dus belangrijk om onderscheid te maken tussen je{' '}
+          <strong>winst in een bepaald jaar</strong> en je uiteindelijke{' '}
+          <strong>toetsinkomen</strong>.
+        </p>
+
+        <h2>Telt het lopende jaar mee?</h2>
+        <p>Ja.</p>
+        <p>
+          Bij de beoordeling van ondernemersinkomen wordt ook gekeken naar het lopende boekjaar. Het
+          actuele inkomen moet volgens de NHG-criteria minstens in lijn zijn met het gemiddelde
+          inkomen waarop de berekening is gebaseerd.
+        </p>
+        <p>
+          Dit is vooral belangrijk wanneer je onderneming inmiddels sterk is veranderd.
+        </p>
+        <p>
+          Stel dat je de afgelopen drie jaar gemiddeld €50.000 verdiende, maar je onderneming dit
+          jaar veel minder goed draait.
+        </p>
+        <p>Dan kan niet zonder meer worden uitgegaan van €50.000 als stabiel inkomen.</p>
+        <p>
+          Andersom kan een sterk lopend jaar relevant zijn wanneer je onderneming duidelijk groeit.
+        </p>
+
+        <h2>Wat als je inkomen sterk fluctueert?</h2>
+        <p>Een sterke fluctuatie kan de beoordeling ingewikkelder maken.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>€30.000 winst in jaar 1;</li>
+          <li>€80.000 in jaar 2;</li>
+          <li>€35.000 in jaar 3.</li>
+        </ul>
+        <p>
+          Het gemiddelde geeft in dit voorbeeld een vertekend beeld als je alleen naar dat gemiddelde
+          zou kijken. Daarom wordt ook gekeken naar het laatste jaar en het lopende boekjaar.
+        </p>
+        <p>
+          De inkomensbeoordeling probeert uiteindelijk een beeld te geven van het inkomen dat
+          duurzaam beschikbaar is voor de hypotheeklasten.
+        </p>
+
+        <h2>Wat als je één slecht jaar hebt?</h2>
+        <p>
+          Een enkel slecht jaar betekent niet automatisch dat je geen hypotheek kunt krijgen.
+        </p>
+        <p>
+          De gevolgen hangen af van de oorzaak en van je overige financiële resultaten.
+        </p>
+        <p>
+          Een tijdelijke terugval kan bijvoorbeeld anders worden beoordeeld dan een structurele
+          daling van je bedrijfsresultaat.
+        </p>
+        <p>
+          Voor NHG geldt bovendien dat een ondernemer maximaal één kalenderjaar geen inkomen mag
+          hebben gehad. Het gemiddelde wordt in dat geval nog steeds over drie jaar berekend.
+        </p>
+        <p>
+          Heb je meerdere jaren met zeer lage of negatieve resultaten, dan kan dat uiteraard een
+          veel grotere invloed hebben op de inkomensbeoordeling.
+        </p>
+
+        <h2>Wat als je één uitzonderlijk goed jaar hebt?</h2>
+        <p>
+          Een uitzonderlijk goed jaar betekent niet automatisch dat je hypotheek op dat volledige
+          inkomen wordt gebaseerd.
+        </p>
+        <p>
+          Bij NHG is het gemiddelde van de laatste drie kalenderjaren het uitgangspunt, met het
+          laatste jaar als maximum. Ook het lopende boekjaar wordt gecontroleerd.
+        </p>
+        <p>
+          Dat voorkomt dat één uitzonderlijk goed jaar automatisch wordt behandeld alsof dat je
+          structurele inkomen is.
+        </p>
+
+        <h2>Hoeveel hypotheek kun je krijgen met wisselend inkomen?</h2>
+        <p>Dat is niet alleen afhankelijk van je gemiddelde winst.</p>
+        <p>
+          Nadat je toetsinkomen is vastgesteld, spelen ook andere factoren een rol, zoals:
+        </p>
+        <ul>
+          <li>hypotheekrente;</li>
+          <li>andere leningen;</li>
+          <li>studieschuld;</li>
+          <li>leaseverplichtingen;</li>
+          <li>inkomen van je partner;</li>
+          <li>waarde van de woning;</li>
+          <li>de geldende leennormen.</li>
+        </ul>
+        <p>
+          De overheid geeft aan dat de maximale hypotheek onder andere afhankelijk is van het
+          inkomen en de waarde van de woning. Ook financiële verplichtingen zoals een lening,
+          leasecontract of studieschuld kunnen de maximale hypotheek beïnvloeden.
+        </p>
+        <p>Daarom kun je niet zeggen:</p>
+        <blockquote>
+          <p>&quot;Mijn gemiddelde winst is €50.000, dus ik kan €X lenen.&quot;</p>
+        </blockquote>
+        <p>
+          Het gemiddelde of vastgestelde toetsinkomen is slechts één onderdeel van de berekening.
+          Meer over bedragen lees je in{' '}
+          <Link href="/blogs/hoeveel-hypotheek-kan-ik-krijgen-als-zzper" className="text-warm-orange hover:underline">
+            Hoeveel hypotheek kan ik krijgen als zzp&apos;er?
+          </Link>
+          .
+        </p>
+
+        <h2>Wisselende omzet is niet hetzelfde als wisselende winst</h2>
+        <p>
+          Voor een hypotheek is het belangrijk om omzet en winst uit elkaar te houden.
+        </p>
+        <p>Stel dat je omzet sterk wisselt:</p>
+        <ul>
+          <li>jaar 1: €100.000;</li>
+          <li>jaar 2: €150.000;</li>
+          <li>jaar 3: €110.000.</li>
+        </ul>
+        <p>Dat zegt op zichzelf nog niet genoeg.</p>
+        <p>
+          Als je kosten in die jaren ook sterk verschillen, kan je winst veel stabieler of juist
+          veel wisselender zijn.
+        </p>
+        <p>
+          Voor de inkomensbeoordeling van een IB-ondernemer vormt de fiscale winst een belangrijke
+          basis.
+        </p>
+        <p>
+          Het gaat dus niet alleen om hoeveel je factureert, maar vooral om wat er financieel uit je
+          onderneming komt.
+        </p>
+
+        <h2>Wat als je inkomsten per maand sterk verschillen?</h2>
+        <p>Als zzp&apos;er kunnen je inkomsten per maand behoorlijk fluctueren.</p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>januari: €3.000;</li>
+          <li>februari: €8.000;</li>
+          <li>maart: €2.000;</li>
+          <li>april: €10.000.</li>
+        </ul>
+        <p>
+          Voor een hypotheek wordt je inkomen niet simpelweg bepaald door naar één maand te kijken.
+        </p>
+        <p>
+          Bij ondernemers wordt gekeken naar de financiële resultaten over een langere periode.
+          Daardoor zijn maandelijkse schommelingen op zichzelf minder belangrijk dan de structurele
+          ontwikkeling van je onderneming.
+        </p>
+        <p>
+          Een onderneming met sterk wisselende maandinkomsten kan dus alsnog een redelijk stabiel
+          jaarlijks inkomen hebben.
+        </p>
+
+        <h2>Wat als je inkomen afhankelijk is van een paar grote klanten?</h2>
+        <p>
+          Een onderneming kan een hoog inkomen hebben terwijl een groot deel van de omzet afkomstig
+          is van één of enkele opdrachtgevers.
+        </p>
+        <p>
+          Dat is iets anders dan een inkomen dat simpelweg ieder jaar stabiel is.
+        </p>
+        <p>
+          Bij de inkomensbeoordeling wordt gekeken naar de onderneming en de beschikbare financiële
+          gegevens. De Inkomensverklaring Ondernemer is een uitgebreide analyse van de onderneming.
+        </p>
+        <p>
+          Als je inkomen sterk afhankelijk is van een specifieke opdrachtgever, kan de actuele
+          situatie van je onderneming daarom relevant zijn.
+        </p>
+
+        <h2>Wisselend inkomen als startende zzp&apos;er</h2>
+        <p>
+          Voor een startende zzp&apos;er is er vaak nog weinig historische informatie beschikbaar.
+        </p>
+        <p>Dat betekent niet automatisch dat een hypotheek onmogelijk is.</p>
+        <p>
+          Voor NHG kan een ondernemer die minimaal 12 maanden actief is gebruikmaken van de
+          Inkomensverklaring Ondernemer. Bestaat de onderneming korter dan drie jaar, dan wordt de
+          beschikbare financiële historie gebruikt.
+        </p>
+        <p>
+          Hoe korter je onderneming bestaat, hoe minder jaren beschikbaar zijn om je inkomen te
+          beoordelen.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+            Hypotheek voor startende zzp&apos;ers
+          </Link>
+        </p>
+
+        <h2>Wisselend inkomen en een hypotheek zonder NHG</h2>
+        <p>
+          De regels hierboven over de Inkomensverklaring Ondernemer hebben specifiek betrekking op de
+          NHG-route.
+        </p>
+        <p>Zonder NHG kunnen geldverstrekkers hun eigen acceptatiebeleid hanteren.</p>
+        <p>
+          Daarom kun je de NHG-regels niet automatisch als universele regel voor iedere hypotheek
+          gebruiken.
+        </p>
+        <p>
+          Als je geen NHG-hypotheek aanvraagt, is het belangrijk om te controleren hoe de betreffende
+          geldverstrekker ondernemersinkomen met wisselende resultaten beoordeelt.
+        </p>
+
+        <h2>Wat als je naast je onderneming in loondienst werkt?</h2>
+        <p>
+          Sommige ondernemers combineren hun onderneming met een baan in loondienst.
+        </p>
+        <p>
+          Binnen de NHG-Inkomensverklaring Ondernemer kan een combinatie van inkomen uit
+          dienstbetrekking en zelfstandig ondernemerschap mogelijk zijn. De precieze beoordeling
+          hangt af van de situatie en het geldende toetskader.
+        </p>
+        <p>
+          Je moet daarom niet automatisch alleen naar je winst uit onderneming kijken als je
+          daarnaast salaris ontvangt.
+        </p>
+
+        <h2>Kun je je hypotheek berekenen met je gemiddelde winst?</h2>
+        <p>
+          Voor een eerste indicatie kan een gemiddelde winst een nuttig uitgangspunt zijn.
+        </p>
+        <p>
+          Maar voor een daadwerkelijke hypotheekaanvraag is het belangrijker om te weten welk{' '}
+          <strong>toetsinkomen</strong> volgens de geldende regels wordt vastgesteld.
+        </p>
+        <p>
+          Heb je al een Inkomensverklaring Ondernemer? Dan is het daarin vastgestelde inkomen veel
+          relevanter dan zelf een gemiddelde van je winst berekenen.
+        </p>
+        <HypotheekCta />
+
+        <h2>Voorbeeld: drie jaar wisselende winst</h2>
+        <p>Stel dat je winst als volgt is:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€35.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€60.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€45.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het gemiddelde bedraagt €46.667.</p>
+        <p>Het laatste jaar is echter €45.000.</p>
+        <p>
+          Binnen de NHG-systematiek is het lagere inkomen van het laatste jaar dan relevant voor de
+          vaststelling van het toetsinkomen. Daarnaast moet het lopende boekjaar worden beoordeeld.
+        </p>
+        <p>
+          Dit voorbeeld laat zien waarom je niet simpelweg kunt uitgaan van het gemiddelde van je
+          drie jaren.
+        </p>
+
+        <h2>Wat gebeurt er als het lopende jaar veel lager is?</h2>
+        <p>Ook het lopende jaar kan een belangrijke rol spelen.</p>
+        <p>
+          De NHG-regels vereisen dat het actuele inkomen minstens in lijn is met het gemiddelde.
+          Wanneer de actuele ontwikkeling daar duidelijk onder ligt, kan dat gevolgen hebben voor
+          het toetsinkomen.
+        </p>
+        <p>
+          Daarom kan een ondernemer met goede historische cijfers toch een lager toetsinkomen krijgen
+          wanneer het bedrijf inmiddels structureel minder goed presteert.
+        </p>
+
+        <h2>Wat gebeurt er als het lopende jaar juist hoger is?</h2>
+        <p>
+          Een sterk lopend jaar betekent niet automatisch dat je toetsinkomen direct wordt verhoogd
+          naar het nieuwe niveau.
+        </p>
+        <p>
+          De beoordeling kijkt naar de beschikbare historie én de actuele ontwikkeling.
+        </p>
+        <p>
+          Binnen het NHG-toetskader zijn er specifieke regels voor het vergelijken van het lopende
+          boekjaar met de historische resultaten.
+        </p>
+        <p>
+          Daarom is het verstandig om bij sterk groeiende inkomsten niet zelf te veronderstellen
+          welk bedrag de geldverstrekker uiteindelijk zal gebruiken.
+        </p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Kun je een hypotheek krijgen met een wisselend inkomen als zzp&apos;er?</h3>
+        <p>
+          Ja, dat kan. Een wisselend inkomen sluit een hypotheek niet automatisch uit. Bij NHG wordt
+          het ondernemersinkomen beoordeeld via de Inkomensverklaring Ondernemer.
+        </p>
+        <h3>Wordt het gemiddelde van mijn inkomen gebruikt?</h3>
+        <p>
+          Bij NHG is het gemiddelde inkomen over de laatste drie kalenderjaren het uitgangspunt. Er
+          gelden daarnaast regels voor het laatste jaar en het lopende boekjaar.
+        </p>
+        <h3>Wat als mijn laatste jaar slechter was?</h3>
+        <p>
+          Als je laatste jaar lager is dan het gemiddelde, kan het inkomen van het laatste jaar als
+          uitgangspunt gelden voor het toetsinkomen.
+        </p>
+        <h3>Wat als mijn laatste jaar veel beter was?</h3>
+        <p>
+          Een beter laatste jaar betekent niet automatisch dat je volledige winst van dat jaar als
+          toetsinkomen wordt gebruikt. De inkomensbeoordeling kijkt ook naar de eerdere jaren en het
+          lopende boekjaar.
+        </p>
+        <h3>Telt het lopende jaar mee?</h3>
+        <p>
+          Ja. Het actuele inkomen wordt binnen de NHG-beoordeling gecontroleerd en moet minstens in
+          lijn zijn met het gemiddelde.
+        </p>
+        <h3>Kan ik als startende zzp&apos;er met wisselende inkomsten een hypotheek krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Voor NHG kan de Inkomensverklaring Ondernemer worden gebruikt vanaf
+          minimaal 12 maanden ondernemerschap. Bij een jongere onderneming wordt de beschikbare
+          financiële historie beoordeeld.
+        </p>
+        <h3>Wordt naar omzet of winst gekeken?</h3>
+        <p>
+          Voor een IB-ondernemer vormt de fiscale winst een belangrijke basis voor de
+          inkomensbeoordeling. Omzet en winst zijn dus niet hetzelfde voor een hypotheek.
+        </p>
+        <h3>Kan ik met een wisselend inkomen een hypotheek zonder NHG krijgen?</h3>
+        <p>
+          Dat kan mogelijk, maar de voorwaarden kunnen per geldverstrekker verschillen. De
+          NHG-regels voor de Inkomensverklaring Ondernemer gelden niet automatisch voor iedere
+          hypotheek zonder NHG.
+        </p>
+
+        <h2>Bereken je hypotheek als zzp&apos;er</h2>
+        <p>
+          Een wisselend inkomen betekent niet automatisch dat je geen hypotheek kunt krijgen. Het
+          belangrijkste is welk <strong>toetsinkomen</strong> uiteindelijk voor jouw situatie wordt
+          vastgesteld.
+        </p>
+        <p>
+          Heb je wisselende winsten, kijk dan niet alleen naar je beste jaar of naar één maand. De
+          financiële historie en je actuele ontwikkeling zijn belangrijk bij de
+          inkomensbeoordeling.
+        </p>
+        <p>
+          Lees ook{' '}
+          <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+            Winst uit onderneming voor hypotheek
+          </Link>
+          ,{' '}
+          <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Welk inkomen telt voor een hypotheek als zzp&apos;er?
+          </Link>{' '}
+          en{' '}
+          <Link href="/blogs/hoeveel-hypotheek-kan-ik-krijgen-als-zzper" className="text-warm-orange hover:underline">
+            Hoeveel hypotheek kan ik krijgen als zzp&apos;er?
+          </Link>
+          .
+        </p>
+        <p>Wil je een eerste indicatie van je maximale hypotheek?</p>
+        <HypotheekCta label="Hypotheek berekenen als zzp'er →" />
+        <HypotheekHubLink />
+        <p>Meer lezen over hypotheken als zzp&apos;er:</p>
+        <ul>
+          <li>
+            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
+              Hypotheek voor zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Welk inkomen telt voor een hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+              Winst uit onderneming voor hypotheek
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+              Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+              Hypotheek voor startende zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    slug: 'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+    relatedSlugs: [
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'welk-inkomen-telt-voor-hypotheek-als-zzper',
+      'winst-uit-onderneming-voor-hypotheek',
+      'hoe-lang-zzper-zijn-voor-hypotheek',
+      'hypotheek-voor-startende-zzpers',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
+    ],
+    title: "Jaarcijfers nodig voor hypotheek als zzp'er?",
+    excerpt:
+      "Welke jaarcijfers heb je nodig voor een hypotheek als zzp'er? Lees hoeveel jaar financiële gegevens nodig zijn en welke cijfers meetellen.",
+    keywords:
+      "jaarcijfers hypotheek zzp, jaarcijfers nodig voor hypotheek zzp, hypotheek jaarcijfers zzp'er, jaarcijfers hypotheek als zzp'er, hoeveel jaarcijfers hypotheek zzp, jaarcijfers nodig hypotheek zzp, jaarrekening hypotheek zzp, financiële cijfers hypotheek zzp, jaarcijfers aanleveren hypotheek zzp, hypotheek aanvragen zonder jaarcijfers, jaarcijfers startende zzp'er hypotheek, voorlopige jaarcijfers hypotheek, jaarcijfers ondernemer hypotheek",
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/jaarcijfers%20hypotheek%20zzp.jpg',
+      alt: "Jaarcijfers nodig voor hypotheek als zzp'er? Welke financiële gegevens meetellen.",
+    },
+    datePublished: '2026-09-18',
+    dateModified: '2026-09-18',
+    faq: [
+      {
+        question: "Heb ik als zzp'er jaarcijfers nodig voor een hypotheek?",
+        answer:
+          'Vaak wel. Bij een hypotheek met NHG worden de financiële resultaten van je onderneming gebruikt om het ondernemersinkomen vast te stellen.',
+      },
+      {
+        question: 'Hoeveel jaarcijfers heb ik nodig?',
+        answer:
+          'Bij NHG wordt doorgaans naar de laatste drie kalenderjaren gekeken. Bestaat je onderneming korter, dan wordt de beschikbare historie gebruikt.',
+      },
+      {
+        question: 'Kan ik met één jaar aan jaarcijfers een hypotheek krijgen?',
+        answer:
+          'Dat kan mogelijk. Voor de NHG-Inkomensverklaring Ondernemer moet je minimaal 12 maanden actief zijn als ondernemer.',
+      },
+      {
+        question: 'Tellen voorlopige jaarcijfers mee?',
+        answer:
+          'Dat kan afhankelijk zijn van het moment van de aanvraag. Vanaf 1 mei van het lopende boekjaar zijn voor de NHG-Inkomensverklaring de definitieve jaarcijfers van het vorige boekjaar verplicht.',
+      },
+      {
+        question: 'Heb ik ook cijfers van het lopende jaar nodig?',
+        answer:
+          'Dat kan. De NHG-systematiek kijkt naar het lopende boekjaar om te controleren of je actuele inkomen in lijn is met de historische resultaten.',
+      },
+      {
+        question: 'Kan ik mijn aangifte inkomstenbelasting gebruiken in plaats van jaarcijfers?',
+        answer:
+          'Dat hangt af van de gebruikte hypotheekmethode en geldverstrekker. Voor een NHG-Inkomensverklaring Ondernemer worden meerdere financiële gegevens van de onderneming gebruikt.',
+      },
+      {
+        question: 'Wat als mijn onderneming nog geen drie jaar bestaat?',
+        answer:
+          'Je hoeft voor de NHG-Inkomensverklaring Ondernemer niet eerst drie jaar ondernemer te zijn. Vanaf minimaal 12 maanden ondernemerschap kan de verklaring worden aangevraagd.',
+      },
+      {
+        question: 'Wat als mijn winst sterk wisselt?',
+        answer:
+          'Een wisselende winst sluit een hypotheek niet automatisch uit. De historische resultaten, het laatste boekjaar en het lopende boekjaar kunnen allemaal relevant zijn voor de inkomensbeoordeling.',
+      },
+      {
+        question: 'Kan ik alvast mijn maximale hypotheek berekenen zonder jaarcijfers?',
+        answer:
+          'Ja, voor een eerste indicatie kun je een berekening maken. Voor een definitieve hypotheekaanvraag moet echter worden vastgesteld welk toetsinkomen voor jouw situatie geldt.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Als zzp&apos;er heb je voor een hypotheek vaak financiële gegevens van je onderneming
+          nodig. De geldverstrekker wil namelijk kunnen beoordelen welk inkomen uit je onderneming
+          kan worden meegenomen voor de hypotheek.
+        </p>
+        <p>
+          Bij een hypotheek met NHG wordt het ondernemersinkomen vastgesteld met een{' '}
+          <strong>Inkomensverklaring Ondernemer</strong>. Daarbij wordt meestal gekeken naar de
+          financiële resultaten van de afgelopen drie jaar, of naar een kortere periode als je
+          onderneming nog geen drie jaar bestaat.
+        </p>
+        <p>
+          Welke documenten je precies nodig hebt, hangt af van hoe lang je onderneming bestaat, je
+          ondernemingsvorm en het moment waarop je de hypotheek aanvraagt.
+        </p>
+
+        <h2>Heb je jaarcijfers nodig voor een hypotheek als zzp&apos;er?</h2>
+        <p>
+          Ja, in veel gevallen zijn jaarcijfers onderdeel van de documenten die nodig zijn om je
+          ondernemersinkomen vast te stellen.
+        </p>
+        <p>
+          Voor een hypotheek met NHG wordt vanaf 1 mei van het lopende boekjaar het definitieve
+          resultaat van het vorige boekjaar meegenomen in de verplichte documentatie. Bij een
+          aanvraag later in het jaar kunnen daarnaast tussentijdse cijfers en aangiften
+          omzetbelasting nodig zijn om de ontwikkeling van het lopende boekjaar te beoordelen.
+        </p>
+        <p>Het gaat dus niet alleen om je aangifte inkomstenbelasting.</p>
+        <p>De beoordeling kan bijvoorbeeld betrekking hebben op:</p>
+        <ul>
+          <li>jaarcijfers van je onderneming;</li>
+          <li>fiscale winst;</li>
+          <li>tussentijdse cijfers;</li>
+          <li>aangiften omzetbelasting;</li>
+          <li>informatie over het lopende boekjaar;</li>
+          <li>gegevens over de financiële positie van je onderneming.</li>
+        </ul>
+        <p>
+          Welke stukken precies moeten worden aangeleverd, wordt bepaald binnen het geldende
+          toetskader.
+        </p>
+
+        <h2>Welke jaarcijfers heb je nodig voor een hypotheek?</h2>
+        <p>
+          Bij een IB-ondernemer, zoals een eenmanszaak, vormt de fiscale winst een belangrijke basis
+          voor de inkomensbeoordeling.
+        </p>
+        <p>
+          Binnen de NHG-Inkomensverklaring Ondernemer is het uitgangspunt het gemiddelde inkomen over
+          de laatste drie kalenderjaren. Voor een IB-ondernemer gaat het om het gemiddelde van de
+          fiscale winst, waarbij het laatste jaar als maximum geldt.
+        </p>
+        <p>Stel dat je winst was:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€40.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€55.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€50.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het gemiddelde bedraagt €48.333.</p>
+        <p>
+          Omdat het laatste jaar €50.000 bedraagt, ligt het gemiddelde onder het resultaat van het
+          laatste jaar. Binnen het NHG-toetskader vormt het gemiddelde dan de basis, rekening houdend
+          met de overige voorwaarden en controles.
+        </p>
+        <p>
+          Het is daarom belangrijk om niet alleen je meest recente jaarcijfers te bekijken. Lees ook{' '}
+          <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+            Winst uit onderneming voor hypotheek
+          </Link>
+          .
+        </p>
+
+        <h2>Hoeveel jaarcijfers heb je nodig?</h2>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer wordt meestal gekeken naar de laatste drie
+          kalenderjaren.
+        </p>
+        <p>
+          Bestaat je onderneming nog geen drie jaar, dan wordt gekeken naar de beschikbare periode.
+          Een ondernemer moet voor deze route minimaal 12 maanden actief zijn.
+        </p>
+        <p>Dat betekent bijvoorbeeld:</p>
+        <ul>
+          <li>
+            <strong>1 jaar ondernemer:</strong> je beschikbare financiële historie wordt beoordeeld;
+          </li>
+          <li>
+            <strong>2 jaar ondernemer:</strong> de beschikbare twee jaren worden beoordeeld;
+          </li>
+          <li>
+            <strong>3 jaar of langer ondernemer:</strong> de laatste drie kalenderjaren vormen
+            doorgaans de basis.
+          </li>
+        </ul>
+        <p>
+          Een startende zzp&apos;er hoeft voor een NHG-hypotheek dus niet eerst drie volledige jaren
+          ondernemer te zijn.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+            Hypotheek voor startende zzp&apos;ers
+          </Link>
+        </p>
+
+        <h2>Zijn alleen jaarcijfers voldoende?</h2>
+        <p>Niet altijd.</p>
+        <p>
+          De jaarcijfers geven vooral inzicht in de afgelopen boekjaren. Voor de hypotheekbeoordeling
+          kan ook naar het <strong>lopende boekjaar</strong> worden gekeken.
+        </p>
+        <p>
+          Dat is belangrijk wanneer je onderneming inmiddels duidelijk beter of slechter presteert.
+        </p>
+        <p>
+          Bij de NHG-Inkomensverklaring Ondernemer moet het actuele inkomen minstens in lijn zijn met
+          het gemiddelde inkomen waarop de berekening is gebaseerd. Als de tussentijdse cijfers een
+          lager resultaat laten zien, kan het inkomen naar beneden worden bijgesteld. Een hoger
+          resultaat in het lopende jaar leidt daarentegen niet automatisch tot een hoger
+          toetsinkomen.
+        </p>
+        <p>
+          Je hypotheek wordt dus niet simpelweg berekend door drie oude jaarcijfers bij elkaar op te
+          tellen.
+        </p>
+
+        <h2>Welke documenten heb je als zzp&apos;er nodig?</h2>
+        <p>
+          De precieze documentenlijst kan verschillen afhankelijk van de situatie.
+        </p>
+        <p>
+          Voor een NHG-Inkomensverklaring wordt onder andere gekeken naar de financiële gegevens van
+          de onderneming. Vanaf 1 mei van het lopende boekjaar zijn de definitieve jaarcijfers van
+          het vorige boekjaar verplicht. Vanaf 1 augustus zijn bijvoorbeeld tussentijdse cijfers tot
+          en met het tweede kwartaal en de bijbehorende aangiften omzetbelasting nodig. Vanaf 1
+          november verschuift dit naar de cijfers tot en met het derde kwartaal.
+        </p>
+        <p>Een vereenvoudigd overzicht:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[320px] border-collapse text-left text-sm">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">
+                  Moment van aanvraag
+                </th>
+                <th className="border-b border-slate-200 py-2 font-semibold">
+                  Belangrijke financiële informatie
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4 align-top">Vanaf 1 mei</td>
+                <td className="border-b border-slate-100 py-2">
+                  Definitieve jaarcijfers vorige boekjaar
+                </td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4 align-top">Vanaf 1 augustus</td>
+                <td className="border-b border-slate-100 py-2">
+                  Tussentijdse cijfers t/m Q2 + btw-aangiften t/m Q2
+                </td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4 align-top">Vanaf 1 november</td>
+                <td className="border-b border-slate-100 py-2">
+                  Tussentijdse cijfers t/m Q3 + btw-aangiften t/m Q3
+                </td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 align-top">Vanaf 1 februari</td>
+                <td className="py-2">Tussentijdse cijfers t/m Q4 + btw-aangiften t/m Q4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          De exacte documentenlijst van de Inkomensverklaring Ondernemer bepaalt welke stukken in
+          jouw situatie moeten worden aangeleverd.
+        </p>
+
+        <h2>Wat als je jaarcijfers nog niet definitief zijn?</h2>
+        <p>Dat hoeft niet automatisch een probleem te zijn.</p>
+        <p>
+          Wanneer het vorige boekjaar nog niet definitief is afgesloten, kunnen afhankelijk van het
+          moment van aanvragen tussentijdse cijfers en andere financiële gegevens worden gebruikt.
+        </p>
+        <p>
+          Vanaf 1 mei van het lopende boekjaar moeten voor de NHG-Inkomensverklaring de definitieve
+          jaarcijfers van het vorige boekjaar worden aangeleverd.
+        </p>
+        <p>
+          Als je bijvoorbeeld in 2026 een hypotheek aanvraagt, kan het dus relevant zijn of je
+          cijfers over 2025 al definitief beschikbaar zijn.
+        </p>
+
+        <h2>Wat als je boekhouder de jaarcijfers nog niet heeft gemaakt?</h2>
+        <p>
+          Dan is het verstandig om eerst te controleren welke documenten de hypotheekverstrekker of
+          rekenexpert nodig heeft.
+        </p>
+        <p>
+          Voor NHG is de Inkomensverklaring Ondernemer een uitgebreide analyse van je onderneming. Je
+          vraagt deze aan via een hypotheekadviseur, geldverstrekker of een door NHG aangewezen
+          rekenexpert. De verklaring wordt opgesteld op basis van de benodigde financiële
+          documenten.
+        </p>
+        <p>
+          Het is daarom niet verstandig om zelf alvast een willekeurig gemiddelde van je winst te
+          gebruiken als officieel toetsinkomen.
+        </p>
+
+        <h2>Kun je een hypotheek krijgen met maar één jaar aan jaarcijfers?</h2>
+        <p>Dat kan mogelijk.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer moet je minimaal 12 maanden actief zijn. Je hoeft
+          dus niet per se drie volledige jaren aan jaarcijfers te hebben.
+        </p>
+        <p>
+          Als je onderneming korter dan drie jaar bestaat, wordt de beschikbare financiële historie
+          gebruikt.
+        </p>
+        <p>
+          Hoe korter je onderneming bestaat, hoe minder historische informatie beschikbaar is om je
+          inkomen te beoordelen.
+        </p>
+        <p>
+          Dat betekent ook dat een startende zzp&apos;er niet automatisch op dezelfde manier wordt
+          beoordeeld als iemand die al tien jaar ondernemer is. Lees ook{' '}
+          <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+            Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+          </Link>
+          .
+        </p>
+
+        <h2>Wat als je één jaar geen inkomen had?</h2>
+        <p>
+          Binnen de NHG-systematiek mag een ondernemer maximaal één kalenderjaar geen inkomen hebben
+          gehad.
+        </p>
+        <p>Het gemiddelde wordt in dat geval nog steeds over drie jaar berekend.</p>
+        <p>Een jaar zonder inkomen kan dus wel gevolgen hebben voor de berekening.</p>
+        <p>
+          Heb je meerdere jaren zonder inkomen of met zeer lage resultaten, dan kan dat uiteraard
+          een grotere invloed hebben op het toetsinkomen.
+        </p>
+
+        <h2>Wat als je winst sterk wisselt?</h2>
+        <p>Wisselende winst betekent niet automatisch dat je geen hypotheek kunt krijgen.</p>
+        <p>Bijvoorbeeld:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€35.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€75.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€45.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het gemiddelde bedraagt €51.667.</p>
+        <p>
+          Maar je hypotheekbeoordeling kijkt niet alleen naar dit gemiddelde. Binnen de
+          NHG-systematiek geldt het laatste jaar als maximum en wordt ook naar het lopende boekjaar
+          gekeken.
+        </p>
+        <p>
+          Een uitzonderlijk goed jaar zorgt daarom niet automatisch voor een evenredig hoger
+          toetsinkomen.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek met wisselend inkomen als zzp&apos;er
+          </Link>
+        </p>
+
+        <h2>Is een aangifte inkomstenbelasting hetzelfde als jaarcijfers?</h2>
+        <p>Nee.</p>
+        <p>
+          Je aangifte inkomstenbelasting en de jaarcijfers van je onderneming zijn verschillende
+          documenten.
+        </p>
+        <p>
+          De aangifte inkomstenbelasting bevat je fiscale gegevens als persoon. De jaarcijfers geven
+          inzicht in de financiële resultaten van je onderneming.
+        </p>
+        <p>
+          Voor een hypotheek kunnen beide soorten informatie relevant zijn, afhankelijk van de
+          gebruikte beoordelingsmethode en de geldverstrekker.
+        </p>
+        <p>
+          Bij de NHG-Inkomensverklaring Ondernemer wordt de onderneming uitgebreid geanalyseerd om
+          het toetsinkomen vast te stellen.
+        </p>
+
+        <h2>Kan ik mijn hypotheek berekenen zonder definitieve jaarcijfers?</h2>
+        <p>Voor een eerste indicatie kan dat.</p>
+        <p>
+          Je kunt bijvoorbeeld je recente winst en de resultaten van eerdere jaren gebruiken om een
+          inschatting te maken.
+        </p>
+        <p>
+          Maar een hypotheekcalculator kan daarmee nog niet automatisch bepalen welk officiële
+          toetsinkomen een geldverstrekker zal gebruiken.
+        </p>
+        <p>
+          Dat komt doordat de uiteindelijke beoordeling ook rekening kan houden met:
+        </p>
+        <ul>
+          <li>de ontwikkeling van je winst;</li>
+          <li>het laatste volledige boekjaar;</li>
+          <li>het lopende boekjaar;</li>
+          <li>correctieposten;</li>
+          <li>de financiële positie van je onderneming;</li>
+          <li>andere inkomsten;</li>
+          <li>eventuele financiële verplichtingen.</li>
+        </ul>
+        <p>
+          Voor NHG wordt het uiteindelijke ondernemersinkomen vastgesteld via de Inkomensverklaring
+          Ondernemer.
+        </p>
+        <HypotheekCta />
+
+        <h2>Wat als je jaarcijfers sterk zijn verbeterd?</h2>
+        <p>
+          Een verbetering van je bedrijfsresultaat is relevante informatie, maar betekent niet
+          automatisch dat je volledige nieuwe winst als toetsinkomen wordt gebruikt.
+        </p>
+        <p>
+          De NHG-systematiek kijkt naar de historische resultaten en het actuele inkomen. Wanneer
+          het lopende jaar beter is dan de historische jaren, wordt het inkomen binnen het
+          standaardtoetskader niet simpelweg onbeperkt naar boven aangepast.
+        </p>
+        <p>
+          Dat voorkomt dat een korte periode met uitzonderlijk hoge inkomsten direct wordt behandeld
+          als structureel inkomen.
+        </p>
+
+        <h2>Wat als je jaarcijfers juist slechter worden?</h2>
+        <p>Een dalend resultaat kan wel gevolgen hebben voor je toetsinkomen.</p>
+        <p>
+          Als de tussentijdse cijfers van het lopende boekjaar duidelijk lager liggen dan het
+          historische gemiddelde, kan aanleiding bestaan om het inkomen naar beneden bij te stellen.
+        </p>
+        <p>
+          Daarom kan het verstandig zijn om niet te wachten tot het moment van de hypotheekaanvraag
+          als je onderneming inmiddels sterk is veranderd.
+        </p>
+        <p>Je actuele financiële situatie kan onderdeel zijn van de beoordeling.</p>
+
+        <h2>Heb je voor een hypotheek zonder NHG ook jaarcijfers nodig?</h2>
+        <p>Dat kan, maar de voorwaarden verschillen per geldverstrekker.</p>
+        <p>
+          De NHG-Inkomensverklaring Ondernemer is specifiek onderdeel van de NHG-systematiek. Zonder
+          NHG kan een geldverstrekker een eigen methode gebruiken om het ondernemersinkomen vast te
+          stellen.
+        </p>
+        <p>
+          Daarom kun je de NHG-documentenlijst niet automatisch gebruiken als universele checklist
+          voor iedere hypotheek.
+        </p>
+        <p>
+          Controleer bij een hypotheek zonder NHG welke financiële documenten de betreffende
+          geldverstrekker verlangt.
+        </p>
+
+        <h2>Wat kost een Inkomensverklaring Ondernemer?</h2>
+        <p>
+          De Inkomensverklaring Ondernemer wordt opgesteld door een rekenexpert en is onderdeel van
+          het aanvraagproces voor een NHG-hypotheek voor ondernemers.
+        </p>
+        <p>
+          NHG geeft aan dat de verklaring via een adviseur, geldverstrekker of één van de aangewezen
+          rekenexperts kan worden aangevraagd. De opdrachtgever betaalt de verklaring.
+        </p>
+        <p>
+          De kosten staan los van de vraag welk toetsinkomen uiteindelijk uit de analyse komt.
+        </p>
+
+        <h2>Hoe lang is de Inkomensverklaring geldig?</h2>
+        <p>
+          Een Inkomensverklaring Ondernemer is vanaf de dagtekening <strong>zes maanden geldig</strong>
+          . Binnen die periode moet het bindend aanbod worden gedaan.
+        </p>
+        <p>
+          Het kan daarom relevant zijn om het aanvragen van de verklaring af te stemmen op je
+          daadwerkelijke hypotheekaanvraag.
+        </p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Heb ik als zzp&apos;er jaarcijfers nodig voor een hypotheek?</h3>
+        <p>
+          Vaak wel. Bij een hypotheek met NHG worden de financiële resultaten van je onderneming
+          gebruikt om het ondernemersinkomen vast te stellen.
+        </p>
+        <h3>Hoeveel jaarcijfers heb ik nodig?</h3>
+        <p>
+          Bij NHG wordt doorgaans naar de laatste drie kalenderjaren gekeken. Bestaat je
+          onderneming korter, dan wordt de beschikbare historie gebruikt.
+        </p>
+        <h3>Kan ik met één jaar aan jaarcijfers een hypotheek krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Voor de NHG-Inkomensverklaring Ondernemer moet je minimaal 12 maanden
+          actief zijn als ondernemer.
+        </p>
+        <h3>Tellen voorlopige jaarcijfers mee?</h3>
+        <p>
+          Dat kan afhankelijk zijn van het moment van de aanvraag. Vanaf 1 mei van het lopende
+          boekjaar zijn voor de NHG-Inkomensverklaring de definitieve jaarcijfers van het vorige
+          boekjaar verplicht.
+        </p>
+        <h3>Heb ik ook cijfers van het lopende jaar nodig?</h3>
+        <p>
+          Dat kan. De NHG-systematiek kijkt naar het lopende boekjaar om te controleren of je
+          actuele inkomen in lijn is met de historische resultaten.
+        </p>
+        <h3>Kan ik mijn aangifte inkomstenbelasting gebruiken in plaats van jaarcijfers?</h3>
+        <p>
+          Dat hangt af van de gebruikte hypotheekmethode en geldverstrekker. Voor een
+          NHG-Inkomensverklaring Ondernemer worden meerdere financiële gegevens van de onderneming
+          gebruikt.
+        </p>
+        <h3>Wat als mijn onderneming nog geen drie jaar bestaat?</h3>
+        <p>
+          Je hoeft voor de NHG-Inkomensverklaring Ondernemer niet eerst drie jaar ondernemer te zijn.
+          Vanaf minimaal 12 maanden ondernemerschap kan de verklaring worden aangevraagd.
+        </p>
+        <h3>Wat als mijn winst sterk wisselt?</h3>
+        <p>
+          Een wisselende winst sluit een hypotheek niet automatisch uit. De historische resultaten,
+          het laatste boekjaar en het lopende boekjaar kunnen allemaal relevant zijn voor de
+          inkomensbeoordeling.
+        </p>
+        <h3>Kan ik alvast mijn maximale hypotheek berekenen zonder jaarcijfers?</h3>
+        <p>
+          Ja, voor een eerste indicatie kun je een berekening maken. Voor een definitieve
+          hypotheekaanvraag moet echter worden vastgesteld welk toetsinkomen voor jouw situatie
+          geldt.
+        </p>
+
+        <h2>Bereid je jaarcijfers voor op je hypotheek</h2>
+        <p>
+          Als zzp&apos;er zijn je jaarcijfers een belangrijk onderdeel van de financiële beoordeling
+          voor een hypotheek. Kijk daarom niet alleen naar je omzet of naar het bedrag dat je in één
+          goed jaar hebt verdiend.
+        </p>
+        <p>Zorg dat je inzicht hebt in:</p>
+        <ul>
+          <li>je winst van de afgelopen jaren;</li>
+          <li>je definitieve jaarcijfers;</li>
+          <li>je actuele resultaat;</li>
+          <li>je cijfers van het lopende boekjaar;</li>
+          <li>je btw-aangiften;</li>
+          <li>eventuele andere inkomsten.</li>
+        </ul>
+        <p>
+          Bij een NHG-hypotheek wordt vervolgens via de{' '}
+          <strong>Inkomensverklaring Ondernemer</strong> vastgesteld welk toetsinkomen voor je
+          hypotheek kan worden gebruikt.
+        </p>
+        <p>
+          Heb je nog geen drie volledige jaren als zzp&apos;er? Lees ook{' '}
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+            Hypotheek zzp zonder 3 jaar cijfers
+          </Link>{' '}
+          en{' '}
+          <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+            Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+          </Link>
+          .
+        </p>
+        <p>Wil je eerst weten wat je ongeveer kunt lenen?</p>
+        <HypotheekCta label="Hypotheek berekenen als zzp'er →" />
+        <HypotheekHubLink />
+        <p>Meer lezen over hypotheken als zzp&apos;er:</p>
+        <ul>
+          <li>
+            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
+              Hypotheek voor zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Welk inkomen telt voor een hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+              Winst uit onderneming voor hypotheek
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+              Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+              Hypotheek voor startende zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+              Hypotheek als zzp&apos;er zonder 3 jaar cijfers
+            </Link>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    slug: 'hypotheek-zzp-zonder-3-jaar-cijfers',
+    relatedSlugs: [
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hoe-lang-zzper-zijn-voor-hypotheek',
+      'hypotheek-voor-startende-zzpers',
+      'welk-inkomen-telt-voor-hypotheek-als-zzper',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
+    ],
+    title: "Hypotheek als zzp'er zonder 3 jaar cijfers",
+    excerpt:
+      "Kun je als zzp'er een hypotheek krijgen zonder 3 jaar cijfers? Lees wat mogelijk is met 1 of 2 jaar cijfers en hoe je inkomen wordt beoordeeld.",
+    keywords:
+      "hypotheek zzp zonder 3 jaar cijfers, hypotheek zonder 3 jaar cijfers zzp, hypotheek als zzp'er zonder 3 jaar cijfers, hypotheek zzp minder dan 3 jaar, hypotheek zzp 1 jaar cijfers, hypotheek zzp 2 jaar cijfers, hypotheek voor startende zzp'er, hypotheek als starter zzp, hypotheek aanvragen zonder 3 jaar jaarcijfers, hypotheek zonder drie jaar jaarcijfers, hypotheek ondernemer korter dan 3 jaar, hypotheek zzp korter dan 3 jaar, hypotheek met 1 jaar cijfers zzp",
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/Hypotheek%20zzp%20zonder%203%20jaar%20cijfers.jpg',
+      alt: "Hypotheek als zzp'er zonder 3 jaar cijfers: wat kan met 1 of 2 jaar cijfers?",
+    },
+    datePublished: '2026-09-18',
+    dateModified: '2026-09-18',
+    faq: [
+      {
+        question: "Kan ik als zzp'er een hypotheek krijgen zonder 3 jaar cijfers?",
+        answer:
+          'Ja, dat kan mogelijk. Voor NHG kan vanaf minimaal 12 maanden ondernemerschap een Inkomensverklaring Ondernemer worden gebruikt. Als je onderneming korter dan drie jaar bestaat, wordt de beschikbare financiële historie beoordeeld.',
+      },
+      {
+        question: "Hoeveel jaar moet ik zzp'er zijn voor een hypotheek?",
+        answer:
+          "Je hoeft niet automatisch drie jaar zzp'er te zijn. Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van 12 maanden ondernemerschap.",
+      },
+      {
+        question: 'Kan ik met 1 jaar cijfers een hypotheek krijgen?',
+        answer:
+          'Dat kan mogelijk. Bij minimaal 12 maanden ondernemerschap kan de Inkomensverklaring Ondernemer worden gebruikt. Je beschikbare financiële gegevens worden vervolgens beoordeeld.',
+      },
+      {
+        question: 'Kan ik met 2 jaar cijfers een hypotheek krijgen?',
+        answer:
+          'Dat kan mogelijk. Als je onderneming nog geen drie jaar bestaat, kan de beschikbare financiële historie worden gebruikt voor de inkomensbeoordeling.',
+      },
+      {
+        question: 'Waarom denken veel mensen dat je 3 jaar cijfers nodig hebt?',
+        answer:
+          'Bij een gevestigde ondernemer wordt binnen de NHG-systematiek doorgaans gekeken naar de resultaten van de laatste drie kalenderjaren. Daardoor wordt soms gedacht dat je ook verplicht drie jaar ondernemer moet zijn. Voor de Inkomensverklaring Ondernemer geldt echter een minimale ondernemingsduur van 12 maanden.',
+      },
+      {
+        question: "Kan ik als startende zzp'er een hypotheek met NHG krijgen?",
+        answer:
+          'Dat kan mogelijk. Voor de NHG-Inkomensverklaring Ondernemer moet je minimaal 12 maanden actief zijn als ondernemer.',
+      },
+      {
+        question: 'Wat als ik nog geen definitieve jaarcijfers heb?',
+        answer:
+          'Welke documenten nodig zijn, hangt af van het moment van aanvragen. Naast jaarcijfers kunnen ook tussentijdse cijfers en btw-aangiften relevant zijn.',
+      },
+      {
+        question: 'Wordt mijn winst van één jaar volledig meegenomen?',
+        answer:
+          'Niet automatisch. Het toetsinkomen wordt vastgesteld volgens het geldende toetskader. Bij een korte ondernemershistorie is er minder financiële historie beschikbaar om het inkomen te beoordelen.',
+      },
+      {
+        question: 'Kan ik zonder 3 jaar cijfers een hypotheek zonder NHG krijgen?',
+        answer:
+          'Dat kan mogelijk, maar de voorwaarden verschillen per geldverstrekker. Zonder NHG gelden niet automatisch dezelfde regels als bij de NHG-Inkomensverklaring Ondernemer.',
+      },
+      {
+        question: "Is een hypotheek moeilijker als je minder dan 3 jaar zzp'er bent?",
+        answer:
+          'Een korte ondernemershistorie betekent dat er minder financiële informatie beschikbaar is. Hoe dat precies wordt beoordeeld, hangt af van de hypotheekroute en geldverstrekker.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Ben je pas kort geleden begonnen als zzp&apos;er en heb je nog geen drie volledige jaren
+          aan jaarcijfers? Dan betekent dat niet automatisch dat je geen hypotheek kunt krijgen.
+        </p>
+        <p>
+          Voor ondernemers wordt gekeken naar de financiële resultaten van de onderneming en naar
+          de ontwikkeling van het inkomen. Bij een hypotheek met NHG kan een{' '}
+          <strong>Inkomensverklaring Ondernemer</strong> worden gebruikt om het toetsinkomen vast te
+          stellen.
+        </p>
+        <p>Daarvoor hoef je niet altijd drie volledige jaren ondernemer te zijn.</p>
+        <p>
+          Als je onderneming minimaal 12 maanden bestaat, kan de Inkomensverklaring Ondernemer
+          mogelijk worden gebruikt. Bij een onderneming die korter dan drie jaar bestaat, wordt de
+          beschikbare financiële historie gebruikt.
+        </p>
+        <p>
+          Het ontbreken van drie volledige jaarcijfers betekent dus niet automatisch dat een
+          hypotheek onmogelijk is.
+        </p>
+
+        <h2>Kun je als zzp&apos;er een hypotheek krijgen zonder 3 jaar cijfers?</h2>
+        <p>Ja, dat kan mogelijk.</p>
+        <p>
+          De gedachte dat je als zzp&apos;er altijd eerst drie jaar ondernemer moet zijn voordat je
+          een hypotheek kunt krijgen, klopt niet als algemene regel.
+        </p>
+        <p>
+          Voor NHG kan een ondernemer vanaf minimaal 12 maanden ondernemerschap gebruikmaken van de
+          Inkomensverklaring Ondernemer. Bestaat je onderneming korter dan drie jaar, dan wordt
+          gekeken naar de beschikbare financiële historie.
+        </p>
+        <p>
+          Je hoeft dus niet eerst drie volledige jaren te hebben voordat je überhaupt voor een
+          hypotheek in aanmerking kunt komen.
+        </p>
+        <p>
+          Wel kan een kortere ondernemershistorie invloed hebben op de manier waarop je inkomen
+          wordt vastgesteld.
+        </p>
+
+        <h2>Hoeveel jaar moet je zzp&apos;er zijn voor een hypotheek?</h2>
+        <p>Er is geen algemene regel dat je precies drie jaar zzp&apos;er moet zijn.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van{' '}
+          <strong>12 maanden ondernemerschap</strong>.
+        </p>
+        <p>Daarbij wordt onderscheid gemaakt tussen ondernemers met:</p>
+        <ul>
+          <li>ongeveer 1 jaar ondernemerschap;</li>
+          <li>2 jaar ondernemerschap;</li>
+          <li>3 jaar of langer ondernemerschap.</li>
+        </ul>
+        <p>
+          Hoe langer je onderneming bestaat, hoe meer financiële historie beschikbaar is om je
+          inkomen te beoordelen.
+        </p>
+        <p>
+          Dat betekent echter niet dat iemand met één jaar cijfers automatisch geen hypotheek kan
+          krijgen.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+            Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+          </Link>
+        </p>
+
+        <h2>Hypotheek als zzp&apos;er met 1 jaar cijfers</h2>
+        <p>
+          Ben je ongeveer één jaar ondernemer? Dan is je situatie anders dan die van een zzp&apos;er
+          die al meerdere jaren een onderneming heeft.
+        </p>
+        <p>Er zijn simpelweg minder financiële gegevens beschikbaar.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer kan vanaf minimaal 12 maanden ondernemerschap een
+          inkomensverklaring worden aangevraagd. De beschikbare financiële historie wordt vervolgens
+          gebruikt om je ondernemersinkomen te beoordelen.
+        </p>
+        <p>
+          Bij één jaar ondernemerschap kan het daarom extra belangrijk zijn dat je financiële
+          administratie goed op orde is.
+        </p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>je financiële resultaten;</li>
+          <li>je aangifte inkomstenbelasting;</li>
+          <li>je omzet;</li>
+          <li>je kosten;</li>
+          <li>je actuele cijfers;</li>
+          <li>je btw-aangiften;</li>
+          <li>de ontwikkeling van je onderneming.</li>
+        </ul>
+        <p>
+          Welke documenten precies nodig zijn, hangt af van je situatie en het moment van de
+          aanvraag.
+        </p>
+
+        <h2>Hypotheek als zzp&apos;er met 2 jaar cijfers</h2>
+        <p>
+          Heb je inmiddels twee jaar cijfers beschikbaar, dan is er meer historische informatie over
+          je onderneming.
+        </p>
+        <p>Dat kan helpen bij het beoordelen van de ontwikkeling van je inkomen.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer wordt bij een onderneming die korter dan drie
+          jaar bestaat gekeken naar de beschikbare periode.
+        </p>
+        <p>Je hebt dus niet per se drie volledige jaren nodig.</p>
+        <p>
+          Wel blijft het belangrijk dat de financiële resultaten voldoende inzicht geven in je
+          onderneming en dat ook de actuele ontwikkeling kan worden beoordeeld.
+        </p>
+
+        <h2>Waarom wordt vaak gesproken over 3 jaar?</h2>
+        <p>
+          De periode van drie jaar komt vooral terug omdat bij een gevestigde ondernemer de
+          financiële resultaten van de laatste drie kalenderjaren een belangrijke basis vormen voor
+          de inkomensbeoordeling.
+        </p>
+        <p>
+          Bij NHG wordt het gemiddelde inkomen over de laatste drie kalenderjaren als uitgangspunt
+          genomen. Het laatste jaar vormt daarbij een maximum.
+        </p>
+        <p>
+          Heb je nog geen drie volledige jaren als ondernemer, dan kan die volledige historie
+          uiteraard niet worden gebruikt.
+        </p>
+        <p>Daarom wordt bij een jongere onderneming gekeken naar de beschikbare gegevens.</p>
+        <p>De regel is dus niet:</p>
+        <blockquote>
+          <p>&quot;Je moet drie jaar zzp&apos;er zijn.&quot;</p>
+        </blockquote>
+        <p>Maar eerder:</p>
+        <blockquote>
+          <p>
+            &quot;Hoeveel financiële historie is beschikbaar om je ondernemersinkomen te
+            beoordelen?&quot;
+          </p>
+        </blockquote>
+
+        <h2>Voorbeeld: één jaar ondernemer</h2>
+        <p>Stel dat je op 1 januari 2025 bent gestart als zzp&apos;er.</p>
+        <p>In 2025 maakte je:</p>
+        <p>
+          <strong>€45.000 winst.</strong>
+        </p>
+        <p>In 2026 wil je een hypotheek aanvragen.</p>
+        <p>Je hebt dan nog geen drie volledige kalenderjaren als ondernemer.</p>
+        <p>Dat betekent niet automatisch dat je moet wachten tot 2028.</p>
+        <p>
+          Voor NHG kan vanaf minimaal 12 maanden ondernemerschap een Inkomensverklaring Ondernemer
+          worden gebruikt. De beschikbare financiële informatie over je onderneming wordt daarbij
+          beoordeeld.
+        </p>
+        <p>
+          Je situatie wordt dus anders beoordeeld dan die van een ondernemer met drie volledige
+          jaren aan resultaten, maar een hypotheek is niet per definitie uitgesloten.
+        </p>
+
+        <h2>Voorbeeld: twee jaar ondernemer</h2>
+        <p>Stel:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€35.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 2</td>
+                <td className="py-2 text-right">€50.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Je bent inmiddels twee jaar ondernemer en hebt twee volledige jaren aan resultaten.
+        </p>
+        <p>Je hebt nog geen drie jaar cijfers.</p>
+        <p>
+          Toch kan je beschikbare financiële historie worden gebruikt voor de beoordeling van je
+          ondernemersinkomen.
+        </p>
+        <p>
+          Daarbij wordt niet alleen gekeken naar de hoogte van de winst. Ook de ontwikkeling van de
+          onderneming en het actuele inkomen kunnen relevant zijn.
+        </p>
+
+        <h2>Wat als je onderneming minder dan 12 maanden bestaat?</h2>
+        <p>Hier ligt een belangrijk verschil.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer moet je minimaal 12 maanden actief zijn als
+          ondernemer.
+        </p>
+        <p>
+          Ben je pas enkele maanden geleden gestart, dan kun je dus niet simpelweg dezelfde route
+          gebruiken als een ondernemer die al minimaal een jaar actief is.
+        </p>
+        <p>
+          Dat betekent niet noodzakelijk dat iedere hypotheek zonder meer onmogelijk is.
+          Geldverstrekkers kunnen verschillende acceptatiecriteria hanteren, vooral buiten NHG.
+        </p>
+        <p>
+          Maar je kunt de NHG-regels voor een ondernemer vanaf 12 maanden niet zomaar toepassen op
+          iemand die pas enkele maanden actief is.
+        </p>
+
+        <h2>Tellen voorlopige cijfers mee?</h2>
+        <p>Dat kan.</p>
+        <p>
+          Welke cijfers nodig zijn, hangt onder andere af van het moment waarop je de hypotheek
+          aanvraagt.
+        </p>
+        <p>
+          Bij een NHG-Inkomensverklaring Ondernemer wordt niet alleen naar afgesloten boekjaren
+          gekeken. Ook het lopende boekjaar kan worden gecontroleerd.
+        </p>
+        <p>
+          Vanaf 1 mei van het lopende boekjaar zijn de definitieve jaarcijfers van het vorige
+          boekjaar onderdeel van de verplichte documentatie.
+        </p>
+        <p>
+          Later in het jaar kunnen ook tussentijdse cijfers en btw-aangiften nodig zijn.
+        </p>
+        <p>
+          Dit is vooral relevant voor startende ondernemers, omdat hun financiële historie vaak nog
+          beperkt is. Lees ook{' '}
+          <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+          </Link>
+          .
+        </p>
+
+        <h2>Wat als je nog geen definitieve jaarrekening hebt?</h2>
+        <p>
+          Ook hier moet je onderscheid maken tussen een onderneming die nog maar kort bestaat en een
+          onderneming waarvan het laatste boekjaar simpelweg nog niet definitief is afgesloten.
+        </p>
+        <p>
+          Als je bijvoorbeeld in 2025 bent gestart en in 2026 een hypotheek aanvraagt, kunnen de
+          financiële resultaten over 2025 relevant zijn.
+        </p>
+        <p>
+          Zijn de definitieve jaarcijfers inmiddels beschikbaar, dan kunnen deze onderdeel zijn van
+          de documentatie.
+        </p>
+        <p>
+          Daarnaast kan informatie over 2026 nodig zijn om te beoordelen hoe je onderneming momenteel
+          presteert.
+        </p>
+        <p>Je moet daarom niet alleen kijken naar de vraag:</p>
+        <blockquote>
+          <p>&quot;Heb ik drie jaarcijfers?&quot;</p>
+        </blockquote>
+        <p>maar vooral:</p>
+        <blockquote>
+          <p>
+            &quot;Welke financiële informatie is op het moment van mijn hypotheekaanvraag
+            beschikbaar?&quot;
+          </p>
+        </blockquote>
+
+        <h2>Hoe wordt je inkomen berekend als je geen 3 jaar cijfers hebt?</h2>
+        <p>
+          Bij een jongere onderneming kan niet worden uitgegaan van drie volledige kalenderjaren als
+          die simpelweg niet bestaan.
+        </p>
+        <p>De beschikbare financiële historie wordt gebruikt.</p>
+        <p>Het uiteindelijke toetsinkomen is daardoor niet noodzakelijk gelijk aan:</p>
+        <p>
+          <strong>je winst van het laatste jaar.</strong>
+        </p>
+        <p>
+          De inkomensbeoordeling kijkt naar het geldende toetskader en de beschikbare financiële
+          informatie.
+        </p>
+        <p>Bij NHG wordt dit vastgesteld via de Inkomensverklaring Ondernemer.</p>
+        <p>Daarbij wordt onder andere gekeken naar:</p>
+        <ul>
+          <li>de fiscale winst;</li>
+          <li>de beschikbare historische resultaten;</li>
+          <li>het laatste boekjaar;</li>
+          <li>het lopende boekjaar;</li>
+          <li>de financiële ontwikkeling van de onderneming;</li>
+          <li>de financiële positie van de onderneming.</li>
+        </ul>
+
+        <h2>Kun je met één goed jaar direct een hoge hypotheek krijgen?</h2>
+        <p>Niet automatisch.</p>
+        <p>
+          Als je pas één jaar ondernemer bent en in dat jaar bijvoorbeeld €80.000 winst hebt
+          gemaakt, betekent dat niet automatisch dat een geldverstrekker simpelweg €80.000 als
+          duurzaam toetsinkomen gebruikt.
+        </p>
+        <p>Er is immers nog weinig historische informatie beschikbaar.</p>
+        <p>
+          Bij de beoordeling wordt gekeken naar het geldende toetskader en de ontwikkeling van de
+          onderneming.
+        </p>
+        <p>
+          Een hoog inkomen in een korte periode is daarom niet hetzelfde als een langdurig stabiel
+          ondernemersinkomen.
+        </p>
+
+        <h2>Wat als je inkomen snel stijgt?</h2>
+        <p>
+          Een sterk groeiende onderneming kan een ander beeld geven dan een onderneming waarvan het
+          inkomen stabiel blijft.
+        </p>
+        <p>Stel:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€25.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 2</td>
+                <td className="py-2 text-right">€50.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je inkomen is duidelijk gestegen.</p>
+        <p>
+          Dat is relevante informatie, maar je kunt niet automatisch aannemen dat je hypotheek wordt
+          gebaseerd op €50.000.
+        </p>
+        <p>De uiteindelijke inkomensvaststelling volgt het geldende toetskader.</p>
+        <p>
+          Ook het lopende boekjaar kan worden bekeken om te beoordelen of de ontwikkeling van je
+          onderneming aansluit bij de historische resultaten.
+        </p>
+
+        <h2>Wat als je inkomen juist daalt?</h2>
+        <p>Hetzelfde geldt in de andere richting.</p>
+        <p>Stel:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€60.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 2</td>
+                <td className="py-2 text-right">€35.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je gemiddelde of eerdere winst vertelt dan niet het volledige verhaal.</p>
+        <p>
+          Een dalend inkomen kan invloed hebben op het inkomen dat voor de hypotheek wordt
+          gebruikt.
+        </p>
+        <p>
+          Daarom zijn actuele cijfers belangrijk wanneer je onderneming inmiddels duidelijk anders
+          presteert dan in eerdere jaren.
+        </p>
+
+        <h2>Zijn jaarcijfers verplicht voor iedere zzp&apos;er?</h2>
+        <p>Niet iedere hypotheekaanvraag gebruikt exact dezelfde documenten.</p>
+        <p>
+          Geldverstrekkers hebben hun eigen acceptatiebeleid en buiten NHG kunnen andere methodes
+          worden gebruikt.
+        </p>
+        <p>
+          Toch zijn financiële gegevens van je onderneming bij een hypotheekaanvraag als zzp&apos;er
+          belangrijk. De geldverstrekker moet immers kunnen beoordelen welk inkomen uit je
+          onderneming kan worden meegenomen.
+        </p>
+        <p>Dat kunnen bijvoorbeeld zijn:</p>
+        <ul>
+          <li>jaarcijfers;</li>
+          <li>aangiften inkomstenbelasting;</li>
+          <li>tussentijdse cijfers;</li>
+          <li>btw-aangiften;</li>
+          <li>bankgegevens;</li>
+          <li>andere financiële documenten.</li>
+        </ul>
+        <p>
+          Welke stukken daadwerkelijk nodig zijn, hangt af van de geldverstrekker en jouw situatie.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+          </Link>
+        </p>
+
+        <h2>Hypotheek zonder 3 jaar cijfers met NHG</h2>
+        <p>
+          De NHG-route is voor ondernemers interessant omdat hiervoor een specifieke methode bestaat
+          om het ondernemersinkomen vast te stellen.
+        </p>
+        <p>
+          De <strong>Inkomensverklaring Ondernemer</strong> kan vanaf minimaal 12 maanden
+          ondernemerschap worden gebruikt.
+        </p>
+        <p>
+          Heb je nog geen drie jaar cijfers, dan wordt de beschikbare financiële historie beoordeeld.
+        </p>
+        <p>
+          Daarmee is de situatie voor een startende zzp&apos;er duidelijk anders dan de vaak
+          gehoorde regel dat je eerst drie jaar ondernemer moet zijn.
+        </p>
+        <p>NHG stelt wel voorwaarden aan de onderneming en de inkomensbeoordeling.</p>
+
+        <h2>Hypotheek zonder 3 jaar cijfers zonder NHG</h2>
+        <p>Zonder NHG kunnen andere regels gelden.</p>
+        <p>
+          Een geldverstrekker kan bijvoorbeeld eigen criteria hanteren voor ondernemers die één of
+          twee jaar actief zijn.
+        </p>
+        <p>
+          Daarom is het niet verstandig om de NHG-regels als algemene regel voor iedere hypotheek te
+          gebruiken.
+        </p>
+        <p>
+          Als je geen NHG gebruikt, moet je specifiek kijken naar het acceptatiebeleid van de
+          geldverstrekker.
+        </p>
+        <p>
+          Dat kan betekenen dat de ene geldverstrekker anders omgaat met een korte
+          ondernemershistorie dan de andere.
+        </p>
+
+        <h2>Kan een startende zzp&apos;er een hypotheek krijgen?</h2>
+        <p>Ja, dat kan mogelijk.</p>
+        <p>
+          Een startende zzp&apos;er heeft alleen minder historische financiële gegevens dan een
+          ondernemer die al meerdere jaren actief is.
+        </p>
+        <p>
+          Voor NHG kan vanaf minimaal 12 maanden ondernemerschap een Inkomensverklaring Ondernemer
+          worden gebruikt.
+        </p>
+        <p>
+          Of je daadwerkelijk een hypotheek kunt krijgen en hoeveel je kunt lenen, hangt vervolgens
+          ook af van andere factoren.
+        </p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>je vastgestelde toetsinkomen;</li>
+          <li>hypotheekrente;</li>
+          <li>andere leningen;</li>
+          <li>studieschuld;</li>
+          <li>leaseverplichtingen;</li>
+          <li>inkomen van je partner;</li>
+          <li>waarde van de woning;</li>
+          <li>de geldende leennormen.</li>
+        </ul>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+            Hypotheek voor startende zzp&apos;ers
+          </Link>
+        </p>
+
+        <h2>Heeft een eenmanszaak een andere beoordeling dan een bv?</h2>
+        <p>
+          Ja, de manier waarop ondernemersinkomen wordt vastgesteld kan verschillen per
+          ondernemingsvorm.
+        </p>
+        <p>
+          Bij een eenmanszaak of vof wordt onder andere gekeken naar de fiscale winst van de
+          onderneming.
+        </p>
+        <p>
+          Bij een bv ligt de situatie anders. Daar kan bijvoorbeeld onderscheid worden gemaakt tussen
+          salaris uit de bv en het resultaat van de onderneming.
+        </p>
+        <p>
+          Daarom kun je de regels voor een eenmanszaak niet automatisch toepassen op een
+          directeur-grootaandeelhouder van een bv.
+        </p>
+
+        <h2>Kun je zonder jaarrekening een hypotheek krijgen?</h2>
+        <p>
+          Een hypotheek zonder een formele jaarrekening is niet hetzelfde als een hypotheek zonder
+          financiële gegevens.
+        </p>
+        <p>
+          Bij sommige ondernemers is een uitgebreide jaarrekening bijvoorbeeld niet op dezelfde
+          manier beschikbaar als bij een bv.
+        </p>
+        <p>
+          De geldverstrekker zal echter nog steeds financiële informatie nodig hebben om het
+          ondernemersinkomen te kunnen beoordelen.
+        </p>
+        <p>
+          Welke documenten daarvoor worden gebruikt, hangt af van de ondernemingsvorm en de gekozen
+          hypotheekroute.
+        </p>
+
+        <h2>Hoeveel hypotheek kun je krijgen zonder 3 jaar cijfers?</h2>
+        <p>
+          Er is geen vast bedrag dat geldt voor iedere zzp&apos;er zonder drie jaar cijfers.
+        </p>
+        <p>
+          De maximale hypotheek wordt niet alleen bepaald door het aantal jaren dat je ondernemer
+          bent.
+        </p>
+        <p>
+          Nadat je toetsinkomen is vastgesteld, spelen ook andere factoren een rol.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>je inkomen;</li>
+          <li>het inkomen van je partner;</li>
+          <li>hypotheekrente;</li>
+          <li>andere financiële verplichtingen;</li>
+          <li>studieschuld;</li>
+          <li>lease;</li>
+          <li>de waarde van de woning;</li>
+          <li>de geldende leennormen.</li>
+        </ul>
+        <p>Daarom kun je niet zeggen:</p>
+        <blockquote>
+          <p>&quot;Ik ben twee jaar zzp&apos;er, dus ik kan maximaal €X lenen.&quot;</p>
+        </blockquote>
+        <p>Je toetsinkomen moet eerst worden vastgesteld.</p>
+
+        <h2>Kun je alvast je maximale hypotheek berekenen?</h2>
+        <p>Ja, voor een eerste indicatie kan dat.</p>
+        <p>
+          Als je nog geen drie jaar cijfers hebt, kun je bijvoorbeeld je beschikbare winst en andere
+          inkomsten gebruiken om een indicatie te krijgen.
+        </p>
+        <p>
+          Maar een online berekening is geen vervanging voor een officiële inkomensbeoordeling.
+        </p>
+        <p>
+          Voor een NHG-hypotheek kan de Inkomensverklaring Ondernemer uiteindelijk bepalen welk
+          ondernemersinkomen voor de hypotheek wordt gebruikt.
+        </p>
+        <HypotheekCta />
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Kan ik als zzp&apos;er een hypotheek krijgen zonder 3 jaar cijfers?</h3>
+        <p>
+          Ja, dat kan mogelijk. Voor NHG kan vanaf minimaal 12 maanden ondernemerschap een
+          Inkomensverklaring Ondernemer worden gebruikt. Als je onderneming korter dan drie jaar
+          bestaat, wordt de beschikbare financiële historie beoordeeld.
+        </p>
+        <h3>Hoeveel jaar moet ik zzp&apos;er zijn voor een hypotheek?</h3>
+        <p>
+          Je hoeft niet automatisch drie jaar zzp&apos;er te zijn. Voor de NHG-Inkomensverklaring
+          Ondernemer geldt een minimale periode van 12 maanden ondernemerschap.
+        </p>
+        <h3>Kan ik met 1 jaar cijfers een hypotheek krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Bij minimaal 12 maanden ondernemerschap kan de Inkomensverklaring
+          Ondernemer worden gebruikt. Je beschikbare financiële gegevens worden vervolgens
+          beoordeeld.
+        </p>
+        <h3>Kan ik met 2 jaar cijfers een hypotheek krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Als je onderneming nog geen drie jaar bestaat, kan de beschikbare
+          financiële historie worden gebruikt voor de inkomensbeoordeling.
+        </p>
+        <h3>Waarom denken veel mensen dat je 3 jaar cijfers nodig hebt?</h3>
+        <p>
+          Bij een gevestigde ondernemer wordt binnen de NHG-systematiek doorgaans gekeken naar de
+          resultaten van de laatste drie kalenderjaren. Daardoor wordt soms gedacht dat je ook
+          verplicht drie jaar ondernemer moet zijn. Voor de Inkomensverklaring Ondernemer geldt
+          echter een minimale ondernemingsduur van 12 maanden.
+        </p>
+        <h3>Kan ik als startende zzp&apos;er een hypotheek met NHG krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Voor de NHG-Inkomensverklaring Ondernemer moet je minimaal 12 maanden
+          actief zijn als ondernemer.
+        </p>
+        <h3>Wat als ik nog geen definitieve jaarcijfers heb?</h3>
+        <p>
+          Welke documenten nodig zijn, hangt af van het moment van aanvragen. Naast jaarcijfers
+          kunnen ook tussentijdse cijfers en btw-aangiften relevant zijn.
+        </p>
+        <h3>Wordt mijn winst van één jaar volledig meegenomen?</h3>
+        <p>
+          Niet automatisch. Het toetsinkomen wordt vastgesteld volgens het geldende toetskader. Bij
+          een korte ondernemershistorie is er minder financiële historie beschikbaar om het inkomen
+          te beoordelen.
+        </p>
+        <h3>Kan ik zonder 3 jaar cijfers een hypotheek zonder NHG krijgen?</h3>
+        <p>
+          Dat kan mogelijk, maar de voorwaarden verschillen per geldverstrekker. Zonder NHG gelden
+          niet automatisch dezelfde regels als bij de NHG-Inkomensverklaring Ondernemer.
+        </p>
+        <h3>Is een hypotheek moeilijker als je minder dan 3 jaar zzp&apos;er bent?</h3>
+        <p>
+          Een korte ondernemershistorie betekent dat er minder financiële informatie beschikbaar is.
+          Hoe dat precies wordt beoordeeld, hangt af van de hypotheekroute en geldverstrekker.
+        </p>
+
+        <h2>Hypotheek als zzp&apos;er zonder 3 jaar cijfers</h2>
+        <p>
+          Je hoeft als zzp&apos;er niet automatisch drie volledige jaren ondernemer te zijn voordat
+          je een hypotheek kunt aanvragen.
+        </p>
+        <p>
+          Voor NHG kan vanaf <strong>12 maanden ondernemerschap</strong> een Inkomensverklaring
+          Ondernemer worden gebruikt. Heb je nog geen drie jaar cijfers, dan wordt gekeken naar de
+          financiële informatie die wél beschikbaar is.
+        </p>
+        <p>
+          Het belangrijkste is daarom niet alleen hoeveel jaar je ondernemer bent, maar welk{' '}
+          <strong>toetsinkomen</strong> op basis van je financiële situatie kan worden vastgesteld.
+        </p>
+        <p>
+          Heb je één of twee jaar cijfers? Dan kan het dus zeker de moeite waard zijn om je
+          mogelijkheden te laten berekenen.
+        </p>
+        <p>
+          Heb je nog geen drie volledige jaren als zzp&apos;er? Lees ook{' '}
+          <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+            Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+          </Link>{' '}
+          en{' '}
+          <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Jaarcijfers nodig voor een hypotheek als zzp&apos;er?
+          </Link>
+          .
+        </p>
+        <HypotheekCta label="Hypotheek berekenen als zzp'er →" />
+        <HypotheekHubLink />
+        <p>Meer lezen over hypotheken als zzp&apos;er:</p>
+        <ul>
+          <li>
+            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
+              Hypotheek voor zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Welk inkomen telt voor een hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+              Winst uit onderneming voor hypotheek
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+              Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+              Hypotheek voor startende zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-berekenen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek berekenen als zzp&apos;er
+            </Link>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    slug: 'hypotheek-berekenen-als-zzper',
+    relatedSlugs: [
+      'hoeveel-hypotheek-kan-ik-krijgen-als-zzper',
+      'welk-inkomen-telt-voor-hypotheek-als-zzper',
+      'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
+    ],
+    title: "Hypotheek berekenen als zzp'er",
+    metaTitle: "Hypotheek berekenen als zzp'er | Maximale hypotheek",
+    excerpt:
+      "Hoeveel hypotheek kun je krijgen als zzp'er? Bereken je maximale hypotheek en ontdek hoe winst, toetsinkomen, schulden en partnerinkomen meetellen.",
+    keywords:
+      "hypotheek berekenen als zzp'er, hypotheek berekenen zzp, hypotheek zzp berekenen, maximale hypotheek zzp, maximale hypotheek berekenen zzp, hoeveel hypotheek kan ik krijgen als zzp'er, hoeveel kan ik lenen als zzp'er, hypotheekcalculator zzp, hypotheek berekenen ondernemer, hypotheek berekenen eenmanszaak, hypotheek op basis van winst zzp, toetsinkomen zzp hypotheek, inkomen zzp hypotheek berekenen, hypotheek zzp inkomen berekenen",
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/Hypotheek%20berekenen%20als%20zzper.jpg',
+      alt: "Hypotheek berekenen als zzp'er: maximale hypotheek op basis van toetsinkomen en winst.",
+    },
+    datePublished: '2026-09-18',
+    dateModified: '2026-09-18',
+    faq: [
+      {
+        question: "Hoe bereken ik mijn maximale hypotheek als zzp'er?",
+        answer:
+          'Eerst moet je toetsinkomen worden vastgesteld. Daarna wordt met je inkomen, financiële verplichtingen, eventuele partnerinkomen, hypotheekrente en andere gegevens je maximale hypotheek berekend.',
+      },
+      {
+        question: 'Kan ik mijn hypotheek berekenen op basis van mijn winst?',
+        answer:
+          'Voor een eerste indicatie kan dat. Je winst is echter niet automatisch hetzelfde als je officiële toetsinkomen.',
+      },
+      {
+        question: 'Wordt mijn omzet gebruikt voor mijn hypotheek?',
+        answer:
+          'Niet rechtstreeks. Voor een IB-ondernemer vormt de fiscale winst een belangrijke basis voor de inkomensbeoordeling.',
+      },
+      {
+        question: 'Hoeveel hypotheek kan ik krijgen met €50.000 winst?',
+        answer:
+          'Dat is afhankelijk van je uiteindelijke toetsinkomen en andere factoren zoals rente, schulden, lease, partnerinkomen en de woningwaarde.',
+      },
+      {
+        question: 'Hoeveel jaar cijfers heb ik nodig?',
+        answer:
+          'Je hebt niet automatisch drie volledige jaren nodig. Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van 12 maanden ondernemerschap.',
+      },
+      {
+        question: "Kan ik als startende zzp'er een hypotheek krijgen?",
+        answer:
+          'Dat kan mogelijk. Vanaf minimaal 12 maanden ondernemerschap kan binnen de NHG-route een Inkomensverklaring Ondernemer worden gebruikt.',
+      },
+      {
+        question: 'Telt mijn partnerinkomen mee?',
+        answer:
+          'Dat kan. De manier waarop het inkomen van je partner wordt meegenomen hangt af van het type inkomen en de geldende hypotheekregels.',
+      },
+      {
+        question: 'Verlagen schulden mijn maximale hypotheek?',
+        answer:
+          'Ja. Bestaande financiële verplichtingen zoals leningen, studieschuld en lease kunnen invloed hebben op je maximale hypotheek.',
+      },
+      {
+        question: "Kan ik zonder NHG een hypotheek als zzp'er krijgen?",
+        answer:
+          'Dat kan mogelijk. Zonder NHG kunnen geldverstrekkers hun eigen voorwaarden hanteren voor het beoordelen van ondernemersinkomen.',
+      },
+      {
+        question: "Is een hypotheekcalculator voor zzp'ers betrouwbaar?",
+        answer:
+          'Een calculator kan een goede eerste indicatie geven, maar het resultaat is niet automatisch het definitieve hypotheekbedrag. De uiteindelijke berekening hangt af van het toetsinkomen en de volledige financiële situatie.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Wil je als zzp&apos;er een huis kopen? Dan wil je waarschijnlijk eerst weten hoeveel
+          hypotheek je ongeveer kunt krijgen.
+        </p>
+        <p>Dat werkt voor een ondernemer net iets anders dan voor iemand in loondienst.</p>
+        <p>
+          Bij een werknemer kan het salaris op de loonstrook een belangrijk uitgangspunt zijn. Als
+          zzp&apos;er wordt gekeken naar het inkomen uit je onderneming en naar de financiële
+          ontwikkeling daarvan.
+        </p>
+        <p>Daarbij is je omzet niet hetzelfde als je inkomen.</p>
+        <p>
+          Voor een hypotheek is vooral belangrijk welk <strong>toetsinkomen</strong> uiteindelijk
+          voor jouw situatie wordt vastgesteld.
+        </p>
+        <p>Je kunt daarom niet simpelweg zeggen:</p>
+        <blockquote>
+          <p>
+            &quot;Ik heb €80.000 omzet, dus ik kan €80.000 als inkomen gebruiken.&quot;
+          </p>
+        </blockquote>
+        <p>
+          De hypotheekverstrekker kijkt naar de financiële resultaten van je onderneming en naar het
+          geldende toetskader.
+        </p>
+
+        <h2>Hoe bereken je een hypotheek als zzp&apos;er?</h2>
+        <p>De berekening bestaat grofweg uit twee stappen.</p>
+        <p>
+          Eerst wordt vastgesteld welk inkomen van jou als ondernemer voor de hypotheek kan worden
+          gebruikt.
+        </p>
+        <p>
+          Daarna wordt met dat inkomen gekeken hoeveel hypotheek je binnen de geldende leennormen
+          kunt krijgen.
+        </p>
+        <p>
+          Bij een hypotheek met NHG kan het ondernemersinkomen worden vastgesteld met een{' '}
+          <strong>Inkomensverklaring Ondernemer</strong>.
+        </p>
+        <p>Daarbij wordt onder andere gekeken naar:</p>
+        <ul>
+          <li>je financiële resultaten;</li>
+          <li>je winst uit onderneming;</li>
+          <li>je historische inkomen;</li>
+          <li>je laatste boekjaar;</li>
+          <li>je lopende boekjaar;</li>
+          <li>de financiële positie van je onderneming.</li>
+        </ul>
+        <p>
+          Heb je meerdere jaren als ondernemer, dan wordt je inkomen anders beoordeeld dan wanneer
+          je net bent gestart.
+        </p>
+
+        <h2>Welke winst telt voor je hypotheek?</h2>
+        <p>
+          Voor een IB-ondernemer, zoals iemand met een eenmanszaak, vormt de fiscale winst een
+          belangrijke basis voor de inkomensbeoordeling.
+        </p>
+        <p>Je omzet is dus niet hetzelfde als je hypotheekinkomen.</p>
+        <p>Stel:</p>
+        <ul>
+          <li>omzet: €100.000;</li>
+          <li>zakelijke kosten: €30.000;</li>
+          <li>fiscale winst: €70.000.</li>
+        </ul>
+        <p>
+          Dan betekent dit niet automatisch dat €70.000 ook precies je toetsinkomen voor de
+          hypotheek is.
+        </p>
+        <p>
+          Er kunnen binnen de inkomensbeoordeling nog andere correcties en regels gelden.
+        </p>
+        <p>
+          Het uiteindelijke toetsinkomen moet daarom worden vastgesteld volgens de methode die voor
+          jouw hypotheek van toepassing is.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+            Winst uit onderneming voor hypotheek
+          </Link>
+        </p>
+
+        <h2>Hoeveel hypotheek kan ik krijgen als zzp&apos;er?</h2>
+        <p>
+          Er is geen vast bedrag dat iedere zzp&apos;er met een bepaald inkomen kan lenen.
+        </p>
+        <p>De maximale hypotheek hangt onder andere af van:</p>
+        <ul>
+          <li>je toetsinkomen;</li>
+          <li>de hypotheekrente;</li>
+          <li>je leeftijd en situatie;</li>
+          <li>andere financiële verplichtingen;</li>
+          <li>studieschuld;</li>
+          <li>persoonlijke leningen;</li>
+          <li>leaseverplichtingen;</li>
+          <li>het inkomen van je partner;</li>
+          <li>de waarde van de woning;</li>
+          <li>de geldende leennormen.</li>
+        </ul>
+        <p>
+          Daarom is een inkomen van €50.000 niet automatisch gelijk aan één vast maximaal
+          hypotheekbedrag.
+        </p>
+        <p>
+          Dezelfde ondernemer kan onder verschillende omstandigheden een andere maximale hypotheek
+          hebben. Meer details lees je in{' '}
+          <Link href="/blogs/hoeveel-hypotheek-kan-ik-krijgen-als-zzper" className="text-warm-orange hover:underline">
+            Hoeveel hypotheek kan ik krijgen als zzp&apos;er?
+          </Link>
+          .
+        </p>
+
+        <h2>Hypotheek berekenen op basis van gemiddelde winst</h2>
+        <p>
+          Als je meerdere jaren ondernemer bent, kan het gemiddelde van je winst een nuttige eerste
+          indicatie geven.
+        </p>
+        <p>Bijvoorbeeld:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€40.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€50.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€60.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het gemiddelde is €50.000.</p>
+        <p>
+          Maar je kunt niet automatisch aannemen dat je officiële toetsinkomen daarom €50.000 is.
+        </p>
+        <p>
+          Bij de NHG-Inkomensverklaring Ondernemer wordt het ondernemersinkomen volgens het
+          geldende toetskader vastgesteld. Bij een IB-ondernemer is het gemiddelde inkomen over de
+          laatste drie kalenderjaren een belangrijk uitgangspunt, waarbij het laatste jaar als
+          maximum geldt.
+        </p>
+        <p>Ook de ontwikkeling in het lopende boekjaar kan worden meegenomen.</p>
+
+        <h2>Wat als je inkomen wisselt?</h2>
+        <p>Een wisselend inkomen sluit een hypotheek niet automatisch uit.</p>
+        <p>Stel:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€35.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€70.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€45.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je gemiddelde winst is €50.000.</p>
+        <p>
+          Toch kun je niet simpelweg zeggen dat je hypotheek op €50.000 inkomen wordt gebaseerd.
+        </p>
+        <p>Er wordt ook gekeken naar het laatste jaar en het lopende boekjaar.</p>
+        <p>
+          Een tijdelijk uitzonderlijk goed jaar wordt dus niet automatisch behandeld alsof dit je
+          structurele inkomen is.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek met wisselend inkomen als zzp&apos;er
+          </Link>
+        </p>
+
+        <h2>Wat als je inkomen stijgt?</h2>
+        <p>Een groeiend inkomen kan relevant zijn voor je hypotheekaanvraag.</p>
+        <p>Stel:</p>
+        <ul>
+          <li>jaar 1: €30.000;</li>
+          <li>jaar 2: €45.000;</li>
+          <li>jaar 3: €60.000.</li>
+        </ul>
+        <p>Je onderneming groeit duidelijk.</p>
+        <p>
+          Toch betekent dit niet automatisch dat je volledige winst van €60.000 als toetsinkomen
+          wordt gebruikt.
+        </p>
+        <p>
+          De inkomensbeoordeling kijkt naar je historische resultaten én je actuele situatie.
+        </p>
+        <p>
+          Het verschil tussen je <strong>werkelijke winst</strong> en je{' '}
+          <strong>toetsinkomen</strong> is daarom belangrijk.
+        </p>
+
+        <h2>Wat als je inkomen daalt?</h2>
+        <p>Een dalend inkomen kan juist gevolgen hebben voor je hypotheekberekening.</p>
+        <p>Stel:</p>
+        <ul>
+          <li>jaar 1: €60.000;</li>
+          <li>jaar 2: €55.000;</li>
+          <li>jaar 3: €35.000.</li>
+        </ul>
+        <p>Het gemiddelde over deze drie jaren is €50.000.</p>
+        <p>Maar je laatste jaar ligt daar duidelijk onder.</p>
+        <p>
+          Binnen de NHG-systematiek kan het lagere inkomen van het laatste jaar dan bepalend zijn
+          voor het toetsinkomen.
+        </p>
+        <p>Ook het lopende boekjaar wordt bekeken.</p>
+        <p>
+          Een hypotheekberekening op basis van alleen het gemiddelde kan in zo&apos;n situatie dus
+          een te hoog bedrag opleveren.
+        </p>
+
+        <h2>Hoeveel jaar moet je zzp&apos;er zijn voor een hypotheek?</h2>
+        <p>Je hoeft niet automatisch drie jaar ondernemer te zijn.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van{' '}
+          <strong>12 maanden ondernemerschap</strong>.
+        </p>
+        <p>
+          Heb je minder dan drie jaar cijfers, dan wordt de beschikbare financiële historie
+          beoordeeld.
+        </p>
+        <p>
+          Je kunt dus mogelijk ook als relatief startende zzp&apos;er een hypotheek krijgen.
+        </p>
+        <p>
+          Hoe langer je onderneming bestaat, hoe meer financiële historie beschikbaar is.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+            Hypotheek zzp zonder 3 jaar cijfers
+          </Link>
+        </p>
+
+        <h2>Hypotheek berekenen als startende zzp&apos;er</h2>
+        <p>
+          Ben je net gestart als ondernemer, dan is het lastiger om je toekomstige inkomen
+          uitsluitend op basis van historische cijfers te beoordelen.
+        </p>
+        <p>Je hebt immers nog maar weinig financiële historie.</p>
+        <p>
+          Voor NHG kan vanaf minimaal 12 maanden ondernemerschap een Inkomensverklaring Ondernemer
+          worden gebruikt.
+        </p>
+        <p>
+          Heb je bijvoorbeeld één jaar cijfers, dan wordt die beschikbare informatie gebruikt binnen
+          het geldende toetskader.
+        </p>
+        <p>
+          Dat betekent niet dat je automatisch dezelfde leencapaciteit hebt als een ondernemer met
+          tien jaar stabiele resultaten.
+        </p>
+        <p>Maar drie volledige jaren zijn niet per definitie vereist.</p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+            Hypotheek voor startende zzp&apos;ers
+          </Link>
+        </p>
+
+        <h2>Welke documenten heb je nodig om je hypotheek te berekenen?</h2>
+        <p>
+          Voor een eerste berekening kun je vaak beginnen met je eigen financiële gegevens.
+        </p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>winst van de afgelopen jaren;</li>
+          <li>actuele winst;</li>
+          <li>omzet;</li>
+          <li>zakelijke kosten;</li>
+          <li>inkomen uit loondienst;</li>
+          <li>inkomen van je partner;</li>
+          <li>bestaande leningen;</li>
+          <li>studieschuld;</li>
+          <li>leaseverplichtingen.</li>
+        </ul>
+        <p>
+          Voor een daadwerkelijke hypotheekaanvraag kunnen meer documenten nodig zijn.
+        </p>
+        <p>
+          Bij de NHG-Inkomensverklaring Ondernemer worden de financiële gegevens van de onderneming
+          onderzocht en kan bijvoorbeeld worden gevraagd naar jaarcijfers, tussentijdse cijfers en
+          btw-aangiften.
+        </p>
+        <p>
+          Welke documenten precies nodig zijn, hangt af van de situatie en het moment van aanvragen.
+          Lees ook{' '}
+          <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+          </Link>
+          .
+        </p>
+
+        <h2>Telt omzet mee voor je hypotheek?</h2>
+        <p>Omzet en inkomen zijn twee verschillende dingen.</p>
+        <p>Stel dat je als zzp&apos;er €150.000 omzet draait.</p>
+        <p>
+          Als je vervolgens €80.000 zakelijke kosten hebt, blijft er €70.000 winst over.
+        </p>
+        <p>
+          Je kunt daarom niet automatisch je omzet als persoonlijk inkomen gebruiken voor een
+          hypotheek.
+        </p>
+        <p>
+          Voor een IB-ondernemer vormt de fiscale winst een belangrijke basis voor de
+          inkomensbeoordeling.
+        </p>
+        <p>
+          Het is dus vooral belangrijk om te weten wat je onderneming daadwerkelijk oplevert.
+        </p>
+
+        <h2>Telt inkomen uit loondienst ook mee?</h2>
+        <p>
+          Sommige zzp&apos;ers combineren hun onderneming met een baan in loondienst.
+        </p>
+        <p>
+          Dan kan naast het ondernemersinkomen ook het inkomen uit dienstbetrekking relevant zijn.
+        </p>
+        <p>
+          Hoe dit precies wordt meegenomen, hangt af van de hypotheekregels en je persoonlijke
+          situatie.
+        </p>
+        <p>
+          Je moet daarom niet automatisch alleen naar je winst uit onderneming kijken wanneer je
+          daarnaast salaris ontvangt.
+        </p>
+
+        <h2>Wat als je partner ook inkomen heeft?</h2>
+        <p>
+          Heb je een partner met inkomen, dan kan dat inkomen onderdeel zijn van de
+          hypotheekberekening.
+        </p>
+        <p>
+          De precieze manier waarop het inkomen van je partner wordt meegenomen, hangt af van het
+          type inkomen en de geldende leennormen.
+        </p>
+        <p>
+          Bij een gezamenlijke hypotheek wordt daarom niet alleen gekeken naar jouw inkomen als
+          zzp&apos;er.
+        </p>
+        <p>
+          Een berekening op basis van alleen jouw winst kan daardoor een ander resultaat geven dan
+          een gezamenlijke berekening.
+        </p>
+
+        <h2>Welke schulden verlagen je maximale hypotheek?</h2>
+        <p>
+          Bij het berekenen van je maximale hypotheek wordt niet alleen naar inkomen gekeken.
+        </p>
+        <p>
+          Bestaande financiële verplichtingen kunnen je leencapaciteit verminderen.
+        </p>
+        <p>Denk aan:</p>
+        <ul>
+          <li>persoonlijke leningen;</li>
+          <li>doorlopende kredieten;</li>
+          <li>private lease;</li>
+          <li>studieschuld;</li>
+          <li>andere financiële verplichtingen.</li>
+        </ul>
+        <p>
+          Daarom kan iemand met een hoger inkomen toch minder kunnen lenen dan iemand met een lager
+          inkomen en weinig verplichtingen.
+        </p>
+        <p>
+          Voor een betrouwbare berekening moet je deze verplichtingen dus meenemen.
+        </p>
+
+        <h2>Hoeveel hypotheek bij €40.000 winst?</h2>
+        <p>
+          Een winst van €40.000 geeft op zichzelf onvoldoende informatie om je maximale hypotheek te
+          bepalen.
+        </p>
+        <p>Eerst moet duidelijk zijn welk toetsinkomen wordt vastgesteld.</p>
+        <p>
+          Daarna zijn onder andere de hypotheekrente, financiële verplichtingen, partnerinkomen en
+          woningwaarde relevant.
+        </p>
+        <p>Je kunt daarom beter spreken over:</p>
+        <blockquote>
+          <p>&quot;Wat is mijn toetsinkomen?&quot;</p>
+        </blockquote>
+        <p>dan alleen:</p>
+        <blockquote>
+          <p>&quot;Hoeveel winst maak ik?&quot;</p>
+        </blockquote>
+        <p>
+          Het toetsinkomen vormt vervolgens één van de belangrijkste uitgangspunten voor de
+          hypotheekberekening.
+        </p>
+
+        <h2>Hoeveel hypotheek bij €50.000 winst?</h2>
+        <p>Ook bij €50.000 winst is er geen universeel hypotheekbedrag.</p>
+        <p>
+          Als je €50.000 fiscale winst hebt, betekent dit niet automatisch dat je precies hetzelfde
+          bedrag als toetsinkomen krijgt.
+        </p>
+        <p>
+          Bij meerdere jaren winst wordt gekeken naar de historische resultaten en de ontwikkeling
+          van je onderneming.
+        </p>
+        <p>
+          Vervolgens wordt je maximale hypotheek berekend op basis van de geldende leennormen.
+        </p>
+
+        <h2>Hoeveel hypotheek bij €75.000 winst?</h2>
+        <p>Hetzelfde geldt voor een winst van €75.000.</p>
+        <p>
+          Een hoge winst kan uiteraard leiden tot een hoger toetsinkomen, maar de uiteindelijke
+          maximale hypotheek wordt niet uitsluitend bepaald door je winst.
+        </p>
+        <p>
+          Andere verplichtingen en de actuele hypotheekrente spelen bijvoorbeeld ook een rol.
+        </p>
+        <p>
+          Bovendien moet eerst worden vastgesteld welk deel van je winst als toetsinkomen wordt
+          meegenomen.
+        </p>
+
+        <h2>Kun je als zzp&apos;er 100% van je inkomen lenen?</h2>
+        <p>
+          Nee, je maximale hypotheek wordt niet simpelweg bepaald door een percentage van je
+          inkomen.
+        </p>
+        <p>
+          De leennormen bepalen hoeveel je maximaal mag lenen op basis van je inkomen en andere
+          omstandigheden.
+        </p>
+        <p>Daarnaast geldt de woningwaarde als belangrijke grens.</p>
+        <p>
+          In veel gevallen kun je niet meer lenen dan het percentage van de woningwaarde dat volgens
+          de regels is toegestaan, behoudens specifieke uitzonderingen.
+        </p>
+        <p>Je inkomen bepaalt dus niet alleen hoeveel je kunt lenen.</p>
+
+        <h2>Hypotheek berekenen met NHG</h2>
+        <p>Met NHG kan een specifieke route voor ondernemers worden gebruikt.</p>
+        <p>
+          De <strong>Inkomensverklaring Ondernemer</strong> wordt opgesteld op basis van financiële
+          gegevens van je onderneming.
+        </p>
+        <p>
+          De verklaring bepaalt welk ondernemersinkomen voor de hypotheek kan worden gebruikt.
+        </p>
+        <p>
+          Daarna wordt met dat inkomen de maximale hypotheek berekend volgens de geldende normen.
+        </p>
+        <p>
+          Dit betekent dat je eigen berekening van je gemiddelde winst vooral een{' '}
+          <strong>indicatie</strong> is.
+        </p>
+        <p>De officiële inkomensvaststelling kan daarvan afwijken.</p>
+
+        <h2>Hypotheek berekenen zonder NHG</h2>
+        <p>Niet iedere hypotheek heeft NHG.</p>
+        <p>
+          Zonder NHG kunnen geldverstrekkers hun eigen acceptatiebeleid voor ondernemers hanteren.
+        </p>
+        <p>
+          Daarom kunnen de eisen voor een zzp&apos;er per geldverstrekker verschillen.
+        </p>
+        <p>
+          Een berekening die volgens een NHG-methode wordt gemaakt, kun je dus niet automatisch
+          gebruiken als definitieve berekening voor iedere hypotheek zonder NHG.
+        </p>
+
+        <h2>Wat is mijn toetsinkomen?</h2>
+        <p>
+          Je toetsinkomen is het inkomen dat de geldverstrekker gebruikt bij het bepalen van je
+          maximale hypotheek.
+        </p>
+        <p>Voor een ondernemer is dat niet noodzakelijk gelijk aan:</p>
+        <ul>
+          <li>je omzet;</li>
+          <li>je nettowinst op je bankrekening;</li>
+          <li>je winst van één goed jaar;</li>
+          <li>je gemiddelde maandinkomen.</li>
+        </ul>
+        <p>
+          Het toetsinkomen wordt vastgesteld volgens de methode die voor jouw hypotheek geldt.
+        </p>
+        <p>Bij NHG kan daarvoor de Inkomensverklaring Ondernemer worden gebruikt.</p>
+        <p>
+          Het verschil tussen je daadwerkelijke bedrijfsresultaat en het toetsinkomen is daarom
+          belangrijk bij het berekenen van je hypotheek. Lees ook{' '}
+          <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Welk inkomen telt voor een hypotheek als zzp&apos;er?
+          </Link>
+          .
+        </p>
+
+        <h2>Voorbeeld van een hypotheekberekening voor een zzp&apos;er</h2>
+        <p>Stel dat je al drie jaar ondernemer bent:</p>
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="border-b border-slate-200 py-2 pr-4 font-semibold">Jaar</th>
+                <th className="border-b border-slate-200 py-2 text-right font-semibold">Winst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 1</td>
+                <td className="border-b border-slate-100 py-2 text-right">€45.000</td>
+              </tr>
+              <tr>
+                <td className="border-b border-slate-100 py-2 pr-4">Jaar 2</td>
+                <td className="border-b border-slate-100 py-2 text-right">€55.000</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Jaar 3</td>
+                <td className="py-2 text-right">€50.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je gemiddelde winst bedraagt €50.000.</p>
+        <p>
+          Voor een eerste indicatie kun je dus uitgaan van ongeveer €50.000.
+        </p>
+        <p>
+          Maar voor de daadwerkelijke hypotheekaanvraag moet worden vastgesteld welk toetsinkomen
+          geldt.
+        </p>
+        <p>Stel daarnaast dat je:</p>
+        <ul>
+          <li>geen andere leningen hebt;</li>
+          <li>geen leaseverplichtingen hebt;</li>
+          <li>een partner met inkomen hebt.</li>
+        </ul>
+        <p>
+          Dan kan je maximale hypotheek anders uitvallen dan wanneer je dezelfde €50.000 winst hebt
+          maar ook een persoonlijke lening en studieschuld.
+        </p>
+        <p>
+          Daarom is het toetsinkomen slechts één onderdeel van de berekening.
+        </p>
+
+        <h2>Waarom kan mijn hypotheekberekening verschillen van de berekening van een adviseur?</h2>
+        <p>Een online calculator gebruikt vaak een beperkt aantal gegevens.</p>
+        <p>
+          Een hypotheekadviseur of geldverstrekker kan over meer informatie beschikken, zoals:
+        </p>
+        <ul>
+          <li>definitieve jaarcijfers;</li>
+          <li>tussentijdse cijfers;</li>
+          <li>fiscale gegevens;</li>
+          <li>correcties;</li>
+          <li>schulden;</li>
+          <li>partnerinkomen;</li>
+          <li>specifieke acceptatieregels.</li>
+        </ul>
+        <p>
+          Daardoor kan een eerste online indicatie verschillen van de uiteindelijke
+          hypotheekberekening.
+        </p>
+        <p>
+          Een calculator is daarom vooral geschikt om vooraf een idee te krijgen van je
+          mogelijkheden.
+        </p>
+
+        <h2>Kun je je maximale hypotheek als zzp&apos;er online berekenen?</h2>
+        <p>Ja.</p>
+        <p>
+          Voor een eerste indicatie kun je je financiële gegevens invullen in een
+          hypotheekcalculator.
+        </p>
+        <p>
+          Voor ondernemers is het daarbij belangrijk om niet alleen naar omzet te kijken.
+        </p>
+        <p>Gebruik bij voorkeur je beschikbare winstgegevens en houd rekening met:</p>
+        <ul>
+          <li>meerdere jaren aan resultaten;</li>
+          <li>je actuele inkomen;</li>
+          <li>bestaande verplichtingen;</li>
+          <li>inkomen van je partner;</li>
+          <li>de waarde van de woning.</li>
+        </ul>
+        <HypotheekCta />
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Hoe bereken ik mijn maximale hypotheek als zzp&apos;er?</h3>
+        <p>
+          Eerst moet je toetsinkomen worden vastgesteld. Daarna wordt met je inkomen, financiële
+          verplichtingen, eventuele partnerinkomen, hypotheekrente en andere gegevens je maximale
+          hypotheek berekend.
+        </p>
+        <h3>Kan ik mijn hypotheek berekenen op basis van mijn winst?</h3>
+        <p>
+          Voor een eerste indicatie kan dat. Je winst is echter niet automatisch hetzelfde als je
+          officiële toetsinkomen.
+        </p>
+        <h3>Wordt mijn omzet gebruikt voor mijn hypotheek?</h3>
+        <p>
+          Niet rechtstreeks. Voor een IB-ondernemer vormt de fiscale winst een belangrijke basis
+          voor de inkomensbeoordeling.
+        </p>
+        <h3>Hoeveel hypotheek kan ik krijgen met €50.000 winst?</h3>
+        <p>
+          Dat is afhankelijk van je uiteindelijke toetsinkomen en andere factoren zoals rente,
+          schulden, lease, partnerinkomen en de woningwaarde.
+        </p>
+        <h3>Hoeveel jaar cijfers heb ik nodig?</h3>
+        <p>
+          Je hebt niet automatisch drie volledige jaren nodig. Voor de NHG-Inkomensverklaring
+          Ondernemer geldt een minimale periode van 12 maanden ondernemerschap.
+        </p>
+        <h3>Kan ik als startende zzp&apos;er een hypotheek krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Vanaf minimaal 12 maanden ondernemerschap kan binnen de NHG-route een
+          Inkomensverklaring Ondernemer worden gebruikt.
+        </p>
+        <h3>Telt mijn partnerinkomen mee?</h3>
+        <p>
+          Dat kan. De manier waarop het inkomen van je partner wordt meegenomen hangt af van het
+          type inkomen en de geldende hypotheekregels.
+        </p>
+        <h3>Verlagen schulden mijn maximale hypotheek?</h3>
+        <p>
+          Ja. Bestaande financiële verplichtingen zoals leningen, studieschuld en lease kunnen
+          invloed hebben op je maximale hypotheek.
+        </p>
+        <h3>Kan ik zonder NHG een hypotheek als zzp&apos;er krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Zonder NHG kunnen geldverstrekkers hun eigen voorwaarden hanteren voor
+          het beoordelen van ondernemersinkomen.
+        </p>
+        <h3>Is een hypotheekcalculator voor zzp&apos;ers betrouwbaar?</h3>
+        <p>
+          Een calculator kan een goede eerste indicatie geven, maar het resultaat is niet
+          automatisch het definitieve hypotheekbedrag. De uiteindelijke berekening hangt af van het
+          toetsinkomen en de volledige financiële situatie.
+        </p>
+
+        <h2>Bereken je maximale hypotheek als zzp&apos;er</h2>
+        <p>
+          Als zzp&apos;er begint een hypotheekberekening bij je <strong>toetsinkomen</strong>.
+        </p>
+        <p>
+          Kijk daarom niet alleen naar je omzet of naar je winst van het afgelopen jaar. Je
+          historische resultaten, actuele inkomen en persoonlijke financiële verplichtingen kunnen
+          allemaal een rol spelen.
+        </p>
+        <p>
+          Heb je meerdere jaren cijfers, dan kan je gemiddelde winst een nuttig startpunt zijn. Ben
+          je pas één of twee jaar ondernemer, dan wordt gekeken naar de beschikbare financiële
+          historie.
+        </p>
+        <p>Wil je weten wat je ongeveer kunt lenen?</p>
+        <HypotheekCta label="Bereken je maximale hypotheek als zzp'er →" />
+        <HypotheekHubLink />
+        <p>Meer lezen over hypotheken als zzp&apos;er:</p>
+        <ul>
+          <li>
+            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
+              Hypotheek voor zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Welk inkomen telt voor een hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+              Winst uit onderneming voor hypotheek
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+              Hypotheek zzp zonder 3 jaar cijfers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+              Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+              Hypotheek voor startende zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheekadviseur-voor-zzpers" className="text-warm-orange hover:underline">
+              Hypotheekadviseur voor zzp&apos;ers
+            </Link>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    slug: 'hypotheekadviseur-voor-zzpers',
+    relatedSlugs: [
+      'hypotheek-berekenen-als-zzper',
+      'welk-inkomen-telt-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-voor-startende-zzpers',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+    ],
+    title: "Hypotheekadviseur voor zzp'ers",
+    metaTitle: "Hypotheekadviseur voor zzp'ers | Hypotheekadvies",
+    excerpt:
+      "Op zoek naar een hypotheekadviseur voor zzp'ers? Lees waar je op moet letten bij hypotheekadvies voor ondernemers en maak kennis met Haruna.",
+    keywords:
+      "hypotheekadviseur voor zzp'ers, hypotheekadviseur zzp, hypotheekadvies zzp, hypotheekadvies voor zzp'ers, hypotheekadviseur voor zelfstandigen, hypotheekadviseur ondernemer, hypotheekadviseur eenmanszaak, hypotheekadviseur startende zzp'er, onafhankelijke hypotheekadviseur zzp, hypotheek aanvragen zzp adviseur, hypotheekadvies voor ondernemers, zzp hypotheek advies, hypotheek met zzp inkomen, hypotheekadviseur zzp online, hypotheekadviseur zzp Nederland, Haruna hypotheekadviseur, Haruna hypotheekadvies",
+    image: {
+      url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/Hypotheekadviseur%20voor%20zzper.jpg',
+      alt: "Hypotheekadviseur voor zzp'ers: hypotheekadvies voor ondernemers via Haruna.",
+    },
+    datePublished: '2026-09-18',
+    dateModified: '2026-09-18',
+    faq: [
+      {
+        question: "Wat doet een hypotheekadviseur voor zzp'ers?",
+        answer:
+          'Een hypotheekadviseur helpt bij het beoordelen van je financiële situatie, het vaststellen van je hypotheekmogelijkheden en het vergelijken van passende hypotheekoplossingen.',
+      },
+      {
+        question: "Heb ik als zzp'er een hypotheekadviseur nodig?",
+        answer:
+          'Niet per se. Je kunt zelf een eerste berekening maken. Bij een complexere ondernemerssituatie kan professioneel advies wel helpen om je inkomen en mogelijkheden goed in kaart te brengen.',
+      },
+      {
+        question: "Kan ik als startende zzp'er een hypotheek krijgen?",
+        answer:
+          'Dat kan mogelijk. Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van 12 maanden ondernemerschap.',
+      },
+      {
+        question: 'Kan ik een hypotheek krijgen zonder 3 jaar cijfers?',
+        answer:
+          'Dat kan mogelijk. Je hoeft voor de NHG-Inkomensverklaring Ondernemer niet automatisch drie volledige jaren ondernemer te zijn.',
+      },
+      {
+        question: "Wat kost hypotheekadvies voor zzp'ers?",
+        answer:
+          'De kosten verschillen per adviseur en situatie. Haruna geeft aan dat de kosten afhankelijk zijn van de situatie en het type dienstverlening.',
+      },
+      {
+        question: 'Kan ik online hypotheekadvies krijgen?',
+        answer: 'Ja. Haruna biedt hypotheekadvies via videobellen en werkt online.',
+      },
+      {
+        question: 'Is Haruna onafhankelijk?',
+        answer:
+          'Haruna positioneert zich als onafhankelijk hypotheekadviseur en geeft aan hypotheken van vrijwel alle geldverstrekkers in Nederland te vergelijken.',
+      },
+      {
+        question: 'Kan ik eerst vrijblijvend kennismaken?',
+        answer: 'Ja. Haruna vermeldt dat het kennismakingsgesprek vrijblijvend is.',
+      },
+      {
+        question: 'Kan ik eerst zelf mijn hypotheek berekenen?',
+        answer:
+          'Ja. Je kunt eerst een indicatie van je maximale hypotheek berekenen voordat je een adviseur inschakelt.',
+      },
+    ],
+    content: (
+      <>
+        <p>
+          Een hypotheek aanvragen als zzp&apos;er kan net wat ingewikkelder zijn dan wanneer je in
+          loondienst bent.
+        </p>
+        <p>
+          Je inkomen komt immers niet iedere maand uit een vast salaris. De geldverstrekker moet
+          eerst bepalen welk inkomen uit je onderneming voor de hypotheek kan worden gebruikt.
+        </p>
+        <p>
+          Daarbij kunnen je winst van de afgelopen jaren, je actuele inkomen, de ontwikkeling van je
+          onderneming en andere financiële gegevens een rol spelen.
+        </p>
+        <p>
+          Een <strong>hypotheekadviseur voor zzp&apos;ers</strong> kan helpen om deze gegevens vooraf
+          in kaart te brengen en te bepalen welke hypotheekmogelijkheden bij jouw situatie passen.
+        </p>
+        <p>
+          Voor FactuurBaas werken we hiervoor samen met <strong>Haruna B.V.</strong>, een
+          onafhankelijke hypotheek- en financieel adviseur. Haruna werkt online via videobellen en
+          adviseert zowel particulieren als ondernemers.
+        </p>
+
+        <h2>Waarom is hypotheekadvies voor zzp&apos;ers anders?</h2>
+        <p>
+          Bij iemand in loondienst kan een geldverstrekker vaak relatief eenvoudig naar het inkomen
+          op de loonstrook en de arbeidsovereenkomst kijken.
+        </p>
+        <p>Als zzp&apos;er werkt dat anders.</p>
+        <p>Je inkomen kan bijvoorbeeld zijn:</p>
+        <ul>
+          <li>€35.000 winst in het ene jaar;</li>
+          <li>€55.000 in het volgende jaar;</li>
+          <li>€45.000 daarna.</li>
+        </ul>
+        <p>
+          Of je bent pas één of twee jaar ondernemer en hebt nog maar beperkte financiële historie.
+        </p>
+        <p>
+          De hypotheekadviseur moet daarom eerst bepalen welk inkomen voor de hypotheek kan worden
+          gebruikt.
+        </p>
+        <p>
+          Dat wordt ook wel het <strong>toetsinkomen</strong> genoemd.
+        </p>
+
+        <h2>Wat doet een hypotheekadviseur voor een zzp&apos;er?</h2>
+        <p>Een hypotheekadviseur kijkt niet alleen naar hoeveel geld je momenteel verdient.</p>
+        <p>Bij een ondernemer kan onder andere worden gekeken naar:</p>
+        <ul>
+          <li>je winst uit onderneming;</li>
+          <li>je jaarcijfers;</li>
+          <li>je aangiften inkomstenbelasting;</li>
+          <li>je actuele resultaten;</li>
+          <li>het lopende boekjaar;</li>
+          <li>je ondernemingsvorm;</li>
+          <li>eventuele andere inkomsten;</li>
+          <li>bestaande financiële verplichtingen;</li>
+          <li>het inkomen van je partner.</li>
+        </ul>
+        <p>
+          Daarna wordt gekeken naar de hypotheekmogelijkheden die bij jouw situatie passen.
+        </p>
+        <p>
+          Bij NHG kan voor ondernemers een <strong>Inkomensverklaring Ondernemer</strong> worden
+          gebruikt om het ondernemersinkomen vast te stellen.
+        </p>
+
+        <h2>Heb je als zzp&apos;er een hypotheekadviseur nodig?</h2>
+        <p>Niet iedere zzp&apos;er heeft dezelfde behoefte aan advies.</p>
+        <p>Voor een eenvoudige situatie kun je zelf al een eerste berekening maken.</p>
+        <p>Maar zodra je bijvoorbeeld:</p>
+        <ul>
+          <li>pas kort ondernemer bent;</li>
+          <li>wisselende winsten hebt;</li>
+          <li>meerdere ondernemingen hebt;</li>
+          <li>inkomen uit loondienst combineert met ondernemerschap;</li>
+          <li>een bv hebt;</li>
+          <li>een studieschuld hebt;</li>
+          <li>andere leningen hebt;</li>
+          <li>een partner met inkomen hebt;</li>
+        </ul>
+        <p>
+          kan het lastiger worden om zelf te bepalen welk inkomen voor de hypotheek wordt gebruikt.
+        </p>
+        <p>
+          Een hypotheekadviseur kan je financiële situatie in dat geval vooraf beoordelen en
+          aangeven welke informatie en documenten nodig zijn.
+        </p>
+
+        <h2>Hypotheekadviseur voor startende zzp&apos;ers</h2>
+        <p>Ben je pas begonnen als zzp&apos;er?</p>
+        <p>
+          Dan heb je waarschijnlijk nog geen drie volledige jaren aan jaarcijfers.
+        </p>
+        <p>Dat betekent niet automatisch dat een hypotheek onmogelijk is.</p>
+        <p>
+          Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van 12 maanden
+          ondernemerschap. Als je onderneming korter dan drie jaar bestaat, wordt de beschikbare
+          financiële historie gebruikt.
+        </p>
+        <p>
+          Een hypotheekadviseur kan daarom juist bij een startende ondernemer helpen om eerst te
+          bepalen welke route mogelijk is.
+        </p>
+        <p>Lees ook:</p>
+        <ul>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+              Hypotheek zzp zonder 3 jaar cijfers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+              Hypotheek voor startende zzp&apos;ers
+            </Link>
+          </li>
+        </ul>
+
+        <h2>Hypotheekadviseur bij wisselende inkomsten</h2>
+        <p>Niet iedere zzp&apos;er verdient ieder jaar hetzelfde.</p>
+        <p>
+          Je kunt bijvoorbeeld een paar grote opdrachten hebben gehad waardoor je winst in één jaar
+          veel hoger was.
+        </p>
+        <p>Of je onderneming kan juist tijdelijk minder goed hebben gedraaid.</p>
+        <p>
+          Bij een hypotheek wordt daarom niet automatisch alleen gekeken naar je beste jaar.
+        </p>
+        <p>
+          De inkomensbeoordeling kijkt naar de financiële historie en de actuele ontwikkeling van je
+          onderneming.
+        </p>
+        <p>
+          Een hypotheekadviseur kan helpen om vooraf inzicht te krijgen in hoe jouw inkomen
+          waarschijnlijk moet worden beoordeeld.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek met wisselend inkomen als zzp&apos;er
+          </Link>
+        </p>
+
+        <h2>Hypotheekadviseur voor een eenmanszaak</h2>
+        <p>Veel zzp&apos;ers werken vanuit een eenmanszaak.</p>
+        <p>
+          Bij een eenmanszaak vormt de fiscale winst een belangrijke basis voor de beoordeling van
+          het ondernemersinkomen.
+        </p>
+        <p>
+          Maar fiscale winst is niet automatisch hetzelfde als het uiteindelijke toetsinkomen.
+        </p>
+        <p>
+          De hypotheekadviseur kijkt daarom naar de financiële gegevens van de onderneming en de
+          regels die gelden voor de gekozen hypotheek.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+            Winst uit onderneming voor hypotheek
+          </Link>
+        </p>
+
+        <h2>Welke documenten heeft een hypotheekadviseur nodig?</h2>
+        <p>
+          Een hypotheekadviseur zal je meestal vragen om financiële informatie over je onderneming
+          en persoonlijke situatie.
+        </p>
+        <p>Welke documenten precies nodig zijn, hangt af van je situatie.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>jaarcijfers;</li>
+          <li>aangiften inkomstenbelasting;</li>
+          <li>tussentijdse cijfers;</li>
+          <li>btw-aangiften;</li>
+          <li>identiteitsgegevens;</li>
+          <li>gegevens over bestaande hypotheken;</li>
+          <li>informatie over leningen;</li>
+          <li>studieschuld;</li>
+          <li>gegevens van je partner.</li>
+        </ul>
+        <p>
+          Bij een NHG-Inkomensverklaring Ondernemer is een specifieke documentenlijst van toepassing.
+        </p>
+        <p>
+          Daarom is het verstandig om je financiële administratie goed op orde te hebben voordat je
+          een hypotheek aanvraagt.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+            Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+          </Link>
+        </p>
+
+        <h2>Wat kost een hypotheekadviseur voor zzp&apos;ers?</h2>
+        <p>
+          De kosten van hypotheekadvies verschillen per adviseur en per situatie.
+        </p>
+        <p>
+          Een zzp&apos;er kan bijvoorbeeld een complexere inkomenssituatie hebben dan iemand in
+          loondienst. Daardoor kan de hoeveelheid werk verschillen.
+        </p>
+        <p>
+          Haruna geeft op zijn website aan dat de kosten afhankelijk zijn van de situatie en het
+          type dienstverlening. In een vrijblijvend kennismakingsgesprek worden de situatie en de
+          bijbehorende kosten besproken.
+        </p>
+        <p>Het is daarom verstandig om vooraf te vragen:</p>
+        <ul>
+          <li>wat het advies kost;</li>
+          <li>welke werkzaamheden daarbij horen;</li>
+          <li>of het regelen van de hypotheek inbegrepen is;</li>
+          <li>wanneer je betaalt;</li>
+          <li>welke kosten eventueel apart worden berekend.</li>
+        </ul>
+
+        <h2>Onafhankelijke hypotheekadviseur voor zzp&apos;ers</h2>
+        <p>
+          Een onafhankelijk adviseur kan verschillende geldverstrekkers met elkaar vergelijken.
+        </p>
+        <p>
+          Haruna geeft aan hypotheken van vrijwel alle geldverstrekkers in Nederland te vergelijken
+          en positioneert zich als onafhankelijk hypotheekadviseur.
+        </p>
+        <p>
+          Dat kan relevant zijn voor zzp&apos;ers, omdat acceptatiecriteria voor ondernemers per
+          geldverstrekker kunnen verschillen.
+        </p>
+        <p>Het is daarom niet altijd voldoende om alleen naar één bank te kijken.</p>
+
+        <h2>Waarom samenwerken met Haruna?</h2>
+        <p>
+          Voor de hypotheekcontent van FactuurBaas werken we samen met <strong>Haruna B.V.</strong>
+        </p>
+        <p>
+          Haruna is een hypotheek- en pensioenadvieskantoor dat online werkt via videobellen. Het
+          kantoor staat onder leiding van hypotheek- en pensioenadviseur Harm Jan Schouwstra en
+          vermeldt meer dan 30 jaar ervaring. Haruna is daarnaast SEH Erkend Financieel Adviseur en
+          staat geregistreerd als vergunninghouder bij de AFM.
+        </p>
+        <p>
+          De samenwerking betekent dat je via FactuurBaas niet alleen informatie over hypotheken als
+          zzp&apos;er kunt lezen, maar ook kunt worden doorverwezen naar een adviseur wanneer je
+          jouw eigen situatie wilt bespreken.
+        </p>
+
+        <h2>Hypotheekadvies voor zzp&apos;ers bij Haruna</h2>
+        <p>Haruna biedt hypotheekadvies online via videobellen.</p>
+        <p>
+          Je kunt eerst je situatie in kaart brengen voordat je besluit of je verder wilt met een
+          adviseur.
+        </p>
+        <p>
+          Haruna biedt hiervoor een <strong>gratis situatiecheck</strong>. Daarbij kun je onder
+          andere een PDF ontvangen met een indicatie van je maximale hypotheek, een
+          documentchecklist en vragen die je met een adviseur kunt bespreken. De situatiecheck is
+          volgens Haruna geen bindend hypotheekadvies.
+        </p>
+        <p>
+          Dit kan vooral handig zijn als je eerst wilt weten welke informatie je nodig hebt voordat
+          je een volledige hypotheekaanvraag start.
+        </p>
+
+        <h2>Hypotheek berekenen als zzp&apos;er</h2>
+        <p>
+          Voordat je met een hypotheekadviseur praat, kun je natuurlijk zelf een eerste berekening
+          maken.
+        </p>
+        <p>Daarbij is het belangrijk om niet alleen naar je omzet te kijken.</p>
+        <p>Voor een eerste indicatie kun je bijvoorbeeld kijken naar:</p>
+        <ul>
+          <li>je winst van de afgelopen jaren;</li>
+          <li>je actuele winst;</li>
+          <li>inkomen van je partner;</li>
+          <li>bestaande leningen;</li>
+          <li>studieschuld;</li>
+          <li>leaseverplichtingen;</li>
+          <li>de gewenste woningwaarde.</li>
+        </ul>
+        <p>Maar een online berekening blijft een indicatie.</p>
+        <p>
+          De uiteindelijke hypotheek wordt gebaseerd op het toetsinkomen en de geldende leennormen.
+        </p>
+        <HypotheekCta />
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-berekenen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek berekenen als zzp&apos;er
+          </Link>
+        </p>
+
+        <h2>Wat bespreek je met een hypotheekadviseur?</h2>
+        <p>
+          Een eerste gesprek met een hypotheekadviseur kan bijvoorbeeld gaan over:
+        </p>
+        <h3>Je ondernemerssituatie</h3>
+        <p>Hoe lang ben je ondernemer?</p>
+        <p>Heb je een eenmanszaak, vof of bv?</p>
+        <p>Zijn je inkomsten stabiel of wisselend?</p>
+        <h3>Je inkomen</h3>
+        <p>Hoeveel winst maak je?</p>
+        <p>Wat waren je resultaten van de afgelopen jaren?</p>
+        <p>Hoe ziet het lopende boekjaar eruit?</p>
+        <h3>Je woning</h3>
+        <p>Welke woning wil je kopen?</p>
+        <p>Wat is de verwachte aankoopprijs?</p>
+        <p>Hoeveel eigen geld heb je beschikbaar?</p>
+        <h3>Je financiële verplichtingen</h3>
+        <p>Heb je een studieschuld?</p>
+        <p>Heb je leningen of lease?</p>
+        <p>Heb je al een hypotheek?</p>
+        <h3>Je toekomst</h3>
+        <p>Verwacht je dat je inkomen verandert?</p>
+        <p>Wil je je onderneming uitbreiden?</p>
+        <p>
+          Zijn er andere veranderingen die invloed kunnen hebben op je financiële situatie?
+        </p>
+        <p>
+          Deze informatie helpt om je hypotheekmogelijkheden beter in kaart te brengen.
+        </p>
+
+        <h2>Kan een hypotheekadviseur helpen als je nog geen 3 jaar cijfers hebt?</h2>
+        <p>
+          Ja, dat is juist een situatie waarin vooraf advies nuttig kan zijn.
+        </p>
+        <p>
+          Als je nog geen drie volledige jaren ondernemer bent, moet eerst worden gekeken welke
+          financiële historie beschikbaar is en welke hypotheekroute bij je situatie past.
+        </p>
+        <p>
+          Voor NHG kan vanaf 12 maanden ondernemerschap een Inkomensverklaring Ondernemer worden
+          gebruikt.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+            Hypotheek zzp zonder 3 jaar cijfers
+          </Link>
+        </p>
+
+        <h2>Kan een hypotheekadviseur helpen bij een wisselend inkomen?</h2>
+        <p>Ja.</p>
+        <p>Een wisselend inkomen hoeft een hypotheek niet automatisch uit te sluiten.</p>
+        <p>
+          Wel is het belangrijk om te begrijpen welk inkomen uiteindelijk als toetsinkomen wordt
+          gebruikt.
+        </p>
+        <p>
+          Een adviseur kan je financiële resultaten vooraf bekijken en aangeven welke informatie
+          nodig is voor de inkomensbeoordeling.
+        </p>
+        <p>
+          Lees ook:{' '}
+          <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+            Hypotheek met wisselend inkomen als zzp&apos;er
+          </Link>
+        </p>
+
+        <h2>Hypotheekadviseur voor zzp&apos;ers online</h2>
+        <p>Je hoeft niet per se naar een kantoor om hypotheekadvies te krijgen.</p>
+        <p>
+          Haruna werkt online via videobellen en geeft aan dat gesprekken ook buiten reguliere
+          kantoortijden mogelijk zijn.
+        </p>
+        <p>
+          Dat kan praktisch zijn als je als zzp&apos;er weinig tijd hebt of niet in de buurt van een
+          hypotheekadviseur woont.
+        </p>
+        <p>
+          De documenten en financiële gegevens kunnen vervolgens digitaal worden aangeleverd.
+        </p>
+
+        <h2>Veelgestelde vragen</h2>
+        <h3>Wat doet een hypotheekadviseur voor zzp&apos;ers?</h3>
+        <p>
+          Een hypotheekadviseur helpt bij het beoordelen van je financiële situatie, het vaststellen
+          van je hypotheekmogelijkheden en het vergelijken van passende hypotheekoplossingen.
+        </p>
+        <h3>Heb ik als zzp&apos;er een hypotheekadviseur nodig?</h3>
+        <p>
+          Niet per se. Je kunt zelf een eerste berekening maken. Bij een complexere
+          ondernemerssituatie kan professioneel advies wel helpen om je inkomen en mogelijkheden
+          goed in kaart te brengen.
+        </p>
+        <h3>Kan ik als startende zzp&apos;er een hypotheek krijgen?</h3>
+        <p>
+          Dat kan mogelijk. Voor de NHG-Inkomensverklaring Ondernemer geldt een minimale periode van
+          12 maanden ondernemerschap.
+        </p>
+        <h3>Kan ik een hypotheek krijgen zonder 3 jaar cijfers?</h3>
+        <p>
+          Dat kan mogelijk. Je hoeft voor de NHG-Inkomensverklaring Ondernemer niet automatisch drie
+          volledige jaren ondernemer te zijn.
+        </p>
+        <h3>Wat kost hypotheekadvies voor zzp&apos;ers?</h3>
+        <p>
+          De kosten verschillen per adviseur en situatie. Haruna geeft aan dat de kosten afhankelijk
+          zijn van de situatie en het type dienstverlening.
+        </p>
+        <h3>Kan ik online hypotheekadvies krijgen?</h3>
+        <p>Ja. Haruna biedt hypotheekadvies via videobellen en werkt online.</p>
+        <h3>Is Haruna onafhankelijk?</h3>
+        <p>
+          Haruna positioneert zich als onafhankelijk hypotheekadviseur en geeft aan hypotheken van
+          vrijwel alle geldverstrekkers in Nederland te vergelijken.
+        </p>
+        <h3>Kan ik eerst vrijblijvend kennismaken?</h3>
+        <p>Ja. Haruna vermeldt dat het kennismakingsgesprek vrijblijvend is.</p>
+        <h3>Kan ik eerst zelf mijn hypotheek berekenen?</h3>
+        <p>
+          Ja. Je kunt eerst een indicatie van je maximale hypotheek berekenen voordat je een
+          adviseur inschakelt.
+        </p>
+        <HypotheekCta />
+
+        <h2>Hypotheekadvies voor zzp&apos;ers via Haruna</h2>
+        <p>
+          Als zzp&apos;er is het belangrijkste verschil met iemand in loondienst dat je
+          hypotheekinkomen niet simpelweg van één loonstrook kan worden afgelezen.
+        </p>
+        <p>
+          Je financiële historie, winst, actuele resultaten en persoonlijke financiële situatie
+          moeten worden beoordeeld voordat duidelijk is welk toetsinkomen kan worden gebruikt.
+        </p>
+        <p>
+          Daarom kan het handig zijn om je situatie eerst met een hypotheekadviseur te bespreken.
+        </p>
+        <p>
+          Voor FactuurBaas werken we hiervoor samen met <strong>Haruna B.V.</strong> Haruna biedt
+          onafhankelijk hypotheekadvies online via videobellen en heeft een gratis situatiecheck
+          waarmee je je financiële situatie eerst kunt voorbereiden.
+        </p>
+        <p>
+          <strong>Contact met Haruna</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>Website:</strong>{' '}
+            <a
+              href="https://www.haruna.nl/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-warm-orange hover:underline"
+            >
+              Haruna.nl
+            </a>
+          </li>
+          <li>
+            <strong>E-mail:</strong>{' '}
+            <a href="mailto:contact@haruna.nl" className="text-warm-orange hover:underline">
+              contact@haruna.nl
+            </a>
+          </li>
+          <li>
+            <strong>Telefoon:</strong>{' '}
+            <a href="tel:+31786849331" className="text-warm-orange hover:underline">
+              078 684 93 31
+            </a>
+          </li>
+        </ul>
+        <p>Wil je eerst zelf berekenen wat je ongeveer kunt lenen?</p>
+        <HypotheekCta label="Bereken je maximale hypotheek als zzp'er →" />
+        <HypotheekHubLink />
+        <p>Meer lezen over hypotheken als zzp&apos;er:</p>
+        <ul>
+          <li>
+            <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
+              Hypotheek voor zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-berekenen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek berekenen als zzp&apos;er
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Welk inkomen telt voor een hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/winst-uit-onderneming-voor-hypotheek" className="text-warm-orange hover:underline">
+              Winst uit onderneming voor hypotheek
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper" className="text-warm-orange hover:underline">
+              Jaarcijfers nodig voor hypotheek als zzp&apos;er?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers" className="text-warm-orange hover:underline">
+              Hypotheek zzp zonder 3 jaar cijfers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hoe-lang-zzper-zijn-voor-hypotheek" className="text-warm-orange hover:underline">
+              Hoe lang moet je zzp&apos;er zijn voor een hypotheek?
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-voor-startende-zzpers" className="text-warm-orange hover:underline">
+              Hypotheek voor startende zzp&apos;ers
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper" className="text-warm-orange hover:underline">
+              Hypotheek met wisselend inkomen als zzp&apos;er
+            </Link>
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  ...aovArticles,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];
   const aIsSpecial = specialSlugs.includes(a.slug);

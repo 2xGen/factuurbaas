@@ -26,6 +26,7 @@ export default function ArticlePostClient({
   listHref = '/blogs',
   listLabel = 'Terug naar alle blogs',
   breadcrumbSection = 'Blogs',
+  breadcrumbItems = null,
 }) {
   const articleUrl = `https://factuurbaas.nl${basePath}/${article.slug}`;
   const published = article.datePublished ? `${article.datePublished}T12:00:00+01:00` : new Date().toISOString();
@@ -48,14 +49,30 @@ export default function ArticlePostClient({
     dateModified: modified,
   };
 
+  const breadcrumbTrail =
+    breadcrumbItems?.length > 0
+      ? breadcrumbItems
+      : [
+          { name: 'Home', href: '/' },
+          { name: breadcrumbSection, href: listHref },
+          { name: article.title },
+        ];
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://factuurbaas.nl' },
-      { '@type': 'ListItem', position: 2, name: breadcrumbSection, item: `https://factuurbaas.nl${listHref}` },
-      { '@type': 'ListItem', position: 3, name: article.title, item: articleUrl },
-    ],
+    itemListElement: breadcrumbTrail.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      ...(item.href
+        ? {
+            item: item.href.startsWith('http')
+              ? item.href
+              : `https://factuurbaas.nl${item.href}`,
+          }
+        : { item: articleUrl }),
+    })),
   };
 
   const faqSchema =
@@ -127,17 +144,48 @@ export default function ArticlePostClient({
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl py-12 md:py-16">
           <nav aria-label="Breadcrumb" className="mb-8">
-            <Link
-              href={listHref}
-              className="inline-flex items-center text-sky-600 hover:text-warm-orange transition-colors group"
-            >
-              <span className="mr-2 group-hover:-translate-x-1 transition-transform inline-block">←</span>
-              {listLabel}
-            </Link>
+            {breadcrumbItems?.length > 0 ? (
+              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-slate-500">
+                {breadcrumbItems.map((item, index) => {
+                  const isLast = index === breadcrumbItems.length - 1;
+                  return (
+                    <li key={`${item.name}-${index}`} className="flex items-center gap-1.5">
+                      {index > 0 && <span aria-hidden>/</span>}
+                      {isLast || !item.href ? (
+                        <span className="font-medium text-slate-800">{item.name}</span>
+                      ) : (
+                        <Link href={item.href} className="hover:text-warm-orange">
+                          {item.name}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            ) : (
+              <Link
+                href={listHref}
+                className="inline-flex items-center text-sky-600 hover:text-warm-orange transition-colors group"
+              >
+                <span className="mr-2 group-hover:-translate-x-1 transition-transform inline-block">←</span>
+                {listLabel}
+              </Link>
+            )}
           </nav>
           <article className="prose prose-lg lg:prose-xl max-w-none text-slate-700 leading-relaxed">
             {article.content}
           </article>
+
+          {breadcrumbItems?.some((item) => item.href === '/blogs/hypotheek-als-zzper') && (
+            <p className="mt-10 text-slate-600">
+              <Link
+                href="/blogs/hypotheek-als-zzper"
+                className="font-medium text-warm-orange hover:underline"
+              >
+                ← Hypotheek als zzp&apos;er: alle onderwerpen
+              </Link>
+            </p>
+          )}
 
           {relatedItems.length > 0 && (
             <section className="mt-16 pt-12 border-t border-slate-200" aria-label="Gerelateerde artikelen">

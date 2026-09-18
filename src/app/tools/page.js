@@ -87,6 +87,14 @@ const toolLinks = [
     tag: 'Beschikbaar',
     footerLabel: 'Meer info',
   },
+  {
+    label: "AOV voor zzp'ers",
+    href: '/tools/aov-zzp',
+    description:
+      'Bereken hoeveel inkomen je wilt beschermen en wat je wachttijd betekent — geen premieadvies.',
+    tag: 'Beschikbaar',
+    footerLabel: 'Meer info',
+  },
 ];
 
 export default function ToolsHubPage() {

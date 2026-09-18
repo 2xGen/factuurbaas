@@ -13,6 +13,7 @@ import {
   FileText,
   Clock,
   ArrowRight,
+  Shield,
 } from 'lucide-react';
 
 const pillarIcons = {
@@ -23,6 +24,8 @@ const pillarIcons = {
   tools: FileStack,
   'templates-voorbeelden': FileStack,
   boekhouden: Wallet,
+  hypotheek: Wallet,
+  aov: Shield,
   'betaling-beheer': Wallet,
 };
 
@@ -59,7 +62,13 @@ function BlogPillarsSection() {
               className="group"
             >
               <Link
-                href={`/blogs?pillar=${pillar.id}`}
+                href={
+                  pillar.id === 'hypotheek'
+                    ? '/blogs/hypotheek-als-zzper'
+                    : pillar.id === 'aov'
+                      ? '/tools/aov-zzp'
+                      : `/blogs?pillar=${pillar.id}`
+                }
                 className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-warm-orange/20 hover:shadow-md sm:p-6"
               >
                 <div

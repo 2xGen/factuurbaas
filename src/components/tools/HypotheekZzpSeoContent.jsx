@@ -56,7 +56,12 @@ const MORE_LINKS = [
   { label: "Hoe lang moet je zzp'er zijn voor een hypotheek?", href: '/blogs/hoe-lang-zzper-zijn-voor-hypotheek' },
   { label: "Welk inkomen telt voor een hypotheek als zzp'er?", href: '/blogs/welk-inkomen-telt-voor-hypotheek-als-zzper' },
   { label: 'Winst uit onderneming voor hypotheek', href: '/blogs/winst-uit-onderneming-voor-hypotheek' },
-  { label: 'AOV voor zzp\'ers', href: '/tools' },
+  { label: "Hypotheek met wisselend inkomen als zzp'er", href: '/blogs/hypotheek-met-wisselend-inkomen-als-zzper' },
+  { label: "Jaarcijfers nodig voor hypotheek als zzp'er?", href: '/blogs/jaarcijfers-nodig-voor-hypotheek-als-zzper' },
+  { label: "Hypotheek als zzp'er zonder 3 jaar cijfers", href: '/blogs/hypotheek-zzp-zonder-3-jaar-cijfers' },
+  { label: "Hypotheek berekenen als zzp'er", href: '/blogs/hypotheek-berekenen-als-zzper' },
+  { label: "Hypotheekadviseur voor zzp'ers", href: '/blogs/hypotheekadviseur-voor-zzpers' },
+  { label: 'AOV voor zzp\'ers', href: '/tools/aov-zzp' },
   { label: 'Pensioen opbouwen als zzp\'er', href: '/tools' },
   { label: 'Zakelijke verzekeringen voor zzp\'ers', href: '/tools' },
   { label: 'Zakelijke rekening voor zzp\'ers', href: '/blogs/zakelijke-rekening-zzp' },
@@ -269,6 +274,14 @@ export default function HypotheekZzpSeoContent() {
         <p className="mt-3 text-slate-600 leading-relaxed">
           Een wisselend inkomen betekent daarom niet automatisch dat je geen hypotheek kunt krijgen.
           Wel kan de inkomensbeoordeling anders uitvallen dan wanneer je inkomen al jaren stabiel is.
+          Lees meer in onze gids{' '}
+          <Link
+            href="/blogs/hypotheek-met-wisselend-inkomen-als-zzper"
+            className="font-medium text-warm-orange hover:underline"
+          >
+            Hypotheek met wisselend inkomen als zzp&apos;er
+          </Link>
+          .
         </p>
       </section>
 
@@ -325,7 +338,14 @@ export default function HypotheekZzpSeoContent() {
         </p>
         <p className="mt-3 text-slate-600 leading-relaxed">
           Heb je dus nog geen drie volledige boekjaren? Dan is het verstandig om niet automatisch
-          aan te nemen dat je moet wachten.
+          aan te nemen dat je moet wachten. Lees meer in{' '}
+          <Link
+            href="/blogs/hypotheek-zzp-zonder-3-jaar-cijfers"
+            className="font-medium text-warm-orange hover:underline"
+          >
+            Hypotheek als zzp&apos;er zonder 3 jaar cijfers
+          </Link>
+          .
         </p>
       </section>
 

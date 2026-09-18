@@ -24,6 +24,44 @@ function sortByDate(items) {
   });
 }
 
+function getPillarId(item) {
+  for (const pillar of blogPillars) {
+    if (item.type === 'guide' && (pillar.guideSlugs || []).includes(item.slug)) {
+      return pillar.id;
+    }
+    if (item.type !== 'guide' && pillar.slugs.includes(item.slug)) {
+      return pillar.id;
+    }
+  }
+  return 'other';
+}
+
+/** Round-robin across pillars so the grid mixes topics instead of stacking by date. */
+function interleaveByPillar(items) {
+  const pillarOrder = [...blogPillars.map((p) => p.id), 'other'];
+  const queues = new Map(pillarOrder.map((id) => [id, []]));
+
+  for (const item of sortByDate(items)) {
+    const id = getPillarId(item);
+    if (!queues.has(id)) queues.set(id, []);
+    queues.get(id).push(item);
+  }
+
+  const result = [];
+  let remaining = true;
+  while (remaining) {
+    remaining = false;
+    for (const id of pillarOrder) {
+      const queue = queues.get(id);
+      if (queue?.length) {
+        result.push(queue.shift());
+        remaining = true;
+      }
+    }
+  }
+  return result;
+}
+
 function HubTitle({ title }) {
   const marker = "zzp'ers";
   const index = title.indexOf(marker);
@@ -63,7 +101,7 @@ export default function BlogListClient({ articles, guides = [] }) {
 
   const allItems = useMemo(() => {
     const blogItems = articles.map(toListItem);
-    return sortByDate([...blogItems, ...guides]);
+    return interleaveByPillar([...blogItems, ...guides]);
   }, [articles, guides]);
 
   const filteredItems = useMemo(() => {

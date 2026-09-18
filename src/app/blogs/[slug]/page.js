@@ -2,6 +2,10 @@ import { notFound } from 'next/navigation';
 import { articles } from '@/lib/blogData';
 import BlogPostClient from './BlogPostClient';
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
+import {
+  getHypotheekArticleBreadcrumbs,
+  isHypotheekGuideSlug,
+} from '@/lib/hypotheekHub';
 
 // Dynamic to avoid auth/context issues during Vercel static build
 export const dynamic = 'force-dynamic';
@@ -46,11 +50,23 @@ export default async function BlogPostPage({ params }) {
   const resolvedParams = typeof params.then === 'function' ? await params : params;
   const article = articles.find((a) => a.slug === resolvedParams.slug);
   if (!article) notFound();
+  const relatedLimit = isHypotheekGuideSlug(article.slug) ? 6 : 4;
   const relatedArticles = (article.relatedSlugs?.length
     ? article.relatedSlugs
         .map((slug) => articles.find((a) => a.slug === slug))
         .filter(Boolean)
-    : articles.filter((a) => a.slug !== article.slug).slice(0, 4)
-  ).slice(0, 4);
-  return <BlogPostClient article={article} relatedArticles={relatedArticles} />;
+    : articles.filter((a) => a.slug !== article.slug).slice(0, relatedLimit)
+  ).slice(0, relatedLimit);
+
+  const breadcrumbItems = isHypotheekGuideSlug(article.slug)
+    ? getHypotheekArticleBreadcrumbs(article.title)
+    : null;
+
+  return (
+    <BlogPostClient
+      article={article}
+      relatedArticles={relatedArticles}
+      breadcrumbItems={breadcrumbItems}
+    />
+  );
 }

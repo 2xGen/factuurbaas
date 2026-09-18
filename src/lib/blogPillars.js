@@ -110,7 +110,7 @@ export const blogPillars = [
     id: 'hypotheek',
     title: "Hypotheek als zzp'er",
     description:
-      "Hoe werkt een hypotheek als zzp'er? Lees over toetsinkomen, documenten, NHG en bereken je maximale hypotheek.",
+      "Hoe werkt een hypotheek als zzp'er? Overzicht van inkomen, cijfers, maximale hypotheek en advies — start bij de hub.",
     slugs: [
       'hypotheek-als-zzper-hoe-werkt-het',
       'hoeveel-hypotheek-kan-ik-krijgen-als-zzper',
@@ -119,6 +119,23 @@ export const blogPillars = [
       'hoe-lang-zzper-zijn-voor-hypotheek',
       'welk-inkomen-telt-voor-hypotheek-als-zzper',
       'winst-uit-onderneming-voor-hypotheek',
+      'hypotheek-met-wisselend-inkomen-als-zzper',
+      'jaarcijfers-nodig-voor-hypotheek-als-zzper',
+      'hypotheek-zzp-zonder-3-jaar-cijfers',
+      'hypotheek-berekenen-als-zzper',
+      'hypotheekadviseur-voor-zzpers',
+    ],
+  },
+  {
+    id: 'aov',
+    title: "AOV voor zzp'ers",
+    description:
+      "Arbeidsongeschiktheidsverzekering voor zzp'ers: dekking, wachttijd, kosten en vergelijken — met gratis calculator.",
+    slugs: [
+      'wat-kost-een-aov-voor-zzpers',
+      'aov-voor-startende-zzpers',
+      'aov-verplicht-voor-zzpers',
+      'aov-vergelijken',
     ],
   },
   {
