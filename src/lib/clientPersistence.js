@@ -95,6 +95,37 @@ export function clientToReceiverDetails(client) {
   };
 }
 
+/** Map saved client → offerte clientDetails (single address field). */
+export function clientToQuoteClientDetails(client) {
+  if (!client) return {};
+  const street = client.street || '';
+  const line2 = [client.postalCode, client.city].filter(Boolean).join(' ');
+  const address = [street, line2, client.country].filter(Boolean).join('\n');
+  return {
+    companyName: client.companyName || '',
+    contactPerson: client.contactPerson || '',
+    email: client.email || '',
+    address,
+  };
+}
+
+/** Map offerte clientDetails → receiver shape for ClientPicker “opslaan als klant”. */
+export function quoteClientDetailsToReceiver(details = {}) {
+  return {
+    companyName: details.companyName || '',
+    contactPerson: details.contactPerson || '',
+    email: details.email || '',
+    phone: '',
+    street: details.address || '',
+    postalCode: '',
+    city: '',
+    country: '',
+    address: details.address || '',
+    kvk: '',
+    btw: '',
+  };
+}
+
 export function receiverDetailsToClient(details, extras = {}) {
   const hasStructured = Boolean(
     details?.street || details?.postalCode || details?.city || details?.country

@@ -1,13 +1,20 @@
 /**
  * Blog pillars: topic-based grouping of blog slugs.
  * Used on the homepage (category cards) and /blogs pillar filter.
+ *
+ * title / titleAccent → /blogs hub + filters
+ * cardTitle / cardAccent / cardBlurb → homepage cards (short & clean)
  */
 export const blogPillars = [
   {
     id: 'starten',
     title: 'Starten met factureren',
+    titleAccent: 'factureren',
+    cardTitle: 'Starten met factureren',
+    cardAccent: 'factureren',
+    cardBlurb: 'Je eerste factuur, zonder account.',
     description:
-      'Je eerste factuur, gratis factuur maken zonder account en alles voor wie net begint als zzp\'er.',
+      "Je eerste factuur, gratis factuur maken zonder account en alles voor wie net begint als zzp'er.",
     slugs: [
       'factureren-startende-zzper',
       'factuur-maken-zzp',
@@ -18,6 +25,10 @@ export const blogPillars = [
   {
     id: 'btw-belasting',
     title: 'Btw & belasting',
+    titleAccent: '& belasting',
+    cardTitle: 'Btw & belasting',
+    cardAccent: '& belasting',
+    cardBlurb: 'Tarieven, aangifte en fouten voorkomen.',
     description:
       'Btw op je factuur, belasting reserveren, boetes voorkomen en factureren naar het buitenland.',
     slugs: [
@@ -44,7 +55,11 @@ export const blogPillars = [
   },
   {
     id: 'offertes',
-    title: 'Offertes',
+    title: 'Offerte-gidsen: maken, versturen en factureren',
+    titleAccent: 'maken, versturen en factureren',
+    cardTitle: 'Offertes',
+    cardAccent: null,
+    cardBlurb: 'Maken, versturen en omzetten naar factuur.',
     description:
       'Offertes maken, voorbeelden en alles over het verschil tussen offerte en factuur.',
     slugs: ['verschil-factuur-offerte'],
@@ -65,6 +80,10 @@ export const blogPillars = [
   {
     id: 'uurtarief',
     title: 'Uurtarief & inkomen',
+    titleAccent: '& inkomen',
+    cardTitle: 'Uurtarief & inkomen',
+    cardAccent: '& inkomen',
+    cardBlurb: 'Bepaal je tarief en bereken je omzet.',
     description:
       "Welk uurtarief moet je rekenen als zzp'er? Bereken je tarief, omzet en inkomen met praktische gidsen en gratis tools.",
     slugs: [],
@@ -73,6 +92,10 @@ export const blogPillars = [
   {
     id: 'tools',
     title: 'Tools & calculators',
+    titleAccent: '& calculators',
+    cardTitle: 'Tools & calculators',
+    cardAccent: '& calculators',
+    cardBlurb: 'Gratis calculators, zonder account.',
     description:
       "Gratis online tools voor zzp'ers: factuur maken, btw, offerte, uurtarief en meer — met uitleg hoe je ze gebruikt.",
     slugs: [],
@@ -81,13 +104,21 @@ export const blogPillars = [
   {
     id: 'templates-voorbeelden',
     title: 'Templates & voorbeelden',
+    titleAccent: '& voorbeelden',
+    cardTitle: 'Templates & voorbeelden',
+    cardAccent: '& voorbeelden',
+    cardBlurb: 'Templates en PDF-facturen downloaden.',
     description:
       'Professionele factuur templates en je factuur eenvoudig als PDF downloaden.',
     slugs: ['factuur-templates-zzp', 'factuur-pdf-downloaden'],
   },
   {
     id: 'boekhouden',
-    title: 'Boekhouden & administratie',
+    title: "Boekhouden als zzp'er",
+    titleAccent: "zzp'er",
+    cardTitle: "Boekhouden als zzp'er",
+    cardAccent: "zzp'er",
+    cardBlurb: 'Zelf doen of software kiezen.',
     description:
       "Zelf boekhouden als zzp'er, welk boekhoudprogramma past bij jou, en wanneer software of een boekhouder handig is.",
     slugs: [
@@ -107,8 +138,36 @@ export const blogPillars = [
     ],
   },
   {
+    id: 'zakelijke-kosten',
+    title: 'Zakelijke kosten & uitgaven',
+    titleAccent: 'kosten & uitgaven',
+    cardTitle: 'Zakelijke kosten & uitgaven',
+    cardAccent: 'kosten & uitgaven',
+    cardBlurb: 'Wat mag je aftrekken — en hoe houd je het bij.',
+    description:
+      "Welke kosten zijn aftrekbaar? Alles over zakelijke uitgaven, btw, bonnetjes en kosten bijhouden als zzp'er.",
+    slugs: [
+      'zakelijke-kosten-zzp',
+      'zakelijke-uitgaven-bijhouden-zzp',
+      'btw-zakelijke-kosten-aftrekken',
+      'zakelijke-kosten-prive-betaald',
+      'privekosten-zakelijk-betalen',
+      'laptop-aftrekbaar-zzp',
+      'telefoon-aftrekbaar-zzp',
+      'internet-aftrekbaar-zzp',
+      'software-abonnementen-aftrekken-zzp',
+      'reiskosten-aftrekken-zzp',
+      'werkkleding-aftrekbaar-zzp',
+      'werkruimte-thuis-aftrekbaar-zzp',
+    ],
+  },
+  {
     id: 'hypotheek',
     title: "Hypotheek als zzp'er",
+    titleAccent: "zzp'er",
+    cardTitle: "Hypotheek als zzp'er",
+    cardAccent: "zzp'er",
+    cardBlurb: 'Inkomen, cijfers en maximale hypotheek.',
     description:
       "Hoe werkt een hypotheek als zzp'er? Overzicht van inkomen, cijfers, maximale hypotheek en advies — start bij de hub.",
     slugs: [
@@ -129,6 +188,10 @@ export const blogPillars = [
   {
     id: 'aov',
     title: "AOV voor zzp'ers",
+    titleAccent: "zzp'ers",
+    cardTitle: "AOV voor zzp'ers",
+    cardAccent: "zzp'ers",
+    cardBlurb: 'Dekking, wachttijd en kosten vergelijken.',
     description:
       "Arbeidsongeschiktheidsverzekering voor zzp'ers: dekking, wachttijd, kosten en vergelijken — met gratis calculator.",
     slugs: [
@@ -146,8 +209,12 @@ export const blogPillars = [
   {
     id: 'betaling-beheer',
     title: 'Betaling & beheer',
+    titleAccent: '& beheer',
+    cardTitle: 'Betaling & beheer',
+    cardAccent: '& beheer',
+    cardBlurb: 'Sneller betaald en overzicht houden.',
     description:
-      'Sneller betaald krijgen, factuurbeheer en je zakelijke rekening als zzp\'er.',
+      "Sneller betaald krijgen, factuurbeheer en je zakelijke rekening als zzp'er.",
     slugs: [
       'factuur-niet-betaald-wat-mag-je-doen',
       'sneller-betalen-factuur',
@@ -157,3 +224,22 @@ export const blogPillars = [
     ],
   },
 ];
+
+/** Split pillar title so the accent phrase can be rendered in warm-orange. */
+export function formatPillarTitle(title, titleAccent) {
+  if (!titleAccent) return title;
+  const index = title.lastIndexOf(titleAccent);
+  if (index === -1) return title;
+  return {
+    before: title.slice(0, index),
+    accent: titleAccent,
+    after: title.slice(index + titleAccent.length),
+  };
+}
+
+export function getPillarHref(pillar) {
+  if (pillar.id === 'hypotheek') return '/blogs/hypotheek-als-zzper';
+  if (pillar.id === 'aov') return '/blogs/aov-zzp';
+  if (pillar.id === 'zakelijke-kosten') return '/blogs/zakelijke-kosten-zzp';
+  return `/blogs?pillar=${pillar.id}`;
+}

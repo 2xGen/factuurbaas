@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import OfferteMakerPage from '@/views/OfferteMakerPage';
 
 export const metadata = {
@@ -7,5 +8,13 @@ export const metadata = {
 };
 
 export default function OfferteMakerToolPage() {
-  return <OfferteMakerPage />;
+  return (
+    <Suspense
+      fallback={
+        <div className="container mx-auto px-4 py-16 text-center text-slate-500">Offerte laden…</div>
+      }
+    >
+      <OfferteMakerPage />
+    </Suspense>
+  );
 }

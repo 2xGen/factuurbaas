@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { blogPillars } from '@/lib/blogPillars';
+import { blogPillars, getPillarHref } from '@/lib/blogPillars';
 import { LandingSection, SectionHeader } from '@/components/landing/LandingSection';
 import {
   Rocket,
@@ -14,6 +14,7 @@ import {
   Clock,
   ArrowRight,
   Shield,
+  Receipt,
 } from 'lucide-react';
 
 const pillarIcons = {
@@ -24,17 +25,18 @@ const pillarIcons = {
   tools: FileStack,
   'templates-voorbeelden': FileStack,
   boekhouden: Wallet,
+  'zakelijke-kosten': Receipt,
   hypotheek: Wallet,
   aov: Shield,
   'betaling-beheer': Wallet,
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.22, 0.61, 0.36, 1], delay: i * 0.08 },
+    transition: { duration: 0.4, ease: [0.22, 0.61, 0.36, 1], delay: i * 0.04 },
   }),
 };
 
@@ -43,13 +45,15 @@ function BlogPillarsSection() {
     <LandingSection bg="muted" className="!py-14 sm:!py-16 lg:!py-20">
       <SectionHeader
         eyebrow="Gidsen"
-        title="Alles over factureren"
-        description="Praktische uitleg per onderwerp. Kies een categorie en lees verder."
+        title="Alles voor je bedrijf als zzp'er"
+        description="Korte gidsen over factureren, geld en ondernemen."
       />
 
-      <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+      <div className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2">
         {blogPillars.map((pillar, index) => {
           const Icon = pillarIcons[pillar.id] || FileStack;
+          const title = pillar.cardTitle || pillar.title;
+          const blurb = pillar.cardBlurb || pillar.description;
 
           return (
             <motion.div
@@ -59,38 +63,23 @@ function BlogPillarsSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="group"
             >
               <Link
-                href={
-                  pillar.id === 'hypotheek'
-                    ? '/blogs/hypotheek-als-zzper'
-                    : pillar.id === 'aov'
-                      ? '/blogs/aov-zzp'
-                      : `/blogs?pillar=${pillar.id}`
-                }
-                className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-warm-orange/20 hover:shadow-md sm:p-6"
+                href={getPillarHref(pillar)}
+                className="group flex items-start gap-3.5 rounded-xl border border-slate-200/80 bg-white px-4 py-3.5 transition-all duration-200 hover:border-warm-orange/30 hover:shadow-sm sm:px-5 sm:py-4"
               >
-                <div
-                  className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-warm-orange to-amber-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  aria-hidden
-                />
-
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-warm-orange/15 to-amber-500/10 text-warm-orange transition-colors group-hover:from-warm-orange/25 group-hover:to-amber-500/20">
-                  <Icon className="h-6 w-6" strokeWidth={2} />
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-warm-orange/10 text-warm-orange transition-colors group-hover:bg-warm-orange/15">
+                  <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
                 </div>
-
-                <h3 className="text-lg font-bold text-deep-blue transition-colors group-hover:text-warm-orange">
-                  {pillar.title}
-                </h3>
-                <p className="mt-2 flex-grow text-sm leading-relaxed text-slate-600">
-                  {pillar.description}
-                </p>
-
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-warm-orange">
-                  Bekijk gidsen
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-[15px] font-semibold leading-snug text-deep-blue sm:text-base">
+                      {title}
+                    </h3>
+                    <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-slate-300 transition-all group-hover:translate-x-0.5 group-hover:text-warm-orange" />
+                  </div>
+                  <p className="mt-0.5 text-sm leading-snug text-slate-500">{blurb}</p>
+                </div>
               </Link>
             </motion.div>
           );
@@ -98,18 +87,18 @@ function BlogPillarsSection() {
       </div>
 
       <motion.div
-        className="mt-10 text-center sm:mt-12"
-        initial={{ opacity: 0, y: 12 }}
+        className="mt-8 text-center sm:mt-10"
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.4, delay: 0.15 }}
       >
         <Link
           href="/blogs"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-deep-blue px-8 py-3.5 font-semibold text-white shadow-lg shadow-deep-blue/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-deep-blue transition-colors hover:text-warm-orange"
         >
           Bekijk alle gidsen
-          <ArrowRight className="h-5 w-5" />
+          <ArrowRight className="h-4 w-4" />
         </Link>
       </motion.div>
     </LandingSection>

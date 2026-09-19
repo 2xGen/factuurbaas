@@ -1,18 +1,11 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import {
-  CheckCircle2,
-  Circle,
-  Copy,
-  Edit,
-  FileText,
-  ListChecks,
-  Send,
-  Trash2,
-} from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { format } from 'date-fns';
 import { nl } from 'date-fns/locale';
+import RowActionsMenu from '@/components/shared/RowActionsMenu';
 
 function formatShort(date) {
   return date ? format(date, 'd MMM yyyy', { locale: nl }) : '—';
@@ -48,17 +41,17 @@ const InvoiceTable = ({
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm">
       <div className="overflow-x-auto">
-        <table className="w-full table-fixed text-sm">
+        <table className="w-full min-w-[720px] text-sm">
           <thead className="border-b border-slate-200 bg-slate-50/80">
             <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-              <th className="w-[9%] px-3 py-3">Nr.</th>
-              <th className="w-[18%] px-3 py-3">Klant</th>
-              <th className="w-[14%] px-3 py-3">Datum</th>
-              <th className="w-[14%] px-3 py-3">Verval</th>
-              <th className="w-[10%] px-3 py-3">Dagen</th>
-              <th className="w-[12%] px-3 py-3">Bedrag</th>
-              <th className="w-[11%] px-3 py-3">Status</th>
-              <th className="w-[14%] px-2 py-3 text-right">Acties</th>
+              <th className="px-3 py-3">Nr.</th>
+              <th className="px-3 py-3">Klant</th>
+              <th className="px-3 py-3">Datum</th>
+              <th className="px-3 py-3">Verval</th>
+              <th className="px-3 py-3">Dagen</th>
+              <th className="px-3 py-3">Bedrag</th>
+              <th className="px-3 py-3">Status</th>
+              <th className="px-3 py-3 text-right">Acties</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -74,6 +67,36 @@ const InvoiceTable = ({
                 '—';
               const isPaid = invoice.status === 'paid';
 
+              const actions = [
+                { id: 'edit', label: 'Bewerken', onSelect: () => onEdit(invoice.id) },
+                {
+                  id: 'duplicate',
+                  label: 'Opnieuw factureren',
+                  onSelect: () => onDuplicate?.(invoice.id),
+                },
+                {
+                  id: 'paid',
+                  label: isPaid ? 'Markeer als onbetaald' : 'Markeer als betaald',
+                  onSelect: () => onTogglePaid(invoice.id),
+                },
+                !isPaid && {
+                  id: 'reminder',
+                  label: 'Herinnering sturen',
+                  onSelect: () => onSendReminder(invoice),
+                },
+                {
+                  id: 'log',
+                  label: 'Activiteitenlog',
+                  onSelect: () => onOpenActivityLog(invoice),
+                },
+                {
+                  id: 'delete',
+                  label: 'Verwijderen',
+                  destructive: true,
+                  onSelect: () => onDelete(invoice),
+                },
+              ];
+
               return (
                 <motion.tr
                   key={invoice.id}
@@ -81,10 +104,10 @@ const InvoiceTable = ({
                   animate={{ opacity: 1 }}
                   className="transition-colors hover:bg-slate-50/80"
                 >
-                  <td className="truncate px-3 py-3 font-medium text-deep-blue">
+                  <td className="whitespace-nowrap px-3 py-3 font-medium text-deep-blue">
                     #{invoice.invoice_number || String(invoice.id).slice(0, 8)}
                   </td>
-                  <td className="truncate px-3 py-3 text-slate-800" title={client}>
+                  <td className="max-w-[12rem] truncate px-3 py-3 text-slate-800" title={client}>
                     {client}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-slate-500">
@@ -116,73 +139,8 @@ const InvoiceTable = ({
                       {statusInfo.text}
                     </span>
                   </td>
-                  <td className="px-2 py-2">
-                    <div className="flex items-center justify-end gap-0.5">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-slate-600 hover:text-deep-blue"
-                        onClick={() => onEdit(invoice.id)}
-                        title="Bewerken"
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-warm-orange hover:text-orange-700"
-                        onClick={() => onDuplicate?.(invoice.id)}
-                        title="Opnieuw factureren"
-                      >
-                        <Copy className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className={`h-8 w-8 ${
-                          isPaid
-                            ? 'text-emerald-600 hover:text-emerald-700'
-                            : 'text-slate-500 hover:text-emerald-600'
-                        }`}
-                        onClick={() => onTogglePaid(invoice.id)}
-                        title={isPaid ? 'Markeer als onbetaald' : 'Markeer als betaald'}
-                      >
-                        {isPaid ? (
-                          <CheckCircle2 className="h-4 w-4" />
-                        ) : (
-                          <Circle className="h-4 w-4" />
-                        )}
-                      </Button>
-                      {!isPaid && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-orange-600 hover:text-orange-700"
-                          onClick={() => onSendReminder(invoice)}
-                          title="Stuur herinnering"
-                        >
-                          <Send className="h-4 w-4" />
-                        </Button>
-                      )}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-slate-500 hover:text-deep-blue"
-                        onClick={() => onOpenActivityLog(invoice)}
-                        title="Activiteitenlogboek"
-                      >
-                        <ListChecks className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-slate-400 hover:text-red-600"
-                        onClick={() => onDelete(invoice)}
-                        title="Verwijderen"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
+                  <td className="px-3 py-2 text-right">
+                    <RowActionsMenu items={actions} />
                   </td>
                 </motion.tr>
               );

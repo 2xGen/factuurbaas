@@ -9,7 +9,9 @@ import FormDatePicker from '@/components/invoice/formElements/FormDatePicker';
 import InvoiceFormSection from '@/components/invoice/formSections/InvoiceFormSection';
 import LayoutSelector from '@/components/invoice/LayoutSelector';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
+import ClientPicker from '@/components/invoice/ClientPicker';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { quoteClientDetailsToReceiver } from '@/lib/clientPersistence';
 import {
   Building2,
   FileText,
@@ -21,9 +23,19 @@ import {
   Palette,
   Bell,
   CheckCircle2,
+  UserCircle,
+  Loader2,
+  Save,
 } from 'lucide-react';
 
-export default function OfferteMaker({ form }) {
+export default function OfferteMaker({
+  form,
+  onImportFromProfile,
+  isImportingProfile = false,
+  onSaveToAccount,
+  isSavingToAccount = false,
+  onApplyClient,
+}) {
   const { user } = useAuth();
   const isLoggedIn = Boolean(user);
   const {
@@ -48,6 +60,46 @@ export default function OfferteMaker({ form }) {
         icon={<Building2 className="h-5 w-5 text-blue-600" />}
       >
         <div className="space-y-4">
+          {isLoggedIn && onImportFromProfile && (
+            <div className="flex flex-col gap-2 rounded-lg border border-warm-orange/30 bg-orange-50/60 p-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-slate-700">Vul je opgeslagen bedrijfsgegevens in.</p>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="shrink-0 border-warm-orange text-warm-orange hover:bg-orange-100"
+                  onClick={onImportFromProfile}
+                  disabled={isImportingProfile}
+                >
+                  {isImportingProfile ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <UserCircle className="mr-2 h-4 w-4" />
+                  )}
+                  Uit profiel
+                </Button>
+                {onSaveToAccount && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="shrink-0"
+                    onClick={onSaveToAccount}
+                    disabled={isSavingToAccount}
+                  >
+                    {isSavingToAccount ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Save className="mr-2 h-4 w-4" />
+                    )}
+                    Opslaan in account
+                  </Button>
+                )}
+              </div>
+            </div>
+          )}
+
           <div className="flex items-start gap-4">
             {quote.logo ? (
               <img
@@ -134,30 +186,38 @@ export default function OfferteMaker({ form }) {
           </div>
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-3">
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={quote.rememberCompanyDetails}
-              onChange={(e) => handleRememberChange(e.target.checked)}
-              className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-            />
-            <span className="text-sm text-slate-700">
-              <span className="font-medium text-slate-900">
-                Onthoud mijn bedrijfsgegevens op dit apparaat
+        {!isLoggedIn && (
+          <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-3">
+            <label className="flex cursor-pointer items-start gap-3">
+              <input
+                type="checkbox"
+                checked={quote.rememberCompanyDetails}
+                onChange={(e) => handleRememberChange(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm text-slate-700">
+                <span className="font-medium text-slate-900">
+                  Onthoud mijn bedrijfsgegevens op dit apparaat
+                </span>
+                <span className="mt-1 block text-slate-500">
+                  Opgeslagen in je browser. Wij slaan deze gegevens niet op onze servers op.
+                </span>
               </span>
-              <span className="block mt-1 text-slate-500">
-                Opgeslagen in je browser. Wij slaan deze gegevens niet op onze servers op.
-              </span>
-            </span>
-          </label>
-          {quote.rememberCompanyDetails && (
-            <p className="flex items-center gap-2 text-sm text-green-700 font-medium pl-7">
-              <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
-              Bedrijfsgegevens worden lokaal opgeslagen.
+            </label>
+            {quote.rememberCompanyDetails && (
+              <p className="flex items-center gap-2 pl-7 text-sm font-medium text-green-700">
+                <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
+                Bedrijfsgegevens worden lokaal opgeslagen.
+              </p>
+            )}
+            <p className="pl-7 text-xs text-slate-500">
+              <Link href="/login" className="font-medium text-warm-orange hover:underline">
+                Log in
+              </Link>{' '}
+              om gegevens in je account te bewaren en klanten te hergebruiken.
             </p>
-          )}
-        </div>
+          </div>
+        )}
       </InvoiceFormSection>
 
       <InvoiceFormSection
@@ -189,6 +249,12 @@ export default function OfferteMaker({ form }) {
         icon={<Users className="h-5 w-5 text-blue-600" />}
       >
         <div className="space-y-4">
+          {isLoggedIn && onApplyClient && (
+            <ClientPicker
+              receiverDetails={quoteClientDetailsToReceiver(quote.clientDetails)}
+              onApply={onApplyClient}
+            />
+          )}
           <FormInput
             label="Bedrijfsnaam"
             value={quote.clientDetails.companyName}

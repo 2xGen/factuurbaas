@@ -15,7 +15,7 @@ export default function FooterClient() {
           <div>
             <h3 className="mb-3 font-heading text-lg font-semibold text-deep-blue">FactuurBaas</h3>
             <p className="text-sm text-slate-600">
-              De makkelijkste manier voor Nederlandse ondernemers om mooie facturen te maken. Gratis, zonder account.
+              FactuurBaas helpt Nederlandse zzp&apos;ers met facturen, administratie en grip op hun bedrijf. Gratis en eenvoudig.
             </p>
           </div>
           <div>
@@ -30,6 +30,7 @@ export default function FooterClient() {
           <div>
             <h3 className="mb-3 font-heading text-lg font-semibold text-deep-blue">Meer</h3>
             <ul className="space-y-2">
+              <li><Link href="/uitgaven-bijhouden" className="text-sm transition-colors hover:text-warm-orange">Uitgaven bijhouden</Link></li>
               <li><Link href="/tools" className="text-sm transition-colors hover:text-warm-orange">Tools</Link></li>
               <li><Link href="/blogs" className="text-sm transition-colors hover:text-warm-orange">Gidsen</Link></li>
               <li><Link href="/blogs/hypotheek-als-zzper" className="text-sm transition-colors hover:text-warm-orange">Hypotheek als zzp&apos;er</Link></li>

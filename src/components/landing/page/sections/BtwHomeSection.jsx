@@ -12,34 +12,49 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { ArrowRight, CalendarDays, Percent, Receipt } from 'lucide-react';
+import {
+  ArrowRight,
+  Percent,
+  PiggyBank,
+  Receipt,
+  Repeat,
+  Wallet,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LandingSection, SectionHeader } from '@/components/landing/LandingSection';
 
-const BTW_COLOR = '#0A2A4D';
+const COLORS = {
+  verkopen: '#0A2A4D',
+  uitgaven: '#FF7F50',
+};
 
 const DEMO_BTW = [
-  { label: 'Q4 2025', btwTotaal: 680 },
-  { label: 'Q1 2026', btwTotaal: 1240 },
-  { label: 'Q2 2026', btwTotaal: 1580 },
-  { label: 'Q3 2026', btwTotaal: 1420 },
+  { label: 'Q4 2025', verkopen: 680, uitgaven: 145 },
+  { label: 'Q1 2026', verkopen: 1240, uitgaven: 260 },
+  { label: 'Q2 2026', verkopen: 1580, uitgaven: 310 },
+  { label: 'Q3 2026', verkopen: 1420, uitgaven: 285 },
 ];
 
 const POINTS = [
   {
-    icon: Receipt,
-    title: 'Totaal btw in één oogopslag',
-    text: 'Zie hoeveel btw je op al je facturen hebt berekend — zonder Excel.',
+    icon: Wallet,
+    title: 'Zakelijke uitgaven',
+    text: 'Registreer software, materiaal, reiskosten, verzekeringen en andere zakelijke kosten.',
+  },
+  {
+    icon: Repeat,
+    title: 'Terugkerende uitgaven',
+    text: 'Voeg abonnementen en andere vaste kosten één keer toe.',
   },
   {
     icon: Percent,
-    title: 'Btw openstaand',
-    text: 'Weten wat er nog binnenkomt op openstaande facturen.',
+    title: 'BTW-overzicht',
+    text: 'Zie btw op verkopen en geregistreerde zakelijke uitgaven naast elkaar.',
   },
   {
-    icon: CalendarDays,
-    title: 'Per kwartaal',
-    text: 'Klaar voor je btw-aangifte: verstuurd per kwartaal in een heldere grafiek.',
+    icon: PiggyBank,
+    title: 'Resultaat',
+    text: 'Zie omzet minus geregistreerde uitgaven.',
   },
 ];
 
@@ -54,7 +69,10 @@ function MoneyTooltip({ active, payload, label }) {
       <p className="mb-1.5 font-semibold text-deep-blue">{label}</p>
       {payload.map((entry) => (
         <div key={entry.dataKey} className="flex items-center justify-between gap-4 py-0.5">
-          <span className="text-slate-600">{entry.name}</span>
+          <span className="flex items-center gap-1.5 text-slate-600">
+            <span className="inline-block h-2 w-2 rounded-full" style={{ background: entry.color }} />
+            {entry.name}
+          </span>
           <span className="font-medium text-slate-900">
             {new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(
               entry.value || 0
@@ -88,7 +106,7 @@ export default function BtwHomeSection() {
               <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
               <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
               <div className="ml-3 flex-1 truncate rounded-md bg-white px-3 py-1 text-center text-[11px] text-slate-500 sm:text-xs">
-                factuurbaas.nl/dashboard
+                factuurbaas.nl/uitgaven
               </div>
             </div>
 
@@ -97,22 +115,22 @@ export default function BtwHomeSection() {
                 <div className="rounded-xl border border-slate-200/80 bg-[#f4f6f9] px-3 py-3.5 sm:px-4">
                   <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-medium text-slate-500 sm:text-xs">
                     <Receipt className="h-3.5 w-3.5 text-deep-blue" strokeWidth={1.75} />
-                    Totaal btw
+                    Uitgaven
                   </div>
                   <p className="font-heading text-xl font-bold tracking-tight text-deep-blue sm:text-2xl">
-                    € 4.920,00
+                    € 1.240
                   </p>
-                  <p className="mt-0.5 text-[10px] text-slate-400 sm:text-xs">Op alle facturen</p>
+                  <p className="mt-0.5 text-[10px] text-slate-400 sm:text-xs">Deze maand</p>
                 </div>
                 <div className="rounded-xl border border-slate-200/80 bg-[#f4f6f9] px-3 py-3.5 sm:px-4">
                   <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-medium text-slate-500 sm:text-xs">
                     <Percent className="h-3.5 w-3.5 text-warm-orange" strokeWidth={1.75} />
-                    Btw openstaand
+                    Btw op kosten
                   </div>
                   <p className="font-heading text-xl font-bold tracking-tight text-deep-blue sm:text-2xl">
-                    € 385,00
+                    € 260
                   </p>
-                  <p className="mt-0.5 text-[10px] text-slate-400 sm:text-xs">Nog te ontvangen</p>
+                  <p className="mt-0.5 text-[10px] text-slate-400 sm:text-xs">Geregistreerd</p>
                 </div>
               </div>
 
@@ -120,17 +138,17 @@ export default function BtwHomeSection() {
                 <div className="mb-3 flex items-start justify-between gap-2">
                   <div>
                     <h3 className="font-heading text-sm font-semibold text-deep-blue sm:text-base">
-                      Btw verstuurd per kwartaal
+                      BTW-overzicht
                     </h3>
                     <p className="text-[11px] text-slate-500 sm:text-xs">
-                      Btw op verstuurde facturen per kwartaal
+                      Verkopen en zakelijke uitgaven per kwartaal
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-400">
-                      Totaal btw
+                      Te reserveren
                     </p>
-                    <p className="font-heading text-base font-bold text-deep-blue">€ 4.920,00</p>
+                    <p className="font-heading text-base font-bold text-deep-blue">€ 3.920</p>
                   </div>
                 </div>
                 <div className="h-48 w-full sm:h-56">
@@ -152,11 +170,18 @@ export default function BtwHomeSection() {
                       />
                       <Tooltip content={<MoneyTooltip />} />
                       <Bar
-                        dataKey="btwTotaal"
-                        name="Btw verstuurd"
-                        fill={BTW_COLOR}
+                        dataKey="verkopen"
+                        name="Btw verkopen"
+                        fill={COLORS.verkopen}
                         radius={[4, 4, 0, 0]}
-                        maxBarSize={44}
+                        maxBarSize={28}
+                      />
+                      <Bar
+                        dataKey="uitgaven"
+                        name="Btw uitgaven"
+                        fill={COLORS.uitgaven}
+                        radius={[4, 4, 0, 0]}
+                        maxBarSize={28}
                       />
                     </BarChart>
                   </ResponsiveContainer>
@@ -175,9 +200,9 @@ export default function BtwHomeSection() {
         >
           <SectionHeader
             align="left"
-            eyebrow="Btw-overzicht"
-            title="Btw per kwartaal — zonder gedoe"
-            description="Houd totaal btw en openstaande btw bij. Zie wat je per kwartaal hebt verstuurd, klaar voor je aangifte."
+            eyebrow="Uitgaven & btw"
+            title="Houd zakelijke kosten én btw bij"
+            description="Voeg zakelijke uitgaven toe en zie hoeveel btw je op je kosten hebt geregistreerd. FactuurBaas combineert dit met de btw op je facturen voor een duidelijker overzicht."
             className="mb-8 sm:mb-10"
           />
 
@@ -207,19 +232,11 @@ export default function BtwHomeSection() {
             })}
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8">
             <Button asChild size="lg" className="h-12 rounded-xl px-6 font-semibold">
-              <Link href="/register">
-                Maak gratis account <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/uitgaven-bijhouden">
+                Uitgaven bijhouden <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="h-12 rounded-xl border-slate-300 px-6 font-semibold text-deep-blue"
-            >
-              <Link href="/login?next=/dashboard">Bekijk dashboard</Link>
             </Button>
           </div>
         </motion.div>

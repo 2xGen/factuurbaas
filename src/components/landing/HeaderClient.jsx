@@ -16,6 +16,7 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
+  Receipt,
   UserCircle,
   Users,
   X,
@@ -48,7 +49,9 @@ function NavLink({ href, children, active }) {
 export default function HeaderClient() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [createMenuOpen, setCreateMenuOpen] = useState(false);
   const headerRef = useRef(null);
+  const createMenuRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
   const { user, loading, signOut } = useAuth();
@@ -90,6 +93,17 @@ export default function HeaderClient() {
   const homeHref = isLoggedIn ? '/dashboard' : '/';
   const createLabel = isLoggedIn ? 'Maak factuur' : 'Maak gratis factuur';
   const showCreateCta = pathname !== '/create-invoice';
+
+  useEffect(() => {
+    if (!createMenuOpen) return;
+    const onDoc = (e) => {
+      if (createMenuRef.current && !createMenuRef.current.contains(e.target)) {
+        setCreateMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, [createMenuOpen]);
 
   return (
     <header
@@ -142,6 +156,9 @@ export default function HeaderClient() {
             <NavLink href="/uren" active={pathname.startsWith('/uren')}>
               Uren
             </NavLink>
+            <NavLink href="/uitgaven" active={pathname.startsWith('/uitgaven')}>
+              Uitgaven
+            </NavLink>
             <NavLink href="/klanten" active={pathname.startsWith('/klanten')}>
               Klanten
             </NavLink>
@@ -176,28 +193,55 @@ export default function HeaderClient() {
           )}
 
           {showCreateCta && (
-            <div className="hidden md:block">
-              <Button
-                asChild
-                className={
-                  isLoggedIn
-                    ? 'rounded-xl bg-deep-blue px-5 font-semibold shadow-sm hover:bg-deep-blue/90'
-                    : undefined
-                }
-              >
-                <Link href="/create-invoice">
-                  {isLoggedIn ? (
-                    <>
+            <div className="relative hidden md:block" ref={createMenuRef}>
+              {isLoggedIn ? (
+                <div className="flex overflow-hidden rounded-xl shadow-sm">
+                  <Button
+                    asChild
+                    className="rounded-none rounded-l-xl bg-deep-blue px-4 font-semibold hover:bg-deep-blue/90"
+                  >
+                    <Link href="/create-invoice">
                       <FilePlus2 className="mr-2 h-4 w-4" />
                       {createLabel}
-                    </>
-                  ) : (
-                    <>
-                      {createLabel} <ArrowRight className="ml-2 h-4 w-4" />
-                    </>
+                    </Link>
+                  </Button>
+                  <Button
+                    type="button"
+                    className="rounded-none rounded-r-xl border-l border-white/20 bg-deep-blue px-2.5 hover:bg-deep-blue/90"
+                    aria-label="Meer aanmaken"
+                    aria-expanded={createMenuOpen}
+                    onClick={() => setCreateMenuOpen((v) => !v)}
+                  >
+                    <span className="text-xs leading-none">▾</span>
+                  </Button>
+                  {createMenuOpen && (
+                    <div className="absolute right-0 top-full z-50 mt-1.5 min-w-[11rem] overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-lg">
+                      <Link
+                        href="/create-invoice"
+                        className="flex items-center gap-2 px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50"
+                        onClick={() => setCreateMenuOpen(false)}
+                      >
+                        <FilePlus2 className="h-4 w-4 text-deep-blue" />
+                        Factuur
+                      </Link>
+                      <Link
+                        href="/tools/offerte-maker/maken"
+                        className="flex items-center gap-2 px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50"
+                        onClick={() => setCreateMenuOpen(false)}
+                      >
+                        <FileText className="h-4 w-4 text-deep-blue" />
+                        Offerte
+                      </Link>
+                    </div>
                   )}
-                </Link>
-              </Button>
+                </div>
+              ) : (
+                <Button asChild>
+                  <Link href="/create-invoice">
+                    {createLabel} <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
             </div>
           )}
 
@@ -237,6 +281,14 @@ export default function HeaderClient() {
                     </span>
                   </Link>
                   <Link
+                    href="/tools/offerte-maker/maken"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <FileText className="h-4 w-4" /> Maak offerte
+                    </span>
+                  </Link>
+                  <Link
                     href="/facturen"
                     className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
                   >
@@ -250,6 +302,14 @@ export default function HeaderClient() {
                   >
                     <span className="inline-flex items-center gap-2">
                       <Clock className="h-4 w-4" /> Uren
+                    </span>
+                  </Link>
+                  <Link
+                    href="/uitgaven"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Receipt className="h-4 w-4" /> Uitgaven
                     </span>
                   </Link>
                   <Link

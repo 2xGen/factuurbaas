@@ -1,106 +1,55 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  ArrowRight,
-  Calculator,
-  Clock,
-  FileText,
-  Hash,
-  Percent,
-  Receipt,
-  Scale,
-  Timer,
-  TrendingUp,
-  Users,
-  Wallet,
-} from 'lucide-react';
+import { ArrowRight, Calculator, Percent, Receipt, Wallet } from 'lucide-react';
 
 const DASHBOARD_TOOLS = [
   {
-    title: 'Factuur maken',
-    description: 'Nieuwe factuur opstellen en opslaan.',
-    href: '/create-invoice',
-    icon: FileText,
-  },
-  {
-    title: 'Uren → factuur',
-    description: 'Log uren en zet ze om naar een factuur.',
-    href: '/uren',
-    icon: Clock,
-  },
-  {
-    title: 'Klanten',
-    description: 'Klanten opslaan voor sneller factureren.',
-    href: '/klanten',
-    icon: Users,
-  },
-  {
-    title: 'Offerte maker',
-    description: 'Professionele offerte als PDF.',
+    title: 'Offerte maken',
+    description: 'Professionele offerte maken en downloaden.',
     href: '/tools/offerte-maker/maken',
     icon: Receipt,
   },
   {
     title: 'BTW calculator',
-    description: 'Incl. / excl. btw berekenen.',
+    description: 'Bereken snel bedragen incl. of excl. btw.',
     href: '/tools/btw-calculator/berekenen',
     icon: Calculator,
   },
   {
-    title: 'Uurtarief',
-    description: 'Bepaal je minimale uurtarief.',
+    title: 'Uurtarief berekenen',
+    description: 'Ontdek welk uurtarief bij je doelen past.',
     href: '/tools/uurtarief-calculator/maken',
     icon: Wallet,
   },
   {
-    title: 'Uurtarief → inkomen',
-    description: 'Omzet en winst uit je tarief.',
-    href: '/tools/uurtarief-naar-inkomen/berekenen',
-    icon: TrendingUp,
-  },
-  {
-    title: 'Factuurnummer',
-    description: 'Genereer een net factuurnummer.',
-    href: '/tools/factuurnummer-generator/maken',
-    icon: Hash,
-  },
-  {
     title: 'Marge calculator',
-    description: 'Winstmarge op inkoop/verkoop.',
+    description: 'Bereken je marge en verkoopprijs.',
     href: '/tools/marge-calculator/berekenen',
     icon: Percent,
-  },
-  {
-    title: 'Betaaltermijn',
-    description: 'Vervaldatum berekenen.',
-    href: '/tools/betaaltermijn-calculator/berekenen',
-    icon: Timer,
-  },
-  {
-    title: 'KOR check',
-    description: 'Past de KOR bij jouw omzet?',
-    href: '/tools/kor-calculator/berekenen',
-    icon: Scale,
   },
 ];
 
 export default function DashboardTools() {
   return (
-    <section className="mb-10">
+    <section className="mb-8">
       <div className="mb-4 flex items-end justify-between gap-3">
         <div>
-          <h2 className="font-heading text-lg font-semibold text-deep-blue sm:text-xl">Tools</h2>
-          <p className="mt-1 text-sm text-slate-500">Snel aan de slag — direct openen zonder omwegen.</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Tools voor jou
+          </p>
+          <h2 className="mt-0.5 font-heading text-lg font-semibold text-deep-blue sm:text-xl">
+            Handige tools voor je bedrijf
+          </h2>
         </div>
         <Link
           href="/tools"
           className="hidden text-sm font-medium text-warm-orange hover:underline sm:inline-flex sm:items-center sm:gap-1"
         >
-          Alle tools <ArrowRight className="h-3.5 w-3.5" />
+          Bekijk alle tools <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2">
         {DASHBOARD_TOOLS.map((tool) => {
           const Icon = tool.icon;
           return (
@@ -113,9 +62,7 @@ export default function DashboardTools() {
                 <Icon className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <span className="min-w-0">
-                <span className="block font-semibold text-deep-blue group-hover:text-deep-blue">
-                  {tool.title}
-                </span>
+                <span className="block font-semibold text-deep-blue">{tool.title}</span>
                 <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">
                   {tool.description}
                 </span>
@@ -123,6 +70,15 @@ export default function DashboardTools() {
             </Link>
           );
         })}
+      </div>
+
+      <div className="mt-3 sm:hidden">
+        <Link
+          href="/tools"
+          className="inline-flex items-center gap-1 text-sm font-medium text-warm-orange hover:underline"
+        >
+          Bekijk alle tools <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </div>
     </section>
   );

@@ -9,14 +9,16 @@ export function getGuidePillars() {
 
 export const guideHubIntro = {
   default: {
-    title: 'Factuur tips voor zzp\'ers',
+    title: "Factuur tips voor zzp'ers",
+    titleAccent: "zzp'ers",
     paragraphs: [
       'Artikelen en gidsen over factuur maken, btw berekenen, offertes en factuurbeheer. Praktische uitleg voor zzp\'ers en kleine ondernemers — zonder ingewikkelde taal.',
       'Filter op onderwerp of blader door alles. Elke gids koppelt door naar onze gratis tools, zodat je direct een factuur, offerte of btw-berekening kunt maken.',
     ],
   },
   'btw-belasting': {
-    title: 'Btw-gidsen voor zzp\'ers',
+    title: "Btw-gidsen voor zzp'ers",
+    titleAccent: "zzp'ers",
     paragraphs: [
       'Welke btw moet je rekenen? Hoe bereken je btw terug uit een bedrag inclusief btw? In deze gidsen lees je alles over 21%, 9% en 0% btw, veelgemaakte fouten en btw voor buitenlandse klanten.',
       'Gebruik onze gratis btw calculator om bedragen direct te berekenen en lees de gids die bij jouw situatie past.',
@@ -24,6 +26,7 @@ export const guideHubIntro = {
   },
   offertes: {
     title: 'Offerte-gidsen: maken, versturen en factureren',
+    titleAccent: 'maken, versturen en factureren',
     paragraphs: [
       'Een professionele offerte helpt je om duidelijke afspraken te maken vóór je start met een opdracht. In deze gidsen lees je hoe je een offerte maakt, wat erop moet staan, hoe je deze als PDF verstuurt en hoe je na akkoord omzet naar een factuur.',
       'Maak gratis een offerte met FactuurBaas — zonder account en direct downloadbaar als PDF.',
@@ -31,6 +34,7 @@ export const guideHubIntro = {
   },
   uurtarief: {
     title: "Uurtarief-gidsen voor zzp'ers",
+    titleAccent: "zzp'ers",
     paragraphs: [
       "Welk uurtarief moet je vragen? Hoe bereken je omzet uit je tarief? In deze gidsen leer je hoe je als zzp'er een realistisch uurtarief bepaalt op basis van inkomen, kosten en factureerbare uren.",
       'Gebruik onze gratis uurtarief calculator om direct te berekenen welk tarief bij jouw situatie past.',
@@ -38,6 +42,7 @@ export const guideHubIntro = {
   },
   tools: {
     title: "Tools voor zzp'ers",
+    titleAccent: "zzp'ers",
     paragraphs: [
       "Welke online tools helpen je als zzp'er met factureren, offertes, btw en uurtarieven? In deze gidsen lees je welke tools handig zijn — en ga je direct aan de slag zonder account.",
       'Alle FactuurBaas-tools zijn gratis. Kies een tool, lees hoe het werkt en download wat je nodig hebt.',
@@ -45,6 +50,7 @@ export const guideHubIntro = {
   },
   boekhouden: {
     title: "Boekhouden als zzp'er",
+    titleAccent: "zzp'er",
     paragraphs: [
       "Kun je zelf je boekhouding doen? Wanneer heb je een boekhoudprogramma nodig? En wat is het verschil tussen een factuurtool en boekhoudsoftware? In deze gidsen lees je hoe je als zzp'er je administratie regelt.",
       'Doe ook de gratis boekhoudprogramma-check om te zien welk type oplossing bij jouw situatie past.',
@@ -156,6 +162,7 @@ export function getBlogHubIntro(pillarId) {
     if (pillar) {
       return {
         title: pillar.title,
+        titleAccent: pillar.titleAccent,
         paragraphs: [pillar.description],
       };
     }

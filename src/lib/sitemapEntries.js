@@ -38,6 +38,7 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/tools/hypotheek-berekenen-zzp`, lastModified: new Date('2026-09-15'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/aov-zzp`, lastModified: new Date('2026-09-18'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/tools/aov-berekenen-zzp`, lastModified: new Date('2026-09-18'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/uitgaven-bijhouden`, lastModified: new Date('2026-09-19'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/premium`, lastModified: new Date('2026-02-05'), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITEMAP_BASE_URL}/gidsen`, lastModified: new Date('2026-09-05'), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITEMAP_BASE_URL}/blogs`, lastModified: new Date('2026-09-05'), changeFrequency: 'weekly', priority: 0.8 },

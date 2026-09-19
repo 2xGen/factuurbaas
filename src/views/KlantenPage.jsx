@@ -5,15 +5,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
-  FilePlus2,
   Loader2,
-  Pencil,
   Plus,
   Search,
-  Trash2,
   Users,
 } from 'lucide-react';
 import ClientFormDialog from '@/components/klanten/ClientFormDialog';
+import RowActionsMenu from '@/components/shared/RowActionsMenu';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
@@ -210,7 +208,7 @@ export default function KlantenPage() {
           ) : (
             <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm">
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[640px] text-left text-sm">
+                <table className="w-full min-w-[720px] text-left text-sm">
                   <thead>
                     <tr className="border-b border-slate-100 text-[11px] uppercase tracking-wide text-slate-400">
                       <th className="px-4 py-3 font-medium">Klant</th>
@@ -235,43 +233,37 @@ export default function KlantenPage() {
                           {client.phone || '—'}
                         </td>
                         <td className="px-4 py-3.5 text-slate-600">{client.email || '—'}</td>
-                        <td className="px-4 py-3.5">
-                          <div className="flex items-center justify-end gap-1">
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="h-8 text-deep-blue hover:bg-deep-blue/5"
-                              onClick={() =>
-                                router.push(`/create-invoice?clientId=${client.id}`)
-                              }
-                              title="Factuur maken"
-                            >
-                              <FilePlus2 className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="h-8 text-slate-600"
-                              onClick={() => openEdit(client)}
-                              title="Bewerken"
-                            >
-                              <Pencil className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="h-8 text-red-500 hover:bg-red-50 hover:text-red-600"
-                              onClick={() => handleDelete(client)}
-                              disabled={deletingId === client.id}
-                              title="Verwijderen"
-                            >
-                              {deletingId === client.id ? (
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                              ) : (
-                                <Trash2 className="h-4 w-4" />
-                              )}
-                            </Button>
-                          </div>
+                        <td className="px-4 py-3.5 text-right">
+                          <RowActionsMenu
+                            items={[
+                              {
+                                id: 'invoice',
+                                label: 'Factuur maken',
+                                onSelect: () =>
+                                  router.push(`/create-invoice?clientId=${client.id}`),
+                              },
+                              {
+                                id: 'quote',
+                                label: 'Offerte maken',
+                                onSelect: () =>
+                                  router.push(
+                                    `/tools/offerte-maker/maken?clientId=${client.id}`
+                                  ),
+                              },
+                              {
+                                id: 'edit',
+                                label: 'Bewerken',
+                                onSelect: () => openEdit(client),
+                              },
+                              {
+                                id: 'delete',
+                                label: 'Verwijderen',
+                                destructive: true,
+                                disabled: deletingId === client.id,
+                                onSelect: () => handleDelete(client),
+                              },
+                            ]}
+                          />
                         </td>
                       </tr>
                     ))}

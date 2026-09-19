@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MONEYBIRD_URL, JORTT_URL, E_BOEKHOUDEN_URL } from '@/lib/affiliateLinks';
 import { aovArticles } from '@/lib/aovBlogData';
+import { uitgavenArticles } from '@/lib/uitgavenBlogData';
+import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
 
 const CtaButton = () => (
     <div className="my-8 text-center">
@@ -13393,6 +13395,8 @@ export const articles = [
     ),
   },
   ...aovArticles,
+  ...uitgavenArticles,
+  ...zakelijkeKostenArticles,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];
   const aIsSpecial = specialSlugs.includes(a.slug);

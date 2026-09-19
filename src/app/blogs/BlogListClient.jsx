@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { blogPillars } from '@/lib/blogPillars';
+import { blogPillars, formatPillarTitle } from '@/lib/blogPillars';
 import { GUIDES_PER_PAGE, getBlogHubIntro, guideHubFaqs } from '@/lib/guideHub';
 
 function toListItem(article) {
@@ -62,16 +62,30 @@ function interleaveByPillar(items) {
   return result;
 }
 
-function HubTitle({ title }) {
-  const marker = "zzp'ers";
-  const index = title.indexOf(marker);
-  if (index === -1) return title;
+function HubTitle({ title, titleAccent }) {
+  const parts = formatPillarTitle(title, titleAccent);
+  if (typeof parts === 'string') {
+    // Fallback: highlight common zzp markers
+    for (const marker of ["zzp'ers", "zzp'er"]) {
+      const index = title.indexOf(marker);
+      if (index !== -1) {
+        return (
+          <>
+            {title.slice(0, index)}
+            <span className="text-warm-orange">{marker}</span>
+            {title.slice(index + marker.length)}
+          </>
+        );
+      }
+    }
+    return title;
+  }
 
   return (
     <>
-      {title.slice(0, index)}
-      <span className="text-warm-orange">{marker}</span>
-      {title.slice(index + marker.length)}
+      {parts.before}
+      <span className="text-warm-orange">{parts.accent}</span>
+      {parts.after}
     </>
   );
 }
@@ -177,7 +191,7 @@ export default function BlogListClient({ articles, guides = [] }) {
           className="text-center mb-10 max-w-3xl mx-auto"
         >
           <h1 className="text-4xl sm:text-5xl font-extrabold text-deep-blue tracking-tight font-heading">
-            <HubTitle title={intro.title} />
+            <HubTitle title={intro.title} titleAccent={intro.titleAccent} />
           </h1>
           {intro.paragraphs.map((paragraph) => (
             <p key={paragraph.slice(0, 48)} className="mt-4 text-lg text-slate-600 leading-relaxed">
@@ -216,7 +230,7 @@ export default function BlogListClient({ articles, guides = [] }) {
                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                 }`}
               >
-                {pillar.title}
+                {pillar.cardTitle || pillar.title}
               </button>
             ))}
           </div>

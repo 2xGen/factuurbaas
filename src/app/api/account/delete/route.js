@@ -84,6 +84,7 @@ export async function DELETE(request) {
   });
 
   await admin.from('clients').delete().eq('user_id', user.id);
+  await admin.from('expenses').delete().eq('user_id', user.id);
   await admin.from('invoices').delete().eq('user_id', user.id);
   await admin.from('profiles').delete().eq('id', user.id);
 
