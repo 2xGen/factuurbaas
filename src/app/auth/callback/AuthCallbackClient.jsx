@@ -14,17 +14,11 @@ import { requestWelcomeEmail } from '@/lib/requestWelcomeEmail';
 import { Loader2 } from 'lucide-react';
 
 const CALLBACK_TIMEOUT_MS = 15_000;
-/** Survives React Strict Mode remounts so a PKCE code is only exchanged once. */
-const inFlightExchanges = new Map();
 
 function safeNextPath(next) {
   if (!next || typeof next !== 'string') return '/dashboard';
   if (!next.startsWith('/') || next.startsWith('//')) return '/dashboard';
   return next;
-}
-
-function isBenignExchangeError(message = '') {
-  return /already|exchanged|code verifier|auth code.*invalid|flow state/i.test(message);
 }
 
 async function applyPrivacyConsentIfNeeded() {
@@ -88,51 +82,52 @@ async function applyReferralIfNeeded() {
       // Keep nothing — invalid code
     }
   } catch (err) {
-    // Re-store so signup can be attributed once the migration is live
     storeReferralCode(code);
     console.warn('referral apply failed:', err?.message || err);
   }
 }
 
-async function ensureSessionFromCallback(code) {
-  if (code) {
-    const existingExchange = inFlightExchanges.get(code);
-    if (existingExchange) return existingExchange;
+/**
+ * Wait for the session created by GoTrue's PKCE auto-exchange on initialize.
+ * Do NOT call exchangeCodeForSession here — gotrue-js 2.43 still auto-exchanges
+ * PKCE when ?code= + code-verifier exist, even with detectSessionInUrl: false.
+ * A second exchange causes "invalid flow state" 404s and can wipe the session.
+ */
+async function waitForOAuthSession(timeoutMs) {
+  await supabase.auth.initialize();
 
-    const exchangePromise = (async () => {
-      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-      if (!error && data?.session) return data.session;
+  const {
+    data: { session: existing },
+  } = await supabase.auth.getSession();
+  if (existing) return existing;
 
-      // Double-exchange / Strict Mode race: session may already exist.
-      if (error && isBenignExchangeError(error.message)) {
-        const { data: existing } = await supabase.auth.getSession();
-        if (existing?.session) return existing.session;
-      }
-      if (error) throw error;
+  return new Promise((resolve, reject) => {
+    let settled = false;
 
-      const { data: fallback, error: fallbackError } = await supabase.auth.getSession();
-      if (fallbackError) throw fallbackError;
-      if (!fallback.session) {
-        throw new Error('Geen sessie ontvangen van Google.');
-      }
-      return fallback.session;
-    })();
+    const finish = (session, error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      subscription.unsubscribe();
+      if (error) reject(error);
+      else resolve(session);
+    };
 
-    inFlightExchanges.set(code, exchangePromise);
-    try {
-      return await exchangePromise;
-    } catch (err) {
-      inFlightExchanges.delete(code);
-      throw err;
-    }
-  }
+    const timer = setTimeout(() => {
+      finish(null, new Error('Inloggen duurt te lang. Probeer het opnieuw.'));
+    }, timeoutMs);
 
-  const { data, error } = await supabase.auth.getSession();
-  if (error) throw error;
-  if (!data.session) {
-    throw new Error('Geen sessie ontvangen van Google.');
-  }
-  return data.session;
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) finish(session);
+    });
+
+    // Cover the case where SIGNED_IN fired before we subscribed.
+    void supabase.auth.getSession().then(({ data }) => {
+      if (data?.session) finish(data.session);
+    });
+  });
 }
 
 export default function AuthCallbackClient() {
@@ -143,7 +138,6 @@ export default function AuthCallbackClient() {
   useEffect(() => {
     let cancelled = false;
     const next = safeNextPath(searchParams.get('next'));
-    const code = searchParams.get('code');
     const errorDescription = searchParams.get('error_description');
 
     const fail = (msg) => {
@@ -163,7 +157,7 @@ export default function AuthCallbackClient() {
 
     (async () => {
       try {
-        await ensureSessionFromCallback(code);
+        await waitForOAuthSession(CALLBACK_TIMEOUT_MS - 500);
         if (cancelled) return;
 
         await applyPrivacyConsentIfNeeded();

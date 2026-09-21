@@ -14,8 +14,9 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: isBrowser,
     autoRefreshToken: isBrowser,
-    // Callback page exchanges ?code= explicitly — avoid a second auto-exchange.
-    detectSessionInUrl: false,
+    // gotrue-js always auto-exchanges PKCE when ?code= + verifier exist;
+    // AuthCallbackClient waits for that session (must not exchange again).
+    detectSessionInUrl: true,
     flowType: 'pkce',
     storage: isBrowser ? window.localStorage : undefined,
   },
