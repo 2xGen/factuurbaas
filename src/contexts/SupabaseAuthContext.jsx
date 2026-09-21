@@ -3,6 +3,7 @@ import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 
 const AuthContext = createContext(undefined);
+const AUTH_INIT_TIMEOUT_MS = 12_000;
 
 function getRedirectOrigin() {
   if (typeof window !== 'undefined') return window.location.origin;
@@ -24,31 +25,42 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     let mounted = true;
 
-    // Local JWT can outlive a deleted account — validate against the server.
+    const safetyTimeout = setTimeout(() => {
+      if (mounted) setLoading(false);
+    }, AUTH_INIT_TIMEOUT_MS);
+
     (async () => {
-      const {
-        data: { session: current },
-      } = await supabase.auth.getSession();
-      if (!mounted) return;
+      try {
+        const {
+          data: { session: current },
+        } = await supabase.auth.getSession();
+        if (!mounted) return;
 
-      if (!current) {
-        handleSession(null);
-        return;
+        if (!current) {
+          handleSession(null);
+          return;
+        }
+
+        const {
+          data: { user: verified },
+          error,
+        } = await supabase.auth.getUser();
+        if (!mounted) return;
+
+        if (error || !verified) {
+          // Stale/invalid refresh tokens are common after storage races — clear locally.
+          await supabase.auth.signOut({ scope: 'local' });
+          handleSession(null);
+          return;
+        }
+
+        handleSession(current);
+      } catch (err) {
+        console.warn('Auth init failed:', err?.message || err);
+        if (mounted) handleSession(null);
+      } finally {
+        clearTimeout(safetyTimeout);
       }
-
-      const {
-        data: { user: verified },
-        error,
-      } = await supabase.auth.getUser();
-      if (!mounted) return;
-
-      if (error || !verified) {
-        await supabase.auth.signOut({ scope: 'local' });
-        handleSession(null);
-        return;
-      }
-
-      handleSession(current);
     })();
 
     const {
@@ -59,6 +71,7 @@ export const AuthProvider = ({ children }) => {
 
     return () => {
       mounted = false;
+      clearTimeout(safetyTimeout);
       subscription.unsubscribe();
     };
   }, [handleSession]);
@@ -70,7 +83,8 @@ export const AuthProvider = ({ children }) => {
         provider: 'google',
         options: {
           redirectTo,
-          queryParams: { access_type: 'offline', prompt: 'consent' },
+          // Avoid forcing consent every login — reduces invalid_grant / code reuse issues.
+          queryParams: { access_type: 'offline', prompt: 'select_account' },
         },
       });
 

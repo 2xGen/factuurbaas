@@ -13,10 +13,18 @@ import { applyReferralCode, consumeReferralCode, storeReferralCode } from '@/lib
 import { requestWelcomeEmail } from '@/lib/requestWelcomeEmail';
 import { Loader2 } from 'lucide-react';
 
+const CALLBACK_TIMEOUT_MS = 15_000;
+/** Survives React Strict Mode remounts so a PKCE code is only exchanged once. */
+const inFlightExchanges = new Map();
+
 function safeNextPath(next) {
   if (!next || typeof next !== 'string') return '/dashboard';
   if (!next.startsWith('/') || next.startsWith('//')) return '/dashboard';
   return next;
+}
+
+function isBenignExchangeError(message = '') {
+  return /already|exchanged|code verifier|auth code.*invalid|flow state/i.test(message);
 }
 
 async function applyPrivacyConsentIfNeeded() {
@@ -86,6 +94,47 @@ async function applyReferralIfNeeded() {
   }
 }
 
+async function ensureSessionFromCallback(code) {
+  if (code) {
+    const existingExchange = inFlightExchanges.get(code);
+    if (existingExchange) return existingExchange;
+
+    const exchangePromise = (async () => {
+      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+      if (!error && data?.session) return data.session;
+
+      // Double-exchange / Strict Mode race: session may already exist.
+      if (error && isBenignExchangeError(error.message)) {
+        const { data: existing } = await supabase.auth.getSession();
+        if (existing?.session) return existing.session;
+      }
+      if (error) throw error;
+
+      const { data: fallback, error: fallbackError } = await supabase.auth.getSession();
+      if (fallbackError) throw fallbackError;
+      if (!fallback.session) {
+        throw new Error('Geen sessie ontvangen van Google.');
+      }
+      return fallback.session;
+    })();
+
+    inFlightExchanges.set(code, exchangePromise);
+    try {
+      return await exchangePromise;
+    } catch (err) {
+      inFlightExchanges.delete(code);
+      throw err;
+    }
+  }
+
+  const { data, error } = await supabase.auth.getSession();
+  if (error) throw error;
+  if (!data.session) {
+    throw new Error('Geen sessie ontvangen van Google.');
+  }
+  return data.session;
+}
+
 export default function AuthCallbackClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -93,48 +142,48 @@ export default function AuthCallbackClient() {
 
   useEffect(() => {
     let cancelled = false;
+    const next = safeNextPath(searchParams.get('next'));
+    const code = searchParams.get('code');
+    const errorDescription = searchParams.get('error_description');
 
-    async function finish() {
-      const next = safeNextPath(searchParams.get('next'));
-      const code = searchParams.get('code');
-      const errorDescription = searchParams.get('error_description');
+    const fail = (msg) => {
+      if (cancelled) return;
+      setMessage(msg);
+      setTimeout(() => router.replace('/login'), 2500);
+    };
 
-      if (errorDescription) {
-        setMessage(errorDescription);
-        setTimeout(() => router.replace('/login'), 2500);
-        return;
-      }
+    if (errorDescription) {
+      fail(errorDescription);
+      return;
+    }
 
+    const timeoutId = setTimeout(() => {
+      fail('Inloggen duurt te lang. Probeer het opnieuw.');
+    }, CALLBACK_TIMEOUT_MS);
+
+    (async () => {
       try {
-        if (code) {
-          const { error } = await supabase.auth.exchangeCodeForSession(code);
-          if (error) throw error;
-        } else {
-          const { data, error } = await supabase.auth.getSession();
-          if (error) throw error;
-          if (!data.session) {
-            throw new Error('Geen sessie ontvangen van Google.');
-          }
-        }
+        await ensureSessionFromCallback(code);
+        if (cancelled) return;
 
         await applyPrivacyConsentIfNeeded();
         await applyGuestConversionIfNeeded();
         await applyReferralIfNeeded();
-        // One-time welcome mail (server skips if already sent)
         void requestWelcomeEmail(supabase);
 
-        if (!cancelled) router.replace(next);
-      } catch (err) {
         if (!cancelled) {
-          setMessage(err.message || 'Inloggen mislukt.');
-          setTimeout(() => router.replace('/login'), 2500);
+          clearTimeout(timeoutId);
+          router.replace(next);
         }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        fail(err?.message || 'Inloggen mislukt.');
       }
-    }
+    })();
 
-    finish();
     return () => {
       cancelled = true;
+      clearTimeout(timeoutId);
     };
   }, [router, searchParams]);
 
