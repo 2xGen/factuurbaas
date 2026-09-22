@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import InstallAppCta from '@/components/pwa/InstallAppCta';
 
 const TextLink = ({ href, children }) => (
   <Link href={href} className="text-warm-orange hover:underline">
@@ -104,6 +105,8 @@ export const gratisFactuurAppArticle = {
       </p>
       <p>Zo heb je je factuurtool altijd snel bij de hand.</p>
 
+      <InstallAppCta />
+
       <FactuurCta />
 
       <h2>Facturen maken met een app</h2>
@@ -156,11 +159,16 @@ export const gratisFactuurAppArticle = {
         venster.
       </p>
 
+      <InstallAppCta
+        title="Installeer FactuurBaas nu"
+        text="Eén tik en FactuurBaas staat op je beginscherm — sneller dan elke keer de website zoeken."
+      />
+
       <h3>FactuurBaas installeren op Android</h3>
-      <p>Log in op FactuurBaas.</p>
       <p>
-        Wanneer je apparaat installatie ondersteunt, kan de optie <strong>Installeer</strong>{' '}
-        verschijnen. Gebruik deze om FactuurBaas aan je telefoon toe te voegen.
+        Gebruik de blauwe knop <strong>Download de gratis app</strong> hierboven wanneer die
+        beschikbaar is. Of log in op FactuurBaas — dan kan ook de installatiebanner onderaan
+        verschijnen.
       </p>
       <p>Daarna kun je FactuurBaas rechtstreeks vanaf je beginscherm openen.</p>
 
@@ -169,6 +177,9 @@ export const gratisFactuurAppArticle = {
       <p>Open FactuurBaas in Safari en kies:</p>
       <p>
         <strong>Delen → Zet op beginscherm</strong>
+      </p>
+      <p>
+        Of tik op <strong>Toon iPhone-stappen</strong> in de blauwe downloadblokken op deze pagina.
       </p>
       <p>Daarna verschijnt FactuurBaas als icoon op je iPhone.</p>
 
@@ -366,6 +377,11 @@ export const gratisFactuurAppArticle = {
           downloaden.
         </strong>
       </p>
+
+      <InstallAppCta
+        title="Zet FactuurBaas op je telefoon"
+        text="Download de gratis app naar je beginscherm en maak daarna meteen je eerste factuur."
+      />
 
       <FactuurCta label="Maak nu gratis een factuur →" />
     </>

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Download } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { usePwaInstall } from '@/components/pwa/usePwaInstall';
 
@@ -15,17 +15,26 @@ const GUIDE_HREF = '/blogs/gratis-factuur-app';
  */
 export default function FooterAppInstallLink() {
   const router = useRouter();
+  const pathname = usePathname();
   const { user } = useAuth();
   const { canPrompt, isInstalled, promptInstall } = usePwaInstall(user?.id);
 
   if (isInstalled) return null;
 
   const onClick = async (event) => {
-    if (!canPrompt) return; // let Link navigate to the guide
-    event.preventDefault();
-    const result = await promptInstall();
-    if (!result.ok) {
-      router.push(GUIDE_HREF);
+    if (canPrompt) {
+      event.preventDefault();
+      const result = await promptInstall();
+      if (!result.ok && pathname !== GUIDE_HREF) {
+        router.push(GUIDE_HREF);
+      }
+      return;
+    }
+
+    // Already on the guide: scroll to the on-page install CTA
+    if (pathname === GUIDE_HREF) {
+      event.preventDefault();
+      document.getElementById('app-downloaden')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
