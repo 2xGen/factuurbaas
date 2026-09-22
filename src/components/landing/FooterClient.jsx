@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import FeatureUpdatesSignup from "@/components/invoice/FeatureUpdatesSignup";
+import FooterAppInstallLink from "@/components/pwa/FooterAppInstallLink";
 
 export default function FooterClient() {
   const { openCookiePreferences } = useCookieConsent();
@@ -17,6 +18,7 @@ export default function FooterClient() {
             <p className="text-sm text-slate-600">
               FactuurBaas helpt Nederlandse zzp&apos;ers met facturen, administratie en grip op hun bedrijf. Gratis en eenvoudig.
             </p>
+            <FooterAppInstallLink />
           </div>
           <div>
             <h3 className="mb-3 font-heading text-lg font-semibold text-deep-blue">Facturen</h3>

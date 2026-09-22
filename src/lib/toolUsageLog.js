@@ -10,6 +10,7 @@ export const TOOL_LOG_TABLES = {
   betaaltermijn: 'factuurbaas_betaaltermijn_calculator',
   kor: 'factuurbaas_kor_calculator',
   hypotheek: 'factuurbaas_hypotheek_berekeningen',
+  pwaInstalls: 'factuurbaas_pwa_installs',
 };
 
 // Invoices: insert into base table, read via view in admin dashboard.
@@ -80,6 +81,14 @@ export const TOOL_USAGE_ADMIN_SECTIONS = [
     statsRpc: 'get_hypotheek_berekening_stats',
     emptyMessage: 'Nog geen hypotheek-berekeningen geregistreerd.',
   },
+  {
+    title: 'App installs (PWA)',
+    description:
+      'Hoe vaak FactuurBaas als app is geïnstalleerd (Chrome/Android). iOS “Zet op beginscherm” wordt niet door de browser gemeld.',
+    table: TOOL_LOG_TABLES.pwaInstalls,
+    statsRpc: 'get_pwa_install_stats',
+    emptyMessage: 'Nog geen app-installaties geregistreerd.',
+  },
 ];
 
 export async function logToolUsage(table) {
@@ -90,5 +99,32 @@ export async function logToolUsage(table) {
     }
   } catch (error) {
     console.error(`Supabase client error logging to ${table}:`, error);
+  }
+}
+
+function detectInstallPlatform() {
+  if (typeof window === 'undefined') return null;
+  const ua = window.navigator.userAgent || '';
+  if (/android/i.test(ua)) return 'android';
+  if (/iphone|ipad|ipod/i.test(ua)) return 'ios';
+  if (/windows/i.test(ua)) return 'windows';
+  if (/mac os|macintosh/i.test(ua)) return 'mac';
+  if (/linux/i.test(ua)) return 'linux';
+  return 'other';
+}
+
+/** Log a successful PWA install (Chrome/Edge `appinstalled`). */
+export async function logPwaInstall({ userId } = {}) {
+  try {
+    const payload = {
+      platform: detectInstallPlatform(),
+      ...(userId ? { user_id: userId } : {}),
+    };
+    const { error } = await supabase.from(TOOL_LOG_TABLES.pwaInstalls).insert([payload]);
+    if (error) {
+      console.error('Error logging PWA install:', error);
+    }
+  } catch (error) {
+    console.error('Supabase client error logging PWA install:', error);
   }
 }

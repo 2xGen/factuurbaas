@@ -20,6 +20,7 @@ export const blogPillars = [
       'factuur-maken-zzp',
       'gratis-factuur-zzp',
       'factureren-zonder-account',
+      'gratis-factuur-app',
     ],
   },
   {
