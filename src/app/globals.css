@@ -67,20 +67,19 @@
   height: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-  border-radius: 10px;
+  background: #e2e8f0;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--secondary));
-  border-radius: 10px;
-  border: 2px solid hsl(var(--muted));
+  background: #64748b;
+  border-radius: 6px;
+  border: 2px solid #e2e8f0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--accent));
+  background: #0a2a4d;
 }
 * {
   scrollbar-width: auto;
-  scrollbar-color: hsl(var(--secondary)) hsl(var(--muted));
+  scrollbar-color: #64748b #e2e8f0;
 }
 
 .react-datepicker-wrapper input[type="text"] {
