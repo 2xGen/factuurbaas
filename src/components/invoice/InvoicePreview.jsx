@@ -290,7 +290,11 @@ const InvoicePreview = React.forwardRef(({ invoice }, ref) => {
                   className={`flex justify-between mb-0.5 ${currentLayout.secondary}`}
                 >
                   <span>
-                    {labels.vat} ({line.label})
+                    {line.tax === 'exempt'
+                      ? labels.vatExempt
+                      : line.tax === 'reverse'
+                        ? labels.vatReverse
+                        : `${labels.vat} (${line.label})`}
                   </span>
                   <span>{fmt(line.amount)}</span>
                 </div>

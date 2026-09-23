@@ -95,7 +95,7 @@ const InvoiceForm = ({
       <InvoiceFormSection
         step={4}
         title="Wat heb je geleverd?"
-        description="Producten, materiaal en/of uren — ook door elkaar."
+        description="Voeg producten of uren toe. Kies de BTW per regel."
       >
         <WorkItemsForm
           invoice={invoice}

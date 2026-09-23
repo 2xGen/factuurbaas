@@ -17,11 +17,13 @@ export const TAX_OPTIONS = [
   { value: 'custom', label: 'Anders (vrij %)' },
 ];
 
-/** Per-regel BTW — geen vrijgesteld/verlegd (dat blijft factuur-niveau). */
+/** Per-regel BTW — inclusief 0% vrijgesteld / verlegd. */
 export const LINE_TAX_OPTIONS = [
   { value: '21', label: '21%' },
   { value: '9', label: '9%' },
   { value: '0', label: '0%' },
+  { value: 'reverse', label: '0% verlegd' },
+  { value: 'exempt', label: '0% vrijgesteld' },
   { value: 'custom', label: 'Anders %' },
 ];
 
@@ -150,18 +152,19 @@ export function getEffectiveTaxRate(invoice) {
 /** Resolve tax key + rate for a line item (falls back to invoice default). */
 export function resolveLineTax(item, invoice) {
   if (!invoice) return { tax: '21', customTaxRate: null, rate: 0.21, label: '21%' };
-  if (invoice.tax === 'exempt' || invoice.tax === 'reverse') {
-    return {
-      tax: invoice.tax,
-      customTaxRate: null,
-      rate: 0,
-      label: invoice.tax === 'exempt' ? 'vrijgesteld' : 'verlegd',
-    };
-  }
+
   const tax =
     item?.tax != null && item.tax !== ''
       ? String(item.tax)
       : String(invoice.tax || '21');
+
+  if (tax === 'exempt') {
+    return { tax, customTaxRate: null, rate: 0, label: '0% vrijgesteld' };
+  }
+  if (tax === 'reverse') {
+    return { tax, customTaxRate: null, rate: 0, label: '0% verlegd' };
+  }
+
   const customTaxRate =
     tax === 'custom'
       ? parseFloat(item?.customTaxRate ?? invoice.customTaxRate) || 0

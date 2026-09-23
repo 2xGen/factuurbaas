@@ -6,33 +6,7 @@ import FormTextarea from '@/components/invoice/formElements/FormTextarea';
 import FormSelect from '@/components/invoice/formElements/FormSelect';
 import FormDatePicker from '@/components/invoice/formElements/FormDatePicker';
 import MeerOpties from '@/components/invoice/formElements/MeerOpties';
-import { TAX_OPTIONS, LINE_TAX_OPTIONS } from '@/lib/invoiceConfig';
-import { cn } from '@/lib/utils';
-
-const VAT_HINTS = {
-  '21': 'Het meest gebruikelijke tarief.',
-  '9': 'Laag tarief, bijvoorbeeld voor eten of boeken.',
-  '0': '0% BTW.',
-  exempt: 'Geen BTW in rekening gebracht.',
-  reverse: 'BTW verlegd naar de afnemer.',
-  custom: 'Vul zelf een percentage in.',
-};
-
-const SIMPLE_TAX_OPTIONS = TAX_OPTIONS.map((opt) => ({
-  value: opt.value,
-  label:
-    opt.value === '21'
-      ? '21%'
-      : opt.value === '9'
-        ? '9%'
-        : opt.value === '0'
-          ? '0%'
-          : opt.value === 'exempt'
-            ? 'Vrijgesteld'
-            : opt.value === 'reverse'
-              ? 'Verlegd'
-              : 'Anders %',
-}));
+import { LINE_TAX_OPTIONS } from '@/lib/invoiceConfig';
 
 const WorkItemsForm = ({
   invoice,
@@ -44,11 +18,25 @@ const WorkItemsForm = ({
   onUpdateWorkDay,
   onRemoveWorkDay,
 }) => {
-  const [pendingType, setPendingType] = useState('product');
+  const extra = invoice.extraCosts || {};
+  const hasExtraCosts = Boolean(extra.travel || extra.shipping || extra.material);
+  const [showExtraCosts, setShowExtraCosts] = useState(hasExtraCosts);
+  const pricesInclVat = Boolean(invoice.taxIncluded);
+  const priceLabel = pricesInclVat ? 'Prijs (incl. BTW)' : 'Prijs';
+  const hourlyLabel = pricesInclVat ? 'Uurtarief (incl. BTW)' : 'Uurtarief';
 
-  const handleTaxRateChange = (e) => {
-    onInputChange({ target: { name: 'tax', value: e.target.value } });
-  };
+  const items = invoice.items || [];
+  const hoursWorked = invoice.hoursWorked || [];
+  const hasLines = items.length > 0 || hoursWorked.length > 0;
+
+  const lineTaxValue = (item) =>
+    item.tax != null && item.tax !== '' ? String(item.tax) : String(invoice.tax || '21');
+
+  const hoursTaxValue = ['21', '9', '0', 'reverse', 'exempt', 'custom'].includes(
+    String(invoice.tax)
+  )
+    ? String(invoice.tax)
+    : '21';
 
   const handleExtraCostChange = (e) => {
     onInputChange({
@@ -60,30 +48,24 @@ const WorkItemsForm = ({
     });
   };
 
-  const invoiceLevelSpecial = ['exempt', 'reverse'].includes(invoice.tax);
-  const allowPerLineTax = !invoiceLevelSpecial;
-  const extra = invoice.extraCosts || {};
-  const hasExtraCosts = Boolean(extra.travel || extra.shipping || extra.material);
-  const [showExtraCosts, setShowExtraCosts] = useState(hasExtraCosts);
-  const taxIsNonDefault = invoice.tax !== '21' || invoice.taxIncluded;
-
-  const items = invoice.items || [];
-  const hoursWorked = invoice.hoursWorked || [];
-  const hasLines = items.length > 0 || hoursWorked.length > 0;
-
-  const lineTaxValue = (item) =>
-    item.tax != null && item.tax !== '' ? String(item.tax) : String(invoice.tax || '21');
-
-  const handleAddLine = () => {
-    if (pendingType === 'hours') onAddWorkDay();
-    else onAddItem();
+  const handleHoursTaxChange = (e) => {
+    onInputChange({ target: { name: 'tax', value: e.target.value } });
   };
 
   return (
     <div className="space-y-5">
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <Button type="button" variant="outline" onClick={onAddItem} className="flex-1">
+          <PlusCircle className="mr-2 h-4 w-4" /> Product toevoegen
+        </Button>
+        <Button type="button" variant="outline" onClick={onAddWorkDay} className="flex-1">
+          <PlusCircle className="mr-2 h-4 w-4" /> Uren toevoegen
+        </Button>
+      </div>
+
       {!hasLines && (
-        <p className="rounded-lg border border-dashed border-slate-200 bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
-          Voeg hieronder toe wat je hebt geleverd.
+        <p className="text-center text-sm text-slate-500">
+          Kies hierboven wat je wilt toevoegen. Vul daarna de omschrijving, prijs en BTW in.
         </p>
       )}
 
@@ -96,13 +78,13 @@ const WorkItemsForm = ({
             >
               <FormInput
                 label="Omschrijving"
-                placeholder="Bijv. Website ontwerp, bouten, schilderwerk"
+                placeholder="Bijv. Website ontwerp, schilderwerk"
                 value={item.itemName || ''}
                 onChange={(e) => onUpdateItem(index, 'itemName', e.target.value)}
                 inputClassName="text-sm"
                 labelClassName="text-xs"
               />
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 <FormInput
                   label="Aantal"
                   type="number"
@@ -113,7 +95,7 @@ const WorkItemsForm = ({
                   labelClassName="text-xs"
                 />
                 <FormInput
-                  label="Prijs"
+                  label={priceLabel}
                   type="number"
                   min="0"
                   step="0.01"
@@ -122,38 +104,34 @@ const WorkItemsForm = ({
                   inputClassName="text-sm"
                   labelClassName="text-xs"
                 />
+                <FormSelect
+                  label="BTW"
+                  name={`item-tax-${index}`}
+                  value={lineTaxValue(item)}
+                  onChange={(e) => onUpdateItem(index, 'tax', e.target.value)}
+                  options={LINE_TAX_OPTIONS}
+                  labelClassName="text-xs"
+                />
               </div>
-              {allowPerLineTax && (
-                <div className="grid grid-cols-2 gap-3">
-                  <FormSelect
-                    label="BTW"
-                    name={`item-tax-${index}`}
-                    value={lineTaxValue(item)}
-                    onChange={(e) => onUpdateItem(index, 'tax', e.target.value)}
-                    options={LINE_TAX_OPTIONS}
-                    labelClassName="text-xs"
-                  />
-                  {lineTaxValue(item) === 'custom' && (
-                    <FormInput
-                      label="Percentage"
-                      type="number"
-                      min="0"
-                      max="100"
-                      step="0.01"
-                      value={item.customTaxRate ?? ''}
-                      onChange={(e) =>
-                        onUpdateItem(
-                          index,
-                          'customTaxRate',
-                          e.target.value === '' ? '' : parseFloat(e.target.value)
-                        )
-                      }
-                      placeholder="Bijv. 13"
-                      inputClassName="text-sm"
-                      labelClassName="text-xs"
-                    />
-                  )}
-                </div>
+              {lineTaxValue(item) === 'custom' && (
+                <FormInput
+                  label="BTW-percentage"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  value={item.customTaxRate ?? ''}
+                  onChange={(e) =>
+                    onUpdateItem(
+                      index,
+                      'customTaxRate',
+                      e.target.value === '' ? '' : parseFloat(e.target.value)
+                    )
+                  }
+                  placeholder="Bijv. 13"
+                  inputClassName="text-sm"
+                  labelClassName="text-xs"
+                />
               )}
               <Button
                 type="button"
@@ -172,22 +150,46 @@ const WorkItemsForm = ({
 
       {hoursWorked.length > 0 && (
         <div className="space-y-3">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <h4 className="text-sm font-semibold text-slate-800">Uren</h4>
-            <div className="w-full max-w-[10rem]">
+          <h4 className="text-sm font-semibold text-slate-800">Uren</h4>
+          <div
+            className={`grid max-w-md gap-3 ${
+              hoursTaxValue === 'custom' ? 'grid-cols-3' : 'grid-cols-2'
+            }`}
+          >
+            <FormInput
+              label={hourlyLabel}
+              name="amount"
+              type="number"
+              value={invoice.amount || ''}
+              onChange={onInputChange}
+              placeholder="75"
+              min="0"
+              step="0.01"
+              inputClassName="text-sm"
+              labelClassName="text-xs"
+            />
+            <FormSelect
+              label="BTW"
+              name="tax"
+              value={hoursTaxValue}
+              onChange={handleHoursTaxChange}
+              options={LINE_TAX_OPTIONS}
+              labelClassName="text-xs"
+            />
+            {hoursTaxValue === 'custom' && (
               <FormInput
-                label="Uurtarief"
-                name="amount"
+                label="%"
+                name="customTaxRate"
                 type="number"
-                value={invoice.amount || ''}
-                onChange={onInputChange}
-                placeholder="75"
                 min="0"
+                max="100"
                 step="0.01"
+                value={invoice.customTaxRate ?? ''}
+                onChange={onInputChange}
                 inputClassName="text-sm"
                 labelClassName="text-xs"
               />
-            </div>
+            )}
           </div>
           {hoursWorked.map((log, index) => (
             <div
@@ -239,70 +241,24 @@ const WorkItemsForm = ({
         </div>
       )}
 
-      <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-3">
-        <p className="mb-2 text-xs font-medium text-slate-600">Type</p>
-        <div className="mb-3 flex gap-2">
-          <button
-            type="button"
-            onClick={() => setPendingType('product')}
-            className={cn(
-              'rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-              pendingType === 'product'
-                ? 'bg-deep-blue text-white'
-                : 'bg-white text-slate-600 ring-1 ring-slate-200'
-            )}
-          >
-            Product
-          </button>
-          <button
-            type="button"
-            onClick={() => setPendingType('hours')}
-            className={cn(
-              'rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-              pendingType === 'hours'
-                ? 'bg-deep-blue text-white'
-                : 'bg-white text-slate-600 ring-1 ring-slate-200'
-            )}
-          >
-            Uren
-          </button>
-        </div>
-        <Button type="button" variant="outline" onClick={handleAddLine} className="w-full sm:w-auto">
-          <PlusCircle className="mr-2 h-4 w-4" /> Regel toevoegen
-        </Button>
-      </div>
-
-      <MeerOpties defaultOpen={taxIsNonDefault} label="BTW-instellingen">
-        <div>
-          <FormSelect
-            label="BTW"
-            name="tax"
-            value={invoice.tax}
-            onChange={handleTaxRateChange}
-            options={SIMPLE_TAX_OPTIONS}
+      {hasLines && (
+        <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-600">
+          <input
+            type="checkbox"
+            name="taxIncluded"
+            checked={Boolean(invoice.taxIncluded)}
+            onChange={(e) =>
+              onInputChange({
+                target: { name: 'taxIncluded', type: 'checkbox', checked: e.target.checked },
+              })
+            }
+            className="h-4 w-4 rounded border-gray-300 text-deep-blue focus:ring-deep-blue"
           />
-          <p className="mt-1.5 text-xs text-slate-500">
-            {VAT_HINTS[invoice.tax] || VAT_HINTS['21']}
-          </p>
-          {invoice.tax === 'custom' && (
-            <div className="mt-3">
-              <FormInput
-                label="Percentage"
-                name="customTaxRate"
-                type="number"
-                min="0"
-                max="100"
-                step="0.01"
-                value={invoice.customTaxRate ?? ''}
-                onChange={onInputChange}
-                placeholder="Bijv. 13"
-              />
-            </div>
-          )}
-        </div>
-      </MeerOpties>
+          Prijzen zijn inclusief BTW
+        </label>
+      )}
 
-      <MeerOpties defaultOpen={showExtraCosts} label="Extra kosten of notities">
+      <MeerOpties defaultOpen={showExtraCosts} label="Meer opties">
         <label className="flex cursor-pointer items-center gap-3">
           <input
             type="checkbox"
@@ -313,7 +269,7 @@ const WorkItemsForm = ({
           <span className="text-sm text-gray-700">Voorrijden, verzending of materiaal</span>
         </label>
         {showExtraCosts && (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <FormInput
               label="Voorrijkosten"
               name="travel"

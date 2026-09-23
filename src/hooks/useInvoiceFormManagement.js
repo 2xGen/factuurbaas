@@ -272,7 +272,7 @@ export const useInvoiceFormManagement = (initialInvoice) => {
             itemDescription: '',
             quantity: 1,
             price: 0,
-            tax: prev.tax === 'exempt' || prev.tax === 'reverse' ? '21' : prev.tax || '21',
+            tax: prev.tax === 'exempt' || prev.tax === 'reverse' ? prev.tax : prev.tax || '21',
             customTaxRate: prev.tax === 'custom' ? prev.customTaxRate : '',
           },
         ],

@@ -29,7 +29,6 @@ export const useInvoiceActions = (setInvoice, toastInstance) => {
         valToSet = value === "true";
       }
 
-
       return {
         ...prev,
         [name]: valToSet,

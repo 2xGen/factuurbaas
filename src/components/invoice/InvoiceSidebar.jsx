@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { Download, Info, Save, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PreviewDialog from '@/components/invoice/dialogs/PreviewDialog';
@@ -42,7 +41,7 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
 
   if (!invoice) return null;
 
-  const showVatAmount = !['exempt', 'reverse'].includes(invoice.tax);
+  const showVatAmount = invoiceBreakdown.taxAmount > 0 || (invoiceBreakdown.taxLines || []).some((l) => l.rate > 0);
 
   return (
     <div className="space-y-5 self-start rounded-xl border border-gray-200 bg-white p-5 shadow-xl lg:sticky lg:top-6 sm:p-6">
@@ -57,10 +56,21 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
             <span className="font-medium">{fmt(invoiceBreakdown.subtotal)}</span>
           </div>
           {showVatAmount ? (
-            <div className="flex justify-between">
-              <span>{getTaxDisplayLabel(invoice, labels)}:</span>
-              <span className="font-medium">{fmt(invoiceBreakdown.taxAmount)}</span>
-            </div>
+            invoiceBreakdown.taxLines?.length > 0 ? (
+              invoiceBreakdown.taxLines.map((line) => (
+                <div key={line.key} className="flex justify-between">
+                  <span>
+                    {labels.vat} ({line.label}):
+                  </span>
+                  <span className="font-medium">{fmt(line.amount)}</span>
+                </div>
+              ))
+            ) : (
+              <div className="flex justify-between">
+                <span>{getTaxDisplayLabel(invoice, labels)}:</span>
+                <span className="font-medium">{fmt(invoiceBreakdown.taxAmount)}</span>
+              </div>
+            )
           ) : (
             <p className="text-xs text-gray-500">{getTaxDisplayLabel(invoice, labels)}</p>
           )}
@@ -72,59 +82,77 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
       </div>
 
       <div className="space-y-3 border-t border-gray-200 pt-4">
-        {onSave && (
-          <Button
-            className="h-11 w-full bg-deep-blue font-semibold text-white hover:bg-deep-blue/90"
-            onClick={onSave}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <Save className="mr-2 h-4 w-4" />
-            )}
-            {isLoggedIn ? 'Factuur opslaan' : 'Opslaan (inloggen)'}
-          </Button>
-        )}
-
         <Button
           className="h-12 w-full bg-warm-orange font-semibold text-white hover:bg-warm-orange/90"
           onClick={() => setIsPreviewOpen(true)}
           disabled={isSaving}
         >
           <Download className="mr-2 h-4 w-4" />
-          Gratis PDF downloaden
+          Downloaden als PDF
         </Button>
 
-        <p className="text-center text-xs leading-relaxed text-slate-500">
-          Gratis te gebruiken. Geen abonnement nodig.
-        </p>
-
-        {brandingOn ? (
-          <div className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5 text-xs leading-relaxed text-slate-600">
-            Deze gratis factuur bevat een kleine FactuurBaas-vermelding.
-            {isLoggedIn ? (
-              <button
-                type="button"
-                className="mt-1 block font-medium text-warm-orange hover:underline"
-                onClick={() =>
-                  onInputChange?.({
-                    target: { name: 'showFactuurBaasBranding', type: 'checkbox', checked: false },
-                  })
-                }
-              >
-                Vermelding uitzetten
-              </button>
-            ) : (
-              <Link
-                href="/login?next=/create-invoice"
-                className="mt-1 block font-medium text-warm-orange hover:underline"
-              >
-                Gratis account → vermelding verwijderen
-              </Link>
-            )}
-          </div>
+        {isLoggedIn ? (
+          onSave && (
+            <Button
+              className="h-11 w-full bg-deep-blue font-semibold text-white hover:bg-deep-blue/90"
+              onClick={onSave}
+              disabled={isSaving}
+            >
+              {isSaving ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Save className="mr-2 h-4 w-4" />
+              )}
+              Factuur opslaan
+            </Button>
+          )
         ) : (
+          <>
+            {onSave && (
+              <Button
+                variant="outline"
+                className="h-11 w-full border-deep-blue/20 font-semibold text-deep-blue hover:bg-deep-blue/5"
+                onClick={onSave}
+                disabled={isSaving}
+              >
+                {isSaving ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 h-4 w-4" />
+                )}
+                Opslaan in account
+              </Button>
+            )}
+            <div className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-3 text-xs leading-relaxed text-slate-600">
+              <p className="font-semibold text-deep-blue">Gratis account — handig voor:</p>
+              <ul className="mt-1.5 list-disc space-y-0.5 pl-4">
+                <li>Facturen later terugvinden</li>
+                <li>Bedrijfs- en klantgegevens bewaren</li>
+                <li>BTW bijhouden</li>
+                <li>FactuurBaas-vermelding uitzetten</li>
+              </ul>
+            </div>
+          </>
+        )}
+
+        {isLoggedIn && brandingOn && (
+          <div className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5 text-xs leading-relaxed text-slate-600">
+            Deze factuur bevat een kleine FactuurBaas-vermelding.
+            <button
+              type="button"
+              className="mt-1 block font-medium text-warm-orange hover:underline"
+              onClick={() =>
+                onInputChange?.({
+                  target: { name: 'showFactuurBaasBranding', type: 'checkbox', checked: false },
+                })
+              }
+            >
+              Vermelding uitzetten
+            </button>
+          </div>
+        )}
+
+        {isLoggedIn && !brandingOn && (
           <label className="flex cursor-pointer items-start gap-2 text-xs text-slate-600">
             <input
               type="checkbox"
