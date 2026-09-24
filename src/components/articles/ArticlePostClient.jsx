@@ -3,6 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import InsifyAovSticky from '@/components/aov/InsifyAovSticky';
+import { isAovArticleSlug } from '@/lib/blogPillars';
 
 function formatDate(iso) {
   if (!iso) return null;
@@ -92,8 +94,11 @@ export default function ArticlePostClient({
   const modifiedFormatted = formatDate(modified);
   const showDates = publishedFormatted || modifiedFormatted;
 
+  const showInsifySticky = basePath === '/blogs' && isAovArticleSlug(article.slug);
+
   return (
     <>
+      {showInsifySticky && <InsifyAovSticky />}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}

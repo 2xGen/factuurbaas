@@ -1,4 +1,5 @@
 import AovCalculator from '@/components/tools/AovCalculator';
+import InsifyAovSticky from '@/components/aov/InsifyAovSticky';
 
 export const metadata = {
   title: "AOV berekenen zzp | Inkomensdekking calculator | FactuurBaas",
@@ -20,6 +21,7 @@ export const metadata = {
 export default function AovBerekenenZzpPage() {
   return (
     <div className="min-h-screen bg-slate-50 py-8 sm:py-12">
+      <InsifyAovSticky />
       <div className="container mx-auto px-4 sm:px-6">
         <AovCalculator />
       </div>

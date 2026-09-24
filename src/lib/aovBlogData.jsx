@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import InsifyAovCta from '@/components/aov/InsifyAovCta';
 
 const AOV_PILLAR_IMAGE = {
   url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/Arbeidsongeschiktheidsverzekering%20zzp.jpg',
@@ -342,6 +343,7 @@ export const aovArticles = [
           raakt? Gebruik daarvoor onze gratis tool:
         </p>
         <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
+        <InsifyAovCta />
         <p>
           Met de tool kun je je financiële situatie als zzp&apos;er in kaart brengen en nadenken
           over hoeveel inkomen je bij arbeidsongeschiktheid zou moeten kunnen opvangen.
@@ -642,6 +644,7 @@ export const aovArticles = [
         </p>
         <p>Wil je eerst weten hoeveel inkomen je eigenlijk zou moeten kunnen opvangen?</p>
         <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
+        <InsifyAovCta />
 
         <h2>Wat kost een AOV gemiddeld?</h2>
         <p>
@@ -1574,6 +1577,7 @@ export const aovArticles = [
           verzekering gaat kijken.
         </p>
         <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
+        <InsifyAovCta />
 
         <h2>Wanneer kun je het beste een AOV afsluiten?</h2>
         <p>Er is geen universeel moment dat voor iedere starter het beste is.</p>
@@ -2069,6 +2073,7 @@ export const aovArticles = [
           particuliere AOV of andere oplossing kijkt.
         </p>
         <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
+        <InsifyAovCta />
 
         <h2>Wat kun je nu al doen?</h2>
         <p>
@@ -2530,6 +2535,7 @@ export const aovArticles = [
           financiële buffer en de periode die je zelf kunt overbruggen.
         </p>
         <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
+        <InsifyAovCta />
         <p>Wil je eerst de basis van een AOV begrijpen? Lees dan ook:</p>
         <ul>
           <li>
@@ -3031,6 +3037,7 @@ export const aovArticles = [
           specifieke verzekering kijkt.
         </p>
         <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
+        <InsifyAovCta />
         <p>Lees ook:</p>
         <ul>
           <li>
@@ -3568,6 +3575,7 @@ export const aovArticles = [
           van FactuurBaas.
         </p>
         <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
+        <InsifyAovCta />
         <p>Je kunt daarnaast verder lezen:</p>
         <ul>
           <li>
@@ -4220,6 +4228,7 @@ export const aovArticles = [
           Zo krijg je een beter beeld van hoeveel inkomen je daadwerkelijk zou moeten opvangen.
         </p>
         <AovCta href="/tools/aov-zzp" label="Bereken hoeveel AOV je nodig hebt →" />
+        <InsifyAovCta />
 
         <h2>Conclusie</h2>
         <p>
@@ -4359,6 +4368,7 @@ export const aovArticles = [
           bepalen van de kosten van een AOV.
         </p>
         <AovCta href="/tools/aov-zzp" label="Bereken je AOV →" />
+        <InsifyAovCta />
 
         <h2>AOV berekenen: begin met je maandelijkse behoefte</h2>
         <p>Een eenvoudige manier om je AOV te berekenen is:</p>

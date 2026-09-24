@@ -244,3 +244,10 @@ export function getPillarHref(pillar) {
   if (pillar.id === 'zakelijke-kosten') return '/blogs/zakelijke-kosten-zzp';
   return `/blogs?pillar=${pillar.id}`;
 }
+
+const AOV_PILLAR = blogPillars.find((p) => p.id === 'aov');
+
+/** True for AOV cluster blog slugs (Insify sticky / CTAs). */
+export function isAovArticleSlug(slug) {
+  return Boolean(slug && AOV_PILLAR?.slugs?.includes(slug));
+}

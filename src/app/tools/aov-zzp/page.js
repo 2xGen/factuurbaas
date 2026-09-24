@@ -1,5 +1,6 @@
 import ToolGatePage from '@/components/tools/ToolGatePage';
 import AovZzpSeoContent from '@/components/tools/AovZzpSeoContent';
+import InsifyAovSticky from '@/components/aov/InsifyAovSticky';
 import { getAovZzpGateSchema } from '@/lib/aovZzpGate';
 
 export const metadata = {
@@ -23,6 +24,8 @@ const TOOL_HREF = '/tools/aov-berekenen-zzp';
 
 export default function AovZzpGatePage() {
   return (
+    <>
+    <InsifyAovSticky />
     <ToolGatePage
       breadcrumbLabel="AOV zzp"
       h1="AOV voor zzp'ers"
@@ -45,5 +48,6 @@ export default function AovZzpGatePage() {
     >
       <AovZzpSeoContent />
     </ToolGatePage>
+    </>
   );
 }

@@ -17,6 +17,7 @@ import {
   formatWaitingPeriod,
   parseAmount,
 } from '@/lib/aovCalculator';
+import InsifyAovCta from '@/components/aov/InsifyAovCta';
 
 function ChoiceChip({ selected, onClick, children }) {
   return (
@@ -323,6 +324,8 @@ export default function AovCalculator() {
                   ))}
                 </ul>
               </div>
+
+              <InsifyAovCta />
             </>
           ) : (
             <p className="text-sm text-slate-500">

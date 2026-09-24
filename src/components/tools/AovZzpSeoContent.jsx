@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { AOV_ZZP_GATE_FAQS } from '@/lib/aovZzpGate';
+import InsifyAovCta from '@/components/aov/InsifyAovCta';
 
 const TOOL_HREF = '/tools/aov-berekenen-zzp';
 
@@ -72,6 +73,7 @@ export default function AovZzpSeoContent() {
         <p className="mt-4 text-slate-600 leading-relaxed">
           Onze calculator helpt je met die financiële uitgangspunten.
         </p>
+        <InsifyAovCta className="mt-6" />
         <div className="mt-6">
           <Cta label="Bereken je benodigde AOV-dekking →" />
         </div>
