@@ -9,6 +9,7 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import PrivacyConsentCheckbox from '@/components/auth/PrivacyConsentCheckbox';
 import NewsletterOptInCheckbox from '@/components/auth/NewsletterOptInCheckbox';
 import { markPrivacyConsentPending } from '@/lib/privacyConsent';
+import { completeAuthSideEffects } from '@/lib/authSideEffects';
 import { recordReferralVisitOnce, storeReferralCode } from '@/lib/referral';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
@@ -37,16 +38,58 @@ function GoogleIcon({ className }) {
   );
 }
 
+const inputClassName =
+  'w-full rounded-lg border border-gray-300 px-4 py-2.5 shadow-sm transition-shadow placeholder:text-slate-400 focus:border-transparent focus:ring-2 focus:ring-warm-orange disabled:bg-gray-100';
+
+function AuthField({
+  id,
+  label,
+  type,
+  value,
+  onChange,
+  disabled,
+  autoComplete = 'off',
+  placeholder,
+  required = true,
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1 block text-sm font-medium text-gray-700">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        required={required}
+        className={inputClassName}
+      />
+    </div>
+  );
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
-  const { user, loading, signInWithGoogle } = useAuth();
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const { user, loading, signInWithGoogle, signIn, signUp } = useAuth();
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [mode, setMode] = useState('login'); // 'login' | 'signup'
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [newsletterOptIn, setNewsletterOptIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const next = searchParams.get('next') || '/dashboard';
+  const safeNext = next.startsWith('/') ? next : '/dashboard';
+  const busy = isSubmitting || loading;
 
   useEffect(() => {
     const ref = searchParams.get('ref');
@@ -57,23 +100,98 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      router.replace(next.startsWith('/') ? next : '/dashboard');
+      router.replace(safeNext);
     }
-  }, [loading, user, router, next]);
+  }, [loading, user, router, safeNext]);
+
+  const requirePrivacy = () => {
+    if (privacyAccepted) return true;
+    toast({
+      title: 'Akkoord vereist',
+      description: 'Bevestig het privacybeleid en de voorwaarden om door te gaan.',
+      variant: 'destructive',
+    });
+    return false;
+  };
 
   const handleGoogle = async () => {
-    if (!privacyAccepted) {
+    if (!requirePrivacy()) return;
+    setIsSubmitting(true);
+    markPrivacyConsentPending({ newsletterOptIn });
+    await signInWithGoogle(safeNext);
+    setIsSubmitting(false);
+  };
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    if (!requirePrivacy()) return;
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail || !password) {
       toast({
-        title: 'Akkoord vereist',
-        description: 'Bevestig het privacybeleid en de voorwaarden om door te gaan.',
+        title: 'Bijna klaar',
+        description: 'Vul je e-mailadres en wachtwoord in.',
         variant: 'destructive',
       });
       return;
     }
-    setIsLoggingIn(true);
+
+    if (mode === 'signup') {
+      if (password.length < 6) {
+        toast({
+          title: 'Wachtwoord te kort',
+          description: 'Kies een wachtwoord van minimaal 6 tekens.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (password !== confirmPassword) {
+        toast({
+          title: 'Wachtwoorden komen niet overeen',
+          description: 'Check je wachtwoord en probeer opnieuw.',
+          variant: 'destructive',
+        });
+        return;
+      }
+    }
+
+    setIsSubmitting(true);
     markPrivacyConsentPending({ newsletterOptIn });
-    await signInWithGoogle(next.startsWith('/') ? next : '/dashboard');
-    setIsLoggingIn(false);
+
+    try {
+      if (mode === 'signup') {
+        const { error, needsEmailConfirmation } = await signUp(trimmedEmail, password, safeNext);
+        if (error) return;
+
+        if (needsEmailConfirmation) {
+          toast({
+            title: 'Bevestig je e-mail',
+            description:
+              'We hebben een bevestigingslink gestuurd. Open die om je account te activeren, daarna kun je inloggen.',
+          });
+          setMode('login');
+          setPassword('');
+          setConfirmPassword('');
+          return;
+        }
+
+        await completeAuthSideEffects();
+        toast({
+          title: 'Account aangemaakt',
+          description: 'Welkom bij FactuurBaas.',
+        });
+        router.replace(safeNext);
+        return;
+      }
+
+      const { error } = await signIn(trimmedEmail, password);
+      if (error) return;
+
+      await completeAuthSideEffects();
+      router.replace(safeNext);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -92,29 +210,34 @@ export default function LoginPage() {
         className="w-full max-w-md space-y-6 rounded-2xl border border-gray-200 bg-white p-10 shadow-xl"
       >
         <div className="text-center">
-          <Link href="/" className="mb-2 flex items-center justify-center font-heading text-3xl font-bold text-deep-blue">
+          <Link
+            href="/"
+            className="mb-2 flex items-center justify-center font-heading text-3xl font-bold text-deep-blue"
+          >
             <Crown className="mr-2 h-8 w-8 text-warm-orange" />
             FactuurBaas.nl
           </Link>
           <h2 className="font-heading text-2xl text-gray-700">Inloggen of account maken</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600">
-            Sla facturen veilig op en bekijk openstaande bedragen in je dashboard. Gratis, met Google — zonder
-            wachtwoord.
+            Sla facturen veilig op en bekijk openstaande bedragen in je dashboard. Gratis met Google
+            of met e-mail en wachtwoord.
           </p>
         </div>
 
-        <div className="space-y-3">
-          <PrivacyConsentCheckbox
-            checked={privacyAccepted}
-            onCheckedChange={setPrivacyAccepted}
-            disabled={isLoggingIn || loading}
-          />
-          <NewsletterOptInCheckbox
-            checked={newsletterOptIn}
-            onCheckedChange={setNewsletterOptIn}
-            disabled={isLoggingIn || loading}
-          />
-        </div>
+        {!showEmailForm && (
+          <div className="space-y-3">
+            <PrivacyConsentCheckbox
+              checked={privacyAccepted}
+              onCheckedChange={setPrivacyAccepted}
+              disabled={busy}
+            />
+            <NewsletterOptInCheckbox
+              checked={newsletterOptIn}
+              onCheckedChange={setNewsletterOptIn}
+              disabled={busy}
+            />
+          </div>
+        )}
 
         <Button
           type="button"
@@ -122,15 +245,131 @@ export default function LoginPage() {
           variant="outline"
           className="h-12 w-full gap-3 border-slate-300 text-base font-semibold"
           onClick={handleGoogle}
-          disabled={isLoggingIn || loading || !privacyAccepted}
+          disabled={busy || !privacyAccepted}
         >
-          {isLoggingIn ? (
-            <Loader2 className="h-5 w-5 animate-spin" />
-          ) : (
-            <GoogleIcon className="h-5 w-5" />
-          )}
+          {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : <GoogleIcon className="h-5 w-5" />}
           Doorgaan met Google
         </Button>
+
+        {!showEmailForm ? (
+          <button
+            type="button"
+            onClick={() => setShowEmailForm(true)}
+            disabled={busy}
+            className="w-full text-center text-sm font-medium text-deep-blue hover:text-warm-orange hover:underline disabled:opacity-60"
+          >
+            of met e-mail?
+          </button>
+        ) : (
+          <div className="space-y-4">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center" aria-hidden>
+                <div className="w-full border-t border-slate-200" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase tracking-wide">
+                <span className="bg-white px-3 text-slate-500">of met e-mail</span>
+              </div>
+            </div>
+
+            <div className="flex rounded-lg border border-slate-200 bg-slate-50 p-1">
+              <button
+                type="button"
+                onClick={() => setMode('login')}
+                disabled={busy}
+                className={`flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                  mode === 'login'
+                    ? 'bg-white text-deep-blue shadow-sm'
+                    : 'text-slate-600 hover:text-deep-blue'
+                }`}
+              >
+                Inloggen
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode('signup')}
+                disabled={busy}
+                className={`flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                  mode === 'signup'
+                    ? 'bg-white text-deep-blue shadow-sm'
+                    : 'text-slate-600 hover:text-deep-blue'
+                }`}
+              >
+                Account maken
+              </button>
+            </div>
+
+            <form onSubmit={handleEmailSubmit} className="space-y-4" autoComplete="off">
+              <AuthField
+                id="fb-login-email"
+                label="E-mail"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={busy}
+                autoComplete="off"
+                placeholder="jouw@email.nl"
+              />
+              <AuthField
+                id="fb-login-password"
+                label="Wachtwoord"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={busy}
+                autoComplete="new-password"
+                placeholder="Minimaal 6 tekens"
+              />
+              {mode === 'signup' && (
+                <AuthField
+                  id="fb-login-confirm-password"
+                  label="Bevestig wachtwoord"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  disabled={busy}
+                  autoComplete="new-password"
+                  placeholder="Herhaal je wachtwoord"
+                />
+              )}
+
+              <div className="space-y-3">
+                <PrivacyConsentCheckbox
+                  id="privacy-consent-email"
+                  checked={privacyAccepted}
+                  onCheckedChange={setPrivacyAccepted}
+                  disabled={busy}
+                />
+                <NewsletterOptInCheckbox
+                  id="newsletter-opt-in-email"
+                  checked={newsletterOptIn}
+                  onCheckedChange={setNewsletterOptIn}
+                  disabled={busy}
+                />
+              </div>
+
+              <Button
+                type="submit"
+                size="lg"
+                className="h-12 w-full bg-deep-blue text-base font-semibold hover:bg-deep-blue/90"
+                disabled={busy || !privacyAccepted}
+              >
+                {isSubmitting ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : mode === 'signup' ? (
+                  'Account aanmaken'
+                ) : (
+                  'Inloggen met e-mail'
+                )}
+              </Button>
+            </form>
+
+            {mode === 'signup' && (
+              <p className="text-center text-xs leading-relaxed text-slate-500">
+                Na het aanmaken sturen we een bevestigingsmail. Pas daarna kun je inloggen.
+              </p>
+            )}
+          </div>
+        )}
       </motion.div>
     </div>
   );

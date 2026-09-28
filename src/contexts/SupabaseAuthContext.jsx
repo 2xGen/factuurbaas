@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
+import { friendlyAuthError } from '@/lib/authSideEffects';
 import { useToast } from '@/components/ui/use-toast';
 
 const AuthContext = createContext(undefined);
@@ -92,11 +93,69 @@ export const AuthProvider = ({ children }) => {
         toast({
           variant: 'destructive',
           title: 'Inloggen mislukt',
-          description: error.message || 'Kon niet inloggen met Google.',
+          description: friendlyAuthError(error),
         });
       }
 
       return { error };
+    },
+    [toast]
+  );
+
+  const signIn = useCallback(
+    async (email, password) => {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+      if (error) {
+        toast({
+          variant: 'destructive',
+          title: 'Inloggen mislukt',
+          description: friendlyAuthError(error),
+        });
+        return { data: null, error };
+      }
+
+      return { data, error: null };
+    },
+    [toast]
+  );
+
+  const signUp = useCallback(
+    async (email, password, redirectPath = '/dashboard') => {
+      const emailRedirectTo = `${getRedirectOrigin()}/auth/callback?next=${encodeURIComponent(redirectPath)}`;
+      const { data, error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: { emailRedirectTo },
+      });
+
+      if (error) {
+        toast({
+          variant: 'destructive',
+          title: 'Registreren mislukt',
+          description: friendlyAuthError(error),
+        });
+        return { data: null, error, needsEmailConfirmation: false };
+      }
+
+      // Supabase may return a user with empty identities when the email is already taken
+      // (to avoid account enumeration) — treat as "check email" / already exists.
+      const identities = data?.user?.identities;
+      if (Array.isArray(identities) && identities.length === 0) {
+        const already = new Error('User already registered');
+        toast({
+          variant: 'destructive',
+          title: 'Account bestaat al',
+          description: friendlyAuthError(already),
+        });
+        return { data: null, error: already, needsEmailConfirmation: false };
+      }
+
+      const needsEmailConfirmation = !data?.session;
+      return { data, error: null, needsEmailConfirmation };
     },
     [toast]
   );
@@ -131,16 +190,11 @@ export const AuthProvider = ({ children }) => {
       session,
       loading,
       signInWithGoogle,
+      signIn,
+      signUp,
       signOut,
-      // Legacy no-ops kept so old imports don't crash during migration
-      signIn: async () => ({
-        error: new Error('Gebruik Google-login'),
-      }),
-      signUp: async () => ({
-        error: new Error('Gebruik Google-login'),
-      }),
     }),
-    [user, session, loading, signInWithGoogle, signOut]
+    [user, session, loading, signInWithGoogle, signIn, signUp, signOut]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

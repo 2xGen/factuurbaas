@@ -3,14 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/customSupabaseClient';
-import { consumeGuestInvoiceFlag } from '@/lib/guestInvoiceAttribution';
-import {
-  consumePrivacyConsentPending,
-  persistPrivacyAcceptance,
-  persistNewsletterOptIn,
-} from '@/lib/privacyConsent';
-import { applyReferralCode, consumeReferralCode, storeReferralCode } from '@/lib/referral';
-import { requestWelcomeEmail } from '@/lib/requestWelcomeEmail';
+import { completeAuthSideEffects } from '@/lib/authSideEffects';
 import { Loader2 } from 'lucide-react';
 
 const CALLBACK_TIMEOUT_MS = 15_000;
@@ -19,72 +12,6 @@ function safeNextPath(next) {
   if (!next || typeof next !== 'string') return '/dashboard';
   if (!next.startsWith('/') || next.startsWith('//')) return '/dashboard';
   return next;
-}
-
-async function applyPrivacyConsentIfNeeded() {
-  const pending = consumePrivacyConsentPending();
-  if (!pending?.at) return;
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user?.id) return;
-
-  await persistPrivacyAcceptance(supabase, user.id, pending.at);
-  await persistNewsletterOptIn(supabase, user.id, pending.newsletterOptIn);
-}
-
-async function applyGuestConversionIfNeeded() {
-  const guestAt = consumeGuestInvoiceFlag();
-  if (!guestAt) return;
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user?.id) return;
-
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('id, converted_from_guest')
-    .eq('id', user.id)
-    .maybeSingle();
-
-  if (profile?.converted_from_guest) return;
-
-  if (profile) {
-    const { error } = await supabase
-      .from('profiles')
-      .update({ converted_from_guest: true, updated_at: new Date().toISOString() })
-      .eq('id', user.id);
-    if (error && !/converted_from_guest|schema cache|column/i.test(error.message || '')) {
-      console.warn('converted_from_guest update failed:', error.message);
-    }
-    return;
-  }
-
-  const { error } = await supabase.from('profiles').insert({
-    id: user.id,
-    converted_from_guest: true,
-    full_name: user.user_metadata?.full_name || user.user_metadata?.name || null,
-  });
-  if (error && !/converted_from_guest|schema cache|column/i.test(error.message || '')) {
-    console.warn('converted_from_guest insert failed:', error.message);
-  }
-}
-
-async function applyReferralIfNeeded() {
-  const code = consumeReferralCode();
-  if (!code) return;
-
-  try {
-    const result = await applyReferralCode(supabase, code);
-    if (result?.ok === false && result?.reason === 'invalid') {
-      // Keep nothing — invalid code
-    }
-  } catch (err) {
-    storeReferralCode(code);
-    console.warn('referral apply failed:', err?.message || err);
-  }
 }
 
 /**
@@ -160,10 +87,7 @@ export default function AuthCallbackClient() {
         await waitForOAuthSession(CALLBACK_TIMEOUT_MS - 500);
         if (cancelled) return;
 
-        await applyPrivacyConsentIfNeeded();
-        await applyGuestConversionIfNeeded();
-        await applyReferralIfNeeded();
-        void requestWelcomeEmail(supabase);
+        await completeAuthSideEffects();
 
         if (!cancelled) {
           clearTimeout(timeoutId);
