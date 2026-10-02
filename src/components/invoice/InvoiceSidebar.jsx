@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Info, Save, Loader2 } from 'lucide-react';
+import { Eye, Info, Save, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PreviewDialog from '@/components/invoice/dialogs/PreviewDialog';
 import DownloadSuccessDialog from '@/components/invoice/dialogs/DownloadSuccessDialog';
@@ -87,8 +87,8 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
           onClick={() => setIsPreviewOpen(true)}
           disabled={isSaving}
         >
-          <Download className="mr-2 h-4 w-4" />
-          Downloaden als PDF
+          <Eye className="mr-2 h-4 w-4" />
+          Bekijk PDF
         </Button>
 
         {isLoggedIn ? (
@@ -103,7 +103,7 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
               ) : (
                 <Save className="mr-2 h-4 w-4" />
               )}
-              Factuur opslaan
+              Opslaan in mijn account
             </Button>
           )
         ) : (
@@ -120,7 +120,7 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
                 ) : (
                   <Save className="mr-2 h-4 w-4" />
                 )}
-                Opslaan in account
+                Opslaan in mijn account
               </Button>
             )}
             <div className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-3 text-xs leading-relaxed text-slate-600">

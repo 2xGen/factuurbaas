@@ -34,7 +34,7 @@ export default function QuotePreviewDialog({
             Offerte: {quote.quoteNumber || 'Concept'}
           </DialogTitle>
           <DialogDescription>
-            Controleer je offerte en download direct als PDF.
+            Controleer je offerte hieronder. Downloaden doe je via de knop hieronder.
           </DialogDescription>
         </DialogHeader>
 

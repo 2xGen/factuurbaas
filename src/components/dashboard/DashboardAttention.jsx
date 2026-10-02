@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { AlertTriangle, ArrowRight, CheckCircle2, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import RowActionsMenu from '@/components/shared/RowActionsMenu';
 import { cn } from '@/lib/utils';
 
 /**
@@ -16,7 +18,9 @@ export default function DashboardAttention({
   onViewInvoice,
   onSendReminder,
   onMarkPaid,
+  onSetQuoteStatus,
 }) {
+  const router = useRouter();
   const hasActions = actions.length > 0;
 
   return (
@@ -32,72 +36,101 @@ export default function DashboardAttention({
             </h2>
           </div>
           <ul className="divide-y divide-slate-100">
-            {actions.map((item) => (
-              <li
-                key={item.id}
-                className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
-              >
-                <div className="flex min-w-0 items-start gap-3">
-                  <span
-                    className={cn(
-                      'mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
-                      item.tone === 'urgent' ? 'bg-red-100 text-red-600' : 'bg-amber-100 text-amber-700'
-                    )}
-                  >
-                    {item.tone === 'urgent' ? (
-                      <AlertTriangle className="h-4 w-4" strokeWidth={1.75} />
-                    ) : (
-                      <Clock className="h-4 w-4" strokeWidth={1.75} />
-                    )}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-semibold text-deep-blue">{item.title}</p>
-                    {item.detail && <p className="mt-0.5 text-sm text-slate-500">{item.detail}</p>}
+            {actions.map((item) => {
+              const isConceptWithQuote = item.type === 'concept-quotes' && item.quote;
+
+              return (
+                <li
+                  key={item.id}
+                  className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+                >
+                  <div className="flex min-w-0 items-start gap-3">
+                    <span
+                      className={cn(
+                        'mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
+                        item.tone === 'urgent'
+                          ? 'bg-red-100 text-red-600'
+                          : 'bg-amber-100 text-amber-700'
+                      )}
+                    >
+                      {item.tone === 'urgent' ? (
+                        <AlertTriangle className="h-4 w-4" strokeWidth={1.75} />
+                      ) : (
+                        <Clock className="h-4 w-4" strokeWidth={1.75} />
+                      )}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-deep-blue">{item.title}</p>
+                      {item.detail && (
+                        <p className="mt-0.5 text-sm text-slate-500">{item.detail}</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end">
-                  {item.type === 'overdue' && item.invoice && (
-                    <>
+                  <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end">
+                    {item.type === 'overdue' && item.invoice && (
+                      <>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="rounded-xl border-slate-200 bg-white"
+                          onClick={() => onViewInvoice?.(item.invoice.id)}
+                        >
+                          Bekijk factuur
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="rounded-xl border-slate-200 bg-white"
+                          onClick={() => onSendReminder?.(item.invoice)}
+                        >
+                          Herinnering
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
+                          onClick={() => onMarkPaid?.(item.invoice.id)}
+                        >
+                          Markeer betaald
+                        </Button>
+                      </>
+                    )}
+                    {isConceptWithQuote && (
+                      <RowActionsMenu
+                        items={[
+                          {
+                            id: 'status-sent',
+                            label: 'Status: Verstuurd',
+                            onSelect: () => onSetQuoteStatus?.(item.quote, 'sent'),
+                          },
+                          {
+                            id: 'status-accepted',
+                            label: 'Status: Geaccepteerd',
+                            onSelect: () => onSetQuoteStatus?.(item.quote, 'accepted'),
+                          },
+                          item.href && {
+                            id: 'edit',
+                            label: 'Bewerken',
+                            onSelect: () => router.push(item.href),
+                          },
+                        ].filter(Boolean)}
+                      />
+                    )}
+                    {!isConceptWithQuote && item.href && item.cta && (
                       <Button
-                        variant="outline"
-                        size="sm"
-                        className="rounded-xl border-slate-200 bg-white"
-                        onClick={() => onViewInvoice?.(item.invoice.id)}
-                      >
-                        Bekijk factuur
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="rounded-xl border-slate-200 bg-white"
-                        onClick={() => onSendReminder?.(item.invoice)}
-                      >
-                        Herinnering
-                      </Button>
-                      <Button
+                        asChild
                         size="sm"
                         className="rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
-                        onClick={() => onMarkPaid?.(item.invoice.id)}
                       >
-                        Markeer betaald
+                        <Link href={item.href}>
+                          {item.cta}
+                          <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                        </Link>
                       </Button>
-                    </>
-                  )}
-                  {item.href && item.cta && (
-                    <Button
-                      asChild
-                      size="sm"
-                      className="rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
-                    >
-                      <Link href={item.href}>
-                        {item.cta}
-                        <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                      </Link>
-                    </Button>
-                  )}
-                </div>
-              </li>
-            ))}
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </section>
       ) : (
@@ -113,7 +146,9 @@ export default function DashboardAttention({
               <h2 className="mt-0.5 font-heading text-lg font-semibold text-deep-blue">
                 Alles bijgewerkt
               </h2>
-              <p className="mt-1 text-sm text-slate-500">Geen verlopen facturen of openstaande uren.</p>
+              <p className="mt-1 text-sm text-slate-500">
+                Geen verlopen facturen, openstaande uren of offertes die actie vragen.
+              </p>
             </div>
           </div>
         </section>
@@ -128,7 +163,11 @@ export default function DashboardAttention({
             <p className="mt-0.5 font-semibold text-deep-blue">{nextStep.title}</p>
             {nextStep.detail && <p className="mt-0.5 text-sm text-slate-500">{nextStep.detail}</p>}
           </div>
-          <Button asChild size="sm" className="shrink-0 rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90">
+          <Button
+            asChild
+            size="sm"
+            className="shrink-0 rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
+          >
             <Link href={nextStep.href}>
               {nextStep.cta}
               <ArrowRight className="ml-1.5 h-3.5 w-3.5" />

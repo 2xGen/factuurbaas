@@ -26,7 +26,7 @@ const PreviewDialog = ({ isOpen, onClose, invoice, invoiceBreakdown, onConfirmDo
         <DialogHeader className="p-6 pb-2 border-b">
           <DialogTitle className="text-2xl text-deep-blue">Factuur Voorbeeld: {invoice.invoiceName || `Concept #${invoice.invoice_number || 'Nieuw'}`}</DialogTitle>
           <DialogDescription>
-            Controleer hieronder het voorbeeld van je factuur. Je kunt het direct downloaden.
+            Controleer hieronder het voorbeeld. Downloaden doe je via de knop hieronder.
           </DialogDescription>
         </DialogHeader>
         
@@ -39,7 +39,7 @@ const PreviewDialog = ({ isOpen, onClose, invoice, invoiceBreakdown, onConfirmDo
             Sluiten
           </Button>
           <Button onClick={onConfirmDownload} className="bg-warm-orange hover:bg-orange-600 text-white">
-            <Download className="w-4 h-4 mr-2" /> Factuur Downloaden
+            <Download className="w-4 h-4 mr-2" /> Factuur downloaden
           </Button>
         </DialogFooter>
       </DialogContent>

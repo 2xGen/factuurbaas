@@ -141,6 +141,35 @@ export function getProfileCompletion(profile) {
   };
 }
 
+/** Accepted quotes waiting to be converted to an invoice. */
+export function getAcceptedQuotesWaiting(quotes = []) {
+  return quotes.filter((q) => q.status === 'accepted');
+}
+
+/** Sent (or concept) quotes whose validity date has passed. */
+export function getExpiredValidityQuotes(quotes = [], now = new Date()) {
+  const today = startOfDay(now);
+  return quotes
+    .filter((q) => q.status === 'sent' || q.status === 'concept')
+    .map((q) => {
+      const validUntil = toDate(q.validUntil);
+      if (!validUntil) return null;
+      const daysExpired = differenceInDays(today, startOfDay(validUntil));
+      if (daysExpired <= 0) return null;
+      return { quote: q, daysExpired };
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.daysExpired - a.daysExpired);
+}
+
+export function getConceptQuotes(quotes = []) {
+  return quotes.filter((q) => q.status === 'concept');
+}
+
+export function countConceptQuotes(quotes = []) {
+  return getConceptQuotes(quotes).length;
+}
+
 /**
  * Split real problems (Actie nodig) from one onboarding nudge (Volgende stap).
  * Hours nudge only when the user already uses hours (open unbilled hours).
@@ -151,9 +180,14 @@ export function buildDashboardSignals({
   clientCount = 0,
   invoiceCount = 0,
   expenseCount = 0,
+  quoteCount = 0,
+  acceptedQuotes = [],
+  expiredQuotes = [],
+  conceptQuotes = [],
   profileCompletion,
 }) {
   const actions = [];
+  const conceptQuoteCount = conceptQuotes.length;
 
   for (const row of overdue.slice(0, 3)) {
     const daysLabel = `${row.daysLate} ${row.daysLate === 1 ? 'dag' : 'dagen'} te laat`;
@@ -187,6 +221,72 @@ export function buildDashboardSignals({
     });
   }
 
+  if (acceptedQuotes.length > 0) {
+    const first = acceptedQuotes[0];
+    const label =
+      acceptedQuotes.length === 1
+        ? first.clientName
+          ? `${first.clientName} heeft geaccepteerd`
+          : `Offerte ${first.quoteNumber || ''} is geaccepteerd`.trim()
+        : `${acceptedQuotes.length} geaccepteerde offertes`;
+    actions.push({
+      id: 'accepted-quotes',
+      type: 'accepted-quotes',
+      tone: 'info',
+      title: label,
+      detail:
+        acceptedQuotes.length === 1
+          ? 'Zet om naar een factuur om te kunnen factureren.'
+          : 'Zet ze om naar facturen wanneer je klaar bent.',
+      href:
+        acceptedQuotes.length === 1 && first.id
+          ? `/tools/offerte-maker/maken?id=${first.id}`
+          : '/offertes',
+      cta: acceptedQuotes.length === 1 ? 'Omzetten naar factuur' : 'Bekijk offertes',
+    });
+  }
+
+  if (conceptQuoteCount > 0) {
+    const first = conceptQuotes[0];
+    actions.push({
+      id: 'concept-quotes',
+      type: 'concept-quotes',
+      tone: 'info',
+      title:
+        conceptQuoteCount === 1
+          ? first.clientName
+            ? `Offerte voor ${first.clientName} staat nog als concept`
+            : `Offerte ${first.quoteNumber || ''} staat nog als concept`.trim()
+          : `${conceptQuoteCount} offertes staan nog als concept`,
+      detail: 'Zet de status op Verstuurd of Geaccepteerd, of werk de offerte af.',
+      href:
+        conceptQuoteCount === 1 && first.id
+          ? `/tools/offerte-maker/maken?id=${first.id}`
+          : '/offertes?status=concept',
+      cta: conceptQuoteCount === 1 ? 'Bewerken' : 'Bekijk concepten',
+      quote: conceptQuoteCount === 1 ? first : null,
+    });
+  }
+
+  if (expiredQuotes.length > 0 && actions.length < 5) {
+    const first = expiredQuotes[0];
+    actions.push({
+      id: 'expired-quotes',
+      type: 'expired-quotes',
+      tone: 'info',
+      title:
+        expiredQuotes.length === 1
+          ? `Offerte ${first.quote.quoteNumber || ''} is verlopen`.trim()
+          : `${expiredQuotes.length} offertes zijn verlopen`,
+      detail: 'Verleng de geldigheid of stuur een nieuwe versie.',
+      href:
+        expiredQuotes.length === 1 && first.quote.id
+          ? `/tools/offerte-maker/maken?id=${first.quote.id}`
+          : '/offertes',
+      cta: 'Bekijk offerte',
+    });
+  }
+
   let nextStep = null;
 
   if (invoiceCount === 0) {
@@ -212,6 +312,14 @@ export function buildDashboardSignals({
       detail: 'Sla een klant op — volgende keer vul je gegevens met één klik in.',
       href: '/klanten',
       cta: 'Klant toevoegen',
+    };
+  } else if (quoteCount === 0) {
+    nextStep = {
+      id: 'no-quotes',
+      title: 'Bewaar je volgende offerte',
+      detail: 'Sla offertes op, volg de status en zet ze met één klik om naar een factuur.',
+      href: '/tools/offerte-maker/maken',
+      cta: 'Offerte maken',
     };
   } else if (profileCompletion && !profileCompletion.isComplete) {
     nextStep = {

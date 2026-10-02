@@ -4,7 +4,7 @@ import { Clock, FilePlus2, FileText, Plus, UserPlus } from 'lucide-react';
 
 const ACTIONS = [
   { href: '/create-invoice', label: 'Factuur', icon: FilePlus2 },
-  { href: '/tools/offerte-maker/maken', label: 'Offerte', icon: FileText },
+  { href: '/offertes', label: 'Offerte', icon: FileText },
   { href: '/uitgaven', label: 'Uitgave', icon: Plus },
   { href: '/uren', label: 'Uren', icon: Clock },
   { href: '/klanten', label: 'Klant', icon: UserPlus },

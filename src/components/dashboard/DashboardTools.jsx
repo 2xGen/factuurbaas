@@ -5,8 +5,8 @@ import { ArrowRight, Calculator, Percent, Receipt, Wallet } from 'lucide-react';
 const DASHBOARD_TOOLS = [
   {
     title: 'Offerte maken',
-    description: 'Professionele offerte maken en downloaden.',
-    href: '/tools/offerte-maker/maken',
+    description: 'Bewaar offertes en zet ze om naar facturen.',
+    href: '/offertes',
     icon: Receipt,
   },
   {

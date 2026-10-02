@@ -92,32 +92,70 @@ export const useInvoiceFormManagement = (initialInvoice) => {
 
     if (prefill.source === 'offerte-maker') {
       const taxField = taxRateToInvoiceField(prefill.taxRate);
+      const invoiceTax =
+        prefill.tax != null && prefill.tax !== ''
+          ? String(prefill.tax)
+          : taxField;
+      const client = prefill.clientDetails || {};
+      let street = client.street || '';
+      let postalCode = client.postalCode || '';
+      let city = client.city || '';
+      const country = client.country || '';
+      if (!street && client.address) {
+        const lines = String(client.address)
+          .split(/\n/)
+          .map((l) => l.trim())
+          .filter(Boolean);
+        street = lines[0] || '';
+        if (lines[1]) {
+          const match = lines[1].match(/^(\d{4}\s*[A-Za-z]{2})\s+(.*)$/);
+          if (match) {
+            postalCode = match[1].replace(/\s+/, ' ').trim();
+            city = match[2].trim();
+          } else {
+            city = lines[1];
+          }
+        }
+      }
+      const mappedItems = (prefill.items || []).map((item, index) => ({
+        id: Date.now() + index,
+        itemName: item.description || '',
+        itemDescription: '',
+        quantity: item.quantity || 1,
+        price: item.price || 0,
+        tax: item.tax != null && item.tax !== '' ? String(item.tax) : invoiceTax,
+        customTaxRate: item.customTaxRate,
+      }));
+      const mappedHours = (prefill.hoursWorked || []).map((log, index) => ({
+        id: Date.now() + 1000 + index,
+        taskDescription: log.taskDescription || '',
+        hours: log.hours || 0,
+        date: log.date ? new Date(log.date) : new Date(),
+      }));
+      const hasHours = mappedHours.length > 0;
+      const hasItems = mappedItems.length > 0;
       setInvoice((prev) => ({
         ...prev,
         companyDetails: { ...prev.companyDetails, ...(prefill.companyDetails || {}) },
         logo: prefill.logo ?? prev.logo,
         receiverDetails: {
           ...prev.receiverDetails,
-          companyName: prefill.clientDetails?.companyName || '',
-          contactPerson: prefill.clientDetails?.contactPerson || '',
-          email: prefill.clientDetails?.email || '',
-          street: prefill.clientDetails?.street || '',
-          postalCode: prefill.clientDetails?.postalCode || '',
-          city: prefill.clientDetails?.city || '',
-          country: prefill.clientDetails?.country || '',
-          address: prefill.clientDetails?.address || '',
+          companyName: client.companyName || '',
+          contactPerson: client.contactPerson || '',
+          email: client.email || '',
+          street,
+          postalCode,
+          city,
+          country,
+          address: client.address || '',
         },
-        workType: 'fixed',
-        tax: taxField,
-        customTaxRate: prefill.taxRate,
-        taxIncluded: false,
-        items: (prefill.items || []).map((item, index) => ({
-          id: Date.now() + index,
-          itemName: item.description || '',
-          itemDescription: '',
-          quantity: item.quantity || 1,
-          price: item.price || 0,
-        })),
+        workType: hasItems && hasHours ? 'mixed' : hasHours ? 'hourly' : 'fixed',
+        tax: invoiceTax,
+        customTaxRate: prefill.customTaxRate ?? prefill.taxRate,
+        taxIncluded: Boolean(prefill.taxIncluded),
+        amount: prefill.amount ?? prev.amount,
+        items: mappedItems,
+        hoursWorked: mappedHours,
         notes: prefill.notes || prev.notes,
         terms: prefill.terms || prev.terms,
         layout: prefill.layout || prev.layout,

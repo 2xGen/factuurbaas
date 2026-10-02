@@ -98,20 +98,53 @@ export function consumeQuotePrefill() {
 
 export function saveQuoteToInvoicePrefill(quote) {
   if (typeof window === 'undefined') return;
+  const client = quote.clientDetails || {};
+  const quoteId = quote.id || null;
   sessionStorage.setItem(
     PREFILL_KEY,
     JSON.stringify({
       source: 'offerte-maker',
+      quoteId,
       companyDetails: quote.companyDetails,
       logo: quote.logo,
-      clientDetails: quote.clientDetails,
+      clientDetails: {
+        companyName: client.companyName || '',
+        contactPerson: client.contactPerson || '',
+        email: client.email || '',
+        address: client.address || '',
+        street: client.street || '',
+        postalCode: client.postalCode || '',
+        city: client.city || '',
+        country: client.country || '',
+      },
       items: quote.items,
+      hoursWorked: quote.hoursWorked,
+      amount: quote.amount,
       taxRate: quote.taxRate,
+      tax: quote.tax,
+      customTaxRate: quote.customTaxRate,
+      taxIncluded: quote.taxIncluded,
       layout: quote.layout,
       notes: quote.notes,
       terms: quote.terms,
     })
   );
+  if (quoteId) stashPendingQuoteId(quoteId);
+}
+
+/** Quote id waiting to be marked converted after a successful invoice save. */
+const PENDING_QUOTE_ID_KEY = 'factuurbaas_pending_quote_id';
+
+export function stashPendingQuoteId(quoteId) {
+  if (typeof window === 'undefined' || !quoteId) return;
+  sessionStorage.setItem(PENDING_QUOTE_ID_KEY, quoteId);
+}
+
+export function consumePendingQuoteId() {
+  if (typeof window === 'undefined') return null;
+  const id = sessionStorage.getItem(PENDING_QUOTE_ID_KEY);
+  sessionStorage.removeItem(PENDING_QUOTE_ID_KEY);
+  return id || null;
 }
 
 const PENDING_HOURS_ENTRY_IDS_KEY = 'factuurbaas_uren_pending_entry_ids';

@@ -19,8 +19,9 @@ import {
   fetchClientById,
   isPersistedClientId,
 } from '@/lib/clientPersistence';
-import { consumePendingHoursEntryIds } from '@/lib/invoicePrefill';
+import { consumePendingHoursEntryIds, consumePendingQuoteId } from '@/lib/invoicePrefill';
 import { markTimeEntriesInvoiced } from '@/lib/timeEntryPersistence';
+import { markQuoteConverted } from '@/lib/quotePersistence';
 import {
   fetchProfileForInvoice,
   profileHasCompanyData,
@@ -280,6 +281,15 @@ function InvoiceDetailsInner() {
       if (pendingHourIds.length) {
         try {
           await markTimeEntriesInvoiced(supabase, user.id, pendingHourIds);
+        } catch {
+          // Non-blocking: invoice is already saved
+        }
+      }
+
+      const pendingQuoteId = consumePendingQuoteId();
+      if (pendingQuoteId && saved?.id) {
+        try {
+          await markQuoteConverted(supabase, user.id, pendingQuoteId, saved.id);
         } catch {
           // Non-blocking: invoice is already saved
         }

@@ -153,6 +153,9 @@ export default function HeaderClient() {
             <NavLink href="/facturen" active={pathname.startsWith('/facturen')}>
               Facturen
             </NavLink>
+            <NavLink href="/offertes" active={pathname.startsWith('/offertes')}>
+              Offertes
+            </NavLink>
             <NavLink href="/uren" active={pathname.startsWith('/uren')}>
               Uren
             </NavLink>
@@ -294,6 +297,14 @@ export default function HeaderClient() {
                   >
                     <span className="inline-flex items-center gap-2">
                       <FileText className="h-4 w-4" /> Facturen
+                    </span>
+                  </Link>
+                  <Link
+                    href="/offertes"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <FileText className="h-4 w-4" /> Offertes
                     </span>
                   </Link>
                   <Link

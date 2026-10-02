@@ -10,13 +10,12 @@ import InvoiceFormSection from '@/components/invoice/formSections/InvoiceFormSec
 import LayoutSelector from '@/components/invoice/LayoutSelector';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
 import ClientPicker from '@/components/invoice/ClientPicker';
+import QuoteWorkItemsForm from '@/components/tools/QuoteWorkItemsForm';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { quoteClientDetailsToReceiver } from '@/lib/clientPersistence';
 import {
   Building2,
   FileText,
-  PlusCircle,
-  Trash2,
   Upload,
   Users,
   Briefcase,
@@ -47,6 +46,13 @@ export default function OfferteMaker({
     updateItem,
     addItem,
     removeItem,
+    addWorkDay,
+    updateWorkDay,
+    removeWorkDay,
+    setTaxIncluded,
+    setHourlyRate,
+    setHoursTax,
+    setCustomTaxRate,
     toggleOption,
     handleRememberChange,
     handleSelectLayout,
@@ -281,74 +287,22 @@ export default function OfferteMaker({
       </InvoiceFormSection>
 
       <InvoiceFormSection
-        title="Werkzaamheden & prijzen"
+        title="Wat bied je aan?"
         icon={<Briefcase className="h-5 w-5 text-blue-600" />}
       >
-        <div className="space-y-4">
-          {quote.items.map((item, index) => (
-            <div
-              key={item.id}
-              className="relative rounded-lg border border-slate-200 bg-slate-50/50 p-4"
-            >
-              <FormInput
-                label="Omschrijving"
-                value={item.description}
-                onChange={(e) => updateItem(index, 'description', e.target.value)}
-                placeholder="Bijv. Website ontwerp"
-              />
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <FormInput
-                  label="Aantal"
-                  type="number"
-                  min="0"
-                  value={item.quantity}
-                  onChange={(e) => updateItem(index, 'quantity', e.target.value)}
-                />
-                <FormInput
-                  label="Prijs per stuk"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={item.price}
-                  onChange={(e) => updateItem(index, 'price', e.target.value)}
-                />
-              </div>
-              {quote.items.length > 1 && (
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-2 top-2 text-red-500"
-                  onClick={() => removeItem(index)}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
-          ))}
-          <Button type="button" variant="outline" onClick={addItem} className="w-full sm:w-auto">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Regel toevoegen
-          </Button>
-
-          <div className="pt-2">
-            <p className="mb-2 text-sm font-medium text-slate-700">BTW percentage</p>
-            <div className="flex flex-wrap gap-3">
-              {[21, 9, 0].map((rate) => (
-                <label key={rate} className="flex cursor-pointer items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    name="taxRate"
-                    checked={quote.taxRate === rate}
-                    onChange={() => setQuote((p) => ({ ...p, taxRate: rate }))}
-                    className="h-4 w-4 text-blue-600"
-                  />
-                  {rate}%
-                </label>
-              ))}
-            </div>
-          </div>
-        </div>
+        <QuoteWorkItemsForm
+          quote={quote}
+          onAddItem={addItem}
+          onUpdateItem={updateItem}
+          onRemoveItem={removeItem}
+          onAddWorkDay={addWorkDay}
+          onUpdateWorkDay={updateWorkDay}
+          onRemoveWorkDay={removeWorkDay}
+          onTaxIncludedChange={setTaxIncluded}
+          onHourlyRateChange={setHourlyRate}
+          onHoursTaxChange={setHoursTax}
+          onCustomTaxRateChange={setCustomTaxRate}
+        />
       </InvoiceFormSection>
 
       <InvoiceFormSection

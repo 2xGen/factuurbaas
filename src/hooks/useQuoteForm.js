@@ -37,6 +37,7 @@ export function useQuoteForm() {
           description: 'Uurtarief advies',
           quantity: 1,
           price: Math.round(prefill.hourlyRate * 100) / 100,
+          tax: String(prev.tax || '21'),
         },
       ],
     }));
@@ -74,15 +75,77 @@ export function useQuoteForm() {
   const addItem = () => {
     setQuote((prev) => ({
       ...prev,
-      items: [...prev.items, { id: Date.now(), description: '', quantity: 1, price: 0 }],
+      items: [
+        ...(prev.items || []),
+        {
+          id: Date.now(),
+          description: '',
+          quantity: 1,
+          price: 0,
+          tax: String(prev.tax || prev.taxRate || '21'),
+        },
+      ],
     }));
   };
 
   const removeItem = (index) => {
     setQuote((prev) => ({
       ...prev,
-      items: prev.items.filter((_, i) => i !== index),
+      items: (prev.items || []).filter((_, i) => i !== index),
     }));
+  };
+
+  const addWorkDay = () => {
+    setQuote((prev) => ({
+      ...prev,
+      hoursWorked: [
+        ...(prev.hoursWorked || []),
+        {
+          id: Date.now(),
+          taskDescription: '',
+          hours: 1,
+          date: new Date(),
+        },
+      ],
+    }));
+  };
+
+  const updateWorkDay = (index, field, value) => {
+    setQuote((prev) => {
+      const hoursWorked = [...(prev.hoursWorked || [])];
+      hoursWorked[index] = { ...hoursWorked[index], [field]: value };
+      return { ...prev, hoursWorked };
+    });
+  };
+
+  const removeWorkDay = (index) => {
+    setQuote((prev) => ({
+      ...prev,
+      hoursWorked: (prev.hoursWorked || []).filter((_, i) => i !== index),
+    }));
+  };
+
+  const setTaxIncluded = (checked) => {
+    setQuote((prev) => ({ ...prev, taxIncluded: Boolean(checked) }));
+  };
+
+  const setHourlyRate = (amount) => {
+    setQuote((prev) => ({ ...prev, amount }));
+  };
+
+  const setHoursTax = (tax) => {
+    setQuote((prev) => {
+      const numeric = ['21', '9', '0'].includes(String(tax)) ? Number(tax) : prev.taxRate;
+      return {
+        ...prev,
+        tax: String(tax),
+        taxRate: Number.isFinite(numeric) ? numeric : prev.taxRate,
+      };
+    });
+  };
+
+  const setCustomTaxRate = (customTaxRate) => {
+    setQuote((prev) => ({ ...prev, customTaxRate, tax: 'custom' }));
   };
 
   const toggleOption = (key) => {
@@ -132,6 +195,13 @@ export function useQuoteForm() {
     updateItem,
     addItem,
     removeItem,
+    addWorkDay,
+    updateWorkDay,
+    removeWorkDay,
+    setTaxIncluded,
+    setHourlyRate,
+    setHoursTax,
+    setCustomTaxRate,
     toggleOption,
     handleRememberChange,
     handleSelectLayout,

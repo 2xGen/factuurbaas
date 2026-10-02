@@ -25,7 +25,10 @@ import { getBaasLevel, getBadgeStates, getReferralHeroProgress } from '@/lib/baa
 import { countMyReferrals } from '@/lib/referral';
 import {
   buildDashboardSignals,
+  getConceptQuotes,
+  getAcceptedQuotesWaiting,
   getDisplayFirstName,
+  getExpiredValidityQuotes,
   getMonthBusinessResult,
   getOverdueInvoices,
   getProfileCompletion,
@@ -33,10 +36,17 @@ import {
   getSalesBtwThisMonth,
   getTimeOfDayGreeting,
 } from '@/lib/dashboardCockpit';
+import {
+  fetchQuoteDashboardRows,
+  QUOTE_STATUS_LABELS,
+  updateQuoteStatus,
+} from '@/lib/quotePersistence';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function DashboardPage() {
   const router = useRouter();
   const { user } = useAuth();
+  const { toast } = useToast();
   const { authLoading, isLoadingInvoices, userInvoices, onSaveInvoice } = useUserInvoices();
 
   const [hoursStats, setHoursStats] = useState({
@@ -48,6 +58,7 @@ export default function DashboardPage() {
   const [expenses, setExpenses] = useState([]);
   const [profile, setProfile] = useState(null);
   const [referralCount, setReferralCount] = useState(0);
+  const [quoteRows, setQuoteRows] = useState([]);
   const [metaLoading, setMetaLoading] = useState(true);
   const [selectedInvoiceForReminder, setSelectedInvoiceForReminder] = useState(null);
 
@@ -58,7 +69,7 @@ export default function DashboardPage() {
     (async () => {
       setMetaLoading(true);
       try {
-        const [hours, clientsRes, profileRes, referrals, expenseList] = await Promise.all([
+        const [hours, clientsRes, profileRes, referrals, expenseList, quotes] = await Promise.all([
           fetchHoursThisMonth(supabase, user.id).catch(() => ({
             totalHours: 0,
             openHours: 0,
@@ -77,6 +88,7 @@ export default function DashboardPage() {
             .maybeSingle(),
           countMyReferrals(supabase).catch(() => 0),
           fetchUserExpenses(supabase, user.id).catch(() => []),
+          fetchQuoteDashboardRows(supabase, user.id).catch(() => []),
         ]);
 
         if (cancelled) return;
@@ -85,6 +97,7 @@ export default function DashboardPage() {
         if (!profileRes.error) setProfile(profileRes.data);
         setReferralCount(referrals || 0);
         setExpenses(expenseList || []);
+        setQuoteRows(quotes || []);
       } finally {
         if (!cancelled) setMetaLoading(false);
       }
@@ -125,6 +138,9 @@ export default function DashboardPage() {
 
   const overdue = useMemo(() => getOverdueInvoices(userInvoices), [userInvoices]);
   const profileCompletion = useMemo(() => getProfileCompletion(profile), [profile]);
+  const acceptedQuotes = useMemo(() => getAcceptedQuotesWaiting(quoteRows), [quoteRows]);
+  const expiredQuotes = useMemo(() => getExpiredValidityQuotes(quoteRows), [quoteRows]);
+  const conceptQuotes = useMemo(() => getConceptQuotes(quoteRows), [quoteRows]);
 
   const { actions: attentionActions, nextStep } = useMemo(
     () =>
@@ -134,6 +150,10 @@ export default function DashboardPage() {
         clientCount,
         invoiceCount: userInvoices.length,
         expenseCount: expenses.length,
+        quoteCount: quoteRows.length,
+        acceptedQuotes,
+        expiredQuotes,
+        conceptQuotes,
         profileCompletion,
       }),
     [
@@ -142,6 +162,10 @@ export default function DashboardPage() {
       clientCount,
       userInvoices.length,
       expenses.length,
+      quoteRows.length,
+      acceptedQuotes,
+      expiredQuotes,
+      conceptQuotes,
       profileCompletion,
     ]
   );
@@ -191,6 +215,26 @@ export default function DashboardPage() {
     onSaveInvoice({ ...invoice, status: newStatus }, activityDescription);
   };
 
+  const handleQuoteStatusChange = async (quote, status) => {
+    if (!user?.id || !quote?.id) return;
+    try {
+      await updateQuoteStatus(supabase, user.id, quote.id, status);
+      setQuoteRows((prev) =>
+        prev.map((row) => (row.id === quote.id ? { ...row, status } : row))
+      );
+      toast({
+        title: 'Status bijgewerkt',
+        description: `Offerte staat nu op ${QUOTE_STATUS_LABELS[status] || status}.`,
+      });
+    } catch (error) {
+      toast({
+        title: 'Status wijzigen mislukt',
+        description: error.message || 'Probeer het opnieuw.',
+        variant: 'destructive',
+      });
+    }
+  };
+
   if (authLoading || (isLoadingInvoices && !userInvoices.length && user) || (user && metaLoading)) {
     return (
       <div className="flex h-[70vh] flex-col items-center justify-center bg-[#f7f8fb]">
@@ -224,6 +268,7 @@ export default function DashboardPage() {
             onViewInvoice={(id) => router.push(`/create-invoice?id=${id}`)}
             onSendReminder={(invoice) => setSelectedInvoiceForReminder(invoice)}
             onMarkPaid={togglePaidStatus}
+            onSetQuoteStatus={handleQuoteStatusChange}
           />
 
           <DashboardStats

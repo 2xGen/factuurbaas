@@ -11,7 +11,7 @@ import { QUOTE_LAYOUT_STYLES, resolveUsableLayoutId } from '@/lib/invoiceLayouts
 const QuotePreview = React.forwardRef(({ quote }, ref) => {
   const { user } = useAuth();
   const { referralCount } = useReferralCount();
-  const { subtotal, taxAmount, grandTotal } = calculateQuoteBreakdown(quote);
+  const { subtotal, taxAmount, grandTotal, taxLines } = calculateQuoteBreakdown(quote);
   const company = quote.companyDetails || {};
   const client = quote.clientDetails || {};
   const opts = quote.options || {};
@@ -136,6 +136,36 @@ const QuotePreview = React.forwardRef(({ quote }, ref) => {
               </div>
             );
           })}
+          {(quote.hoursWorked || []).map((log) => {
+            const hours = parseFloat(log.hours) || 0;
+            const rate = parseFloat(quote.amount) || 0;
+            const lineTotal = hours * rate;
+            if (!log.taskDescription && lineTotal === 0) return null;
+            return (
+              <div
+                key={log.id}
+                className={cn(
+                  'grid grid-cols-12 gap-2 border-t px-4 py-3 text-sm',
+                  currentLayout.borderColor,
+                  currentLayout.text
+                )}
+              >
+                <span className="col-span-6">
+                  {log.taskDescription || 'Uren'}
+                  {log.date ? (
+                    <span className={cn('mt-0.5 block text-xs', currentLayout.muted)}>
+                      {format(new Date(log.date), 'd MMM yyyy', { locale: nl })}
+                    </span>
+                  ) : null}
+                </span>
+                <span className="col-span-2 text-right">{hours}</span>
+                <span className="col-span-2 text-right">{formatQuoteMoney(rate)}</span>
+                <span className="col-span-2 text-right font-medium">
+                  {formatQuoteMoney(lineTotal)}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <div className="ml-auto w-full max-w-xs space-y-1.5 text-sm">
@@ -143,10 +173,18 @@ const QuotePreview = React.forwardRef(({ quote }, ref) => {
             <span>Subtotaal</span>
             <span>{formatQuoteMoney(subtotal)}</span>
           </div>
-          <div className={cn('flex justify-between', currentLayout.secondary)}>
-            <span>BTW ({quote.taxRate}%)</span>
-            <span>{formatQuoteMoney(taxAmount)}</span>
-          </div>
+          {(taxLines?.length
+            ? taxLines.filter((line) => Math.abs(line.amount) > 0.0001 || line.rate === 0)
+            : [{ key: 'fallback', label: `BTW (${quote.taxRate || 21}%)`, amount: taxAmount }]
+          ).map((line) => (
+            <div
+              key={line.key || line.label}
+              className={cn('flex justify-between', currentLayout.secondary)}
+            >
+              <span>{line.label || 'BTW'}</span>
+              <span>{formatQuoteMoney(line.amount)}</span>
+            </div>
+          ))}
           <div
             className={cn(
               'flex justify-between border-t pt-2 text-base font-bold',
