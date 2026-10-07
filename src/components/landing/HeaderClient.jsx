@@ -68,6 +68,15 @@ export default function HeaderClient() {
     return () => {
       ro.disconnect();
     };
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [isOpen]);
 
   const handleSignOut = async () => {
@@ -93,7 +102,6 @@ export default function HeaderClient() {
 
   return (
     <header
-      ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         isLoggedIn
           ? `border-slate-200/80 bg-white/95 backdrop-blur-md ${isScrolled ? 'shadow-sm' : ''}`
@@ -104,6 +112,7 @@ export default function HeaderClient() {
             }`
       }`}
     >
+      <div ref={headerRef}>
       <ShareFactuurBaas variant="banner" />
 
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:h-18 sm:px-6 lg:h-20">
@@ -226,6 +235,7 @@ export default function HeaderClient() {
           </div>
         </div>
       </div>
+      </div>
 
       <AnimatePresence>
         {isOpen && (
@@ -233,9 +243,9 @@ export default function HeaderClient() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-t border-slate-200 bg-white md:hidden"
+            className="max-h-[calc(100dvh-var(--header-height,4rem))] overflow-y-auto overscroll-contain border-t border-slate-200 bg-white md:hidden"
           >
-            <nav className="flex flex-col items-stretch gap-1 px-4 py-4">
+            <nav className="flex flex-col items-stretch gap-1 px-4 py-4 pb-8">
               {isLoggedIn ? (
                 <>
                   <Link

@@ -72,7 +72,7 @@ function IncomeForm({ onSave, entries }) {
   };
 
   return (
-    <div className="flex h-full flex-col rounded-2xl bg-white p-5 text-ink shadow-window sm:p-7">
+    <div className="flex h-full min-w-0 flex-col rounded-2xl bg-white p-5 text-ink shadow-window sm:p-7">
       <div className="flex items-center gap-3">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-white">
           <Plus className="h-4 w-4" />
@@ -236,7 +236,7 @@ function GoalCard({ ytd }) {
   const perMonth = Math.max(0, goal - ytd) / MONTHS_LEFT;
 
   return (
-    <div ref={ref} className="rounded-2xl bg-white p-5 text-ink shadow-window sm:p-7">
+    <div ref={ref} className="min-w-0 rounded-2xl bg-white p-5 text-ink shadow-window sm:p-7">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ember-50 text-ember">
@@ -323,13 +323,13 @@ function ComparisonCard({ month }) {
   ];
 
   return (
-    <div className="rounded-2xl bg-white p-5 text-ink shadow-window sm:p-7">
+    <div className="min-w-0 overflow-hidden rounded-2xl bg-white p-5 text-ink shadow-window sm:p-7">
       <div className="flex items-baseline justify-between gap-4">
         <p className="font-display text-xl leading-tight">Oktober vergeleken</p>
         <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">excl. btw</p>
       </div>
 
-      <div className="mt-5 overflow-x-auto">
+      <div className="mt-5 -mx-5 overflow-x-auto overscroll-x-contain px-5">
         <table className="w-full min-w-[26rem] text-sm">
           <thead>
             <tr className="text-left font-mono text-[10px] uppercase tracking-[0.12em] text-ink-400">
@@ -379,13 +379,13 @@ export default function IncomeDemo() {
 
   return (
     <div className="grid gap-4 lg:grid-cols-12 lg:gap-5">
-      <div className="lg:col-span-5 lg:row-span-2">
+      <div className="min-w-0 lg:col-span-5 lg:row-span-2">
         <IncomeForm entries={entries} onSave={(entry) => setEntries((prev) => [entry, ...prev])} />
       </div>
-      <div className="lg:col-span-7">
+      <div className="min-w-0 lg:col-span-7">
         <GoalCard ytd={BASE.ytdIncome + added} />
       </div>
-      <div className="lg:col-span-7">
+      <div className="min-w-0 lg:col-span-7">
         <ComparisonCard month={month} />
       </div>
     </div>

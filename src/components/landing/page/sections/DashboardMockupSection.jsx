@@ -316,7 +316,7 @@ export default function DashboardMockupSection() {
           </motion.div>
         </figure>
 
-        <div className="mx-auto mt-28 max-w-6xl sm:mt-40">
+        <div className="mx-auto mt-28 min-w-0 max-w-6xl sm:mt-40">
           <Reveal className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
             <h3 className="max-w-[20ch] font-display text-[2rem] font-normal leading-[1.05] tracking-[-0.03em] sm:text-[2.6rem]">
               Ook als je omzet <em className="text-ember-100">niet alleen uit facturen</em> komt.

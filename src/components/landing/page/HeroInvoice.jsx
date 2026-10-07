@@ -46,13 +46,13 @@ export default function HeroInvoice() {
         };
 
   return (
-    <div className="relative mx-auto w-full max-w-[34rem] lg:mr-0">
+    <div className="relative mx-auto w-full max-w-[34rem] overflow-x-clip lg:mr-0 sm:overflow-visible">
       <div
-        className="absolute inset-0 translate-x-5 translate-y-4 rotate-[3.5deg] rounded-[10px] border border-ink/5 bg-paper-50 shadow-paper"
+        className="absolute inset-0 hidden translate-x-5 translate-y-4 rotate-[3.5deg] rounded-[10px] border border-ink/5 bg-paper-50 shadow-paper sm:block"
         aria-hidden
       />
       <div
-        className="absolute inset-0 -translate-x-3 translate-y-2 -rotate-[2deg] rounded-[10px] border border-ink/5 bg-white/80 shadow-paper"
+        className="absolute inset-0 hidden -translate-x-3 translate-y-2 -rotate-[2deg] rounded-[10px] border border-ink/5 bg-white/80 shadow-paper sm:block"
         aria-hidden
       />
 
@@ -64,7 +64,7 @@ export default function HeroInvoice() {
               animate: { opacity: 1, y: 0, rotate: 0 },
               transition: { duration: 0.9, ease: EASE_OUT },
             })}
-        className="relative overflow-hidden rounded-[10px] border border-ink/[0.06] bg-white p-6 text-ink shadow-paper sm:p-9"
+        className="relative overflow-visible rounded-[10px] border border-ink/[0.06] bg-white p-5 text-ink shadow-paper sm:overflow-hidden sm:p-9"
         aria-label="Voorbeeld van een factuur"
         role="img"
       >
@@ -121,49 +121,51 @@ export default function HeroInvoice() {
           ))}
         </div>
 
-        <motion.div
-          {...appear(TOTALS_AT)}
-          className="ml-auto mt-3 w-full max-w-[15rem] space-y-1.5 border-t border-ink/10 pt-3 text-[11px] sm:text-[13px]"
-        >
-          <div className="flex justify-between text-ink-500">
-            <span>Subtotaal</span>
-            <span className="tabular">{formatEuro(SUBTOTAL)}</span>
-          </div>
-          <div className="flex justify-between text-ink-500">
-            <span>Btw 21%</span>
-            <CountUp className="tabular" value={BTW} start={ready} delay={TOTALS_AT} duration={1.1} />
-          </div>
-          <div className="flex items-baseline justify-between pt-2">
-            <span className="text-sm font-semibold">Totaal</span>
-            <CountUp
-              className="font-display text-2xl tabular sm:text-[1.75rem]"
-              value={TOTAL}
-              start={ready}
-              delay={TOTALS_AT}
-              duration={1.3}
-            />
-          </div>
-        </motion.div>
+        <div className="mt-3 flex flex-col-reverse items-start gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <motion.div
+            {...(reduce
+              ? {}
+              : {
+                  initial: { opacity: 0, scale: 1.8 },
+                  animate: { opacity: 1, scale: 1 },
+                  transition: { delay: STAMP_AT, type: 'spring', stiffness: 380, damping: 18 },
+                })}
+            className="pointer-events-none origin-left"
+            aria-hidden
+          >
+            <div className="-rotate-[10deg] rounded-md border-[2.5px] border-emerald-600/80 px-3 py-1 font-mono text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700/90 mix-blend-multiply sm:text-base">
+              Betaald
+            </div>
+          </motion.div>
+
+          <motion.div
+            {...appear(TOTALS_AT)}
+            className="w-full max-w-[15rem] space-y-1.5 border-t border-ink/10 pt-3 text-[11px] sm:ml-auto sm:text-[13px]"
+          >
+            <div className="flex justify-between text-ink-500">
+              <span>Subtotaal</span>
+              <span className="tabular">{formatEuro(SUBTOTAL)}</span>
+            </div>
+            <div className="flex justify-between text-ink-500">
+              <span>Btw 21%</span>
+              <CountUp className="tabular" value={BTW} start={ready} delay={TOTALS_AT} duration={1.1} />
+            </div>
+            <div className="flex items-baseline justify-between gap-4 pt-2">
+              <span className="text-sm font-semibold">Totaal</span>
+              <CountUp
+                className="font-display text-2xl tabular sm:text-[1.75rem]"
+                value={TOTAL}
+                start={ready}
+                delay={TOTALS_AT}
+                duration={1.3}
+              />
+            </div>
+          </motion.div>
+        </div>
 
         <p className="mt-6 border-t border-ink/[0.07] pt-4 font-mono text-[9px] leading-relaxed text-ink-400 sm:text-[10px]">
           Graag binnen 14 dagen overmaken op NL91 ABNA 0417 1643 00 o.v.v. 2026-001
         </p>
-
-        <motion.div
-          {...(reduce
-            ? {}
-            : {
-                initial: { opacity: 0, scale: 1.8 },
-                animate: { opacity: 1, scale: 1 },
-                transition: { delay: STAMP_AT, type: 'spring', stiffness: 380, damping: 18 },
-              })}
-          className="pointer-events-none absolute bottom-[5.25rem] left-6 sm:bottom-24 sm:left-9"
-          aria-hidden
-        >
-          <div className="-rotate-[10deg] rounded-md border-[2.5px] border-emerald-600/80 px-3 py-1 font-mono text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700/90 mix-blend-multiply sm:text-base">
-            Betaald
-          </div>
-        </motion.div>
       </motion.div>
 
       <motion.div
