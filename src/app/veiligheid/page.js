@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
-  Crown,
   Database,
   Download,
   EyeOff,
@@ -12,6 +11,7 @@ import {
   Shield,
   Trash2,
 } from 'lucide-react';
+import { DisplayHeading } from '@/components/site/editorial';
 
 export const metadata = {
   title: 'Veiligheid | FactuurBaas',
@@ -34,7 +34,7 @@ const POINTS = [
   {
     icon: Database,
     title: 'Row Level Security',
-    text: 'Op databaseniveau: alleen jij kunt jouw facturen en profiel lezen of wijzigen. Andere accounts zien jouw data niet.',
+    text: 'Op databaseniveau: alleen jij kunt jouw facturen, offertes, inkomsten, uitgaven, uren en profiel lezen of wijzigen. Andere accounts zien jouw data niet.',
   },
   {
     icon: Server,
@@ -49,12 +49,12 @@ const POINTS = [
   {
     icon: Download,
     title: 'Export wanneer jij wilt',
-    text: 'Exporteer opgeslagen facturen als JSON of CSV vanuit je dashboard.',
+    text: 'Download je accountgegevens als JSON via Profiel. Facturen en offertes kun je ook als JSON of CSV exporteren.',
   },
   {
     icon: Trash2,
     title: 'Verwijderen (AVG)',
-    text: 'Verwijder facturen één voor één, of wis je hele account inclusief opgeslagen data.',
+    text: 'Verwijder facturen, offertes, inkomsten, uitgaven of uren één voor één, of wis je hele account inclusief opgeslagen data.',
   },
   {
     icon: Shield,
@@ -63,68 +63,108 @@ const POINTS = [
   },
 ];
 
+const inlineLink =
+  'font-medium text-ink underline decoration-ink/20 underline-offset-[5px] transition-colors hover:decoration-ember';
+
+const rise = (ms) => ({ animationDelay: `${ms}ms` });
+
 export default function SecurityPage() {
   return (
-    <div className="min-h-screen bg-[#f7f8fb] px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <div className="container mx-auto max-w-4xl">
-        <Link
-          href="/"
-          className="group mb-8 inline-flex items-center font-semibold text-deep-blue transition-colors hover:text-warm-orange"
-        >
-          <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-          Terug naar Home
-        </Link>
-
-        <header className="mb-10 text-center">
-          <Shield className="mx-auto mb-4 h-14 w-14 text-deep-blue" />
-          <h1 className="font-heading text-3xl font-bold tracking-tight text-deep-blue sm:text-4xl">
-            FactuurBaas veiligheid
-          </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-            Beveiliging is geen bijzaak. Voor ondernemers die facturen bewaren, leggen we helder uit waar data staat
-            en hoe we die beschermen.
-          </p>
-        </header>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          {POINTS.map(({ icon: Icon, title, text }) => (
-            <div
-              key={title}
-              className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm"
-            >
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-deep-blue">
-                <Icon className="h-5 w-5" strokeWidth={1.75} />
-              </div>
-              <h2 className="font-heading text-lg font-semibold text-deep-blue">{title}</h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{text}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm sm:p-8">
-          <p className="text-sm text-slate-600">
-            Details over verwerking en rechten staan in ons{' '}
-            <Link href="/privacybeleid" className="font-medium text-warm-orange hover:underline">
-              privacybeleid
-            </Link>
-            . De{' '}
-            <Link href="/verwerkersovereenkomst" className="font-medium text-warm-orange hover:underline">
-              verwerkersovereenkomst (DPA)
-            </Link>{' '}
-            maakt deel uit van de dienstverlening. FactuurBaas.nl is een dienst van 2xGen LLC. Vragen?{' '}
-            <a href="mailto:mail@factuurbaas.nl" className="font-medium text-warm-orange hover:underline">
-              mail@factuurbaas.nl
-            </a>
-          </p>
+    <div className="min-h-screen bg-paper text-ink">
+      <header className="grain relative isolate overflow-hidden bg-paper">
+        <div className="bg-ledger mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
+        <div
+          className="pointer-events-none absolute -right-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(210,96,26,0.12),transparent_65%)]"
+          aria-hidden
+        />
+        <div className="container mx-auto px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24">
           <Link
             href="/"
-            className="mt-6 inline-flex items-center font-heading font-bold text-deep-blue hover:text-warm-orange"
+            className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400 transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-paper motion-safe:animate-rise"
           >
-            <Crown className="mr-2 h-5 w-5 text-warm-orange" />
-            FactuurBaas.nl
+            <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+            Terug naar Home
           </Link>
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+            <div>
+              <span
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-ink/10 bg-white/80 shadow-paper motion-safe:animate-rise"
+                style={rise(40)}
+              >
+                <Shield className="h-5 w-5 text-ember" strokeWidth={1.75} aria-hidden />
+              </span>
+              <DisplayHeading
+                as="h1"
+                size="xl"
+                className="mt-7 max-w-[14ch] motion-safe:animate-rise"
+                style={rise(100)}
+              >
+                FactuurBaas <em>veiligheid</em>
+              </DisplayHeading>
+            </div>
+            <p
+              className="max-w-xl text-lg leading-relaxed text-ink-500 motion-safe:animate-rise sm:text-xl lg:ml-auto"
+              style={rise(160)}
+            >
+              Beveiliging is geen bijzaak. Voor ondernemers die facturen bewaren, leggen we helder uit waar data staat
+              en hoe we die beschermen.
+            </p>
+          </div>
         </div>
-      </div>
+      </header>
+
+      <section className="border-t border-ink/[0.06] bg-paper-50">
+        <div className="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+          <ul className="grid border-t border-ink/15 md:grid-cols-2 md:gap-x-16">
+            {POINTS.map(({ icon: Icon, title, text }, i) => (
+              <li
+                key={title}
+                className="grid grid-cols-[auto_1fr] gap-5 border-b border-ink/15 py-8 sm:gap-6 sm:py-10"
+              >
+                <div className="flex flex-col items-center gap-4">
+                  <span className="font-display text-2xl italic leading-none text-ember" aria-hidden>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/10 bg-white text-ink-700">
+                    <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                  </span>
+                </div>
+                <div>
+                  <DisplayHeading size="sm">{title}</DisplayHeading>
+                  <p className="mt-2.5 max-w-md text-[15px] leading-relaxed text-ink-500 sm:text-base">{text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-14 rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-paper sm:p-10">
+            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end md:gap-12">
+              <p className="max-w-2xl text-[15px] leading-relaxed text-ink-500 sm:text-base">
+                Details over verwerking en rechten staan in ons{' '}
+                <Link href="/privacybeleid" className={inlineLink}>
+                  privacybeleid
+                </Link>
+                . De{' '}
+                <Link href="/verwerkersovereenkomst" className={inlineLink}>
+                  verwerkersovereenkomst (DPA)
+                </Link>{' '}
+                maakt deel uit van de dienstverlening. FactuurBaas.nl is een dienst van 2xGen LLC. Vragen?{' '}
+                <a href="mailto:mail@factuurbaas.nl" className={inlineLink}>
+                  mail@factuurbaas.nl
+                </a>
+              </p>
+              <Link
+                href="/"
+                className="group inline-flex items-center gap-2.5 self-start rounded-full border border-ink/15 bg-paper-50 py-2 pl-2.5 pr-4 font-display text-lg text-ink transition-colors hover:border-ink/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 md:self-auto"
+              >
+                <img src="/crown-favicon.svg" alt="" aria-hidden className="h-6 w-6" />
+                FactuurBaas.nl
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

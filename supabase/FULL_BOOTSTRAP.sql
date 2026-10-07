@@ -118,6 +118,7 @@ create table if not exists public.invoices (
   invoice_name text,
   invoice_date timestamptz,
   due_date timestamptz,
+  paid_date date,
   payment_term_days text,
   status text not null default 'concept'
     check (status in ('concept', 'pending', 'paid')),
@@ -461,11 +462,11 @@ create policy "emails_anon_insert"
   to anon, authenticated
   with check (email is not null);
 
+-- No SELECT for anon/authenticated. Admin reads via service role on the server.
 drop policy if exists "emails_auth_read" on public.factuurbaas_emails;
-create policy "emails_auth_read"
-  on public.factuurbaas_emails for select
-  to authenticated
-  using (true);
+revoke all on table public.factuurbaas_emails from public;
+revoke select, update, delete on table public.factuurbaas_emails from anon, authenticated;
+grant insert on table public.factuurbaas_emails to anon, authenticated;
 
 -- ─── 3. Page views ────────────────────────────────────────────────────────────
 
@@ -489,11 +490,11 @@ create policy "page_views_anon_insert"
   to anon, authenticated
   with check (true);
 
+-- No SELECT for anon/authenticated. Admin reads via /api/admin/page-views.
 drop policy if exists "page_views_auth_read" on public.page_views;
-create policy "page_views_auth_read"
-  on public.page_views for select
-  to authenticated
-  using (true);
+revoke all on table public.page_views from public;
+revoke select, update, delete on table public.page_views from anon, authenticated;
+grant insert on table public.page_views to anon, authenticated;
 
 create or replace function public.get_page_view_stats()
 returns table (period text, count bigint)
@@ -523,8 +524,10 @@ as $$
   limit 100;
 $$;
 
-grant execute on function public.get_page_view_stats() to authenticated;
-grant execute on function public.get_page_views_by_path() to authenticated;
+revoke all on function public.get_page_view_stats() from public, anon, authenticated;
+revoke all on function public.get_page_views_by_path() from public, anon, authenticated;
+grant execute on function public.get_page_view_stats() to service_role;
+grant execute on function public.get_page_views_by_path() to service_role;
 
 -- ─── 4. Invoice creation counter (anonymous) ──────────────────────────────────
 

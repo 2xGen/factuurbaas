@@ -1,43 +1,47 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Calculator } from 'lucide-react';
+import { EASE_OUT, Reveal } from '@/components/landing/page/motion';
 import { getHypotheekHubSections, HYPOTHEEK_HUB_IMAGE } from '@/lib/hypotheekHub';
 
 const CALCULATOR_HREF = '/tools/hypotheek-berekenen-zzp';
 
 function CalculatorCta({
-  label = "Bereken je maximale hypotheek als zzp'er →",
-  className = 'my-8',
+  label = "Bereken je maximale hypotheek als zzp'er",
+  className = 'my-10',
 }) {
   return (
-    <div className={`not-prose text-center ${className}`}>
-      <Button asChild size="lg" className="rounded-xl bg-warm-orange hover:bg-orange-600">
-        <Link href={CALCULATOR_HREF}>
-          {label}
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Link>
-      </Button>
+    <div className={`not-prose ${className}`}>
+      <Link
+        href={CALCULATOR_HREF}
+        className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[15px] font-medium text-white shadow-[0_1px_2px_rgba(6,26,48,0.2),0_8px_20px_-8px_rgba(6,26,48,0.5)] transition-colors hover:bg-ink-950"
+      >
+        <Calculator className="h-4 w-4 text-ember-100" aria-hidden />
+        {label.replace(/\s*→$/, '')}
+        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+      </Link>
     </div>
   );
 }
 
 function GuideList({ articles }) {
   return (
-    <ul className="mt-4 space-y-2">
+    <ul className="border-t border-ink/10">
       {articles.map((article) => (
-        <li key={article.slug}>
-          <Link
-            href={`/blogs/${article.slug}`}
-            className="group inline-flex items-start gap-2 font-medium text-deep-blue hover:text-warm-orange"
-          >
-            <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-warm-orange opacity-70 transition group-hover:translate-x-0.5" />
-            <span>{article.title}</span>
+        <li key={article.slug} className="border-b border-ink/10">
+          <Link href={`/blogs/${article.slug}`} className="group flex items-start justify-between gap-6 py-5">
+            <span>
+              <span className="font-display text-xl leading-snug text-ink transition-colors group-hover:text-ink-700">
+                {article.title}
+              </span>
+              {article.excerpt && (
+                <span className="mt-1.5 block text-sm leading-relaxed text-ink-500">{article.excerpt}</span>
+              )}
+            </span>
+            <ArrowRight className="mt-1.5 h-4 w-4 shrink-0 text-ember transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-          {article.excerpt && (
-            <p className="ml-6 mt-0.5 text-sm leading-relaxed text-slate-600">{article.excerpt}</p>
-          )}
         </li>
       ))}
     </ul>
@@ -46,48 +50,75 @@ function GuideList({ articles }) {
 
 export default function HypotheekHubContent() {
   const sections = getHypotheekHubSections();
+  const reduce = useReducedMotion();
 
   return (
-    <div className="bg-white">
-      <div className="relative h-64 w-full md:h-96">
-        <img
-          src={HYPOTHEEK_HUB_IMAGE.url}
-          alt={HYPOTHEEK_HUB_IMAGE.alt}
-          className="h-full w-full object-cover"
-          fetchPriority="high"
+    <div className="bg-paper-50 text-ink">
+      <header className="grain relative isolate overflow-hidden bg-paper">
+        <div className="bg-ledger mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
+        <div
+          className="pointer-events-none absolute -right-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(210,96,26,0.12),transparent_65%)]"
+          aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 text-white container mx-auto">
-          <h1 className="font-heading text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-            Hypotheek als zzp&apos;er
+        <div className="container mx-auto max-w-4xl px-4 pb-36 pt-12 sm:px-6 sm:pb-48 sm:pt-16 lg:pt-20">
+          <nav aria-label="Breadcrumb" className="motion-safe:animate-rise">
+            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">
+              <li>
+                <Link href="/" className="transition-colors hover:text-ink">
+                  FactuurBaas
+                </Link>
+              </li>
+              <li aria-hidden className="text-ink/20">/</li>
+              <li>
+                <Link href="/blogs?pillar=hypotheek" className="transition-colors hover:text-ink">
+                  Hypotheek
+                </Link>
+              </li>
+              <li aria-hidden className="text-ink/20">/</li>
+              <li className="text-ink-500" aria-current="page">Hypotheek als zzp&apos;er</li>
+            </ol>
+          </nav>
+
+          <p
+            className="mt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-ember motion-safe:animate-rise"
+            style={{ animationDelay: '60ms' }}
+          >
+            Overzicht · {sections.reduce((n, s) => n + s.articles.length, 0)} gidsen
+          </p>
+          <h1
+            className="mt-4 font-display text-[2.6rem] font-normal leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.4rem] motion-safe:animate-rise"
+            style={{ animationDelay: '120ms' }}
+          >
+            Hypotheek als <em className="text-ink-700">zzp&apos;er</em>
           </h1>
-          <p className="mt-2 max-w-2xl text-sm text-white/90 sm:text-base">
+          <p
+            className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-500 sm:text-xl motion-safe:animate-rise"
+            style={{ animationDelay: '180ms' }}
+          >
             Hoe werkt een hypotheek als ondernemer? Overzicht van inkomen, cijfers, berekenen en
             advies.
           </p>
         </div>
+      </header>
+
+      <div className="container mx-auto -mt-28 max-w-6xl px-4 sm:-mt-40 sm:px-6">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 28, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.25, ease: EASE_OUT }}
+          className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-paper-200 shadow-paper ring-1 ring-ink/5 sm:aspect-[2/1] sm:rounded-[1.75rem]"
+        >
+          <img
+            src={HYPOTHEEK_HUB_IMAGE.url}
+            alt={HYPOTHEEK_HUB_IMAGE.alt}
+            className="absolute inset-0 h-full w-full object-cover"
+            fetchPriority="high"
+          />
+        </motion.div>
       </div>
 
-      <div className="container mx-auto max-w-3xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <nav aria-label="Breadcrumb" className="mb-8 text-sm text-slate-500">
-          <ol className="flex flex-wrap items-center gap-1.5">
-            <li>
-              <Link href="/" className="hover:text-warm-orange">
-                FactuurBaas
-              </Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li>
-              <Link href="/blogs?pillar=hypotheek" className="hover:text-warm-orange">
-                Hypotheek
-              </Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li className="font-medium text-slate-800">Hypotheek als zzp&apos;er</li>
-          </ol>
-        </nav>
-
-        <article className="prose prose-lg max-w-none text-slate-700 lg:prose-xl">
+      <div className="container mx-auto max-w-[42rem] px-4 pb-24 pt-14 sm:px-6 sm:pt-20 lg:px-0">
+        <article className="article-body prose prose-lg max-w-none prose-p:leading-[1.75] prose-h2:text-[1.85rem] sm:prose-h2:text-[2.15rem]">
           <p>
             Een <strong>hypotheek als zzp&apos;er</strong> werkt anders dan wanneer je in loondienst
             bent. Je inkomen komt niet van een vaste loonstrook, maar uit je onderneming. De
@@ -240,63 +271,97 @@ export default function HypotheekHubContent() {
           </p>
         </article>
 
-        <section className="mt-14" aria-labelledby="hub-topics">
-          <h2 id="hub-topics" className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-            Hypotheek als zzp&apos;er: alle onderwerpen
-          </h2>
-          <p className="mt-3 text-slate-600">
-            Kies het onderwerp dat bij jouw vraag past. Elke gids gaat dieper in op één onderdeel.
-          </p>
+      </div>
 
-          <div className="mt-8 space-y-10">
-            {sections.map((section) => (
-              <div key={section.id}>
-                <h3 className="font-heading text-lg font-semibold text-deep-blue">{section.title}</h3>
+      <section className="border-t border-ink/10 bg-paper" aria-labelledby="hub-topics">
+        <div className="container mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:py-28">
+          <Reveal className="lg:sticky lg:top-32 lg:self-start">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember">Alle onderwerpen</p>
+            <h2
+              id="hub-topics"
+              className="mt-4 font-display text-[2.2rem] font-normal leading-[1.05] tracking-[-0.03em] sm:text-5xl"
+            >
+              Hypotheek als <em className="text-ink-700">zzp&apos;er</em>: alle onderwerpen
+            </h2>
+            <p className="mt-5 max-w-sm text-base leading-relaxed text-ink-500">
+              Kies het onderwerp dat bij jouw vraag past. Elke gids gaat dieper in op één onderdeel.
+            </p>
+            <CalculatorCta className="mt-8" label="Of bereken eerst je maximale hypotheek" />
+          </Reveal>
+
+          <div className="space-y-14">
+            {sections.map((section, index) => (
+              <Reveal key={section.id} delay={0.05}>
+                <h3 className="mb-2 flex items-baseline gap-4 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400">
+                  <span className="font-display text-2xl normal-case italic tracking-normal text-ember">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  {section.title}
+                </h3>
                 <GuideList articles={section.articles} />
-              </div>
+              </Reveal>
             ))}
           </div>
+        </div>
+      </section>
 
-          <CalculatorCta className="mt-10" label="Of bereken eerst je maximale hypotheek →" />
-        </section>
-
-        <section className="mt-14 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
-          <h2 className="font-heading text-xl font-bold text-deep-blue sm:text-2xl">
-            Hulp nodig bij je hypotheek als zzp&apos;er?
-          </h2>
-          <p className="mt-3 text-slate-600 leading-relaxed">
-            De regels voor ondernemers kunnen per situatie en geldverstrekker verschillen. Wil je
-            jouw situatie laten beoordelen? FactuurBaas werkt hiervoor samen met Haruna, een
-            onafhankelijk hypotheekadvieskantoor dat ook ondernemers begeleidt.
-          </p>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button asChild size="lg" className="rounded-xl">
-              <Link href="/blogs/hypotheekadviseur-voor-zzpers">
+      <section className="bg-paper px-3 pb-3 sm:px-6 sm:pb-6">
+        <Reveal
+          y={24}
+          className="grain-light relative isolate mx-auto max-w-[88rem] overflow-hidden rounded-[1.75rem] bg-ink-950 px-6 py-16 text-white sm:rounded-[2.25rem] sm:px-12 sm:py-20"
+        >
+          <div className="bg-ledger-dark mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
+          <div
+            className="pointer-events-none absolute -bottom-40 right-0 -z-10 h-[26rem] w-[46rem] rounded-full bg-[radial-gradient(ellipse,rgba(210,96,26,0.26),transparent_62%)]"
+            aria-hidden
+          />
+          <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+              <h2 className="max-w-[18ch] font-display text-[2.2rem] font-normal leading-[1.04] tracking-[-0.03em] sm:text-5xl">
+                Hulp nodig bij je hypotheek <em className="text-ember-100">als zzp&apos;er?</em>
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/65">
+                De regels voor ondernemers kunnen per situatie en geldverstrekker verschillen. Wil je
+                jouw situatie laten beoordelen? FactuurBaas werkt hiervoor samen met Haruna, een
+                onafhankelijk hypotheekadvieskantoor dat ook ondernemers begeleidt.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 lg:items-end">
+              <Link
+                href="/blogs/hypotheekadviseur-voor-zzpers"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-[15px] font-medium text-ink transition-colors hover:bg-paper-100"
+              >
                 Bekijk hypotheekadvies voor zzp&apos;ers
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-xl">
-              <Link href={CALCULATOR_HREF}>
+              <Link
+                href={CALCULATOR_HREF}
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-6 text-[15px] font-medium text-white transition-colors hover:border-white/50"
+              >
                 Bereken eerst zelf je hypotheek
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </Link>
-            </Button>
+            </div>
           </div>
-        </section>
-
-        <p className="mt-10 text-sm text-slate-500">
-          Of ga eerst naar de{' '}
-          <Link href="/tools/hypotheek-zzp" className="text-warm-orange hover:underline">
-            hypotheek-uitleg voor zzp&apos;ers
-          </Link>{' '}
-          of{' '}
-          <Link href={CALCULATOR_HREF} className="text-warm-orange hover:underline">
-            bereken je maximale hypotheek
-          </Link>
-          .
-        </p>
-      </div>
+          <p className="mx-auto mt-12 max-w-5xl border-t border-white/10 pt-6 text-sm text-white/50">
+            Of ga eerst naar de{' '}
+            <Link
+              href="/tools/hypotheek-zzp"
+              className="text-white underline decoration-white/30 underline-offset-[5px] hover:decoration-white"
+            >
+              hypotheek-uitleg voor zzp&apos;ers
+            </Link>{' '}
+            of{' '}
+            <Link
+              href={CALCULATOR_HREF}
+              className="text-white underline decoration-white/30 underline-offset-[5px] hover:decoration-white"
+            >
+              bereken je maximale hypotheek
+            </Link>
+            .
+          </p>
+        </Reveal>
+      </section>
     </div>
   );
 }

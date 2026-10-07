@@ -4,9 +4,10 @@ export function LandingSection({ children, className, bg = 'white' }) {
   return (
     <section
       className={cn(
-        'py-16 sm:py-20 lg:py-24',
-        bg === 'white' && 'bg-white',
-        bg === 'muted' && 'bg-slate-50',
+        'py-20 text-ink sm:py-24 lg:py-28',
+        bg === 'white' && 'bg-paper-50',
+        bg === 'muted' && 'border-y border-ink/[0.06] bg-paper',
+        bg === 'dark' && 'bg-ink-950 text-white',
         className
       )}
     >
@@ -26,26 +27,22 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        'mb-10 sm:mb-12 lg:mb-14',
+        'mb-12 sm:mb-14 lg:mb-16',
         align === 'center' && 'mx-auto max-w-2xl text-center',
         align === 'left' && 'max-w-2xl',
-        action && 'flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:max-w-none',
+        action && 'flex flex-col gap-6 md:max-w-none md:flex-row md:items-end md:justify-between',
         className
       )}
     >
-      <div className={align === 'center' ? 'mx-auto max-w-2xl' : ''}>
+      <div className={align === 'center' ? 'mx-auto max-w-2xl' : 'max-w-2xl'}>
         {eyebrow && (
-          <p className="text-warm-orange font-semibold uppercase tracking-[0.14em] text-xs sm:text-sm mb-3">
-            {eyebrow}
-          </p>
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ember">{eyebrow}</p>
         )}
-        <h2 className="text-2xl sm:text-3xl lg:text-[2.125rem] font-heading font-bold text-deep-blue tracking-tight leading-tight">
+        <h2 className="font-display text-[2rem] font-normal leading-[1.06] tracking-[-0.03em] text-ink sm:text-[2.6rem] lg:text-5xl [&_em]:text-ink-700">
           {title}
         </h2>
         {description && (
-          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            {description}
-          </p>
+          <p className="mt-4 text-base leading-relaxed text-ink-500 sm:mt-5 sm:text-lg">{description}</p>
         )}
       </div>
       {action}

@@ -7,12 +7,22 @@ const AdminProtectedRoute = ({ children }) => {
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    const isAdminAuthenticated = typeof window !== 'undefined' && sessionStorage.getItem('isAdminAuthenticated') === 'true';
-    if (!isAdminAuthenticated) {
-      router.replace('/M@tthijs1997');
-    } else {
-      setAllowed(true);
-    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/admin/session', { credentials: 'include' });
+        if (!res.ok) {
+          router.replace('/M@tthijs1997');
+          return;
+        }
+        if (!cancelled) setAllowed(true);
+      } catch {
+        router.replace('/M@tthijs1997');
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [router]);
 
   if (!allowed) return null;

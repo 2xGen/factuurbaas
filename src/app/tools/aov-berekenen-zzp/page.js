@@ -20,11 +20,9 @@ export const metadata = {
 
 export default function AovBerekenenZzpPage() {
   return (
-    <div className="min-h-screen bg-slate-50 py-8 sm:py-12">
+    <div className="min-h-screen bg-paper-50 text-ink">
       <InsifyAovSticky />
-      <div className="container mx-auto px-4 sm:px-6">
-        <AovCalculator />
-      </div>
+      <AovCalculator />
     </div>
   );
 }

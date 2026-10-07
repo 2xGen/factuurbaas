@@ -4,7 +4,7 @@
  */
 
 export const PRIVACY_CONSENT_PENDING_KEY = 'fb_privacy_consent_pending';
-export const PRIVACY_POLICY_VERSION = '2026-08-02-newsletter-opt-in';
+export const PRIVACY_POLICY_VERSION = '2026-10-07-account-data-categories';
 
 export function markPrivacyConsentPending({ newsletterOptIn = false } = {}) {
   if (typeof window === 'undefined') return;

@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabaseClient';
 import { useToast } from "@/components/ui/use-toast";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -23,34 +22,13 @@ const PageViewsSection = () => {
   const fetchPageViewsData = useCallback(async () => {
     setIsLoading(true);
     try {
-      // Fetch recent page views for display
-      const { data: recentViewsData, error: recentViewsError } = await supabase
-        .from('page_views')
-        .select('id, page_path, view_timestamp, user_agent')
-        .order('view_timestamp', { ascending: false })
-        .limit(100);
+      const res = await fetch('/api/admin/page-views', { credentials: 'include' });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);
 
-      if (recentViewsError) throw recentViewsError;
-      setRecentPageViews(recentViewsData || []);
-
-      // Fetch stats using RPC
-      const { data: statsData, error: statsError } = await supabase.rpc('get_page_view_stats');
-      if (statsError) throw statsError;
-      
-      const newStats = (statsData || []).reduce((acc, item) => {
-        acc[item.period] = item.count;
-        return acc;
-      }, { last_24_hours: 0, last_30_days: 0, all_time: 0 });
-      setStats(newStats);
-
-      // Aggregate views by page path using RPC
-      const { data: aggregatedData, error: aggregatedError } = await supabase.rpc('get_page_views_by_path');
-      if (aggregatedError) {
-        console.warn("Error fetching page views by path via RPC:", aggregatedError.message);
-        setViewsByPage([]); // Set to empty or handle fallback
-      } else {
-         setViewsByPage(aggregatedData || []);
-      }
+      setRecentPageViews(body.recent || []);
+      setStats(body.stats || { last_24_hours: 0, last_30_days: 0, all_time: 0 });
+      setViewsByPage(body.viewsByPage || []);
 
     } catch (error) {
       console.error("Error in fetchPageViewsData:", error);

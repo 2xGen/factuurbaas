@@ -1,5 +1,6 @@
 import { differenceInDays, startOfDay } from 'date-fns';
 import { parseDateSafe } from '@/lib/invoiceUtils';
+import { KOR_REVENUE_LIMIT } from '@/lib/korCalculator';
 
 const PROFILE_FIELDS = [
   { key: 'name', label: 'Bedrijfsnaam' },
@@ -72,13 +73,37 @@ export function getOverdueInvoices(invoices = [], now = new Date()) {
     .sort((a, b) => b.daysLate - a.daysLate);
 }
 
-/** Omzet excl. btw for the current calendar month. */
+/**
+ * "Verdiend" in FactuurBaas = omzet op factuurdatum, excl. btw (accrual).
+ *
+ * Telt mee:
+ * - facturen met invoiceDate in de periode (total_excl), óók als ze nog openstaan
+ * - losse verkopen (incomes.amount_excl) met incomeDate in de periode
+ *
+ * Telt niet mee:
+ * - een factuur later op betaald zetten (dat is cash / openstaand)
+ * - een bankbetaling voor een factuur die al bestaat — Inkomsten is alleen
+ *   verkoop zonder factuur, nooit een tweede keer dezelfde €1.000
+ *
+ * Openstaand = nog niet betaalde facturen (total_incl), ook van eerdere maanden.
+ * Jaardoel gebruikt dezelfde definitie over het kalenderjaar.
+ */
 export function getRevenueThisMonth(invoices = [], now = new Date()) {
   const year = now.getFullYear();
   const month = now.getMonth();
   return invoices.reduce((sum, inv) => {
     const date = invoiceDate(inv);
     if (!date || date.getFullYear() !== year || date.getMonth() !== month) return sum;
+    return sum + (Number(inv.total_excl) || 0);
+  }, 0);
+}
+
+/** Zelfde definitie als verdiend, over het kalenderjaar. */
+export function getRevenueThisYear(invoices = [], now = new Date()) {
+  const year = now.getFullYear();
+  return invoices.reduce((sum, inv) => {
+    const date = invoiceDate(inv);
+    if (!date || date.getFullYear() !== year) return sum;
     return sum + (Number(inv.total_excl) || 0);
   }, 0);
 }
@@ -170,42 +195,166 @@ export function countConceptQuotes(quotes = []) {
   return getConceptQuotes(quotes).length;
 }
 
+/** Sent/concept quotes that expire within the next `withinDays` days (not yet expired). */
+export function getQuotesExpiringSoon(quotes = [], now = new Date(), withinDays = 7) {
+  const today = startOfDay(now);
+  return quotes
+    .filter((q) => q.status === 'sent' || q.status === 'concept')
+    .map((q) => {
+      const validUntil = toDate(q.validUntil);
+      if (!validUntil) return null;
+      const daysUntil = differenceInDays(startOfDay(validUntil), today);
+      if (daysUntil < 1 || daysUntil > withinDays) return null;
+      return { quote: q, daysUntil };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.daysUntil - b.daysUntil);
+}
+
 /**
- * Split real problems (Actie nodig) from one onboarding nudge (Volgende stap).
- * Hours nudge only when the user already uses hours (open unbilled hours).
+ * Dutch quarterly VAT return window: last two weeks of Mar/Jun/Sep/Dec,
+ * and the following aangifte month (Apr/Jul/Oct/Jan).
+ */
+export function isVatReturnApproaching(now = new Date()) {
+  const month = now.getMonth();
+  const day = now.getDate();
+  if ([2, 5, 8, 11].includes(month) && day >= 18) return true;
+  if ([3, 6, 9, 0].includes(month)) return true;
+  return false;
+}
+
+function quoteHref(quote) {
+  return quote?.id ? `/tools/offerte-maker/maken?id=${quote.id}` : '/offertes';
+}
+
+function quoteLabel(quote) {
+  if (quote?.clientName) return quote.clientName;
+  if (quote?.quoteNumber) return `Offerte ${quote.quoteNumber}`;
+  return 'Offerte';
+}
+
+/**
+ * Actie nodig = business workflow (te laat → herinnering → betaald, offerte, btw).
+ * Onboarding = "Maak FactuurBaas compleet" and disappears when done.
  */
 export function buildDashboardSignals({
   overdue = [],
   openHours = 0,
-  clientCount = 0,
   invoiceCount = 0,
-  expenseCount = 0,
   quoteCount = 0,
   acceptedQuotes = [],
   expiredQuotes = [],
-  conceptQuotes = [],
+  expiringQuotes = [],
   profileCompletion,
+  outstandingInvoicesCount = 0,
+  btwTeReserveren = 0,
+  vatReturnApproaching = false,
+  ytdRevenue = 0,
 }) {
   const actions = [];
-  const conceptQuoteCount = conceptQuotes.length;
+  const listedOverdue = overdue.slice(0, 3);
 
-  for (const row of overdue.slice(0, 3)) {
+  for (const row of listedOverdue) {
     const daysLabel = `${row.daysLate} ${row.daysLate === 1 ? 'dag' : 'dagen'} te laat`;
     actions.push({
       id: `overdue-${row.invoice.id}`,
       type: 'overdue',
       tone: 'urgent',
-      title:
-        overdue.length === 1
-          ? `1 factuur is ${daysLabel}`
-          : `${row.client} · ${formatEuro(row.amount)}`,
-      detail:
-        overdue.length === 1
-          ? `${row.client} · ${formatEuro(row.amount)}`
-          : daysLabel,
+      title: `${row.client} · ${formatEuro(row.amount)} · ${daysLabel}`,
       invoice: row.invoice,
       daysLate: row.daysLate,
       amount: row.amount,
+    });
+  }
+
+  const unpaidNotListed = Math.max(0, outstandingInvoicesCount - listedOverdue.length);
+  if (unpaidNotListed > 0) {
+    const n = unpaidNotListed;
+    actions.push({
+      id: 'open-invoices',
+      type: 'open-invoices',
+      tone: 'info',
+      title: n === 1 ? '1 factuur nog niet betaald' : `${n} facturen nog niet betaald`,
+      href: '/facturen',
+      cta: 'Bekijk',
+    });
+  }
+
+  for (const row of expiringQuotes.slice(0, 2)) {
+    const q = row.quote;
+    actions.push({
+      id: `expiring-quote-${q.id || row.daysUntil}`,
+      type: 'expiring-quote',
+      tone: 'info',
+      title:
+        row.daysUntil === 1
+          ? `${quoteLabel(q)} verloopt morgen`
+          : `${quoteLabel(q)} verloopt over ${row.daysUntil} dagen`,
+      href: quoteHref(q),
+      cta: 'Bekijk offerte',
+    });
+  }
+
+  if (expiredQuotes.length > 0) {
+    const first = expiredQuotes[0];
+    actions.push({
+      id: 'expired-quotes',
+      type: 'expired-quotes',
+      tone: 'info',
+      title:
+        expiredQuotes.length === 1
+          ? `${quoteLabel(first.quote)} is verlopen`
+          : `${expiredQuotes.length} offertes zijn verlopen`,
+      href: expiredQuotes.length === 1 ? quoteHref(first.quote) : '/offertes',
+      cta: 'Bekijk offerte',
+    });
+  }
+
+  if (ytdRevenue > KOR_REVENUE_LIMIT) {
+    actions.push({
+      id: 'kor-over',
+      type: 'kor',
+      tone: 'urgent',
+      title: `KOR-grens overschreden · ${formatEuro(ytdRevenue)} omzet`,
+      href: '/tools/kor-calculator/berekenen',
+      cta: 'Bekijk KOR',
+    });
+  } else if (ytdRevenue >= KOR_REVENUE_LIMIT * 0.85) {
+    const remaining = Math.max(0, KOR_REVENUE_LIMIT - ytdRevenue);
+    actions.push({
+      id: 'kor-near',
+      type: 'kor',
+      tone: 'info',
+      title: `KOR: nog ${formatEuro(remaining)} onder de grens`,
+      href: '/tools/kor-calculator/berekenen',
+      cta: 'Bekijk',
+    });
+  }
+
+  if (vatReturnApproaching && btwTeReserveren > 0) {
+    actions.push({
+      id: 'vat-reserve',
+      type: 'vat-reserve',
+      tone: 'info',
+      title: 'BTW-aangifte nadert',
+      detail: `${formatEuro(btwTeReserveren)} apart houden`,
+      href: '/uitgaven',
+      cta: 'Bekijk',
+    });
+  }
+
+  if (acceptedQuotes.length > 0) {
+    const first = acceptedQuotes[0];
+    actions.push({
+      id: 'accepted-quotes',
+      type: 'accepted-quotes',
+      tone: 'info',
+      title:
+        acceptedQuotes.length === 1
+          ? `${quoteLabel(first)} heeft geaccepteerd`
+          : `${acceptedQuotes.length} geaccepteerde offertes`,
+      href: acceptedQuotes.length === 1 ? quoteHref(first) : '/offertes',
+      cta: acceptedQuotes.length === 1 ? 'Maak factuur' : 'Bekijk',
     });
   }
 
@@ -215,123 +364,49 @@ export function buildDashboardSignals({
       type: 'open-hours',
       tone: 'info',
       title: `${formatHours(openHours)} nog niet gefactureerd`,
-      detail: 'Zet openstaande uren om naar een factuur.',
       href: '/uren',
-      cta: 'Maak factuur van uren',
+      cta: 'Maak factuur',
     });
   }
 
-  if (acceptedQuotes.length > 0) {
-    const first = acceptedQuotes[0];
-    const label =
-      acceptedQuotes.length === 1
-        ? first.clientName
-          ? `${first.clientName} heeft geaccepteerd`
-          : `Offerte ${first.quoteNumber || ''} is geaccepteerd`.trim()
-        : `${acceptedQuotes.length} geaccepteerde offertes`;
-    actions.push({
-      id: 'accepted-quotes',
-      type: 'accepted-quotes',
-      tone: 'info',
-      title: label,
-      detail:
-        acceptedQuotes.length === 1
-          ? 'Zet om naar een factuur om te kunnen factureren.'
-          : 'Zet ze om naar facturen wanneer je klaar bent.',
-      href:
-        acceptedQuotes.length === 1 && first.id
-          ? `/tools/offerte-maker/maken?id=${first.id}`
-          : '/offertes',
-      cta: acceptedQuotes.length === 1 ? 'Omzetten naar factuur' : 'Bekijk offertes',
+  const onboarding = [];
+
+  if (profileCompletion && !profileCompletion.isComplete) {
+    onboarding.push({
+      id: 'profile',
+      title: 'Vul je bedrijfsgegevens aan',
+      detail: `${profileCompletion.filled} van ${profileCompletion.total} ingevuld`,
+      href: '/profile',
+      cta: 'Aanvullen',
     });
   }
 
-  if (conceptQuoteCount > 0) {
-    const first = conceptQuotes[0];
-    actions.push({
-      id: 'concept-quotes',
-      type: 'concept-quotes',
-      tone: 'info',
-      title:
-        conceptQuoteCount === 1
-          ? first.clientName
-            ? `Offerte voor ${first.clientName} staat nog als concept`
-            : `Offerte ${first.quoteNumber || ''} staat nog als concept`.trim()
-          : `${conceptQuoteCount} offertes staan nog als concept`,
-      detail: 'Zet de status op Verstuurd of Geaccepteerd, of werk de offerte af.',
-      href:
-        conceptQuoteCount === 1 && first.id
-          ? `/tools/offerte-maker/maken?id=${first.id}`
-          : '/offertes?status=concept',
-      cta: conceptQuoteCount === 1 ? 'Bewerken' : 'Bekijk concepten',
-      quote: conceptQuoteCount === 1 ? first : null,
-    });
-  }
-
-  if (expiredQuotes.length > 0 && actions.length < 5) {
-    const first = expiredQuotes[0];
-    actions.push({
-      id: 'expired-quotes',
-      type: 'expired-quotes',
-      tone: 'info',
-      title:
-        expiredQuotes.length === 1
-          ? `Offerte ${first.quote.quoteNumber || ''} is verlopen`.trim()
-          : `${expiredQuotes.length} offertes zijn verlopen`,
-      detail: 'Verleng de geldigheid of stuur een nieuwe versie.',
-      href:
-        expiredQuotes.length === 1 && first.quote.id
-          ? `/tools/offerte-maker/maken?id=${first.quote.id}`
-          : '/offertes',
-      cta: 'Bekijk offerte',
-    });
-  }
-
-  let nextStep = null;
-
-  if (invoiceCount === 0) {
-    nextStep = {
-      id: 'no-invoices',
-      title: 'Maak je eerste factuur',
-      detail: 'Opslaan terwijl je bent ingelogd — dan verschijnen omzet, btw en openstaand hier.',
-      href: '/create-invoice',
-      cta: 'Factuur maken',
-    };
-  } else if (expenseCount === 0) {
-    nextStep = {
-      id: 'no-expenses',
-      title: 'Voeg je eerste uitgave toe',
-      detail: 'Dan zie je ook je resultaat en btw te reserveren.',
-      href: '/uitgaven',
-      cta: 'Uitgave toevoegen',
-    };
-  } else if (clientCount === 0) {
-    nextStep = {
-      id: 'no-clients',
-      title: 'Factureer sneller met je eerste klant',
-      detail: 'Sla een klant op — volgende keer vul je gegevens met één klik in.',
-      href: '/klanten',
-      cta: 'Klant toevoegen',
-    };
-  } else if (quoteCount === 0) {
-    nextStep = {
+  if (quoteCount === 0) {
+    onboarding.push({
       id: 'no-quotes',
-      title: 'Bewaar je volgende offerte',
-      detail: 'Sla offertes op, volg de status en zet ze met één klik om naar een factuur.',
+      title: 'Maak je eerste offerte',
       href: '/tools/offerte-maker/maken',
       cta: 'Offerte maken',
-    };
-  } else if (profileCompletion && !profileCompletion.isComplete) {
-    nextStep = {
-      id: 'profile',
-      title: 'Maak je volgende factuur sneller',
-      detail: `Vul je bedrijfsgegevens één keer in. ${profileCompletion.filled} van ${profileCompletion.total} gegevens ingevuld.`,
-      href: '/profile',
-      cta: 'Profiel aanvullen',
-    };
+    });
   }
 
-  return { actions, nextStep };
+  if (invoiceCount === 0) {
+    onboarding.push({
+      id: 'no-invoices',
+      title: 'Maak je eerste factuur',
+      href: '/create-invoice',
+      cta: 'Factuur maken',
+    });
+  }
+
+  const limitedOnboarding = onboarding.slice(0, 2);
+
+  return {
+    actions: actions.slice(0, 6),
+    onboarding: limitedOnboarding,
+    nextStep: limitedOnboarding[0] || null,
+    nextSteps: limitedOnboarding,
+  };
 }
 
 /** @deprecated use buildDashboardSignals */

@@ -1,181 +1,64 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
-import {
-  buildMonthlyOmzetUitgaven,
-  buildQuarterlyBtwPosition,
-} from '@/lib/dashboardAnalytics';
+import { buildMonthlyOmzetUitgaven } from '@/lib/dashboardAnalytics';
+import { formatEuro } from '@/lib/dashboardCockpit';
 
-const COLORS = {
-  omzet: '#0A2A4D',
-  uitgaven: '#FF7F50',
-  btwOmzet: '#0A2A4D',
-  btwUitgaven: '#94A3B8',
-  btwTeReserveren: '#10B981',
-};
-
-const euro = (value) =>
-  new Intl.NumberFormat('nl-NL', {
-    style: 'currency',
-    currency: 'EUR',
-    maximumFractionDigits: 0,
-  }).format(value || 0);
-
-function ChartCard({ title, subtitle, totalLabel, total, children }) {
-  return (
-    <div className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm sm:p-5">
-      <div className="mb-4 flex items-start justify-between gap-3">
-        <div>
-          <h3 className="font-heading text-base font-semibold text-deep-blue sm:text-lg">{title}</h3>
-          {subtitle && <p className="mt-0.5 text-xs text-slate-500 sm:text-sm">{subtitle}</p>}
-        </div>
-        {total != null && (
-          <div className="shrink-0 text-right">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-              {totalLabel || 'Totaal'}
-            </p>
-            <p className="font-heading text-lg font-bold text-deep-blue sm:text-xl">{total}</p>
-          </div>
-        )}
-      </div>
-      <div className="h-64 w-full sm:h-72">{children}</div>
-    </div>
-  );
-}
-
-function MoneyTooltip({ active, payload, label }) {
-  if (!active || !payload?.length) return null;
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs shadow-md">
-      <p className="mb-1.5 font-semibold text-deep-blue">{label}</p>
-      {payload.map((entry) => (
-        <div key={entry.dataKey} className="flex items-center justify-between gap-4 py-0.5">
-          <span className="flex items-center gap-1.5 text-slate-600">
-            <span className="inline-block h-2 w-2 rounded-full" style={{ background: entry.color }} />
-            {entry.name}
-          </span>
-          <span className="font-medium text-slate-900">{euro(entry.value)}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export default function DashboardCharts({ invoices = [], expenses = [] }) {
+export default function DashboardCharts({ invoices = [], expenses = [], incomes = [] }) {
   const monthly = useMemo(
-    () => buildMonthlyOmzetUitgaven(invoices, expenses, 6),
-    [invoices, expenses]
-  );
-  const btwQuarters = useMemo(
-    () => buildQuarterlyBtwPosition(invoices, expenses, 4),
-    [invoices, expenses]
+    () => buildMonthlyOmzetUitgaven(invoices, expenses, 6, incomes),
+    [invoices, expenses, incomes]
   );
 
-  const hasData = invoices.length > 0 || expenses.length > 0;
-  if (!hasData) return null;
-
-  const periodResultaat = monthly.reduce((s, m) => s + (m.resultaat || 0), 0);
-  const latestBtw = btwQuarters[btwQuarters.length - 1]?.btwTeReserveren ?? 0;
-
-  const euroFull = (value) =>
-    new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value || 0);
+  const max = Math.max(1, ...monthly.flatMap((m) => [m.omzet, m.uitgaven]));
+  const currentKey = monthly[monthly.length - 1]?.label;
 
   return (
-    <section className="grid gap-4 lg:grid-cols-2">
-      <ChartCard
-        title="Omzet vs uitgaven"
-        subtitle="Excl. btw per maand"
-        totalLabel="Resultaat (6 mnd)"
-        total={euroFull(periodResultaat)}
-      >
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={monthly} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-            <XAxis
-              dataKey="label"
-              tick={{ fill: '#64748b', fontSize: 11 }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <YAxis
-              tickFormatter={(v) => `€${v >= 1000 ? `${Math.round(v / 1000)}k` : v}`}
-              tick={{ fill: '#64748b', fontSize: 11 }}
-              axisLine={false}
-              tickLine={false}
-              width={44}
-            />
-            <Tooltip content={<MoneyTooltip />} />
-            <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} iconType="circle" iconSize={8} />
-            <Bar dataKey="omzet" name="Omzet" fill={COLORS.omzet} radius={[4, 4, 0, 0]} maxBarSize={28} />
-            <Bar
-              dataKey="uitgaven"
-              name="Uitgaven"
-              fill={COLORS.uitgaven}
-              radius={[4, 4, 0, 0]}
-              maxBarSize={28}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </ChartCard>
-
-      <ChartCard
-        title="BTW per kwartaal"
-        subtitle="Verkoop-btw − aftrekbaar op uitgaven"
-        totalLabel="Laatste kwartaal"
-        total={euroFull(latestBtw)}
-      >
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={btwQuarters} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-            <XAxis
-              dataKey="label"
-              tick={{ fill: '#64748b', fontSize: 11 }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <YAxis
-              tickFormatter={(v) => `€${v >= 1000 ? `${Math.round(v / 1000)}k` : v}`}
-              tick={{ fill: '#64748b', fontSize: 11 }}
-              axisLine={false}
-              tickLine={false}
-              width={44}
-            />
-            <Tooltip content={<MoneyTooltip />} />
-            <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} iconType="circle" iconSize={8} />
-            <Bar
-              dataKey="btwOmzet"
-              name="BTW op omzet"
-              fill={COLORS.btwOmzet}
-              radius={[4, 4, 0, 0]}
-              maxBarSize={22}
-            />
-            <Bar
-              dataKey="btwUitgaven"
-              name="BTW op uitgaven"
-              fill={COLORS.btwUitgaven}
-              radius={[4, 4, 0, 0]}
-              maxBarSize={22}
-            />
-            <Bar
-              dataKey="btwTeReserveren"
-              name="Te reserveren"
-              fill={COLORS.btwTeReserveren}
-              radius={[4, 4, 0, 0]}
-              maxBarSize={22}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </ChartCard>
-    </section>
+    <div className="rounded-xl border border-slate-200/80 bg-white p-4 sm:p-5">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-sm font-semibold text-deep-blue">Inkomsten en uitgaven</p>
+        <div className="flex items-center gap-3 text-[11px] text-slate-500">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-sm bg-deep-blue" /> In
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-sm bg-warm-orange/80" /> Uit
+          </span>
+        </div>
+      </div>
+      <div className="relative mt-5 h-36 sm:h-40">
+        <div className="absolute inset-0 flex flex-col justify-between" aria-hidden>
+          {[0, 1, 2, 3].map((i) => (
+            <span key={i} className="border-t border-dashed border-slate-200" />
+          ))}
+        </div>
+        <div className="relative flex h-full items-end justify-between gap-2 sm:gap-3">
+          {monthly.map((m) => {
+            const current = m.label === currentKey;
+            return (
+              <div key={m.label} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
+                <div className="flex h-full w-full items-end justify-center gap-1">
+                  <span
+                    className={`block w-full max-w-[14px] rounded-t-[3px] ${current ? 'bg-deep-blue' : 'bg-deep-blue/80'}`}
+                    style={{ height: m.omzet ? `${Math.max(2, (m.omzet / max) * 100)}%` : '0%' }}
+                    title={`Inkomsten ${formatEuro(m.omzet)}`}
+                  />
+                  <span
+                    className="block w-full max-w-[14px] rounded-t-[3px] bg-warm-orange/80"
+                    style={{ height: m.uitgaven ? `${Math.max(2, (m.uitgaven / max) * 100)}%` : '0%' }}
+                    title={`Uitgaven ${formatEuro(m.uitgaven)}`}
+                  />
+                </div>
+                <span
+                  className={`font-mono text-[10px] ${current ? 'font-semibold text-deep-blue' : 'text-slate-400'}`}
+                >
+                  {m.label.split(' ')[0]}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }

@@ -3,97 +3,85 @@ import LandingHubPage from '@/components/landing/LandingHubPage';
 export const metadata = {
   title: 'Gratis Factuur Tools voor ZZP\'ers | FactuurBaas',
   description:
-    'Gratis online tools voor zzp\'ers: factuur maken, btw calculator, offerte maker en meer. Lees meer en ga direct aan de slag zonder account.',
+    'Gratis tools voor zzp\'ers, gegroepeerd rond je bedrijf: factureren, btw, inkomen en financiële zekerheid. Zonder account.',
   alternates: { canonical: 'https://factuurbaas.nl/tools' },
 };
 
-const toolLinks = [
+const toolGroups = [
   {
-    label: 'Factuur maken',
-    href: '/tools/factuur-maken',
-    description: 'Maak gratis een factuur en download direct als PDF. Geen account nodig.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
+    title: 'Factureren',
+    links: [
+      {
+        label: 'Factuur maken',
+        href: '/tools/factuur-maken',
+        description: 'Maak een factuur en download hem als PDF. Geen account nodig.',
+      },
+      {
+        label: 'Offerte maken',
+        href: '/tools/offerte-maker',
+        description: 'Maak een offerte en zet hem later om naar een factuur.',
+      },
+      {
+        label: 'Factuurnummer generator',
+        href: '/tools/factuurnummer-generator',
+        description: 'Stel een uniek factuurnummer samen.',
+      },
+      {
+        label: 'Betaaltermijn / vervaldatum',
+        href: '/tools/betaaltermijn-calculator',
+        description: 'Reken uit wanneer een factuur betaald moet zijn.',
+      },
+    ],
   },
   {
-    label: 'BTW calculator',
-    href: '/tools/btw-calculator',
-    description: 'Bereken bedragen inclusief of exclusief btw. 9%, 21% of eigen percentage.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
+    title: 'BTW & belasting',
+    links: [
+      {
+        label: 'BTW calculator',
+        href: '/tools/btw-calculator',
+        description: 'Bedrag inclusief of exclusief btw. 9%, 21% of een eigen percentage.',
+      },
+      {
+        label: 'KOR calculator',
+        href: '/tools/kor-calculator',
+        description: 'Zie of je omzet onder de KOR-grens van € 20.000 blijft.',
+      },
+    ],
   },
   {
-    label: 'Offerte maker',
-    href: '/tools/offerte-maker',
-    description: 'Maak professionele offertes en zet ze om naar een factuur.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
+    title: 'Inkomen & bedrijf',
+    links: [
+      {
+        label: 'Uurtarief calculator',
+        href: '/tools/uurtarief-calculator',
+        description: 'Welk tarief heb je nodig voor het inkomen dat je wilt.',
+      },
+      {
+        label: 'Uurtarief → inkomen',
+        href: '/tools/uurtarief-naar-inkomen',
+        description: 'Wat je uurtarief per maand oplevert, vóór belasting.',
+      },
+      {
+        label: 'Marge calculator',
+        href: '/tools/marge-calculator',
+        description: 'Winst en marge op inkoop- en verkoopprijs.',
+      },
+    ],
   },
   {
-    label: 'Uurtarief calculator',
-    href: '/tools/uurtarief-calculator',
-    description: 'Bereken je uurtarief op basis van gewenst netto-inkomen, kosten en werkuren.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: 'Uurtarief naar inkomen',
-    href: '/tools/uurtarief-naar-inkomen',
-    description: 'Bereken wat je uurtarief oplevert: maandelijkse omzet en geschatte winst vóór belasting.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: 'Factuurnummer generator',
-    href: '/tools/factuurnummer-generator',
-    description: 'Voorbeelden, regels en een generator voor een uniek factuurnummer.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: 'Marge calculator',
-    href: '/tools/marge-calculator',
-    description: 'Bereken winst en winstmarge op basis van inkoop- en verkoopprijs.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: 'Betaaltermijn calculator',
-    href: '/tools/betaaltermijn-calculator',
-    description: 'Bereken de vervaldatum van je factuur op basis van factuurdatum en betalingstermijn.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: 'KOR calculator',
-    href: '/tools/kor-calculator',
-    description: 'Gratis KOR check: vergelijk je omzet met de €20.000-grens.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: 'Boekhoudprogramma-check',
-    href: '/tools/boekhoudprogramma-check',
-    description:
-      "Welk boekhoudprogramma past bij jou? Doe de korte check voor zzp'ers.",
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: "Hypotheek voor zzp'ers",
-    href: '/tools/hypotheek-zzp',
-    description:
-      "Hoe werkt een hypotheek als zzp'er? Lees de uitleg en bereken je maximale hypotheek.",
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
-  },
-  {
-    label: "AOV voor zzp'ers",
-    href: '/tools/aov-zzp',
-    description:
-      'Bereken hoeveel inkomen je wilt beschermen en wat je wachttijd betekent — geen premieadvies.',
-    tag: 'Beschikbaar',
-    footerLabel: 'Meer info',
+    title: 'Financiële zekerheid',
+    links: [
+      {
+        label: 'Hypotheek ZZP',
+        href: '/tools/hypotheek-zzp',
+        description: "Hoe een hypotheek als zzp'er werkt, en een indicatie van het maximum.",
+      },
+      {
+        label: 'AOV ZZP',
+        href: '/tools/aov-zzp',
+        description: 'Hoeveel inkomen je wilt beschermen, en wat een wachttijd betekent.',
+      },
+    ],
   },
 ];
 
@@ -101,15 +89,18 @@ export default function ToolsHubPage() {
   return (
     <LandingHubPage
       title="Tools"
-      description="Gratis online tools voor ondernemers. Kies een tool, lees hoe het werkt en ga direct aan de slag."
-      linksTitle="Onze tools"
-      linksDescription="Kies een gratis tool voor je administratie. Bekijk uitleg, voorbeelden en gebruik daarna direct de online versie."
-      linkFooterLabel="Meer info"
-      links={toolLinks}
+      description="Voor het geld in je bedrijf. Factureren, btw, inkomen en wat je wilt beschermen."
+      linkGroups={toolGroups}
+      linksTitle={null}
+      linkFooterLabel="Openen"
       ctaHref="/factuur-maken"
       ctaLabel="Maak gratis factuur"
-      relatedLinksTitle="Lees ook"
+      relatedLinksTitle="Ook handig"
       relatedLinks={[
+        {
+          href: '/tools/boekhoudprogramma-check',
+          label: 'Boekhoudprogramma-check',
+        },
         {
           href: '/gidsen/deze-7-tools-zijn-heel-handig-voor-zzpers',
           label: "7 handige tools voor zzp'ers",

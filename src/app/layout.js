@@ -1,8 +1,29 @@
 import '@/app/globals.css';
+import { Geist, Geist_Mono, Newsreader } from 'next/font/google';
 import { Providers } from './providers';
 import ClientLayout from './ClientLayout';
 import { Analytics } from '@vercel/analytics/next';
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
+
+const fontSans = Geist({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
+
+const fontMono = Geist_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+});
+
+const fontDisplay = Newsreader({
+  subsets: ['latin'],
+  display: 'swap',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-display',
+});
 
 export const viewport = {
   themeColor: '#0A2A4D',
@@ -56,7 +77,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="nl">
+    <html
+      lang="nl"
+      className={`${fontSans.variable} ${fontMono.variable} ${fontDisplay.variable}`}
+    >
       <head>
         <meta name="google-site-verification" content="fSZ1o8tGJa7pjbJW1I2MsHR4xBnmfMu57OzH8rmO3Lo" />
         <meta name="impact-site-verification" value="e72d300b-d7ad-48db-ba1f-dd5a6a7d196f" />

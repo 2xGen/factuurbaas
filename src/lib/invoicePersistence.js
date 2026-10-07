@@ -6,6 +6,7 @@ import {
   uploadLogoDataUrl,
 } from '@/lib/logoStorage';
 import { calculateInvoiceBreakdown } from '@/lib/invoiceUtils';
+import { nextInvoiceNumberFromExisting } from '@/lib/factuurnummerGenerator';
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -21,10 +22,36 @@ function toIso(value) {
   return Number.isNaN(d.getTime()) ? null : d.toISOString();
 }
 
+function toIsoDate(value) {
+  if (!value) return null;
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) return value.slice(0, 10);
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return null;
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function toLocalDate(value) {
+  if (!value) return null;
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) {
+    const [y, m, d] = value.slice(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+  const d = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
 function toDate(value) {
   if (!value) return new Date();
   const d = new Date(value);
   return Number.isNaN(d.getTime()) ? new Date() : d;
+}
+
+function isMissingPaidDateColumn(error) {
+  const msg = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`;
+  return /paid_date/i.test(msg);
 }
 
 function normalizeReceiverDetails(receiver = {}) {
@@ -68,6 +95,7 @@ export function rowToInvoice(row) {
     invoice_number: row.invoice_number || '',
     invoiceDate: toDate(row.invoice_date),
     dueDate: toDate(row.due_date),
+    paidDate: toLocalDate(row.paid_date),
     paymentTermDays: row.payment_term_days || '14',
     status: row.status || 'concept',
     companyDetails: row.company_details || {},
@@ -125,6 +153,7 @@ export function invoiceToRow(invoice, userId, { includeId = true } = {}) {
     invoice_name: invoice.invoiceName || null,
     invoice_date: toIso(invoice.invoiceDate),
     due_date: toIso(invoice.dueDate),
+    paid_date: invoice.status === 'paid' ? toIsoDate(invoice.paidDate) : null,
     payment_term_days: invoice.paymentTermDays || null,
     status: invoice.status || 'concept',
     company_details: invoice.companyDetails || {},
@@ -156,6 +185,15 @@ export function invoiceToRow(invoice, userId, { includeId = true } = {}) {
   }
 
   return row;
+}
+
+export async function fetchNextInvoiceNumber(client, userId, now = new Date()) {
+  const { data, error } = await client
+    .from('invoices')
+    .select('invoice_number')
+    .eq('user_id', userId);
+  if (error) throw error;
+  return nextInvoiceNumberFromExisting(data || [], now);
 }
 
 export async function fetchUserInvoices(supabase, userId) {
@@ -209,19 +247,24 @@ export async function upsertInvoice(supabase, userId, invoice, activityDescripti
   const isUpdate = isPersistedInvoiceId(invoice.id);
   const row = invoiceToRow({ ...withLog, logo }, userId, { includeId: isUpdate });
 
-  if (isUpdate) {
-    const { data, error } = await supabase
-      .from('invoices')
-      .update(row)
-      .eq('id', invoice.id)
-      .eq('user_id', userId)
-      .select('*')
-      .single();
-    if (error) throw error;
-    return withResolvedLogo(supabase, rowToInvoice(data));
-  }
+  const write = async (payload) => {
+    if (isUpdate) {
+      return supabase
+        .from('invoices')
+        .update(payload)
+        .eq('id', invoice.id)
+        .eq('user_id', userId)
+        .select('*')
+        .single();
+    }
+    return supabase.from('invoices').insert(payload).select('*').single();
+  };
 
-  const { data, error } = await supabase.from('invoices').insert(row).select('*').single();
+  let { data, error } = await write(row);
+  if (error && isMissingPaidDateColumn(error)) {
+    const { paid_date: _ignored, ...withoutPaidDate } = row;
+    ({ data, error } = await write(withoutPaidDate));
+  }
   if (error) throw error;
   return withResolvedLogo(supabase, rowToInvoice(data));
 }
@@ -247,6 +290,7 @@ export function invoicesToExportCsv(invoices) {
     'status',
     'invoice_date',
     'due_date',
+    'paid_date',
     'receiver',
     'total_excl',
     'total_btw',
@@ -263,6 +307,7 @@ export function invoicesToExportCsv(invoices) {
       inv.status,
       toIso(inv.invoiceDate),
       toIso(inv.dueDate),
+      toIsoDate(inv.paidDate) || '',
       receiver,
       inv.total_excl ?? '',
       inv.total_btw ?? '',

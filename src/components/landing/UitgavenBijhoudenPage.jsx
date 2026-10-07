@@ -2,10 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
-  ArrowRight,
-  CheckCircle2,
+  Lock,
   Percent,
   PiggyBank,
   Plus,
@@ -14,8 +13,16 @@ import {
   Search,
   Wallet,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { LandingSection, SectionHeader } from '@/components/landing/LandingSection';
+import { SectionHeader } from '@/components/landing/LandingSection';
+import { EASE_OUT, Reveal, Stagger, staggerItem } from '@/components/landing/page/motion';
+import {
+  ArrowIcon,
+  DarkPanel,
+  FaqList,
+  PageHeader,
+  TrustList,
+  btn,
+} from '@/components/site/editorial';
 import {
   UITGAVEN_BENEFITS,
   UITGAVEN_BLOG_PATH,
@@ -72,48 +79,64 @@ const BENEFIT_ICONS = [Receipt, Repeat, Percent, PiggyBank];
 
 function UitgavenMockup() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-[#f4f6f9] shadow-2xl shadow-deep-blue/10 sm:rounded-3xl">
-      <div className="flex items-center gap-2 border-b border-slate-200/80 bg-white px-4 py-3 sm:px-5">
-        <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-        <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-        <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-        <div className="ml-3 flex-1 truncate rounded-md bg-slate-100 px-3 py-1 text-center text-[11px] text-slate-500 sm:text-xs">
+    <div className="overflow-hidden rounded-2xl bg-white text-ink shadow-window ring-1 ring-white/10">
+      <div className="flex h-11 items-center gap-4 border-b border-ink/[0.07] bg-paper-100 px-4">
+        <div className="flex gap-1.5" aria-hidden>
+          <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
+        </div>
+        <div className="mx-auto flex w-full min-w-0 max-w-xs items-center justify-center gap-1.5 truncate rounded-md border border-ink/[0.06] bg-white py-1 text-[11px] text-ink-500">
+          <Lock className="h-3 w-3 shrink-0" aria-hidden />
           factuurbaas.nl/uitgaven
         </div>
+        <div className="hidden w-10 sm:block" aria-hidden />
       </div>
 
-      <div className="p-3 sm:p-5">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div className="bg-paper-50/40 p-4 sm:p-7">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="font-heading text-lg font-bold text-deep-blue sm:text-xl">Uitgaven</p>
-            <p className="text-xs text-slate-500 sm:text-sm">
+            <p className="font-display text-xl sm:text-2xl">Uitgaven</p>
+            <p className="mt-1 text-xs text-ink-500 sm:text-sm">
               Zakelijke kosten · deze maand € 1.240 excl. btw
             </p>
           </div>
-          <span className="inline-flex items-center gap-1.5 rounded-xl bg-deep-blue px-3 py-2 text-xs font-semibold text-white">
-            <Plus className="h-3.5 w-3.5" />
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-xs font-medium text-white">
+            <Plus className="h-3.5 w-3.5" aria-hidden />
             Nieuwe uitgave
           </span>
         </div>
 
-        <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+        <div className="mb-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
             { icon: Wallet, label: 'Uitgaven', value: '€ 1.240' },
             { icon: Percent, label: 'Btw op kosten', value: '€ 260' },
             { icon: Repeat, label: 'Terugkerend', value: '2 posten' },
-            { icon: PiggyBank, label: 'Resultaat', value: '€ 3.610' },
+            { icon: PiggyBank, label: 'Resultaat', value: '€ 3.610', answer: true },
           ].map((stat) => {
             const Icon = stat.icon;
             return (
               <div
                 key={stat.label}
-                className="rounded-xl border border-slate-200/80 bg-white px-3 py-3"
+                className={`rounded-xl p-4 ${
+                  stat.answer
+                    ? 'bg-ink text-white shadow-[0_12px_24px_-12px_rgba(10,42,77,0.6)]'
+                    : 'border border-ink/[0.07] bg-white'
+                }`}
               >
-                <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
-                  <Icon className="h-3.5 w-3.5 text-deep-blue" strokeWidth={1.75} />
+                <div
+                  className={`flex items-center gap-1.5 text-xs ${
+                    stat.answer ? 'text-white/70' : 'text-ink-500'
+                  }`}
+                >
+                  <Icon
+                    className={`h-3.5 w-3.5 ${stat.answer ? 'text-ember-100' : 'text-ember'}`}
+                    strokeWidth={1.75}
+                    aria-hidden
+                  />
                   {stat.label}
                 </div>
-                <p className="font-heading text-base font-bold text-deep-blue sm:text-lg">
+                <p className="mt-2 font-display text-[1.4rem] leading-none tabular sm:text-[1.65rem]">
                   {stat.value}
                 </p>
               </div>
@@ -121,41 +144,45 @@ function UitgavenMockup() {
           })}
         </div>
 
-        <div className="mb-3 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-400">
-          <Search className="h-3.5 w-3.5" />
-          Zoek op omschrijving, leverancier of categorie…
+        <div className="mb-3 flex items-center gap-2 rounded-xl border border-ink/[0.07] bg-white px-3.5 py-2.5 text-xs text-ink-400">
+          <Search className="h-3.5 w-3.5 shrink-0" aria-hidden />
+          <span className="truncate">Zoek op omschrijving, leverancier of categorie…</span>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-xl border border-ink/[0.07] bg-white">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[560px] text-left text-xs sm:text-sm">
+            <table className="w-full min-w-[560px] text-left text-xs sm:text-[13px]">
               <thead>
-                <tr className="border-b border-slate-100 text-[10px] uppercase tracking-wide text-slate-400">
-                  <th className="px-3 py-2.5 font-medium sm:px-4">Datum</th>
-                  <th className="px-3 py-2.5 font-medium">Omschrijving</th>
-                  <th className="px-3 py-2.5 font-medium">Categorie</th>
-                  <th className="px-3 py-2.5 text-right font-medium">Excl.</th>
-                  <th className="px-3 py-2.5 text-right font-medium sm:px-4">Incl.</th>
+                <tr className="border-b border-ink/[0.07] font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">
+                  <th className="px-4 py-3 font-normal">Datum</th>
+                  <th className="px-3 py-3 font-normal">Omschrijving</th>
+                  <th className="px-3 py-3 font-normal">Categorie</th>
+                  <th className="px-3 py-3 text-right font-normal">Excl.</th>
+                  <th className="px-4 py-3 text-right font-normal">Incl.</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-ink/[0.06]">
                 {DEMO_ROWS.map((row) => (
-                  <tr key={row.description} className="border-b border-slate-50 last:border-0">
-                    <td className="whitespace-nowrap px-3 py-2.5 text-slate-500 sm:px-4">
+                  <tr key={row.description}>
+                    <td className="whitespace-nowrap px-4 py-3 font-mono text-[11px] text-ink-400">
                       {row.date}
                     </td>
-                    <td className="px-3 py-2.5">
-                      <p className="font-medium text-deep-blue">{row.description}</p>
-                      <p className="text-[11px] text-slate-500">
+                    <td className="px-3 py-3">
+                      <p className="font-medium text-ink">{row.description}</p>
+                      <p className="text-[11px] text-ink-400">
                         {row.supplier}
                         {row.recurring ? ' · Terugkerend' : ''}
                       </p>
                     </td>
-                    <td className="px-3 py-2.5 text-slate-600">{row.category}</td>
-                    <td className="whitespace-nowrap px-3 py-2.5 text-right font-medium text-slate-800">
+                    <td className="px-3 py-3">
+                      <span className="inline-flex rounded-full bg-paper-100 px-2 py-0.5 text-[11px] text-ink-700 ring-1 ring-inset ring-ink/[0.06]">
+                        {row.category}
+                      </span>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-3 text-right tabular text-ink-700">
                       {row.excl}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-2.5 text-right font-medium text-slate-800 sm:px-4">
+                    <td className="whitespace-nowrap px-4 py-3 text-right font-medium tabular text-ink">
                       {row.incl}
                     </td>
                   </tr>
@@ -171,9 +198,10 @@ function UitgavenMockup() {
 
 export default function UitgavenBijhoudenPage() {
   const schemas = [getUitgavenFaqSchema(), getUitgavenSoftwareSchema()];
+  const reduce = useReducedMotion();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper text-ink">
       {schemas.map((schema, index) => (
         <script
           key={index}
@@ -182,160 +210,144 @@ export default function UitgavenBijhoudenPage() {
         />
       ))}
 
-      <section className="bg-gradient-to-br from-deep-blue via-sky-700 to-indigo-600 py-12 text-white sm:py-16">
-        <div className="container mx-auto max-w-4xl px-4 sm:px-6">
-          <nav className="mb-6 text-sm text-blue-200" aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-2">
-              <li>
-                <Link href="/" className="hover:text-white">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-white">Uitgaven bijhouden</li>
-            </ol>
-          </nav>
-
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-blue-200">
-            Gratis met account
-          </p>
-          <h1 className="font-heading text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-            Zakelijke uitgaven bijhouden als zzp&apos;er
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-blue-100 sm:text-lg">
+      <PageHeader
+        breadcrumbs={[{ name: 'Home', href: '/' }, { name: 'Uitgaven bijhouden' }]}
+        eyebrow="Gratis met account"
+        eyebrowIcon={Receipt}
+        title={
+          <>
+            Zakelijke uitgaven <em>bijhouden</em> als zzp&apos;er
+          </>
+        }
+        lead={
+          <p>
             Registreer zakelijke kosten, houd btw op uitgaven bij en zie wat er overblijft van je
             omzet. Gratis met een FactuurBaas-account.
           </p>
+        }
+      >
+        <TrustList
+          items={[
+            'Kosten & btw registreren',
+            'Terugkerende lasten',
+            'Resultaat naast facturen',
+            'Gratis account',
+          ]}
+        />
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Link href={UITGAVEN_SIGNUP_HREF} className={btn.primary}>
+            Houd mijn uitgaven gratis bij
+            <ArrowIcon />
+          </Link>
+          <Link href={UITGAVEN_BLOG_PATH} className={btn.secondary}>
+            Lees de gids
+          </Link>
+        </div>
+      </PageHeader>
 
-          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
-            {[
-              'Kosten & btw registreren',
-              'Terugkerende lasten',
-              'Resultaat naast facturen',
-              'Gratis account',
-            ].map((point) => (
-              <li
-                key={point}
-                className="flex items-center gap-2 text-sm text-blue-100 sm:text-base"
-              >
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-green-300" />
-                {point}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="xl"
-              variant="secondary"
-              className="h-auto min-h-14 gap-2 px-8 py-4 text-base font-semibold"
-            >
-              <Link href={UITGAVEN_SIGNUP_HREF}>
-                Houd mijn uitgaven gratis bij
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="xl"
-              variant="outline"
-              className="h-auto min-h-14 border-white/30 bg-transparent px-8 py-4 text-base font-semibold text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href={UITGAVEN_BLOG_PATH}>Lees de gids</Link>
-            </Button>
-          </div>
+      <section className="grain-light relative isolate overflow-hidden bg-ink-950 py-16 text-white sm:py-24 lg:py-28">
+        <div className="bg-ledger-dark mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[36rem] w-[64rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(210,96,26,0.2),transparent_60%)]"
+          aria-hidden
+        />
+        <div className="container mx-auto px-4 sm:px-6">
+          <motion.figure
+            initial={reduce ? false : { opacity: 0, y: 32, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: EASE_OUT }}
+            className="mx-auto max-w-5xl"
+          >
+            <UitgavenMockup />
+          </motion.figure>
         </div>
       </section>
 
-      <LandingSection bg="muted" className="overflow-hidden !py-12 sm:!py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto max-w-5xl"
-        >
-          <UitgavenMockup />
-        </motion.div>
-      </LandingSection>
+      <section className="bg-paper-50">
+        <div className="container mx-auto grid gap-12 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24 lg:py-28">
+          <Reveal className="lg:sticky lg:top-32 lg:self-start">
+            <SectionHeader
+              align="left"
+              className="!mb-0"
+              eyebrow="Wat je krijgt"
+              title={
+                <>
+                  Alles om je zakelijke kosten <em>bij te houden</em>
+                </>
+              }
+              description="Geen nep-tool: dit is de echte uitgavenfunctie in FactuurBaas — naast je facturen en dashboard."
+            />
+          </Reveal>
 
-      <LandingSection bg="white">
-        <SectionHeader
-          eyebrow="Wat je krijgt"
-          title="Alles om je zakelijke kosten bij te houden"
-          description="Geen nep-tool: dit is de echte uitgavenfunctie in FactuurBaas — naast je facturen en dashboard."
-        />
-        <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2 lg:gap-8">
-          {UITGAVEN_BENEFITS.map((item, i) => {
-            const Icon = BENEFIT_ICONS[i] || Receipt;
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06, duration: 0.35 }}
-                className="flex gap-3"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-deep-blue/5 text-deep-blue">
-                  <Icon className="h-5 w-5" strokeWidth={1.75} />
-                </span>
-                <div>
-                  <p className="font-heading text-base font-semibold text-deep-blue">{item.title}</p>
-                  <p className="mt-0.5 text-sm leading-relaxed text-slate-600">{item.text}</p>
-                </div>
-              </motion.div>
-            );
-          })}
+          <Stagger as="dl" className="border-t border-ink/15">
+            {UITGAVEN_BENEFITS.map((item, i) => {
+              const Icon = BENEFIT_ICONS[i] || Receipt;
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={staggerItem}
+                  className="relative border-b border-ink/15 py-8 pl-16 sm:py-10 sm:pl-[5.5rem]"
+                >
+                  <dt className="flex items-center gap-3 font-display text-2xl leading-tight sm:text-[1.75rem]">
+                    <span
+                      className="absolute left-0 top-9 font-display text-2xl italic leading-none text-ember sm:top-11 sm:text-3xl"
+                      aria-hidden
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    {item.title}
+                    <Icon className="hidden h-4 w-4 shrink-0 text-ink-400 sm:block" strokeWidth={1.75} aria-hidden />
+                  </dt>
+                  <dd className="mt-3 max-w-lg text-base leading-relaxed text-ink-500">{item.text}</dd>
+                </motion.div>
+              );
+            })}
+          </Stagger>
         </div>
-      </LandingSection>
+      </section>
 
-      <LandingSection bg="muted">
-        <div className="mx-auto max-w-3xl text-center">
-          <SectionHeader
-            eyebrow="Gratis starten"
-            title="Houd je zakelijke uitgaven gratis bij"
-            description="Registreer kosten en btw en zie automatisch je resultaat — samen met je facturen."
-          />
-          <Button asChild size="lg" className="h-12 rounded-xl px-8 font-semibold">
-            <Link href={UITGAVEN_SIGNUP_HREF}>
-              Houd mijn uitgaven gratis bij
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-          <p className="mt-4 text-sm text-slate-500">
-            Of lees eerst:{' '}
-            <Link href={UITGAVEN_BLOG_PATH} className="font-medium text-warm-orange hover:underline">
-              Zakelijke uitgaven bijhouden als zzp&apos;er
-            </Link>
-          </p>
+      <section className="border-t border-ink/[0.06] bg-paper">
+        <div className="container mx-auto grid gap-12 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24 lg:py-28">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <SectionHeader
+              align="left"
+              className="!mb-0"
+              eyebrow="Veelgestelde vragen"
+              title="Uitgaven bijhouden — FAQ"
+              description="Kort antwoord op de vragen die zzp'ers het vaakst stellen."
+            />
+          </div>
+          <FaqList items={UITGAVEN_FAQS} />
         </div>
-      </LandingSection>
+      </section>
 
-      <LandingSection bg="white">
-        <SectionHeader
-          eyebrow="Veelgestelde vragen"
-          title="Uitgaven bijhouden — FAQ"
-          description="Kort antwoord op de vragen die zzp'ers het vaakst stellen."
-        />
-        <div className="mx-auto max-w-3xl space-y-4">
-          {UITGAVEN_FAQS.map((item) => (
-            <details
-              key={item.question}
-              className="group rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 open:bg-white open:shadow-sm"
-            >
-              <summary className="cursor-pointer list-none font-heading text-base font-semibold text-deep-blue marker:content-none">
-                <span className="flex items-start justify-between gap-3">
-                  {item.question}
-                  <span className="mt-0.5 text-slate-400 transition group-open:rotate-45">+</span>
-                </span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.answer}</p>
-            </details>
-          ))}
+      <DarkPanel innerClassName="text-center">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember-100/70">
+          Gratis starten
+        </p>
+        <h2 className="mx-auto mt-6 max-w-[20ch] font-display text-[2.3rem] font-normal leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]">
+          Houd je zakelijke uitgaven <em className="text-ember-100">gratis</em> bij
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+          Registreer kosten en btw en zie automatisch je resultaat — samen met je facturen.
+        </p>
+        <div className="mt-10 flex justify-center">
+          <Link href={UITGAVEN_SIGNUP_HREF} className={`${btn.light} w-full sm:w-auto`}>
+            Houd mijn uitgaven gratis bij
+            <ArrowIcon />
+          </Link>
         </div>
-      </LandingSection>
+        <p className="mt-6 text-sm text-white/55">
+          Of lees eerst:{' '}
+          <Link
+            href={UITGAVEN_BLOG_PATH}
+            className="font-medium text-white underline decoration-white/25 underline-offset-[6px] transition-colors hover:decoration-ember"
+          >
+            Zakelijke uitgaven bijhouden als zzp&apos;er
+          </Link>
+        </p>
+      </DarkPanel>
     </div>
   );
 }

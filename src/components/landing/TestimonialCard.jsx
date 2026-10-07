@@ -1,49 +1,65 @@
+'use client';
+
 import React from "react";
-import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { EASE_OUT } from "@/components/landing/page/motion";
 
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  hidden: { opacity: 0, y: 18 },
   visible: (index) => ({
     opacity: 1,
-    scale: 1,
     y: 0,
     transition: {
-      delay: index * 0.1, 
-      duration: 0.5,
-      ease: "easeOut"
-    }
-  })
+      delay: index * 0.08,
+      duration: 0.6,
+      ease: EASE_OUT,
+    },
+  }),
 };
 
-const TestimonialCard = ({ name, title, quote, avatarText, rating, index }) => (
-  <motion.div
-    variants={cardVariants}
-    custom={index}
-    className="bg-white p-6 md:p-8 rounded-xl shadow-xl border border-gray-200 flex flex-col h-full hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 group relative overflow-hidden"
-  >
-    <div className="relative z-10 flex flex-col h-full">
-      <div className="flex items-center mb-4">
-        <Avatar className="h-12 w-12 mr-4 border-2 border-warm-orange/50 group-hover:border-warm-orange/80 transition-colors duration-300">
-          <AvatarFallback className="bg-warm-orange text-white font-semibold">{avatarText}</AvatarFallback>
-        </Avatar>
-        <div>
-          <h4 className="font-semibold text-lg text-deep-blue">{name}</h4>
-          <p className="text-sm text-gray-500">{title}</p>
-        </div>
-      </div>
-      <Quote className="w-8 h-8 text-warm-orange/40 mb-3 transform -scale-x-100 group-hover:text-warm-orange/50 transition-colors duration-300" />
-      <p className="text-gray-700 italic leading-relaxed mb-5 flex-grow text-[1.02rem]">{quote}</p>
-      <div className="flex items-center mt-auto pt-4 border-t border-gray-200 group-hover:border-gray-200/80 transition-colors duration-300">
+const reducedVariants = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1 },
+};
+
+const TestimonialCard = ({ name, title, quote, avatarText, rating, index }) => {
+  const reduce = useReducedMotion();
+
+  return (
+    <motion.div
+      variants={reduce ? reducedVariants : cardVariants}
+      custom={index}
+      className="group relative flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-white p-7 shadow-paper transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-ink/15 motion-reduce:transition-none sm:p-8"
+    >
+      <span
+        className="pointer-events-none absolute right-6 top-3 select-none font-display text-[5.5rem] italic leading-none text-ember/15"
+        aria-hidden
+      >
+        &ldquo;
+      </span>
+      <div className="flex items-center gap-1" aria-label={`${rating} van 5 sterren`} role="img">
         {Array(rating)
           .fill(0)
           .map((_, i) => (
-            <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400 mr-1" />
+            <Star key={i} className="h-3.5 w-3.5 fill-ember text-ember" aria-hidden />
           ))}
       </div>
-    </div>
-  </motion.div>
-);
+      <p className="relative mt-6 flex-grow font-display text-[1.3rem] leading-[1.4] tracking-[-0.01em] text-ink">
+        {quote}
+      </p>
+      <div className="mt-8 flex items-center gap-3.5 border-t border-ink/10 pt-5">
+        <Avatar className="h-11 w-11 border border-ink/10">
+          <AvatarFallback className="bg-ink font-display text-base italic text-white">{avatarText}</AvatarFallback>
+        </Avatar>
+        <div>
+          <h4 className="text-[15px] font-medium text-ink">{name}</h4>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-400">{title}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default TestimonialCard;

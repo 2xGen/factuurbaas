@@ -2,129 +2,127 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, FileText } from 'lucide-react';
-import DemoInvoicePreview from '@/components/landing/DemoInvoicePreview';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Euro, FileDown, MapPin, ShieldCheck } from 'lucide-react';
+import HeroInvoice from '@/components/landing/page/HeroInvoice';
 
-const trustItems = [
-  'Gratis · geen abonnement',
-  'Zonder account als PDF',
-  'Met account: status, btw & overzicht',
-  "Voor ZZP'ers en kleine ondernemers",
+const TRUST = [
+  { icon: MapPin, label: 'Gemaakt voor Nederland' },
+  { icon: ShieldCheck, label: 'Accountgegevens in de EU' },
+  { icon: FileDown, label: 'Direct als PDF' },
+  { icon: Euro, label: 'Geen abonnement' },
 ];
 
-const HeroSection = () => (
-  <section className="relative overflow-hidden bg-gradient-to-br from-deep-blue via-sky-800 to-indigo-700 text-white">
-    <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
+const rise = (delay) => ({ animationDelay: `${delay}ms` });
+
+const HeroSection = () => {
+  const reduce = useReducedMotion();
+
+  return (
+    <section className="grain relative isolate overflow-hidden bg-paper text-ink">
+      <div className="bg-ledger mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
       <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-          backgroundSize: '32px 32px',
-        }}
+        className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(210,96,26,0.14),transparent_65%)]"
+        aria-hidden
       />
-    </div>
+      <div
+        className="pointer-events-none absolute -bottom-56 -left-40 -z-10 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(10,42,77,0.08),transparent_65%)]"
+        aria-hidden
+      />
 
-    <div className="container relative z-10 mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-        <div className="text-center lg:text-left">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mb-4 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-sky-100"
-          >
-            Gratis · Geen account · Direct PDF
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="text-[1.75rem] leading-[1.15] font-heading font-extrabold tracking-tight sm:text-4xl md:text-[2.75rem] lg:text-5xl"
-          >
-            Gratis factuur maken zonder account
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.12 }}
-            className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-blue-100 sm:text-lg lg:mx-0"
-          >
-            Maak online een professionele factuur, download hem direct als PDF en stuur hem naar je
-            klant. Gratis, zonder abonnement en zonder ingewikkelde boekhouding.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start"
-          >
-            <Button
-              asChild
-              size="lg"
-              variant="secondary"
-              className="h-12 rounded-xl px-6 text-base font-semibold sm:h-14 sm:px-8 sm:text-lg"
+      <div className="container relative mx-auto px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
+        <div className="grid items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 xl:gap-20">
+          <div>
+            <p
+              className="inline-flex items-center gap-2.5 rounded-full border border-ink/10 bg-white/70 py-1.5 pl-2.5 pr-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-700 backdrop-blur motion-safe:animate-rise"
+              style={rise(0)}
             >
-              <Link href="/create-invoice">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 motion-safe:animate-pulse-dot" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Gratis factuur maken
+            </p>
+
+            <h1
+              className="mt-7 max-w-[13ch] font-display text-[2.9rem] font-normal leading-[0.98] tracking-[-0.035em] text-ink sm:text-[4rem] lg:text-[4.4rem] xl:text-[5rem] motion-safe:animate-rise"
+              style={rise(80)}
+            >
+              Gratis factuur maken{' '}
+              <span className="relative inline-block whitespace-nowrap italic text-ink-700">
+                zonder account
+                <svg
+                  className="absolute -bottom-2 left-0 h-3 w-full text-ember sm:-bottom-3 sm:h-4"
+                  viewBox="0 0 300 16"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  aria-hidden
+                >
+                  <motion.path
+                    d="M3 11.5C58 5.5 122 3.5 186 5.2c38 1 74 3.4 111 6.8"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    initial={reduce ? false : { pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.9, delay: 0.55, ease: [0.65, 0, 0.35, 1] }}
+                  />
+                </svg>
+              </span>
+            </h1>
+
+            <div
+              className="mt-8 max-w-[34rem] space-y-3 text-[1.05rem] leading-relaxed text-ink-500 sm:text-lg motion-safe:animate-rise"
+              style={rise(180)}
+            >
+              <p>
+                Maak een professionele factuur en download hem direct als PDF.{' '}
+                <span className="text-ink">Gratis, zonder abonnement.</span>
+              </p>
+              <p>Met een gratis account houd je ook je inkomsten, uitgaven, offertes en resultaat bij.</p>
+            </div>
+
+            <div
+              className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center motion-safe:animate-rise"
+              style={rise(260)}
+            >
+              <Link
+                href="/create-invoice"
+                className="group inline-flex h-[3.25rem] items-center justify-center gap-2 rounded-full bg-ink px-7 text-[15px] font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_10px_24px_-10px_rgba(10,42,77,0.7)] transition-all duration-300 hover:bg-ink-950 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_16px_32px_-12px_rgba(10,42,77,0.8)]"
+              >
                 Maak gratis factuur
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="h-12 rounded-xl border-white/30 bg-white/5 px-6 text-base font-semibold text-white hover:bg-white/15 hover:text-white sm:h-14 sm:px-8 sm:text-lg"
-            >
-              <Link href="/voorbeeld">
-                <FileText className="mr-2 h-5 w-5" />
+              <Link
+                href="/voorbeeld"
+                className="inline-flex h-[3.25rem] items-center justify-center rounded-full border border-ink/15 bg-white/60 px-7 text-[15px] font-medium text-ink backdrop-blur transition-colors hover:border-ink/30 hover:bg-white"
+              >
                 Bekijk voorbeelden
               </Link>
-            </Button>
-          </motion.div>
-
-          <motion.ul
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.28 }}
-            className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 lg:max-w-lg"
-          >
-            {trustItems.map((item) => (
-              <li
-                key={item}
-                className="flex items-center justify-center gap-2 text-sm text-sky-100 sm:justify-start"
-              >
-                <CheckCircle className="h-4 w-4 flex-shrink-0 text-sky-300" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </motion.ul>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="mx-auto w-full max-w-md lg:max-w-lg lg:justify-self-end"
-        >
-          <div className="relative">
-            <div
-              className="absolute -inset-3 rounded-2xl bg-white/10 blur-2xl sm:-inset-4"
-              aria-hidden
-            />
-            <div className="relative rounded-2xl bg-white/10 p-3 ring-1 ring-white/20 backdrop-blur-sm sm:p-4">
-              <DemoInvoicePreview layout="plain" className="shadow-2xl" />
             </div>
           </div>
-        </motion.div>
+
+          <div className="lg:pl-4">
+            <HeroInvoice />
+          </div>
+        </div>
+
+        <ul
+          className="mt-20 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-ink/10 pt-7 sm:mt-24 lg:grid-cols-4 motion-safe:animate-rise"
+          style={rise(420)}
+        >
+          {TRUST.map(({ icon: Icon, label }) => (
+            <li key={label} className="flex items-center gap-3 text-sm text-ink-700">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/70">
+                <Icon className="h-3.5 w-3.5 text-ember" strokeWidth={2} />
+              </span>
+              {label}
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default HeroSection;

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 /**
- * Baas status only — profile onboarding lives in "Volgende stap".
+ * Baas status only — profile onboarding lives in "Maak FactuurBaas compleet".
  */
 export default function DashboardProfilePrompt({
   baasLevelName = 'Starter',

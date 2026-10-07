@@ -66,6 +66,30 @@ export function createDefaultInvoiceNumber(date = new Date()) {
   return formatInvoiceNumber({ year, prefix: '', startNumber: 1, padLength: 3 });
 }
 
+/** Next number in this year's series, e.g. 2026-014 → 2026-015. */
+export function nextInvoiceNumberFromExisting(rows = [], date = new Date()) {
+  const year = date instanceof Date && !Number.isNaN(date.getTime()) ? date.getFullYear() : new Date().getFullYear();
+  const yearStr = String(year);
+  let best = null;
+  let bestN = -1;
+
+  for (const row of rows) {
+    const current = String(row?.invoice_number ?? row ?? '').trim();
+    if (!current.includes(yearStr)) continue;
+    const match = current.match(/^(.*?)(\d+)(\D*)$/);
+    if (!match) continue;
+    const n = Number(match[2]);
+    if (!Number.isFinite(n) || n <= bestN) continue;
+    bestN = n;
+    best = current;
+  }
+
+  if (!best) return createDefaultInvoiceNumber(date);
+  const match = best.match(/^(.*?)(\d+)(\D*)$/);
+  const next = String(bestN + 1).padStart(match[2].length, '0');
+  return `${match[1]}${next}${match[3]}`;
+}
+
 export function getFactuurnummerFaqSchema() {
   return {
     '@context': 'https://schema.org',

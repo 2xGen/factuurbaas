@@ -19,10 +19,8 @@ export const metadata = {
 
 export default function HypotheekBerekenenZzpPage() {
   return (
-    <div className="min-h-screen bg-slate-50 py-8 sm:py-12">
-      <div className="container mx-auto px-4 sm:px-6">
-        <HypotheekZzpCalculator />
-      </div>
+    <div className="min-h-screen bg-paper-50 text-ink">
+      <HypotheekZzpCalculator />
     </div>
   );
 }

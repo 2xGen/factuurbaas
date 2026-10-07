@@ -1,14 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
-
-function getAdminPassword() {
-  return process.env.ADMIN_PASSWORD || 'L@coL@co';
-}
-
-function isAuthorized(request) {
-  const header = request.headers.get('x-admin-password') || '';
-  return header && header === getAdminPassword();
-}
+import { isAdminRequest } from '@/lib/adminAuth';
 
 async function listAllUsers(admin) {
   const users = [];
@@ -30,10 +22,10 @@ async function listAllUsers(admin) {
 
 /**
  * Aggregate retention KPIs for admin dashboard.
- * Auth: x-admin-password header matching ADMIN_PASSWORD env.
+ * Auth: httpOnly admin session cookie (see /api/admin/login).
  */
-export async function GET(request) {
-  if (!isAuthorized(request)) {
+export async function GET() {
+  if (!(await isAdminRequest())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

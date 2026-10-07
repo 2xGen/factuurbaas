@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Loader2 } from 'lucide-react';
+import { format } from 'date-fns';
+import { nl } from 'date-fns/locale';
+import { Loader2, Plus } from 'lucide-react';
 import DashboardAttention from '@/components/dashboard/DashboardAttention';
-import DashboardStats from '@/components/dashboard/DashboardStats';
-import DashboardAdmin from '@/components/dashboard/DashboardAdmin';
+import DashboardStats, { DashboardSideMetrics } from '@/components/dashboard/DashboardStats';
 import DashboardCharts from '@/components/dashboard/DashboardCharts';
-import DashboardTools from '@/components/dashboard/DashboardTools';
-import DashboardProfilePrompt from '@/components/dashboard/DashboardProfilePrompt';
-import DashboardComingSoon from '@/components/dashboard/DashboardComingSoon';
+import DashboardGoal from '@/components/dashboard/DashboardGoal';
+import DashboardRecentInvoices from '@/components/dashboard/DashboardRecentInvoices';
 import ReminderDialog from '@/components/dashboard/dialogs/ReminderDialog';
+import MarkPaidDialog from '@/components/dashboard/dialogs/MarkPaidDialog';
 import { useUserInvoices } from '@/hooks/useUserInvoices';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
@@ -19,34 +20,32 @@ import { fetchHoursThisMonth } from '@/lib/timeEntryPersistence';
 import {
   fetchUserExpenses,
   sumExpensesForMonth,
-  estimateMonthlyFixedCosts,
 } from '@/lib/expensePersistence';
-import { getBaasLevel, getBadgeStates, getReferralHeroProgress } from '@/lib/baasStatus';
-import { countMyReferrals } from '@/lib/referral';
+import {
+  fetchUserIncomes,
+  sumIncomesForMonth,
+  sumIncomesForYear,
+} from '@/lib/incomePersistence';
 import {
   buildDashboardSignals,
-  getConceptQuotes,
   getAcceptedQuotesWaiting,
   getDisplayFirstName,
   getExpiredValidityQuotes,
   getMonthBusinessResult,
   getOverdueInvoices,
   getProfileCompletion,
+  getQuotesExpiringSoon,
   getRevenueThisMonth,
+  getRevenueThisYear,
   getSalesBtwThisMonth,
   getTimeOfDayGreeting,
+  isVatReturnApproaching,
 } from '@/lib/dashboardCockpit';
-import {
-  fetchQuoteDashboardRows,
-  QUOTE_STATUS_LABELS,
-  updateQuoteStatus,
-} from '@/lib/quotePersistence';
-import { useToast } from '@/components/ui/use-toast';
+import { fetchQuoteDashboardRows } from '@/lib/quotePersistence';
 
 export default function DashboardPage() {
   const router = useRouter();
   const { user } = useAuth();
-  const { toast } = useToast();
   const { authLoading, isLoadingInvoices, userInvoices, onSaveInvoice } = useUserInvoices();
 
   const [hoursStats, setHoursStats] = useState({
@@ -54,13 +53,13 @@ export default function DashboardPage() {
     openHours: 0,
     monthLabel: '',
   });
-  const [clientCount, setClientCount] = useState(0);
   const [expenses, setExpenses] = useState([]);
+  const [incomes, setIncomes] = useState([]);
   const [profile, setProfile] = useState(null);
-  const [referralCount, setReferralCount] = useState(0);
   const [quoteRows, setQuoteRows] = useState([]);
   const [metaLoading, setMetaLoading] = useState(true);
   const [selectedInvoiceForReminder, setSelectedInvoiceForReminder] = useState(null);
+  const [invoiceToMarkPaid, setInvoiceToMarkPaid] = useState(null);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -69,34 +68,39 @@ export default function DashboardPage() {
     (async () => {
       setMetaLoading(true);
       try {
-        const [hours, clientsRes, profileRes, referrals, expenseList, quotes] = await Promise.all([
+        const [hours, profileRes, expenseList, incomeList, quotes] = await Promise.all([
           fetchHoursThisMonth(supabase, user.id).catch(() => ({
             totalHours: 0,
             openHours: 0,
             monthLabel: '',
           })),
           supabase
-            .from('clients')
-            .select('id', { count: 'exact', head: true })
-            .eq('user_id', user.id),
-          supabase
             .from('profiles')
             .select(
-              'full_name, company_name, company_address, company_street, company_postal_code, company_city, company_kvk, company_btw, company_iban, logo_url'
+              'full_name, company_name, company_address, company_street, company_postal_code, company_city, company_kvk, company_btw, company_iban, logo_url, yearly_goal, yearly_goal_year'
             )
             .eq('id', user.id)
-            .maybeSingle(),
-          countMyReferrals(supabase).catch(() => 0),
+            .maybeSingle()
+            .then(async (res) => {
+              if (!res.error) return res;
+              return supabase
+                .from('profiles')
+                .select(
+                  'full_name, company_name, company_address, company_street, company_postal_code, company_city, company_kvk, company_btw, company_iban, logo_url'
+                )
+                .eq('id', user.id)
+                .maybeSingle();
+            }),
           fetchUserExpenses(supabase, user.id).catch(() => []),
+          fetchUserIncomes(supabase, user.id).catch(() => []),
           fetchQuoteDashboardRows(supabase, user.id).catch(() => []),
         ]);
 
         if (cancelled) return;
         setHoursStats(hours);
-        if (!clientsRes.error) setClientCount(clientsRes.count || 0);
         if (!profileRes.error) setProfile(profileRes.data);
-        setReferralCount(referrals || 0);
         setExpenses(expenseList || []);
+        setIncomes(incomeList || []);
         setQuoteRows(quotes || []);
       } finally {
         if (!cancelled) setMetaLoading(false);
@@ -121,10 +125,14 @@ export default function DashboardPage() {
     [userInvoices]
   );
 
-  const revenueThisMonth = useMemo(() => getRevenueThisMonth(userInvoices), [userInvoices]);
-  const salesBtwThisMonth = useMemo(() => getSalesBtwThisMonth(userInvoices), [userInvoices]);
+  const invoiceRevenueMonth = useMemo(() => getRevenueThisMonth(userInvoices), [userInvoices]);
+  const incomeMonth = useMemo(() => sumIncomesForMonth(incomes), [incomes]);
+  const revenueThisMonth = invoiceRevenueMonth + incomeMonth.amountExcl;
+  const salesBtwThisMonth = useMemo(
+    () => getSalesBtwThisMonth(userInvoices) + incomeMonth.vatAmount,
+    [userInvoices, incomeMonth.vatAmount]
+  );
   const expensesMonth = useMemo(() => sumExpensesForMonth(expenses), [expenses]);
-  const fixedCosts = useMemo(() => estimateMonthlyFixedCosts(expenses), [expenses]);
   const { resultaat, btwTeReserveren } = useMemo(
     () =>
       getMonthBusinessResult({
@@ -136,110 +144,69 @@ export default function DashboardPage() {
     [revenueThisMonth, expensesMonth, salesBtwThisMonth]
   );
 
+  const ytd = useMemo(
+    () => getRevenueThisYear(userInvoices) + sumIncomesForYear(incomes),
+    [userInvoices, incomes]
+  );
+
   const overdue = useMemo(() => getOverdueInvoices(userInvoices), [userInvoices]);
   const profileCompletion = useMemo(() => getProfileCompletion(profile), [profile]);
   const acceptedQuotes = useMemo(() => getAcceptedQuotesWaiting(quoteRows), [quoteRows]);
   const expiredQuotes = useMemo(() => getExpiredValidityQuotes(quoteRows), [quoteRows]);
-  const conceptQuotes = useMemo(() => getConceptQuotes(quoteRows), [quoteRows]);
+  const expiringQuotes = useMemo(() => getQuotesExpiringSoon(quoteRows), [quoteRows]);
 
-  const { actions: attentionActions, nextStep } = useMemo(
+  const { actions: attentionActions, onboarding } = useMemo(
     () =>
       buildDashboardSignals({
         overdue,
         openHours: hoursStats.openHours,
-        clientCount,
         invoiceCount: userInvoices.length,
-        expenseCount: expenses.length,
         quoteCount: quoteRows.length,
         acceptedQuotes,
         expiredQuotes,
-        conceptQuotes,
+        expiringQuotes,
         profileCompletion,
+        outstandingInvoicesCount,
+        btwTeReserveren,
+        vatReturnApproaching: isVatReturnApproaching(),
+        ytdRevenue: ytd,
       }),
     [
       overdue,
       hoursStats.openHours,
-      clientCount,
       userInvoices.length,
-      expenses.length,
       quoteRows.length,
       acceptedQuotes,
       expiredQuotes,
-      conceptQuotes,
+      expiringQuotes,
       profileCompletion,
+      outstandingInvoicesCount,
+      btwTeReserveren,
+      ytd,
     ]
   );
 
-  const baasStats = useMemo(
-    () => ({
-      hasAccount: Boolean(user),
-      invoiceCount: userInvoices.length,
-      referralCount,
-      hasClient: clientCount > 0,
-      profileComplete: Boolean(
-        profile?.company_name &&
-          (profile?.company_address || (profile?.company_street && profile?.company_city)) &&
-          profile?.company_kvk
-      ),
-    }),
-    [user, userInvoices.length, referralCount, clientCount, profile]
-  );
-
-  const baasLevel = useMemo(() => getBaasLevel(baasStats), [baasStats]);
-  const badges = useMemo(() => getBadgeStates(baasStats), [baasStats]);
-  const badgesUnlocked = useMemo(
-    () => badges.filter((b) => b.unlocked && !b.comingSoon).length,
-    [badges]
-  );
-  const badgesTotal = useMemo(
-    () => badges.filter((b) => !b.comingSoon).length,
-    [badges]
-  );
-  const referralHero = useMemo(() => getReferralHeroProgress(referralCount), [referralCount]);
-  const referralHint = referralHero.unlocked
-    ? null
-    : referralHero.remaining === 1
-      ? '1 referral nodig voor je volgende unlock'
-      : `${referralHero.remaining} referrals nodig voor je volgende unlock`;
-
   const greeting = getTimeOfDayGreeting();
   const firstName = getDisplayFirstName(user, profile);
+  const monthLabel = format(new Date(), 'LLLL', { locale: nl });
+  const year = new Date().getFullYear();
+  const yearlyGoal =
+    Number(profile?.yearly_goal_year) === year ? Number(profile?.yearly_goal) || 0 : Number(profile?.yearly_goal) || 0;
 
-  const togglePaidStatus = (invoiceId) => {
-    const invoice = userInvoices.find((inv) => inv.id === invoiceId);
-    if (!invoice) return;
-    const newStatus = invoice.status === 'paid' ? 'pending' : 'paid';
-    const activityDescription = `Status gewijzigd naar: ${
-      newStatus === 'paid' ? 'Betaald' : 'Openstaand'
-    }`;
-    onSaveInvoice({ ...invoice, status: newStatus }, activityDescription);
-  };
-
-  const handleQuoteStatusChange = async (quote, status) => {
-    if (!user?.id || !quote?.id) return;
-    try {
-      await updateQuoteStatus(supabase, user.id, quote.id, status);
-      setQuoteRows((prev) =>
-        prev.map((row) => (row.id === quote.id ? { ...row, status } : row))
-      );
-      toast({
-        title: 'Status bijgewerkt',
-        description: `Offerte staat nu op ${QUOTE_STATUS_LABELS[status] || status}.`,
-      });
-    } catch (error) {
-      toast({
-        title: 'Status wijzigen mislukt',
-        description: error.message || 'Probeer het opnieuw.',
-        variant: 'destructive',
-      });
-    }
+  const confirmMarkPaid = (paidDate) => {
+    if (!invoiceToMarkPaid) return;
+    onSaveInvoice(
+      { ...invoiceToMarkPaid, status: 'paid', paidDate },
+      `Gemarkeerd als betaald op ${paidDate}`
+    );
+    setInvoiceToMarkPaid(null);
   };
 
   if (authLoading || (isLoadingInvoices && !userInvoices.length && user) || (user && metaLoading)) {
     return (
-      <div className="flex h-[70vh] flex-col items-center justify-center bg-[#f7f8fb]">
+      <div className="flex h-[70vh] flex-col items-center justify-center bg-[#f6f4f1]">
         <Loader2 className="mb-4 h-10 w-10 animate-spin text-deep-blue" />
-        <p className="text-slate-500">Dashboard laden…</p>
+        <p className="text-slate-500">Overzicht laden…</p>
       </div>
     );
   }
@@ -247,69 +214,62 @@ export default function DashboardPage() {
   if (!user && !authLoading) return null;
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] bg-[#f7f8fb]">
-      <div className="container mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <div className="mb-8">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Je bedrijf in één overzicht
-            </p>
-            <h1 className="mt-1 font-heading text-2xl font-bold tracking-tight text-deep-blue sm:text-3xl">
-              {greeting}, {firstName}
-            </h1>
-            <p className="mt-1 text-sm text-slate-500">
-              Wat speelt er vandaag — en wat kun je nu doen?
-            </p>
+    <div className="bg-[#f6f4f1]">
+      <div className="px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-400">
+                {monthLabel}
+              </p>
+              <h1 className="mt-1 font-heading text-xl font-bold tracking-tight text-deep-blue sm:text-2xl">
+                {greeting}, {firstName}
+              </h1>
+              <p className="mt-1 text-sm text-slate-500">Hoe je bedrijf ervoor staat</p>
+            </div>
+            <Link
+              href="/create-invoice"
+              className="inline-flex items-center gap-1.5 rounded-full bg-deep-blue px-3.5 py-2 text-xs font-semibold text-white hover:bg-deep-blue/90"
+            >
+              <Plus className="h-3.5 w-3.5" /> Nieuwe factuur
+            </Link>
           </div>
 
-          <DashboardAttention
-            actions={attentionActions}
-            nextStep={nextStep}
-            onViewInvoice={(id) => router.push(`/create-invoice?id=${id}`)}
-            onSendReminder={(invoice) => setSelectedInvoiceForReminder(invoice)}
-            onMarkPaid={togglePaidStatus}
-            onSetQuoteStatus={handleQuoteStatusChange}
-          />
+          <div className="mt-6">
+            <DashboardAttention
+              actions={attentionActions}
+              onboarding={onboarding}
+              onViewInvoice={(id) => router.push(`/create-invoice?id=${id}`)}
+              onSendReminder={(invoice) => setSelectedInvoiceForReminder(invoice)}
+              onMarkPaid={setInvoiceToMarkPaid}
+            />
+          </div>
 
           <DashboardStats
             revenueThisMonth={revenueThisMonth}
             expensesThisMonth={expensesMonth.amountExcl}
             resultaat={resultaat}
-            salesBtwThisMonth={salesBtwThisMonth}
-            expensesBtwThisMonth={expensesMonth.vatAmount}
-            btwTeReserveren={btwTeReserveren}
-            totalOutstandingAmount={totalOutstandingAmount}
-            outstandingInvoicesCount={outstandingInvoicesCount}
-            monthlyFixedCosts={fixedCosts.monthly}
           />
 
-          <DashboardAdmin />
+          <div className="mt-3 grid gap-3 lg:grid-cols-[1.45fr_1fr]">
+            <DashboardCharts invoices={userInvoices} expenses={expenses} incomes={incomes} />
+            <DashboardSideMetrics
+              totalOutstandingAmount={totalOutstandingAmount}
+              outstandingInvoicesCount={outstandingInvoicesCount}
+              btwTeReserveren={btwTeReserveren}
+              salesBtwThisMonth={salesBtwThisMonth}
+              expensesBtwThisMonth={expensesMonth.vatAmount}
+            />
+          </div>
 
-          {(userInvoices.length > 0 || expenses.length > 0) && (
-            <div className="mb-8">
-              <div className="mb-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  Inzicht in je bedrijf
-                </p>
-                <h2 className="mt-0.5 font-heading text-lg font-semibold text-deep-blue sm:text-xl">
-                  Omzet & uitgaven
-                </h2>
-              </div>
-              <DashboardCharts invoices={userInvoices} expenses={expenses} />
-            </div>
-          )}
+          <div className="mt-3">
+            <DashboardRecentInvoices invoices={userInvoices} />
+          </div>
 
-          <DashboardTools />
-
-          <DashboardProfilePrompt
-            baasLevelName={baasLevel.name}
-            badgesUnlocked={badgesUnlocked}
-            badgesTotal={badgesTotal}
-            referralHint={referralHint}
-          />
-
-          <DashboardComingSoon email={user?.email || ''} />
-        </motion.div>
+          <div className="mt-3">
+            <DashboardGoal userId={user.id} ytd={ytd} initialGoal={yearlyGoal} year={year} />
+          </div>
+        </div>
       </div>
 
       {selectedInvoiceForReminder && (
@@ -319,6 +279,16 @@ export default function DashboardPage() {
           onClose={() => setSelectedInvoiceForReminder(null)}
           onActionLog={(invoice, logMessage) => onSaveInvoice(invoice, logMessage)}
           user={user}
+          profile={profile}
+        />
+      )}
+      {invoiceToMarkPaid && (
+        <MarkPaidDialog
+          invoice={invoiceToMarkPaid}
+          invoices={userInvoices}
+          isOpen={!!invoiceToMarkPaid}
+          onClose={() => setInvoiceToMarkPaid(null)}
+          onConfirm={confirmMarkPaid}
         />
       )}
     </div>

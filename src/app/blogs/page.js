@@ -72,7 +72,7 @@ export default function BlogsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Suspense fallback={<div className="bg-slate-50 py-24 min-h-[40rem] flex items-center justify-center"><div className="animate-pulse text-slate-400">Laden...</div></div>}>
+      <Suspense fallback={<div className="flex min-h-[40rem] items-center justify-center bg-paper py-24"><div className="animate-pulse font-mono text-xs uppercase tracking-[0.16em] text-ink-400">Laden…</div></div>}>
         <BlogListClient articles={articles} guides={guideListItems} />
       </Suspense>
     </>

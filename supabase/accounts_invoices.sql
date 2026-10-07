@@ -82,6 +82,7 @@ create table if not exists public.invoices (
   invoice_name text,
   invoice_date timestamptz,
   due_date timestamptz,
+  paid_date date,
   payment_term_days text,
   status text not null default 'concept'
     check (status in ('concept', 'pending', 'paid')),

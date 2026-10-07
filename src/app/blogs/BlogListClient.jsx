@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { EASE_OUT, Reveal } from '@/components/landing/page/motion';
 import { blogPillars, formatPillarTitle } from '@/lib/blogPillars';
 import { GUIDES_PER_PAGE, getBlogHubIntro, guideHubFaqs } from '@/lib/guideHub';
 
@@ -62,6 +63,8 @@ function interleaveByPillar(items) {
   return result;
 }
 
+const pillarLabels = new Map(blogPillars.map((p) => [p.id, p.cardTitle || p.title]));
+
 function HubTitle({ title, titleAccent }) {
   const parts = formatPillarTitle(title, titleAccent);
   if (typeof parts === 'string') {
@@ -72,7 +75,7 @@ function HubTitle({ title, titleAccent }) {
         return (
           <>
             {title.slice(0, index)}
-            <span className="text-warm-orange">{marker}</span>
+            <em className="text-ink-700">{marker}</em>
             {title.slice(index + marker.length)}
           </>
         );
@@ -84,11 +87,95 @@ function HubTitle({ title, titleAccent }) {
   return (
     <>
       {parts.before}
-      <span className="text-warm-orange">{parts.accent}</span>
+      <em className="text-ink-700">{parts.accent}</em>
       {parts.after}
     </>
   );
 }
+
+function ItemMeta({ item }) {
+  const label = pillarLabels.get(getPillarId(item));
+  return (
+    <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-400">
+      {label && <span className="text-ember">{label}</span>}
+      {label && <span aria-hidden>·</span>}
+      <span>{item.type === 'guide' ? 'Gids' : 'Artikel'}</span>
+    </p>
+  );
+}
+
+function ItemCard({ item, index, featured = false }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: Math.min(index, 8) * 0.05, ease: EASE_OUT }}
+      className={`group relative flex flex-col ${
+        featured ? 'md:col-span-2 lg:row-span-2' : ''
+      }`}
+      role="listitem"
+      aria-labelledby={`post-title-${item.slug}`}
+    >
+      <Link
+        href={item.href}
+        className={`relative block overflow-hidden rounded-2xl bg-paper-200 ring-1 ring-inset ring-ink/5 ${
+          featured ? 'aspect-[16/10] lg:aspect-auto lg:flex-1' : 'aspect-[16/10]'
+        }`}
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        <img
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.035]"
+          alt={item.image.alt}
+          src={item.image.url}
+          loading={index < 6 ? 'eager' : 'lazy'}
+          fetchPriority={index < 3 ? 'high' : undefined}
+        />
+        <div className="absolute inset-0 bg-ink-950/0 transition-colors duration-500 group-hover:bg-ink-950/10" />
+      </Link>
+      <div className={featured ? 'mt-6' : 'mt-5'}>
+        <ItemMeta item={item} />
+        <h2
+          id={`post-title-${item.slug}`}
+          className={`mt-2.5 font-display font-normal tracking-[-0.02em] text-ink ${
+            featured
+              ? 'max-w-[24ch] text-[1.9rem] leading-[1.08] sm:text-[2.4rem]'
+              : 'text-[1.4rem] leading-[1.18] line-clamp-3'
+          }`}
+        >
+          <Link
+            href={item.href}
+            className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]"
+          >
+            {item.title}
+          </Link>
+        </h2>
+        <p
+          className={`mt-3 text-ink-500 ${
+            featured ? 'max-w-xl text-base leading-relaxed line-clamp-3' : 'text-[15px] leading-relaxed line-clamp-2'
+          }`}
+        >
+          {item.excerpt}
+        </p>
+        <Link
+          href={item.href}
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink"
+          aria-label={`Lees meer: ${item.title}`}
+        >
+          {item.type === 'guide' ? 'Lees gids' : 'Lees artikel'}
+          <ArrowRight className="h-3.5 w-3.5 text-ember transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </motion.article>
+  );
+}
+
+const chipClass = (active) =>
+  `shrink-0 rounded-full px-4 py-2 text-sm transition-colors duration-200 ${
+    active
+      ? 'bg-ink text-white shadow-[0_1px_2px_rgba(6,26,48,0.25)]'
+      : 'border border-ink/10 bg-white/70 text-ink-500 hover:border-ink/25 hover:text-ink'
+  }`;
 
 export default function BlogListClient({ articles, guides = [] }) {
   const searchParams = useSearchParams();
@@ -181,134 +268,120 @@ export default function BlogListClient({ articles, guides = [] }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const showFeatured = safePage === 1 && paginatedItems.length >= 4;
+
   return (
-    <main className="bg-slate-50 py-16 sm:py-24" aria-label="Blog overzicht">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10 max-w-3xl mx-auto"
-        >
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-deep-blue tracking-tight font-heading">
-            <HubTitle title={intro.title} titleAccent={intro.titleAccent} />
-          </h1>
-          {intro.paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 48)} className="mt-4 text-lg text-slate-600 leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
-        </motion.header>
-
-        <motion.nav
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="mb-10"
-          aria-label="Filter op onderwerp"
-        >
-          <div className="flex flex-wrap justify-center gap-2">
-            <button
-              type="button"
-              onClick={() => handlePillarChange(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                selectedPillar === null
-                  ? 'bg-warm-orange text-white shadow-md'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-              }`}
-            >
-              Alle
-            </button>
-            {blogPillars.map((pillar) => (
-              <button
-                key={pillar.id}
-                type="button"
-                onClick={() => handlePillarChange(pillar.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                  selectedPillar === pillar.id
-                    ? 'bg-warm-orange text-white shadow-md'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-                }`}
+    <main className="bg-paper text-ink" aria-label="Blog overzicht">
+      <header className="grain relative isolate overflow-hidden">
+        <div className="bg-ledger mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
+        <div
+          className="pointer-events-none absolute -right-40 -top-48 -z-10 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(210,96,26,0.12),transparent_65%)]"
+          aria-hidden
+        />
+        <div className="container mx-auto px-4 pb-10 pt-14 sm:px-6 sm:pb-12 sm:pt-20 lg:px-8 lg:pt-24">
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+            <div>
+              <p
+                className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-700 backdrop-blur motion-safe:animate-rise"
               >
-                {pillar.cardTitle || pillar.title}
-              </button>
-            ))}
+                <BookOpen className="h-3.5 w-3.5 text-ember" aria-hidden />
+                Kennisbank · {allItems.length} artikelen
+              </p>
+              <h1
+                className="mt-6 max-w-[16ch] font-display text-[2.6rem] font-normal leading-[1] tracking-[-0.035em] sm:text-6xl lg:text-[4.25rem] motion-safe:animate-rise"
+                style={{ animationDelay: '80ms' }}
+              >
+                <HubTitle title={intro.title} titleAccent={intro.titleAccent} />
+              </h1>
+            </div>
+            <div className="motion-safe:animate-rise" style={{ animationDelay: '160ms' }}>
+              {intro.paragraphs.map((paragraph) => (
+                <p
+                  key={paragraph.slice(0, 48)}
+                  className="mt-4 max-w-xl text-base leading-relaxed text-ink-500 first:mt-0 sm:text-[1.05rem]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
-        </motion.nav>
 
+          <nav
+            className="-mx-4 mt-12 border-t border-ink/10 px-4 pt-6 motion-safe:animate-rise sm:mx-0 sm:px-0"
+            style={{ animationDelay: '240ms' }}
+            aria-label="Filter op onderwerp"
+          >
+            <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
+              <button
+                type="button"
+                onClick={() => handlePillarChange(null)}
+                aria-pressed={selectedPillar === null}
+                className={chipClass(selectedPillar === null)}
+              >
+                Alles
+              </button>
+              {blogPillars.map((pillar) => (
+                <button
+                  key={pillar.id}
+                  type="button"
+                  onClick={() => handlePillarChange(pillar.id)}
+                  aria-pressed={selectedPillar === pillar.id}
+                  className={chipClass(selectedPillar === pillar.id)}
+                >
+                  {pillar.cardTitle || pillar.title}
+                </button>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 pb-24 sm:px-6 lg:px-8 lg:pb-32">
         {filteredItems.length > 0 && (
-          <p className="text-center text-sm text-slate-500 mb-8">
-            {filteredItems.length} {filteredItems.length === 1 ? 'artikel' : 'artikelen'}
+          <p className="mb-8 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400">
+            <span>
+              {filteredItems.length} {filteredItems.length === 1 ? 'artikel' : 'artikelen'}
+            </span>
             {totalPages > 1 && (
               <>
-                {' '}
-                · pagina {safePage} van {totalPages}
+                <span className="h-px w-6 bg-ink/15" aria-hidden />
+                <span>
+                  Pagina {safePage} van {totalPages}
+                </span>
               </>
             )}
           </p>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
-          <AnimatePresence mode="popLayout">
-            {paginatedItems.map((item, index) => (
-              <motion.article
-                key={`${item.type}-${item.slug}`}
-                layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.35, delay: index * 0.04 }}
-                className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col group hover:shadow-xl transition-shadow duration-300"
-                role="listitem"
-                aria-labelledby={`post-title-${item.slug}`}
-              >
-                <Link href={item.href} className="block" aria-hidden="true" tabIndex={-1}>
-                  <div className="relative h-48">
-                    <img
-                      className="w-full h-full object-cover"
-                      alt={item.image.alt}
-                      src={item.image.url}
-                      loading={index < 6 ? 'eager' : 'lazy'}
-                      fetchPriority={index < 3 ? 'high' : undefined}
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
-                  </div>
-                </Link>
-                <div className="p-6 flex-grow flex flex-col">
-                  <h2
-                    id={`post-title-${item.slug}`}
-                    className="text-xl font-bold text-deep-blue font-heading mb-2 line-clamp-2 group-hover:text-warm-orange transition-colors duration-300"
-                  >
-                    <Link href={item.href}>{item.title}</Link>
-                  </h2>
-                  <p className="text-slate-600 text-sm flex-grow mb-4 line-clamp-3">{item.excerpt}</p>
-                  <div className="mt-auto">
-                    <Link
-                      href={item.href}
-                      className="inline-flex items-center font-semibold text-sky-600 group-hover:text-warm-orange transition-colors duration-300"
-                      aria-label={`Lees meer: ${item.title}`}
-                    >
-                      {item.type === 'guide' ? 'Lees gids' : 'Lees meer'}
-                      <ArrowRight className="ml-2 h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
+        <div
+          key={`${selectedPillar || 'all'}-${safePage}`}
+          className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3"
+          role="list"
+        >
+          {paginatedItems.map((item, index) => (
+            <ItemCard
+              key={`${item.type}-${item.slug}`}
+              item={item}
+              index={index}
+              featured={showFeatured && index === 0}
+            />
+          ))}
         </div>
 
         {filteredItems.length === 0 && (
-          <p className="text-center text-slate-500 py-12">Geen artikelen in deze categorie.</p>
+          <p className="py-16 text-center font-display text-2xl text-ink-500">Geen artikelen in deze categorie.</p>
         )}
 
         {totalPages > 1 && (
-          <nav className="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label="Paginering">
+          <nav
+            className="mt-20 flex flex-wrap items-center justify-center gap-1.5 border-t border-ink/10 pt-10"
+            aria-label="Paginering"
+          >
             <button
               type="button"
               disabled={safePage <= 1}
               onClick={() => handlePageChange(safePage - 1)}
-              className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+              className="mr-2 inline-flex h-10 items-center gap-1 rounded-full border border-ink/10 bg-white px-4 text-sm text-ink-700 transition-colors hover:border-ink/25 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronLeft className="h-4 w-4" />
               Vorige
@@ -319,10 +392,8 @@ export default function BlogListClient({ articles, guides = [] }) {
                 type="button"
                 onClick={() => handlePageChange(page)}
                 aria-current={page === safePage ? 'page' : undefined}
-                className={`min-w-[2.5rem] rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  page === safePage
-                    ? 'bg-warm-orange text-white shadow-md'
-                    : 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                className={`tabular h-10 min-w-[2.5rem] rounded-full px-3 font-mono text-sm transition-colors ${
+                  page === safePage ? 'bg-ink text-white' : 'text-ink-500 hover:bg-white hover:text-ink'
                 }`}
               >
                 {page}
@@ -332,7 +403,7 @@ export default function BlogListClient({ articles, guides = [] }) {
               type="button"
               disabled={safePage >= totalPages}
               onClick={() => handlePageChange(safePage + 1)}
-              className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+              className="ml-2 inline-flex h-10 items-center gap-1 rounded-full border border-ink/10 bg-white px-4 text-sm text-ink-700 transition-colors hover:border-ink/25 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Volgende
               <ChevronRight className="h-4 w-4" />
@@ -341,33 +412,41 @@ export default function BlogListClient({ articles, guides = [] }) {
         )}
 
         {visibleFaqs.length > 0 && (
-          <section className="mt-16 max-w-3xl mx-auto" aria-labelledby="blog-hub-faq-heading">
-            <h2
-              id="blog-hub-faq-heading"
-              className="text-2xl sm:text-3xl font-bold text-deep-blue font-heading text-center mb-8"
-            >
-              Veelgestelde vragen
-            </h2>
-            <div className="space-y-3">
+          <section
+            className="mt-24 grid gap-10 border-t border-ink/10 pt-16 lg:mt-32 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:pt-20"
+            aria-labelledby="blog-hub-faq-heading"
+          >
+            <Reveal className="lg:sticky lg:top-32 lg:self-start">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember">Vragen</p>
+              <h2
+                id="blog-hub-faq-heading"
+                className="mt-4 font-display text-[2.2rem] font-normal leading-[1.05] tracking-[-0.03em] sm:text-5xl"
+              >
+                Veelgestelde <em className="text-ink-700">vragen</em>
+              </h2>
+            </Reveal>
+            <div className="border-t border-ink/15">
               {visibleFaqs.map(({ question, answer, guideSlug }) => (
-                <details
-                  key={question}
-                  className="group rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm"
-                >
-                  <summary className="cursor-pointer list-none font-semibold text-deep-blue marker:content-none [&::-webkit-details-marker]:hidden">
-                    <span className="flex items-start justify-between gap-3">
-                      {question}
-                      <span className="text-warm-orange transition-transform group-open:rotate-45">+</span>
+                <details key={question} className="group border-b border-ink/15">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 font-display text-xl leading-snug text-ink marker:content-none sm:text-[1.4rem] [&::-webkit-details-marker]:hidden">
+                    {question}
+                    <span
+                      className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-ink/15 text-ember transition-transform duration-300 group-open:rotate-45"
+                      aria-hidden
+                    >
+                      <Plus className="h-3.5 w-3.5" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{answer}</p>
-                  <Link
-                    href={`/gidsen/${guideSlug}`}
-                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-warm-orange hover:underline"
-                  >
-                    Lees de volledige gids
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                  <div className="max-w-2xl pb-7 pr-12">
+                    <p className="text-[15px] leading-relaxed text-ink-500 sm:text-base">{answer}</p>
+                    <Link
+                      href={`/gidsen/${guideSlug}`}
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink underline decoration-ink/20 underline-offset-[6px] transition-colors hover:decoration-ember"
+                    >
+                      Lees de volledige gids
+                      <ArrowRight className="h-3.5 w-3.5 text-ember" />
+                    </Link>
+                  </div>
                 </details>
               ))}
             </div>

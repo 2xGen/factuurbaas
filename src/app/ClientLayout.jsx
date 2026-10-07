@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import HeaderClient from '@/components/landing/HeaderClient';
 import FooterClient from '@/components/landing/FooterClient';
 import OnboardingPrompt from '@/components/onboarding/OnboardingPrompt';
@@ -10,7 +11,27 @@ import InstallAppBanner from '@/components/pwa/InstallAppBanner';
 import ServiceWorkerRegister from '@/components/pwa/ServiceWorkerRegister';
 import { PageViewLogger } from './PageViewLogger';
 
+const APP_PREFIXES = [
+  '/dashboard',
+  '/facturen',
+  '/offertes',
+  '/uren',
+  '/uitgaven',
+  '/inkomsten',
+  '/klanten',
+  '/profile',
+  '/baas-status',
+  '/rekenen',
+];
+
+function isAppPath(pathname) {
+  return APP_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
 export default function ClientLayout({ children }) {
+  const pathname = usePathname() || '';
+  const hideFooter = isAppPath(pathname);
+
   return (
     <CookieConsentProvider>
       <div className="flex min-h-screen flex-col bg-white">
@@ -19,7 +40,7 @@ export default function ClientLayout({ children }) {
         <ReferralCapture />
         <HeaderClient />
         <main className="flex-grow pt-[var(--header-height,5rem)]">{children}</main>
-        <FooterClient />
+        {!hideFooter && <FooterClient />}
         <InstallAppBanner />
         <CookieBanner />
         <OnboardingPrompt />

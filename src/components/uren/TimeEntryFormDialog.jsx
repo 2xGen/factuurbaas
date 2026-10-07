@@ -82,6 +82,7 @@ export default function TimeEntryFormDialog({
   initialEntry,
   clients = [],
   isSaving,
+  defaultHourlyRate = '',
 }) {
   const isEdit = Boolean(initialEntry?.id);
 
@@ -109,7 +110,9 @@ export default function TimeEntryFormDialog({
       setManualDate(todayIsoDate());
     } else {
       setClientId('');
-      setHourlyRate('');
+      setHourlyRate(
+        defaultHourlyRate != null && defaultHourlyRate !== '' ? String(defaultHourlyRate) : ''
+      );
       setHoursPerDay('8');
       setDescription('');
       setSelectedDates([]);
@@ -117,7 +120,7 @@ export default function TimeEntryFormDialog({
       setEditDate(todayIsoDate());
       setEditHours('');
     }
-  }, [open, initialEntry]);
+  }, [open, initialEntry, defaultHourlyRate]);
 
   const sortedDates = useMemo(
     () => [...selectedDates].sort((a, b) => a.localeCompare(b)),

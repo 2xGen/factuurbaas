@@ -1,34 +1,42 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, FileType } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import InvoiceHubThumbnail from '@/components/landing/InvoiceHubThumbnail';
+import { LandingSection, SectionHeader } from '@/components/landing/LandingSection';
+import { Reveal } from '@/components/landing/page/motion';
+import { ArrowIcon, PageHeader, btn } from '@/components/site/editorial';
 
-const tagIcons = {
-  Formaat: FileType,
-  Populair: FileText,
-  Bouw: FileText,
-  Uren: FileText,
-  Diensten: FileText,
-  Freelance: FileText,
-  KOR: FileText,
-  Horeca: FileText,
-  Marketing: FileText,
-};
+function accentLastWord(text) {
+  if (typeof text !== 'string') return text;
+  const index = text.lastIndexOf(' ');
+  if (index === -1) return text;
+  return (
+    <>
+      {text.slice(0, index + 1)}
+      <em>{text.slice(index + 1)}</em>
+    </>
+  );
+}
 
-function HubLinkCard({ link, footerLabel, showPreview, previewBadge }) {
-  const TagIcon = tagIcons[link.tag] || FileText;
+const focusRing =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-4 focus-visible:ring-offset-paper-50';
+
+function HubLinkCard({ link, footerLabel, showPreview, previewBadge, index }) {
   const actionLabel = link.footerLabel || footerLabel;
   const isSoon = link.comingSoon;
+  const hasPreview = showPreview && (link.example || link.format);
 
-  const cardClassName =
-    'group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 sm:p-6 ' +
-    (isSoon
-      ? 'opacity-80'
-      : 'hover:-translate-y-0.5 hover:border-warm-orange/30 hover:shadow-md');
+  const cardClassName = cn(
+    'group flex h-full flex-col rounded-2xl transition-all duration-300',
+    focusRing,
+    !hasPreview && 'border border-ink/[0.08] bg-white p-6 shadow-paper sm:p-7',
+    !hasPreview && !isSoon && 'hover:-translate-y-1 hover:border-ink/20',
+    isSoon && 'opacity-60'
+  );
 
   const inner = (
     <>
-      {showPreview && (link.example || link.format) && (
+      {hasPreview && (
         <InvoiceHubThumbnail
           example={link.example}
           format={link.format}
@@ -37,48 +45,59 @@ function HubLinkCard({ link, footerLabel, showPreview, previewBadge }) {
         />
       )}
 
-      <div className="mb-3 flex items-start justify-between gap-3">
+      <div className={cn('flex items-start justify-between gap-3', hasPreview && 'mt-5')}>
         {link.tag ? (
           <span
-            className={
-              isSoon
-                ? 'inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-slate-500'
-                : 'inline-flex items-center gap-1.5 rounded-full bg-green-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-green-700'
-            }
+            className={cn(
+              'font-mono text-[10.5px] uppercase tracking-[0.14em]',
+              isSoon ? 'text-ink-400' : 'text-ember'
+            )}
           >
-            <TagIcon className="h-3.5 w-3.5" />
             {link.tag}
           </span>
         ) : (
           <span />
         )}
-        {!isSoon && (
-          <ArrowRight className="h-4 w-4 flex-shrink-0 text-slate-300 transition-all group-hover:translate-x-0.5 group-hover:text-warm-orange" />
+        {!hasPreview && (
+          <span className="font-display text-lg italic leading-none text-ink-400" aria-hidden>
+            {String(index + 1).padStart(2, '0')}
+          </span>
         )}
       </div>
 
       <h3
-        className={
-          isSoon
-            ? 'text-lg font-bold text-slate-700'
-            : 'text-lg font-bold text-deep-blue transition-colors group-hover:text-warm-orange'
-        }
+        className={cn(
+          'mt-2.5 font-display text-[1.4rem] font-normal leading-[1.18] tracking-[-0.02em]',
+          isSoon ? 'text-ink-500' : 'text-ink'
+        )}
       >
-        {link.label}
+        <span
+          className={cn(
+            !isSoon &&
+              'bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]'
+          )}
+        >
+          {link.label}
+        </span>
       </h3>
 
       {link.description && (
-        <p className="mt-2 flex-grow text-sm leading-relaxed text-slate-600">{link.description}</p>
+        <p className="mt-3 flex-grow text-[15px] leading-relaxed text-ink-500">{link.description}</p>
       )}
 
       <span
-        className={
-          isSoon
-            ? 'mt-4 text-sm font-medium text-slate-400'
-            : 'mt-4 text-sm font-semibold text-deep-blue group-hover:text-warm-orange'
-        }
+        className={cn(
+          'mt-5 inline-flex items-center gap-1.5 text-sm font-medium',
+          isSoon ? 'text-ink-400' : 'text-ink'
+        )}
       >
         {actionLabel}
+        {!isSoon && (
+          <ArrowRight
+            className="h-3.5 w-3.5 text-ember transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden
+          />
+        )}
       </span>
     </>
   );
@@ -92,6 +111,13 @@ function HubLinkCard({ link, footerLabel, showPreview, previewBadge }) {
       {inner}
     </Link>
   );
+}
+
+function gridClassName(count, showPreview) {
+  const gap = showPreview ? 'gap-x-8 gap-y-14' : 'gap-5';
+  if (count === 2) return cn('grid sm:grid-cols-2', gap, showPreview ? 'max-w-4xl' : 'max-w-3xl');
+  if (count === 4) return cn('grid sm:grid-cols-2 lg:grid-cols-4', gap);
+  return cn('grid sm:grid-cols-2 lg:grid-cols-3', gap);
 }
 
 export default function LandingHubPage({
@@ -121,113 +147,99 @@ export default function LandingHubPage({
       : [];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <section className="bg-gradient-to-br from-deep-blue via-sky-700 to-indigo-600 text-white py-12 sm:py-16">
-        <div className="container mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <h1 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">{title}</h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-blue-100 sm:text-lg">
-            {description}
-          </p>
-          {descriptionExtra && (
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-blue-100/90 sm:text-base">
-              {descriptionExtra}
-            </p>
-          )}
-          {showHeroCta && (
-            <div className="mt-10 flex justify-center">
-              <Button
-                asChild
-                size="xl"
-                variant="secondary"
-                className="h-auto min-h-14 gap-2 px-8 py-4 text-base font-semibold sm:text-lg"
-              >
-                <Link href={ctaHref}>
-                  {ctaLabel}
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          )}
-        </div>
-      </section>
+    <div className="min-h-screen bg-paper-50 text-ink">
+      <PageHeader
+        title={accentLastWord(title)}
+        containerClassName="pb-14 sm:pb-16 lg:pb-20"
+        lead={
+          <>
+            <p>{description}</p>
+            {descriptionExtra && <p className="text-base text-ink-400 sm:text-lg">{descriptionExtra}</p>}
+          </>
+        }
+      >
+        {showHeroCta && (
+          <Link href={ctaHref} className={btn.primary}>
+            {ctaLabel}
+            <ArrowIcon />
+          </Link>
+        )}
+      </PageHeader>
 
       {groups.length > 0 && (
-        <section className="py-14 sm:py-16 lg:py-20">
-          <div className="container mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
-              <h2 className="font-heading text-2xl font-bold tracking-tight text-deep-blue sm:text-3xl">
-                {linksTitle}
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-600 sm:text-lg">
-                {linksDescription}
-              </p>
-            </div>
+        <LandingSection className="border-t border-ink/[0.06]">
+          {linksTitle ? (
+            <SectionHeader align="left" title={linksTitle} description={linksDescription} />
+          ) : null}
 
-            <div className="space-y-12">
-              {groups.map((group) => (
-                <div key={group.title || 'default'}>
-                  {group.title && (
-                    <h3 className="mb-5 font-heading text-lg font-semibold text-deep-blue sm:text-xl">
+          <div className="space-y-16 sm:space-y-20">
+            {groups.map((group, groupIndex) => (
+              <div key={group.title || 'default'}>
+                {group.title && (
+                  <div className="mb-8 flex items-baseline gap-4 border-b border-ink/10 pb-4">
+                    <span className="font-display text-xl italic text-ember" aria-hidden>
+                      {String(groupIndex + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="font-display text-2xl font-normal tracking-[-0.02em] text-ink sm:text-[1.75rem]">
                       {group.title}
                     </h3>
-                  )}
-                  <div
-                    className={
-                      group.links.length === 2
-                        ? 'mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 sm:gap-5'
-                        : group.links.length === 4
-                          ? 'grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4'
-                          : 'grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3'
-                    }
-                  >
-                    {group.links.map((link) => (
+                  </div>
+                )}
+                <div className={gridClassName(group.links.length, showPreview)}>
+                  {group.links.map((link, index) => (
+                    <Reveal key={link.href || link.label} delay={Math.min(index, 6) * 0.05} className="h-full">
                       <HubLinkCard
-                        key={link.href || link.label}
                         link={link}
+                        index={index}
                         footerLabel={linkFooterLabel}
                         showPreview={showPreview}
                         previewBadge={previewBadge}
                       />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {relatedLinks?.length > 0 && (
-              <div className="mx-auto mt-12 max-w-2xl text-center sm:mt-14">
-                <h2 className="font-heading text-lg font-bold text-deep-blue sm:text-xl">
-                  {relatedLinksTitle}
-                </h2>
-                <div className="mt-5 flex flex-wrap justify-center gap-2.5">
-                  {relatedLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-warm-orange/40 hover:text-warm-orange"
-                    >
-                      {link.label}
-                    </Link>
+                    </Reveal>
                   ))}
                 </div>
               </div>
-            )}
-
-            {showFooterCtas && (
-              <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:mt-14 sm:flex-row">
-                <Button asChild size="lg" className="h-12 rounded-xl px-8">
-                  <Link href={footerPrimaryHref}>
-                    {footerPrimaryLabel}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="h-12 rounded-xl px-8">
-                  <Link href="/blogs">Bekijk gidsen</Link>
-                </Button>
-              </div>
-            )}
+            ))}
           </div>
-        </section>
+
+          {relatedLinks?.length > 0 && (
+            <div className="mt-20 grid gap-6 border-t border-ink/10 pt-10 sm:mt-24 md:grid-cols-[14rem_1fr] md:gap-10">
+              <h2 className="font-display text-2xl font-normal tracking-[-0.02em] text-ink">
+                {relatedLinksTitle}
+              </h2>
+              <div className="flex flex-wrap gap-2.5">
+                {relatedLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      'group inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white px-4 py-2 text-sm text-ink-700 transition-colors hover:border-ink/30 hover:text-ink',
+                      focusRing
+                    )}
+                  >
+                    {link.label}
+                    <ArrowRight
+                      className="h-3.5 w-3.5 text-ember transition-transform duration-300 group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {showFooterCtas && (
+            <div className="mt-16 flex flex-col gap-3 border-t border-ink/10 pt-10 sm:flex-row">
+              <Link href={footerPrimaryHref} className={btn.primary}>
+                {footerPrimaryLabel}
+                <ArrowIcon />
+              </Link>
+              <Link href="/blogs" className={btn.secondary}>
+                Bekijk gidsen
+              </Link>
+            </div>
+          )}
+        </LandingSection>
       )}
     </div>
   );

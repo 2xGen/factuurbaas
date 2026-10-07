@@ -7,31 +7,37 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { ShieldCheck, Crown } from 'lucide-react';
 
-const ADMIN_PASSWORD = "L@coL@co"; 
-
 const AdminLoginPage = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem('isAdminAuthenticated', 'true');
-      sessionStorage.setItem('adminPassword', password);
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ password }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(body.error === 'Unauthorized' ? 'Ongeldig wachtwoord.' : body.error || 'Login mislukt');
+      }
       toast({
-        title: "Admin Login Succesvol",
-        description: "Welkom bij het FactuurBaas Admin Dashboard.",
+        title: 'Admin Login Succesvol',
+        description: 'Welkom bij het FactuurBaas Admin Dashboard.',
       });
       router.push('/admin-dashboard');
-    } else {
+    } catch (err) {
       toast({
-        title: "Login Mislukt",
-        description: "Ongeldig wachtwoord. Probeer het opnieuw.",
-        variant: "destructive",
+        title: 'Login Mislukt',
+        description: err.message || 'Ongeldig wachtwoord. Probeer het opnieuw.',
+        variant: 'destructive',
       });
       setIsLoading(false);
     }
@@ -67,6 +73,7 @@ const AdminLoginPage = () => {
                 id="admin-password"
                 name="password"
                 type="password"
+                autoComplete="current-password"
                 required
                 className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-slate-500 bg-slate-800 placeholder-slate-400 text-white focus:outline-none focus:ring-2 focus:ring-warm-orange focus:border-warm-orange focus:z-10 sm:text-sm"
                 placeholder="Admin Wachtwoord"
@@ -78,10 +85,10 @@ const AdminLoginPage = () => {
           </div>
 
           <div>
-            <Button 
-              type="submit" 
-              variant="default" 
-              size="lg" 
+            <Button
+              type="submit"
+              variant="default"
+              size="lg"
               className="w-full py-3 text-base bg-warm-orange hover:bg-orange-600 text-white group"
               disabled={isLoading}
             >

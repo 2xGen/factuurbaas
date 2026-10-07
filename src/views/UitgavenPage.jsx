@@ -21,6 +21,7 @@ import {
   sumExpensesForMonth,
   upsertExpense,
 } from '@/lib/expensePersistence';
+import { consumeMoneyPrefill, peekMoneyPrefill } from '@/lib/moneyPrefill';
 
 function formatDate(iso) {
   if (!iso) return '—';
@@ -40,6 +41,7 @@ export default function UitgavenPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingExpense, setEditingExpense] = useState(null);
+  const [prefillExpense, setPrefillExpense] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
 
@@ -70,6 +72,16 @@ export default function UitgavenPage() {
     else setIsLoading(false);
   }, [user, authLoading, loadExpenses]);
 
+  useEffect(() => {
+    if (!user?.id) return;
+    if (peekMoneyPrefill()?.kind !== 'expense') return;
+    const prefill = consumeMoneyPrefill();
+    if (prefill?.kind !== 'expense') return;
+    setPrefillExpense(prefill);
+    setEditingExpense(null);
+    setDialogOpen(true);
+  }, [user?.id]);
+
   const monthTotals = useMemo(() => sumExpensesForMonth(expenses), [expenses]);
 
   const filtered = useMemo(() => {
@@ -84,6 +96,7 @@ export default function UitgavenPage() {
 
   const openCreate = () => {
     setEditingExpense(null);
+    setPrefillExpense(null);
     setDialogOpen(true);
   };
 
@@ -110,6 +123,7 @@ export default function UitgavenPage() {
       });
       setDialogOpen(false);
       setEditingExpense(null);
+      setPrefillExpense(null);
       const count = savedList.length;
       toast({
         title: editingExpense?.id
@@ -328,9 +342,10 @@ export default function UitgavenPage() {
         onClose={() => {
           setDialogOpen(false);
           setEditingExpense(null);
+          setPrefillExpense(null);
         }}
         onSave={handleSave}
-        initialExpense={editingExpense}
+        initialExpense={editingExpense || prefillExpense}
         isSaving={isSaving}
       />
     </div>

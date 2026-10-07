@@ -22,6 +22,8 @@ import {
   fetchUserClients,
   upsertClient,
 } from '@/lib/clientPersistence';
+import { fetchUserInvoices } from '@/lib/invoicePersistence';
+import { formatAveragePaymentDays, getClientPaymentStats } from '@/lib/paymentTerms';
 
 export default function KlantenPage() {
   const router = useRouter();
@@ -29,6 +31,7 @@ export default function KlantenPage() {
   const { user, loading: authLoading } = useAuth();
 
   const [clients, setClients] = useState([]);
+  const [invoices, setInvoices] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -43,8 +46,12 @@ export default function KlantenPage() {
     }
     setIsLoading(true);
     try {
-      const data = await fetchUserClients(supabase, user.id);
-      setClients(data);
+      const [clientList, invoiceList] = await Promise.all([
+        fetchUserClients(supabase, user.id),
+        fetchUserInvoices(supabase, user.id).catch(() => []),
+      ]);
+      setClients(clientList);
+      setInvoices(invoiceList);
     } catch (error) {
       toast({
         title: 'Fout bij laden klanten',
@@ -52,6 +59,7 @@ export default function KlantenPage() {
         variant: 'destructive',
       });
       setClients([]);
+      setInvoices([]);
     } finally {
       setIsLoading(false);
     }
@@ -214,11 +222,14 @@ export default function KlantenPage() {
                       <th className="px-4 py-3 font-medium">Klant</th>
                       <th className="px-4 py-3 font-medium">Contact</th>
                       <th className="px-4 py-3 font-medium">Email</th>
+                      <th className="px-4 py-3 font-medium">Betaalt in</th>
                       <th className="px-4 py-3 font-medium text-right">Acties</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filtered.map((client) => (
+                    {filtered.map((client) => {
+                      const payStats = getClientPaymentStats(invoices, client);
+                      return (
                       <tr
                         key={client.id}
                         className="border-b border-slate-50 last:border-0 hover:bg-slate-50/80"
@@ -233,6 +244,20 @@ export default function KlantenPage() {
                           {client.phone || '—'}
                         </td>
                         <td className="px-4 py-3.5 text-slate-600">{client.email || '—'}</td>
+                        <td className="px-4 py-3.5 text-slate-600">
+                          {payStats ? (
+                            <>
+                              <p className="font-medium text-deep-blue">
+                                {formatAveragePaymentDays(payStats)}
+                              </p>
+                              <p className="text-xs text-slate-400">
+                                {payStats.count === 1 ? '1 factuur' : `${payStats.count} facturen`}
+                              </p>
+                            </>
+                          ) : (
+                            '—'
+                          )}
+                        </td>
                         <td className="px-4 py-3.5 text-right">
                           <RowActionsMenu
                             items={[
@@ -266,7 +291,8 @@ export default function KlantenPage() {
                           />
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

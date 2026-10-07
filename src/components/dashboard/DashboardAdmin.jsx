@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { Clock, FilePlus2, FileText, Plus, UserPlus } from 'lucide-react';
+import { Clock, FilePlus2, FileText, Plus, UserPlus, Wallet } from 'lucide-react';
 
 const ACTIONS = [
   { href: '/create-invoice', label: 'Factuur', icon: FilePlus2 },
   { href: '/offertes', label: 'Offerte', icon: FileText },
+  { href: '/inkomsten', label: 'Inkomst', icon: Wallet },
   { href: '/uitgaven', label: 'Uitgave', icon: Plus },
   { href: '/uren', label: 'Uren', icon: Clock },
   { href: '/klanten', label: 'Klant', icon: UserPlus },
@@ -17,7 +18,7 @@ export default function DashboardAdmin() {
       <div className="mb-3">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Snel toevoegen</p>
       </div>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5 sm:gap-3">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6 sm:gap-3">
         {ACTIONS.map((action) => {
           const Icon = action.icon;
           return (

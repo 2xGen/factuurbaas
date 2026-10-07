@@ -1,71 +1,57 @@
 'use client';
-import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { FileText, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+
+import React from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Reveal } from '@/components/landing/page/motion';
 
 const CallToActionSection = () => {
   return (
-    <motion.section 
-      className="py-16 sm:py-20 bg-deep-blue text-white relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="ctaGrid" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M100 0 L0 0 0 100" fill="none" stroke="rgba(128,193,255,0.5)" strokeWidth="0.3"/>
-              <circle cx="50" cy="50" r="1" fill="rgba(128,193,255,0.3)"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#ctaGrid)" />
-        </svg>
-      </div>
-       <motion.div
-        className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-sky-500/20 to-transparent opacity-50 animate-pulse-slow pointer-events-none"
-        initial={{ x: "-100%" }}
-        animate={{ x: "100%" }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-      />
+    <section className="bg-paper px-3 py-3 sm:px-6 sm:py-6">
+      <Reveal
+        y={24}
+        amount={0.3}
+        className="grain-light relative isolate mx-auto max-w-[88rem] overflow-hidden rounded-[1.75rem] bg-ink-950 px-6 py-20 text-center text-white sm:rounded-[2.25rem] sm:px-10 sm:py-28 lg:py-32"
+      >
+        <div className="bg-ledger-dark mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
+        <div
+          className="pointer-events-none absolute -bottom-40 left-1/2 -z-10 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(210,96,26,0.28),transparent_62%)]"
+          aria-hidden
+        />
+        <img
+          src="/crown-favicon.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-10 -top-10 -z-10 h-72 w-72 rotate-12 opacity-[0.04] brightness-0 invert"
+        />
 
-
-      <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity:0, y:20 }}
-          whileInView={{ opacity:1, y:0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Zap className="w-12 h-12 text-warm-orange mx-auto mb-4 drop-shadow-lg" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-4">
-            Klaar om je factuur te maken?
-          </h2>
-          <p className="text-base sm:text-lg text-blue-200 mb-8 max-w-xl mx-auto">
-            Gratis, zonder account. Download direct als PDF en stuur hem naar je klant.
-          </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity:0, scale:0.9 }}
-          whileInView={{ opacity:1, scale:1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <Link href="/create-invoice">
-            <Button 
-              size="xl" 
-              variant="secondary" 
-              className="text-secondary-foreground text-md sm:text-lg px-10 sm:px-12 py-5 sm:py-6 rounded-xl transform hover:scale-105 transition-transform duration-300 ease-out group"
-            >
-              Maak gratis factuur <FileText className="ml-2 sm:ml-3 h-5 w-5 group-hover:rotate-3 transition-transform" />
-            </Button>
+        <img src="/crown-favicon.svg" alt="" aria-hidden className="mx-auto h-10 w-10" />
+        <h2 className="mx-auto mt-8 max-w-[18ch] font-display text-[2.5rem] font-normal leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4.25rem]">
+          Zie hoe je bedrijf <em className="text-ember-100">ervoor staat.</em>
+        </h2>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+          Houd inkomsten, uitgaven, facturen en offertes bij. Gratis en eenvoudig.
+        </p>
+        <div className="mt-10 flex flex-col items-center gap-5">
+          <Link
+            href="/register"
+            className="group inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-base font-medium text-ink transition-colors hover:bg-paper-100 sm:w-auto"
+          >
+            Maak een gratis account
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-        </motion.div>
-      </div>
-    </motion.section>
+          <p className="text-sm text-white/55">
+            Liever eerst een factuur maken?{' '}
+            <Link
+              href="/create-invoice"
+              className="font-medium text-white underline decoration-white/30 underline-offset-[5px] transition-colors hover:decoration-white"
+            >
+              Maak gratis een factuur
+            </Link>
+          </p>
+        </div>
+      </Reveal>
+    </section>
   );
 };
 

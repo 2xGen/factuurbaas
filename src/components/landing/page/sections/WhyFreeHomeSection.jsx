@@ -3,83 +3,78 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowUpRight } from 'lucide-react';
+import { Reveal, Stagger, staggerItem } from '@/components/landing/page/motion';
+
+const facts = [
+  {
+    title: 'Nederland',
+    text: 'Voor zzp’ers en kleine ondernemers, in het Nederlands.',
+  },
+  {
+    title: 'Jouw gegevens',
+    text: 'Accountgegevens staan in de EU. Alleen jij ziet jouw facturen. We verkopen ze niet.',
+    href: '/veiligheid',
+    link: 'Hoe we dat beveiligen',
+  },
+  {
+    title: 'Gratis factureren',
+    text: 'Een factuur maken en als PDF downloaden blijft gratis, zonder verplicht abonnement.',
+    href: '/waarom-gratis',
+    link: 'Waarom het gratis is',
+  },
+];
 
 export default function WhyFreeHomeSection() {
   return (
-    <section className="relative overflow-hidden bg-deep-blue text-white">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          background:
-            'radial-gradient(ellipse 70% 50% at 85% 0%, rgba(255,127,80,0.3), transparent 55%), radial-gradient(ellipse 40% 40% at 0% 100%, rgba(255,255,255,0.06), transparent 50%)',
-        }}
-        aria-hidden
-      />
+    <section className="relative bg-paper text-ink">
+      <div className="container mx-auto grid gap-14 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24 lg:py-32">
+        <Reveal className="lg:sticky lg:top-32 lg:self-start">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember">FactuurBaas.nl</p>
+          <h2 className="mt-5 max-w-[14ch] font-display text-[2.4rem] font-normal leading-[1.02] tracking-[-0.03em] sm:text-5xl lg:text-[3.4rem]">
+            Gemaakt voor <em className="text-ink-700">Nederlandse</em> ondernemers
+          </h2>
+          <img
+            src="/crown-favicon.svg"
+            alt=""
+            className="mt-10 hidden h-12 w-12 opacity-90 lg:block"
+            aria-hidden
+          />
+        </Reveal>
 
-      <div className="container relative z-10 mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-warm-orange">
-              Transparantie
-            </p>
-            <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight sm:text-3xl lg:text-[2.125rem]">
-              Waarom is FactuurBaas gratis?
-            </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Maak professionele facturen zonder maandelijkse kosten. Ondernemen is al duur genoeg —
-              wij houden factureren toegankelijk.
-            </p>
-            <ul className="mt-6 space-y-2.5 text-sm text-white/80 sm:text-base">
-              <li className="flex gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-warm-orange" />
-                Geen verplicht abonnement om te factureren
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-warm-orange" />
-                Jij bent onze gebruiker, niet ons product
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-warm-orange" />
-                Geen verkoop van factuur- of bedrijfsgegevens
-              </li>
-            </ul>
-            <div className="mt-8">
-              <Button
-                asChild
-                size="lg"
-                className="h-12 rounded-xl bg-warm-orange px-6 font-semibold text-white hover:bg-orange-600"
-              >
-                <Link href="/waarom-gratis">
-                  Lees waarom het gratis is <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.1 }}
-            className="rounded-2xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm sm:p-8"
-          >
-            <Shield className="mb-4 h-7 w-7 text-warm-orange" strokeWidth={1.75} />
-            <p className="font-heading text-xl font-semibold leading-snug sm:text-2xl">
-              Jij bent onze gebruiker, niet ons product.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
-              Wij verdienen niet door jouw facturen of bedrijfsgegevens te verkopen. De kern van
-              factureren blijft toegankelijk.
-            </p>
-          </motion.div>
-        </div>
+        <Stagger as="dl" className="border-t border-ink/15">
+          {facts.map((fact, index) => (
+            <motion.div
+              key={fact.title}
+              variants={staggerItem}
+              className="relative border-b border-ink/15 py-8 pl-16 sm:py-10 sm:pl-[5.5rem]"
+            >
+              <dt className="font-display text-2xl leading-tight sm:text-[1.9rem]">
+                <span
+                  className="absolute left-0 top-9 font-display text-2xl italic leading-none text-ember sm:top-11 sm:text-3xl"
+                  aria-hidden
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {fact.title}
+              </dt>
+              <dd className="mt-3 max-w-lg text-base leading-relaxed text-ink-500 sm:text-[1.05rem]">
+                {fact.text}
+              </dd>
+              {fact.href && (
+                <dd className="mt-4">
+                  <Link
+                    href={fact.href}
+                    className="group/link inline-flex items-center gap-1 text-sm font-medium text-ink underline decoration-ink/20 underline-offset-[6px] transition-colors hover:decoration-ember"
+                  >
+                    {fact.link}
+                    <ArrowUpRight className="h-3.5 w-3.5 text-ember transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+                  </Link>
+                </dd>
+              )}
+            </motion.div>
+          ))}
+        </Stagger>
       </div>
     </section>
   );

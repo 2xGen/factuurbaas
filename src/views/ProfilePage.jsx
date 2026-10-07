@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
-import { ArrowLeft, UserCircle, Building, Camera, Save, LogOut, Loader2, Trash2, Briefcase } from 'lucide-react';
+import { ArrowLeft, UserCircle, Building, Camera, Save, LogOut, Loader2, Trash2, Briefcase, Clock, Download } from 'lucide-react';
 import ProfileSection from '@/components/profile/ProfileSection';
 import PersonalDetailsForm from '@/components/profile/formSections/PersonalDetailsForm';
 import CompanyDetailsForm from '@/components/profile/formSections/CompanyDetailsForm';
@@ -25,7 +25,10 @@ import {
 import PrivacyConsentCheckbox from '@/components/auth/PrivacyConsentCheckbox';
 import NewsletterOptInCheckbox from '@/components/auth/NewsletterOptInCheckbox';
 import OnboardingFields from '@/components/onboarding/OnboardingFields';
+import WorkDetailsForm from '@/components/profile/formSections/WorkDetailsForm';
+import { patchBusinessSettings } from '@/lib/businessSettings';
 import { PRIVACY_POLICY_VERSION } from '@/lib/privacyConsent';
+import { buildAccountExportPayload, downloadAccountExportJson } from '@/lib/accountExport';
 import {
   emptyOnboardingForm,
   onboardingFormToDbFields,
@@ -57,11 +60,19 @@ const ProfilePage = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoadingPage, setIsLoadingPage] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
   const [privacyAcceptedAt, setPrivacyAcceptedAt] = useState(null);
   const [privacyChecked, setPrivacyChecked] = useState(false);
   const [newsletterOptIn, setNewsletterOptIn] = useState(false);
   const [newsletterOptInAt, setNewsletterOptInAt] = useState(null);
   const [onboardingForm, setOnboardingForm] = useState(emptyOnboardingForm());
+  const [workForm, setWorkForm] = useState({
+    hourlyRate: '',
+    hoursPerWeek: '',
+    weeksPerYear: '46',
+    desiredNetMonthly: '',
+    defaultPaymentTermDays: '14',
+  });
 
   const loadProfile = useCallback(async () => {
     if (!user) {
@@ -92,6 +103,14 @@ const ProfilePage = () => {
       setNewsletterOptIn(Boolean(data?.newsletter_opt_in));
       setNewsletterOptInAt(data?.newsletter_opt_in_at || null);
       setOnboardingForm(profileToOnboardingForm(data));
+      setWorkForm({
+        hourlyRate: data?.hourly_rate == null ? '' : String(data.hourly_rate),
+        hoursPerWeek: data?.hours_per_week == null ? '' : String(data.hours_per_week),
+        weeksPerYear: data?.weeks_per_year == null ? '46' : String(data.weeks_per_year),
+        desiredNetMonthly: data?.desired_net_monthly == null ? '' : String(data.desired_net_monthly),
+        defaultPaymentTermDays:
+          data?.default_payment_term_days == null ? '14' : String(data.default_payment_term_days),
+      });
     } catch (err) {
       toast({
         title: 'Profiel laden mislukt',
@@ -187,6 +206,18 @@ const ProfilePage = () => {
       const { error } = await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
       if (error) throw error;
 
+      try {
+        await patchBusinessSettings(supabase, user.id, {
+          hourlyRate: workForm.hourlyRate,
+          hoursPerWeek: workForm.hoursPerWeek,
+          weeksPerYear: workForm.weeksPerYear,
+          desiredNetMonthly: workForm.desiredNetMonthly,
+          defaultPaymentTermDays: workForm.defaultPaymentTermDays,
+        });
+      } catch {
+        // Columns may not exist until ADD_BUSINESS_SETTINGS.sql is run.
+      }
+
       const preview = await resolveLogoForDisplay(supabase, logoPath);
       setFormData((prev) => ({ ...prev, logo: logoPath }));
       setLogoPreview(preview);
@@ -212,9 +243,30 @@ const ProfilePage = () => {
     router.push('/');
   };
 
+  const onExportAccount = async () => {
+    if (!user) return;
+    setIsExporting(true);
+    try {
+      const payload = await buildAccountExportPayload(supabase, user);
+      downloadAccountExportJson(payload);
+      toast({
+        title: 'Export klaar',
+        description: 'Je accountgegevens zijn gedownload als JSON.',
+      });
+    } catch (err) {
+      toast({
+        title: 'Export mislukt',
+        description: err.message || 'Kon je gegevens niet exporteren.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   const onDeleteAccount = async () => {
     const confirmed = window.confirm(
-      'Weet je zeker dat je je account en alle opgeslagen facturen permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt.'
+      'Weet je zeker dat je je account en alle opgeslagen gegevens (facturen, offertes, klanten, inkomsten, uitgaven, uren, profiel en logo) permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt.'
     );
     if (!confirmed) return;
 
@@ -305,6 +357,13 @@ const ProfilePage = () => {
             />
           </ProfileSection>
 
+          <ProfileSection title="Jouw werk" icon={<Clock className="h-6 w-6 text-deep-blue" />}>
+            <p className="mb-4 text-sm text-slate-500">
+              Stabiele cijfers voor facturen en tools. Calculators kunnen deze velden vullen.
+            </p>
+            <WorkDetailsForm form={workForm} onChange={setWorkForm} disabled={isSaving} />
+          </ProfileSection>
+
           <ProfileSection
             title="Over jouw onderneming"
             icon={<Briefcase className="h-6 w-6 text-deep-blue" />}
@@ -361,17 +420,41 @@ const ProfilePage = () => {
           </div>
         </form>
 
-        <div className="mt-10 rounded-xl border border-red-200 bg-red-50 p-5">
+        <div className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h2 className="font-semibold text-deep-blue">Je gegevens exporteren</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            Download een JSON-bestand met je profiel, facturen, offertes, klanten, inkomsten, uitgaven,
+            uren en bedrijfsinstellingen (uurtarief, jaardoel). Facturen en offertes kun je ook als CSV
+            downloaden op hun eigen pagina’s.
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-4"
+            onClick={onExportAccount}
+            disabled={isExporting || isSaving || isDeleting}
+          >
+            {isExporting ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Download className="mr-2 h-4 w-4" />
+            )}
+            Accountgegevens downloaden
+          </Button>
+        </div>
+
+        <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-5">
           <h2 className="font-semibold text-red-800">Account verwijderen</h2>
           <p className="mt-2 text-sm text-red-700">
-            Verwijdert permanent je account, opgeslagen facturen en logo (AVG recht op vergetelheid).
+            Verwijdert permanent je account, facturen, offertes, klanten, inkomsten, uitgaven, uren,
+            profiel en logo (AVG recht op vergetelheid).
           </p>
           <Button
             type="button"
             variant="destructive"
             className="mt-4"
             onClick={onDeleteAccount}
-            disabled={isDeleting || isSaving}
+            disabled={isDeleting || isSaving || isExporting}
           >
             {isDeleting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Trash2 className="mr-2 h-4 w-4" />}
             Account en gegevens wissen

@@ -82,12 +82,28 @@ export function categoryLabel(id) {
   return EXPENSE_CATEGORIES.find((c) => c.id === id)?.label || id || 'Overig';
 }
 
+function parseMoneyAmount(value) {
+  const n = Number(String(value ?? '').replace(/\s/g, '').replace(',', '.'));
+  return Number.isFinite(n) ? n : 0;
+}
+
 export function computeVatBreakdown(amountExcl, vatRate) {
-  const excl = Math.round((Number(amountExcl) || 0) * 100) / 100;
+  const excl = Math.round(parseMoneyAmount(amountExcl) * 100) / 100;
   const rate = Number(vatRate);
   const safeRate = Number.isFinite(rate) ? rate : 21;
   const vat = Math.round(excl * (safeRate / 100) * 100) / 100;
   const incl = Math.round((excl + vat) * 100) / 100;
+  return { amountExcl: excl, vatRate: safeRate, vatAmount: vat, amountIncl: incl };
+}
+
+/** Pin/contant: je vult incl. in, btw en excl. worden eruit gehaald. */
+export function computeVatBreakdownFromIncl(amountIncl, vatRate) {
+  const incl = Math.round(parseMoneyAmount(amountIncl) * 100) / 100;
+  const rate = Number(vatRate);
+  const safeRate = Number.isFinite(rate) ? rate : 21;
+  const excl =
+    safeRate === 0 ? incl : Math.round((incl / (1 + safeRate / 100)) * 100) / 100;
+  const vat = Math.round((incl - excl) * 100) / 100;
   return { amountExcl: excl, vatRate: safeRate, vatAmount: vat, amountIncl: incl };
 }
 

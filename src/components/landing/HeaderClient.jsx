@@ -19,6 +19,8 @@ import {
   Receipt,
   UserCircle,
   Users,
+  Wallet,
+  Wrench,
   X,
 } from 'lucide-react';
 
@@ -29,22 +31,6 @@ const guestNavLinks = [
   { name: 'Gidsen', href: '/blogs' },
   { name: 'Waarom gratis', href: '/waarom-gratis' },
 ];
-
-function NavLink({ href, children, active }) {
-  return (
-    <Link
-      href={href}
-      className={`text-sm font-medium transition-colors ${
-        active ? 'text-deep-blue' : 'text-slate-600 hover:text-deep-blue'
-      }`}
-    >
-      {children}
-      {active && (
-        <span className="mt-1 block h-0.5 rounded-full bg-warm-orange" aria-hidden />
-      )}
-    </Link>
-  );
-}
 
 export default function HeaderClient() {
   const [isOpen, setIsOpen] = useState(false);
@@ -111,16 +97,25 @@ export default function HeaderClient() {
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         isLoggedIn
           ? `border-slate-200/80 bg-white/95 backdrop-blur-md ${isScrolled ? 'shadow-sm' : ''}`
-          : `border-slate-200 bg-white ${isScrolled ? 'shadow-md' : 'shadow-sm'}`
+          : `bg-white/85 backdrop-blur-md ${
+              isScrolled
+                ? 'border-ink/10 shadow-[0_8px_24px_-16px_rgba(10,42,77,0.25)]'
+                : 'border-ink/[0.06]'
+            }`
       }`}
     >
       <ShareFactuurBaas variant="banner" />
 
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:h-18 sm:px-6 lg:h-20">
-        <Link href={homeHref} className="flex items-center gap-2.5">
-          <img src="/crown-favicon.svg" alt="FactuurBaas" className="h-7 w-7 sm:h-8 sm:w-8" />
-          <span className="font-heading text-xl font-bold tracking-tight text-deep-blue sm:text-2xl">
-            FactuurBaas
+        <Link href={homeHref} className="flex min-w-0 items-center gap-2.5">
+          <img src="/crown-favicon.svg" alt="" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
+          <span className="min-w-0 leading-none">
+            <span className="block font-heading text-lg font-semibold tracking-[-0.03em] text-deep-blue sm:text-xl">
+              FactuurBaas
+            </span>
+            <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
+              Grip op je bedrijf
+            </span>
           </span>
         </Link>
 
@@ -134,43 +129,14 @@ export default function HeaderClient() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`font-medium transition-colors hover:text-warm-orange ${
-                    isActive ? 'font-bold text-warm-orange' : 'text-slate-700'
+                  className={`text-[15px] transition-colors hover:text-ink ${
+                    isActive ? 'font-medium text-ink' : 'text-ink-500'
                   }`}
                 >
                   {link.name}
                 </Link>
               );
             })}
-          </nav>
-        )}
-
-        {!loading && isLoggedIn && (
-          <nav className="hidden items-center gap-4 md:flex lg:gap-6">
-            <NavLink href="/dashboard" active={pathname.startsWith('/dashboard')}>
-              Dashboard
-            </NavLink>
-            <NavLink href="/facturen" active={pathname.startsWith('/facturen')}>
-              Facturen
-            </NavLink>
-            <NavLink href="/offertes" active={pathname.startsWith('/offertes')}>
-              Offertes
-            </NavLink>
-            <NavLink href="/uren" active={pathname.startsWith('/uren')}>
-              Uren
-            </NavLink>
-            <NavLink href="/uitgaven" active={pathname.startsWith('/uitgaven')}>
-              Uitgaven
-            </NavLink>
-            <NavLink href="/klanten" active={pathname.startsWith('/klanten')}>
-              Klanten
-            </NavLink>
-            <NavLink href="/baas-status" active={pathname.startsWith('/baas-status')}>
-              Baas status
-            </NavLink>
-            <NavLink href="/profile" active={pathname.startsWith('/profile')}>
-              Profiel
-            </NavLink>
           </nav>
         )}
 
@@ -190,9 +156,12 @@ export default function HeaderClient() {
           )}
 
           {!loading && !isLoggedIn && (
-            <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
-              <Link href="/login">Inloggen</Link>
-            </Button>
+            <Link
+              href="/login"
+              className="hidden rounded-full px-3 py-2 text-[15px] text-ink-500 transition-colors hover:text-ink md:inline-flex"
+            >
+              Inloggen
+            </Link>
           )}
 
           {showCreateCta && (
@@ -239,11 +208,13 @@ export default function HeaderClient() {
                   )}
                 </div>
               ) : (
-                <Button asChild>
-                  <Link href="/create-invoice">
-                    {createLabel} <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                <Link
+                  href="/create-invoice"
+                  className="group inline-flex h-10 items-center gap-2 rounded-full bg-ink px-5 text-sm font-medium text-white transition-colors hover:bg-ink-950"
+                >
+                  {createLabel}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
               )}
             </div>
           )}
@@ -272,7 +243,7 @@ export default function HeaderClient() {
                     className="rounded-lg px-3 py-3 text-base font-medium text-deep-blue hover:bg-slate-50"
                   >
                     <span className="inline-flex items-center gap-2">
-                      <LayoutDashboard className="h-4 w-4" /> Dashboard
+                      <LayoutDashboard className="h-4 w-4" /> Overzicht
                     </span>
                   </Link>
                   <Link
@@ -316,11 +287,27 @@ export default function HeaderClient() {
                     </span>
                   </Link>
                   <Link
+                    href="/inkomsten"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Wallet className="h-4 w-4" /> Inkomsten
+                    </span>
+                  </Link>
+                  <Link
                     href="/uitgaven"
                     className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
                   >
                     <span className="inline-flex items-center gap-2">
                       <Receipt className="h-4 w-4" /> Uitgaven
+                    </span>
+                  </Link>
+                  <Link
+                    href="/rekenen"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Wrench className="h-4 w-4" /> Tools
                     </span>
                   </Link>
                   <Link

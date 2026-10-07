@@ -1,12 +1,25 @@
 'use client';
 
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { Calculator, Copy, FileText, Receipt } from 'lucide-react';
+import { Copy, FileText, Receipt } from 'lucide-react';
+import {
+  AffixInput,
+  CalculatorPage,
+  FieldHint,
+  FieldLabel,
+  RelatedLink,
+  ResultActions,
+  ResultEmpty,
+  ResultHero,
+  ResultPanel,
+  ResultRow,
+  ResultRows,
+  ToolCard,
+  ToolGrid,
+  resultButton,
+} from '@/components/tools/calculatorUi';
 import {
   DEFAULT_INPUTS,
   WEEKS_PER_MONTH,
@@ -21,28 +34,24 @@ import {
 } from '@/lib/invoicePrefill';
 import { TOOL_LOG_TABLES } from '@/lib/toolUsageLog';
 import { useDebouncedCalculationLog } from '@/hooks/useDebouncedCalculationLog';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { supabase } from '@/lib/customSupabaseClient';
+import {
+  fetchBusinessSettings,
+  potentialAnnualRevenue,
+  saveRevenueGoalFromTool,
+} from '@/lib/businessSettings';
+import SaveToBusiness, { SaveBusinessButton } from '@/components/tools/SaveToBusiness';
 
 function MoneyInput({ id, label, hint, value, onChange, optional = false }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-slate-700">
+      <FieldLabel htmlFor={id}>
         {label}
-        {optional && <span className="font-normal text-slate-400"> (optioneel)</span>}
-      </label>
-      {hint && <p className="mb-2 text-xs text-slate-500">{hint}</p>}
-      <div className="relative">
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-          €
-        </span>
-        <Input
-          id={id}
-          type="text"
-          inputMode="decimal"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-12 pl-9 text-lg"
-        />
-      </div>
+        {optional && <span className="normal-case tracking-normal text-ink-400"> (optioneel)</span>}
+      </FieldLabel>
+      {hint && <FieldHint className="-mt-1 mb-2">{hint}</FieldHint>}
+      <AffixInput id={id} prefix="€" value={value} onChange={onChange} />
     </div>
   );
 }
@@ -50,12 +59,26 @@ function MoneyInput({ id, label, hint, value, onChange, optional = false }) {
 export default function UurtariefNaarInkomenCalculator() {
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useAuth();
+  const [weeksPerYear, setWeeksPerYear] = useState(46);
+  const [savingGoal, setSavingGoal] = useState(false);
 
   const [rateInput, setRateInput] = useState(String(DEFAULT_INPUTS.hourlyRate));
   const [hoursWeekInput, setHoursWeekInput] = useState(String(DEFAULT_INPUTS.hoursPerWeek));
   const [hoursMonthInput, setHoursMonthInput] = useState(String(DEFAULT_INPUTS.billableHoursPerMonth));
   const [hoursMonthTouched, setHoursMonthTouched] = useState(false);
   const [costsInput, setCostsInput] = useState(String(DEFAULT_INPUTS.monthlyCosts));
+
+  useEffect(() => {
+    if (!user?.id) return;
+    fetchBusinessSettings(supabase, user.id)
+      .then((s) => {
+        if (s.hourlyRate) setRateInput(String(s.hourlyRate));
+        if (s.hoursPerWeek) setHoursWeekInput(String(s.hoursPerWeek));
+        if (s.weeksPerYear) setWeeksPerYear(s.weeksPerYear);
+      })
+      .catch(() => {});
+  }, [user?.id]);
 
   useEffect(() => {
     if (hoursMonthTouched) return;
@@ -115,30 +138,52 @@ export default function UurtariefNaarInkomenCalculator() {
     router.push('/tools/offerte-maker/maken');
   }, [result, router]);
 
+  const annualFromProfile = potentialAnnualRevenue({
+    hourlyRate: parseAmount(rateInput),
+    hoursPerWeek: parseAmount(hoursWeekInput),
+    weeksPerYear,
+  });
+
+  const handleSaveGoal = useCallback(async () => {
+    if (!annualFromProfile || !user?.id) return;
+    setSavingGoal(true);
+    try {
+      await saveRevenueGoalFromTool(supabase, user.id, annualFromProfile, new Date().getFullYear());
+      toast({
+        title: 'Jaardoel gezet',
+        description: `${formatEuro(annualFromProfile)} is nu je omzetdoel.`,
+      });
+    } catch {
+      toast({
+        title: 'Opslaan mislukt',
+        description: 'Probeer het opnieuw of zet het doel op je overzicht.',
+        variant: 'destructive',
+      });
+    } finally {
+      setSavingGoal(false);
+    }
+  }, [annualFromProfile, user?.id, toast]);
+
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          Uurtarief naar inkomen
-        </h1>
-        <p className="mt-2 text-slate-600">
-          Bereken je maandelijkse omzet en geschatte winst op basis van je uurtarief.
-        </p>
-      </div>
-
-      <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
-        <div className="lg:col-span-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-              <Calculator className="h-5 w-5" />
-            </div>
-            <div>
-              <h2 className="font-heading text-lg font-bold text-deep-blue">Jouw gegevens</h2>
-              <p className="text-sm text-slate-500">Vul je uurtarief en werkuren in.</p>
-            </div>
-          </div>
-
-          <div className="space-y-5">
+    <CalculatorPage
+      breadcrumbLabel="Uurtarief naar inkomen"
+      title={
+        <>
+          Uurtarief naar <em>inkomen</em>
+        </>
+      }
+      lead={<p>Bereken je maandelijkse omzet en geschatte winst op basis van je uurtarief.</p>}
+    >
+      <ToolGrid>
+        <ToolCard
+          title="Jouw gegevens"
+          description={
+            user
+              ? 'Met jouw huidige uurtarief en uren. Pas aan als je een scenario wilt doorrekenen.'
+              : 'Vul je uurtarief en werkuren in.'
+          }
+        >
+          <div className="space-y-6">
             <MoneyInput
               id="hourly-rate"
               label="Uurtarief"
@@ -146,111 +191,113 @@ export default function UurtariefNaarInkomenCalculator() {
               onChange={setRateInput}
             />
             <div>
-              <label htmlFor="hours-week" className="mb-2 block text-sm font-medium text-slate-700">
-                Aantal uren per week
-              </label>
-              <Input
-                id="hours-week"
-                type="text"
-                inputMode="decimal"
-                value={hoursWeekInput}
-                onChange={(e) => setHoursWeekInput(e.target.value)}
-                className="h-12 text-lg"
-              />
-              <p className="mt-2 text-xs text-slate-500">
+              <FieldLabel htmlFor="hours-week">Aantal uren per week</FieldLabel>
+              <AffixInput id="hours-week" value={hoursWeekInput} onChange={setHoursWeekInput} />
+              <FieldHint className="mt-2 tabular">
                 Bij {hoursWeekInput || '…'} uur per week × {WEEKS_PER_MONTH} weken ={' '}
                 {monthlyHoursFromWeekly(hoursWeekInput) ?? '…'} uur per maand.
-              </p>
+              </FieldHint>
             </div>
             <div>
-              <label htmlFor="hours-month" className="mb-2 block text-sm font-medium text-slate-700">
-                Factureerbare uren per maand
-              </label>
-              <Input
+              <FieldLabel htmlFor="hours-month">Factureerbare uren per maand</FieldLabel>
+              <AffixInput
                 id="hours-month"
-                type="text"
-                inputMode="decimal"
                 value={hoursMonthInput}
-                onChange={(e) => {
+                onChange={(value) => {
                   setHoursMonthTouched(true);
-                  setHoursMonthInput(e.target.value);
+                  setHoursMonthInput(value);
                 }}
-                className="h-12 text-lg"
               />
             </div>
-            <MoneyInput
-              id="monthly-costs"
-              label="Zakelijke kosten"
-              hint="Per maand"
-              value={costsInput}
-              onChange={setCostsInput}
-              optional
-            />
+            <div className="border-t border-dashed border-ink/10 pt-6">
+              <MoneyInput
+                id="monthly-costs"
+                label="Zakelijke kosten"
+                hint="Per maand"
+                value={costsInput}
+                onChange={setCostsInput}
+                optional
+              />
+            </div>
           </div>
-        </div>
+        </ToolCard>
 
-        <div className="lg:col-span-2">
-          <div className="sticky top-[calc(var(--header-height,6rem)+1.5rem)] rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="font-heading text-lg font-bold text-deep-blue">Resultaat</h2>
-
+        <div className="lg:sticky lg:top-[calc(var(--header-height,5rem)+1.5rem)]">
+          <ResultPanel
+            footnote={
+              <p>Omzet is wat je factureert. Geschatte winst is omzet minus kosten, vóór belasting.</p>
+            }
+          >
             {result ? (
-              <div className="mt-5 space-y-4">
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Maandelijkse omzet</span>
-                  <span className="font-semibold text-slate-900">
-                    {formatEuro(result.monthlyRevenue)}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-400">
-                  {formatEuro(result.hourlyRate)} × {result.billableHoursPerMonth} uur
-                </p>
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Zakelijke kosten</span>
-                  <span className="font-semibold text-red-600">
-                    − {formatEuro(result.monthlyCosts)}
-                  </span>
-                </div>
-                <div className="rounded-xl bg-blue-50 px-4 py-5 text-center">
-                  <p className="text-sm font-medium text-blue-800">Geschatte winst</p>
-                  <p className="mt-1 font-heading text-3xl font-bold text-deep-blue">
-                    {formatEuro(result.estimatedProfit)}
-                  </p>
-                  <p className="text-sm text-blue-700">per maand (vóór belasting)</p>
-                </div>
+              <>
+                <ResultHero
+                  label="Geschatte winst"
+                  value={result.estimatedProfit}
+                  format={formatEuro}
+                  sub="per maand (vóór belasting)"
+                />
+                <ResultRows>
+                  <ResultRow
+                    label="Maandelijkse omzet"
+                    detail={`${formatEuro(result.hourlyRate)} × ${result.billableHoursPerMonth} uur`}
+                    value={result.monthlyRevenue}
+                    format={formatEuro}
+                  />
+                  <ResultRow
+                    label="Zakelijke kosten"
+                    value={result.monthlyCosts}
+                    format={(v) => `− ${formatEuro(v)}`}
+                    valueClassName="text-rose-300"
+                  />
+                </ResultRows>
 
-                <div className="flex flex-col gap-2 pt-2">
-                  <Button type="button" variant="outline" onClick={handleCopy} className="w-full">
-                    <Copy className="mr-2 h-4 w-4" />
-                    Kopieer resultaat
-                  </Button>
-                  <Button type="button" variant="outline" onClick={handleMakeQuote} className="w-full">
-                    <Receipt className="mr-2 h-4 w-4" />
-                    Maak offerte
-                  </Button>
-                  <Button type="button" onClick={handleMakeInvoice} className="w-full">
-                    <FileText className="mr-2 h-4 w-4" />
+                <ResultActions>
+                  {annualFromProfile ? (
+                    <div className="rounded-xl bg-white/[0.05] px-4 py-3 text-sm text-white/80 ring-1 ring-inset ring-white/10">
+                      <p className="text-xs text-white/50">
+                        {formatEuro(parseAmount(rateInput) || 0)} × {hoursWeekInput} uur × {weeksPerYear} weken
+                      </p>
+                      <p className="mt-1 font-medium text-white">
+                        Potentiële jaaromzet {formatEuro(annualFromProfile)}
+                      </p>
+                    </div>
+                  ) : null}
+                  <SaveToBusiness hint="dit als jaardoel te zetten">
+                    <SaveBusinessButton onClick={handleSaveGoal} disabled={savingGoal || !annualFromProfile}>
+                      Gebruik als basis voor mijn omzetdoel
+                    </SaveBusinessButton>
+                  </SaveToBusiness>
+                  <button type="button" onClick={handleMakeInvoice} className={resultButton.primary}>
+                    <FileText className="h-4 w-4" aria-hidden />
                     Maak factuur
-                  </Button>
-                </div>
-              </div>
+                  </button>
+                  <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                    <button type="button" onClick={handleMakeQuote} className={resultButton.secondary}>
+                      <Receipt className="h-4 w-4" aria-hidden />
+                      Maak offerte
+                    </button>
+                    <button type="button" onClick={handleCopy} className={resultButton.secondary}>
+                      <Copy className="h-4 w-4" aria-hidden />
+                      Kopieer resultaat
+                    </button>
+                  </div>
+                </ResultActions>
+              </>
             ) : (
-              <p className="mt-5 text-sm text-slate-500">
+              <ResultEmpty>
                 Vul je uurtarief en factureerbare uren in om je inkomen te berekenen.
-              </p>
+              </ResultEmpty>
             )}
-
-            <p className="mt-5 text-xs leading-relaxed text-slate-500">
-              Omzet is wat je factureert. Geschatte winst is omzet minus kosten, vóór belasting.
-            </p>
-          </div>
+          </ResultPanel>
         </div>
-      </div>
+      </ToolGrid>
 
-      <p className="text-center text-sm text-slate-500">
-        <Link href="/tools/uurtarief-naar-inkomen" className="text-warm-orange hover:underline">
-          ← Meer uitleg over uurtarief naar inkomen
-        </Link>
-      </p>
-    </div>
+      <RelatedLink href="/tools/uurtarief-naar-inkomen">
+        <span className="text-ember" aria-hidden>
+          ←
+        </span>{' '}
+        Meer uitleg over uurtarief naar inkomen
+      </RelatedLink>
+    </CalculatorPage>
   );
 }

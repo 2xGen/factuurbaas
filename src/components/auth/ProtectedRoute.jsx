@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import AppShell from '@/components/app/AppShell';
 
 const ProtectedRoute = ({ children }) => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const ProtectedRoute = ({ children }) => {
   if (!user) {
     return null;
   }
-  return children;
+  return <AppShell>{children}</AppShell>;
 };
 
 export default ProtectedRoute;

@@ -2,16 +2,29 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import {
-  Calculator,
-  Copy,
-  Download,
-  FileText,
-} from 'lucide-react';
+import { Copy, Download, FileText, Receipt, Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { DisplayHeading } from '@/components/site/editorial';
+import { Stagger, staggerItem } from '@/components/landing/page/motion';
+import {
+  AffixInput,
+  CalculatorPage,
+  FieldLabel,
+  ResultActions,
+  ResultEmpty,
+  ResultHero,
+  ResultPanel,
+  ResultRow,
+  ResultRows,
+  Segmented,
+  ToolCard,
+  ToolGrid,
+  fieldInputClass,
+  resultButton,
+} from '@/components/tools/calculatorUi';
 import {
   BTW_EXAMPLES,
   BTW_PRESETS,
@@ -21,6 +34,7 @@ import {
   parseAmount,
 } from '@/lib/btwCalculator';
 import { saveInvoicePrefill } from '@/lib/invoicePrefill';
+import { saveMoneyPrefill } from '@/lib/moneyPrefill';
 import { TOOL_LOG_TABLES } from '@/lib/toolUsageLog';
 import { useDebouncedCalculationLog } from '@/hooks/useDebouncedCalculationLog';
 
@@ -64,21 +78,10 @@ function downloadResultPdf(result, mode) {
   });
 }
 
-function ResultRow({ label, value, highlight = false }) {
-  return (
-    <div
-      className={cn(
-        'flex items-center justify-between gap-4 py-2.5',
-        highlight && 'border-t border-slate-200 pt-3 font-bold text-deep-blue'
-      )}
-    >
-      <span className={highlight ? 'text-deep-blue' : 'text-slate-600'}>{label}</span>
-      <span className={highlight ? 'text-lg text-deep-blue' : 'font-medium text-slate-900'}>
-        {value}
-      </span>
-    </div>
-  );
-}
+const MODE_OPTIONS = [
+  { value: 'add', label: 'BTW toevoegen aan een bedrag' },
+  { value: 'remove', label: 'BTW uit een bedrag halen' },
+];
 
 export default function BtwCalculator() {
   const router = useRouter();
@@ -131,6 +134,21 @@ export default function BtwCalculator() {
     router.push('/create-invoice');
   }, [result, router]);
 
+  const handleAddMoney = useCallback(
+    (kind) => {
+      if (!result) return;
+      saveMoneyPrefill({
+        kind,
+        description: kind === 'income' ? 'Verkoop' : 'Uitgave',
+        amountExcl: Math.round(result.excl * 100) / 100,
+        amountIncl: Math.round(result.incl * 100) / 100,
+        vatRate: result.rate,
+      });
+      router.push(kind === 'income' ? '/inkomsten' : '/uitgaven');
+    },
+    [result, router]
+  );
+
   const applyExample = (example) => {
     setMode(example.mode);
     setAmountInput(String(example.amount));
@@ -138,249 +156,221 @@ export default function BtwCalculator() {
     setCustomRate('');
   };
 
+  const taxOptions = [...BTW_PRESETS, { value: 'custom', label: 'Eigen percentage' }];
+
   return (
-    <div className="space-y-14 sm:space-y-16">
-      <section id="calculator" className="scroll-mt-24">
-        <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
-          <div className="lg:col-span-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <Calculator className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="font-heading text-xl font-bold text-deep-blue">Bereken BTW</h2>
-                <p className="text-sm text-slate-500">Vul een bedrag en BTW-tarief in.</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <p className="mb-3 text-sm font-medium text-slate-700">Ik wil...</p>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {[
-                    { value: 'add', label: 'BTW toevoegen aan een bedrag' },
-                    { value: 'remove', label: 'BTW uit een bedrag halen' },
-                  ].map((opt) => (
-                    <label
-                      key={opt.value}
-                      className={cn(
-                        'flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors',
-                        mode === opt.value
-                          ? 'border-blue-500 bg-blue-50/60'
-                          : 'border-slate-200 hover:border-slate-300'
-                      )}
-                    >
-                      <input
-                        type="radio"
-                        name="btwMode"
-                        checked={mode === opt.value}
-                        onChange={() => setMode(opt.value)}
-                        className="mt-1 h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="text-sm font-medium text-slate-800">{opt.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="btw-amount" className="mb-2 block text-sm font-medium text-slate-700">
-                  Bedrag
-                </label>
-                <div className="relative">
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                    €
-                  </span>
-                  <Input
-                    id="btw-amount"
-                    type="text"
-                    inputMode="decimal"
-                    placeholder="0,00"
-                    value={amountInput}
-                    onChange={(e) => setAmountInput(e.target.value)}
-                    className="h-12 pl-9 text-lg"
+    <CalculatorPage
+      breadcrumbLabel="BTW calculator"
+      title={
+        <>
+          BTW <em>berekenen</em>
+        </>
+      }
+      lead="Bereken direct BTW toevoegen of BTW uit een bedrag halen. Gratis, geen account."
+    >
+      <div className="space-y-20 sm:space-y-24">
+        <section id="calculator" className="scroll-mt-24">
+          <ToolGrid>
+            <ToolCard title="Bereken BTW" description="Vul een bedrag en BTW-tarief in.">
+              <div className="space-y-7">
+                <div>
+                  <FieldLabel>Ik wil...</FieldLabel>
+                  <Segmented
+                    name="btwMode"
+                    ariaLabel="Ik wil..."
+                    layoutId="btw-mode-pill"
+                    options={MODE_OPTIONS}
+                    value={mode}
+                    onChange={setMode}
+                    stackOnMobile
                   />
                 </div>
-                <p className="mb-2 text-xs font-medium text-slate-500">Snelle keuzes:</p>
-                <div className="flex flex-wrap gap-2">
-                  {QUICK_AMOUNTS.map((value) => (
-                    <button
-                      key={value}
-                      type="button"
-                      onClick={() => setAmountInput(String(value))}
-                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
-                    >
-                      €{value}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
-              <div>
-                <p className="mb-3 text-sm font-medium text-slate-700">BTW percentage</p>
-                <div className="flex flex-wrap gap-3">
-                  {BTW_PRESETS.map((preset) => (
-                    <label
-                      key={preset.value}
-                      className={cn(
-                        'flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors',
-                        taxPreset === preset.value
-                          ? 'border-blue-500 bg-blue-50 text-blue-700'
-                          : 'border-slate-200 text-slate-700 hover:border-slate-300'
-                      )}
-                    >
-                      <input
-                        type="radio"
-                        name="taxPreset"
-                        checked={taxPreset === preset.value}
-                        onChange={() => setTaxPreset(preset.value)}
-                        className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      {preset.label}
-                    </label>
-                  ))}
-                  <label
-                    className={cn(
-                      'flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors',
-                      taxPreset === 'custom'
-                        ? 'border-blue-500 bg-blue-50 text-blue-700'
-                        : 'border-slate-200 text-slate-700 hover:border-slate-300'
-                    )}
-                  >
-                    <input
-                      type="radio"
-                      name="taxPreset"
-                      checked={taxPreset === 'custom'}
-                      onChange={() => setTaxPreset('custom')}
-                      className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                    />
-                    Eigen percentage
-                  </label>
-                </div>
-                {taxPreset === 'custom' && (
-                  <div className="mt-3 max-w-[160px]">
-                    <Input
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="Bijv. 13"
-                      value={customRate}
-                      onChange={(e) => setCustomRate(e.target.value)}
-                      className="h-10"
-                    />
+                <div>
+                  <FieldLabel htmlFor="btw-amount">Bedrag</FieldLabel>
+                  <AffixInput
+                    id="btw-amount"
+                    prefix="€"
+                    placeholder="0,00"
+                    value={amountInput}
+                    onChange={setAmountInput}
+                  />
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <p className="mr-1 text-xs text-ink-400">Snelle keuzes:</p>
+                    {QUICK_AMOUNTS.map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setAmountInput(String(value))}
+                        className={cn(
+                          'rounded-full border px-3 py-1 text-sm font-medium tabular transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-1',
+                          amount === value
+                            ? 'border-ink bg-ink text-white'
+                            : 'border-ink/[0.12] bg-paper-50 text-ink-700 hover:border-ink/30 hover:text-ink'
+                        )}
+                      >
+                        €{value}
+                      </button>
+                    ))}
                   </div>
-                )}
-              </div>
-            </div>
-          </div>
+                </div>
 
-          <div className="lg:col-span-2">
-            <div className="sticky top-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-              <h3 className="font-heading text-lg font-bold text-deep-blue">Resultaat</h3>
-
-              {result ? (
-                <div className="mt-4">
-                  {mode === 'add' ? (
-                    <>
-                      <ResultRow
-                        label="Bedrag exclusief BTW"
-                        value={formatEuro(result.excl)}
-                      />
-                      <ResultRow label={`BTW (${result.rate}%)`} value={formatEuro(result.btw)} />
-                      <ResultRow
-                        label="Totaal inclusief BTW"
-                        value={formatEuro(result.incl)}
-                        highlight
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <ResultRow
-                        label="Bedrag inclusief BTW"
-                        value={formatEuro(result.incl)}
-                      />
-                      <ResultRow label={`BTW (${result.rate}%)`} value={formatEuro(result.btw)} />
-                      <ResultRow
-                        label="Bedrag exclusief BTW"
-                        value={formatEuro(result.excl)}
-                        highlight
-                      />
-                    </>
+                <div>
+                  <FieldLabel>BTW percentage</FieldLabel>
+                  <Segmented
+                    name="taxPreset"
+                    ariaLabel="BTW percentage"
+                    layoutId="btw-rate-pill"
+                    options={taxOptions}
+                    value={taxPreset}
+                    onChange={setTaxPreset}
+                  />
+                  {taxPreset === 'custom' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-3 max-w-[180px]"
+                    >
+                      <div className="relative">
+                        <Input
+                          type="text"
+                          inputMode="decimal"
+                          placeholder="Bijv. 13"
+                          aria-label="Eigen percentage"
+                          value={customRate}
+                          onChange={(e) => setCustomRate(e.target.value)}
+                          className={cn(fieldInputClass, 'h-11 pr-9 text-base')}
+                        />
+                        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-400">
+                          %
+                        </span>
+                      </div>
+                    </motion.div>
                   )}
-
-                  <div className="mt-6 space-y-2">
-                    <Button variant="outline" className="w-full justify-center" onClick={handleCopy}>
-                      <Copy className="mr-2 h-4 w-4" />
-                      Kopieer resultaat
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full justify-center"
-                      onClick={() => downloadResultPdf(result, mode)}
-                    >
-                      <Download className="mr-2 h-4 w-4" />
-                      Download PDF
-                    </Button>
-                    <Button className="w-full justify-center" onClick={handleMakeInvoice}>
-                      <FileText className="mr-2 h-4 w-4" />
-                      Maak factuur met dit bedrag
-                    </Button>
-                  </div>
                 </div>
-              ) : (
-                <p className="mt-4 text-sm leading-relaxed text-slate-500">
-                  Vul een bedrag in om direct het btw-resultaat te zien.
-                </p>
-              )}
+              </div>
+            </ToolCard>
+
+            <div className="lg:sticky lg:top-[calc(var(--header-height,5rem)+1.5rem)]">
+              <ResultPanel titleAs="h3">
+                {result ? (
+                  <>
+                    <ResultHero
+                      label={mode === 'add' ? 'Totaal inclusief BTW' : 'Bedrag exclusief BTW'}
+                      value={mode === 'add' ? result.incl : result.excl}
+                      format={formatEuro}
+                    />
+                    <ResultRows>
+                      <ResultRow
+                        label={mode === 'add' ? 'Bedrag exclusief BTW' : 'Bedrag inclusief BTW'}
+                        value={mode === 'add' ? result.excl : result.incl}
+                        format={formatEuro}
+                      />
+                      <ResultRow label={`BTW (${result.rate}%)`} value={result.btw} format={formatEuro} />
+                    </ResultRows>
+
+                    <ResultActions>
+                      <button type="button" className={resultButton.primary} onClick={handleMakeInvoice}>
+                        <FileText className="h-4 w-4" aria-hidden />
+                        Gebruik in nieuwe factuur
+                      </button>
+                      <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                        <button
+                          type="button"
+                          className={resultButton.secondary}
+                          onClick={() => handleAddMoney('income')}
+                        >
+                          <Wallet className="h-4 w-4" aria-hidden />
+                          Voeg toe als inkomst
+                        </button>
+                        <button
+                          type="button"
+                          className={resultButton.secondary}
+                          onClick={() => handleAddMoney('expense')}
+                        >
+                          <Receipt className="h-4 w-4" aria-hidden />
+                          Voeg toe als uitgave
+                        </button>
+                      </div>
+                      <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                        <button type="button" className={resultButton.secondary} onClick={handleCopy}>
+                          <Copy className="h-4 w-4" aria-hidden />
+                          Kopieer resultaat
+                        </button>
+                        <button
+                          type="button"
+                          className={resultButton.secondary}
+                          onClick={() => downloadResultPdf(result, mode)}
+                        >
+                          <Download className="h-4 w-4" aria-hidden />
+                          Download PDF
+                        </button>
+                      </div>
+                    </ResultActions>
+                  </>
+                ) : (
+                  <ResultEmpty>Vul een bedrag in om direct het btw-resultaat te zien.</ResultEmpty>
+                )}
+              </ResultPanel>
             </div>
-          </div>
-        </div>
-      </section>
+          </ToolGrid>
+        </section>
 
-      <section>
-        <h2 className="font-heading text-2xl font-bold text-deep-blue">Voorbeelden</h2>
-        <p className="mt-2 text-slate-600">Klik op een voorbeeld om het direct in de calculator te laden.</p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {BTW_EXAMPLES.map((example) => {
-            const ex = calculateBtw({
-              amount: example.amount,
-              rate: example.rate,
-              mode: example.mode,
-            });
-            return (
-              <button
-                key={example.title}
-                type="button"
-                onClick={() => applyExample(example)}
-                className="rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition-all hover:border-warm-orange/30 hover:shadow-md"
-              >
-                <p className="font-semibold text-deep-blue">{example.title}</p>
-                <div className="mt-4 grid grid-cols-3 gap-3 text-center text-sm">
-                  <div className="rounded-lg bg-slate-50 p-3">
-                    <p className="text-xs text-slate-500">
-                      {example.mode === 'add' ? 'Excl.' : 'Incl.'}
-                    </p>
-                    <p className="mt-1 font-bold text-slate-900">
-                      {formatEuro(example.mode === 'add' ? ex.excl : ex.incl)}
-                    </p>
+        <section>
+          <DisplayHeading size="md">Voorbeelden</DisplayHeading>
+          <p className="mt-3 text-ink-500">Klik op een voorbeeld om het direct in de calculator te laden.</p>
+          <Stagger className="mt-8 grid gap-4 sm:grid-cols-2">
+            {BTW_EXAMPLES.map((example) => {
+              const ex = calculateBtw({
+                amount: example.amount,
+                rate: example.rate,
+                mode: example.mode,
+              });
+              return (
+                <motion.button
+                  key={example.title}
+                  variants={staggerItem}
+                  type="button"
+                  onClick={() => applyExample(example)}
+                  className="group rounded-2xl border border-ink/[0.08] bg-white p-5 text-left shadow-paper transition-[border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-ink/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 sm:p-6"
+                >
+                  <p className="flex items-start justify-between gap-3 font-display text-lg leading-snug text-ink">
+                    {example.title}
+                    <span
+                      className="mt-1 shrink-0 text-ember transition-transform duration-300 group-hover:translate-x-0.5"
+                      aria-hidden
+                    >
+                      →
+                    </span>
+                  </p>
+                  <div className="mt-5 grid grid-cols-3 divide-x divide-ink/[0.08] rounded-xl bg-paper-100 text-sm">
+                    <div className="px-3 py-3">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">
+                        {example.mode === 'add' ? 'Excl.' : 'Incl.'}
+                      </p>
+                      <p className="mt-1 font-medium text-ink tabular">
+                        {formatEuro(example.mode === 'add' ? ex.excl : ex.incl)}
+                      </p>
+                    </div>
+                    <div className="px-3 py-3">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">BTW</p>
+                      <p className="mt-1 font-medium text-ink tabular">{formatEuro(ex.btw)}</p>
+                    </div>
+                    <div className="px-3 py-3">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">
+                        {example.mode === 'add' ? 'Incl.' : 'Excl.'}
+                      </p>
+                      <p className="mt-1 font-medium text-ink tabular">
+                        {formatEuro(example.mode === 'add' ? ex.incl : ex.excl)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="rounded-lg bg-slate-50 p-3">
-                    <p className="text-xs text-slate-500">BTW</p>
-                    <p className="mt-1 font-bold text-slate-900">{formatEuro(ex.btw)}</p>
-                  </div>
-                  <div className="rounded-lg bg-slate-50 p-3">
-                    <p className="text-xs text-slate-500">
-                      {example.mode === 'add' ? 'Incl.' : 'Excl.'}
-                    </p>
-                    <p className="mt-1 font-bold text-slate-900">
-                      {formatEuro(example.mode === 'add' ? ex.incl : ex.excl)}
-                    </p>
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </section>
-    </div>
+                </motion.button>
+              );
+            })}
+          </Stagger>
+        </section>
+      </div>
+    </CalculatorPage>
   );
 }

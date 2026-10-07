@@ -38,17 +38,7 @@ export default function RetentionStatsSection() {
     setIsLoading(true);
     setError(null);
     try {
-      const password =
-        typeof window !== 'undefined' ? sessionStorage.getItem('adminPassword') : null;
-      if (!password) {
-        setError('Log opnieuw in als admin om retention-stats te laden.');
-        setStats(null);
-        return;
-      }
-
-      const res = await fetch('/api/admin/retention-stats', {
-        headers: { 'x-admin-password': password },
-      });
+      const res = await fetch('/api/admin/retention-stats', { credentials: 'include' });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);
       setStats(body);

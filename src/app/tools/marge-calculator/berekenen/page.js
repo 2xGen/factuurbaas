@@ -7,9 +7,5 @@ export const metadata = {
 };
 
 export default function MargeCalculatorToolPage() {
-  return (
-    <div className="container mx-auto max-w-5xl px-4 py-8 sm:px-6">
-      <MargeCalculator />
-    </div>
-  );
+  return <MargeCalculator />;
 }

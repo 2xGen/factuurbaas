@@ -1,12 +1,28 @@
 'use client';
 
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { Calculator, Copy, FileText, Info, Receipt } from 'lucide-react';
+import { Clock, Copy, FileText, Info, Receipt, Wallet } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { btn } from '@/components/site/editorial';
+import {
+  AffixInput,
+  CalculatorPage,
+  FieldHint,
+  FieldLabel,
+  RelatedLink,
+  ResultActions,
+  ResultEmpty,
+  ResultHero,
+  ResultPanel,
+  ResultRow,
+  ResultRows,
+  ToolCard,
+  ToolGrid,
+  resultButton,
+} from '@/components/tools/calculatorUi';
 import {
   DEFAULT_INPUTS,
   TAX_RESERVE_RATE,
@@ -22,40 +38,36 @@ import {
 } from '@/lib/invoicePrefill';
 import { TOOL_LOG_TABLES } from '@/lib/toolUsageLog';
 import { useDebouncedCalculationLog } from '@/hooks/useDebouncedCalculationLog';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { supabase } from '@/lib/customSupabaseClient';
+import { fetchBusinessSettings, saveHourlyRate } from '@/lib/businessSettings';
+import SaveToBusiness, { SaveBusinessButton } from '@/components/tools/SaveToBusiness';
 
 function MoneyInput({ id, label, hint, value, onChange }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-slate-700">
-        {label}
-      </label>
-      {hint && <p className="mb-2 text-xs text-slate-500">{hint}</p>}
-      <div className="relative">
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-          €
-        </span>
-        <Input
-          id={id}
-          type="text"
-          inputMode="decimal"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-12 pl-9 text-lg"
-        />
-      </div>
+      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+      {hint && <FieldHint className="-mt-1 mb-2">{hint}</FieldHint>}
+      <AffixInput id={id} prefix="€" value={value} onChange={onChange} />
     </div>
   );
 }
 
 function BreakdownRow({ label, value, detail }) {
   return (
-    <div className="flex items-start justify-between gap-3 py-2">
-      <div>
-        <p className="text-sm text-slate-600">{label}</p>
-        {detail && <p className="mt-0.5 text-xs text-slate-400">{detail}</p>}
+    <div className="flex items-start justify-between gap-3 border-b border-ink/[0.07] py-2.5 last:border-b-0">
+      <div className="min-w-0">
+        <p className="text-sm text-ink-700">{label}</p>
+        {detail && <p className="mt-0.5 text-xs text-ink-400 tabular">{detail}</p>}
       </div>
-      <span className="shrink-0 text-sm font-medium text-slate-900">{value}</span>
+      <span className="shrink-0 text-sm font-medium text-ink tabular">{value}</span>
     </div>
+  );
+}
+
+function StepLabel({ children }) {
+  return (
+    <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">{children}</p>
   );
 }
 
@@ -64,17 +76,15 @@ function CalculationBreakdown({ result }) {
   const keepPercent = 100 - taxPercent;
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-      <div className="mb-3 flex items-center gap-2">
-        <Info className="h-4 w-4 text-blue-600" />
-        <h3 className="text-sm font-semibold text-deep-blue">Zo komt dit getal tot stand</h3>
+    <div className="rounded-2xl border border-ink/[0.08] bg-white p-5 shadow-paper sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Info className="h-4 w-4 text-ember" aria-hidden />
+        <h3 className="font-display text-lg font-normal leading-tight text-ink">Zo komt dit getal tot stand</h3>
       </div>
 
-      <div className="space-y-1 divide-y divide-slate-200/80">
-        <div className="pb-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Stap 1 — Wat je over wilt houden
-          </p>
+      <div className="divide-y divide-ink/10">
+        <div className="pb-4">
+          <StepLabel>Stap 1 — Wat je over wilt houden</StepLabel>
           <BreakdownRow
             label="Gewenst netto inkomen"
             value={formatEuro(result.desiredNetMonthly)}
@@ -87,11 +97,9 @@ function CalculationBreakdown({ result }) {
           />
         </div>
 
-        <div className="py-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Stap 2 — Reservering voor belasting ({taxPercent}%)
-          </p>
-          <p className="mb-2 text-xs leading-relaxed text-slate-500">
+        <div className="py-4">
+          <StepLabel>Stap 2 — Reservering voor belasting ({taxPercent}%)</StepLabel>
+          <p className="mb-2 text-xs leading-relaxed text-ink-500">
             We rekenen met een vuistregel: ongeveer {taxPercent}% van je omzet gaat naar
             belasting en premies (inkomstenbelasting, Zvw, etc.). Wat overblijft ({keepPercent}%)
             moet je netto inkomen en kosten dekken.
@@ -108,10 +116,8 @@ function CalculationBreakdown({ result }) {
           />
         </div>
 
-        <div className="py-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Stap 3 — Factureerbare uren per maand
-          </p>
+        <div className="py-4">
+          <StepLabel>Stap 3 — Factureerbare uren per maand</StepLabel>
           <BreakdownRow
             label="Uren per week × weken × declarabel %"
             value={`${Math.round(result.billableHoursPerMonth)} uur`}
@@ -119,10 +125,8 @@ function CalculationBreakdown({ result }) {
           />
         </div>
 
-        <div className="pt-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Stap 4 — Uurtarief
-          </p>
+        <div className="pt-4">
+          <StepLabel>Stap 4 — Uurtarief</StepLabel>
           <BreakdownRow
             label="Omzet ÷ factureerbare uren"
             value={`${formatHourlyRate(result.hourlyRate)} /uur`}
@@ -131,13 +135,10 @@ function CalculationBreakdown({ result }) {
         </div>
       </div>
 
-      <p className="mt-4 text-xs leading-relaxed text-slate-500">
+      <p className="mt-4 border-t border-ink/[0.08] pt-4 text-xs leading-relaxed text-ink-500">
         Dit is een richtlijn, geen exacte belastingberekening. Btw reken je meestal apart door
         aan je klant.{' '}
-        <Link
-          href="/blogs/hoeveel-geld-apart-belasting-zzper"
-          className="text-warm-orange hover:underline"
-        >
+        <Link href="/blogs/hoeveel-geld-apart-belasting-zzper" className={cn(btn.link, 'text-xs')}>
           Lees meer over belasting reserveren
         </Link>
         .
@@ -149,11 +150,23 @@ function CalculationBreakdown({ result }) {
 export default function UurtariefCalculator() {
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useAuth();
+  const [savingRate, setSavingRate] = useState(false);
 
   const [netInput, setNetInput] = useState(String(DEFAULT_INPUTS.desiredNetMonthly));
   const [costsInput, setCostsInput] = useState(String(DEFAULT_INPUTS.monthlyCosts));
   const [hoursInput, setHoursInput] = useState(String(DEFAULT_INPUTS.hoursPerWeek));
   const [billableInput, setBillableInput] = useState(String(DEFAULT_INPUTS.billablePercent));
+
+  useEffect(() => {
+    if (!user?.id) return;
+    fetchBusinessSettings(supabase, user.id)
+      .then((s) => {
+        if (s.desiredNetMonthly) setNetInput(String(s.desiredNetMonthly));
+        if (s.hoursPerWeek) setHoursInput(String(s.hoursPerWeek));
+      })
+      .catch(() => {});
+  }, [user?.id]);
 
   const result = useMemo(
     () =>
@@ -213,31 +226,48 @@ export default function UurtariefCalculator() {
     router.push('/tools/offerte-maker/maken');
   }, [result, router]);
 
+  const handleSaveRate = useCallback(async () => {
+    if (!result || !user?.id) return;
+    setSavingRate(true);
+    try {
+      await saveHourlyRate(supabase, user.id, result.hourlyRate, {
+        hoursPerWeek: result.hoursPerWeek,
+        desiredNetMonthly: result.desiredNetMonthly,
+      });
+      toast({
+        title: 'Uurtarief bewaard',
+        description: `${formatHourlyRate(result.hourlyRate)} staat nu op je facturen en uren.`,
+      });
+    } catch {
+      toast({
+        title: 'Opslaan mislukt',
+        description: 'Run ADD_BUSINESS_SETTINGS.sql in Supabase als dit de eerste keer is.',
+        variant: 'destructive',
+      });
+    } finally {
+      setSavingRate(false);
+    }
+  }, [result, user?.id, toast]);
+
   return (
-    <div className="space-y-8">
-      <div className="mb-2">
-        <h1 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          Uurtarief calculator
-        </h1>
-        <p className="mt-2 text-slate-600">
+    <CalculatorPage
+      breadcrumbLabel="Uurtarief calculator"
+      title={
+        <>
+          Uurtarief <em>calculator</em>
+        </>
+      }
+      lead={
+        <p>
           Bereken welk uurtarief je nodig hebt als zzp&apos;er — inclusief zakelijke kosten,
           belastingreservering en factureerbare uren.
         </p>
-      </div>
-
-      <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
-        <div className="space-y-8 lg:col-span-3">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <Calculator className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="font-heading text-lg font-bold text-deep-blue">Wat wil je verdienen?</h2>
-              </div>
-            </div>
-
-            <div className="space-y-5">
+      }
+    >
+      <ToolGrid>
+        <div className="space-y-6">
+          <ToolCard title="Wat wil je verdienen?" icon={Wallet}>
+            <div className="space-y-6">
               <MoneyInput
                 id="net-income"
                 label="Gewenst netto inkomen per maand"
@@ -252,124 +282,113 @@ export default function UurtariefCalculator() {
                 onChange={setCostsInput}
               />
             </div>
-          </div>
+          </ToolCard>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="mb-5 font-heading text-lg font-bold text-deep-blue">Werkuren</h2>
-            <div className="space-y-5">
+          <ToolCard title="Werkuren" icon={Clock}>
+            <div className="space-y-6">
               <div>
-                <label htmlFor="hours-week" className="mb-2 block text-sm font-medium text-slate-700">
-                  Uren per week
-                </label>
-                <Input
-                  id="hours-week"
-                  type="text"
-                  inputMode="decimal"
-                  value={hoursInput}
-                  onChange={(e) => setHoursInput(e.target.value)}
-                  className="h-12 text-lg"
-                />
+                <FieldLabel htmlFor="hours-week">Uren per week</FieldLabel>
+                <AffixInput id="hours-week" value={hoursInput} onChange={setHoursInput} />
               </div>
               <div>
-                <label
-                  htmlFor="billable-percent"
-                  className="mb-1 block text-sm font-medium text-slate-700"
-                >
+                <FieldLabel htmlFor="billable-percent" className="mb-1">
                   Declarabele uren
-                </label>
-                <p className="mb-3 text-sm text-slate-600">
+                </FieldLabel>
+                <p className="mb-3 text-sm text-ink-500">
                   Hoeveel van je uren kun je aan klanten doorberekenen?
                 </p>
-                <div className="relative">
-                  <Input
-                    id="billable-percent"
-                    type="text"
-                    inputMode="decimal"
-                    value={billableInput}
-                    onChange={(e) => setBillableInput(e.target.value)}
-                    className="h-12 pr-10 text-lg"
-                  />
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
-                    %
-                  </span>
+                <AffixInput
+                  id="billable-percent"
+                  suffix="%"
+                  value={billableInput}
+                  onChange={setBillableInput}
+                />
+                <div className="mt-4 space-y-2 rounded-xl bg-paper-100 px-4 py-3.5">
+                  <FieldHint>
+                    Niet alle gewerkte uren kun je doorberekenen aan klanten. Je tijd gaat ook
+                    naar administratie, offertes, marketing, gesprekken en andere taken.
+                  </FieldHint>
+                  <FieldHint>
+                    <span className="font-medium text-ink-700">Voorbeeld: </span>
+                    Bij een werkweek van {billableExample.hours} uur en {billableExample.percent}%
+                    factureerbare tijd kun je ongeveer {billableExample.billableHours} uur per week
+                    factureren.
+                  </FieldHint>
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-slate-500">
-                  Niet alle gewerkte uren kun je doorberekenen aan klanten. Je tijd gaat ook
-                  naar administratie, offertes, marketing, gesprekken en andere taken.
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                  <span className="font-medium text-slate-600">Voorbeeld: </span>
-                  Bij een werkweek van {billableExample.hours} uur en {billableExample.percent}%
-                  factureerbare tijd kun je ongeveer {billableExample.billableHours} uur per week
-                  factureren.
-                </p>
               </div>
             </div>
-          </div>
+          </ToolCard>
         </div>
 
-        <div className="lg:col-span-2">
-          <div className="sticky top-[calc(var(--header-height,6rem)+1.5rem)] rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="font-heading text-lg font-bold text-deep-blue">Resultaat</h2>
-
-            {result ? (
-              <div className="mt-5 space-y-4">
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Benodigde omzet per maand</span>
-                  <span className="font-semibold text-slate-900">
-                    {formatEuro(result.requiredRevenue)}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Uren die je kunt factureren</span>
-                  <span className="font-semibold text-slate-900">
-                    {Math.round(result.billableHoursPerMonth)} uur
-                  </span>
-                </div>
-                <div className="rounded-xl bg-blue-50 px-4 py-5 text-center">
-                  <p className="text-sm font-medium text-blue-800">Jouw aanbevolen uurtarief</p>
-                  <p className="mt-1 font-heading text-3xl font-bold text-deep-blue">
-                    {formatHourlyRate(result.hourlyRate)}
-                  </p>
-                  <p className="text-sm text-blue-700">per uur</p>
-                </div>
-
-                <div className="flex flex-col gap-2 pt-2">
-                  <Button type="button" variant="outline" onClick={handleCopy} className="w-full">
-                    <Copy className="mr-2 h-4 w-4" />
-                    Kopieer resultaat
-                  </Button>
-                  <Button type="button" variant="outline" onClick={handleMakeQuote} className="w-full">
-                    <Receipt className="mr-2 h-4 w-4" />
-                    Maak offerte
-                  </Button>
-                  <Button type="button" onClick={handleMakeInvoice} className="w-full">
-                    <FileText className="mr-2 h-4 w-4" />
-                    Maak factuur
-                  </Button>
-                </div>
-
-                <CalculationBreakdown result={result} />
-              </div>
-            ) : (
-              <p className="mt-5 text-sm text-slate-500">
-                Vul je gewenste inkomen en werkuren in om je uurtarief te berekenen.
+        <div className="space-y-6">
+          <ResultPanel
+            footnote={
+              <p>
+                We rekenen met 4 weken per maand en een belastingreservering van 30%. Pas het
+                tarief aan op je branche, ervaring en werkelijke kosten.
               </p>
+            }
+          >
+            {result ? (
+              <>
+                <ResultHero
+                  label="Jouw aanbevolen uurtarief"
+                  value={result.hourlyRate}
+                  format={formatHourlyRate}
+                  sub="per uur"
+                />
+                <ResultRows>
+                  <ResultRow
+                    label="Benodigde omzet per maand"
+                    value={result.requiredRevenue}
+                    format={formatEuro}
+                  />
+                  <ResultRow
+                    label="Uren die je kunt factureren"
+                    value={Math.round(result.billableHoursPerMonth)}
+                    format={(v) => `${Math.round(v)} uur`}
+                  />
+                </ResultRows>
+
+                <ResultActions>
+                  <SaveToBusiness hint="dit tarief te bewaren">
+                    <SaveBusinessButton onClick={handleSaveRate} disabled={savingRate}>
+                      Gebruik {formatHourlyRate(result.hourlyRate)} als mijn uurtarief
+                    </SaveBusinessButton>
+                  </SaveToBusiness>
+                  <button type="button" onClick={handleMakeInvoice} className={resultButton.primary}>
+                    <FileText className="h-4 w-4" aria-hidden />
+                    Maak factuur
+                  </button>
+                  <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                    <button type="button" onClick={handleMakeQuote} className={resultButton.secondary}>
+                      <Receipt className="h-4 w-4" aria-hidden />
+                      Maak offerte
+                    </button>
+                    <button type="button" onClick={handleCopy} className={resultButton.secondary}>
+                      <Copy className="h-4 w-4" aria-hidden />
+                      Kopieer resultaat
+                    </button>
+                  </div>
+                </ResultActions>
+              </>
+            ) : (
+              <ResultEmpty>
+                Vul je gewenste inkomen en werkuren in om je uurtarief te berekenen.
+              </ResultEmpty>
             )}
+          </ResultPanel>
 
-            <p className="mt-5 text-xs leading-relaxed text-slate-500">
-              We rekenen met 4 weken per maand en een belastingreservering van 30%. Pas het
-              tarief aan op je branche, ervaring en werkelijke kosten.
-            </p>
-          </div>
+          {result && <CalculationBreakdown result={result} />}
         </div>
-      </div>
+      </ToolGrid>
 
-      <p className="text-center text-sm text-slate-500">
-        <Link href="/tools/uurtarief-calculator" className="text-warm-orange hover:underline">
-          ← Meer uitleg over uurtarief berekenen
-        </Link>
-      </p>
-    </div>
+      <RelatedLink href="/tools/uurtarief-calculator">
+        <span className="text-ember" aria-hidden>
+          ←
+        </span>{' '}
+        Meer uitleg over uurtarief berekenen
+      </RelatedLink>
+    </CalculatorPage>
   );
 }

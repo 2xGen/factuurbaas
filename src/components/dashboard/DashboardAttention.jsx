@@ -2,47 +2,67 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { AlertTriangle, ArrowRight, CheckCircle2, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import RowActionsMenu from '@/components/shared/RowActionsMenu';
 import { cn } from '@/lib/utils';
 
-/**
- * Actie nodig = real problems only.
- * Volgende stap = one soft onboarding nudge underneath.
- */
+function TextAction({ href, onClick, children, muted }) {
+  const className = cn(
+    'inline-flex items-center gap-1 text-sm underline-offset-4 hover:underline',
+    muted ? 'font-medium text-slate-500' : 'font-semibold text-deep-blue'
+  );
+  if (href) {
+    return (
+      <Link href={href} className={className}>
+        {children}
+        <ArrowRight className="h-3.5 w-3.5" />
+      </Link>
+    );
+  }
+  return (
+    <button type="button" onClick={onClick} className={className}>
+      {children}
+    </button>
+  );
+}
+
 export default function DashboardAttention({
   actions = [],
   nextStep = null,
+  nextSteps = null,
+  onboarding = null,
   onViewInvoice,
   onSendReminder,
   onMarkPaid,
-  onSetQuoteStatus,
 }) {
-  const router = useRouter();
   const hasActions = actions.length > 0;
+  const steps = onboarding?.length
+    ? onboarding
+    : nextSteps?.length
+      ? nextSteps
+      : nextStep
+        ? [nextStep]
+        : [];
 
   return (
-    <div className="mb-8 space-y-3">
+    <div className="mb-8 space-y-4">
       {hasActions ? (
-        <section className="overflow-hidden rounded-2xl border border-red-200/80 bg-gradient-to-br from-red-50/70 to-white shadow-sm">
-          <div className="border-b border-red-100/80 px-5 py-4 sm:px-6">
+        <section className="overflow-hidden rounded-2xl border border-red-200/80 bg-white">
+          <div className="border-b border-red-100 px-5 py-4 sm:px-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-red-600">
               Actie nodig
             </p>
-            <h2 className="mt-0.5 font-heading text-lg font-semibold text-deep-blue sm:text-xl">
+            <h2 className="mt-0.5 font-heading text-lg font-semibold text-deep-blue">
               {actions.length === 1 ? 'Er staat iets open' : `${actions.length} dingen vragen aandacht`}
             </h2>
           </div>
           <ul className="divide-y divide-slate-100">
             {actions.map((item) => {
-              const isConceptWithQuote = item.type === 'concept-quotes' && item.quote;
+              const isOverdue = item.type === 'overdue' && item.invoice;
 
               return (
                 <li
                   key={item.id}
-                  className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+                  className="flex flex-col gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6"
                 >
                   <div className="flex min-w-0 items-start gap-3">
                     <span
@@ -60,119 +80,79 @@ export default function DashboardAttention({
                       )}
                     </span>
                     <div className="min-w-0">
-                      <p className="font-semibold text-deep-blue">{item.title}</p>
+                      {isOverdue ? (
+                        <button
+                          type="button"
+                          className="text-left font-semibold text-deep-blue hover:underline"
+                          onClick={() => onViewInvoice?.(item.invoice.id)}
+                        >
+                          {item.title}
+                        </button>
+                      ) : (
+                        <p className="font-semibold text-deep-blue">{item.title}</p>
+                      )}
                       {item.detail && (
                         <p className="mt-0.5 text-sm text-slate-500">{item.detail}</p>
                       )}
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end">
-                    {item.type === 'overdue' && item.invoice && (
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:shrink-0 sm:justify-end">
+                    {isOverdue ? (
                       <>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="rounded-xl border-slate-200 bg-white"
-                          onClick={() => onViewInvoice?.(item.invoice.id)}
-                        >
-                          Bekijk factuur
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="rounded-xl border-slate-200 bg-white"
-                          onClick={() => onSendReminder?.(item.invoice)}
-                        >
-                          Herinnering
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
-                          onClick={() => onMarkPaid?.(item.invoice.id)}
-                        >
-                          Markeer betaald
-                        </Button>
+                        <TextAction onClick={() => onSendReminder?.(item.invoice)}>
+                          Stuur herinnering
+                        </TextAction>
+                        <span className="hidden text-slate-300 sm:inline" aria-hidden>
+                          ·
+                        </span>
+                        <TextAction muted onClick={() => onMarkPaid?.(item.invoice)}>
+                          Markeer als betaald
+                        </TextAction>
                       </>
-                    )}
-                    {isConceptWithQuote && (
-                      <RowActionsMenu
-                        items={[
-                          {
-                            id: 'status-sent',
-                            label: 'Status: Verstuurd',
-                            onSelect: () => onSetQuoteStatus?.(item.quote, 'sent'),
-                          },
-                          {
-                            id: 'status-accepted',
-                            label: 'Status: Geaccepteerd',
-                            onSelect: () => onSetQuoteStatus?.(item.quote, 'accepted'),
-                          },
-                          item.href && {
-                            id: 'edit',
-                            label: 'Bewerken',
-                            onSelect: () => router.push(item.href),
-                          },
-                        ].filter(Boolean)}
-                      />
-                    )}
-                    {!isConceptWithQuote && item.href && item.cta && (
-                      <Button
-                        asChild
-                        size="sm"
-                        className="rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
-                      >
-                        <Link href={item.href}>
-                          {item.cta}
-                          <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                        </Link>
-                      </Button>
-                    )}
+                    ) : item.href && item.cta ? (
+                      <TextAction href={item.href}>{item.cta}</TextAction>
+                    ) : null}
                   </div>
                 </li>
               );
             })}
           </ul>
         </section>
-      ) : (
-        <section className="overflow-hidden rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-emerald-50/80 to-white p-5 shadow-sm sm:px-6">
-          <div className="flex items-start gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-              <CheckCircle2 className="h-5 w-5" strokeWidth={1.75} />
-            </span>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700/80">
-                Actie nodig
-              </p>
-              <h2 className="mt-0.5 font-heading text-lg font-semibold text-deep-blue">
-                Alles bijgewerkt
-              </h2>
-              <p className="mt-1 text-sm text-slate-500">
-                Geen verlopen facturen, openstaande uren of offertes die actie vragen.
-              </p>
-            </div>
-          </div>
+      ) : null}
+
+      {steps.length > 0 && (
+        <section className="px-1 sm:px-0">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Maak FactuurBaas compleet
+          </p>
+          <ul className="mt-2 divide-y divide-slate-200 border-y border-slate-200">
+            {steps.map((step) => (
+              <li
+                key={step.id || step.title}
+                className="flex flex-col gap-2 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              >
+                <div className="min-w-0">
+                  <p className="font-medium text-deep-blue">{step.title}</p>
+                  {step.detail && <p className="mt-0.5 text-sm text-slate-500">{step.detail}</p>}
+                </div>
+                {step.href && step.cta && (
+                  <div className="flex shrink-0">
+                    <TextAction href={step.href}>{step.cta}</TextAction>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
-      {nextStep && (
-        <section className="flex flex-col gap-3 rounded-2xl border border-slate-200/80 bg-white px-5 py-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      {!hasActions && steps.length === 0 && (
+        <section className="flex items-start gap-3 px-1">
+          <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" strokeWidth={1.75} />
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              Volgende stap
-            </p>
-            <p className="mt-0.5 font-semibold text-deep-blue">{nextStep.title}</p>
-            {nextStep.detail && <p className="mt-0.5 text-sm text-slate-500">{nextStep.detail}</p>}
+            <p className="font-medium text-deep-blue">Alles bijgewerkt</p>
+            <p className="mt-0.5 text-sm text-slate-500">Niets dat nu aandacht vraagt.</p>
           </div>
-          <Button
-            asChild
-            size="sm"
-            className="shrink-0 rounded-xl bg-deep-blue font-semibold hover:bg-deep-blue/90"
-          >
-            <Link href={nextStep.href}>
-              {nextStep.cta}
-              <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-            </Link>
-          </Button>
         </section>
       )}
     </div>

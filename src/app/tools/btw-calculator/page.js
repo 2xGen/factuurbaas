@@ -1,4 +1,5 @@
-import ToolGatePage from '@/components/tools/ToolGatePage';import { buildGuideItemListSchema, getGuideLinksByCluster } from '@/lib/guideData';
+import ToolGatePage from '@/components/tools/ToolGatePage';
+import { buildGuideItemListSchema, getGuideLinksByCluster } from '@/lib/guideData';
 import { getBtwFaqSchema } from '@/lib/btwCalculator';
 import BtwCalculatorSeoContent from '@/components/tools/BtwCalculatorSeoContent';
 

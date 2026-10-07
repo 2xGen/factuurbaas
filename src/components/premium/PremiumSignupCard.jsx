@@ -92,45 +92,60 @@ const PremiumSignupCard = ({ source = 'premium_page' }) => {
   };
 
   return (
-    <Card className="border-gray-200 shadow-none">
-      <CardHeader className="p-5 pb-3">
-        <CardTitle className="text-xl font-heading text-deep-blue">
+    <Card className="rounded-2xl border-ink/[0.08] bg-white text-ink shadow-paper">
+      <CardHeader className="space-y-2 p-6 pb-4 sm:p-7 sm:pb-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember">Premium</p>
+        <CardTitle className="font-display text-[1.75rem] font-normal leading-[1.1] tracking-[-0.025em] text-ink">
           Claim je korting
         </CardTitle>
-        <CardDescription className="text-sm text-slate-600">
+        <CardDescription className="text-[15px] leading-relaxed text-ink-500">
           Meld je aan en ontvang altijd 50% korting op Premium.
           Je hoeft nu niets te betalen.
         </CardDescription>
       </CardHeader>
-      <CardContent className="p-5 pt-0">
+      <CardContent className="p-6 pt-0 sm:p-7 sm:pt-0">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
+            <label
+              htmlFor="premium-signup-email"
+              className="block font-mono text-[11px] uppercase tracking-[0.16em] text-ink-500"
+            >
+              E-mail
+            </label>
             <Input
+              id="premium-signup-email"
               type="email"
               inputMode="email"
               placeholder="jouw@email.nl"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
+              className="h-12 rounded-xl border-ink/15 bg-white px-4 text-[15px] text-ink placeholder:text-ink-400 focus-visible:ring-ember focus-visible:ring-offset-1"
             />
           </div>
 
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 rounded-xl bg-paper-50 p-3.5 ring-1 ring-inset ring-ink/[0.06]">
             <Checkbox
               id="premium-signup-consent"
               checked={consentGiven}
               onCheckedChange={(v) => setConsentGiven(Boolean(v))}
+              className="mt-0.5 border-ink/40 focus-visible:ring-ember data-[state=checked]:border-ink data-[state=checked]:bg-ink data-[state=checked]:text-white"
             />
-            <label htmlFor="premium-signup-consent" className="text-xs text-slate-700 leading-relaxed">
+            <label htmlFor="premium-signup-consent" className="text-[13px] leading-relaxed text-ink-700">
               Ik wil als eerste toegang + lifetime 50% korting ontvangen
             </label>
           </div>
 
-          <Button type="submit" className="w-full" disabled={!canSubmit} variant="default">
+          <Button
+            type="submit"
+            className="h-12 w-full rounded-full bg-ink text-[15px] font-medium text-white shadow-[0_1px_2px_rgba(6,26,48,0.2),0_8px_20px_-8px_rgba(6,26,48,0.5)] hover:bg-ink-950 hover:opacity-100 focus-visible:ring-ember"
+            disabled={!canSubmit}
+            variant="default"
+          >
             {isSubmitting ? 'Bezig met aanmelden...' : 'Meld mij aan'}
           </Button>
 
-          <div className="text-[11px] text-slate-500 space-y-1">
+          <div className="space-y-1 text-xs leading-relaxed text-ink-400">
             <p>We slaan je e-mailadres alleen op als je de checkbox aanvinkt.</p>
             <p>We mailen je alleen wanneer Premium live gaat. Afmelden kan altijd met één klik.</p>
           </div>

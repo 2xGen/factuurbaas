@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { addDays } from 'date-fns';
 import { defaultInvoice } from '@/config/invoiceDefaults';
 import {
   loadRememberPreference,
@@ -8,6 +9,27 @@ import {
 } from '@/lib/invoiceLocalStorage';
 import { calculateDueDate, getPaymentTermsText } from '@/lib/invoiceUtils';
 import { consumeInvoicePrefill, taxRateToInvoiceField } from '@/lib/invoicePrefill';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { supabase } from '@/lib/customSupabaseClient';
+import { fetchBusinessSettings } from '@/lib/businessSettings';
+import { fetchNextInvoiceNumber, isPersistedInvoiceId } from '@/lib/invoicePersistence';
+import { paymentTermValueFromDays } from '@/lib/betaaltermijnCalculator';
+
+function applyPaymentTermDays(invoice, days) {
+  const n = Number(days);
+  if (!Number.isFinite(n) || n <= 0) return invoice;
+  const paymentTermDays = paymentTermValueFromDays(n);
+  const invoiceDate =
+    invoice.invoiceDate instanceof Date && !Number.isNaN(invoice.invoiceDate.getTime())
+      ? invoice.invoiceDate
+      : new Date();
+  const dueDate = addDays(invoiceDate, n);
+  const terms =
+    paymentTermDays === 'custom'
+      ? `Betaling binnen ${n} dagen.`
+      : getPaymentTermsText(paymentTermDays, invoice.pdfLanguage);
+  return { ...invoice, paymentTermDays, dueDate, terms };
+}
 
 function buildInitialInvoice() {
   const saved = loadSavedCompanyDetails();
@@ -24,11 +46,22 @@ function buildInitialInvoice() {
 }
 
 export const useInvoiceFormManagement = (initialInvoice) => {
+  const { user } = useAuth();
   const [invoice, setInvoice] = useState(initialInvoice || buildInitialInvoice);
+  const skipPaymentDefault = useRef(false);
+  const skipHourlyDefault = useRef(false);
+  const skipNumberDefault = useRef(false);
+  const savedHourlyRateRef = useRef(null);
+  const defaultsApplied = useRef(false);
 
   useEffect(() => {
     const prefill = consumeInvoicePrefill();
     if (!prefill) return;
+    if (prefill.source === 'betaaltermijn-calculator') skipPaymentDefault.current = true;
+    if (prefill.source === 'uurtarief-calculator' || prefill.source === 'uren') {
+      skipHourlyDefault.current = true;
+    }
+    if (prefill.source === 'factuurnummer-generator') skipNumberDefault.current = true;
 
     if (prefill.source === 'uurtarief-calculator' && prefill.hourlyRate) {
       setInvoice((prev) => ({
@@ -289,7 +322,17 @@ export const useInvoiceFormManagement = (initialInvoice) => {
   }, []);
 
   const handleWorkTypeChange = useCallback((value) => {
-    setInvoice((prev) => ({ ...prev, workType: value }));
+    setInvoice((prev) => {
+      const next = { ...prev, workType: value };
+      if (
+        (value === 'hourly' || value === 'mixed') &&
+        savedHourlyRateRef.current &&
+        (!prev.amount || Number(prev.amount) === 0)
+      ) {
+        next.amount = String(savedHourlyRateRef.current);
+      }
+      return next;
+    });
   }, []);
 
   const handleSelectLayout = useCallback((layout) => {
@@ -341,7 +384,7 @@ export const useInvoiceFormManagement = (initialInvoice) => {
   const handleAddWorkDay = useCallback(() => {
     setInvoice((prev) => {
       const hasItems = (prev.items || []).length > 0;
-      return {
+      const next = {
         ...prev,
         workType: hasItems ? 'mixed' : 'hourly',
         hoursWorked: [
@@ -349,6 +392,10 @@ export const useInvoiceFormManagement = (initialInvoice) => {
           { id: Date.now(), date: new Date(), taskDescription: '', hours: 0 },
         ],
       };
+      if (savedHourlyRateRef.current && (!prev.amount || Number(prev.amount) === 0)) {
+        next.amount = String(savedHourlyRateRef.current);
+      }
+      return next;
     });
   }, []);
 
@@ -393,6 +440,55 @@ export const useInvoiceFormManagement = (initialInvoice) => {
     },
     [handleRemoveItem]
   );
+
+  useEffect(() => {
+    if (!user?.id || defaultsApplied.current) return;
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('id') || params.get('from')) return;
+    }
+    defaultsApplied.current = true;
+
+    (async () => {
+      try {
+        const [settings, nextNumber] = await Promise.all([
+          fetchBusinessSettings(supabase, user.id).catch(() => null),
+          skipNumberDefault.current
+            ? Promise.resolve(null)
+            : fetchNextInvoiceNumber(supabase, user.id).catch(() => null),
+        ]);
+
+        if (settings?.hourlyRate) savedHourlyRateRef.current = settings.hourlyRate;
+
+        setInvoice((prev) => {
+          if (isPersistedInvoiceId(prev.id)) return prev;
+          let next = prev;
+          if (
+            !skipPaymentDefault.current &&
+            settings?.defaultPaymentTermDays &&
+            settings.defaultPaymentTermDays !== 14
+          ) {
+            next = applyPaymentTermDays(next, settings.defaultPaymentTermDays);
+          }
+          const amountEmpty = !next.amount || Number(next.amount) === 0;
+          if (
+            !skipHourlyDefault.current &&
+            settings?.hourlyRate &&
+            amountEmpty &&
+            (next.workType === 'hourly' || next.workType === 'mixed')
+          ) {
+            next = { ...next, amount: String(settings.hourlyRate) };
+          }
+          if (nextNumber && !skipNumberDefault.current) {
+            next = { ...next, invoice_number: nextNumber };
+          }
+          return next;
+        });
+      } catch {
+        defaultsApplied.current = false;
+      }
+    })();
+  }, [user?.id]);
 
   return {
     invoice,

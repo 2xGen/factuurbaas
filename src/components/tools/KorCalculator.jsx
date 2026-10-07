@@ -1,12 +1,26 @@
 'use client';
 
-import React, { useMemo, useState, useCallback } from 'react';
-import Link from 'next/link';
-import { Calculator, Copy, Info } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { Copy, Info } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
+import { AnimatedNumber, EASE_OUT } from '@/components/landing/page/motion';
+import {
+  AffixInput,
+  CalculatorPage,
+  CheckboxRow,
+  FieldHint,
+  FieldLabel,
+  RelatedLink,
+  ResultActions,
+  ResultEmpty,
+  ResultPanel,
+  Segmented,
+  ToolCard,
+  ToolGrid,
+  resultButton,
+} from '@/components/tools/calculatorUi';
 import {
   KOR_BELASTINGDIENST_URL,
   KOR_REVENUE_LIMIT,
@@ -18,19 +32,52 @@ import {
 } from '@/lib/korCalculator';
 import { TOOL_LOG_TABLES } from '@/lib/toolUsageLog';
 import { useDebouncedCalculationLog } from '@/hooks/useDebouncedCalculationLog';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { supabase } from '@/lib/customSupabaseClient';
+import { fetchRegisteredYearRevenue } from '@/lib/yearRevenue';
 
 const STATUS_STYLES = {
-  eligible: 'border-green-200 bg-green-50 text-green-900',
-  'near-limit': 'border-amber-200 bg-amber-50 text-amber-900',
-  'not-eligible': 'border-red-200 bg-red-50 text-red-900',
+  eligible: 'bg-emerald-400/10 text-emerald-50 ring-emerald-300/25',
+  'near-limit': 'bg-amber-400/10 text-amber-50 ring-amber-300/25',
+  'not-eligible': 'bg-rose-400/10 text-rose-50 ring-rose-300/25',
+};
+
+const STATUS_DOT = {
+  eligible: 'bg-emerald-400',
+  'near-limit': 'bg-amber-400',
+  'not-eligible': 'bg-rose-400',
+};
+
+const STATUS_BAR = {
+  eligible: 'bg-emerald-400',
+  'near-limit': 'bg-amber-400',
+  'not-eligible': 'bg-rose-400',
 };
 
 export default function KorCalculator() {
   const { toast } = useToast();
+  const { user } = useAuth();
+  const reduce = useReducedMotion();
   const [revenuePeriod, setRevenuePeriod] = useState('year');
   const [revenueInput, setRevenueInput] = useState('15000');
   const [mostlyConsumers, setMostlyConsumers] = useState(true);
   const [highVatOnCosts, setHighVatOnCosts] = useState(false);
+  const [liveRevenue, setLiveRevenue] = useState(null);
+  const year = new Date().getFullYear();
+
+  useEffect(() => {
+    if (!user?.id) {
+      setLiveRevenue(null);
+      return;
+    }
+    fetchRegisteredYearRevenue(supabase, user.id)
+      .then((amount) => {
+        setLiveRevenue(amount);
+        setRevenuePeriod('year');
+        setRevenueInput(String(Math.round(amount * 100) / 100));
+      })
+      .catch(() => setLiveRevenue(null));
+  }, [user?.id]);
 
   const handlePeriodChange = (period) => {
     const current = parseAmount(revenueInput);
@@ -92,141 +139,177 @@ export default function KorCalculator() {
   }, [resultText, toast]);
 
   const revenueLabel =
-    revenuePeriod === 'month' ? 'Verwachte omzet per maand' : 'Verwachte omzet per jaar';
+    liveRevenue != null && revenuePeriod === 'year'
+      ? `Geregistreerde omzet in ${year}`
+      : revenuePeriod === 'month'
+        ? 'Verwachte omzet per maand'
+        : 'Verwachte omzet per jaar';
+
+  const liveRemaining =
+    liveRevenue != null ? Math.max(0, KOR_REVENUE_LIMIT - liveRevenue) : null;
+
+  const limitProgress = result ? Math.min(100, (result.annualRevenue / result.korLimit) * 100) : 0;
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          KOR check
-        </h1>
-        <p className="mt-2 text-slate-600">
+    <CalculatorPage
+      breadcrumbLabel="KOR calculator"
+      title={
+        <>
+          KOR <em>check</em>
+        </>
+      }
+      lead={
+        <p>
           Vergelijk je verwachte omzet met de KOR-grens van {formatEuro(KOR_REVENUE_LIMIT)} per
           kalenderjaar. De uitkomst is een indicatie.
         </p>
-      </div>
-
-      <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
-        <div className="lg:col-span-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-              <Calculator className="h-5 w-5" />
-            </div>
+      }
+    >
+      <ToolGrid>
+        <ToolCard
+          title="Jouw situatie"
+          description={
+            liveRevenue != null
+              ? `FactuurBaas vult je omzet in ${year} in. Je kunt het bedrag nog aanpassen.`
+              : 'Vul je verwachte omzet in (per jaar of per maand).'
+          }
+        >
+          <div className="space-y-7">
+            {liveRevenue != null && (
+              <div className="rounded-xl border border-ink/[0.08] bg-paper-100 px-4 py-3.5 text-sm text-ink-700">
+                <p>
+                  Je geregistreerde omzet in {year}:{' '}
+                  <span className="font-medium tabular">{formatEuro(liveRevenue)}</span>
+                </p>
+                <p className="mt-1">
+                  KOR-grens: <span className="tabular">{formatEuro(KOR_REVENUE_LIMIT)}</span>
+                  {' · '}
+                  Resterend:{' '}
+                  <span className="font-medium tabular">{formatEuro(liveRemaining)}</span>
+                </p>
+              </div>
+            )}
             <div>
-              <h2 className="font-heading text-lg font-bold text-deep-blue">Jouw situatie</h2>
-              <p className="text-sm text-slate-500">Vul je verwachte omzet in (per jaar of per maand).</p>
+              <FieldLabel>Omzet invoeren</FieldLabel>
+              <Segmented
+                name="revenuePeriod"
+                ariaLabel="Omzet invoeren"
+                layoutId="kor-period-pill"
+                options={REVENUE_PERIOD_OPTIONS}
+                value={revenuePeriod}
+                onChange={handlePeriodChange}
+              />
+            </div>
+
+            <div>
+              <FieldLabel htmlFor="revenue-amount">{revenueLabel}</FieldLabel>
+              <AffixInput
+                id="revenue-amount"
+                prefix="€"
+                value={revenueInput}
+                onChange={setRevenueInput}
+              />
+              <div className="mt-3 space-y-1.5">
+                {revenuePeriod === 'month' && parseAmount(revenueInput) !== null && (
+                  <FieldHint className="tabular">
+                    Jaaromzet: {formatEuro(parseAmount(revenueInput) * MONTHS_PER_YEAR)} ({formatEuro(parseAmount(revenueInput))} × 12 maanden)
+                  </FieldHint>
+                )}
+                <FieldHint className="tabular">
+                  KOR-grens: maximaal {formatEuro(KOR_REVENUE_LIMIT)} omzet per kalenderjaar
+                  {revenuePeriod === 'month' &&
+                    ` (≈ ${formatEuro(KOR_REVENUE_LIMIT / MONTHS_PER_YEAR)} per maand)`}
+                  .
+                </FieldHint>
+              </div>
+            </div>
+
+            <div className="space-y-3.5 rounded-xl border border-ink/[0.06] bg-paper-100 p-4 sm:p-5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-500">
+                Optioneel — voor een betere inschatting
+              </p>
+              <CheckboxRow checked={mostlyConsumers} onChange={setMostlyConsumers}>
+                Ik lever vooral aan particulieren (consumenten)
+              </CheckboxRow>
+              <CheckboxRow checked={highVatOnCosts} onChange={setHighVatOnCosts}>
+                Ik heb relatief veel btw op zakelijke kosten (inkopen, investeringen)
+              </CheckboxRow>
             </div>
           </div>
+        </ToolCard>
 
-          <div className="space-y-5">
-            <div>
-              <p className="mb-3 text-sm font-medium text-slate-700">Omzet invoeren</p>
-              <div className="mb-4 flex flex-wrap gap-2">
-                {REVENUE_PERIOD_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onClick={() => handlePeriodChange(opt.value)}
-                    className={cn(
-                      'rounded-full border px-4 py-2 text-sm font-medium transition-colors',
-                      revenuePeriod === opt.value
-                        ? 'border-blue-500 bg-blue-50 text-blue-700'
-                        : 'border-slate-200 text-slate-700 hover:border-slate-300'
-                    )}
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-
-              <label htmlFor="revenue-amount" className="mb-2 block text-sm font-medium text-slate-700">
-                {revenueLabel}
-              </label>
-              <div className="relative">
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                  €
-                </span>
-                <Input
-                  id="revenue-amount"
-                  type="text"
-                  inputMode="decimal"
-                  value={revenueInput}
-                  onChange={(e) => setRevenueInput(e.target.value)}
-                  className="h-12 pl-9 text-lg"
-                />
-              </div>
-              {revenuePeriod === 'month' && parseAmount(revenueInput) !== null && (
-                <p className="mt-2 text-xs text-slate-500">
-                  Jaaromzet: {formatEuro(parseAmount(revenueInput) * MONTHS_PER_YEAR)} ({formatEuro(parseAmount(revenueInput))} × 12 maanden)
-                </p>
-              )}
-              <p className="mt-2 text-xs text-slate-500">
-                KOR-grens: maximaal {formatEuro(KOR_REVENUE_LIMIT)} omzet per kalenderjaar
-                {revenuePeriod === 'month' &&
-                  ` (≈ ${formatEuro(KOR_REVENUE_LIMIT / MONTHS_PER_YEAR)} per maand)`}
+        <div className="lg:sticky lg:top-[calc(var(--header-height,5rem)+1.5rem)]">
+          <ResultPanel
+            footnote={
+              <p>
+                Dit is een indicatie, geen fiscaal advies. Check altijd de actuele regels bij de{' '}
+                <a href={KOR_BELASTINGDIENST_URL} target="_blank" rel="noopener noreferrer">
+                  Belastingdienst
+                </a>
                 .
               </p>
-            </div>
-
-            <div className="space-y-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-              <p className="text-sm font-medium text-slate-700">Optioneel — voor een betere inschatting</p>
-              <label className="flex cursor-pointer items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={mostlyConsumers}
-                  onChange={(e) => setMostlyConsumers(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="text-sm text-slate-600">
-                  Ik lever vooral aan particulieren (consumenten)
-                </span>
-              </label>
-              <label className="flex cursor-pointer items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={highVatOnCosts}
-                  onChange={(e) => setHighVatOnCosts(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="text-sm text-slate-600">
-                  Ik heb relatief veel btw op zakelijke kosten (inkopen, investeringen)
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:col-span-2">
-          <div className="sticky top-[calc(var(--header-height,6rem)+1.5rem)] rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="font-heading text-lg font-bold text-deep-blue">Resultaat</h2>
-
+            }
+          >
             {result ? (
-              <div className="mt-5 space-y-4">
+              <div className="mt-6 space-y-5">
                 {revenuePeriod === 'month' && (
-                  <div className="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                  <div className="rounded-xl bg-white/[0.04] px-4 py-3 text-sm text-white/65 ring-1 ring-inset ring-white/10">
                     <p>
-                      Maandomzet: <span className="font-semibold text-slate-900">{formatEuro(result.monthlyRevenue)}</span>
+                      Maandomzet:{' '}
+                      <span className="font-medium text-white tabular">{formatEuro(result.monthlyRevenue)}</span>
                     </p>
                     <p className="mt-1">
                       Jaaromzet:{' '}
-                      <span className="font-semibold text-slate-900">{formatEuro(result.annualRevenue)}</span>
-                      <span className="text-slate-500"> ({formatEuro(result.monthlyRevenue)} × 12)</span>
+                      <span className="font-medium text-white tabular">{formatEuro(result.annualRevenue)}</span>
+                      <span className="text-white/45"> ({formatEuro(result.monthlyRevenue)} × 12)</span>
                     </p>
                   </div>
                 )}
 
-                <div
-                  className={cn(
-                    'rounded-xl border px-4 py-5',
-                    STATUS_STYLES[result.status]
-                  )}
-                >
-                  <p className="text-sm font-semibold">{result.headline}</p>
-                  <p className="mt-2 text-sm leading-relaxed opacity-90">{result.summary}</p>
+                <div>
+                  <div className="flex items-end justify-between gap-4">
+                    <AnimatedNumber
+                      value={result.annualRevenue}
+                      format={formatEuro}
+                      className="font-display text-[2.6rem] leading-none tracking-[-0.03em] text-white tabular sm:text-[3.25rem]"
+                    />
+                    <span className="pb-1 text-right font-mono text-[10px] uppercase tracking-[0.14em] text-white/45">
+                      KOR-grens
+                      <span className="mt-1 block text-sm normal-case tracking-normal text-white/70 tabular">
+                        {formatEuro(result.korLimit)}
+                      </span>
+                    </span>
+                  </div>
+                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10" aria-hidden>
+                    <div
+                      className={cn(
+                        'h-full rounded-full transition-[width,background-color] duration-700 ease-out',
+                        STATUS_BAR[result.status]
+                      )}
+                      style={{ width: `${limitProgress}%` }}
+                    />
+                  </div>
                 </div>
 
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={result.status}
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduce ? undefined : { opacity: 0, y: -8 }}
+                    transition={{ duration: 0.3, ease: EASE_OUT }}
+                    className={cn('rounded-xl px-4 py-4 ring-1 ring-inset sm:px-5', STATUS_STYLES[result.status])}
+                  >
+                    <p className="flex items-center gap-2.5 font-display text-xl leading-snug">
+                      <span className={cn('h-2 w-2 shrink-0 rounded-full', STATUS_DOT[result.status])} aria-hidden />
+                      {result.headline}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed opacity-80">{result.summary}</p>
+                  </motion.div>
+                </AnimatePresence>
+
                 {result.status !== 'not-eligible' && (
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-white/65 tabular">
                     Nog {formatEuro(result.remainingUnderLimit)} onder de KOR-grens dit jaar
                     {revenuePeriod === 'month' && (
                       <> (≈ {formatEuro(result.remainingUnderLimit / MONTHS_PER_YEAR)} per maand)</>
@@ -235,55 +318,43 @@ export default function KorCalculator() {
                   </p>
                 )}
 
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <div className="mb-3 flex items-center gap-2">
-                    <Info className="h-4 w-4 text-blue-600" />
-                    <h3 className="text-sm font-semibold text-deep-blue">Waarom dit resultaat?</h3>
+                <div className="border-t border-white/10 pt-5">
+                  <div className="mb-4 flex items-center gap-2">
+                    <Info className="h-4 w-4 text-ember-100" aria-hidden />
+                    <h3 className="text-sm font-medium text-white">Waarom dit resultaat?</h3>
                   </div>
-                  <div className="space-y-3">
+                  <ol className="space-y-4">
                     {result.explanationSteps.map((step) => (
-                      <div key={step.title}>
-                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                      <li key={step.title} className="border-l border-white/15 pl-4">
+                        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/45">
                           {step.title}
                         </p>
-                        <p className="mt-1 text-sm leading-relaxed text-slate-600">{step.text}</p>
-                      </div>
+                        <p className="mt-1 text-sm leading-relaxed text-white/70">{step.text}</p>
+                      </li>
                     ))}
-                  </div>
+                  </ol>
                 </div>
 
-                <Button type="button" variant="outline" onClick={handleCopy} className="w-full">
-                  <Copy className="mr-2 h-4 w-4" />
-                  Kopieer resultaat
-                </Button>
+                <ResultActions>
+                  <button type="button" onClick={handleCopy} className={resultButton.secondary}>
+                    <Copy className="h-4 w-4" aria-hidden />
+                    Kopieer resultaat
+                  </button>
+                </ResultActions>
               </div>
             ) : (
-              <p className="mt-5 text-sm text-slate-500">
-                Vul je verwachte omzet in om het resultaat te zien.
-              </p>
+              <ResultEmpty>Vul je verwachte omzet in om het resultaat te zien.</ResultEmpty>
             )}
-
-            <p className="mt-5 text-xs leading-relaxed text-slate-500">
-              Dit is een indicatie, geen fiscaal advies. Check altijd de actuele regels bij de{' '}
-              <a
-                href={KOR_BELASTINGDIENST_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-warm-orange hover:underline"
-              >
-                Belastingdienst
-              </a>
-              .
-            </p>
-          </div>
+          </ResultPanel>
         </div>
-      </div>
+      </ToolGrid>
 
-      <p className="text-center text-sm text-slate-500">
-        <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">
-          ← Meer uitleg over de kleineondernemersregeling
-        </Link>
-      </p>
-    </div>
+      <RelatedLink href="/tools/kor-calculator">
+        <span className="text-ember" aria-hidden>
+          ←
+        </span>{' '}
+        Meer uitleg over de kleineondernemersregeling
+      </RelatedLink>
+    </CalculatorPage>
   );
 }

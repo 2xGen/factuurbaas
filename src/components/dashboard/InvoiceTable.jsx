@@ -77,7 +77,7 @@ const InvoiceTable = ({
                 {
                   id: 'paid',
                   label: isPaid ? 'Markeer als onbetaald' : 'Markeer als betaald',
-                  onSelect: () => onTogglePaid(invoice.id),
+                  onSelect: () => onTogglePaid(invoice),
                 },
                 !isPaid && {
                   id: 'reminder',

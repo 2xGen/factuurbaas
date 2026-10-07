@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Crown, FileSignature } from 'lucide-react';
+import { FileSignature } from 'lucide-react';
+import LegalDocument from '@/components/site/LegalDocument';
 
 export const metadata = {
   title: 'Verwerkersovereenkomst (DPA) | FactuurBaas',
@@ -9,34 +10,36 @@ export const metadata = {
   alternates: { canonical: 'https://factuurbaas.nl/verwerkersovereenkomst' },
 };
 
+const sections = [
+  { id: 'partijen', label: '1. Partijen' },
+  { id: 'onderwerp', label: '2. Onderwerp van de verwerking' },
+  { id: 'duur', label: '3. Duur' },
+  { id: 'instructies', label: '4. Instructies' },
+  { id: 'verplichtingen', label: '5. Verplichtingen van de verwerker' },
+  { id: 'subverwerkers', label: '6. Subverwerkers en andere dienstverleners' },
+  { id: 'locatie', label: '7. Locatie' },
+  { id: 'verwijdering', label: '8. Verwijdering en export' },
+  { id: 'aansprakelijkheid', label: '9. Aansprakelijkheid' },
+  { id: 'contact', label: '10. Contact' },
+];
+
 export default function DataProcessingAgreementPage() {
-  const lastUpdatedDate = '2 augustus 2026';
+  const lastUpdatedDate = '7 oktober 2026';
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <div className="container mx-auto max-w-3xl">
-        <Link
-          href="/privacybeleid"
-          className="group mb-8 inline-flex items-center font-semibold text-deep-blue transition-colors hover:text-warm-orange"
-        >
-          <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-          Terug naar Privacybeleid
-        </Link>
-
-        <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-xl sm:p-10">
-          <header className="mb-10 text-center">
-            <FileSignature className="mx-auto mb-4 h-14 w-14 text-deep-blue" />
-            <h1 className="font-heading text-3xl font-bold text-deep-blue sm:text-4xl">
-              Verwerkersovereenkomst (DPA)
-            </h1>
-            <p className="mt-2 text-sm text-gray-500">FactuurBaas.nl — Laatst bijgewerkt: {lastUpdatedDate}</p>
-          </header>
-
-          <div className="prose prose-lg max-w-none text-gray-700">
+    <LegalDocument
+      backHref="/privacybeleid"
+      backLabel="Terug naar Privacybeleid"
+      eyebrow="Verwerkersovereenkomst"
+      eyebrowIcon={FileSignature}
+      title="Verwerkersovereenkomst (DPA)"
+      sections={sections}
+      meta={<span>FactuurBaas.nl — Laatst bijgewerkt: {lastUpdatedDate}</span>}
+    >
             <p>
               Deze verwerkersovereenkomst (“DPA”) maakt onderdeel uit van de dienstverlening van FactuurBaas.nl
               (een dienst van 2xGen LLC) wanneer u de Dienst gebruikt om persoonsgegevens te verwerken. Door een
-              account te gebruiken en facturen of profielgegevens op te slaan,{' '}
+              account te gebruiken en facturen, offertes of andere accountgegevens op te slaan,{' '}
               <strong>aanvaardt u deze DPA als onderdeel van de dienstverlening</strong>, naast ons{' '}
               <Link href="/privacybeleid" className="text-warm-orange hover:underline">
                 Privacybeleid
@@ -55,7 +58,7 @@ export default function DataProcessingAgreementPage() {
               .
             </p>
 
-            <h2>1. Partijen</h2>
+            <h2 id="partijen">1. Partijen</h2>
             <ul>
               <li>
                 <strong>Verwerker:</strong> 2xGen LLC, handelend onder de naam FactuurBaas.nl, gevestigd in New
@@ -73,15 +76,22 @@ export default function DataProcessingAgreementPage() {
               het Privacybeleid.
             </p>
 
-            <h2>2. Onderwerp van de verwerking</h2>
+            <h2 id="onderwerp">2. Onderwerp van de verwerking</h2>
             <p>Wij verwerken in opdracht van u (voor zover u dit opslaat) onder meer:</p>
             <ul>
               <li>factuurgegevens (nummers, datums, bedragen, btw, status, notities);</li>
+              <li>offertegegevens (nummers, geldigheid, bedragen, btw, status, notities);</li>
               <li>
-                klant-/debiteurgegevens die u invult op facturen of in uw klantenlijst (naam, adres, contact,
-                KvK/btw indien ingevuld);
+                klant-/debiteurgegevens die u invult op facturen, offertes of in uw klantenlijst (naam, adres,
+                contact, KvK/btw indien ingevuld);
               </li>
-              <li>uw bedrijfsprofielgegevens en eventueel logo die u koppelt aan facturen.</li>
+              <li>inkomsten zonder factuur (omschrijving, bedrag, btw, betaalwijze);</li>
+              <li>uitgaven (omschrijving, leverancier, categorie, bedrag, btw);</li>
+              <li>urenregistratie (datum, uren, omschrijving, uurtarief, gekoppelde klant);</li>
+              <li>
+                uw bedrijfsprofielgegevens, logo, en optionele bedrijfsinstellingen (uurtarief, uren per week,
+                weken per jaar, jaardoel, standaard betaaltermijn) die u koppelt aan facturen of tools.
+              </li>
             </ul>
             <p>
               In gastmodus (zonder cloudopslag) verwerken wij factuurinhoud niet op onze servers voor later gebruik.
@@ -100,23 +110,26 @@ export default function DataProcessingAgreementPage() {
             <h3>Aard en doel van de verwerking</h3>
             <p>
               De verwerking bestaat uit het opslaan, structureren, weergeven, exporteren en verwijderen van gegevens
-              die nodig zijn voor het maken en beheren van facturen, offertes en opgeslagen klanten.
+              die nodig zijn voor het maken en beheren van facturen, offertes, inkomsten, uitgaven, uren en
+              opgeslagen klanten.
             </p>
 
-            <h2>3. Duur</h2>
+            <h2 id="duur">3. Duur</h2>
             <p>
-              De verwerking duurt zolang u de Dienst met accountopslag gebruikt, tot u facturen of klanten
-              verwijdert of uw account verwijdert, of tot de overeenkomst eindigt.
+              De verwerking duurt zolang u de Dienst met accountopslag gebruikt, tot u facturen, offertes,
+              inkomsten, uitgaven, uren of klanten verwijdert of uw account verwijdert, of tot de overeenkomst
+              eindigt.
             </p>
 
-            <h2>4. Instructies</h2>
+            <h2 id="instructies">4. Instructies</h2>
             <p>
               Wij verwerken persoonsgegevens alleen voor het leveren van de Dienst (opslaan, tonen, exporteren,
-              verwijderen van facturen, klanten en profiel) en volgens uw instructies via de functionaliteit van de
-              Dienst, tenzij een wettelijke verplichting anders voorschrijft.
+              verwijderen van facturen, offertes, inkomsten, uitgaven, uren, klanten en profiel) en volgens uw
+              instructies via de functionaliteit van de Dienst, tenzij een wettelijke verplichting anders
+              voorschrijft.
             </p>
 
-            <h2>5. Verplichtingen van de verwerker</h2>
+            <h2 id="verplichtingen">5. Verplichtingen van de verwerker</h2>
             <ul>
               <li>vertrouwelijkheid van personen die toegang hebben tot de gegevens;</li>
               <li>
@@ -136,11 +149,11 @@ export default function DataProcessingAgreementPage() {
               <li>geen verkoop van uw factuur- of klantgegevens.</li>
             </ul>
 
-            <h2>6. Subverwerkers en andere dienstverleners</h2>
+            <h2 id="subverwerkers">6. Subverwerkers en andere dienstverleners</h2>
             <h3>Subverwerkers</h3>
             <p>
               U stemt ermee in dat wij de volgende subverwerkers inzetten voor de opslag en technische verwerking van
-              factuur-, klant- en profielgegevens:
+              factuur-, offerte-, inkomsten-, uitgaven-, uren-, klant- en profielgegevens:
             </p>
             <ul>
               <li>
@@ -169,29 +182,30 @@ export default function DataProcessingAgreementPage() {
               bezwaar maken door de Dienst te stoppen en uw account te verwijderen.
             </p>
 
-            <h2>7. Locatie</h2>
+            <h2 id="locatie">7. Locatie</h2>
             <p>
-              Opgeslagen accountgegevens (facturen, klanten, profiel, logo&apos;s) worden verwerkt in de EU/EER
-              (Supabase eu-north-1, Stockholm). Hosting/CDN en OAuth kunnen edge- of identiteitsverwerking volgens
-              de voorwaarden van die partijen met zich meebrengen.
+              Opgeslagen accountgegevens (facturen, offertes, inkomsten, uitgaven, uren, klanten, profiel,
+              logo&apos;s) worden verwerkt in de EU/EER (Supabase eu-north-1, Stockholm). Hosting/CDN en OAuth
+              kunnen edge- of identiteitsverwerking volgens de voorwaarden van die partijen met zich meebrengen.
             </p>
 
-            <h2>8. Verwijdering en export</h2>
+            <h2 id="verwijdering">8. Verwijdering en export</h2>
             <p>
-              U kunt facturen exporteren (JSON/CSV) en verwijderen, klanten beheren of uw hele account wissen. Na
-              accountverwijdering wissen wij bijbehorende opgeslagen facturen, klanten, profielgegevens en logo’s,
-              behoudens wettelijke bewaarplichten of technische restanten in back-ups die binnen de normale retentie
-              van onze provider verlopen. Deze back-ups worden{' '}
+              U kunt uw volledige accountgegevens exporteren (JSON via Profiel), facturen en offertes extra als
+              JSON/CSV downloaden, records verwijderen, of uw hele account wissen. Na accountverwijdering wissen
+              wij bijbehorende opgeslagen facturen, offertes, inkomsten, uitgaven, uren, klanten, profielgegevens
+              en logo’s, behoudens wettelijke bewaarplichten of technische restanten in back-ups die binnen de
+              normale retentie van onze provider verlopen. Deze back-ups worden{' '}
               <strong>niet actief gebruikt voor reguliere dienstverlening</strong>.
             </p>
 
-            <h2>9. Aansprakelijkheid</h2>
+            <h2 id="aansprakelijkheid">9. Aansprakelijkheid</h2>
             <p>
               Aansprakelijkheid is beperkt zoals beschreven in de Algemene voorwaarden, voor zover de wet dat
               toelaat. Deze DPA wijzigt geen dwingende rechten van betrokkenen.
             </p>
 
-            <h2>10. Contact</h2>
+            <h2 id="contact">10. Contact</h2>
             <p>
               Vragen of een ondertekende DPA:{' '}
               <a href="mailto:mail@factuurbaas.nl" className="text-warm-orange hover:underline">
@@ -199,19 +213,6 @@ export default function DataProcessingAgreementPage() {
               </a>
               .
             </p>
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/"
-              className="group flex items-center justify-center font-heading text-md font-bold text-deep-blue transition-colors hover:text-warm-orange"
-            >
-              <Crown className="mr-2 h-6 w-6 text-warm-orange transition-transform group-hover:scale-110" />
-              FactuurBaas.nl
-            </Link>
-          </div>
-        </article>
-      </div>
-    </div>
+    </LegalDocument>
   );
 }

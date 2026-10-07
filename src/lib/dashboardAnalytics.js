@@ -19,6 +19,10 @@ function expenseDate(expense) {
   return toDate(expense.expenseDate) || toDate(expense.created_at) || null;
 }
 
+function incomeDate(income) {
+  return toDate(income.incomeDate) || toDate(income.created_at) || null;
+}
+
 const MONTH_SHORT = [
   'jan',
   'feb',
@@ -79,7 +83,7 @@ export function buildMonthlyCashflow(invoices, months = 6) {
 }
 
 /** Last N months: omzet (excl.) vs uitgaven (excl.) + resultaat. */
-export function buildMonthlyOmzetUitgaven(invoices = [], expenses = [], months = 6) {
+export function buildMonthlyOmzetUitgaven(invoices = [], expenses = [], months = 6, incomes = []) {
   const buckets = lastNMonthBuckets(months).map((b) => ({
     ...b,
     omzet: 0,
@@ -94,6 +98,15 @@ export function buildMonthlyOmzetUitgaven(invoices = [], expenses = [], months =
     const bucket = byKey[key];
     if (!bucket) continue;
     bucket.omzet += Number(inv.total_excl) || 0;
+  }
+
+  for (const item of incomes) {
+    const date = incomeDate(item);
+    if (!date) continue;
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const bucket = byKey[key];
+    if (!bucket) continue;
+    bucket.omzet += Number(item.amountExcl) || 0;
   }
 
   for (const exp of expenses) {
@@ -118,7 +131,7 @@ export function buildMonthlyOmzetUitgaven(invoices = [], expenses = [], months =
 }
 
 /** Last N quarters: verkoop-btw, aftrekbare btw, te reserveren. */
-export function buildQuarterlyBtwPosition(invoices = [], expenses = [], quarters = 4) {
+export function buildQuarterlyBtwPosition(invoices = [], expenses = [], quarters = 4, incomes = []) {
   const now = new Date();
   const buckets = [];
   const seen = new Set();
@@ -148,6 +161,16 @@ export function buildQuarterlyBtwPosition(invoices = [], expenses = [], quarters
     const bucket = byKey[key];
     if (!bucket) continue;
     bucket.btwOmzet += Number(inv.total_btw) || 0;
+  }
+
+  for (const item of incomes) {
+    const date = incomeDate(item);
+    if (!date) continue;
+    const q = Math.floor(date.getMonth() / 3) + 1;
+    const key = `${date.getFullYear()}-Q${q}`;
+    const bucket = byKey[key];
+    if (!bucket) continue;
+    bucket.btwOmzet += Number(item.vatAmount) || 0;
   }
 
   for (const exp of expenses) {

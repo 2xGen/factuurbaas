@@ -22,6 +22,7 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
 import { clientDisplayName, fetchUserClients } from '@/lib/clientPersistence';
 import { saveHoursToInvoicePrefill } from '@/lib/invoicePrefill';
+import { fetchBusinessSettings } from '@/lib/businessSettings';
 import {
   deleteTimeEntries,
   deleteTimeEntry,
@@ -53,6 +54,7 @@ export default function UrenPage() {
   const [statusFilter, setStatusFilter] = useState('open'); // open | invoiced | all
   const [selectedIds, setSelectedIds] = useState(() => new Set());
   const [invoiceRate, setInvoiceRate] = useState('');
+  const [defaultHourlyRate, setDefaultHourlyRate] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingEntry, setEditingEntry] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -73,12 +75,18 @@ export default function UrenPage() {
     }
     setIsLoading(true);
     try {
-      const [entryData, clientData] = await Promise.all([
+      const [entryData, clientData, settings] = await Promise.all([
         fetchUserTimeEntries(supabase, user.id, { includeInvoiced: true }),
         fetchUserClients(supabase, user.id),
+        fetchBusinessSettings(supabase, user.id).catch(() => null),
       ]);
       setEntries(entryData);
       setClients(clientData);
+      if (settings?.hourlyRate) {
+        const rate = String(settings.hourlyRate);
+        setDefaultHourlyRate(rate);
+        setInvoiceRate((prev) => prev || rate);
+      }
     } catch (error) {
       toast({
         title: 'Fout bij laden uren',
@@ -752,6 +760,7 @@ export default function UrenPage() {
         initialEntry={editingEntry}
         clients={clients}
         isSaving={isSaving}
+        defaultHourlyRate={defaultHourlyRate}
       />
     </div>
   );

@@ -1,12 +1,27 @@
 'use client';
 
 import React, { useMemo, useState, useCallback } from 'react';
-import Link from 'next/link';
-import { Calculator, Copy } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { Copy, Wallet } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
+import { AnimatedNumber } from '@/components/landing/page/motion';
+import {
+  AffixInput,
+  CalculatorPage,
+  FieldHint,
+  FieldLabel,
+  RelatedLink,
+  ResultActions,
+  ResultEmpty,
+  ResultHero,
+  ResultPanel,
+  ResultRow,
+  ResultRows,
+  ToolCard,
+  ToolGrid,
+  resultButton,
+} from '@/components/tools/calculatorUi';
 import {
   MARGE_MODES,
   calculateMarginFromMode,
@@ -16,27 +31,14 @@ import {
 } from '@/lib/margeCalculator';
 import { TOOL_LOG_TABLES } from '@/lib/toolUsageLog';
 import { useDebouncedCalculationLog } from '@/hooks/useDebouncedCalculationLog';
+import { saveMoneyPrefill } from '@/lib/moneyPrefill';
 
 function MoneyInput({ id, label, hint, value, onChange }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-slate-700">
-        {label}
-      </label>
-      {hint && <p className="mb-2 text-xs text-slate-500">{hint}</p>}
-      <div className="relative">
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-          €
-        </span>
-        <Input
-          id={id}
-          type="text"
-          inputMode="decimal"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-12 pl-9 text-lg"
-        />
-      </div>
+      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+      {hint && <FieldHint className="-mt-1 mb-2">{hint}</FieldHint>}
+      <AffixInput id={id} prefix="€" value={value} onChange={onChange} />
     </div>
   );
 }
@@ -44,28 +46,17 @@ function MoneyInput({ id, label, hint, value, onChange }) {
 function PercentInput({ id, label, hint, value, onChange }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-slate-700">
-        {label}
-      </label>
-      {hint && <p className="mb-2 text-xs text-slate-500">{hint}</p>}
-      <div className="relative">
-        <Input
-          id={id}
-          type="text"
-          inputMode="decimal"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="h-12 pr-10 text-lg"
-        />
-        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
-          %
-        </span>
-      </div>
+      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+      {hint && <FieldHint className="-mt-1 mb-2">{hint}</FieldHint>}
+      <AffixInput id={id} suffix="%" value={value} onChange={onChange} />
     </div>
   );
 }
 
+const formatMargin = (value) => `${formatPercent(value)}%`;
+
 export default function MargeCalculator() {
+  const router = useRouter();
   const { toast } = useToast();
   const [mode, setMode] = useState('both-prices');
   const [purchaseInput, setPurchaseInput] = useState('');
@@ -113,6 +104,17 @@ export default function MargeCalculator() {
     }
   }, [resultText, toast]);
 
+  const handleAddIncome = useCallback(() => {
+    if (!result) return;
+    saveMoneyPrefill({
+      kind: 'income',
+      description: 'Verkoop',
+      amountExcl: Math.round(result.salePrice * 100) / 100,
+      vatRate: 21,
+    });
+    router.push('/inkomsten');
+  }, [result, router]);
+
   const emptyMessage =
     mode === 'both-prices'
       ? 'Vul een inkoop- en verkoopprijs in om je marge te berekenen.'
@@ -121,54 +123,56 @@ export default function MargeCalculator() {
         : 'Vul verkoopprijs en gewenste marge % in om je inkoopprijs te berekenen.';
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-          Marge calculator
-        </h1>
-        <p className="mt-2 text-slate-600">
+    <CalculatorPage
+      breadcrumbLabel="Marge calculator"
+      title={
+        <>
+          Marge <em>calculator</em>
+        </>
+      }
+      lead={
+        <p>
           Bereken winst en marge op basis van prijzen, of bepaal je verkoop- of inkoopprijs met een
           gewenste marge %.
         </p>
-      </div>
-
-      <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
-        <div className="lg:col-span-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-              <Calculator className="h-5 w-5" />
-            </div>
-            <div>
-              <h2 className="font-heading text-lg font-bold text-deep-blue">Wat wil je berekenen?</h2>
-              <p className="text-sm text-slate-500">Kies een berekeningsmethode.</p>
-            </div>
+      }
+    >
+      <ToolGrid>
+        <ToolCard title="Wat wil je berekenen?" description="Kies een berekeningsmethode.">
+          <div role="radiogroup" aria-label="Wat wil je berekenen?" className="mb-8 grid gap-2.5 sm:grid-cols-3">
+            {MARGE_MODES.map((opt) => {
+              const active = mode === opt.value;
+              return (
+                <label
+                  key={opt.value}
+                  className={cn(
+                    'relative flex cursor-pointer flex-col rounded-xl border p-4 transition-colors',
+                    active
+                      ? 'border-ink bg-ink text-white shadow-[0_10px_22px_-12px_rgba(6,26,48,0.7)]'
+                      : 'border-ink/[0.12] bg-white text-ink hover:border-ink/30'
+                  )}
+                >
+                  <input
+                    type="radio"
+                    name="margeMode"
+                    checked={active}
+                    onChange={() => setMode(opt.value)}
+                    className="peer sr-only"
+                  />
+                  <span
+                    className="pointer-events-none absolute inset-0 rounded-xl ring-ember ring-offset-1 peer-focus-visible:ring-2"
+                    aria-hidden
+                  />
+                  <span className="text-sm font-medium">{opt.label}</span>
+                  <span className={cn('mt-1 text-xs leading-relaxed', active ? 'text-white/60' : 'text-ink-400')}>
+                    {opt.hint}
+                  </span>
+                </label>
+              );
+            })}
           </div>
 
-          <div className="mb-6 grid gap-3 sm:grid-cols-3">
-            {MARGE_MODES.map((opt) => (
-              <label
-                key={opt.value}
-                className={cn(
-                  'flex cursor-pointer flex-col rounded-xl border p-4 transition-colors',
-                  mode === opt.value
-                    ? 'border-blue-500 bg-blue-50/60'
-                    : 'border-slate-200 hover:border-slate-300'
-                )}
-              >
-                <input
-                  type="radio"
-                  name="margeMode"
-                  checked={mode === opt.value}
-                  onChange={() => setMode(opt.value)}
-                  className="sr-only"
-                />
-                <span className="text-sm font-semibold text-slate-800">{opt.label}</span>
-                <span className="mt-1 text-xs text-slate-500">{opt.hint}</span>
-              </label>
-            ))}
-          </div>
-
-          <div className="space-y-5">
+          <div className="space-y-6 border-t border-dashed border-ink/10 pt-7">
             {(mode === 'both-prices' || mode === 'from-purchase') && (
               <MoneyInput
                 id="purchase-price"
@@ -195,81 +199,76 @@ export default function MargeCalculator() {
               />
             )}
           </div>
-        </div>
+        </ToolCard>
 
-        <div className="lg:col-span-2">
-          <div className="sticky top-[calc(var(--header-height,6rem)+1.5rem)] rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="font-heading text-lg font-bold text-deep-blue">Resultaat</h2>
-
+        <div className="lg:sticky lg:top-[calc(var(--header-height,5rem)+1.5rem)]">
+          <ResultPanel
+            footnote={
+              <p className="font-mono text-[11px] tracking-[0.02em]">
+                {mode === 'from-purchase'
+                  ? 'Verkoopprijs = inkoopprijs ÷ (1 − marge %). Marge onder 100%.'
+                  : mode === 'from-sale'
+                    ? 'Inkoopprijs = verkoopprijs × (1 − marge %).'
+                    : 'Marge % = (winst ÷ verkoopprijs) × 100'}
+              </p>
+            }
+          >
             {result ? (
-              <div className="mt-5 space-y-4">
+              <>
                 {mode !== 'both-prices' && (
-                  <div className="rounded-lg bg-slate-50 px-4 py-3">
-                    <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  <div className="mt-6 rounded-xl bg-white/[0.05] px-4 py-4 ring-1 ring-inset ring-white/10">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">
                       {mode === 'from-purchase' ? 'Berekende verkoopprijs' : 'Berekende inkoopprijs'}
                     </p>
-                    <p className="mt-1 font-heading text-2xl font-bold text-deep-blue">
-                      {formatEuro(mode === 'from-purchase' ? result.salePrice : result.purchasePrice)}
-                    </p>
-                    <p className="mt-1 text-xs text-slate-500">{result.formulaDetail}</p>
+                    <AnimatedNumber
+                      value={mode === 'from-purchase' ? result.salePrice : result.purchasePrice}
+                      format={formatEuro}
+                      className="mt-1.5 block font-display text-3xl leading-none text-white tabular"
+                    />
+                    <p className="mt-2 text-xs text-white/45">{result.formulaDetail}</p>
                   </div>
                 )}
 
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Inkoopprijs</span>
-                  <span className="font-semibold text-slate-900">
-                    {formatEuro(result.purchasePrice)}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Verkoopprijs</span>
-                  <span className="font-semibold text-slate-900">
-                    {formatEuro(result.salePrice)}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-                  <span className="text-sm text-slate-600">Winst</span>
-                  <span className="font-semibold text-slate-900">
-                    {formatEuro(result.profit)}
-                  </span>
-                </div>
+                <ResultHero label="Winstmarge" value={result.marginPercent} format={formatMargin} sub="van verkoopprijs" />
+
+                <ResultRows>
+                  <ResultRow label="Inkoopprijs" value={result.purchasePrice} format={formatEuro} />
+                  <ResultRow label="Verkoopprijs" value={result.salePrice} format={formatEuro} />
+                  <ResultRow
+                    label="Winst"
+                    value={result.profit}
+                    format={formatEuro}
+                    valueClassName={result.profit < 0 ? 'text-rose-300' : 'text-emerald-300'}
+                  />
+                </ResultRows>
                 {mode === 'both-prices' && (
-                  <p className="text-xs text-slate-400">{result.formulaDetail}</p>
+                  <p className="mt-3 text-xs text-white/45">{result.formulaDetail}</p>
                 )}
 
-                <div className="rounded-xl bg-blue-50 px-4 py-5 text-center">
-                  <p className="text-sm font-medium text-blue-800">Winstmarge</p>
-                  <p className="mt-1 font-heading text-3xl font-bold text-deep-blue">
-                    {formatPercent(result.marginPercent)}%
-                  </p>
-                  <p className="text-sm text-blue-700">van verkoopprijs</p>
-                </div>
-
-                <Button type="button" variant="outline" onClick={handleCopy} className="w-full">
-                  <Copy className="mr-2 h-4 w-4" />
-                  Kopieer resultaat
-                </Button>
-              </div>
+                <ResultActions>
+                  <button type="button" onClick={handleAddIncome} className={resultButton.primary}>
+                    <Wallet className="h-4 w-4" aria-hidden />
+                    Voeg verkoop toe aan inkomsten
+                  </button>
+                  <button type="button" onClick={handleCopy} className={resultButton.secondary}>
+                    <Copy className="h-4 w-4" aria-hidden />
+                    Kopieer resultaat
+                  </button>
+                </ResultActions>
+              </>
             ) : (
-              <p className="mt-5 text-sm text-slate-500">{emptyMessage}</p>
+              <ResultEmpty>{emptyMessage}</ResultEmpty>
             )}
-
-            <p className="mt-5 text-xs leading-relaxed text-slate-500">
-              {mode === 'from-purchase'
-                ? 'Verkoopprijs = inkoopprijs ÷ (1 − marge %). Marge onder 100%.'
-                : mode === 'from-sale'
-                  ? 'Inkoopprijs = verkoopprijs × (1 − marge %).'
-                  : 'Marge % = (winst ÷ verkoopprijs) × 100'}
-            </p>
-          </div>
+          </ResultPanel>
         </div>
-      </div>
+      </ToolGrid>
 
-      <p className="text-center text-sm text-slate-500">
-        <Link href="/tools/marge-calculator" className="text-warm-orange hover:underline">
-          ← Meer uitleg over marge berekenen
-        </Link>
-      </p>
-    </div>
+      <RelatedLink href="/tools/marge-calculator">
+        <span className="text-ember" aria-hidden>
+          ←
+        </span>{' '}
+        Meer uitleg over marge berekenen
+      </RelatedLink>
+    </CalculatorPage>
   );
 }

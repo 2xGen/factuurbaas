@@ -2,6 +2,16 @@ import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { sendAccountDeletedEmail } from '@/lib/welcomeEmail';
 
+const MISSING_TABLE_RE =
+  /does not exist|schema cache|Could not find the table|relation .* does not exist/i;
+
+async function deleteOwnedRows(admin, table, column, userId) {
+  const { error } = await admin.from(table).delete().eq(column, userId);
+  if (error && !MISSING_TABLE_RE.test(error.message || '')) {
+    throw error;
+  }
+}
+
 /**
  * AVG account deletion. Requires Authorization: Bearer <user access token>.
  * Sends a confirmation email first, then deletes auth.users (cascades data).
@@ -83,16 +93,27 @@ export async function DELETE(request) {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  await admin.from('clients').delete().eq('user_id', user.id);
-  await admin.from('expenses').delete().eq('user_id', user.id);
-  await admin.from('invoices').delete().eq('user_id', user.id);
-  await admin.from('profiles').delete().eq('id', user.id);
+  try {
+    // FK-safe order. Ignore tables that are not migrated yet.
+    await deleteOwnedRows(admin, 'time_entries', 'user_id', user.id);
+    await deleteOwnedRows(admin, 'quotes', 'user_id', user.id);
+    await deleteOwnedRows(admin, 'incomes', 'user_id', user.id);
+    await deleteOwnedRows(admin, 'expenses', 'user_id', user.id);
+    await deleteOwnedRows(admin, 'invoices', 'user_id', user.id);
+    await deleteOwnedRows(admin, 'clients', 'user_id', user.id);
+    await deleteOwnedRows(admin, 'profiles', 'id', user.id);
 
-  const { data: files } = await admin.storage.from('user-logos').list(user.id);
-  if (files?.length) {
-    await admin.storage
-      .from('user-logos')
-      .remove(files.map((f) => `${user.id}/${f.name}`));
+    const { data: files } = await admin.storage.from('user-logos').list(user.id);
+    if (files?.length) {
+      await admin.storage
+        .from('user-logos')
+        .remove(files.map((f) => `${user.id}/${f.name}`));
+    }
+  } catch (err) {
+    return NextResponse.json(
+      { error: err.message || 'Kon accountgegevens niet wissen' },
+      { status: 500 }
+    );
   }
 
   const { error: deleteError } = await admin.auth.admin.deleteUser(user.id);

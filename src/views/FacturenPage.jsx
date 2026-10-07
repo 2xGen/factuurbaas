@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Download, FilePlus2, Loader2, Search } from 'lucide-react';
 import ReminderDialog from '@/components/dashboard/dialogs/ReminderDialog';
+import MarkPaidDialog from '@/components/dashboard/dialogs/MarkPaidDialog';
 import ActivityLogDialog from '@/components/dashboard/dialogs/ActivityLogDialog';
 import DeleteInvoiceDialog from '@/components/dashboard/dialogs/DeleteInvoiceDialog';
 import DashboardContent from '@/components/dashboard/DashboardContent';
@@ -29,6 +30,7 @@ export default function FacturenPage() {
   } = useUserInvoices();
 
   const [selectedInvoiceForReminder, setSelectedInvoiceForReminder] = useState(null);
+  const [invoiceToMarkPaid, setInvoiceToMarkPaid] = useState(null);
   const [selectedInvoiceForActivityLog, setSelectedInvoiceForActivityLog] = useState(null);
   const [invoiceToDelete, setInvoiceToDelete] = useState(null);
 
@@ -48,12 +50,25 @@ export default function FacturenPage() {
 
   if (!user && !authLoading) return null;
 
-  const togglePaidStatus = (invoiceId) => {
-    const invoice = userInvoices.find((inv) => inv.id === invoiceId);
+  const togglePaidStatus = (invoice) => {
     if (!invoice) return;
-    const newStatus = invoice.status === 'paid' ? 'pending' : 'paid';
-    const activityDescription = `Status gewijzigd naar: ${newStatus === 'paid' ? 'Betaald' : 'Openstaand'}`;
-    onSaveInvoice({ ...invoice, status: newStatus }, activityDescription);
+    if (invoice.status === 'paid') {
+      onSaveInvoice(
+        { ...invoice, status: 'pending', paidDate: null },
+        'Status gewijzigd naar: Openstaand'
+      );
+      return;
+    }
+    setInvoiceToMarkPaid(invoice);
+  };
+
+  const confirmMarkPaid = (paidDate) => {
+    if (!invoiceToMarkPaid) return;
+    onSaveInvoice(
+      { ...invoiceToMarkPaid, status: 'paid', paidDate },
+      `Gemarkeerd als betaald op ${paidDate}`
+    );
+    setInvoiceToMarkPaid(null);
   };
 
   const handleConfirmDelete = () => {
@@ -149,6 +164,15 @@ export default function FacturenPage() {
         </motion.div>
       </div>
 
+      {invoiceToMarkPaid && (
+        <MarkPaidDialog
+          invoice={invoiceToMarkPaid}
+          invoices={userInvoices}
+          isOpen={!!invoiceToMarkPaid}
+          onClose={() => setInvoiceToMarkPaid(null)}
+          onConfirm={confirmMarkPaid}
+        />
+      )}
       {selectedInvoiceForReminder && (
         <ReminderDialog
           invoice={selectedInvoiceForReminder}

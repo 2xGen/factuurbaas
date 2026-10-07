@@ -17,6 +17,7 @@ import {
   INTERVAL_PRESETS,
   VAT_RATES,
   computeVatBreakdown,
+  computeVatBreakdownFromIncl,
   emptyExpense,
   previewRecurringCount,
   resolveRecurUntil,
@@ -26,6 +27,11 @@ import { cn } from '@/lib/utils';
 
 const fieldClass =
   'w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-deep-blue/40 focus:ring-2 focus:ring-deep-blue/10';
+
+function moneyInput(n) {
+  if (!Number.isFinite(n)) return '';
+  return String(Math.round(n * 100) / 100).replace('.', ',');
+}
 
 function Field({ label, hint, htmlFor, children, className }) {
   return (
@@ -43,6 +49,8 @@ function Field({ label, hint, htmlFor, children, className }) {
 
 export default function ExpenseFormDialog({ open, onClose, onSave, initialExpense, isSaving }) {
   const [form, setForm] = useState(emptyExpense());
+  const [amount, setAmount] = useState('');
+  const [amountMode, setAmountMode] = useState('incl');
   const isEdit = Boolean(initialExpense?.id);
 
   useEffect(() => {
@@ -54,10 +62,6 @@ export default function ExpenseFormDialog({ open, onClose, onSave, initialExpens
         description: initialExpense.description || '',
         supplier: initialExpense.supplier || '',
         category: initialExpense.category || 'overig',
-        amountExcl:
-          initialExpense.amountExcl === 0 || initialExpense.amountExcl
-            ? String(initialExpense.amountExcl)
-            : '',
         vatRate: initialExpense.vatRate ?? 21,
         notes: initialExpense.notes || '',
         isRecurring: Boolean(initialExpense.isRecurring),
@@ -65,16 +69,42 @@ export default function ExpenseFormDialog({ open, onClose, onSave, initialExpens
         recurUntil: initialExpense.recurUntil || '',
         recurrenceGroupId: initialExpense.recurrenceGroupId || null,
       });
+      setAmountMode('incl');
+      setAmount(
+        initialExpense.amountIncl === 0 || initialExpense.amountIncl
+          ? moneyInput(Number(initialExpense.amountIncl))
+          : moneyInput(
+              computeVatBreakdown(initialExpense.amountExcl, initialExpense.vatRate ?? 21).amountIncl
+            )
+      );
     } else {
-      setForm(emptyExpense());
+      const prefill = initialExpense && !initialExpense.id ? initialExpense : null;
+      setForm({
+        ...emptyExpense(),
+        description: prefill?.description || '',
+        vatRate: prefill?.vatRate ?? 21,
+      });
+      if (prefill?.amountIncl != null && prefill.amountIncl !== '') {
+        setAmountMode('incl');
+        setAmount(moneyInput(Number(prefill.amountIncl)));
+      } else if (prefill?.amountExcl != null && prefill.amountExcl !== '') {
+        setAmountMode('excl');
+        setAmount(moneyInput(Number(prefill.amountExcl)));
+      } else {
+        setAmountMode('incl');
+        setAmount('');
+      }
     }
   }, [open, initialExpense]);
 
   const setField = (name, value) => setForm((prev) => ({ ...prev, [name]: value }));
 
   const breakdown = useMemo(
-    () => computeVatBreakdown(form.amountExcl, form.vatRate),
-    [form.amountExcl, form.vatRate]
+    () =>
+      amountMode === 'incl'
+        ? computeVatBreakdownFromIncl(amount, form.vatRate)
+        : computeVatBreakdown(amount, form.vatRate),
+    [amount, amountMode, form.vatRate]
   );
 
   const occurrenceCount = useMemo(() => {
@@ -89,12 +119,14 @@ export default function ExpenseFormDialog({ open, onClose, onSave, initialExpens
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.description?.trim()) return;
-    onSave(form);
+    if (!form.description?.trim() || amount === '') return;
+    onSave({
+      ...form,
+      amountExcl: breakdown.amountExcl,
+    });
   };
 
-  const canSave =
-    Boolean(form.description?.trim()) && Number(form.amountExcl) >= 0 && form.amountExcl !== '';
+  const canSave = Boolean(form.description?.trim()) && amount !== '';
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
@@ -175,67 +207,71 @@ export default function ExpenseFormDialog({ open, onClose, onSave, initialExpens
               </Field>
             </section>
 
-            {/* Amount */}
             <section className="space-y-3">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                 Bedrag
               </p>
-              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/80">
-                <div className="grid gap-3 p-4 sm:grid-cols-[1.4fr_1fr]">
-                  <Field label="Excl. btw" htmlFor="expense-amount">
-                    <div className="relative">
-                      <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-slate-400">
-                        €
-                      </span>
-                      <input
-                        id="expense-amount"
-                        type="number"
-                        inputMode="decimal"
-                        step="0.01"
-                        min="0"
-                        className={cn(fieldClass, 'pl-8 font-semibold tabular-nums')}
-                        value={form.amountExcl}
-                        onChange={(e) => setField('amountExcl', e.target.value)}
-                        placeholder="0,00"
-                        required
-                      />
-                    </div>
-                  </Field>
-                  <Field label="BTW" htmlFor="expense-vat">
-                    <div className="flex gap-1.5">
-                      {VAT_RATES.map((r) => {
-                        const active = Number(form.vatRate) === r.value;
-                        return (
-                          <button
-                            key={r.value}
-                            type="button"
-                            onClick={() => setField('vatRate', r.value)}
-                            className={cn(
-                              'flex-1 rounded-xl border py-2.5 text-sm font-semibold transition',
-                              active
-                                ? 'border-deep-blue bg-deep-blue text-white'
-                                : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
-                            )}
-                          >
-                            {r.label}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </Field>
+              <div className="space-y-3 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
+                <Field label="Bedrag" htmlFor="expense-amount">
+                  <div className="relative">
+                    <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+                      €
+                    </span>
+                    <input
+                      id="expense-amount"
+                      inputMode="decimal"
+                      className={cn(fieldClass, 'pl-8 font-semibold tabular-nums')}
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      placeholder="0,00"
+                      required
+                    />
+                  </div>
+                </Field>
+                <div className="grid grid-cols-2 gap-1 rounded-lg bg-slate-100 p-1">
+                  {[
+                    { value: 'incl', label: 'Incl. btw' },
+                    { value: 'excl', label: 'Excl. btw' },
+                  ].map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setAmountMode(option.value)}
+                      className={cn(
+                        'h-9 rounded-md text-sm font-medium',
+                        amountMode === option.value
+                          ? 'bg-white text-deep-blue shadow-sm'
+                          : 'text-slate-500'
+                      )}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
                 </div>
-                <div className="flex items-center justify-between border-t border-slate-200/80 bg-white px-4 py-3">
-                  <div className="text-sm text-slate-500">
-                    BTW {formatEuro(breakdown.vatAmount)}
+                <div>
+                  <p className="mb-1.5 text-sm font-medium text-slate-700">Btw</p>
+                  <div className="grid grid-cols-3 gap-1 rounded-lg bg-slate-100 p-1">
+                    {VAT_RATES.map((r) => (
+                      <button
+                        key={r.value}
+                        type="button"
+                        onClick={() => setField('vatRate', r.value)}
+                        className={cn(
+                          'h-9 rounded-md text-sm font-medium',
+                          Number(form.vatRate) === r.value
+                            ? 'bg-white text-deep-blue shadow-sm'
+                            : 'text-slate-500'
+                        )}
+                      >
+                        {r.label}
+                      </button>
+                    ))}
                   </div>
-                  <div className="text-right">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                      Totaal incl. btw
-                    </p>
-                    <p className="font-heading text-xl font-bold tabular-nums text-deep-blue">
-                      {formatEuro(breakdown.amountIncl)}
-                    </p>
-                  </div>
+                  <p className="mt-1.5 text-xs text-slate-400">
+                    {amountMode === 'incl'
+                      ? `Excl. btw ${formatEuro(breakdown.amountExcl)} · waarvan btw ${formatEuro(breakdown.vatAmount)}`
+                      : `Incl. btw ${formatEuro(breakdown.amountIncl)} · waarvan btw ${formatEuro(breakdown.vatAmount)}`}
+                  </p>
                 </div>
               </div>
             </section>

@@ -3,15 +3,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Check, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-40px' },
-  transition: { duration: 0.45, ease: 'easeOut' },
-};
+import { Shield } from 'lucide-react';
+import { Reveal, Stagger, staggerItem } from '@/components/landing/page/motion';
+import {
+  ArrowIcon,
+  ClosingCta,
+  DarkPanel,
+  DisplayHeading,
+  PageHeader,
+  btn,
+} from '@/components/site/editorial';
 
 const COSTS = [
   'KVK-inschrijving',
@@ -36,7 +37,10 @@ const TRUST = [
     text: (
       <>
         Beveiligde opslag in Stockholm — zie{' '}
-        <Link href="/veiligheid" className="text-warm-orange underline-offset-2 hover:underline">
+        <Link
+          href="/veiligheid"
+          className="text-ink underline decoration-ink/20 underline-offset-[6px] transition-colors hover:decoration-ember"
+        >
           Veiligheid
         </Link>
         .
@@ -49,211 +53,175 @@ const TRUST = [
   },
 ];
 
+const numeral = (i) => String(i + 1).padStart(2, '0');
+
+function EditorialRow({ title, children, className = '' }) {
+  return (
+    <div
+      className={`grid gap-6 border-t border-ink/15 py-14 sm:py-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24 lg:py-20 ${className}`}
+    >
+      <Reveal className="lg:sticky lg:top-32 lg:self-start">
+        <DisplayHeading size="md" className="max-w-[16ch]">
+          {title}
+        </DisplayHeading>
+      </Reveal>
+      <Reveal delay={0.08} className="text-base leading-relaxed text-ink-500 sm:text-[1.05rem] [&>p+p]:mt-4 [&>p]:max-w-2xl">
+        {children}
+      </Reveal>
+    </div>
+  );
+}
+
 export default function WhyFreeContent() {
   return (
-    <div className="min-h-screen bg-[#f4f6f9]">
-      <section className="relative overflow-hidden bg-deep-blue text-white">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 60% at 70% -10%, rgba(255,127,80,0.35), transparent 55%), radial-gradient(ellipse 50% 40% at 10% 80%, rgba(255,255,255,0.08), transparent 50%)',
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-            maskImage: 'linear-gradient(to bottom, black, transparent)',
-          }}
-        />
+    <div className="min-h-screen bg-paper text-ink">
+      <PageHeader
+        eyebrow="FactuurBaas"
+        title={
+          <>
+            Waarom is FactuurBaas <em>gratis</em>?
+          </>
+        }
+        lead={
+          <p>
+            Maak professionele facturen zonder maandelijkse kosten. Ondernemers verdienen eenvoudige tools —
+            zonder meteen weer een rekening erbij.
+          </p>
+        }
+      >
+        <Link href="/create-invoice" className={btn.primary}>
+          Maak gratis factuur
+          <ArrowIcon />
+        </Link>
+      </PageHeader>
 
-        <div className="relative container mx-auto max-w-4xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
-            <p className="font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              FactuurBaas
-            </p>
-            <h1 className="mt-6 max-w-2xl font-heading text-3xl font-bold leading-[1.15] tracking-tight sm:text-5xl">
-              Waarom is FactuurBaas gratis?
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Maak professionele facturen zonder maandelijkse kosten. Ondernemers verdienen eenvoudige tools —
-              zonder meteen weer een rekening erbij.
-            </p>
-            <div className="mt-8">
-              <Button
-                asChild
-                size="lg"
-                className="rounded-xl bg-warm-orange px-6 font-semibold text-white hover:bg-orange-600"
-              >
-                <Link href="/create-invoice">
-                  Maak gratis factuur <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <div className="container mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
-        <motion.section {...fadeUp} className="mb-20 sm:mb-28">
-          <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-            Ondernemen is al duur genoeg
-          </h2>
-          <p className="mt-4 max-w-2xl text-slate-600 leading-relaxed">
+      <div className="container mx-auto px-4 sm:px-6">
+        <EditorialRow title="Ondernemen is al duur genoeg" className="border-t-0">
+          <p>
             Starten betekent vaak meteen kosten. Wij vinden dat iedere ondernemer een eenvoudige manier moet hebben
             om facturen te maken — zonder meteen weer een maandelijkse rekening.
           </p>
-          <div className="mt-8 flex flex-wrap gap-2.5">
+          <ul className="mt-8 flex flex-wrap gap-2.5">
             {COSTS.map((item) => (
-              <span
+              <li
                 key={item}
-                className="rounded-full border border-slate-200/90 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm"
+                className="rounded-full border border-ink/10 bg-white px-4 py-2 text-sm text-ink-700 shadow-paper"
               >
                 {item}
-              </span>
+              </li>
             ))}
-          </div>
-        </motion.section>
+          </ul>
+        </EditorialRow>
 
-        <motion.section {...fadeUp} className="mb-20 sm:mb-28">
-          <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-            Waarom geen abonnement?
-          </h2>
-          <p className="mt-4 max-w-2xl text-slate-600 leading-relaxed">
+        <EditorialRow title="Waarom geen abonnement?">
+          <p>
             Veel ondernemers starten klein. Een abonnement van €10 of €20 per maand voelt misschien niet groot, maar
             voor iemand die net begint zijn alle vaste kosten belangrijk. Daarom willen wij eerst waarde bieden —
             factureren zonder abonnement te moeten nemen.
           </p>
-        </motion.section>
+        </EditorialRow>
+      </div>
 
-        <motion.section
-          {...fadeUp}
-          className="mb-20 border-y border-slate-200 py-14 sm:mb-28 sm:py-16"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-warm-orange">Missie</p>
-          <p className="mt-4 font-heading text-2xl font-bold leading-snug tracking-tight text-deep-blue sm:text-4xl sm:leading-tight">
-            Nederlandse ondernemers helpen om eenvoudiger hun administratie te regelen.
-          </p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+      <section className="grain relative isolate border-y border-ink/[0.06] bg-paper-50">
+        <div className="bg-ledger mask-fade-y pointer-events-none absolute inset-0 -z-10 opacity-70" aria-hidden />
+        <div className="container mx-auto px-4 py-20 sm:px-6 sm:py-24 lg:py-28">
+          <Reveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ember">Missie</p>
+            <p className="mt-6 max-w-[24ch] font-display text-[2rem] font-normal leading-[1.08] tracking-[-0.03em] text-ink sm:text-5xl lg:text-[3.4rem]">
+              Nederlandse ondernemers helpen om <em className="text-ink-700">eenvoudiger</em> hun administratie te
+              regelen.
+            </p>
+          </Reveal>
+          <Stagger className="mt-12 grid border-t border-ink/15 sm:grid-cols-3">
             {['Geen ingewikkelde systemen', 'Geen lange contracten', 'Geen verplicht abonnement'].map(
-              (line) => (
-                <p key={line} className="text-sm font-medium text-slate-600 sm:text-base">
+              (line, i) => (
+                <motion.p
+                  key={line}
+                  variants={staggerItem}
+                  className="flex items-baseline gap-4 border-b border-ink/15 py-5 text-base text-ink-700 sm:border-b-0 sm:py-7 sm:pr-6 sm:[&:not(:first-child)]:border-l sm:[&:not(:first-child)]:pl-6"
+                >
+                  <span className="font-display text-xl italic leading-none text-ember" aria-hidden>
+                    {numeral(i)}
+                  </span>
                   {line}.
-                </p>
+                </motion.p>
               )
             )}
-          </div>
-        </motion.section>
+          </Stagger>
+        </div>
+      </section>
 
-        <motion.section {...fadeUp} className="mb-20 sm:mb-28">
-          <div className="rounded-3xl bg-deep-blue px-6 py-10 text-white shadow-lg shadow-deep-blue/20 sm:px-10 sm:py-12">
-            <Shield className="mb-5 h-7 w-7 text-warm-orange" strokeWidth={1.75} />
-            <h2 className="font-heading text-2xl font-bold leading-snug sm:text-3xl">
-              Jij bent onze gebruiker, niet ons product.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Wij verdienen niet door jouw facturen of bedrijfsgegevens te verkopen. Jouw administratie blijft van
-              jou.
-            </p>
-          </div>
-        </motion.section>
-
-        <motion.section {...fadeUp} className="mb-20 sm:mb-28">
-          <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-            Hoe blijft FactuurBaas beschikbaar?
+      <DarkPanel className="py-6 sm:py-10">
+        <Reveal className="mx-auto max-w-3xl">
+          <Shield className="h-7 w-7 text-ember-100" strokeWidth={1.5} aria-hidden />
+          <h2 className="mt-7 font-display text-[2.1rem] font-normal leading-[1.06] tracking-[-0.03em] sm:text-5xl">
+            Jij bent onze gebruiker, <em className="text-ember-100">niet ons product.</em>
           </h2>
-          <p className="mt-4 max-w-2xl text-slate-600 leading-relaxed">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
+            Wij verdienen niet door jouw facturen of bedrijfsgegevens te verkopen. Jouw administratie blijft van
+            jou.
+          </p>
+        </Reveal>
+      </DarkPanel>
+
+      <div className="container mx-auto px-4 pb-10 sm:px-6 sm:pb-16">
+        <EditorialRow title="Hoe blijft FactuurBaas beschikbaar?" className="border-t-0">
+          <p>
             Een product onderhouden kost tijd en geld. Wanneer we samenwerken met andere bedrijven, kiezen we alleen
             partners die ondernemers echt kunnen helpen — denk aan banken, verzekeringen of betaaloplossingen.
           </p>
-          <p className="mt-4 max-w-2xl text-slate-600 leading-relaxed">
+          <p>
             Die samenwerkingen zijn altijd optioneel. Jij besluit zelf of iets past bij jouw bedrijf. Zo blijft de
             kern van FactuurBaas toegankelijk.
           </p>
-        </motion.section>
+        </EditorialRow>
 
-        <motion.section {...fadeUp} className="mb-20 sm:mb-28">
-          <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-            Wat blijft toegankelijk?
-          </h2>
-          <p className="mt-4 max-w-2xl text-slate-600 leading-relaxed">
-            De basisfuncties die je nodig hebt om te factureren en overzicht te houden.
-          </p>
-          <ul className="mt-8 space-y-0 divide-y divide-slate-200 border-y border-slate-200">
-            {BASICS.map((item) => (
-              <li key={item} className="flex items-center gap-3 py-4 text-slate-800">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-deep-blue/5 text-deep-blue">
-                  <Check className="h-4 w-4" strokeWidth={2.5} />
+        <EditorialRow title="Wat blijft toegankelijk?">
+          <p>De basisfuncties die je nodig hebt om te factureren en overzicht te houden.</p>
+          <ul className="mt-8 border-t border-ink/15">
+            {BASICS.map((item, i) => (
+              <li
+                key={item}
+                className="grid grid-cols-[2.75rem_1fr] items-baseline gap-2 border-b border-ink/15 py-4 sm:grid-cols-[3.5rem_1fr] sm:py-5"
+              >
+                <span className="font-display text-lg italic leading-none text-ember" aria-hidden>
+                  {numeral(i)}
                 </span>
-                <span className="font-medium">{item}</span>
+                <span className="text-ink">{item}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-5 text-sm text-slate-500">
+          <p className="mt-5 text-sm text-ink-400">
             We beloven geen “alles forever gratis zonder uitzondering” — wel dat de kern van factureren toegankelijk
             blijft voor wie daarop rekent.
           </p>
-        </motion.section>
+        </EditorialRow>
 
-        <motion.section {...fadeUp} className="mb-20 sm:mb-28">
-          <h2 className="font-heading text-2xl font-bold text-deep-blue sm:text-3xl">
-            Transparantie staat voorop
-          </h2>
-          <p className="mt-4 max-w-2xl text-slate-600 leading-relaxed">
-            Gratis software werkt alleen als je weet waar je aan toe bent.
-          </p>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2">
+        <EditorialRow title="Transparantie staat voorop">
+          <p>Gratis software werkt alleen als je weet waar je aan toe bent.</p>
+          <div className="mt-8 grid gap-x-10 border-t border-ink/15 sm:grid-cols-2">
             {TRUST.map((item) => (
-              <div key={item.title} className="border-l-2 border-warm-orange/80 pl-4">
-                <h3 className="font-heading text-lg font-semibold text-deep-blue">{item.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{item.text}</p>
+              <div key={item.title} className="border-b border-ink/15 py-6">
+                <h3 className="font-display text-[1.35rem] font-normal leading-tight tracking-[-0.02em] text-ink">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-ink-500">{item.text}</p>
               </div>
             ))}
           </div>
-        </motion.section>
-
-        <motion.section
-          {...fadeUp}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-deep-blue to-[#0d3a5c] px-6 py-12 text-center sm:px-12 sm:py-16"
-        >
-          <div
-            className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-warm-orange/20 blur-3xl"
-            aria-hidden
-          />
-          <h2 className="relative font-heading text-2xl font-bold text-white sm:text-3xl">
-            Klaar om te factureren?
-          </h2>
-          <p className="relative mx-auto mt-3 max-w-md text-white/70">
-            Ben jij ondernemer? Begin gratis. Help je ondernemers? Laten we samenwerken.
-          </p>
-          <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-xl bg-warm-orange px-6 font-semibold text-white hover:bg-orange-600"
-            >
-              <Link href="/create-invoice">
-                Maak gratis factuur <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="ghost"
-              className="rounded-xl font-semibold text-white hover:bg-white/10 hover:text-white"
-            >
-              <a href="mailto:mail@factuurbaas.nl?subject=Samenwerking%20FactuurBaas">Samenwerken</a>
-            </Button>
-          </div>
-        </motion.section>
+        </EditorialRow>
       </div>
+
+      <ClosingCta
+        title={
+          <>
+            Klaar om te <em>factureren</em>?
+          </>
+        }
+        text="Ben jij ondernemer? Begin gratis. Help je ondernemers? Laten we samenwerken."
+        primary={{ href: '/create-invoice', label: 'Maak gratis factuur' }}
+        secondary={{ href: 'mailto:mail@factuurbaas.nl?subject=Samenwerking%20FactuurBaas', label: 'Samenwerken' }}
+      />
     </div>
   );
 }
