@@ -26,6 +26,8 @@ export async function generateMetadata({ params }) {
     title: `${seoTitle} | FactuurBaas`,
     description: article.excerpt,
     keywords: article.keywords,
+    authors: [{ name: 'FactuurBaas', url: 'https://factuurbaas.nl' }],
+    robots: { index: true, follow: true },
     openGraph: {
       title: seoTitle,
       description: article.excerpt,
@@ -60,7 +62,13 @@ export default async function BlogPostPage({ params }) {
 
   const breadcrumbItems = isHypotheekGuideSlug(article.slug)
     ? getHypotheekArticleBreadcrumbs(article.title)
-    : null;
+    : article.breadcrumbLabel
+      ? [
+          { name: 'Home', href: '/' },
+          { name: 'Blogs', href: '/blogs' },
+          { name: article.breadcrumbLabel },
+        ]
+      : null;
 
   return (
     <BlogPostClient

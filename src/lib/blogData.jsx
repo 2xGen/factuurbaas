@@ -7,10 +7,10 @@ import { uitgavenArticles } from '@/lib/uitgavenBlogData';
 import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
 import { gratisFactuurAppArticle } from '@/lib/gratisFactuurAppBlog';
 
-const CtaButton = () => (
+const CtaButton = ({ href = '/create-invoice', label = 'Maak Nu Je Gratis Factuur' }) => (
     <div className="my-8 text-center">
         <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <Link href="/create-invoice">Maak Nu Je Gratis Factuur</Link>
+            <Link href={href}>{label}</Link>
         </Button>
     </div>
 );
@@ -131,173 +131,894 @@ export const articles = [
   {
     slug: 'factuur-maken-zzp',
     relatedSlugs: ['gratis-factuur-zzp', 'factuur-fouten-voorkomen', 'factuur-templates-zzp', 'factuur-pdf-downloaden'],
-    title: 'Factuur maken zzp: stappenplan + gratis voorbeeld',
-    excerpt: 'Factuur maken zzp met een stappenplan: wat er op moet staan, factuurnummer, betalingstermijn en een gratis voorbeeld/template.',
-    keywords: 'factuur maken zzp, factuur zzp, zzp factuur, voorbeeld factuur zzp, template factuur zzp, wat moet er op een factuur staan zzp, factuurnummer voorbeeld, betalingstermijn factuur zzp, kvk factuur maken, hoe maak je een factuur zzp',
+    metaTitle: 'Factuur maken als zzp\'er? Stappenplan + gratis voorbeeld',
+    title: 'Factuur maken als zzp\'er: stappenplan en voorbeeld',
+    breadcrumbLabel: 'Factuur maken als zzp\'er',
+    excerpt: 'Factuur maken als zzp\'er? Bekijk een compleet voorbeeld, ontdek wat verplicht op je factuur moet staan en maak gratis je eigen factuur als PDF.',
+    keywords: 'factuur maken zzp, zzp factuur maken, voorbeeld factuur zzp, hoe maak je een factuur, factuur opstellen, zzp factuur, wat moet er op een factuur staan zzp',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Hoe%20maak%20je%20een%20factuur%20als%20zzp%20er.png',
-      alt: 'Hoe maak je een factuur als zzp\'er: stappenplan met gratis voorbeeld en template.',
+      alt: 'Factuur maken als zzp\'er: stappenplan met voorbeeld en verplichte gegevens.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
       {
-        question: 'Wat moet er op een factuur staan als zzp\'er?',
-        answer: 'Verplicht op elke factuur: jouw bedrijfsgegevens, KVK-nummer en btw-nummer, klantgegevens, uniek factuurnummer, factuurdatum, omschrijving van diensten of producten, datum van levering, bedragen excl. en incl. btw, en je betaalgegevens met betalingstermijn (bijv. 14 dagen).',
+        question: 'Hoe maak ik mijn eerste factuur als zzp\'er?',
+        answer: 'Verzamel je bedrijfsgegevens en klantgegevens, kies een uniek factuurnummer, vermeld de datums en werkzaamheden, bereken de juiste bedragen en voeg je betaalgegevens toe. Je kunt hiervoor een gratis online factuurmaker gebruiken.',
       },
       {
-        question: 'Hoe maak ik een factuur als zzp\'er?',
-        answer: 'Verzamel je gegevens en die van de klant, kies een template of factuurtool (zoals FactuurBaas), vul de verplichte velden in met duidelijke omschrijvingen, bereken de btw, vermeld je betalingstermijn en IBAN, en download of verstuur de factuur als PDF.',
+        question: 'Kan ik gratis een zzp-factuur maken?',
+        answer: 'Ja. Met FactuurBaas kun je gratis een factuur maken en als PDF downloaden zonder account.',
       },
       {
-        question: 'Welk factuurnummer gebruik ik? (voorbeeld)',
-        answer: 'Gebruik een uniek, opeenvolgend nummer per factuur. Voorbeeld factuurnummer: 2026-001, 2026-002 of F2026-001. Geen nummer twee keer gebruiken. Veel tools genereren het automatisch.',
+        question: 'Hoe ziet een factuur voor een zzp\'er eruit?',
+        answer: 'Een zzp-factuur bevat onder andere bedrijfs- en klantgegevens, een factuurnummer, relevante datums, een omschrijving van de geleverde diensten of producten en de toepasselijke bedragen en btw-gegevens.',
       },
       {
-        question: 'Welke betalingstermijn zet ik op mijn factuur als zzp\'er?',
-        answer: 'Veel zzp\'ers kiezen 14 of 30 dagen. Vermeld dit expliciet op de factuur, bijvoorbeeld: "Graag betalen binnen 14 dagen na factuurdatum." Dit is geen wettelijke verplichting maar wel aan te raden voor je cashflow.',
+        question: 'Moet ik als zzp\'er btw op mijn factuur zetten?',
+        answer: 'Dat hangt af van je werkzaamheden en btw-situatie. Bij btw-belaste prestaties vermeld je doorgaans het btw-tarief en de verschuldigde btw. Voor de KOR, vrijstellingen en bepaalde andere situaties gelden afwijkende regels.',
       },
       {
-        question: 'Moet mijn KVK-nummer op de factuur?',
-        answer: 'Ja. Het KVK-nummer en je btw-identificatienummer zijn verplicht op elke factuur. Zonder deze gegevens voldoet de factuur niet aan de eisen van de Belastingdienst.',
+        question: 'Wat is een goed factuurnummer voor een zzp\'er?',
+        answer: 'Een nummer zoals 2026-001 is een eenvoudige keuze. Zorg dat ieder nummer uniek is en binnen een opeenvolgende reeks past.',
       },
       {
-        question: 'Waar vind ik een gratis voorbeeld of template factuur zzp?',
-        answer: 'Bij FactuurBaas maak je gratis een professionele factuur zonder account. Je vult je gegevens in en downloadt direct een PDF die voldoet aan alle verplichte onderdelen voor een zzp-factuur.',
+        question: 'Kan ik een factuur maken zonder boekhoudprogramma?',
+        answer: 'Ja. Je bent niet verplicht een betaald boekhoudprogramma te gebruiken. Wel moet je een correcte administratie bijhouden en voldoen aan de toepasselijke factuureisen.',
+      },
+      {
+        question: 'Kan ik een factuur maken op mijn telefoon?',
+        answer: 'Ja. Je kunt FactuurBaas via de browser op je telefoon gebruiken en op ondersteunde apparaten als web-app aan je beginscherm toevoegen.',
+      },
+      {
+        question: 'Mag ik als zzp\'er een factuur maken zonder KvK-nummer?',
+        answer: 'Dat hangt af van je situatie. Als je verplicht bent je onderneming bij de KvK in te schrijven, gelden ook de bijbehorende vermeldingsregels. Er zijn situaties waarin iemand niet KvK-inschrijfplichtig is. Controleer welke regels op jou van toepassing zijn.',
+      },
+      {
+        question: 'Welke betalingstermijn gebruik ik als zzp\'er?',
+        answer: 'Veel ondernemers gebruiken 14 of 30 dagen. Welke termijn toegestaan of van toepassing is, hangt af van de afspraken en wettelijke regels. Vermeld de afgesproken vervaldatum duidelijk.',
       },
     ],
     content: (
       <>
-        <p>Veel zzp&apos;ers zoeken op <strong>factuur maken zzp</strong>, <strong>hoe maak je een factuur zzp</strong> of <strong>voorbeeld factuur zzp</strong>. Een correcte factuur is cruciaal: voor een professionele uitstraling, om op tijd betaald te krijgen en om te voldoen aan de eisen van de Belastingdienst. In dit stappenplan leggen we uit hoe je een factuur maakt die aan alles voldoet — inclusief wat er verplicht op moet staan en een gratis voorbeeld via FactuurBaas.</p>
-
-        <h2>Wat moet er op een factuur staan? (zzp)</h2>
-        <p>Volgens de Belastingdienst moet elke factuur bepaalde onderdelen bevatten. Zorg dat je deze altijd vermeldt:</p>
+        <p>Wil je als zzp&apos;er een factuur maken, maar weet je niet precies wat erop moet staan? Of ben je net begonnen met ondernemen en wil je zeker weten dat je eerste factuur klopt?</p>
+        <p>Een factuur maken hoeft niet ingewikkeld te zijn. Je hebt de gegevens van je bedrijf en klant nodig, een omschrijving van je werkzaamheden en de juiste bedragen. Daarnaast moet je rekening houden met de factuureisen van de Belastingdienst.</p>
+        <p>In deze gids ontdek je:</p>
         <ul>
-          <li><strong>Jouw bedrijfsgegevens:</strong> Volledige naam en adres.</li>
-          <li><strong>Jouw KVK-nummer en btw-nummer:</strong> Verplicht op elke factuur — zet je KvK- en btw-identificatienummer erop.</li>
-          <li><strong>Klantgegevens:</strong> Volledige naam en adres van je klant.</li>
-          <li><strong>Factuurnummer:</strong> Uniek en opeenvolgend. Voorbeeld: 2026-001, 2026-002 of F2026-001.</li>
-          <li><strong>Factuurdatum en datum van levering.</strong></li>
-          <li><strong>Omschrijving van diensten/producten:</strong> Wees specifiek over wat je hebt geleverd en de hoeveelheid.</li>
-          <li><strong>Bedragen:</strong> Subtotaal excl. btw, btw-tarief en -bedrag, totaal incl. btw.</li>
-          <li><strong>Betaalgegevens en betalingstermijn:</strong> IBAN, tenaamstelling en bijvoorbeeld &quot;Graag betalen binnen 14 dagen&quot;.</li>
+          <li>Hoe je stap voor stap een factuur opstelt.</li>
+          <li>Welke gegevens verplicht op een zzp-factuur staan.</li>
+          <li>Hoe een voorbeeldfactuur voor een zzp&apos;er eruitziet.</li>
+          <li>Hoe je btw, factuurnummers en betalingstermijnen verwerkt.</li>
+          <li>Hoe je gratis een professionele factuur maakt.</li>
         </ul>
+        <p>
+          <strong>Wil je direct beginnen?</strong> Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je gratis een factuur maken, zonder account, en deze als PDF downloaden.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
 
-        <h2>Stap 1: Verzamel de verplichte gegevens</h2>
-        <p>Zet eerst alle gegevens klaar: van jezelf, van de klant, en een logisch factuurnummer. Met een <strong>template factuur zzp</strong> of tool zoals FactuurBaas vul je daarna alleen de velden in; de structuur staat al goed.</p>
+        <h2>Hoe maak je een factuur als zzp&apos;er?</h2>
+        <p>Een factuur maken als zzp&apos;er bestaat uit zes eenvoudige stappen.</p>
+        <ol>
+          <li>Verzamel je bedrijfsgegevens en de gegevens van je klant.</li>
+          <li>Maak een uniek factuurnummer aan.</li>
+          <li>Vermeld de factuurdatum en de datum waarop je hebt geleverd.</li>
+          <li>Beschrijf je werkzaamheden, producten of gewerkte uren.</li>
+          <li>Bereken het bedrag exclusief btw, de btw en het totaalbedrag.</li>
+          <li>Voeg je betaalgegevens toe en controleer de factuur.</li>
+        </ol>
+        <p>Daarna kun je de factuur downloaden en naar je klant sturen.</p>
+        <p>Hieronder leggen we iedere stap uit.</p>
 
-        <CtaButton />
-
-        <h2>Stap 2: Kies een professionele layout (template)</h2>
-        <p>Een rommelige factuur kan onprofessioneel overkomen. Gebruik een schone, overzichtelijke layout. Met een tool als <strong>FactuurBaas</strong> kies je een <strong>template factuur zzp</strong> en de rest wordt voor je geregeld. Plaats je logo bovenaan en zorg voor een duidelijk leesbaar lettertype.</p>
-
-        <CtaButton />
-
-        <h2>Stap 3: Omschrijf je werk duidelijk</h2>
-        <p>Een vage omschrijving zoals "Geleverde diensten" kan tot vragen leiden. Wees specifiek. Bijvoorbeeld:</p>
+        <h2>Stap 1: Vul je bedrijfsgegevens en klantgegevens in</h2>
+        <p>Begin met de gegevens van je eigen onderneming.</p>
+        <p>Vermeld je volledige bedrijfsnaam en adres, je KvK-nummer en je btw-identificatienummer wanneer dat op jouw factuur verplicht is.</p>
+        <p>Daarna voeg je de gegevens van je klant toe.</p>
+        <p>Voor een zakelijke klant zijn dit doorgaans:</p>
         <ul>
-          <li>Website design - Homepage (10 uur x €75)</li>
-          <li>Teksten voor over-ons pagina (500 woorden)</li>
+          <li>Bedrijfsnaam of volledige naam.</li>
+          <li>Volledig adres.</li>
+          <li>Eventuele aanvullende gegevens die nodig zijn voor de facturatie.</li>
         </ul>
-        <p>Dit voorkomt onduidelijkheid en zorgt ervoor dat je klant precies weet waarvoor hij betaalt.</p>
+        <p>Controleer de gegevens voordat je de factuur verstuurt. Een verkeerd adres of een onjuiste bedrijfsnaam kan ervoor zorgen dat je klant om een aangepaste factuur vraagt.</p>
 
-        <h2>Stap 4: Vermeld de betaalgegevens en betalingstermijn</h2>
-        <p>Maak betalen zo makkelijk mogelijk. Vermeld duidelijk je IBAN en tenaamstelling, en de <strong>betalingstermijn</strong> (bijv. &quot;Graag betalen binnen 14 dagen&quot;). Een vriendelijke afsluiting zoals &quot;Bedankt voor de prettige samenwerking!&quot; kan ook helpen.</p>
+        <h2>Stap 2: Kies een uniek factuurnummer</h2>
+        <p>Iedere factuur moet een uniek nummer hebben dat binnen je administratie in een opeenvolgende reeks past.</p>
+        <p>Je kunt bijvoorbeeld deze nummering gebruiken:</p>
+        <ul>
+          <li>2026-001</li>
+          <li>2026-002</li>
+          <li>2026-003</li>
+        </ul>
+        <p>Of:</p>
+        <ul>
+          <li>F2026-001</li>
+          <li>F2026-002</li>
+          <li>F2026-003</li>
+        </ul>
+        <p>Het belangrijkste is dat je een logisch systeem kiest en dit consequent gebruikt.</p>
+        <p>Begin je voor het eerst met factureren? Dan is een nummer zoals <strong>2026-001</strong> een eenvoudige keuze.</p>
+        <p>
+          Met de{' '}
+          <Link href="/tools/factuurnummer-generator" className="text-warm-orange hover:underline">gratis factuurnummer-generator</Link>{' '}
+          kun je een nummer opstellen.
+        </p>
 
-        <h2>Gratis voorbeeld factuur zzp met FactuurBaas</h2>
-        <p>Geen zin om zelf te knutselen met Word of Excel? Maak je eerste <strong>factuur maken zzp gratis</strong> met FactuurBaas: alle verplichte onderdelen zitten in de template, je downloadt direct een professionele PDF. Meer opties lees je in ons artikel over <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis factuur maken voor zzp&apos;ers</Link>.</p>
+        <h2>Stap 3: Vermeld de factuurdatum en leverdatum</h2>
+        <p>Een factuur bevat normaal gesproken twee belangrijke datums.</p>
+        <p><strong>Factuurdatum:</strong> de datum waarop je de factuur uitreikt.</p>
+        <p><strong>Leverdatum:</strong> de datum waarop je het product hebt geleverd of de dienst hebt uitgevoerd, of de periode waarop de werkzaamheden betrekking hebben.</p>
+        <p>Voorbeeld:</p>
+        <ul>
+          <li>Factuurdatum: 8 oktober 2026</li>
+          <li>Leverdatum: 6 oktober 2026</li>
+        </ul>
+        <p>Heb je gedurende een hele maand werkzaamheden uitgevoerd? Dan kun je de betreffende periode duidelijk vermelden, bijvoorbeeld: <em>Werkzaamheden september 2026</em>.</p>
 
-        <CtaButton />
+        <h2>Stap 4: Beschrijf je werkzaamheden of producten</h2>
+        <p>Je klant moet kunnen begrijpen waarvoor hij betaalt.</p>
+        <p>Gebruik daarom liever geen algemene omschrijving zoals &apos;Werkzaamheden&apos; wanneer je specifieker kunt zijn.</p>
+        <p>Een voorbeeld voor een freelance marketeer:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Aantal</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website optimalisatie</td>
+                <td className="px-4 py-3 text-right">5 uur</td>
+                <td className="px-4 py-3 text-right">€60</td>
+                <td className="px-4 py-3 text-right">€300</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">SEO-advies</td>
+                <td className="px-4 py-3 text-right">3 uur</td>
+                <td className="px-4 py-3 text-right">€60</td>
+                <td className="px-4 py-3 text-right">€180</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue" colSpan={3}>Totaal excl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€480</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een schilder, timmerman of consultant werkt dit op dezelfde manier.</p>
+        <p>Je kunt uren, aantallen, vaste projectprijzen of afzonderlijke producten vermelden.</p>
+        <p>
+          <Link href="/factuur-voorbeeld/uren" className="text-warm-orange hover:underline">Bekijk ook het voorbeeld voor een factuur op basis van gewerkte uren</Link>.
+        </p>
 
-        <h2>Veelgestelde vragen</h2>
-        <h3>Wat moet er op een factuur staan als zzp&apos;er?</h3>
-        <p>Jouw gegevens (incl. KVK en btw-nummer), klantgegevens, factuurnummer, factuur- en leveringsdatum, omschrijving, bedragen excl. en incl. btw, en betaalgegevens met betalingstermijn.</p>
-        <h3>Hoe maak ik een factuur als zzp&apos;er?</h3>
-        <p>Verzamel gegevens, kies een template of tool, vul de velden in, controleer btw en totaal, vermeld betalingstermijn en IBAN, en download of verstuur als PDF.</p>
-        <h3>Welk factuurnummer en welke betalingstermijn?</h3>
-        <p>Gebruik een uniek opeenvolgend nummer (bijv. 2026-001). Voor de termijn kiezen veel zzp&apos;ers 14 of 30 dagen — vermeld dit duidelijk op de factuur.</p>
+        <h2>Stap 5: Bereken de btw en het totaalbedrag</h2>
+        <p>Als je btw in rekening moet brengen, vermeld je het toepasselijke btw-tarief en het btw-bedrag op je factuur.</p>
+        <p>In Nederland komen onder andere de tarieven van 21%, 9% en 0% voor. Welk tarief van toepassing is, hangt af van de geleverde goederen of diensten en de omstandigheden.</p>
+        <p>Voorbeeld bij 21% btw:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Berekening</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Werkzaamheden excl. btw</td>
+                <td className="px-4 py-3 text-right">€480,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€100,80</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal incl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€580,80</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Ben je deelnemer aan de kleineondernemersregeling (KOR)? Dan breng je doorgaans geen btw in rekening en moet je factuur daarbij passen.</p>
+        <p>Ook bij vrijgestelde prestaties en bepaalde internationale transacties kunnen andere regels gelden.</p>
+        <p>Controleer daarom altijd welke btw-behandeling voor jouw situatie geldt.</p>
+
+        <h2>Stap 6: Voeg je betaalgegevens toe</h2>
+        <p>Maak duidelijk hoe en wanneer de klant moet betalen.</p>
+        <p>Vermeld bijvoorbeeld:</p>
+        <ul>
+          <li>Je IBAN.</li>
+          <li>De naam van de rekeninghouder.</li>
+          <li>De afgesproken betalingstermijn.</li>
+          <li>Het factuurnummer als betalingskenmerk.</li>
+        </ul>
+        <p>Een eenvoudige betaalinstructie is:</p>
+        <p><em>Gelieve €580,80 binnen 14 dagen over te maken onder vermelding van factuurnummer 2026-001.</em></p>
+        <p>Een betalingstermijn van 14 of 30 dagen komt vaak voor, maar de toepasselijke wettelijke regels en gemaakte afspraken bepalen welke termijn geldt.</p>
+        <p>Controleer ook of de afgesproken termijn overeenkomt met de vervaldatum die je op de factuur vermeldt.</p>
+
+        <h2>Voorbeeld factuur zzp</h2>
+        <p>Hieronder zie je hoe een eenvoudige factuur voor een zzp&apos;er eruit kan zien.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <div className="border-b border-slate-200 bg-slate-50 px-4 py-3">
+            <p className="text-lg font-semibold text-deep-blue">Factuur</p>
+          </div>
+          <div className="grid gap-4 border-b border-slate-100 px-4 py-4 sm:grid-cols-2">
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Van</p>
+              <p className="font-medium text-deep-blue">Jansen Marketing</p>
+              <p>Voorbeeldstraat 12</p>
+              <p>1012 AB Amsterdam</p>
+              <p>KvK: 12345678</p>
+              <p>Btw-id: NL123456789B01</p>
+            </div>
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Aan</p>
+              <p className="font-medium text-deep-blue">De Vries Webshops</p>
+              <p>Klantstraat 25</p>
+              <p>3011 AA Rotterdam</p>
+            </div>
+          </div>
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Factuurnummer</td>
+                <td className="px-4 py-2">2026-001</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Factuurdatum</td>
+                <td className="px-4 py-2">8 oktober 2026</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Leverdatum</td>
+                <td className="px-4 py-2">6 oktober 2026</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-2 font-medium text-deep-blue">Vervaldatum</td>
+                <td className="px-4 py-2">22 oktober 2026</td>
+              </tr>
+            </tbody>
+          </table>
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Aantal</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Totaal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website optimalisatie</td>
+                <td className="px-4 py-3 text-right">5 uur</td>
+                <td className="px-4 py-3 text-right">€60</td>
+                <td className="px-4 py-3 text-right">€300</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">SEO-advies</td>
+                <td className="px-4 py-3 text-right">3 uur</td>
+                <td className="px-4 py-3 text-right">€60</td>
+                <td className="px-4 py-3 text-right">€180</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="space-y-1 px-4 py-4 text-sm text-slate-700 sm:text-base">
+            <p className="flex justify-between"><span>Subtotaal</span><span>€480,00</span></p>
+            <p className="flex justify-between"><span>Btw 21%</span><span>€100,80</span></p>
+            <p className="flex justify-between font-semibold text-deep-blue"><span>Totaal te betalen</span><span>€580,80</span></p>
+            <p className="pt-3 text-slate-600">IBAN: NL00 BANK 0123 4567 89</p>
+            <p className="text-slate-600">Ten name van: Jansen Marketing</p>
+            <p className="text-slate-600">Betalingskenmerk: 2026-001</p>
+          </div>
+        </div>
+        <p><em>Dit is een fictief voorbeeld. Gebruik je eigen gegevens en controleer het toepasselijke btw-tarief.</em></p>
+        <p>
+          Wil je niet zelf een factuur opmaken? Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas maak je gratis een factuur als PDF</Link>.
+        </p>
+
+        <h2>Wat moet er verplicht op een factuur staan als zzp&apos;er?</h2>
+        <p>Voor een reguliere btw-factuur gelden in Nederland doorgaans de volgende eisen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Verplicht?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Volledige naam en adres van leverancier</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Naam en adres van afnemer</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw-identificatienummer leverancier</td>
+                <td className="px-4 py-3">Doorgaans</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">KvK-nummer leverancier</td>
+                <td className="px-4 py-3">Indien van toepassing</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Uniek opeenvolgend factuurnummer</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Factuurdatum</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Leverdatum of datum van prestatie</td>
+                <td className="px-4 py-3">Ja, indien afwijkend</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Omschrijving en omvang van levering of dienst</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Bedrag exclusief btw</td>
+                <td className="px-4 py-3">Doorgaans</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Toegepast btw-tarief</td>
+                <td className="px-4 py-3">Indien van toepassing</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Verschuldigd btw-bedrag</td>
+                <td className="px-4 py-3">Indien van toepassing</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Bijzondere btw-vermelding</td>
+                <td className="px-4 py-3">Indien van toepassing</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">IBAN en betalingstermijn</td>
+                <td className="px-4 py-3">Praktisch belangrijk, niet algemeen verplicht volgens de btw-factuureisen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Er bestaan uitzonderingen, zoals vereenvoudigde facturen voor bepaalde kleine bedragen en specifieke regels bij btw-verlegging, vrijstellingen en grensoverschrijdende transacties.</p>
+        <p>
+          Bekijk voor de actuele wettelijke eisen de informatie van de{' '}
+          <a href="https://www.belastingdienst.nl/" className="text-warm-orange hover:underline" target="_blank" rel="noopener noreferrer">Belastingdienst</a>.
+        </p>
+
+        <h2>Gratis factuur maken als zzp&apos;er</h2>
+        <p>Je kunt op verschillende manieren een factuur maken. Meer over gratis opties lees je in ons artikel over{' '}
+          <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis een ZZP-factuur maken</Link>.
+        </p>
+        <h3>Factuur maken in Word</h3>
+        <p>Met Word kun je zelf een factuur ontwerpen en aanpassen.</p>
+        <p>Het nadeel is dat je bedragen en btw vaak zelf moet berekenen of controleren.</p>
+        <p>
+          <Link href="/factuur-template/word" className="text-warm-orange hover:underline">Bekijk de Word-factuurtemplate</Link>.
+        </p>
+        <h3>Factuur maken in Excel</h3>
+        <p>Excel is handig als je graag met tabellen en formules werkt.</p>
+        <p>Je kunt berekeningen automatiseren, maar moet nog steeds zorgen dat je factuur de juiste gegevens bevat.</p>
+        <p>
+          <Link href="/factuur-template/excel" className="text-warm-orange hover:underline">Bekijk de Excel-factuurtemplate</Link>.
+        </p>
+        <h3>Online factuur maken</h3>
+        <p>Met een online factuurmaker hoef je niet zelf een document op te bouwen.</p>
+        <p>Bij FactuurBaas vul je de gegevens in, voeg je factuurregels toe en laat je de bedragen berekenen.</p>
+        <p>Daarna download je de factuur als PDF.</p>
+        <p><strong>Een account is niet verplicht om een losse factuur te maken.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis je factuur" />
+
+        <h2>Factuur maken voor een eenmanszaak</h2>
+        <p>Heb je een eenmanszaak? Dan gelden voor jou in beginsel dezelfde factuurregels als voor andere ondernemers.</p>
+        <p>Zzp&apos;er is geen aparte rechtsvorm. Veel zzp&apos;ers werken als eenmanszaak, maar je kunt ook vanuit een andere rechtsvorm ondernemen.</p>
+        <p>Vermeld daarom de gegevens van je eigen onderneming en zorg dat de factuur aansluit op je btw-situatie.</p>
+        <p>Je hoeft niet automatisch een betaald factuurprogramma te gebruiken om aan de factuureisen te voldoen.</p>
+
+        <h2>Factuur maken als zzp&apos;er in de zorg</h2>
+        <p>Werk je als zelfstandige in de zorg? Dan is het belangrijk om te bepalen of je diensten btw-belast of btw-vrijgesteld zijn.</p>
+        <p>Niet iedere zorgdienst is automatisch vrijgesteld van btw. Dit hangt onder andere af van de aard en het doel van de werkzaamheden.</p>
+        <p>Een zorgfactuur kan bijvoorbeeld de volgende regels bevatten:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Aantal</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Totaal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Zorgverlening 1 oktober</td>
+                <td className="px-4 py-3 text-right">8 uur</td>
+                <td className="px-4 py-3 text-right">€45</td>
+                <td className="px-4 py-3 text-right">€360</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Zorgverlening 2 oktober</td>
+                <td className="px-4 py-3 text-right">6 uur</td>
+                <td className="px-4 py-3 text-right">€45</td>
+                <td className="px-4 py-3 text-right">€270</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue" colSpan={3}>Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€630</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De btw-verwerking moet je vervolgens aanpassen aan jouw werkzaamheden en fiscale situatie.</p>
+        <p>Vermeld bij een vrijgestelde prestatie de juiste vrijstellingsvermelding.</p>
+
+        <h2>Veelgemaakte fouten bij het opstellen van een factuur</h2>
+        <p>Een factuur hoeft niet ingewikkeld te zijn, maar kleine fouten kunnen problemen veroorzaken.</p>
+        <p><strong>1. Een factuurnummer dubbel gebruiken</strong></p>
+        <p>Iedere factuur moet een uniek nummer hebben.</p>
+        <p><strong>2. De leverdatum vergeten</strong></p>
+        <p>Vermeld wanneer de dienst of levering heeft plaatsgevonden als dat afwijkt van de factuurdatum.</p>
+        <p><strong>3. Het verkeerde btw-tarief toepassen</strong></p>
+        <p>Controleer welk btw-tarief bij je werkzaamheden hoort.</p>
+        <p><strong>4. Een onduidelijke omschrijving gebruiken</strong></p>
+        <p>Beschrijf wat je daadwerkelijk hebt geleverd.</p>
+        <p><strong>5. Geen duidelijke betaalinstructies geven</strong></p>
+        <p>Maak het voor je klant eenvoudig om de factuur te betalen.</p>
+        <p><strong>6. Geen administratie bijhouden</strong></p>
+        <p>Bewaar je verzonden facturen en andere relevante administratieve gegevens volgens de geldende bewaartermijnen.</p>
+
+        <h2>Wanneer moet je als zzp&apos;er een factuur sturen?</h2>
+        <p>Voor leveringen en diensten waarvoor de reguliere factureringsplicht geldt, moet je de factuur doorgaans uiterlijk op de vijftiende dag van de maand na de maand van levering of dienstverlening uitreiken.</p>
+        <p>Heb je bijvoorbeeld op 20 september een dienst geleverd, dan moet de factuur in de reguliere situatie uiterlijk op 15 oktober worden uitgereikt.</p>
+        <p>Er bestaan uitzonderingen en bijzondere regels, onder meer voor bepaalde internationale transacties.</p>
+        <p>Voor je cashflow is het vaak verstandig om niet tot de uiterste datum te wachten.</p>
+
+        <h2>Heb je als zzp&apos;er een boekhoudprogramma nodig?</h2>
+        <p>Niet noodzakelijk.</p>
+        <p>Als je weinig facturen en zakelijke kosten hebt, kun je mogelijk beginnen met een gratis factuurtool en een eenvoudige eigen administratie.</p>
+        <p>Naarmate je onderneming groeit, kan boekhoudsoftware handig worden voor banktransacties, uitgaven, btw-overzichten en andere administratieve werkzaamheden.</p>
+        <p>Twijfel je wat je nodig hebt?</p>
+        <p>
+          <Link href="/tools/boekhoudprogramma-check" className="text-warm-orange hover:underline">Doe de boekhoudprogramma-check</Link>.
+        </p>
+
+        <h2>Veelgestelde vragen over factuur maken als zzp&apos;er</h2>
+        <h3>Hoe maak ik mijn eerste factuur als zzp&apos;er?</h3>
+        <p>Verzamel je bedrijfsgegevens en klantgegevens, kies een uniek factuurnummer, vermeld de datums en werkzaamheden, bereken de juiste bedragen en voeg je betaalgegevens toe. Je kunt hiervoor een gratis online factuurmaker gebruiken.</p>
+        <h3>Kan ik gratis een zzp-factuur maken?</h3>
+        <p>Ja. Met FactuurBaas kun je gratis een factuur maken en als PDF downloaden zonder account.</p>
+        <h3>Hoe ziet een factuur voor een zzp&apos;er eruit?</h3>
+        <p>Een zzp-factuur bevat onder andere bedrijfs- en klantgegevens, een factuurnummer, relevante datums, een omschrijving van de geleverde diensten of producten en de toepasselijke bedragen en btw-gegevens.</p>
+        <h3>Moet ik als zzp&apos;er btw op mijn factuur zetten?</h3>
+        <p>Dat hangt af van je werkzaamheden en btw-situatie. Bij btw-belaste prestaties vermeld je doorgaans het btw-tarief en de verschuldigde btw. Voor de KOR, vrijstellingen en bepaalde andere situaties gelden afwijkende regels.</p>
+        <h3>Wat is een goed factuurnummer voor een zzp&apos;er?</h3>
+        <p>Een nummer zoals 2026-001 is een eenvoudige keuze. Zorg dat ieder nummer uniek is en binnen een opeenvolgende reeks past.</p>
+        <h3>Kan ik een factuur maken zonder boekhoudprogramma?</h3>
+        <p>Ja. Je bent niet verplicht een betaald boekhoudprogramma te gebruiken. Wel moet je een correcte administratie bijhouden en voldoen aan de toepasselijke factuureisen.</p>
+        <h3>Kan ik een factuur maken op mijn telefoon?</h3>
+        <p>Ja. Je kunt FactuurBaas via de browser op je telefoon gebruiken en op ondersteunde apparaten als web-app aan je beginscherm toevoegen.</p>
+        <h3>Mag ik als zzp&apos;er een factuur maken zonder KvK-nummer?</h3>
+        <p>Dat hangt af van je situatie. Als je verplicht bent je onderneming bij de KvK in te schrijven, gelden ook de bijbehorende vermeldingsregels. Er zijn situaties waarin iemand niet KvK-inschrijfplichtig is. Controleer welke regels op jou van toepassing zijn.</p>
+        <h3>Welke betalingstermijn gebruik ik als zzp&apos;er?</h3>
+        <p>Veel ondernemers gebruiken 14 of 30 dagen. Welke termijn toegestaan of van toepassing is, hangt af van de afspraken en wettelijke regels. Vermeld de afgesproken vervaldatum duidelijk.</p>
+
+        <h2>Maak nu je eerste zzp-factuur</h2>
+        <p>Je weet nu welke gegevens je nodig hebt, hoe je een factuurnummer kiest en hoe je de bedragen berekent.</p>
+        <p>Met FactuurBaas hoef je geen eigen Word- of Excel-document te ontwerpen.</p>
+        <p><strong>Maak gratis een professionele factuur, download hem als PDF en stuur hem zelf naar je klant.</strong></p>
+        <CtaButton href="/create-invoice" label="Gratis factuur maken" />
       </>
     )
   },
   {
     slug: 'factuur-fouten-voorkomen',
     relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'factuur-pdf-downloaden', 'factuur-templates-zzp'],
+    metaTitle: '7 veelgemaakte fouten op facturen (en hoe je ze voorkomt)',
     title: '7 veelgemaakte fouten op facturen en hoe je ze voorkomt',
-    excerpt: 'Facturatie is foutgevoelig — hier de oplossing. Voorkom dubbele facturatie, foutgevoelige PDF-facturen en andere fouten met eenvoudige tips en de juiste tool.',
-    keywords: 'facturatie foutgevoelig oplossing, voorkomen van dubbele facturatie, foutgevoelige pdf facturen, fouten op factuur, factuur tips zzp, correcte factuur maken',
+    breadcrumbLabel: '7 veelgemaakte fouten op facturen',
+    excerpt: 'Welke fouten worden vaak gemaakt op facturen? Ontdek 7 veelgemaakte factuurfouten, hoe je dubbele facturatie voorkomt en hoe je ze eenvoudig corrigeert.',
+    keywords: 'veelgemaakte fouten op facturen, factuur fouten, fouten op factuur, facturatie fouten voorkomen, dubbele facturatie, factuur corrigeren',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/7%20veelgemaakte%20fouten%20op%20facturen%20en%20hoe%20je%20ze%20voorkomt.png',
-      alt: '7 veelgemaakte fouten op facturen: facturatie foutgevoelig? Hier de oplossing.',
+      alt: '7 veelgemaakte fouten op facturen en hoe je ze voorkomt.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
       {
-        question: 'Waarom is facturatie foutgevoelig en wat is de oplossing?',
-        answer: 'Facturatie is foutgevoelig door handmatig werk: verkeerde factuurnummers, btw-fouten, vergeten gegevens of Word/Excel die per ongeluk aangepast wordt. De oplossing is een vaste structuur (template), automatische nummering en btw-berekening, en altijd PDF versturen. Een tool zoals FactuurBaas vermindert fouten sterk.',
+        question: 'Wat staat er meestal fout op facturen?',
+        answer: 'Veelvoorkomende fouten zijn verkeerde factuurnummers, onjuiste btw-bedragen, ontbrekende klantgegevens, onduidelijke omschrijvingen en verkeerde betalingstermijnen.',
+      },
+      {
+        question: 'Hoe voorkom ik fouten bij het maken van facturen?',
+        answer: 'Gebruik een vaste factuuropmaak, controleer de verplichte gegevens, houd je factuurnummers bij en controleer de definitieve factuur voordat je deze verstuurt.',
       },
       {
         question: 'Hoe voorkom ik dubbele facturatie?',
-        answer: 'Gebruik opeenvolgende, unieke factuurnummers en houd een overzicht bij (bijv. in een map of tool). Stuur nooit twee facturen met hetzelfde nummer voor dezelfde levering. Een factuurprogramma dat nummers automatisch doorgeeft voorkomt dubbele of dubbele verzending van dezelfde factuur.',
+        answer: 'Houd bij welke opdrachten al zijn gefactureerd en gebruik één duidelijk overzicht. Controleer ook of dezelfde werkzaamheden niet op meerdere facturen voorkomen.',
       },
       {
-        question: 'Zijn PDF-facturen minder foutgevoelig?',
-        answer: 'Ja. Een PDF is een vast document dat de ontvanger niet kan wijzigen. Word- of Excel-facturen zijn foutgevoeliger: ze kunnen per ongeluk worden aangepast, wat tot discussie of ongeldigheid leidt. Verstuur facturen daarom altijd als PDF.',
+        question: 'Zijn PDF-facturen veiliger dan Word-facturen?',
+        answer: 'PDF-bestanden behouden doorgaans beter hun opmaak, maar zijn niet automatisch beveiligd tegen bewerken. Een PDF kan dus nog steeds fouten bevatten of worden aangepast.',
       },
       {
-        question: 'Welke gegevens mag ik niet vergeten op een factuur?',
-        answer: 'Verplicht: jouw gegevens inclusief KVK en btw-nummer, klantgegevens, uniek factuurnummer, factuur- en leveringsdatum, omschrijving, bedragen excl. en incl. btw, en betaalgegevens met termijn. Vergeten gegevens kunnen vertraging of problemen met de Belastingdienst geven.',
+        question: 'Mag ik een verkeerde factuur aanpassen?',
+        answer: 'Dat hangt af van de situatie. Als de factuur al is uitgereikt of verwerkt, kan een correctiedocument of creditfactuur nodig zijn. Bewaar altijd een duidelijk administratief spoor.',
       },
       {
-        question: 'Hoe voorkom ik btw-fouten op mijn factuur?',
-        answer: 'Gebruik een tool die het btw-tarief (21%, 9% of 0%) en het bedrag automatisch verwerkt. Handmatig rekenen is foutgevoelig. Controleer altijd of het juiste tarief voor jouw dienst of product geldt.',
+        question: 'Hoe voorkom ik fouten bij het factureren van uren?',
+        answer: 'Registreer je uren tijdens de werkzaamheden, controleer het afgesproken uurtarief en vergelijk de urenregistratie met de factuur voordat je deze verstuurt.',
+      },
+      {
+        question: 'Kan ik gratis facturen maken zonder Word of Excel?',
+        answer: 'Ja. Met FactuurBaas kun je online een factuur opstellen, bedragen laten berekenen en de factuur als PDF downloaden.',
       },
     ],
     content: (
-        <>
-            <p><strong>Facturatie is foutgevoelig</strong> als je handmatig werkt: verkeerde nummers, btw-fouten, vergeten gegevens of documenten die per ongeluk worden aangepast. Veel zzp&apos;ers zoeken een <strong>facturatie foutgevoelig oplossing</strong> of willen <strong>voorkomen van dubbele facturatie</strong> en <strong>foutgevoelige pdf facturen</strong>. Hier zijn de 7 meest voorkomende fouten op facturen en hoe je ze voorkomt — met praktische oplossingen en een slimme tool.</p>
+      <>
+        <p>Een verkeerd factuurnummer, een onjuist btw-bedrag of een vergeten betalingstermijn. Kleine fouten op een factuur kunnen zorgen voor vertraging, extra administratie en discussies met klanten.</p>
+        <p>Vooral wanneer je facturen handmatig maakt in Word of Excel, is het gemakkelijk om iets over het hoofd te zien.</p>
+        <p>Gelukkig zijn de meeste factuurfouten eenvoudig te voorkomen.</p>
+        <p>In dit artikel bespreken we <strong>7 veelgemaakte fouten op facturen</strong>, hoe je ze herkent en wat je kunt doen als je al een verkeerde factuur hebt verstuurd.</p>
+        <p>
+          Wil je direct een factuur maken? Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas maak je gratis een factuur als PDF</Link>, zonder account.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
 
-            <h2>De 7 veelgemaakte fouten (en de oplossing)</h2>
-    
-            <h3>1. Verkeerd of niet-opeenvolgend factuurnummer</h3>
-            <p>De Belastingdienst eist unieke, opeenvolgende factuurnummers. Handmatig in Excel is vragen om problemen en vergroot het risico op dubbele nummers. <strong>De oplossing:</strong> Een factuurprogramma nummert automatisch door. Zo voorkom je ook <strong>voorkomen van dubbele facturatie</strong> door verwarring met nummers.</p>
-    
-            <h3>2. Btw-fouten</h3>
-            <p>Verkeerd tarief, verkeerde berekening of btw vergeten. <strong>De oplossing:</strong> Gebruik een tool die de btw automatisch berekent op basis van bedrag en tarief (21%, 9% of 0%).</p>
-    
-            <h3>3. Essentiële gegevens vergeten</h3>
-            <p>KVK-nummer, adres of factuurdatum vergeten. <strong>De oplossing:</strong> FactuurBaas vult je bedrijfsgegevens automatisch in op elke factuur. Minder foutgevoelige facturatie.</p>
-    
-            <h3>4. Vage omschrijvingen</h3>
-            <p>&quot;Consultancy&quot; of &quot;Geleverde werkzaamheden&quot; — je klant weet niet waarvoor hij betaalt. <strong>De oplossing:</strong> Wees specifiek: taak, uren of product. Duidelijkheid versnelt de betaling.</p>
-            
-            <CtaButton />
+        <h2>Wat gaat er meestal fout op facturen?</h2>
+        <p>De meest voorkomende fouten zijn:</p>
+        <ol>
+          <li>Een verkeerd of dubbel factuurnummer.</li>
+          <li>Een verkeerd btw-tarief of een onjuiste berekening.</li>
+          <li>Ontbrekende bedrijfs- of klantgegevens.</li>
+          <li>Een onduidelijke omschrijving van werkzaamheden.</li>
+          <li>Een verkeerde betalingstermijn of ontbrekende betaalgegevens.</li>
+          <li>Dubbele facturatie of fouten bij het overnemen van gegevens.</li>
+          <li>Een onjuiste of verouderde versie van de factuur versturen.</li>
+        </ol>
+        <p>Deze fouten komen zowel bij startende zzp&apos;ers als bij ervaren ondernemers voor.</p>
+        <p>Hieronder leggen we uit hoe je ze voorkomt.</p>
 
-            <h3>5. Onprofessionele uitstraling</h3>
-            <p>Word of Excel met wisselende opmaak straalt geen professionaliteit uit. <strong>De oplossing:</strong> Een strak template. Met FactuurBaas ziet elke factuur er hetzelfde en correct uit.</p>
-    
-            <h3>6. Geen duidelijke betalingstermijn</h3>
-            <p>Zonder termijn kan een klant eindeloos wachten met betalen. <strong>De oplossing:</strong> Vermeld altijd een concrete termijn, bijvoorbeeld &quot;Betalen binnen 14 dagen&quot;.</p>
-    
-            <h3>7. De factuur niet als PDF versturen (foutgevoelige pdf facturen)</h3>
-            <p>Word- of Excel-facturen kunnen door de ontvanger worden aangepast — dat is niet rechtsgeldig en maakt facturatie <strong>foutgevoelig</strong>. <strong>De oplossing:</strong> Verstuur altijd een PDF. Een PDF is een &quot;dicht&quot; document. FactuurBaas genereert automatisch een veilige PDF, zodat je geen <strong>foutgevoelige pdf facturen</strong> meer verstuurt.</p>
+        <h2>1. Een verkeerd of dubbel factuurnummer</h2>
+        <p>Iedere factuur moet een uniek factuurnummer hebben dat binnen een opeenvolgende nummerreeks past.</p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>2026-001</li>
+          <li>2026-002</li>
+          <li>2026-003</li>
+        </ul>
+        <p>Een veelgemaakte fout is dat ondernemers een oude factuur kopiëren en vergeten het factuurnummer aan te passen.</p>
+        <p>Hierdoor kunnen twee verschillende facturen hetzelfde nummer krijgen.</p>
+        <p>Dat maakt je administratie onduidelijk en kan problemen veroorzaken bij controles.</p>
+        <h3>Hoe voorkom je deze fout?</h3>
+        <p>Gebruik één vaste nummerreeks en controleer bij iedere nieuwe factuur welk nummer als laatste is gebruikt.</p>
+        <p>Maak je regelmatig facturen? Dan is het verstandig om een overzicht bij te houden van alle gebruikte factuurnummers.</p>
+        <p>
+          Met de{' '}
+          <Link href="/tools/factuurnummer-generator" className="text-warm-orange hover:underline">gratis factuurnummer-generator</Link>{' '}
+          kun je eenvoudig een nummer opstellen.
+        </p>
 
-            <h2>Voorkomen van dubbele facturatie</h2>
-            <p>Dubbele facturatie ontstaat als je per ongeluk twee keer dezelfde levering factureert of twee facturen met hetzelfde nummer gebruikt. Om <strong>voorkomen van dubbele facturatie</strong> te garanderen: gebruik strikt opeenvolgende factuurnummers, noteer welke opdrachten je al gefactureerd hebt, en werk bij voorkeur met één systeem (bijv. FactuurBaas) zodat je overzicht houdt. Lees ook <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">hoe je een correcte factuur maakt</Link>.</p>
+        <h2>2. Een verkeerd btw-tarief of btw-bedrag</h2>
+        <p>Een andere veelgemaakte fout is het toepassen van een verkeerd btw-tarief.</p>
+        <p>In Nederland zijn onder andere de volgende tarieven van toepassing:</p>
+        <ul>
+          <li>21%: het algemene btw-tarief.</li>
+          <li>9%: voor bepaalde goederen en diensten.</li>
+          <li>0%: voor specifieke situaties.</li>
+        </ul>
+        <p>Daarnaast bestaan btw-vrijstellingen en bijzondere regelingen, zoals de kleineondernemersregeling (KOR).</p>
+        <p>Niet iedere ondernemer hoeft daarom automatisch 21% btw op een factuur te zetten.</p>
+        <h3>Voorbeeld van een btw-fout</h3>
+        <p>Stel dat je een dienst levert voor €500 exclusief btw.</p>
+        <p>Bij 21% btw is de berekening:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Bedrag excl. btw</td>
+                <td className="px-4 py-3 text-right">€500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€105,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal incl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€605,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wanneer je per ongeluk €100 btw berekent, klopt het totaalbedrag niet.</p>
+        <h3>Hoe voorkom je deze fout?</h3>
+        <p>Controleer eerst welk btw-tarief bij je werkzaamheden hoort.</p>
+        <p>Gebruik daarna een factuurtool die de btw automatisch berekent op basis van het geselecteerde tarief.</p>
+        <p>Let op: een automatische berekening voorkomt rekenfouten, maar controleert niet automatisch of je het juiste btw-tarief hebt gekozen.</p>
+        <p>
+          <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">Lees ook welke btw je als zzp&apos;er moet rekenen</Link>.
+        </p>
 
-            <CtaButton />
+        <h2>3. Verplichte gegevens vergeten</h2>
+        <p>Een factuur moet aan bepaalde wettelijke eisen voldoen.</p>
+        <p>Toch vergeten ondernemers regelmatig belangrijke gegevens, zoals:</p>
+        <ul>
+          <li>De volledige bedrijfsnaam of het adres.</li>
+          <li>Het btw-identificatienummer.</li>
+          <li>Het KvK-nummer, indien van toepassing.</li>
+          <li>De naam en het adres van de klant.</li>
+          <li>Het factuurnummer.</li>
+          <li>De factuurdatum.</li>
+          <li>De leverdatum of datum van de dienst.</li>
+          <li>De omschrijving en omvang van de levering.</li>
+          <li>De vereiste btw-gegevens.</li>
+        </ul>
+        <p>Welke gegevens precies verplicht zijn, hangt ook af van het type factuur en de btw-situatie.</p>
+        <h3>Hoe voorkom je deze fout?</h3>
+        <p>Gebruik een vaste factuuropmaak met alle benodigde velden.</p>
+        <p>Controleer je bedrijfsgegevens voordat je de eerste factuur verstuurt en pas ze aan wanneer er iets verandert.</p>
+        <p>Met een gratis FactuurBaas-account kun je je bedrijfsgegevens bewaren, zodat je deze niet telkens opnieuw hoeft in te voeren.</p>
+        <p>
+          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">Bekijk hoe je een correcte zzp-factuur maakt</Link>.
+        </p>
 
-            <h2>Facturatie foutgevoelig? Zo maak je het robuuster</h2>
-            <p>Een <strong>facturatie foutgevoelig oplossing</strong> begint met vaste stappen: template met alle verplichte velden, automatische nummering en btw, en altijd PDF. Zo verminder je fouten en voorkom je dubbele facturatie en discussie over aangepaste documenten.</p>
+        <h2>4. Een onduidelijke omschrijving van werkzaamheden</h2>
+        <p>Een klant moet kunnen begrijpen waarvoor hij betaalt.</p>
+        <p>Een omschrijving zoals &apos;Werkzaamheden&apos; of &apos;Consultancy&apos; is vaak te algemeen.</p>
+        <p>Dat kan leiden tot vragen zoals:</p>
+        <ul>
+          <li>Welke werkzaamheden zijn uitgevoerd?</li>
+          <li>Hoeveel uren zijn er gewerkt?</li>
+          <li>Welk tarief is afgesproken?</li>
+          <li>Op welke periode heeft de factuur betrekking?</li>
+        </ul>
+        <h3>Voorbeeld</h3>
+        <p><strong>Onduidelijk:</strong></p>
+        <p>Consultancy – €600</p>
+        <p><strong>Duidelijk:</strong></p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Aantal</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Totaal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Marketingadvies september 2026</td>
+                <td className="px-4 py-3 text-right">6 uur</td>
+                <td className="px-4 py-3 text-right">€75</td>
+                <td className="px-4 py-3 text-right">€450</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Rapportage en aanbevelingen</td>
+                <td className="px-4 py-3 text-right">2 uur</td>
+                <td className="px-4 py-3 text-right">€75</td>
+                <td className="px-4 py-3 text-right">€150</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zo ziet je klant direct hoe het bedrag is opgebouwd.</p>
+        <h3>Hoe voorkom je discussies over factuurgegevens?</h3>
+        <p>Leg vooraf vast welke werkzaamheden je uitvoert en welk tarief daarvoor geldt.</p>
+        <p>Gebruik vervolgens dezelfde omschrijvingen en afspraken op je factuur.</p>
+        <p>Bij opdrachten op uurbasis helpt het om gewerkte uren gedurende de opdracht bij te houden in plaats van ze achteraf te reconstrueren.</p>
+        <p>
+          <Link href="/factuur-voorbeeld/uren" className="text-warm-orange hover:underline">Bekijk een voorbeeld van een urenfactuur</Link>.
+        </p>
 
-            <h2>Veelgestelde vragen</h2>
-            <h3>Waarom is facturatie foutgevoelig?</h3>
-            <p>Door handmatig invullen, rekenen en verschillende bestandsformaten. Automatische velden, btw-berekening en PDF als standaard vormen de oplossing.</p>
-            <h3>Hoe voorkom ik dubbele facturatie?</h3>
-            <p>Opeenvolgende factuurnummers, overzicht van wat je al gefactureerd hebt, en bij voorkeur één tool voor alle facturen.</p>
-            <h3>Waarom altijd PDF en geen Word?</h3>
-            <p>PDF kan niet worden aangepast door de ontvanger; Word wel. Daarmee voorkom je foutgevoelige of ongeldige facturen.</p>
-        </>
+        <h2>5. Een verkeerde betalingstermijn of ontbrekende betaalgegevens</h2>
+        <p>Je factuur kan inhoudelijk helemaal correct zijn, maar alsnog vertraging opleveren wanneer niet duidelijk is hoe of wanneer de klant moet betalen.</p>
+        <p>Veel ondernemers vergeten bijvoorbeeld hun IBAN of vermelden een vervaldatum die niet overeenkomt met de afgesproken betalingstermijn.</p>
+        <h3>Voorbeeld</h3>
+        <p>Factuurdatum: 8 oktober 2026</p>
+        <p>Betalingstermijn: 14 dagen</p>
+        <p>Vervaldatum: 22 oktober 2026</p>
+        <p>Een duidelijke betaalinstructie is:</p>
+        <p><em>Gelieve het factuurbedrag uiterlijk 22 oktober 2026 over te maken onder vermelding van factuurnummer 2026-015.</em></p>
+        <h3>Hoe voorkom je deze fout?</h3>
+        <p>Controleer bij iedere factuur:</p>
+        <ul>
+          <li>Of je IBAN en tenaamstelling kloppen.</li>
+          <li>Welke betalingstermijn is afgesproken.</li>
+          <li>Of de vervaldatum correct is berekend.</li>
+          <li>Of de klant het factuurnummer als betalingskenmerk kan gebruiken.</li>
+        </ul>
+        <p>Houd rekening met de toepasselijke wettelijke regels voor betalingstermijnen.</p>
+        <p>
+          Met de{' '}
+          <Link href="/tools/betaaltermijn-calculator" className="text-warm-orange hover:underline">betaaltermijn-calculator</Link>{' '}
+          kun je eenvoudig een vervaldatum berekenen.
+        </p>
+
+        <h2>6. Dubbele facturatie en dubbele invoer</h2>
+        <p>Dubbele facturatie betekent dat dezelfde levering of dienst per ongeluk twee keer in rekening wordt gebracht.</p>
+        <p>Dat kan bijvoorbeeld gebeuren wanneer:</p>
+        <ul>
+          <li>Je vergeet dat een opdracht al is gefactureerd.</li>
+          <li>Je dezelfde uren in twee facturen verwerkt.</li>
+          <li>Twee medewerkers onafhankelijk dezelfde factuur aanmaken.</li>
+          <li>Je gegevens uit verschillende bestanden overneemt.</li>
+          <li>Je een oude factuur kopieert zonder alle gegevens aan te passen.</li>
+        </ul>
+        <p>Dubbele facturatie kan leiden tot onterechte betalingsverzoeken en extra administratief werk.</p>
+        <h3>Hoe voorkom je dubbele facturatie?</h3>
+        <p>Houd per opdracht bij of deze al is gefactureerd.</p>
+        <p>Gebruik bijvoorbeeld een eenvoudig overzicht:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[420px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Opdracht</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website onderhoud september</td>
+                <td className="px-4 py-3 text-right">€250</td>
+                <td className="px-4 py-3">Gefactureerd</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Logo ontwerp</td>
+                <td className="px-4 py-3 text-right">€400</td>
+                <td className="px-4 py-3">Nog te factureren</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">SEO-advies</td>
+                <td className="px-4 py-3 text-right">€180</td>
+                <td className="px-4 py-3">Gefactureerd</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Werk bij voorkeur vanuit één overzicht, zodat je niet meerdere losse lijsten hoeft bij te houden.</p>
+        <p>Een uniek factuurnummer helpt bij het terugvinden van facturen, maar voorkomt op zichzelf niet dat je dezelfde werkzaamheden twee keer factureert.</p>
+
+        <h2>7. Een verkeerde versie van de factuur versturen</h2>
+        <p>Veel ondernemers maken hun facturen in Word of Excel.</p>
+        <p>Dat kan prima werken, maar brengt een praktisch risico met zich mee: je kunt per ongeluk een oude of onvolledige versie versturen.</p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>Je hebt het bedrag aangepast, maar de oude PDF verstuurd.</li>
+          <li>De klantgegevens zijn nog van een vorige factuur.</li>
+          <li>Je hebt een fout gecorrigeerd, maar niet het juiste bestand opgeslagen.</li>
+          <li>Je hebt meerdere versies met bijna dezelfde bestandsnaam.</li>
+        </ul>
+        <h3>Is een PDF-factuur foutgevoelig?</h3>
+        <p>Een PDF heeft als voordeel dat de opmaak meestal behouden blijft wanneer de ontvanger het document opent.</p>
+        <p>Maar een PDF is niet automatisch foutloos of beveiligd tegen aanpassingen.</p>
+        <p>Ook PDF-bestanden kunnen worden bewerkt.</p>
+        <p>De belangrijkste bescherming tegen factuurfouten is daarom niet alleen het bestandsformaat, maar vooral <strong>de controle van de gegevens voordat je de factuur verstuurt</strong>.</p>
+        <h3>Hoe voorkom je fouten met PDF-facturen?</h3>
+        <p>Controleer de definitieve versie op:</p>
+        <ul>
+          <li>Factuurnummer.</li>
+          <li>Klantgegevens.</li>
+          <li>Omschrijving en aantallen.</li>
+          <li>Btw en totaalbedrag.</li>
+          <li>Betaalgegevens.</li>
+          <li>Factuurdatum en vervaldatum.</li>
+        </ul>
+        <p>Download daarna de definitieve PDF en bewaar een kopie voor je administratie.</p>
+        <p>
+          Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je een factuur maken en als PDF downloaden zonder zelf een Word- of Excel-document op te maken.
+        </p>
+
+        <h2>Wat doe je als je een verkeerde factuur hebt verstuurd?</h2>
+        <p>Ontdek je een fout nadat de factuur al is verstuurd?</p>
+        <p>Pas dan niet zomaar de oorspronkelijke factuur aan zonder vast te leggen wat er is gewijzigd.</p>
+        <p>Welke correctie nodig is, hangt af van de fout en of de factuur al is verwerkt of betaald.</p>
+        <h3>Stap 1: Controleer de fout</h3>
+        <p>Gaat het om een typefout, een verkeerd bedrag, een onjuist btw-tarief of een dubbele factuur?</p>
+        <p>Bepaal eerst wat er precies moet worden gecorrigeerd.</p>
+        <h3>Stap 2: Informeer de klant</h3>
+        <p>Laat je klant weten dat er een fout in de factuur staat en hoe je deze gaat oplossen.</p>
+        <p>Dat voorkomt dat de klant het verkeerde bedrag betaalt of twee verschillende versies verwerkt.</p>
+        <h3>Stap 3: Maak indien nodig een correctie of creditfactuur</h3>
+        <p>Bij een foutief gefactureerd bedrag kan een creditfactuur en eventueel een nieuwe, correcte factuur nodig zijn.</p>
+        <p>Zorg dat de correctie duidelijk verwijst naar de oorspronkelijke factuur.</p>
+        <h3>Stap 4: Bewaar de administratie</h3>
+        <p>Bewaar de oorspronkelijke factuur en de bijbehorende correctie, zodat duidelijk blijft wat er is gebeurd.</p>
+        <p>Controleer bij btw-fouten ook of een correctie in je btw-administratie of aangifte nodig is.</p>
+
+        <h2>Factuurfouten voorkomen met een vaste checklist</h2>
+        <p>Voordat je een factuur verstuurt, kun je deze checklist gebruiken.</p>
+        <ul>
+          <li>Mijn bedrijfsgegevens zijn correct.</li>
+          <li>De klantgegevens zijn correct.</li>
+          <li>Het factuurnummer is uniek.</li>
+          <li>De factuurdatum en leverdatum kloppen.</li>
+          <li>De werkzaamheden zijn duidelijk omschreven.</li>
+          <li>De aantallen en tarieven zijn correct.</li>
+          <li>Het juiste btw-tarief is toegepast.</li>
+          <li>Het totaalbedrag klopt.</li>
+          <li>Mijn betaalgegevens en vervaldatum zijn correct.</li>
+          <li>De definitieve PDF is gecontroleerd.</li>
+        </ul>
+        <p>Met een vaste controle voorkom je veel fouten zonder dat je een uitgebreid boekhoudprogramma nodig hebt.</p>
+
+        <h2>Factuur maken in Word, Excel of een online factuurtool?</h2>
+        <p>Je kunt op verschillende manieren facturen maken.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[520px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Methode</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Voordeel</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Aandachtspunt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">Word</td>
+                <td className="px-4 py-3">Vrije opmaak</td>
+                <td className="px-4 py-3">Veel handmatige invoer</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">Excel</td>
+                <td className="px-4 py-3">Berekeningen met formules</td>
+                <td className="px-4 py-3">Formule- en invoerfouten mogelijk</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-deep-blue">Online factuurtool</td>
+                <td className="px-4 py-3">Vaste structuur en automatische berekeningen</td>
+                <td className="px-4 py-3">Je moet de ingevulde gegevens blijven controleren</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor ondernemers die regelmatig facturen maken, kan een online factuurtool helpen om handmatige fouten te verminderen.</p>
+        <p>FactuurBaas berekent bedragen en btw op basis van je invoer en laat je de factuur als PDF downloaden.</p>
+        <p>Je hoeft daarvoor geen betaald abonnement af te sluiten.</p>
+
+        <h2>Veelgestelde vragen over fouten op facturen</h2>
+        <h3>Wat staat er meestal fout op facturen?</h3>
+        <p>Veelvoorkomende fouten zijn verkeerde factuurnummers, onjuiste btw-bedragen, ontbrekende klantgegevens, onduidelijke omschrijvingen en verkeerde betalingstermijnen.</p>
+        <h3>Hoe voorkom ik fouten bij het maken van facturen?</h3>
+        <p>Gebruik een vaste factuuropmaak, controleer de verplichte gegevens, houd je factuurnummers bij en controleer de definitieve factuur voordat je deze verstuurt.</p>
+        <h3>Hoe voorkom ik dubbele facturatie?</h3>
+        <p>Houd bij welke opdrachten al zijn gefactureerd en gebruik één duidelijk overzicht. Controleer ook of dezelfde werkzaamheden niet op meerdere facturen voorkomen.</p>
+        <h3>Zijn PDF-facturen veiliger dan Word-facturen?</h3>
+        <p>PDF-bestanden behouden doorgaans beter hun opmaak, maar zijn niet automatisch beveiligd tegen bewerken. Een PDF kan dus nog steeds fouten bevatten of worden aangepast.</p>
+        <h3>Mag ik een verkeerde factuur aanpassen?</h3>
+        <p>Dat hangt af van de situatie. Als de factuur al is uitgereikt of verwerkt, kan een correctiedocument of creditfactuur nodig zijn. Bewaar altijd een duidelijk administratief spoor.</p>
+        <h3>Hoe voorkom ik fouten bij het factureren van uren?</h3>
+        <p>Registreer je uren tijdens de werkzaamheden, controleer het afgesproken uurtarief en vergelijk de urenregistratie met de factuur voordat je deze verstuurt.</p>
+        <h3>Kan ik gratis facturen maken zonder Word of Excel?</h3>
+        <p>Ja. Met FactuurBaas kun je online een factuur opstellen, bedragen laten berekenen en de factuur als PDF downloaden.</p>
+
+        <h2>Maak een factuur met minder handmatig werk</h2>
+        <p>De meeste factuurfouten ontstaan door verkeerd overgenomen gegevens, rekenfouten of onvoldoende controle.</p>
+        <p>Met een vaste werkwijze en een duidelijke factuuropmaak kun je veel van deze problemen voorkomen.</p>
+        <p>Wil je geen facturen meer handmatig opmaken in Word of Excel?</p>
+        <p><strong>Met FactuurBaas maak je gratis een factuur, laat je de bedragen berekenen en download je direct een PDF.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
+      </>
     )
   },
   {
@@ -544,8 +1265,11 @@ export const articles = [
           </table>
         </div>
         <p>
-          Wil je vooral snel een professionele factuur maken? Met FactuurBaas kun je online een factuur maken en direct
-          als{' '}
+          Wil je vooral snel een professionele factuur maken? Je kunt ook{' '}
+          <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">
+            gratis online ZZP-factuur maken
+          </Link>{' '}
+          met FactuurBaas en direct als{' '}
           <Link href="/blogs/factuur-pdf-downloaden" className="text-warm-orange hover:underline">
             PDF downloaden
           </Link>
@@ -794,489 +1518,2277 @@ export const articles = [
   {
     slug: 'btw-factuur-zzp',
     relatedSlugs: ['factuur-maken-zzp', 'buitenlandse-klanten-factureren', 'gratis-factuur-zzp', 'factuur-fouten-voorkomen'],
-    title: 'Btw op je factuur: zo doe je het goed als zzp’er',
-    excerpt: 'Btw op factuur en btw op factuur zzp: uitleg over btw-tarief, factuur exclusief btw, zzp en btw, en factureren met of zonder btw (o.a. KOR).',
-    keywords: 'btw op factuur, btw op factuur zzp, btw factuur, zzp en btw, btw zzp, btw tarief zzp, factuur exclusief btw, factureren met of zonder btw, btw grondslag, kor factuur',
+    metaTitle: 'Btw op factuur als zzp\'er: uitleg + voorbeelden',
+    title: 'Btw op factuur als zzp\'er: zo werkt het',
+    breadcrumbLabel: 'Btw op factuur als zzp\'er',
+    excerpt: 'Hoe vermeld je btw op een factuur? Bekijk voorbeelden met 21%, 9% en 0% btw, leer wanneer je zonder btw factureert en maak gratis een btw-factuur.',
+    keywords: 'btw op factuur, btw factuur, factuur met btw, btw factuur maken, btw op factuur zzp, btw grondslag, factuur exclusief btw, wat is subtotaal factuur',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Btw%20op%20je%20factuur%20zo%20doe%20je%20het%20goed%20als%20zzp%20er.png',
-      alt: 'Btw op factuur zzp: tarieven, factuur exclusief btw en btw berekenen.',
+      alt: 'Btw op factuur als zzp\'er: uitleg met voorbeelden voor 21%, 9% en zonder btw.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
       {
-        question: 'Hoe werkt btw op een factuur?',
-        answer: 'Je vermeldt op de factuur het bedrag exclusief btw (de btw-grondslag), het btw-tarief (21%, 9% of 0%) en het btw-bedrag, en het totaal inclusief btw. De btw die je ontvangt draag je af via de btw-aangifte; btw op je zakelijke inkopen mag je aftrekken.',
+        question: 'Hoe zet ik btw op een factuur?',
+        answer: 'Vermeld het subtotaal exclusief btw, het toepasselijke btw-tarief, het btw-bedrag en het totaal inclusief btw. Bij KOR, vrijstelling of btw-verlegging vermeld je de juiste reden in plaats van een gewoon btw-bedrag.',
       },
       {
-        question: 'Welk btw-tarief gebruik ik als zzp\'er?',
-        answer: 'In Nederland: 21% voor de meeste diensten en producten, 9% voor o.a. voedingsmiddelen en culturele diensten. Bij export of btw verleggen: 0%. Controleer altijd welk btw tarief zzp voor jouw branche geldt.',
+        question: 'Wat is het subtotaal op een factuur?',
+        answer: 'Het subtotaal is meestal het bedrag exclusief btw: de prijs van je producten of diensten voordat de btw is opgeteld. Dat bedrag is ook de btw-grondslag.',
       },
       {
-        question: 'Wat is factuur exclusief btw en inclusief btw?',
-        answer: 'Exclusief btw is het bedrag zonder btw (de grondslag). Inclusief btw is het totaal dat de klant betaalt (excl. bedrag + btw). Op je factuur vermeld je beide: subtotaal excl. btw, btw-bedrag en totaal incl. btw.',
+        question: 'Wat is de btw-grondslag?',
+        answer: 'De btw-grondslag is het bedrag waarover je btw berekent. Op een gewone factuur is dat het bedrag exclusief btw.',
       },
       {
-        question: 'Factureren met of zonder btw als zzp\'er?',
-        answer: 'Meestal met btw (21% of 9%), tenzij je de KOR gebruikt (geen btw), naar het buitenland factureert (0% of btw verlegd) of aan een btw-vrijgestelde onderneming levert. Zet op de factuur altijd welk tarief of welke vrijstelling van toepassing is.',
+        question: 'Wat is het verschil tussen exclusief en inclusief btw?',
+        answer: 'Exclusief btw is het bedrag zonder btw. Inclusief btw is het bedrag plus de btw: het totaal dat de klant betaalt.',
       },
       {
-        question: 'Mag ik als zzp\'er onkosten declareren met btw?',
-        answer: 'Zakelijke kosten met btw mag je in principe als voorbelasting aftrekken in je btw-aangifte. Declareer je onkosten aan een opdrachtgever, dan vermeld je de btw apart op de factuur als je btw-plichtig bent. Bij KOR mag je geen btw aftrekken.',
+        question: 'Is 0% btw hetzelfde als btw verlegd?',
+        answer: 'Nee. 0% btw is een btw-tarief. Btw-verlegging betekent dat de btwplicht bij de afnemer ligt. Op de factuur horen andere vermeldingen, zoals “Btw verlegd” of “Reverse charge”.',
+      },
+      {
+        question: 'Moet ik zonder btw factureren als mijn klant btw-vrijgesteld is?',
+        answer: 'Nee, niet automatisch. Of je btw in rekening brengt, hangt af van jouw levering en de toepasselijke btw-regels, niet alleen van de btw-status van je klant.',
+      },
+      {
+        question: 'Kan ik meerdere btw-tarieven op één factuur zetten?',
+        answer: 'Ja. Als je goederen of diensten met verschillende tarieven levert, vermeld je per regel het bedrag exclusief btw, het tarief en het btw-bedrag.',
+      },
+      {
+        question: 'Wanneer factureer ik zonder btw?',
+        answer: 'Bijvoorbeeld als je de KOR toepast, een btw-vrijgestelde prestatie verricht, of als btw-verlegging of een nultarief van toepassing is. Die situaties zijn niet hetzelfde en horen een passende vermelding op de factuur.',
       },
     ],
     content: (
-        <>
-            <p>Veel zzp&apos;ers zoeken naar <strong>btw op factuur</strong> en <strong>btw op factuur zzp</strong>: hoe bereken je het, welk tarief gebruik je, en wanneer factureer je met of zonder btw? <strong>Btw factuur</strong> en <strong>zzp en btw</strong> gaan hand in hand. In dit artikel leggen we uit hoe <strong>btw op je factuur</strong> werkt, wat <strong>factuur exclusief btw</strong> betekent, welk <strong>btw tarief zzp</strong> van toepassing is, en wanneer je <strong>factureren met of zonder btw</strong> toepast.</p>
+      <>
+        <p>Hoe zet je btw op een factuur? Als zzp&apos;er moet je weten welk btw-tarief van toepassing is, hoe je de btw berekent en wanneer je juist geen btw in rekening brengt.</p>
+        <p>Voor de meeste ondernemers is dit eenvoudig: je vermeldt het bedrag exclusief btw, berekent de btw en toont het totaal inclusief btw. Maar bij de kleineondernemersregeling (KOR), btw-vrijgestelde diensten en buitenlandse klanten gelden andere regels.</p>
+        <p>In deze gids lees je hoe je een correcte btw-factuur maakt, met voorbeelden voor 21%, 9%, verschillende btw-tarieven en facturen zonder btw.</p>
+        <p>
+          <strong>Direct een btw-factuur maken?</strong> Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je gratis een factuur maken, de btw laten berekenen en de factuur als PDF downloaden. Een account is niet nodig.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak een btw-factuur" />
 
-            <h2>Hoe werkt btw op je factuur?</h2>
-            <p>Als ondernemer incasseer je btw namens de Belastingdienst. Je telt het btw-bedrag op bij de prijs van je product of dienst (<strong>btw grondslag</strong> × tarief). Dit bedrag draag je later af via je btw-aangifte. De btw die je zelf betaalt over zakelijke inkopen, mag je daar weer van aftrekken.</p>
-            <p>Op je factuur vermeld je dit altijd gesplitst:</p>
-            <ul>
-                <li><strong>Subtotaal (excl. btw) / factuur exclusief btw:</strong> Het bedrag voor jouw werk — de grondslag waarover btw wordt berekend.</li>
-                <li><strong>Btw-tarief en -bedrag:</strong> Bijvoorbeeld &quot;21% btw&quot; en het berekende bedrag.</li>
-                <li><strong>Totaal (incl. btw):</strong> Het eindbedrag dat de klant betaalt.</li>
-            </ul>
+        <h2>Hoe werkt btw op een factuur?</h2>
+        <p>Btw staat voor belasting over de toegevoegde waarde. Als je btw-belaste producten of diensten levert, bereken je doorgaans btw over het bedrag dat je aan je klant in rekening brengt.</p>
+        <p>Op een normale btw-factuur zie je daarom drie bedragen:</p>
+        <ul>
+          <li><strong>Subtotaal exclusief btw:</strong> de prijs van je producten of diensten zonder btw.</li>
+          <li><strong>Btw-bedrag:</strong> de berekende belasting op basis van het toepasselijke tarief.</li>
+          <li><strong>Totaal inclusief btw:</strong> het bedrag dat je klant uiteindelijk betaalt.</li>
+        </ul>
 
-            <h2>Btw tarief zzp: welk tarief gebruik je?</h2>
-            <p>In Nederland zijn er drie tarieven voor <strong>btw factuur</strong> en <strong>btw zzp</strong>:</p>
-            <ul>
-                <li><strong>21% (standaardtarief):</strong> Voor de meeste diensten en producten.</li>
-                <li><strong>9% (verlaagd tarief):</strong> Voor o.a. voedingsmiddelen, boeken, kappers en culturele diensten.</li>
-                <li><strong>0% (nultarief):</strong> Bij export naar andere EU-landen of daarbuiten, of bij btw verleggen.</li>
-            </ul>
-            <p>Controleer altijd welk <strong>btw tarief zzp</strong> voor jouw branche geldt.</p>
+        <h3>Voorbeeld factuur met 21% btw</h3>
+        <p>Je hebt als zzp&apos;er werkzaamheden uitgevoerd voor €500 exclusief btw.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Werkzaamheden excl. btw</td>
+                <td className="px-4 py-3 text-right">€500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€105,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal incl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€605,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De berekening is:</p>
+        <p>€500 × 21% = €105 btw.</p>
+        <p>€500 + €105 = €605 inclusief btw.</p>
+        <p>Dit is de basis van een factuur met btw.</p>
 
-            <h2>Factureren met of zonder btw: de KOR</h2>
-            <p>De <strong>Kleineondernemersregeling (KOR)</strong> is een btw-vrijstelling voor ondernemers met een jaaromzet van maximaal € 20.000. Dan kies je in feite voor <strong>factureren zonder btw</strong>:</p>
-            <ul>
-                <li>Je rekent <strong>geen btw</strong> op je facturen.</li>
-                <li>Je doet geen btw-aangifte.</li>
-                <li>Je mag ook geen btw op zakelijke kosten aftrekken.</li>
-                <li>Je vermeldt op de factuur: &quot;Factuur vrijgesteld van btw op grond van artikel 25 Wet OB&quot;.</li>
-            </ul>
-            <p>Bij <strong>factureren aan btw vrijgestelde onderneming</strong> of bij KOR gebruik je dus geen btw-tarief op de factuur.</p>
+        <h2>Wat moet er op een btw-factuur staan?</h2>
+        <p>Een btw-factuur moet voldoen aan de factuureisen van de Belastingdienst.</p>
+        <p>Voor een reguliere factuur vermeld je onder andere:</p>
+        <ol>
+          <li>Je volledige bedrijfsnaam en adres.</li>
+          <li>De naam en het adres van je klant.</li>
+          <li>Je btw-identificatienummer.</li>
+          <li>Je KvK-nummer, als je bij de KvK bent ingeschreven.</li>
+          <li>Een uniek, opeenvolgend factuurnummer.</li>
+          <li>De factuurdatum.</li>
+          <li>De datum waarop je de goederen of diensten hebt geleverd.</li>
+          <li>Een duidelijke omschrijving en omvang van de levering.</li>
+          <li>De bedragen exclusief btw.</li>
+          <li>De toepasselijke btw-tarieven en btw-bedragen.</li>
+        </ol>
+        <p>Bij bijzondere situaties, zoals btw-verlegging of internationale leveringen, kunnen aanvullende vermeldingen verplicht zijn.</p>
+        <p>Voor bepaalde kleine facturen en vrijgestelde prestaties gelden afwijkende regels.</p>
+        <p>
+          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">Bekijk ook het volledige stappenplan voor een zzp-factuur</Link>.
+        </p>
 
-            <h2>Factuur exclusief btw en btw grondslag</h2>
-            <p>De <strong>btw grondslag</strong> is het bedrag waarover je btw berekent — dus het bedrag <strong>factuur exclusief btw</strong>. Daarop pas je het tarief toe (21% of 9%). Voorbeeld: € 100 excl. btw + 21% btw = € 21 btw, totaal € 121 incl. btw. Op je factuur zet je altijd beide duidelijk neer.</p>
+        <h2>Welk btw-tarief gebruik je als zzp&apos;er?</h2>
+        <p>In Nederland zijn er drie btw-tarieven: 21%, 9% en 0%.</p>
+        <p>Daarnaast zijn bepaalde goederen en diensten vrijgesteld van btw.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Wanneer</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Op de factuur</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">21%</td>
+                <td className="px-4 py-3">Het algemene tarief voor de meeste producten en diensten</td>
+                <td className="px-4 py-3">Bedrag excl. btw, 21% btw en totaal incl. btw</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">9%</td>
+                <td className="px-4 py-3">Het verlaagde tarief voor bepaalde goederen en diensten</td>
+                <td className="px-4 py-3">Bedrag excl. btw, 9% btw en totaal incl. btw</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">0%</td>
+                <td className="px-4 py-3">Specifieke situaties waarin het nultarief geldt</td>
+                <td className="px-4 py-3">0% btw, met de vermelding die bij die situatie hoort</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-deep-blue">Vrijgesteld of verlegd</td>
+                <td className="px-4 py-3">KOR, vrijgestelde prestaties of btw-verlegging</td>
+                <td className="px-4 py-3">Geen gewoon btw-bedrag; wel de juiste reden of vermelding</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Welk tarief van toepassing is, hangt af van wat je levert, niet van het feit dat je zzp&apos;er bent.</p>
+        <p>
+          Meer over tarieven lees je in{' '}
+          <Link href="/gidsen/welke-btw-rekenen-zzper" className="text-warm-orange hover:underline">welke btw je als zzp&apos;er moet rekenen</Link>
+          {' '}en het{' '}
+          <Link href="/gidsen/verschil-9-en-21-btw" className="text-warm-orange hover:underline">verschil tussen 9% en 21% btw</Link>.
+        </p>
 
-            <h2>Btw op factuur zzp: buitenland</h2>
-            <p>Factureer je aan een ondernemer in een ander EU-land? Dan pas je meestal <strong>btw verleggen</strong> toe: 0% btw en op de factuur &quot;Btw verlegd&quot;. De klant doet dan de btw-aangifte in zijn land. Meer hierover in ons artikel <Link href="/blogs/buitenlandse-klanten-factureren" className="text-warm-orange hover:underline">Buitenlandse klanten factureren</Link>.</p>
+        <h2>Wat is het subtotaal en de btw-grondslag?</h2>
+        <p>Het <strong>subtotaal</strong> op een factuur is meestal het bedrag exclusief btw: de prijs van je werk of producten voordat de btw is opgeteld.</p>
+        <p>Dat bedrag is ook de <strong>btw-grondslag</strong>: het bedrag waarover je de btw berekent.</p>
+        <p>Op een gewone factuur zie je dus:</p>
+        <ul>
+          <li>een factuur exclusief btw (subtotaal / grondslag);</li>
+          <li>het btw-bedrag;</li>
+          <li>het totaal inclusief btw.</li>
+        </ul>
+        <p>Met de{' '}
+          <Link href="/tools/btw-calculator" className="text-warm-orange hover:underline">btw-calculator</Link>{' '}
+          kun je een bedrag exclusief of inclusief btw omrekenen.
+        </p>
 
-            <p>Met een tool als FactuurBaas kun je het juiste btw-tarief selecteren of btw verleggen aangeven. De tool berekent de btw voor je, zodat je <strong>btw op factuur</strong> altijd goed staat.</p>
-            <CtaButton />
+        <h2>Voorbeeld factuur met 9% btw</h2>
+        <p>Stel dat het verlaagde tarief van 9% van toepassing is op een levering van €200 exclusief btw.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Levering excl. btw</td>
+                <td className="px-4 py-3 text-right">€200,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 9%</td>
+                <td className="px-4 py-3 text-right">€18,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal incl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€218,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>€200 × 9% = €18 btw. Het totaal inclusief btw is €218.</p>
+        <p>Gebruik 9% alleen wanneer dat tarief voor jouw levering daadwerkelijk geldt.</p>
 
-            <h2>Veelgestelde vragen</h2>
-            <h3>Hoe zet ik btw op mijn factuur?</h3>
-            <p>Vermeld subtotaal excl. btw (grondslag), btw-tarief en btw-bedrag, en totaal incl. btw. Gebruik 21% of 9% tenzij KOR, buitenland of vrijstelling van toepassing is.</p>
-            <h3>Wat is het verschil tussen excl. en incl. btw?</h3>
-            <p>Excl. btw = bedrag zonder btw (grondslag). Incl. btw = bedrag + btw dat de klant betaalt.</p>
-            <h3>Wanneer factureer ik zonder btw?</h3>
-            <p>Bij KOR, bij levering naar het buitenland (btw verlegd of buiten EU), of bij factureren aan btw-vrijgestelde onderneming. Vermeld altijd de reden op de factuur.</p>
-        </>
+        <h2>Voorbeeld factuur met verschillende btw-tarieven</h2>
+        <p>Lever je op één factuur goederen of diensten met verschillende tarieven? Vermeld dan per regel het tarief en het btw-bedrag.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[520px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Excl. btw</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Btw</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website-onderhoud</td>
+                <td className="px-4 py-3 text-right">€400,00</td>
+                <td className="px-4 py-3 text-right">21%</td>
+                <td className="px-4 py-3 text-right">€84,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Levering tegen 9% btw</td>
+                <td className="px-4 py-3 text-right">€100,00</td>
+                <td className="px-4 py-3 text-right">9%</td>
+                <td className="px-4 py-3 text-right">€9,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-medium text-deep-blue">Subtotaal excl. btw</td>
+                <td className="px-4 py-3 text-right font-medium text-deep-blue">€500,00</td>
+                <td className="px-4 py-3" />
+                <td className="px-4 py-3 text-right font-medium text-deep-blue">€93,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue" colSpan={3}>Totaal incl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€593,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Tel de btw-bedragen per tarief bij elkaar op. Vermeld niet één gemiddeld tarief over het hele factuurbedrag.</p>
+
+        <h2>Factuur zonder btw: KOR, vrijstelling, 0% of verlegd</h2>
+        <p>Geen btw op de factuur kan verschillende oorzaken hebben. Die oorzaken mag je niet door elkaar halen.</p>
+        <ul>
+          <li><strong>KOR:</strong> je neemt deel aan de kleineondernemersregeling en brengt geen btw in rekening.</li>
+          <li><strong>Vrijstelling:</strong> je verricht een btw-vrijgestelde prestatie.</li>
+          <li><strong>0% btw:</strong> er geldt een nultarief. Dat is een btw-tarief, geen vrijstelling.</li>
+          <li><strong>Btw verlegd:</strong> de btwplicht ligt bij de afnemer. Dat is iets anders dan 0% btw.</li>
+        </ul>
+        <p>Zet daarom niet automatisch 0% btw op een factuur wanneer de KOR, een vrijstelling of btw-verlegging van toepassing is.</p>
+
+        <h3>Voorbeeld: factuur bij de KOR</h3>
+        <p>Als je de KOR toepast, breng je doorgaans geen btw in rekening. Het totaal is gelijk aan het bedrag van je werkzaamheden.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Werkzaamheden</td>
+                <td className="px-4 py-3 text-right">€500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw</td>
+                <td className="px-4 py-3 text-right">Niet in rekening gebracht (KOR)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€500,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vermeld op de factuur dat de KOR van toepassing is. Gebruik niet het tarief 0% als vervanging.</p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/factuur-template/zonder-btw" className="text-warm-orange hover:underline">voorbeeld van een factuur zonder btw</Link>
+          {' '}of doe de{' '}
+          <Link href="/tools/kor-calculator" className="text-warm-orange hover:underline">KOR-check</Link>.
+        </p>
+
+        <h3>Voorbeeld: factuur met btw verlegd</h3>
+        <p>Bij btw-verlegging breng je zelf geen Nederlandse btw in rekening. De afnemer geeft de btw aan in zijn eigen aangifte, als de regels dat vereisen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Werkzaamheden</td>
+                <td className="px-4 py-3 text-right">€500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw</td>
+                <td className="px-4 py-3 text-right">Verlegd</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€500,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Op de factuur hoort doorgaans de vermelding &quot;Btw verlegd&quot; of &quot;Reverse charge&quot;, plus het btw-identificatienummer van de afnemer wanneer dat vereist is.</p>
+        <p>Dat is niet hetzelfde als 0% btw. 0% is een tarief; verlegging is een andere btw-behandeling.</p>
+        <p>
+          Wanneer 0% wél het juiste tarief is, lees je dat in{' '}
+          <Link href="/gidsen/wanneer-gebruik-je-0-btw" className="text-warm-orange hover:underline">wanneer je 0% btw gebruikt</Link>.
+        </p>
+
+        <h2>Factureren aan een btw-vrijgestelde klant</h2>
+        <p>Als je klant zelf btw-vrijgesteld is, betekent dat niet automatisch dat jij zonder btw mag factureren.</p>
+        <p>Of je btw in rekening brengt, hangt af van de aard van jouw levering of dienst en de btw-regels die daarvoor gelden. De btw-status van de klant is daarvoor niet genoeg.</p>
+        <p>Lever je een btw-belaste dienst aan een vrijgestelde organisatie, dan reken je in beginsel gewoon het toepasselijke tarief.</p>
+
+        <h2>Btw op facturen naar het buitenland</h2>
+        <p>Niet iedere levering aan een klant in een ander EU-land valt onder 0% btw of btw-verlegging.</p>
+        <p>Het maakt uit of je goederen of diensten levert, of de klant ondernemer of particulier is, en waar de prestatie voor de btw plaatsvindt.</p>
+        <p>Voor een EU-ondernemer kan btw-verlegging gelden. Voor een particuliere afnemer of bepaalde goederen kunnen andere regels van toepassing zijn. Buiten de EU gelden opnieuw andere voorwaarden.</p>
+        <p>Controleer daarom de situatie voordat je 0% of &quot;btw verlegd&quot; op de factuur zet.</p>
+        <p>
+          Een uitgebreidere uitleg staat in{' '}
+          <Link href="/blogs/buitenlandse-klanten-factureren" className="text-warm-orange hover:underline">buitenlandse klanten factureren</Link>.
+        </p>
+
+        <h2>Zo maak je een btw-factuur</h2>
+        <ol>
+          <li>Bepaal welk btw-tarief of welke bijzondere regeling voor de levering geldt.</li>
+          <li>Vul je bedrijfs- en klantgegevens in.</li>
+          <li>Zet per regel het bedrag exclusief btw.</li>
+          <li>Laat de btw per tarief berekenen, of vermeld KOR, vrijstelling of verlegging.</li>
+          <li>Controleer subtotaal, btw en totaal.</li>
+          <li>Download de factuur als PDF.</li>
+        </ol>
+        <p>Met FactuurBaas kies je het tarief per regel. De tool berekent de btw op basis van je invoer. Controleer zelf of het gekozen tarief klopt.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een btw-factuur" />
+
+        <h2>Veelgestelde vragen over btw op factuur</h2>
+        <h3>Hoe zet ik btw op een factuur?</h3>
+        <p>Vermeld het subtotaal exclusief btw, het toepasselijke btw-tarief, het btw-bedrag en het totaal inclusief btw. Bij KOR, vrijstelling of btw-verlegging vermeld je de juiste reden in plaats van een gewoon btw-bedrag.</p>
+        <h3>Wat is het subtotaal op een factuur?</h3>
+        <p>Het subtotaal is meestal het bedrag exclusief btw: de prijs van je producten of diensten voordat de btw is opgeteld. Dat bedrag is ook de btw-grondslag.</p>
+        <h3>Wat is de btw-grondslag?</h3>
+        <p>De btw-grondslag is het bedrag waarover je btw berekent. Op een gewone factuur is dat het bedrag exclusief btw.</p>
+        <h3>Wat is het verschil tussen exclusief en inclusief btw?</h3>
+        <p>Exclusief btw is het bedrag zonder btw. Inclusief btw is het bedrag plus de btw: het totaal dat de klant betaalt.</p>
+        <h3>Is 0% btw hetzelfde als btw verlegd?</h3>
+        <p>Nee. 0% btw is een btw-tarief. Btw-verlegging betekent dat de btwplicht bij de afnemer ligt. Op de factuur horen andere vermeldingen, zoals &quot;Btw verlegd&quot; of &quot;Reverse charge&quot;.</p>
+        <h3>Moet ik zonder btw factureren als mijn klant btw-vrijgesteld is?</h3>
+        <p>Nee, niet automatisch. Of je btw in rekening brengt, hangt af van jouw levering en de toepasselijke btw-regels, niet alleen van de btw-status van je klant.</p>
+        <h3>Kan ik meerdere btw-tarieven op één factuur zetten?</h3>
+        <p>Ja. Als je goederen of diensten met verschillende tarieven levert, vermeld je per regel het bedrag exclusief btw, het tarief en het btw-bedrag.</p>
+        <h3>Wanneer factureer ik zonder btw?</h3>
+        <p>Bijvoorbeeld als je de KOR toepast, een btw-vrijgestelde prestatie verricht, of als btw-verlegging of een nultarief van toepassing is. Die situaties zijn niet hetzelfde en horen een passende vermelding op de factuur.</p>
+
+        <h2>Maak een correcte btw-factuur</h2>
+        <p>Voor de meeste zzp&apos;ers is een btw-factuur: bedrag exclusief btw, het juiste tarief, het btw-bedrag en het totaal inclusief btw.</p>
+        <p>Bij KOR, vrijstelling, 0% of verlegging is de vermelding op de factuur minstens zo belangrijk als de berekening zelf.</p>
+        <p><strong>Met FactuurBaas maak je gratis een factuur, laat je de btw berekenen en download je direct een PDF.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
+      </>
     )
   },
     {
     slug: 'buitenlandse-klanten-factureren',
     relatedSlugs: ['btw-factuur-zzp', 'factuur-maken-zzp', 'gratis-factuur-zzp', 'factureren-startende-zzper'],
-    title: 'Buitenlandse klanten factureren: btw, valuta en regels',
-    excerpt: 'Btw verlegd buitenland, factuur zonder btw naar buitenland en factuur naar buitenland btw: uitleg voor buitenlandse afnemers en voorbeeld factuur buitenland.',
-    keywords: 'btw verlegd buitenland, factuur zonder btw buitenland, factuur naar buitenland btw, btw buitenlandse factuur, btw buitenlandse klant, factuur buitenland btw, buitenlandse afnemers, voorbeeld factuur buitenland',
+    metaTitle: 'Factuur naar buitenland maken? Btw-regels + voorbeelden',
+    title: 'Buitenlandse klanten factureren: btw-regels en voorbeelden',
+    breadcrumbLabel: 'Buitenlandse klanten factureren',
+    excerpt: 'Factuur naar het buitenland sturen? Lees wanneer je btw verlegt, 0% btw gebruikt of Nederlandse btw rekent. Met voorbeelden voor EU en buiten EU.',
+    keywords: 'factuur naar buitenland, buitenlandse klanten factureren, btw verlegd buitenland, factuur zonder btw buitenland, btw buitenlandse klant, factuur buitenland voorbeeld',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Buitenlandse%20klanten%20factureren.png',
-      alt: 'Buitenlandse klanten factureren: btw verlegd buitenland en factuur naar buitenland.',
+      alt: 'Buitenlandse klanten factureren: btw-regels en voorbeelden voor EU en buiten EU.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
       {
-        question: 'Hoe werkt btw verlegd bij factureren naar het buitenland?',
-        answer: 'Bij levering aan een ondernemer in de EU pas je btw verleggen toe: je brengt 0% btw in rekening, vermeldt het btw-nummer van je klant op de factuur en zet er de tekst "Btw verlegd" of "Reverse charge" op. De klant doet dan de btw-aangifte in zijn eigen land.',
+        question: 'Moet ik btw rekenen aan een buitenlandse klant?',
+        answer: 'Dat hangt af van het land van de klant, of het een ondernemer of particulier is, en of je goederen of diensten levert. Soms reken je Nederlandse btw, soms buitenlandse btw, soms geldt 0% of wordt de btw verlegd.',
       },
       {
-        question: 'Mag ik een factuur zonder btw sturen naar het buitenland?',
-        answer: 'Ja. Naar ondernemers in de EU: 0% btw met "Btw verlegd" en het btw-nummer van de klant. Naar klanten buiten de EU: geen btw; vermeld op de factuur dat het om een prestatie buiten de EU gaat.',
+        question: 'Mag ik een factuur zonder btw naar het buitenland sturen?',
+        answer: 'Ja, als de btw-regels voor jouw transactie dat toestaan. Een buitenlandse klant is op zichzelf geen voldoende reden om zonder btw te factureren.',
       },
       {
-        question: 'Welke tekst moet er op de factuur bij btw verlegd buitenland?',
-        answer: 'Vermeld "Btw verlegd" of "Reverse charge" op de factuur. Daarnaast moet het btw-identificatienummer van de buitenlandse afnemer erop staan. Zonder deze gegevens is de factuur niet in orde.',
+        question: 'Wanneer moet ik btw verleggen naar een buitenlandse klant?',
+        answer: 'Bij veel algemene zakelijke diensten aan ondernemers in andere EU-landen wordt de btw verlegd naar de afnemer. Er bestaan uitzonderingen.',
       },
       {
-        question: 'Hoe bereken ik btw op een factuur naar het buitenland?',
-        answer: 'Naar EU-ondernemers: 0% btw (btw verleggen). Naar particulieren in de EU: vaak btw in het land van de klant. Naar buiten de EU: geen btw. Voor je eigen aangifte reken je bedragen in vreemde valuta om naar euro\'s.',
+        question: 'Welke tekst gebruik ik bij btw verlegd buitenland?',
+        answer: "Gebruik 'btw verlegd' of 'reverse charge' wanneer de verleggingsregeling daadwerkelijk van toepassing is.",
       },
       {
-        question: 'Wat is het verschil tussen factuur binnenland en factuur buitenland btw?',
-        answer: 'Binnenland: je rekent Nederlands btw-tarief (21% of 9%) en draagt btw af. Buitenland EU-ondernemer: 0% btw, "Btw verlegd", klant doet aangifte. Buitenland buiten EU: geen btw.',
+        question: 'Moet ik btw rekenen aan een klant in Amerika?',
+        answer: 'Bij veel algemene diensten aan Amerikaanse ondernemingen is geen Nederlandse btw verschuldigd. Voor goederen, particuliere klanten en bijzondere diensten kunnen andere regels gelden.',
+      },
+      {
+        question: 'Moet ik btw rekenen aan een klant in België?',
+        answer: 'Dat hangt af van de situatie. Bij veel zakelijke diensten aan Belgische ondernemers wordt de btw verlegd. Bij leveringen aan particulieren of specifieke soorten diensten kan een andere behandeling gelden.',
+      },
+      {
+        question: 'Mag ik factureren in dollars?',
+        answer: 'Ja. Je kunt een prijs in dollars afspreken en een factuur in dollars opstellen. Houd rekening met de toepasselijke omrekeningsregels voor je administratie en belastingaangifte.',
+      },
+      {
+        question: 'Wat is een opgaaf ICP?',
+        answer: 'Een opgaaf ICP is een periodieke opgave van bepaalde goederenleveringen en diensten aan ondernemers in andere EU-landen.',
+      },
+      {
+        question: 'Kan ik gratis een buitenlandse factuur maken?',
+        answer: 'Ja. Met FactuurBaas kun je gratis een factuur opstellen en downloaden als PDF. Je moet zelf de juiste btw-behandeling en eventuele bijzondere factuurvermeldingen controleren.',
       },
     ],
     content: (
       <>
-        <p>Steeds meer zzp&apos;ers werken voor <strong>buitenlandse klanten</strong> en <strong>buitenlandse afnemers</strong>. Veel zoekvragen gaan over <strong>btw verlegd buitenland</strong>, <strong>factuur zonder btw buitenland</strong> en <strong>factuur naar buitenland btw</strong>. Hoe zit het met de <strong>btw op buitenlandse factuur</strong> en wat moet er op een <strong>voorbeeld factuur buitenland</strong>? We zetten de regels op een rij.</p>
+        <p>Wil je als zzp&apos;er een factuur sturen naar een buitenlandse klant? Dan krijg je mogelijk te maken met andere btw-regels dan bij een Nederlandse klant.</p>
+        <p>Of je btw moet rekenen, hangt vooral af van drie vragen: <strong>is je klant gevestigd binnen of buiten de EU, is het een ondernemer of particulier, en lever je goederen of diensten?</strong></p>
+        <p>Bij sommige buitenlandse facturen verleg je de btw. Bij andere geldt het 0%-tarief, Nederlandse btw of juist buitenlandse btw.</p>
+        <p>In deze gids leggen we de belangrijkste regels uit, met voorbeelden voor buitenlandse klanten binnen en buiten de EU.</p>
+        <p>
+          Wil je direct een factuur maken? Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je gratis een factuur opstellen en als PDF downloaden, zonder account.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
 
-        <h2>Btw verlegd buitenland: factuur naar buitenland btw</h2>
-        <p>Lever je diensten aan een andere ondernemer binnen de EU? Dan is de hoofdregel <strong>btw verleggen</strong> (<strong>btw verlegd buitenland</strong>). Je factuur is dan in feite een <strong>factuur zonder btw</strong> (0% btw) naar die buitenlandse partij. Dit houdt in:</p>
+        <h2>Factuur naar het buitenland: wanneer reken je btw?</h2>
+        <p>Een factuur naar een buitenlandse klant is niet automatisch een factuur zonder btw.</p>
+        <p>De juiste btw-behandeling hangt af van je situatie.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[640px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Klant</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Wat lever je?</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Gebruikelijke btw-behandeling</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Ondernemer binnen EU</td>
+                <td className="px-4 py-3">Diensten</td>
+                <td className="px-4 py-3">Vaak btw verlegd</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Ondernemer binnen EU</td>
+                <td className="px-4 py-3">Goederen die naar ander EU-land gaan</td>
+                <td className="px-4 py-3">Vaak 0% btw</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Particulier binnen EU</td>
+                <td className="px-4 py-3">Diensten</td>
+                <td className="px-4 py-3">Afhankelijk van soort dienst en plaats van dienst</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Particulier binnen EU</td>
+                <td className="px-4 py-3">Goederen</td>
+                <td className="px-4 py-3">Nederlandse of buitenlandse btw, afhankelijk van regels</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Ondernemer buiten EU</td>
+                <td className="px-4 py-3">Diensten</td>
+                <td className="px-4 py-3">Vaak buiten Nederlandse btw-heffing</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Klant buiten EU</td>
+                <td className="px-4 py-3">Goederen die worden geëxporteerd</td>
+                <td className="px-4 py-3">Vaak 0% btw bij bewezen export</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dit zijn hoofdregels, geen automatische uitkomsten. Voor bepaalde diensten, leveringen en bijzondere situaties gelden uitzonderingen.</p>
+
+        <h2>1. Factuur naar een ondernemer binnen de EU</h2>
+        <p>Werk je bijvoorbeeld als freelance marketeer, consultant of webdesigner voor een onderneming in België, Duitsland of Frankrijk?</p>
+        <p>Bij veel zakelijke diensten geldt dat de dienst belast is in het land waar je klant is gevestigd.</p>
+        <p>De btw wordt dan meestal verlegd naar de buitenlandse ondernemer.</p>
+        <h3>Wat zet je op de factuur?</h3>
+        <p>Bij een dienst waarop de EU-verleggingsregeling van toepassing is:</p>
         <ul>
-          <li>Je brengt <strong>0% btw</strong> in rekening op de <strong>factuur naar buitenland</strong>.</li>
-          <li>Je vermeldt het <strong>btw-identificatienummer van je klant</strong> op de factuur. Dit is verplicht.</li>
-          <li>Je zet op de factuur de tekst: <strong>&quot;Btw verlegd&quot;</strong> of &quot;Reverse charge&quot; (<strong>btw verlegd buitenland tekst op factuur</strong>).</li>
+          <li>Je brengt geen Nederlandse btw in rekening.</li>
+          <li>Je vermeldt je eigen btw-identificatienummer.</li>
+          <li>Je vermeldt het geldige btw-identificatienummer van je klant.</li>
+          <li>Je zet de tekst <strong>&apos;btw verlegd&apos;</strong> op de factuur.</li>
+          <li>Je verwerkt de dienst in je btw-aangifte en doorgaans in je opgaaf ICP.</li>
         </ul>
-        <p>De <strong>buitenlandse afnemer</strong> is dan zelf verantwoordelijk voor de btw-aangifte in zijn eigen land. Zo regel je de <strong>btw buitenlandse factuur</strong> en <strong>btw buitenlandse facturen</strong> correct. Dit kun je eenvoudig instellen in een goede factuurtool zoals FactuurBaas.</p>
+        <p>
+          Controleer vooraf het btw-identificatienummer van je klant via het Europese{' '}
+          <a href="https://ec.europa.eu/taxation_customs/vies/" className="text-warm-orange hover:underline" target="_blank" rel="noopener noreferrer">VIES-systeem</a>.
+        </p>
+        <h3>Voorbeeld factuur naar België</h3>
+        <p>Je levert marketingdiensten aan een Belgische onderneming voor €1.000.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <div className="border-b border-slate-200 bg-slate-50 px-4 py-3">
+            <p className="text-lg font-semibold text-deep-blue">Factuur</p>
+          </div>
+          <div className="grid gap-4 border-b border-slate-100 px-4 py-4 sm:grid-cols-2">
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Leverancier</p>
+              <p className="font-medium text-deep-blue">Jansen Marketing</p>
+              <p>Nederland</p>
+            </div>
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">Klant</p>
+              <p className="font-medium text-deep-blue">Voorbeeld BV</p>
+              <p>België</p>
+              <p>Btw-id: BE0123456789 (fictief)</p>
+            </div>
+          </div>
+          <p className="border-b border-slate-100 px-4 py-2 text-sm text-slate-600">Factuurnummer: 2026-025</p>
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Marketingadvies</td>
+                <td className="px-4 py-3 text-right">€1.000,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw</td>
+                <td className="px-4 py-3 text-right">Verlegd</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal te betalen</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.000,00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="px-4 py-4 text-sm text-slate-600">Vermelding: btw verlegd / reverse charge</p>
+        </div>
+        <p>Dit voorbeeld laat de btw-behandeling zien. Op een daadwerkelijke factuur moeten ook de overige verplichte gegevens staan.</p>
+        <p>Let op: bij bepaalde diensten, zoals werkzaamheden aan onroerend goed of toegang tot evenementen, kunnen andere regels gelden.</p>
 
-        <h2>Factuur zonder btw buitenland: klanten buiten de EU</h2>
-        <p>Voor <strong>buitenlandse klanten</strong> buiten de EU ligt het nog simpeler: je brengt <strong>geen btw op factuur buitenland</strong> in rekening. De dienst is &quot;belast in het land van de afnemer&quot;. Op je <strong>factuur buitenland zonder btw</strong> vermeld je dat het om een &quot;prestatie buiten de EU&quot; gaat. Zo voldoe je aan de regels voor een <strong>factuur zonder btw buitenland</strong>.</p>
+        <h2>2. Factuur naar een particulier binnen de EU</h2>
+        <p>Factureer je aan een particulier in Duitsland, België of een ander EU-land?</p>
+        <p>Dan gelden niet automatisch dezelfde regels als voor zakelijke klanten.</p>
+        <p>Bij veel algemene diensten aan particulieren is Nederlandse btw van toepassing, maar er bestaan belangrijke uitzonderingen.</p>
+        <p>Denk bijvoorbeeld aan:</p>
+        <ul>
+          <li>Digitale diensten.</li>
+          <li>Diensten die verband houden met onroerend goed.</li>
+          <li>Bepaalde evenementen en activiteiten.</li>
+          <li>Personenvervoer.</li>
+          <li>Restaurant- en cateringdiensten.</li>
+        </ul>
+        <p>Bij sommige diensten moet je btw berekenen in het land van de klant of de plaats waar de dienst wordt verricht.</p>
+        <h3>Voorbeeld</h3>
+        <p>Een Nederlandse consultant levert een algemene adviesdienst aan een particulier in België.</p>
+        <p>Als de algemene hoofdregel voor diensten aan particulieren van toepassing is, berekent de consultant Nederlandse btw.</p>
+        <p>Een Nederlandse ondernemer die een andere soort dienst levert, kan juist met Belgische btw-regels te maken krijgen.</p>
+        <p><strong>Conclusie:</strong> controleer bij particuliere klanten altijd eerst waar de dienst voor de btw belast is.</p>
 
-        <h2>Btw op factuur naar buitenland: samenvatting</h2>
-        <p><strong>Btw factuur buitenland</strong> en <strong>btw buitenlandse klant</strong>: naar EU-ondernemers 0% met btw verlegd; naar buiten de EU geen btw. Voor je eigen administratie moet je het bedrag bij vreemde valuta omrekenen naar euro&apos;s (wisselkoers factuurdatum). Meer over btw in het algemeen lees je in <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">Btw op je factuur als zzp&apos;er</Link>.</p>
+        <h2>3. Factuur naar een ondernemer buiten de EU</h2>
+        <p>Lever je diensten aan een zakelijke klant in bijvoorbeeld de Verenigde Staten, het Verenigd Koninkrijk of Zwitserland?</p>
+        <p>Bij veel algemene zakelijke diensten ligt de plaats van dienst in het land waar de afnemer is gevestigd.</p>
+        <p>Daardoor is de dienst doorgaans niet belast met Nederlandse btw.</p>
+        <h3>Voorbeeld factuur naar Amerika</h3>
+        <p>Je maakt een website voor een Amerikaanse onderneming.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Websiteontwikkeling</td>
+                <td className="px-4 py-3 text-right">€2.000,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Nederlandse btw</td>
+                <td className="px-4 py-3 text-right">Niet van toepassing</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal te betalen</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€2.000,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij een algemene B2B-dienst die buiten de EU belast is, kun je bijvoorbeeld vermelden:</p>
+        <p><em>Dienst belast buiten Nederland volgens de toepasselijke plaats-van-dienstregels.</em></p>
+        <p>Dit is geen algemene verplichte standaardtekst voor iedere buitenlandse factuur.</p>
+        <p>Het betekent ook niet dat je automatisch 0% btw toepast. De prestatie kan buiten de Nederlandse btw-heffing vallen.</p>
+        <p>Voor bijzondere diensten kunnen afwijkende regels gelden.</p>
 
-        <h2>Factureren in een andere valuta</h2>
-        <p>Spreek je met je <strong>buitenlandse klant</strong> een prijs af in dollars of ponden? Dat mag. Je mag de factuur in een vreemde valuta opstellen. Voor je eigen btw-aangifte reken je het bedrag om naar euro&apos;s op de factuurdatum. <strong>Tip:</strong> Vermeld het totaal eventueel in zowel de vreemde valuta als in euro&apos;s op de factuur.</p>
+        <h2>4. Factuur naar een particulier buiten de EU</h2>
+        <p>Ook bij particuliere klanten buiten de EU hangt de btw af van het soort dienst.</p>
+        <p>Sommige diensten vallen onder de Nederlandse btw-regels, terwijl andere diensten buiten Nederland belast kunnen zijn.</p>
+        <p>Bijvoorbeeld bepaalde adviesdiensten aan particuliere klanten buiten de EU kunnen onder specifieke uitzonderingen vallen.</p>
+        <p>Daarom kun je niet stellen dat iedere factuur aan een klant in Amerika of Zwitserland automatisch zonder btw is.</p>
+        <p>Controleer eerst de toepasselijke plaats-van-dienstregels.</p>
 
-        <h2>Voorbeeld factuur buitenland en tool</h2>
-        <p>Voor een correcte <strong>voorbeeld factuur buitenland</strong> heb je dus: 0% btw (EU-ondernemer of buiten EU), het btw-nummer van de klant (bij EU), en de tekst &quot;Btw verlegd&quot; (bij EU). In FactuurBaas kun je eenvoudig het juiste tarief of btw verleggen kiezen, zodat je <strong>btw op factuur naar buitenland</strong> goed regelt.</p>
-        <CtaButton />
+        <h2>5. Goederen leveren aan een ondernemer binnen de EU</h2>
+        <p>Verkoop je fysieke producten aan een onderneming in een ander EU-land en worden die goederen daadwerkelijk naar dat land vervoerd?</p>
+        <p>Dan kun je onder voorwaarden het 0%-tarief toepassen.</p>
+        <p>Dit heet een <strong>intracommunautaire levering</strong>.</p>
+        <p>Belangrijke voorwaarden zijn onder andere:</p>
+        <ul>
+          <li>De goederen worden naar een ander EU-land vervoerd.</li>
+          <li>De afnemer voldoet aan de voorwaarden voor een intracommunautaire verwerving.</li>
+          <li>Je beschikt over een geldig btw-identificatienummer van de afnemer.</li>
+          <li>Je kunt aantonen dat de goederen naar het andere EU-land zijn vervoerd.</li>
+          <li>Je voldoet aan de aangifte- en opgaafverplichtingen.</li>
+        </ul>
+        <h3>Voorbeeld</h3>
+        <p>Je verkoopt goederen voor €1.500 aan een Duitse onderneming.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Goederen</td>
+                <td className="px-4 py-3 text-right">€1.500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 0%</td>
+                <td className="px-4 py-3 text-right">€0,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.500,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Op de factuur vermeld je de gegevens die bij een intracommunautaire levering vereist zijn, waaronder het btw-identificatienummer van de klant en een passende wettelijke verwijzing naar het 0%-tarief.</p>
+        <p>Dit verschilt van de verleggingsregeling voor veel zakelijke diensten binnen de EU.</p>
 
-        <h2>Veelgestelde vragen</h2>
-        <h3>Welke tekst bij btw verlegd buitenland?</h3>
-        <p>Zet &quot;Btw verlegd&quot; of &quot;Reverse charge&quot; op de factuur en vermeld het btw-identificatienummer van de buitenlandse afnemer.</p>
-        <h3>Factuur zonder btw naar buitenland?</h3>
-        <p>Naar EU-ondernemers: 0% btw + btw verlegd. Naar buiten de EU: geen btw; vermeld prestatie buiten de EU.</p>
-        <h3>Hoe bereken ik btw aan buitenlandse klant?</h3>
-        <p>Meestal 0% (btw verleggen naar EU-ondernemer) of geen btw (buiten EU). De klant is dan zelf verantwoordelijk voor btw in zijn land.</p>
+        <h2>6. Goederen verkopen aan buitenlandse particulieren</h2>
+        <p>Verkoop je producten aan particulieren in andere EU-landen, bijvoorbeeld via een webshop?</p>
+        <p>Dan kun je te maken krijgen met de regels voor afstandsverkopen.</p>
+        <p>Afhankelijk van je situatie en omzet kan Nederlandse btw of de btw van het land van de klant gelden.</p>
+        <p>Voor bepaalde grensoverschrijdende verkopen bestaat een gezamenlijke EU-omzetdrempel van €10.000 per kalenderjaar. Hieraan zijn voorwaarden verbonden.</p>
+        <p>Wanneer buitenlandse btw verschuldigd is, kun je die in veel gevallen via het éénloketsysteem (OSS) aangeven.</p>
+        <p>Bij goederen die je exporteert naar landen buiten de EU, kan onder voorwaarden het 0%-tarief gelden. Je moet dan onder andere kunnen aantonen dat de goederen de EU hebben verlaten.</p>
+
+        <h2>Btw verlegd buitenland: wat betekent het?</h2>
+        <p>Bij btw-verlegging bereken je als leverancier niet zelf de btw aan je klant.</p>
+        <p>De afnemer verwerkt de btw volgens de regels die op de transactie van toepassing zijn.</p>
+        <p>Dit komt bijvoorbeeld veel voor bij algemene zakelijke diensten tussen ondernemers in verschillende EU-landen.</p>
+        <h3>Welke tekst zet je op de factuur?</h3>
+        <p>Bij een toepasselijke verleggingsregeling vermeld je:</p>
+        <p><strong>Btw verlegd</strong></p>
+        <p>Of, op een Engelstalige factuur:</p>
+        <p><strong>Reverse charge</strong></p>
+        <p>Daarnaast vermeld je de btw-identificatienummers en andere vereiste factuurgegevens.</p>
+        <h3>Is btw verlegd hetzelfde als 0% btw?</h3>
+        <p>Nee.</p>
+        <p><strong>Btw verlegd</strong> betekent dat de btw-heffing bij de afnemer ligt.</p>
+        <p><strong>0% btw</strong> betekent dat de levering onder een wettelijk nultarief valt.</p>
+        <p>Ook een prestatie die buiten de Nederlandse btw-heffing valt, is niet automatisch een levering tegen 0% btw.</p>
+        <p>Die verschillen zijn belangrijk voor je factuur en btw-aangifte.</p>
+        <p>
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">Lees meer over btw op facturen</Link>.
+        </p>
+
+        <h2>Factuur buitenland voorbeeld: drie situaties</h2>
+        <p>Hieronder zie je de belangrijkste verschillen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Situatie</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Factuurbedrag</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Btw-vermelding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Marketingdienst aan Belgische ondernemer, verlegging van toepassing</td>
+                <td className="px-4 py-3 text-right">€750</td>
+                <td className="px-4 py-3">Btw verlegd</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Goederen naar Duitse ondernemer, voorwaarden 0%-tarief vervuld</td>
+                <td className="px-4 py-3 text-right">€750</td>
+                <td className="px-4 py-3">0% btw, intracommunautaire levering</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Algemene zakelijke dienst aan Amerikaanse onderneming, belast buiten Nederland</td>
+                <td className="px-4 py-3 text-right">€750</td>
+                <td className="px-4 py-3">Geen Nederlandse btw van toepassing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het te betalen bedrag is in deze voorbeelden gelijk, maar de fiscale behandeling verschilt.</p>
+        <p>Daarom is het belangrijk dat je niet voor iedere buitenlandse klant automatisch dezelfde btw-instelling gebruikt.</p>
+
+        <h2>Wat moet er op een buitenlandse factuur staan?</h2>
+        <p>Een factuur naar het buitenland bevat veel van dezelfde gegevens als een Nederlandse factuur.</p>
+        <p>Denk aan:</p>
+        <ul>
+          <li>Je bedrijfsnaam en adres.</li>
+          <li>De naam en het adres van je klant.</li>
+          <li>Je btw-identificatienummer, indien vereist.</li>
+          <li>Het btw-identificatienummer van de klant, indien vereist.</li>
+          <li>Een uniek factuurnummer.</li>
+          <li>De factuurdatum.</li>
+          <li>De datum van levering of dienstverlening.</li>
+          <li>Een duidelijke omschrijving.</li>
+          <li>De bedragen en toepasselijke btw-behandeling.</li>
+          <li>Bijzondere verplichte vermeldingen, zoals &apos;btw verlegd&apos;.</li>
+        </ul>
+        <p>Bij grensoverschrijdende transacties kunnen aanvullende factuurregels gelden.</p>
+
+        <h2>Factureren in dollars, ponden of andere valuta</h2>
+        <p>Je mag een buitenlandse klant in een andere valuta factureren.</p>
+        <p>Bijvoorbeeld:</p>
+        <ul>
+          <li>Amerikaanse dollars (USD).</li>
+          <li>Britse ponden (GBP).</li>
+          <li>Zwitserse franken (CHF).</li>
+          <li>Tsjechische kronen (CZK).</li>
+        </ul>
+        <p>Spreek vooraf duidelijk af in welke valuta je klant moet betalen.</p>
+        <h3>Voorbeeld factuur in dollars</h3>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Webdesign</td>
+                <td className="px-4 py-3 text-right">$1.200,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Nederlandse btw</td>
+                <td className="px-4 py-3 text-right">Niet van toepassing in dit voorbeeld</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">$1.200,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor je administratie en eventuele btw-aangifte kan het nodig zijn bedragen om te rekenen naar euro&apos;s.</p>
+        <p>Welke wisselkoers en peildatum je gebruikt, hangt af van de toepasselijke regels. De factuurdatum is niet in alle gevallen automatisch de juiste peildatum.</p>
+        <p>Bewaar daarom de gebruikte koers en de bijbehorende berekening.</p>
+
+        <h2>Buitenlandse factuur en de opgaaf ICP</h2>
+        <p>Lever je goederen of diensten aan ondernemers in andere EU-landen?</p>
+        <p>Dan kun je verplicht zijn om naast je btw-aangifte een <strong>opgaaf intracommunautaire prestaties (ICP)</strong> in te dienen.</p>
+        <p>Daarin rapporteer je bepaalde leveringen en diensten aan ondernemers in andere EU-landen.</p>
+        <p>Dit geldt bijvoorbeeld voor veel intracommunautaire leveringen en diensten waarvoor de btw naar de buitenlandse afnemer is verlegd.</p>
+        <p>Niet iedere buitenlandse factuur hoort in de opgaaf ICP.</p>
+        <p>Diensten aan klanten buiten de EU vallen daar bijvoorbeeld niet onder.</p>
+        <p>Controleer daarom welke transacties je moet opnemen.</p>
+
+        <h2>Veelgemaakte fouten bij buitenlandse facturen</h2>
+        <p><strong>1. Iedere buitenlandse factuur op 0% btw zetten</strong></p>
+        <p>Niet iedere buitenlandse transactie valt onder het 0%-tarief.</p>
+        <p><strong>2. Btw-verlegging verwarren met het nultarief</strong></p>
+        <p>Dit zijn verschillende btw-behandelingen.</p>
+        <p><strong>3. Het btw-identificatienummer niet controleren</strong></p>
+        <p>Controleer bij zakelijke klanten binnen de EU het btw-identificatienummer en bewaar bewijs van de controle.</p>
+        <p><strong>4. Geen onderscheid maken tussen goederen en diensten</strong></p>
+        <p>Voor goederen en diensten gelden verschillende hoofdregels.</p>
+        <p><strong>5. Geen onderscheid maken tussen bedrijven en particulieren</strong></p>
+        <p>Voor particuliere klanten kunnen heel andere regels gelden.</p>
+        <p><strong>6. De opgaaf ICP vergeten</strong></p>
+        <p>Bepaalde EU-transacties moet je afzonderlijk rapporteren.</p>
+        <p><strong>7. Een verkeerde wisselkoers gebruiken</strong></p>
+        <p>Controleer welke omrekeningsregels voor jouw administratie en aangifte gelden.</p>
+
+        <h2>Gratis factuur naar het buitenland maken</h2>
+        <p>Wil je een factuur opstellen voor een buitenlandse klant?</p>
+        <p>Met FactuurBaas kun je gratis een factuur maken en als PDF downloaden.</p>
+        <p>Je kunt onder andere:</p>
+        <ul>
+          <li>Je eigen bedrijfsgegevens invullen.</li>
+          <li>De gegevens van je buitenlandse klant toevoegen.</li>
+          <li>Producten of diensten omschrijven.</li>
+          <li>Bedragen en btw-percentages invoeren.</li>
+          <li>Een factuur als PDF downloaden.</li>
+        </ul>
+        <p>Controleer zelf welke btw-regels voor jouw buitenlandse transactie gelden en zorg dat eventuele verplichte bijzondere vermeldingen correct op de factuur staan.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
+
+        <h2>Veelgestelde vragen over buitenlandse klanten factureren</h2>
+        <h3>Moet ik btw rekenen aan een buitenlandse klant?</h3>
+        <p>Dat hangt af van het land van de klant, of het een ondernemer of particulier is, en of je goederen of diensten levert. Soms reken je Nederlandse btw, soms buitenlandse btw, soms geldt 0% of wordt de btw verlegd.</p>
+        <h3>Mag ik een factuur zonder btw naar het buitenland sturen?</h3>
+        <p>Ja, als de btw-regels voor jouw transactie dat toestaan. Een buitenlandse klant is op zichzelf geen voldoende reden om zonder btw te factureren.</p>
+        <h3>Wanneer moet ik btw verleggen naar een buitenlandse klant?</h3>
+        <p>Bij veel algemene zakelijke diensten aan ondernemers in andere EU-landen wordt de btw verlegd naar de afnemer. Er bestaan uitzonderingen.</p>
+        <h3>Welke tekst gebruik ik bij btw verlegd buitenland?</h3>
+        <p>Gebruik &apos;btw verlegd&apos; of &apos;reverse charge&apos; wanneer de verleggingsregeling daadwerkelijk van toepassing is.</p>
+        <h3>Moet ik btw rekenen aan een klant in Amerika?</h3>
+        <p>Bij veel algemene diensten aan Amerikaanse ondernemingen is geen Nederlandse btw verschuldigd. Voor goederen, particuliere klanten en bijzondere diensten kunnen andere regels gelden.</p>
+        <h3>Moet ik btw rekenen aan een klant in België?</h3>
+        <p>Dat hangt af van de situatie. Bij veel zakelijke diensten aan Belgische ondernemers wordt de btw verlegd. Bij leveringen aan particulieren of specifieke soorten diensten kan een andere behandeling gelden.</p>
+        <h3>Mag ik factureren in dollars?</h3>
+        <p>Ja. Je kunt een prijs in dollars afspreken en een factuur in dollars opstellen. Houd rekening met de toepasselijke omrekeningsregels voor je administratie en belastingaangifte.</p>
+        <h3>Wat is een opgaaf ICP?</h3>
+        <p>Een opgaaf ICP is een periodieke opgave van bepaalde goederenleveringen en diensten aan ondernemers in andere EU-landen.</p>
+        <h3>Kan ik gratis een buitenlandse factuur maken?</h3>
+        <p>Ja. Met FactuurBaas kun je gratis een factuur opstellen en downloaden als PDF. Je moet zelf de juiste btw-behandeling en eventuele bijzondere factuurvermeldingen controleren.</p>
+
+        <h2>Factuur naar het buitenland maken</h2>
+        <p>Een buitenlandse factuur maken hoeft niet ingewikkeld te zijn, zolang je vooraf bepaalt welke btw-regels gelden.</p>
+        <p>Controleer waar je klant is gevestigd, of het een ondernemer of particulier is en welke goederen of diensten je levert.</p>
+        <p>Daarna kun je de juiste factuurgegevens en btw-behandeling verwerken.</p>
+        <p><strong>Met FactuurBaas maak je gratis een factuur, zonder account of abonnement.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
     )
   },
   {
     slug: 'factureren-startende-zzper',
-    relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'sneller-betalen-factuur', 'factuur-fouten-voorkomen'],
-    title: 'Factureren als startende zzp\'er: factuur maken zzp, opstellen en wat erop moet',
-    excerpt: 'Zzp factureren en factuur maken zzp: wat moet er op een factuur staan, betalingstermijn factuur zzp, KvK op factuur. Alles voor startende zzp\'ers.',
-    keywords: 'factuur maken zzp, zzp factureren, factureren zzp, zzp factuur maken, factuur zzp, factuur opstellen zzp, facturen maken zzp, betalingstermijn factuur zzp, wat moet er op een factuur staan zzp, hoe maak je een factuur zzp',
+    relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'btw-factuur-zzp', 'sneller-betalen-factuur'],
+    metaTitle: 'Eerste factuur als zzp\'er? Dit moet je regelen',
+    title: 'Factureren als startende zzp\'er: je eerste factuur',
+    breadcrumbLabel: 'Factureren als startende zzp\'er',
+    excerpt: 'Begin je als zzp\'er? Ontdek wanneer je mag factureren, wat je nodig hebt, hoe btw werkt en welke betalingstermijn je kiest.',
+    keywords: 'factureren als startende zzp\'er, eerste factuur zzp, zzp factureren, beginnen met factureren, betalingstermijn zzp',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Factureren%20als%20startende%20zzp%20er.png',
-      alt: 'Factureren als startende zzp\'er: factuur maken zzp en factuur opstellen.',
+      alt: 'Factureren als startende zzp\'er: je eerste factuur.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Hoe maak ik een factuur als zzp\'er?', answer: 'Verzamel je gegevens (KvK, btw-nummer) en die van de klant. Vul een factuur in met factuurnummer, datum, omschrijving van je werk, bedragen en betaalgegevens. Gebruik een tool zoals FactuurBaas of een template. Download als PDF en verstuur. Zie ook ons stappenplan "Hoe maak je een factuur als zzp\'er?"' },
-      { question: 'Wat moet er op een factuur staan als zzp\'er?', answer: 'Verplicht: jouw gegevens inclusief KvK-nummer en btw-nummer, klantgegevens, uniek factuurnummer, factuur- en leveringsdatum, omschrijving van diensten/producten, bedragen excl. en incl. btw, en betaalgegevens met betalingstermijn.' },
-      { question: 'Moet mijn KvK-nummer op de factuur?', answer: 'Ja. Het KvK-nummer en je btw-identificatienummer zijn verplicht op elke factuur. Zonder deze gegevens voldoet de factuur niet aan de eisen van de Belastingdienst.' },
-      { question: 'Welke betalingstermijn gebruik ik op mijn factuur als zzp\'er?', answer: 'Veel zzp\'ers kiezen 14 of 30 dagen. Vermeld de betalingstermijn en de exacte vervaldatum duidelijk op de factuur, bijvoorbeeld: "Graag betalen binnen 14 dagen na factuurdatum."' },
-      { question: 'Waar kan ik als starter het beste factureren?', answer: 'Start met een eenvoudige factuurtool zoals FactuurBaas: geen account nodig, direct een professionele PDF. Zo voorkom je fouten en bespaar je tijd ten opzichte van Word of Excel.' },
+      { question: 'Mag ik als startende zzp\'er direct factureren?', answer: 'Ja, zodra je daarvoor een geldige grondslag hebt en voldoet aan de regels die op jouw activiteiten van toepassing zijn. Controleer onder andere je inschrijfplicht en btw-status.' },
+      { question: 'Moet ik een zakelijke bankrekening hebben?', answer: 'Bij een eenmanszaak bestaat geen algemene wettelijke verplichting om een aparte zakelijke bankrekening te openen. Een bank kan wel voorwaarden stellen aan het gebruik van een privérekening voor zakelijke activiteiten.' },
+      { question: 'Hoeveel btw moet ik rekenen als startende zzp\'er?', answer: 'Dat hangt af van je werkzaamheden en btw-situatie. Het algemene tarief is 21%, maar er bestaan andere tarieven, vrijstellingen en regelingen zoals de KOR.' },
+      { question: 'Wat is een goed factuurnummer voor mijn eerste factuur?', answer: 'Je kunt beginnen met bijvoorbeeld 2026-001. Zorg dat ieder factuurnummer uniek is en past binnen een opeenvolgende nummerreeks.' },
+      { question: 'Welke betalingstermijn kan ik gebruiken?', answer: 'Veel ondernemers gebruiken 14 of 30 dagen. Controleer welke afspraken en wettelijke regels voor jouw situatie gelden.' },
+      { question: 'Heb ik een boekhoudprogramma nodig?', answer: 'Nee. Je moet wel een correcte administratie bijhouden. Een betaald boekhoudprogramma is daarvoor niet automatisch noodzakelijk.' },
+      { question: 'Kan ik mijn eerste factuur gratis maken?', answer: 'Ja. Met FactuurBaas kun je gratis een factuur opstellen en als PDF downloaden, zonder account.' },
     ],
     content: (
-        <>
-            <p>Gefeliciteerd met je start! Veel starters zoeken naar <strong>factuur maken zzp</strong>, <strong>zzp factureren</strong> of <strong>factuur opstellen zzp</strong>. <strong>Factureren zzp</strong> hoort erbij: je eerste factuur opmaken, weten <strong>wat er op een factuur moet staan</strong>, en een duidelijke <strong>betalingstermijn factuur zzp</strong> kiezen. In dit artikel vind je alles wat je moet weten om als startende zzp&apos;er goed te factureren.</p>
+      <>
+        <p>Je bent begonnen als zzp&apos;er en hebt je eerste opdracht uitgevoerd. Nu wil je een factuur sturen, maar wat moet je eigenlijk regelen voordat je kunt factureren?</p>
+        <p>Heb je een KvK-nummer nodig? Moet je btw rekenen? Welke betalingstermijn gebruik je? En hoe houd je je facturen bij?</p>
+        <p>In deze gids leggen we uit wat je als startende zzp&apos;er moet weten over factureren, van je eerste opdracht tot de betaling op je rekening.</p>
+        <p>
+          Wil je direct beginnen? Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          maak je gratis een factuur als PDF, zonder account.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis je eerste factuur" />
 
-            <h2>Voordat je begint: basis voor factuur maken zzp</h2>
-            <p>Voordat je je eerste <strong>zzp factuur</strong> kunt sturen, heb je het volgende nodig:</p>
-            <ol>
-                <li><strong>KvK-nummer:</strong> Ontvang je na inschrijving bij de Kamer van Koophandel. <strong>Moet KvK-nummer op factuur?</strong> Ja — het is verplicht op elke factuur.</li>
-                <li><strong>Btw-identificatienummer:</strong> Krijg je automatisch van de Belastingdienst na KvK-inschrijving. Ook verplicht op je factuur.</li>
-                <li><strong>Zakelijke bankrekening:</strong> Niet verplicht, maar wel aan te raden om privé en zakelijk gescheiden te houden.</li>
-            </ol>
+        <h2>Wat heb je nodig om als zzp&apos;er te factureren?</h2>
+        <p>Voordat je je eerste factuur verstuurt, is het verstandig om een aantal zaken te regelen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Wat moet je weten?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">KvK-inschrijving</td>
+                <td className="px-4 py-3">Verplicht als je onderneming aan de inschrijfcriteria voldoet</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw-identificatienummer</td>
+                <td className="px-4 py-3">Nodig als je voor de btw geregistreerd bent en het op je factuur moet vermelden</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Bankrekening</td>
+                <td className="px-4 py-3">Een aparte zakelijke rekening is bij een eenmanszaak niet algemeen wettelijk verplicht</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Factuurnummering</td>
+                <td className="px-4 py-3">Gebruik een unieke, opeenvolgende nummerreeks</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw-tarief</td>
+                <td className="px-4 py-3">Controleer welk tarief of welke regeling geldt</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Administratie</td>
+                <td className="px-4 py-3">Bewaar je facturen en andere zakelijke gegevens</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je hoeft niet meteen een duur boekhoudprogramma aan te schaffen. Voor een kleine onderneming met weinig facturen kan een eenvoudige administratie voldoende zijn, zolang deze aan de wettelijke eisen voldoet.</p>
 
-            <h2>Wat moet er op een factuur staan? (zzp)</h2>
-            <p>Voor een correcte <strong>factuur zzp</strong> en <strong>facturen maken zzp</strong> moet je factuur in ieder geval bevatten: jouw gegevens (naam, adres, KvK, btw-nummer), klantgegevens, uniek factuurnummer, factuur- en leveringsdatum, omschrijving van je werk, bedragen excl. en incl. btw, en betaalgegevens met <strong>betalingstermijn factuur zzp</strong>. Uitgebreide uitleg vind je in <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">Hoe maak je een factuur als zzp&apos;er?</Link> en <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis factuur maken voor zzp&apos;ers</Link>.</p>
+        <h2>1. Moet je ingeschreven staan bij de KvK?</h2>
+        <p>Veel zzp&apos;ers moeten zich inschrijven bij de Kamer van Koophandel voordat ze structureel als ondernemer aan de slag gaan.</p>
+        <p>Of je inschrijfplichtig bent, hangt onder andere af van de aard en omvang van je activiteiten.</p>
+        <p>Na inschrijving ontvang je een KvK-nummer. Als je voor de btw als ondernemer bent geregistreerd, krijg je daarnaast de relevante btw-gegevens van de Belastingdienst.</p>
+        <h3>Moet je KvK-nummer op je factuur?</h3>
+        <p>Als je bij de KvK bent ingeschreven, moet je je KvK-nummer in de daarvoor wettelijk voorgeschreven zakelijke communicatie vermelden, waaronder je facturen.</p>
+        <p>Ook je btw-identificatienummer moet op een reguliere btw-factuur staan wanneer dat verplicht is.</p>
+        <p>Er bestaan bijzondere situaties waarin iemand niet KvK-inschrijfplichtig is. Controleer daarom altijd welke regels op jouw activiteiten van toepassing zijn.</p>
 
-            <h2>Factuur opstellen zzp: je eerste factuur</h2>
-            <p>Je eerste factuur is de blauwdruk voor de rest. Zorg voor een duidelijke omschrijving van je werk, een uniek factuurnummer en de juiste btw. <strong>Factuur opmaken zzp</strong> gaat het snelst met een tool: je vult in, controleert en downloadt de PDF. Geen gedoe met Word of Excel.</p>
+        <h2>2. Wanneer mag je je eerste factuur versturen?</h2>
+        <p>Je kunt je eerste factuur versturen zodra je daarvoor een geldige grondslag hebt, bijvoorbeeld nadat je een afgesproken dienst hebt geleverd.</p>
+        <p>Het moment waarop je moet factureren hangt onder andere af van het soort klant, de prestatie en de toepasselijke btw-regels.</p>
+        <p>Voor veel reguliere zakelijke transacties geldt dat de factuur uiterlijk op de vijftiende dag van de maand na de maand van levering of dienstverlening moet worden uitgereikt.</p>
+        <p>Voorbeeld:</p>
+        <p>Je voert op 10 oktober werkzaamheden uit voor een zakelijke klant. Bij toepassing van de reguliere factureringsregels moet je uiterlijk 15 november factureren.</p>
+        <p>Je mag uiteraard eerder factureren, bijvoorbeeld direct na afronding van je werkzaamheden.</p>
+        <p>Bij vooruitbetalingen en bijzondere transacties kunnen andere regels gelden.</p>
 
-            <h2>Betalingstermijn factuur zzp</h2>
-            <p>Als starter wil je snel betaald krijgen. Een gebruikelijke <strong>betalingstermijn factuur zzp</strong> is 14 of 30 dagen. Vermeld dit duidelijk op je factuur, bijvoorbeeld: &quot;Graag betalen binnen 14 dagen na factuurdatum.&quot; Meer tips om sneller betaald te krijgen lees je in <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">Factuur sneller betaald krijgen</Link>.</p>
+        <h2>3. Hoe maak je je eerste factuur?</h2>
+        <p>Voor je eerste factuur heb je de gegevens van je eigen onderneming en die van je klant nodig.</p>
+        <p>Daarnaast vermeld je onder andere:</p>
+        <ul>
+          <li>Een uniek factuurnummer.</li>
+          <li>De factuurdatum.</li>
+          <li>De leverdatum of periode van de werkzaamheden.</li>
+          <li>Een duidelijke omschrijving van je producten of diensten.</li>
+          <li>Het aantal uren of producten en het afgesproken tarief.</li>
+          <li>De toepasselijke btw en het totaalbedrag.</li>
+        </ul>
+        <h3>Voorbeeld van een eerste factuur</h3>
+        <p>Stel dat je als freelance webdesigner tien uur hebt gewerkt voor €50 per uur.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Webdesign: 10 uur × €50</td>
+                <td className="px-4 py-3 text-right">€500,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€105,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal te betalen</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€605,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dit voorbeeld gaat ervan uit dat je werkzaamheden onder het algemene btw-tarief vallen.</p>
+        <p>Op de daadwerkelijke factuur vermeld je ook je bedrijfsgegevens, klantgegevens, factuurnummer, datums en overige verplichte gegevens.</p>
+        <p>
+          Wil je precies weten hoe je een factuur opstelt?{' '}
+          <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">Bekijk het complete stappenplan voor een zzp-factuur</Link>.
+        </p>
+        <p>
+          Meer over{' '}
+          <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis factuur maken als starter</Link>
+          {' '}vind je in een aparte gids.
+        </p>
 
-            <h2>Zzp factureren: maak het jezelf makkelijk</h2>
-            <p>Een template in Word of Excel geeft snel fouten (verkeerde nummering, rekenfouten) en ziet er vaak minder professioneel uit. Een online factuurtool zoals <strong>FactuurBaas</strong> is gemaakt voor <strong>zzp factureren</strong> en <strong>factuur maken zzp</strong>: je vult de gegevens in, en met één klik heb je een correcte, professionele PDF. Ideaal om te starten met <strong>facturen maken zzp</strong>.</p>
-            <CtaButton />
+        <h2>4. Moet je als startende zzp&apos;er btw rekenen?</h2>
+        <p>Niet iedere zzp&apos;er brengt automatisch 21% btw in rekening.</p>
+        <p>In Nederland bestaan verschillende btw-tarieven en regelingen.</p>
+        <ul>
+          <li><strong>21% btw:</strong> het algemene tarief voor veel goederen en diensten.</li>
+          <li><strong>9% btw:</strong> voor bepaalde goederen en diensten.</li>
+          <li><strong>0% btw:</strong> voor specifieke transacties.</li>
+          <li><strong>Btw-vrijstelling:</strong> voor prestaties die onder een wettelijke vrijstelling vallen.</li>
+          <li><strong>Kleineondernemersregeling (KOR):</strong> een regeling waarmee je onder voorwaarden geen btw in rekening brengt.</li>
+        </ul>
+        <h3>Kleineondernemersregeling voor starters</h3>
+        <p>Als je aan de voorwaarden voldoet, kun je mogelijk deelnemen aan de KOR.</p>
+        <p>Voor de Nederlandse KOR geldt een omzetgrens van €20.000 per kalenderjaar. Deelname vereist een geldige aanmelding en naleving van de voorwaarden.</p>
+        <p>Bij toepassing van de KOR breng je voor de betreffende prestaties geen btw in rekening. Je kunt dan in beginsel ook geen btw op zakelijke kosten aftrekken die daarop betrekking hebben.</p>
+        <p>
+          <Link href="/blogs/btw-factuur-zzp" className="text-warm-orange hover:underline">Bekijk hoe btw op een factuur werkt</Link>.
+        </p>
 
-            <h2>Veelgestelde vragen</h2>
-            <h3>Hoe maak ik een factuur als zzp&apos;er?</h3>
-            <p>Verzamel je gegevens en die van de klant, kies een template of tool (bijv. FactuurBaas), vul alle verplichte velden in, controleer btw en totaal, en download of verstuur als PDF.</p>
-            <h3>Moet het KvK-nummer op de factuur?</h3>
-            <p>Ja. KvK-nummer en btw-identificatienummer zijn verplicht op elke factuur.</p>
-            <h3>Welke betalingstermijn op mijn factuur?</h3>
-            <p>Veel zzp&apos;ers gebruiken 14 of 30 dagen. Vermeld de termijn en vervaldatum duidelijk op de factuur.</p>
-        </>
+        <h2>5. Welke betalingstermijn kies je als zzp&apos;er?</h2>
+        <p>Een duidelijke betalingstermijn voorkomt misverstanden.</p>
+        <p>Veel zzp&apos;ers gebruiken een betalingstermijn van 14 of 30 dagen.</p>
+        <p>Welke termijn van toepassing of toegestaan is, hangt af van de afspraken met je klant en de wettelijke regels.</p>
+        <h3>Voorbeeld</h3>
+        <p>Factuurdatum: 8 oktober 2026</p>
+        <p>Afgesproken betalingstermijn: 14 dagen</p>
+        <p>Vervaldatum: 22 oktober 2026</p>
+        <p>Op je factuur kun je vermelden:</p>
+        <p><em>Gelieve het factuurbedrag uiterlijk 22 oktober 2026 over te maken onder vermelding van het factuurnummer.</em></p>
+        <h3>Is 14 dagen beter dan 30 dagen?</h3>
+        <p>Een kortere betalingstermijn kan helpen om sneller betaald te worden, maar moet passen binnen de gemaakte afspraken en toepasselijke regels.</p>
+        <p>Spreek de betalingstermijn daarom bij voorkeur al af voordat je de opdracht uitvoert.</p>
+        <p>
+          <Link href="/tools/betaaltermijn-calculator" className="text-warm-orange hover:underline">Bereken de vervaldatum met de betaaltermijn-calculator</Link>.
+        </p>
+
+        <h2>6. Hoe houd je als starter je facturen bij?</h2>
+        <p>Ook als je maar een paar facturen per maand verstuurt, moet je een overzichtelijke administratie bijhouden.</p>
+        <p>Begin bijvoorbeeld met een eenvoudig overzicht:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Factuurnummer</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Klant</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-001</td>
+                <td className="px-4 py-3">Klant A</td>
+                <td className="px-4 py-3 text-right">€605</td>
+                <td className="px-4 py-3">Betaald</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-002</td>
+                <td className="px-4 py-3">Klant B</td>
+                <td className="px-4 py-3 text-right">€363</td>
+                <td className="px-4 py-3">Openstaand</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">2026-003</td>
+                <td className="px-4 py-3">Klant C</td>
+                <td className="px-4 py-3 text-right">€242</td>
+                <td className="px-4 py-3">Openstaand</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zo kun je controleren:</p>
+        <ul>
+          <li>Welke facturen je hebt verstuurd.</li>
+          <li>Welke klanten al hebben betaald.</li>
+          <li>Welke bedragen nog openstaan.</li>
+          <li>Welke facturen je in je administratie moet verwerken.</li>
+        </ul>
+        <p>Bewaar ook je inkomende facturen, bonnetjes en andere zakelijke bewijsstukken.</p>
+        <p>Voor de basisadministratie geldt doorgaans een fiscale bewaartermijn van zeven jaar. Voor bepaalde gegevens gelden langere termijnen.</p>
+
+        <h2>7. Wat als je klant je eerste factuur niet betaalt?</h2>
+        <p>Het kan gebeuren dat een klant niet op tijd betaalt.</p>
+        <p>Controleer eerst of de afgesproken betalingstermijn is verstreken en of de factuurgegevens kloppen.</p>
+        <p>Vervolgens kun je:</p>
+        <ol>
+          <li>Een vriendelijke betalingsherinnering sturen.</li>
+          <li>Contact opnemen met de klant.</li>
+          <li>Zo nodig een formele aanmaning versturen.</li>
+          <li>Bij aanhoudende wanbetaling verdere stappen overwegen.</li>
+        </ol>
+        <p>Welke vervolgstappen en kosten zijn toegestaan, hangt onder andere af van het type klant en de wettelijke regels.</p>
+        <p>Voor consumenten gelden bijvoorbeeld specifieke eisen voordat je incassokosten in rekening mag brengen.</p>
+        <p>
+          <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">Bekijk onze tips om facturen sneller betaald te krijgen</Link>.
+        </p>
+
+        <h2>8. Heb je als startende zzp&apos;er een boekhoudprogramma nodig?</h2>
+        <p>Nee, een betaald boekhoudprogramma is niet verplicht.</p>
+        <p>Je bent wel verplicht een administratie bij te houden die voldoet aan de toepasselijke regels.</p>
+        <p>Wanneer je slechts enkele facturen per maand verstuurt, kan een gratis factuurmaker in combinatie met een eenvoudige administratie voldoende zijn.</p>
+        <p>Naarmate je meer klanten, uitgaven en transacties krijgt, kan boekhoudsoftware handig worden.</p>
+        <p>Met boekhoudsoftware kun je bijvoorbeeld zakelijke kosten verwerken, banktransacties koppelen en btw-overzichten bijhouden.</p>
+        <p>Twijfel je wat bij jouw situatie past?</p>
+        <p>
+          <Link href="/tools/boekhoudprogramma-check" className="text-warm-orange hover:underline">Doe de gratis boekhoudprogramma-check</Link>.
+        </p>
+
+        <h2>Veelgemaakte fouten bij je eerste factuur</h2>
+        <p>Startende zzp&apos;ers maken vaak dezelfde fouten.</p>
+        <p><strong>Geen duidelijk factuurnummer gebruiken.</strong> Begin direct met een logische nummerreeks.</p>
+        <p><strong>Het verkeerde btw-tarief kiezen.</strong> Controleer welke btw-regels voor jouw werkzaamheden gelden.</p>
+        <p><strong>Een onduidelijke omschrijving gebruiken.</strong> Vermeld wat je hebt geleverd en tegen welk tarief.</p>
+        <p><strong>Geen betalingstermijn afspreken.</strong> Maak vooraf duidelijk wanneer je betaald wilt worden.</p>
+        <p><strong>Facturen niet bewaren.</strong> Zorg vanaf het begin voor een overzichtelijke administratie.</p>
+        <p><strong>Zakelijke en privétransacties door elkaar laten lopen.</strong> Een aparte rekening kan je administratie overzichtelijker maken, ook wanneer deze niet verplicht is.</p>
+
+        <h2>Veelgestelde vragen over factureren als startende zzp&apos;er</h2>
+        <h3>Mag ik als startende zzp&apos;er direct factureren?</h3>
+        <p>Ja, zodra je daarvoor een geldige grondslag hebt en voldoet aan de regels die op jouw activiteiten van toepassing zijn. Controleer onder andere je inschrijfplicht en btw-status.</p>
+        <h3>Moet ik een zakelijke bankrekening hebben?</h3>
+        <p>Bij een eenmanszaak bestaat geen algemene wettelijke verplichting om een aparte zakelijke bankrekening te openen. Een bank kan wel voorwaarden stellen aan het gebruik van een privérekening voor zakelijke activiteiten.</p>
+        <h3>Hoeveel btw moet ik rekenen als startende zzp&apos;er?</h3>
+        <p>Dat hangt af van je werkzaamheden en btw-situatie. Het algemene tarief is 21%, maar er bestaan andere tarieven, vrijstellingen en regelingen zoals de KOR.</p>
+        <h3>Wat is een goed factuurnummer voor mijn eerste factuur?</h3>
+        <p>Je kunt beginnen met bijvoorbeeld 2026-001. Zorg dat ieder factuurnummer uniek is en past binnen een opeenvolgende nummerreeks.</p>
+        <h3>Welke betalingstermijn kan ik gebruiken?</h3>
+        <p>Veel ondernemers gebruiken 14 of 30 dagen. Controleer welke afspraken en wettelijke regels voor jouw situatie gelden.</p>
+        <h3>Heb ik een boekhoudprogramma nodig?</h3>
+        <p>Nee. Je moet wel een correcte administratie bijhouden. Een betaald boekhoudprogramma is daarvoor niet automatisch noodzakelijk.</p>
+        <h3>Kan ik mijn eerste factuur gratis maken?</h3>
+        <p>Ja. Met FactuurBaas kun je gratis een factuur opstellen en als PDF downloaden, zonder account.</p>
+
+        <h2>Klaar om je eerste factuur te versturen?</h2>
+        <p>Je hoeft als startende zzp&apos;er geen ingewikkeld systeem op te zetten om je eerste factuur te maken.</p>
+        <p>Zorg dat je bedrijfsgegevens kloppen, controleer de btw, gebruik een uniek factuurnummer en spreek een duidelijke betalingstermijn af.</p>
+        <p><strong>Met FactuurBaas maak je gratis je eerste factuur als PDF, zonder account of abonnement.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis je eerste factuur" />
+      </>
     )
   },
     {
     slug: 'factuurbeheer-overzicht',
     relatedSlugs: ['sneller-betalen-factuur', 'factuur-fouten-voorkomen', 'factuur-maken-zzp', 'beste-boekhoudprogramma-zzp'],
-    title: 'Factuurbeheer: digitaal en elektronisch overzicht + factuurbeheeroplossingen',
-    excerpt: 'Factuurbeheer en factuurbeheeroplossingen: hoe je digitaal factuurbeheer en elektronisch factuurbeheer inricht voor een helder overzicht over je facturen en inkomsten.',
-    keywords: 'factuurbeheer, elektronisch factuurbeheer, digitaal factuurbeheer, factuurbeheeroplossingen, facturen overzicht, inkomsten zzp',
+    metaTitle: 'Factuurbeheer: digitaal overzicht en beste aanpak',
+    title: 'Factuurbeheer: zo houd je digitaal overzicht',
+    breadcrumbLabel: 'Factuurbeheer',
+    excerpt: 'Wat is factuurbeheer? Leer hoe je inkomende en uitgaande facturen digitaal beheert, betalingen bijhoudt en passende factuurbeheersoftware kiest.',
+    keywords: 'factuurbeheer, elektronisch factuurbeheer, digitaal factuurbeheer, online factuurbeheer, factuurbeheeroplossingen',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Slim%20factuurbeheer.png',
-      alt: 'Factuurbeheer: digitaal en elektronisch overzicht over facturen en inkomsten.',
+      alt: 'Factuurbeheer: zo houd je digitaal overzicht over je facturen.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Wat is factuurbeheer?', answer: 'Factuurbeheer is het overzichtelijk beheren van al je facturen: wat is verstuurd, wat is betaald, wat staat open en wat is te laat. Goed factuurbeheer helpt je cashflow en administratie. Je kunt dit digitaal of elektronisch doen met mappen, spreadsheets of factuurbeheeroplossingen.' },
-      { question: 'Wat is elektronisch factuurbeheer?', answer: 'Elektronisch factuurbeheer betekent dat je facturen digitaal maakt, opslaat en bijhoudt — geen papieren mappen. Je werkt met PDF\'s, e-mail en eventueel een tool of software. Zo houd je betaalstatussen en overzichten bij zonder papier.' },
-      { question: 'Wat zijn factuurbeheeroplossingen?', answer: 'Factuurbeheeroplossingen zijn tools of software om je facturen centraal te beheren: maken, nummeren, opslaan, statussen bijhouden en herinneringen sturen. Van eenvoudige factuurtools tot volledige boekhoudpakketten. FactuurBaas is een eerste stap: consistente facturen maken, daarna zelf PDF\'s ordenen of later uitbreiden.' },
-      { question: 'Hoe richt ik digitaal factuurbeheer in?', answer: 'Kies één plek voor al je facturen (bijv. één tool om ze te maken), gebruik vaste nummering, sla PDF\'s georganiseerd op (per jaar of klant) en houd een simpel overzicht bij van wat openstaat en wat betaald is. Zo bouw je digitaal factuurbeheer stap voor stap op.' },
+      { question: 'Wat betekent factuurbeheer?', answer: 'Factuurbeheer is het organiseren, controleren en bijhouden van inkomende en uitgaande facturen, inclusief betalingen en openstaande bedragen.' },
+      { question: 'Wat is digitaal factuurbeheer?', answer: 'Bij digitaal factuurbeheer bewaar en organiseer je facturen digitaal, bijvoorbeeld met PDF-bestanden, spreadsheets of software.' },
+      { question: 'Wat is elektronisch factuurbeheer?', answer: 'Elektronisch factuurbeheer omvat het digitaal verwerken en uitwisselen van facturen, vaak met geautomatiseerde functies.' },
+      { question: 'Wat is de beste factuurbeheeroplossing voor zzp\'ers?', answer: 'Dat hangt af van je situatie. Bij weinig facturen kan een spreadsheet voldoende zijn. Bij grotere aantallen kan software met betaalstatussen en bankkoppelingen tijd besparen.' },
+      { question: 'Kan ik factuurbeheer in Excel doen?', answer: 'Ja. Met Excel kun je factuurnummers, klanten, bedragen, vervaldatums en betaalstatussen bijhouden. Je moet het overzicht wel zelf actueel houden.' },
+      { question: 'Wat is het verschil tussen factuurbeheer en boekhouding?', answer: 'Factuurbeheer richt zich op het beheren van facturen en betalingen. Boekhouding omvat daarnaast de bredere financiële administratie, zoals kosten, opbrengsten, banktransacties en fiscale verwerking.' },
+      { question: 'Is een PDF hetzelfde als een elektronische factuur?', answer: 'Een PDF is een digitaal document, maar niet automatisch een gestructureerde e-factuur. Gestructureerde e-facturen kunnen door geschikte systemen automatisch worden verwerkt.' },
+      { question: 'Kan ik gratis facturen maken?', answer: 'Ja. Met FactuurBaas kun je gratis een factuur maken en als PDF downloaden, zonder account.' },
     ],
     content: (
       <>
-        <p>Veel ondernemers zoeken naar goed <strong>factuurbeheer</strong>: overzicht over wat er openstaat, wat betaald is en wat te laat is. <strong>Elektronisch factuurbeheer</strong> en <strong>digitaal factuurbeheer</strong> helpen je daarbij — en er zijn verschillende <strong>factuurbeheeroplossingen</strong> om uit te kiezen. In dit artikel lees je waarom factuurbeheer belangrijk is en hoe je een solide basis legt voor je overzicht.</p>
+        <p>Facturen versturen is één ding. Bijhouden welke facturen betaald zijn, welke nog openstaan en welke kosten je moet verwerken, is minstens zo belangrijk.</p>
+        <p>Met goed <strong>factuurbeheer</strong> houd je overzicht over je inkomsten, uitgaven en openstaande betalingen. Dat kan met een eenvoudige spreadsheet, een online factuurtool of uitgebreide boekhoudsoftware.</p>
+        <p>In deze gids ontdek je hoe digitaal en elektronisch factuurbeheer werkt, welke oplossingen er zijn en hoe je een overzichtelijke administratie opzet.</p>
+        <p>
+          Wil je eerst een factuur maken? Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          maak je gratis een factuur als PDF, zonder account.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
 
-        <h2>Waarom is factuurbeheer belangrijk?</h2>
+        <h2>Wat is factuurbeheer?</h2>
+        <p>Factuurbeheer is het organiseren, controleren en bijhouden van inkomende en uitgaande facturen.</p>
+        <p>Het gaat dus om meer dan alleen facturen maken.</p>
+        <p>Goed factuurbeheer helpt je om:</p>
         <ul>
-          <li><strong>Cashflow:</strong> Je weet precies hoeveel geld er binnenkomt en wanneer.</li>
-          <li><strong>Tijdsbesparing:</strong> Nooit meer zoeken naar een specifieke factuur of betaalstatus.</li>
-          <li><strong>Professionaliteit:</strong> Snel reageren op vragen van klanten en op tijd herinneringen sturen.</li>
-          <li><strong>Minder stress:</strong> Een duidelijk overzicht geeft rust. <strong>Digitaal factuurbeheer</strong> maakt dat eenvoudiger.</li>
+          <li>Facturen eenvoudig terug te vinden.</li>
+          <li>Te zien welke klanten nog moeten betalen.</li>
+          <li>Inkomende facturen op tijd te betalen.</li>
+          <li>Dubbele betalingen en facturen te voorkomen.</li>
+          <li>Je administratie voor te bereiden op de btw-aangifte.</li>
+          <li>Beter inzicht te krijgen in je cashflow.</li>
         </ul>
+        <h3>Inkomende en uitgaande facturen</h3>
+        <p>Er zijn twee belangrijke onderdelen van factuurbeheer.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Betekenis</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Voorbeeld</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Uitgaande facturen</td>
+                <td className="px-4 py-3">Facturen die jij naar klanten stuurt</td>
+                <td className="px-4 py-3">€750 voor een uitgevoerde opdracht</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Inkomende facturen</td>
+                <td className="px-4 py-3">Facturen die je van leveranciers ontvangt</td>
+                <td className="px-4 py-3">€85 voor software of zakelijke diensten</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij uitgaande facturen wil je vooral weten of je klant al heeft betaald.</p>
+        <p>Bij inkomende facturen wil je controleren of het bedrag klopt, wanneer je moet betalen en hoe je de kosten verwerkt.</p>
 
-        <h2>Van mappen naar digitaal en elektronisch factuurbeheer</h2>
-        <p>Veel starters beginnen met een mapje &quot;Verzonden facturen&quot; en een Excel-sheet voor de status. Dat werkt voor de eerste facturen, maar wordt snel onoverzichtelijk. <strong>Elektronisch factuurbeheer</strong> betekent: facturen digitaal maken, opslaan en bijhouden — geen papieren chaos. Met de juiste <strong>factuurbeheeroplossingen</strong> of een vaste werkwijze houd je alles op één plek. Lees ook <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">factuur sneller betaald krijgen</Link> en <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">veelgemaakte fouten op facturen</Link>.</p>
+        <h2>Hoe werkt digitaal factuurbeheer?</h2>
+        <p>Bij digitaal factuurbeheer sla je facturen digitaal op en houd je de bijbehorende gegevens overzichtelijk bij.</p>
+        <p>Je hoeft daarvoor niet meteen uitgebreide software aan te schaffen.</p>
+        <p>Een eenvoudige werkwijze bestaat uit vijf stappen.</p>
+        <h3>Stap 1. Bewaar alle facturen op één plek</h3>
+        <p>Maak een duidelijke mappenstructuur voor je administratie.</p>
+        <p>Bijvoorbeeld:</p>
+        <p><strong>Administratie 2026</strong></p>
+        <ul>
+          <li>Uitgaande facturen</li>
+          <li>Inkomende facturen</li>
+          <li>Creditfacturen</li>
+          <li>Betaalbewijzen</li>
+        </ul>
+        <p>Je kunt daarnaast mappen per maand of kwartaal gebruiken.</p>
+        <p>Gebruik herkenbare bestandsnamen, bijvoorbeeld:</p>
+        <p><code>2026-018_Klantnaam_605-euro.pdf</code></p>
+        <p>Zo kun je een factuur later gemakkelijk terugvinden.</p>
+        <h3>Stap 2. Gebruik unieke factuurnummers</h3>
+        <p>Iedere uitgaande factuur moet een uniek nummer hebben binnen een opeenvolgende nummerreeks.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>2026-001<br />2026-002<br />2026-003</p>
+        <p>Een consequente nummering helpt bij het terugvinden van facturen en het controleren van je administratie.</p>
+        <h3>Stap 3. Registreer de betaalstatus</h3>
+        <p>Houd bij welke facturen betaald zijn en welke nog openstaan.</p>
+        <p>Dat kan met een eenvoudige spreadsheet.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Factuur</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Klant</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Vervaldatum</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-018</td>
+                <td className="px-4 py-3">Klant A</td>
+                <td className="px-4 py-3 text-right">€605</td>
+                <td className="px-4 py-3">22 oktober</td>
+                <td className="px-4 py-3">Betaald</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-019</td>
+                <td className="px-4 py-3">Klant B</td>
+                <td className="px-4 py-3 text-right">€363</td>
+                <td className="px-4 py-3">25 oktober</td>
+                <td className="px-4 py-3">Openstaand</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">2026-020</td>
+                <td className="px-4 py-3">Klant C</td>
+                <td className="px-4 py-3 text-right">€847</td>
+                <td className="px-4 py-3">30 oktober</td>
+                <td className="px-4 py-3">Openstaand</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je kunt eventueel een extra kolom toevoegen voor de betaaldatum of de datum waarop je een herinnering hebt gestuurd.</p>
+        <h3>Stap 4. Controleer je banktransacties</h3>
+        <p>Vergelijk ontvangen betalingen regelmatig met je openstaande facturen.</p>
+        <p>Controleer:</p>
+        <ul>
+          <li>Of het juiste bedrag is ontvangen.</li>
+          <li>Of de betaling bij de juiste factuur hoort.</li>
+          <li>Of er gedeeltelijke betalingen zijn.</li>
+          <li>Of een factuur mogelijk dubbel is betaald.</li>
+        </ul>
+        <p>Werk daarna de betaalstatus bij.</p>
+        <h3>Stap 5. Controleer wekelijks openstaande facturen</h3>
+        <p>Plan een vast moment om je facturen te controleren.</p>
+        <p>Bekijk welke facturen binnenkort vervallen en welke al te laat zijn.</p>
+        <p>Zo voorkom je dat openstaande bedragen onnodig lang blijven liggen.</p>
+        <p>
+          <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">Lees hoe je facturen sneller betaald krijgt</Link>.
+        </p>
 
-        <h2>Factuurbeheeroplossingen: waar begin je?</h2>
-        <p>Er zijn <strong>factuurbeheeroplossingen</strong> in alle soorten: van simpele factuurtools tot volledige boekhoudsoftware. FactuurBaas focust op het moeiteloos <strong>maken</strong> van professionele facturen — de eerste stap naar slimmer <strong>factuurbeheer</strong>. Door elke factuur met dezelfde tool te maken, creëer je een consistente basis. In de toekomst kunnen features zoals een dashboard met betaalstatussen en herinneringen volgen. De basis leg je nu al:</p>
-        <ol>
-          <li><strong>Centraliseer:</strong> Gebruik één tool voor alle uitgaande facturen.</li>
-          <li><strong>Consistente nummering:</strong> FactuurBaas helpt je met een duidelijke structuur.</li>
-          <li><strong>PDF&apos;s georganiseerd opslaan:</strong> Mappen per jaar of per klant voor je <strong>digitaal factuurbeheer</strong>.</li>
-        </ol>
-        <p>Meer over tools en administratie vind je in <Link href="/blogs/beste-boekhoudprogramma-zzp" className="text-warm-orange hover:underline">beste boekhoudprogramma voor zzp&apos;ers</Link>.</p>
-
-        <p>Begin vandaag met een solide basis voor je <strong>factuurbeheer</strong>. Maak je volgende factuur met FactuurBaas en ervaar hoe eenvoudig <strong>elektronisch factuurbeheer</strong> kan starten.</p>
-        <CtaButton />
-
-        <h2>Veelgestelde vragen</h2>
-        <h3>Wat is factuurbeheer?</h3>
-        <p>Factuurbeheer is het overzichtelijk beheren van je facturen: wat is verstuurd, betaald of open. Digitaal of met <strong>factuurbeheeroplossingen</strong> houd je alles op één plek.</p>
+        <h2>Wat is elektronisch factuurbeheer?</h2>
+        <p>Elektronisch factuurbeheer is het digitaal verwerken, uitwisselen en beheren van facturen.</p>
+        <p>De term wordt vaak gebruikt voor systemen die facturen automatisch ontvangen, herkennen, controleren en verwerken.</p>
+        <p>Denk aan software die:</p>
+        <ul>
+          <li>Factuurgegevens uit documenten haalt.</li>
+          <li>Inkoopfacturen aan leveranciers koppelt.</li>
+          <li>Facturen doorstuurt voor goedkeuring.</li>
+          <li>Betalingen koppelt aan openstaande posten.</li>
+          <li>Facturen archiveert.</li>
+        </ul>
         <h3>Wat is het verschil tussen digitaal en elektronisch factuurbeheer?</h3>
-        <p>In de praktijk overlappen ze: beide gaan over facturen digitaal maken, opslaan en bijhouden in plaats van op papier. <strong>Elektronisch factuurbeheer</strong> benadrukt vaak de digitale uitwisseling en opslag.</p>
-        <h3>Welke factuurbeheeroplossingen zijn er?</h3>
-        <p>Van eenvoudige factuurtools (zoals FactuurBaas) tot boekhoudpakketten met facturatie, betaalstatussen en herinneringen. Kies wat past bij het aantal facturen en je administratie.</p>
+        <p>De begrippen overlappen, maar er is een praktisch verschil.</p>
+        <p><strong>Digitaal factuurbeheer</strong> betekent dat je facturen digitaal bewaart en organiseert.</p>
+        <p><strong>Elektronisch factuurbeheer</strong> wordt vaak gebruikt voor verder geautomatiseerde verwerking en uitwisseling.</p>
+        <p>Een PDF-factuur die je per e-mail ontvangt, is bijvoorbeeld een digitaal document.</p>
+        <p>Een gestructureerde e-factuur in een formaat zoals UBL kan rechtstreeks door geschikte administratiesoftware worden verwerkt.</p>
+        <p>Niet iedere PDF is dus automatisch een gestructureerde e-factuur.</p>
+
+        <h2>Online factuurbeheer: welke mogelijkheden zijn er?</h2>
+        <p>Er bestaan verschillende manieren om facturen online te beheren.</p>
+        <p>De juiste oplossing hangt af van het aantal facturen, je budget en hoeveel automatisering je nodig hebt.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[640px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Oplossing</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Geschikt voor</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Mogelijkheden</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Spreadsheet + PDF-facturen</td>
+                <td className="px-4 py-3">Starters met weinig facturen</td>
+                <td className="px-4 py-3">Handmatig overzicht en opslag</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Online factuurtool</td>
+                <td className="px-4 py-3">Ondernemers die eenvoudig facturen willen maken</td>
+                <td className="px-4 py-3">Facturen opstellen en downloaden; beheerfuncties verschillen per aanbieder</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Factuurbeheersoftware</td>
+                <td className="px-4 py-3">Ondernemers met veel facturen</td>
+                <td className="px-4 py-3">Betaalstatussen, herinneringen en rapportages, afhankelijk van pakket</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Boekhoudsoftware</td>
+                <td className="px-4 py-3">Ondernemers die ook hun administratie willen verwerken</td>
+                <td className="px-4 py-3">Facturatie, kosten, banktransacties en boekhouding</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Gespecialiseerde inkoopfactuursoftware</td>
+                <td className="px-4 py-3">Bedrijven met veel leveranciersfacturen</td>
+                <td className="px-4 py-3">Herkenning, goedkeuring en automatische verwerking</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je hoeft niet meteen de meest uitgebreide oplossing te kiezen.</p>
+        <p>Voor een zzp&apos;er met vijf facturen per maand kan een eenvoudige aanpak voldoende zijn. Een bedrijf dat dagelijks tientallen facturen ontvangt, heeft waarschijnlijk meer behoefte aan automatisering.</p>
+
+        <h2>Hoe kies je goede factuurbeheersoftware?</h2>
+        <p>Let bij het vergelijken van factuurbeheeroplossingen op de functies die je daadwerkelijk gebruikt.</p>
+        <h3>1. Overzicht van openstaande facturen</h3>
+        <p>Kun je eenvoudig zien welke klanten nog moeten betalen?</p>
+        <p>En kun je filteren op vervaldatum, klant of bedrag?</p>
+        <h3>2. Automatische betalingsherinneringen</h3>
+        <p>Sommige systemen kunnen herinneringen versturen wanneer een factuur niet op tijd wordt betaald.</p>
+        <p>Controleer of je zelf de tekst en verzendmomenten kunt instellen.</p>
+        <h3>3. Bankkoppeling</h3>
+        <p>Met een bankkoppeling kunnen betalingen automatisch of gedeeltelijk automatisch aan facturen worden gekoppeld.</p>
+        <p>Dit bespaart vooral tijd wanneer je veel transacties hebt.</p>
+        <h3>4. Verwerking van inkomende facturen</h3>
+        <p>Controleer of de software ook leveranciersfacturen ondersteunt.</p>
+        <p>Niet iedere factuurtool biedt volledige inkoopfactuurverwerking.</p>
+        <h3>5. Exportmogelijkheden</h3>
+        <p>Kun je je facturen en administratieve gegevens exporteren?</p>
+        <p>Dat is belangrijk als je later wilt overstappen naar een ander systeem of gegevens wilt delen met je boekhouder.</p>
+        <h3>6. Kosten</h3>
+        <p>Vergelijk niet alleen de maandprijs, maar ook eventuele beperkingen op het aantal facturen, gebruikers en koppelingen.</p>
+        <p>Gratis software kan voor starters voldoende zijn, terwijl uitgebreidere functies vaak onderdeel zijn van betaalde pakketten.</p>
+
+        <h2>Factuurbeheer in Excel of met software?</h2>
+        <p>Voor kleine ondernemingen kan Excel een prima startpunt zijn.</p>
+        <p>Je maakt een overzicht met factuurnummer, klant, bedrag, vervaldatum en betaalstatus.</p>
+        <p>Het voordeel is dat je zelf bepaalt hoe het overzicht eruitziet.</p>
+        <p>Het nadeel is dat je alle gegevens handmatig moet bijwerken.</p>
+        <p>Naarmate je meer facturen verstuurt, wordt het belangrijker om fouten te voorkomen en minder tijd kwijt te zijn aan administratie.</p>
+        <h3>Wanneer overstappen op software?</h3>
+        <p>Overweeg uitgebreider factuurbeheer wanneer:</p>
+        <ul>
+          <li>Je regelmatig vergeet welke facturen openstaan.</li>
+          <li>Je veel tijd kwijt bent aan het controleren van betalingen.</li>
+          <li>Je meerdere mensen toegang wilt geven.</li>
+          <li>Je veel leveranciersfacturen ontvangt.</li>
+          <li>Je banktransacties automatisch wilt verwerken.</li>
+          <li>Je administratie complexer wordt.</li>
+        </ul>
+        <p>
+          <Link href="/blogs/beste-boekhoudprogramma-zzp" className="text-warm-orange hover:underline">Bekijk ook onze gids over boekhoudprogramma&apos;s voor zzp&apos;ers</Link>.
+        </p>
+
+        <h2>Hoe digitaliseer je inkomende facturen?</h2>
+        <p>Ontvang je nog papieren facturen of facturen verspreid over verschillende e-mailadressen?</p>
+        <p>Dan kun je je inkoopfacturen stapsgewijs digitaliseren.</p>
+        <p>Begin met één vast e-mailadres of een vaste map voor leveranciersfacturen.</p>
+        <p>Sla binnengekomen facturen op met een herkenbare bestandsnaam.</p>
+        <p>Controleer vervolgens de leverancier, het bedrag, de btw en de betaaldatum.</p>
+        <p>Verwerk de factuur in je administratie en leg vast of deze al betaald is.</p>
+        <p>Bij grotere aantallen kan software met factuurherkenning helpen om gegevens automatisch over te nemen.</p>
+        <p>Controleer automatisch herkende gegevens wel voordat je ze verwerkt.</p>
+
+        <h2>Hoe houd je overzicht over openstaande facturen?</h2>
+        <p>Een goed overzicht laat je direct zien hoeveel geld je nog van klanten verwacht.</p>
+        <p>Stel dat je drie openstaande facturen hebt:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Factuur</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Openstaand bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-021</td>
+                <td className="px-4 py-3 text-right">€450</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-022</td>
+                <td className="px-4 py-3 text-right">€750</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-023</td>
+                <td className="px-4 py-3 text-right">€300</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal openstaand</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dat betekent niet dat je €1.500 direct beschikbaar hebt.</p>
+        <p>Het geld moet immers nog worden betaald.</p>
+        <p>Maak daarom onderscheid tussen:</p>
+        <ul>
+          <li><strong>Gefactureerd:</strong> bedragen die je aan klanten in rekening hebt gebracht.</li>
+          <li><strong>Openstaand:</strong> bedragen die nog niet zijn ontvangen.</li>
+          <li><strong>Ontvangen:</strong> bedragen die daadwerkelijk op je rekening zijn bijgeschreven.</li>
+          <li><strong>Achterstallig:</strong> bedragen waarvan de vervaldatum is verstreken.</li>
+        </ul>
+        <p>Dat onderscheid helpt bij het plannen van je uitgaven.</p>
+
+        <h2>Hoe lang moet je facturen bewaren?</h2>
+        <p>Voor de meeste fiscale administratieve gegevens geldt in Nederland een bewaartermijn van zeven jaar.</p>
+        <p>Voor bepaalde gegevens, zoals gegevens over onroerende zaken, gelden langere termijnen.</p>
+        <p>Ook digitale facturen moeten gedurende de toepasselijke bewaartermijn beschikbaar en leesbaar blijven.</p>
+        <p>Zorg daarom voor een betrouwbare opslaglocatie en maak regelmatig back-ups.</p>
+        <p>Alleen een factuur downloaden is niet voldoende als je het bestand daarna kwijtraakt.</p>
+
+        <h2>Veelgemaakte fouten bij factuurbeheer</h2>
+        <p><strong>Facturen verspreid opslaan.</strong> Gebruik één vaste mappenstructuur of systeem.</p>
+        <p><strong>Geen betaalstatus bijhouden.</strong> Registreer welke facturen betaald, openstaand of achterstallig zijn.</p>
+        <p><strong>Dubbele facturen verwerken.</strong> Controleer factuurnummers en leveranciersgegevens.</p>
+        <p><strong>Betalingen niet controleren.</strong> Vergelijk je administratie regelmatig met je banktransacties.</p>
+        <p><strong>Geen back-ups maken.</strong> Zorg dat je bestanden niet verloren gaan bij een defect apparaat.</p>
+        <p><strong>Te vroeg ingewikkelde software aanschaffen.</strong> Kies een oplossing die past bij je huidige administratie.</p>
+
+        <h2>Gratis facturen maken met FactuurBaas</h2>
+        <p>Goed factuurbeheer begint met duidelijke en correcte facturen.</p>
+        <p>Met FactuurBaas kun je gratis een factuur opstellen en als PDF downloaden.</p>
+        <p>Je kunt onder andere:</p>
+        <ul>
+          <li>Je bedrijfsgegevens en klantgegevens invullen.</li>
+          <li>Producten en diensten toevoegen.</li>
+          <li>Btw-bedragen laten berekenen.</li>
+          <li>Een factuur als PDF downloaden.</li>
+        </ul>
+        <p>Een account is niet verplicht om een factuur te maken.</p>
+        <p>Voor uitgebreid factuurbeheer, zoals automatische bankkoppelingen, leveranciersfactuurverwerking en betalingsherinneringen, kun je gespecialiseerde software overwegen.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
+
+        <h2>Veelgestelde vragen over factuurbeheer</h2>
+        <h3>Wat betekent factuurbeheer?</h3>
+        <p>Factuurbeheer is het organiseren, controleren en bijhouden van inkomende en uitgaande facturen, inclusief betalingen en openstaande bedragen.</p>
+        <h3>Wat is digitaal factuurbeheer?</h3>
+        <p>Bij digitaal factuurbeheer bewaar en organiseer je facturen digitaal, bijvoorbeeld met PDF-bestanden, spreadsheets of software.</p>
+        <h3>Wat is elektronisch factuurbeheer?</h3>
+        <p>Elektronisch factuurbeheer omvat het digitaal verwerken en uitwisselen van facturen, vaak met geautomatiseerde functies.</p>
+        <h3>Wat is de beste factuurbeheeroplossing voor zzp&apos;ers?</h3>
+        <p>Dat hangt af van je situatie. Bij weinig facturen kan een spreadsheet voldoende zijn. Bij grotere aantallen kan software met betaalstatussen en bankkoppelingen tijd besparen.</p>
+        <h3>Kan ik factuurbeheer in Excel doen?</h3>
+        <p>Ja. Met Excel kun je factuurnummers, klanten, bedragen, vervaldatums en betaalstatussen bijhouden. Je moet het overzicht wel zelf actueel houden.</p>
+        <h3>Wat is het verschil tussen factuurbeheer en boekhouding?</h3>
+        <p>Factuurbeheer richt zich op het beheren van facturen en betalingen. Boekhouding omvat daarnaast de bredere financiële administratie, zoals kosten, opbrengsten, banktransacties en fiscale verwerking.</p>
+        <h3>Is een PDF hetzelfde als een elektronische factuur?</h3>
+        <p>Een PDF is een digitaal document, maar niet automatisch een gestructureerde e-factuur. Gestructureerde e-facturen kunnen door geschikte systemen automatisch worden verwerkt.</p>
+        <h3>Kan ik gratis facturen maken?</h3>
+        <p>Ja. Met FactuurBaas kun je gratis een factuur maken en als PDF downloaden, zonder account.</p>
+
+        <h2>Begin met overzichtelijk factuurbeheer</h2>
+        <p>Je hoeft niet direct een uitgebreid systeem te gebruiken om grip te krijgen op je facturen.</p>
+        <p>Begin met een duidelijke nummering, één opslaglocatie en een actueel overzicht van openstaande betalingen.</p>
+        <p>Naarmate je onderneming groeit, kun je meer automatiseren of overstappen op software.</p>
+        <p><strong>Met FactuurBaas maak je gratis een factuur als PDF, zonder account of abonnement.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
     )
   },
   {
     slug: 'sneller-betalen-factuur',
     relatedSlugs: ['factuur-maken-zzp', 'factuur-fouten-voorkomen', 'factuurbeheer-overzicht', 'gratis-factuur-zzp'],
-    title: 'Factuur sneller betaald krijgen: tips voor zzp\'ers (betaaltermijn & meer)',
-    excerpt: 'Hoe krijg je je factuur sneller betaald? Betaaltermijn zzp, factuur eerder betaald krijgen en praktische tips om je factuur snel betaald te krijgen.',
-    keywords: 'factuur sneller betaald krijgen, betaaltermijn zzp, factuur sneller, factuur eerder betaald krijgen, factuur snel betaald krijgen, factuur betaald krijgen, factuur sneller betaald',
+    metaTitle: 'Factuur sneller betaald krijgen? 9 praktische tips',
+    title: 'Factuur sneller betaald krijgen: 9 praktische tips',
+    breadcrumbLabel: 'Factuur sneller betaald krijgen',
+    excerpt: 'Wil je je factuur eerder betaald krijgen? Ontdek 9 praktische tips over betalingstermijnen, herinneringen, betaallinks en korting voor snelle betaling.',
+    keywords: 'factuur sneller betaald krijgen, factuur eerder betaald krijgen, factuur snel betaald krijgen, facturen sneller betaald krijgen, betalingstermijn zzp',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/De%20beste%20manier%20om%20sneller%20betaald%20te%20krijgen%20als%20zzp%20er.png',
-      alt: 'Factuur sneller betaald krijgen: betaaltermijn zzp en tips voor tijdige betaling.',
+      alt: 'Factuur sneller betaald krijgen: 9 praktische tips voor zzp\'ers.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
-      {
-        question: 'Hoe krijg ik mijn factuur sneller betaald?',
-        answer: 'Factureer direct na de klus, gebruik een korte betaaltermijn (bijv. 14 dagen), vermeld de vervaldatum duidelijk op de factuur, maak betalen eenvoudig (bijv. betaallink), en stuur tijdig een vriendelijke herinnering als de termijn verstreken is. Een foutloze factuur voorkomt vertraging.',
-      },
-      {
-        question: 'Welke betaaltermijn gebruik ik als zzp\'er?',
-        answer: 'Veel zzp\'ers kiezen 14 of 30 dagen. Een kortere betaaltermijn zzp (14 dagen) helpt je cashflow. Vermeld de termijn en de exacte vervaldatum op de factuur en in je offerte of algemene voorwaarden.',
-      },
-      {
-        question: 'Hoe krijg ik mijn factuur eerder of snel betaald?',
-        answer: 'Stuur de factuur meteen na oplevering, niet pas aan het einde van de maand. Zet een duidelijke vervaldatum op de factuur. Overweeg een kleine korting voor snelle betalers (bijv. binnen 7 dagen). Maak betalen zo makkelijk mogelijk voor de klant.',
-      },
-      {
-        question: 'Wat als mijn factuur niet op tijd betaald wordt?',
-        answer: 'Stuur eerst een vriendelijke herinnering per e-mail. Vermeld de factuurnummer en vervaldatum. Blijft betaling uit, dan kun je een aanmaning sturen of (als afgesproken) verlate betaling interest in rekening brengen. Houd je algemene voorwaarden en communicatie professioneel.',
-      },
+      { question: 'Hoe krijg ik mijn factuur sneller betaald?', answer: 'Verstuur je factuur direct, spreek vooraf een duidelijke betalingstermijn af, maak betalen eenvoudig en stuur tijdig een herinnering wanneer de vervaldatum is verstreken.' },
+      { question: 'Kan ik als zzp\'er een betalingstermijn van 14 dagen gebruiken?', answer: 'Ja, in veel situaties kun je een termijn van 14 dagen afspreken. Zorg dat de klant vooraf akkoord gaat en houd rekening met de toepasselijke wettelijke regels.' },
+      { question: 'Mag ik korting geven als een klant eerder betaalt?', answer: 'Ja. Je kunt betalingskorting afspreken. Let wel op de btw-verwerking en zorg dat de voorwaarden duidelijk zijn.' },
+      { question: 'Kan ik een klant verplichten om direct te betalen?', answer: 'Dat hangt af van de overeenkomst en de toepasselijke wetgeving. Je kunt niet zonder meer achteraf een overeengekomen betalingstermijn wijzigen.' },
+      { question: 'Wat doe ik als mijn factuur 30 dagen te laat is?', answer: 'Controleer eerst de afspraken en betalingen. Neem contact op met de klant en stuur zo nodig een herinnering of formele aanmaning. Welke vervolgstappen mogelijk zijn, hangt af van het soort klant en de situatie.' },
+      { question: 'Is factoring geschikt voor zzp\'ers?', answer: 'Sommige factoringbedrijven werken met zzp\'ers. De mogelijkheden en kosten hangen onder andere af van de factuur, de klant en het financieringsmodel.' },
+      { question: 'Kan ik een betaallink toevoegen aan mijn factuur?', answer: 'Ja, met een geschikte betaaldienst kun je een betaallink of QR-code aanbieden. Dit is geen standaard geïntegreerde functie van FactuurBaas.' },
+      { question: 'Hoe kan ik gratis een factuur maken?', answer: 'Met FactuurBaas kun je online een factuur opstellen, de bedragen laten berekenen en de factuur als PDF downloaden zonder account.' },
     ],
     content: (
-        <>
-            <p>Veel zzp&apos;ers zoeken hoe ze hun <strong>factuur sneller betaald krijgen</strong> of hun <strong>factuur eerder betaald krijgen</strong>. Een gezonde cashflow begint bij tijdige betaling. In dit artikel vind je concrete tips om je <strong>factuur snel betaald te krijgen</strong>: van de juiste <strong>betaaltermijn zzp</strong> tot herinneringen en een <strong>factuur sneller</strong> bij de klant.</p>
+      <>
+        <p>Je hebt je werk afgerond en de factuur verstuurd. Maar vervolgens moet je weken wachten voordat het geld op je rekening staat.</p>
+        <p>Voor zzp&apos;ers en kleine ondernemers kan dat vervelend zijn. Je vaste kosten lopen door, terwijl klanten soms pas na 30 dagen of nog later betalen.</p>
+        <p>Gelukkig kun je zelf veel doen om je <strong>factuur sneller betaald te krijgen</strong>. Van duidelijke betalingsafspraken tot herinneringen en korting voor vroege betaling.</p>
+        <p>Hieronder vind je negen praktische tips, inclusief voorbeelden die je direct kunt gebruiken.</p>
 
-            <h2>1. Factureer direct en correct</h2>
-            <p>De klok begint pas te tikken als de factuur bij de klant is. Wacht niet tot het einde van de maand — stuur je factuur zodra de klus geklaard is. Zo vergroot je de kans dat je je <strong>factuur sneller betaald</strong> krijgt. Zorg er ook voor dat de factuur foutloos is; een foutieve factuur wordt vaak opzij gelegd. Lees ook <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">7 veelgemaakte fouten op facturen</Link>.</p>
+        <h2>1. Verstuur je factuur direct na de werkzaamheden</h2>
+        <p>Hoe langer je wacht met factureren, hoe later je doorgaans betaald krijgt.</p>
+        <p>Stel dat je op 1 oktober een opdracht afrondt, maar pas op 15 oktober de factuur verstuurt met een betalingstermijn van 30 dagen.</p>
+        <p>Dan verschuift de vervaldatum van 31 oktober naar 14 november.</p>
+        <p>Je hebt zelf twee weken extra wachttijd gecreëerd.</p>
+        <p><strong>Tip:</strong> maak er een gewoonte van om je factuur direct na afronding van een opdracht te versturen, tenzij je andere factureringsafspraken hebt gemaakt.</p>
+        <p>
+          Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je gratis een factuur maken en als PDF downloaden.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
 
-            <h2>2. Betaaltermijn zzp: kies 14 of 30 dagen</h2>
-            <p>De <strong>betaaltermijn zzp</strong> die je op je factuur zet, heeft direct invloed op wanneer je betaald wordt. Een termijn van 30 dagen is gebruikelijk, maar <strong>14 dagen is voor zzp&apos;ers vaak beter</strong> om je <strong>factuur betaald te krijgen</strong> zonder lang te wachten. Wees vanaf het begin duidelijk: in je offerte, algemene voorwaarden en op de factuur. Vermeld de <strong>exacte vervaldatum</strong> groot en duidelijk op de factuur.</p>
+        <h2>2. Spreek vooraf een duidelijke betalingstermijn af</h2>
+        <p>Veel zzp&apos;ers gebruiken een betalingstermijn van 14 of 30 dagen.</p>
+        <p>Een kortere betalingstermijn kan je helpen om eerder betaald te krijgen, maar je kunt niet altijd eenzijdig een termijn opleggen.</p>
+        <p>De afspraken met je klant en de wettelijke regels zijn bepalend.</p>
+        <h3>Wat is de wettelijke betalingstermijn?</h3>
+        <p>Bij zakelijke transacties geldt in Nederland doorgaans:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Situatie</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Hoofdregel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Geen betalingstermijn afgesproken tussen bedrijven</td>
+                <td className="px-4 py-3">30 dagen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Betaling door grootbedrijf aan mkb of zzp&apos;er</td>
+                <td className="px-4 py-3">Maximaal 30 dagen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Betaling door overheid</td>
+                <td className="px-4 py-3">In beginsel 30 dagen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Overige zakelijke afspraken</td>
+                <td className="px-4 py-3">Vaak maximaal 60 dagen, met beperkte uitzonderingen</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Particuliere klant</td>
+                <td className="px-4 py-3">Geen algemene vaste wettelijke betalingstermijn; de termijn moet redelijk zijn</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wil je een termijn van 14 dagen gebruiken? Spreek dit dan vooraf af, bijvoorbeeld in je offerte of overeenkomst.</p>
+        <h3>Voorbeeld betalingstermijn</h3>
+        <p>Factuurdatum: 8 oktober 2026</p>
+        <p>Afgesproken betalingstermijn: 14 dagen</p>
+        <p>Vervaldatum: 22 oktober 2026</p>
+        <p>Vermeld op de factuur:</p>
+        <p><em>Graag het factuurbedrag uiterlijk 22 oktober 2026 overmaken onder vermelding van het factuurnummer.</em></p>
+        <p>
+          <Link href="/tools/betaaltermijn-calculator" className="text-warm-orange hover:underline">Bereken je vervaldatum met de gratis betaaltermijn-calculator</Link>.
+        </p>
 
-            <h2>3. Maak betalen super eenvoudig</h2>
-            <p>Hoe minder moeite een klant hoeft te doen, hoe sneller hij betaalt. Een directe betaallink (bijv. iDEAL) op de factuur helpt om je <strong>factuur snel betaald te krijgen</strong>. Hoewel FactuurBaas dit (nog) niet standaard integreert, is het een strategie om in gedachten te houden. Duidelijke betaalgegevens (IBAN, tenaamstelling) op de factuur zijn in ieder geval een must.</p>
+        <h2>3. Maak betalen zo eenvoudig mogelijk</h2>
+        <p>Hoe meer handelingen een klant moet uitvoeren, hoe groter de kans dat betaling wordt uitgesteld.</p>
+        <p>Zorg daarom dat de betaalgegevens duidelijk zichtbaar zijn.</p>
+        <p>Vermeld:</p>
+        <ul>
+          <li>Het totale factuurbedrag.</li>
+          <li>Je IBAN.</li>
+          <li>De tenaamstelling.</li>
+          <li>Het factuurnummer.</li>
+          <li>De uiterste betaaldatum.</li>
+        </ul>
+        <p>Je kunt daarnaast een betaallink of betaal-QR-code gebruiken via een geschikte betaaldienst.</p>
+        <p>Zo hoeft je klant minder gegevens handmatig over te nemen.</p>
+        <p>Let op: FactuurBaas biedt momenteel geen standaard geïntegreerde betaallink aan. Je kunt wel een PDF-factuur maken en die combineren met een afzonderlijk betaalverzoek.</p>
 
-            <h2>4. Stuur vriendelijke herinneringen</h2>
-            <p>Is de <strong>betaaltermijn</strong> verstreken? Wacht niet te lang met een herinnering. Een korte, vriendelijke e-mail is vaak genoeg om je <strong>factuur alsnog betaald te krijgen</strong>. Bijvoorbeeld: &quot;Dag [Naam], wellicht is deze factuur aan je aandacht ontsnapt. Zou je hier nog naar willen kijken?&quot;</p>
+        <h2>4. Voorkom fouten en discussies over je factuur</h2>
+        <p>Een klant die vragen heeft over een factuur, betaalt mogelijk pas nadat die vragen zijn opgelost.</p>
+        <p>Controleer daarom vooraf:</p>
+        <ul>
+          <li>Zijn de klantgegevens correct?</li>
+          <li>Komt het bedrag overeen met de offerte?</li>
+          <li>Zijn de werkzaamheden duidelijk omschreven?</li>
+          <li>Kloppen de uren en tarieven?</li>
+          <li>Is het juiste btw-tarief gebruikt?</li>
+          <li>Is de betalingstermijn duidelijk?</li>
+        </ul>
+        <p>Bij opdrachten op uurbasis is het verstandig om je urenregistratie bij te houden en eventueel vooraf te laten goedkeuren.</p>
+        <p>Dat voorkomt discussies achteraf.</p>
+        <p>
+          <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">Bekijk de 7 veelgemaakte fouten op facturen</Link>.
+        </p>
 
-            <h2>5. Beloon snelle betalers</h2>
-            <p>Overweeg een kleine korting voor klanten die binnen bijvoorbeeld 7 dagen betalen. Zo stimuleer je <strong>factuur sneller betaald krijgen</strong> zonder boetes. Bijvoorbeeld: &quot;Betaal binnen 7 dagen en ontvang 2% korting.&quot;</p>
+        <h2>5. Stuur een vriendelijke betalingsherinnering</h2>
+        <p>Is de vervaldatum verstreken?</p>
+        <p>Stuur dan tijdig een vriendelijke herinnering.</p>
+        <p>Soms is een factuur simpelweg over het hoofd gezien of bij de verkeerde afdeling terechtgekomen.</p>
+        <h3>Voorbeeld eerste betalingsherinnering</h3>
+        <p><strong>Onderwerp: Herinnering factuur 2026-018</strong></p>
+        <p>Beste [naam],</p>
+        <p>Volgens mijn administratie staat factuur 2026-018 van €605 nog open. De vervaldatum was 22 oktober.</p>
+        <p>Zou je kunnen controleren of de betaling al is ingepland?</p>
+        <p>Alvast bedankt!</p>
+        <p>Met vriendelijke groet,<br />[Je naam]</p>
+        <p>Houd de eerste herinnering vriendelijk en feitelijk.</p>
+        <p>Bij particuliere klanten gelden specifieke regels voordat je incassokosten in rekening mag brengen. Een gewone vriendelijke herinnering is niet automatisch een juridisch correcte veertiendagenbrief.</p>
 
-            <p>Door deze tips toe te passen, neem je de controle over je cashflow. Begin met het fundament: een snelle, correcte factuur. Maak er vandaag nog een met FactuurBaas.</p>
-            <CtaButton />
+        <h2>6. Bied korting voor snelle betaling</h2>
+        <p>Een andere mogelijkheid is om klanten een kleine korting te geven wanneer ze eerder betalen.</p>
+        <p>Dit wordt ook wel <strong>betalingskorting</strong> of <em>early payment discount</em> genoemd.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>Je stuurt een factuur van €1.000 met een betalingstermijn van 30 dagen.</p>
+        <p>Je spreekt vooraf af dat de klant 2% korting krijgt wanneer hij binnen zeven dagen betaalt.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[360px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Betaalmoment</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Binnen 7 dagen</td>
+                <td className="px-4 py-3 text-right">€980</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Na 7 dagen, uiterlijk op vervaldatum</td>
+                <td className="px-4 py-3 text-right">€1.000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De klant bespaart €20 en jij ontvangt het geld mogelijk eerder.</p>
+        <h3>Is korting voor snelle betaling verstandig?</h3>
+        <p>Dat hangt af van je winstmarge en hoeveel waarde je hecht aan eerdere betaling.</p>
+        <p>Een korting van 2% lijkt klein, maar kan relatief duur zijn als je daarmee slechts enkele weken betalingstijd wint.</p>
+        <p><strong>Belangrijk:</strong> betalingskorting kan gevolgen hebben voor de btw-berekening en factuurcorrecties. Leg de voorwaarden duidelijk vast en verwerk de korting correct in je administratie.</p>
 
-            <h2>Veelgestelde vragen</h2>
-            <h3>Hoe krijg ik mijn factuur sneller betaald?</h3>
-            <p>Factureer direct na de klus, gebruik een korte betaaltermijn (14 dagen), vermeld de vervaldatum duidelijk, en stuur tijdig een herinnering. Een foutloze factuur voorkomt vertraging.</p>
-            <h3>Welke betaaltermijn is gebruikelijk voor zzp&apos;ers?</h3>
-            <p>14 of 30 dagen. 14 dagen is beter voor je cashflow; vermeld het in je offerte en op de factuur.</p>
-            <h3>Wat als de klant te laat betaalt?</h3>
-            <p>Stuur eerst een vriendelijke herinnering. Blijft betaling uit, dan een aanmaning of (indien van toepassing) verlate betaling interest volgens je voorwaarden.</p>
-        </>
+        <h2>7. Vraag bij grote opdrachten een aanbetaling</h2>
+        <p>Bij grotere projecten hoef je niet altijd te wachten totdat alle werkzaamheden zijn afgerond.</p>
+        <p>Je kunt bijvoorbeeld vooraf een aanbetaling of een betaling per projectfase afspreken.</p>
+        <p>Voorbeeld van een zakelijke opdracht van €3.000 exclusief btw:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[420px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Moment</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Deel</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag excl. btw</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Bij start</td>
+                <td className="px-4 py-3 text-right">30%</td>
+                <td className="px-4 py-3 text-right">€900</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Halverwege</td>
+                <td className="px-4 py-3 text-right">40%</td>
+                <td className="px-4 py-3 text-right">€1.200</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Bij oplevering</td>
+                <td className="px-4 py-3 text-right">30%</td>
+                <td className="px-4 py-3 text-right">€900</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zo ontvang je gedurende het project al betalingen en hoef je niet het volledige bedrag voor te financieren.</p>
+        <p>Leg de afspraken vooraf schriftelijk vast.</p>
+        <p>Houd er rekening mee dat voor aanbetalingen btw- en factureringsregels kunnen gelden. Bij consumenten bestaan bovendien specifieke beperkingen voor verplichte vooruitbetaling in bepaalde situaties.</p>
+
+        <h2>8. Houd openstaande facturen actief bij</h2>
+        <p>Als je niet weet welke facturen nog openstaan, is het moeilijk om tijdig op te volgen.</p>
+        <p>Gebruik daarom een eenvoudig overzicht.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Factuur</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Vervaldatum</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-018</td>
+                <td className="px-4 py-3">22 oktober</td>
+                <td className="px-4 py-3 text-right">€605</td>
+                <td className="px-4 py-3">Openstaand</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2026-019</td>
+                <td className="px-4 py-3">28 oktober</td>
+                <td className="px-4 py-3 text-right">€363</td>
+                <td className="px-4 py-3">Betaald</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">2026-020</td>
+                <td className="px-4 py-3">5 november</td>
+                <td className="px-4 py-3 text-right">€847</td>
+                <td className="px-4 py-3">Openstaand</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Controleer dit overzicht bijvoorbeeld iedere week.</p>
+        <p>Zo zie je direct welke facturen binnenkort vervallen en welke klanten je moet benaderen.</p>
+        <p>Bewaar ook je verzonden herinneringen en eventuele betalingsafspraken.</p>
+
+        <h2>9. Onderzoek financiering als je niet kunt wachten</h2>
+        <p>Soms heb je het geld eerder nodig dan je klant volgens de afgesproken termijn hoeft te betalen.</p>
+        <p>Dan kun je onderzoeken of factuurfinanciering of factoring geschikt is.</p>
+        <p>Bij factoring wordt een factuur of vordering onder bepaalde voorwaarden overgedragen aan een financieringspartij.</p>
+        <p>Je ontvangt dan mogelijk eerder een groot deel van het bedrag.</p>
+        <p>Daar staan kosten en voorwaarden tegenover.</p>
+        <p>Let bijvoorbeeld op:</p>
+        <ul>
+          <li>Hoeveel je vooraf ontvangt.</li>
+          <li>Welke vergoeding de financier rekent.</li>
+          <li>Wie het risico draagt als de klant niet betaalt.</li>
+          <li>Of de financier de klant rechtstreeks benadert.</li>
+          <li>Of de financiering past bij jouw type klanten en facturen.</li>
+        </ul>
+        <p>Factuurfinanciering is niet voor iedere zzp&apos;er beschikbaar of financieel aantrekkelijk.</p>
+        <p>Vergelijk de totale kosten altijd met het voordeel van eerder betaald worden.</p>
+
+        <h2>Voorbeeld: van 30 dagen wachten naar eerder betaald krijgen</h2>
+        <p>Stel dat je op 1 oktober een opdracht afrondt van €2.000.</p>
+        <p>Zonder duidelijke afspraken stuur je de factuur pas op 10 oktober, met een betalingstermijn van 30 dagen.</p>
+        <p>De vervaldatum wordt dan 9 november.</p>
+        <p>Maar met een betere werkwijze kan het anders.</p>
+        <p><strong>Voorbeeld van een snellere aanpak:</strong></p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Moment</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Actie</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Voor de opdracht</td>
+                <td className="px-4 py-3">Spreek 14 dagen betalingstermijn af</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">1 oktober</td>
+                <td className="px-4 py-3">Rond de werkzaamheden af</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">1 oktober</td>
+                <td className="px-4 py-3">Verstuur direct de factuur</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">8 oktober</td>
+                <td className="px-4 py-3">Controleer of de factuur goed is ontvangen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">15 oktober</td>
+                <td className="px-4 py-3">Vervaldatum bij een termijn van 14 dagen</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Na vervaldatum</td>
+                <td className="px-4 py-3">Stuur zo nodig een herinnering</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dit garandeert geen betaling binnen 14 dagen, maar voorkomt onnodige vertraging aan jouw kant.</p>
+
+        <h2>Wat als je factuur niet betaald wordt?</h2>
+        <p>Wanneer een klant ondanks herinneringen niet betaalt, kun je verdere stappen overwegen.</p>
+        <p>Begin met persoonlijk contact. Vraag of de factuur correct is ontvangen en of er een reden is waarom de betaling uitblijft.</p>
+        <p>Blijft betaling uit, dan kun je afhankelijk van de situatie een formele aanmaning sturen, wettelijke rente of incassokosten vorderen en eventueel een incassodienstverlener inschakelen.</p>
+        <p>Bij consumenten moet je voordat je incassokosten rekent aan de wettelijke vereisten voor een kosteloze veertiendagenaanmaning voldoen.</p>
+        <p>Bij zakelijke klanten gelden andere regels.</p>
+        <p>Ga niet automatisch incassokosten rekenen zonder te controleren welke voorwaarden van toepassing zijn.</p>
+
+        <h2>Veelgestelde vragen over facturen sneller betaald krijgen</h2>
+        <h3>Hoe krijg ik mijn factuur sneller betaald?</h3>
+        <p>Verstuur je factuur direct, spreek vooraf een duidelijke betalingstermijn af, maak betalen eenvoudig en stuur tijdig een herinnering wanneer de vervaldatum is verstreken.</p>
+        <h3>Kan ik als zzp&apos;er een betalingstermijn van 14 dagen gebruiken?</h3>
+        <p>Ja, in veel situaties kun je een termijn van 14 dagen afspreken. Zorg dat de klant vooraf akkoord gaat en houd rekening met de toepasselijke wettelijke regels.</p>
+        <h3>Mag ik korting geven als een klant eerder betaalt?</h3>
+        <p>Ja. Je kunt betalingskorting afspreken. Let wel op de btw-verwerking en zorg dat de voorwaarden duidelijk zijn.</p>
+        <h3>Kan ik een klant verplichten om direct te betalen?</h3>
+        <p>Dat hangt af van de overeenkomst en de toepasselijke wetgeving. Je kunt niet zonder meer achteraf een overeengekomen betalingstermijn wijzigen.</p>
+        <h3>Wat doe ik als mijn factuur 30 dagen te laat is?</h3>
+        <p>Controleer eerst de afspraken en betalingen. Neem contact op met de klant en stuur zo nodig een herinnering of formele aanmaning. Welke vervolgstappen mogelijk zijn, hangt af van het soort klant en de situatie.</p>
+        <h3>Is factoring geschikt voor zzp&apos;ers?</h3>
+        <p>Sommige factoringbedrijven werken met zzp&apos;ers. De mogelijkheden en kosten hangen onder andere af van de factuur, de klant en het financieringsmodel.</p>
+        <h3>Kan ik een betaallink toevoegen aan mijn factuur?</h3>
+        <p>Ja, met een geschikte betaaldienst kun je een betaallink of QR-code aanbieden. Dit is geen standaard geïntegreerde functie van FactuurBaas.</p>
+        <h3>Hoe kan ik gratis een factuur maken?</h3>
+        <p>Met FactuurBaas kun je online een factuur opstellen, de bedragen laten berekenen en de factuur als PDF downloaden zonder account.</p>
+
+        <h2>Begin met een duidelijke factuur</h2>
+        <p>Sneller betaald krijgen begint met goede afspraken, een correcte factuur en consequente opvolging.</p>
+        <p>Je hebt niet altijd dure software of ingewikkelde betaaloplossingen nodig.</p>
+        <p><strong>Met FactuurBaas maak je gratis een professionele factuur, inclusief duidelijke betaalgegevens en vervaldatum.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
+      </>
     )
   },
     {
     slug: 'factuur-pdf-downloaden',
-    relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'factuur-templates-zzp', 'factuur-fouten-voorkomen'],
-    title: 'Factuur PDF downloaden: factuur maken pdf, download en versturen',
-    excerpt: 'Factuur PDF en pdf factuur: hoe je eenvoudig factuur maken pdf doet, factuur downloaden of factuur pdf download. Stappen voor pdf factuur maken, factuur printen en versturen.',
-    keywords: 'factuur pdf, pdf factuur, factuur maken pdf, pdf factuur maken, factuur downloaden, pdf facturen, factuur pdf download, factuur printen, factuur download, factuur in pdf maken, facturen downloaden, download factuur, pdf factuur omzetten',
+    relatedSlugs: ['factuur-maken-zzp', 'gratis-factuur-zzp', 'factuur-fouten-voorkomen', 'factuur-templates-zzp'],
+    metaTitle: 'Factuur als PDF maken en downloaden | Gratis',
+    title: 'Factuur als PDF maken en gratis downloaden',
+    breadcrumbLabel: 'Factuur als PDF maken',
+    excerpt: 'Gratis een factuur als PDF maken? Vul je gegevens in, bekijk het voorbeeld en download direct je factuur. Zonder account, ook op je telefoon.',
+    keywords: 'factuur pdf, pdf factuur maken, factuur downloaden, factuur maken pdf, factuur printen, factuur voorbeeld pdf',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Hoe%20je%20eenvoudig%20een%20factuur%20PDF%20downloadt%20en%20verstuurt.png',
-      alt: 'Factuur PDF downloaden: factuur maken pdf en factuur downloaden met één klik.',
+      alt: 'Factuur als PDF maken en gratis downloaden, zonder account.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Hoe download ik een factuur als PDF?', answer: 'Maak je factuur in een tool zoals FactuurBaas: vul je gegevens en die van de klant in, controleer de preview en klik op "Download PDF". Je browser downloadt direct een correcte factuur PDF. Geen account nodig.' },
-      { question: 'Wat is de beste manier om een factuur in PDF te maken?', answer: 'Gebruik een online factuurtool die direct een PDF genereert. Zo voorkom je fouten en zie je live hoe je pdf factuur eruitziet. Met FactuurBaas maak je binnen een minuut een factuur in pdf maken en download je de bestand.' },
-      { question: 'Kan ik een factuur printen?', answer: 'Ja. Nadat je je factuur PDF hebt gedownload, kun je het bestand openen en printen (Ctrl+P of Cmd+P). Een pdf factuur ziet er op papier hetzelfde uit als op het scherm.' },
-      { question: 'Hoe verstuur ik een factuur PDF naar mijn klant?', answer: 'Stuur de gedownloade PDF per e-mail als bijlage. Gebruik een duidelijk onderwerp (bijv. "Factuur [nummer] voor [project]") en vermeld in de e-mail de betaaltermijn. Zo is factuur downloaden voor je klant overzichtelijk.' },
-      { question: 'Wat is pdf factuur omzetten?', answer: 'Soms wil je een factuur die in Word of Excel staat omzetten naar PDF. Dat kan via "Opslaan als PDF" in dat programma. Beter is om direct met een tool te werken die een factuur PDF maakt, zodat je geen aparte omzetstap nodig hebt.' },
+      { question: 'Hoe kan ik gratis een factuur als PDF maken?', answer: 'Open FactuurBaas, vul de factuurgegevens in, controleer de bedragen en klik op Download PDF. Je hebt geen account nodig.' },
+      { question: 'Kan ik een factuur downloaden zonder account?', answer: 'Ja. Met FactuurBaas kun je gratis een factuur maken en downloaden zonder registratie.' },
+      { question: 'Kan ik een PDF-factuur aanpassen?', answer: 'Ja, PDF-bestanden kunnen met geschikte software worden bewerkt. Wanneer een factuur al is uitgereikt, moet je eventuele correcties wel op een administratief juiste manier verwerken.' },
+      { question: 'Kan ik een factuur als PDF printen?', answer: 'Ja. Open de PDF en kies Afdrukken. Je kunt de factuur vervolgens op papier bewaren of versturen.' },
+      { question: 'Kan ik een PDF-factuur via e-mail sturen?', answer: 'Ja. Download de PDF en voeg deze als bijlage toe aan een e-mail aan je klant.' },
+      { question: 'Is een PDF-factuur hetzelfde als een e-factuur?', answer: 'Niet altijd. Een gewone PDF is een digitaal document, terwijl een gestructureerde e-factuur gegevens bevat die automatisch door boekhoudsystemen kunnen worden verwerkt.' },
+      { question: 'Kan ik een factuur als PDF maken op mijn telefoon?', answer: 'Ja. FactuurBaas werkt via je mobiele browser, zodat je een factuur kunt invullen en downloaden.' },
+      { question: 'Moet ik betalen om een factuur als PDF te downloaden?', answer: 'Nee. FactuurBaas biedt gratis PDF-downloads zonder verplicht account of abonnement.' },
     ],
     content: (
       <>
-        <p>Veel mensen zoeken op <strong>factuur pdf</strong>, <strong>pdf factuur</strong> of <strong>factuur maken pdf</strong>. Een <strong>factuur PDF</strong> is de standaard: niet-aanpasbaar, het ziet er overal hetzelfde uit en is ideaal om te <strong>factuur downloaden</strong> of te <strong>factuur printen</strong>. Met FactuurBaas doe je <strong>pdf factuur maken</strong> en <strong>factuur pdf download</strong> in een paar stappen. Hier lees je hoe je eenvoudig <strong>factuur in pdf maken</strong> en <strong>facturen downloaden</strong> of versturen doet.</p>
+        <p>Wil je een factuur als PDF maken en direct downloaden? Dat kan eenvoudig online, zonder Word, Excel of een betaald factuurprogramma.</p>
+        <p>Met FactuurBaas vul je je bedrijfsgegevens, klantgegevens en werkzaamheden in. De bedragen worden automatisch berekend en je kunt de factuur vervolgens als PDF downloaden.</p>
+        <p><strong>Gratis, zonder account en geschikt voor zzp&apos;ers en kleine ondernemers.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een PDF-factuur" />
 
-        <h2>Factuur maken pdf: stap voor stap</h2>
-        <p>Volg deze stappen in <Link href="/create-invoice" className="text-warm-orange hover:underline">Factuur Maken</Link> voor een snelle <strong>factuur download</strong> of <strong>download factuur</strong> als PDF:</p>
-        <ol>
-          <li><strong>Vul de velden in:</strong> Je bedrijfsgegevens, klantgegevens en de geleverde diensten of producten. Je ziet direct een live preview van je <strong>pdf factuur</strong>.</li>
-          <li><strong>Controleer de preview:</strong> Kloppen alle bedragen, btw en omschrijving? Geen spelfouten?</li>
-          <li><strong>Klik op &quot;Download PDF&quot;:</strong> Je browser doet de rest — direct een correcte <strong>factuur pdf</strong> op je computer. Zo simpel is <strong>factuur in pdf maken</strong>.</li>
-        </ol>
-        <p>Meer over een correcte factuur opstellen lees je in <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">hoe maak je een factuur als zzp&apos;er</Link> en <Link href="/blogs/gratis-factuur-zzp" className="text-warm-orange hover:underline">gratis factuur maken</Link>. Voor <strong>pdf facturen</strong> in bulk of meerdere facturen: maak ze één voor één en <strong>facturen downloaden</strong> als aparte PDF&apos;s.</p>
-
-        <h2>Je factuur PDF versturen en eventueel factuur printen</h2>
-        <p>Na je <strong>factuur pdf download</strong> kun je de PDF naar de klant sturen. Het beste per e-mail:</p>
+        <h2>Hoe maak je een factuur als PDF?</h2>
+        <p>Een PDF-factuur maken bestaat uit vier eenvoudige stappen.</p>
+        <h3>Stap 1: Vul je bedrijfsgegevens in</h3>
+        <p>Begin met de gegevens van je onderneming:</p>
         <ul>
-          <li><strong>Duidelijk onderwerp:</strong> Bijv. &quot;Factuur [nummer] voor [project]&quot;.</li>
-          <li><strong>Korte e-mail:</strong> Vermeld de betaaltermijn en dat de factuur in de bijlage zit.</li>
-          <li><strong>PDF als bijlage:</strong> Voeg de gedownloade <strong>factuur pdf</strong> toe.</li>
+          <li>Bedrijfsnaam en adres.</li>
+          <li>KvK-nummer, indien van toepassing.</li>
+          <li>Btw-identificatienummer, indien vereist.</li>
+          <li>Je betaalgegevens.</li>
         </ul>
-        <p>Wil je <strong>factuur printen</strong>? Open de PDF en gebruik Print (Ctrl+P / Cmd+P). Een <strong>pdf factuur</strong> ziet er op papier professioneel uit.</p>
+        <p>Vul daarna de naam en het adres van je klant in.</p>
+        <h3>Stap 2: Voeg je werkzaamheden of producten toe</h3>
+        <p>Beschrijf wat je hebt geleverd en vermeld het aantal en de prijs.</p>
+        <p>Bijvoorbeeld:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[520px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Aantal</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Tarief</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website onderhoud</td>
+                <td className="px-4 py-3 text-right">3 uur</td>
+                <td className="px-4 py-3 text-right">€60</td>
+                <td className="px-4 py-3 text-right">€180</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">SEO-advies</td>
+                <td className="px-4 py-3 text-right">2 uur</td>
+                <td className="px-4 py-3 text-right">€75</td>
+                <td className="px-4 py-3 text-right">€150</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue" colSpan={3}>Subtotaal excl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€330</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kies vervolgens het toepasselijke btw-tarief. FactuurBaas berekent de btw op basis van de ingevulde bedragen en tarieven.</p>
+        <h3>Stap 3: Controleer je factuur</h3>
+        <p>Bekijk de factuur voordat je deze downloadt.</p>
+        <p>Controleer vooral:</p>
+        <ul>
+          <li>Factuurnummer en factuurdatum.</li>
+          <li>Bedrijfsgegevens en klantgegevens.</li>
+          <li>Omschrijving van de werkzaamheden.</li>
+          <li>Btw-tarief en totaalbedrag.</li>
+          <li>IBAN en betalingstermijn.</li>
+        </ul>
+        <p>Een PDF kan er professioneel uitzien en toch onjuiste gegevens bevatten. Controleer daarom altijd de inhoud.</p>
+        <h3>Stap 4: Download de factuur als PDF</h3>
+        <p>Zijn alle gegevens correct?</p>
+        <p>Klik dan op <strong>Download PDF</strong>.</p>
+        <p>Je browser downloadt het bestand, waarna je het kunt bewaren, printen of als bijlage naar je klant kunt sturen.</p>
+        <p>Je hebt hiervoor geen account nodig.</p>
+        <CtaButton href="/create-invoice" label="Download je gratis factuur als PDF" />
 
-        <h2>Factuur PDF vs Word/Excel: waarom pdf factuur maken?</h2>
-        <p>Een <strong>factuur in pdf maken</strong> is verstandiger dan Word of Excel: een PDF kan de ontvanger niet zomaar aanpassen, wat discussie en fouten voorkomt. Bij &quot;<strong>pdf factuur omzetten</strong>&quot; gaat het vaak om een bestaand document naar PDF brengen — met FactuurBaas maak je direct een <strong>factuur pdf</strong>, zonder omzetstap. Lees ook <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">veelgemaakte fouten op facturen</Link>.</p>
+        <h2>Voorbeeld factuur PDF</h2>
+        <p>Wil je eerst zien hoe een factuur eruitziet?</p>
+        <p>Hieronder staat een vereenvoudigd voorbeeld van de bedragen op een PDF-factuur.</p>
+        <p><strong>FACTUUR</strong></p>
+        <p>
+          Jansen Marketing<br />
+          Voorbeeldstraat 12<br />
+          1012 AB Amsterdam
+        </p>
+        <p>
+          Aan: De Vries Webshops<br />
+          Factuurnummer: 2026-018<br />
+          Factuurdatum: 8 oktober 2026
+        </p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Website onderhoud</td>
+                <td className="px-4 py-3 text-right">€180,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">SEO-advies</td>
+                <td className="px-4 py-3 text-right">€150,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Subtotaal excl. btw</td>
+                <td className="px-4 py-3 text-right">€330,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€69,30</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal incl. btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€399,30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Betalingstermijn: 14 dagen</p>
+        <p>Dit is een vereenvoudigd voorbeeld. Een echte factuur moet alle toepasselijke verplichte gegevens bevatten, waaronder de leverdatum en relevante btw-gegevens.</p>
+        <p>Met FactuurBaas kun je een volledige factuur opstellen en als PDF downloaden.</p>
+        <p>
+          <Link href="/factuur-voorbeeld/zzp" className="text-warm-orange hover:underline">Bekijk ook het complete factuurvoorbeeld</Link>.
+        </p>
 
-        <h2>Waarom FactuurBaas voor je factuur PDF?</h2>
-        <p>Geen gedoe met opmaak of rekenfouten. Met FactuurBaas maak je binnen een minuut een <strong>factuur pdf</strong> die voldoet aan alle eisen. <strong>Factuur downloaden</strong> en versturen wordt zo een fluitje van een cent.</p>
-        <CtaButton />
+        <h2>Waarom een factuur als PDF versturen?</h2>
+        <p>PDF is een veelgebruikt bestandsformaat voor facturen.</p>
+        <p>Het heeft verschillende praktische voordelen.</p>
+        <h3>De opmaak blijft behouden</h3>
+        <p>Een PDF behoudt doorgaans dezelfde indeling op verschillende computers en telefoons.</p>
+        <p>Dat is handig wanneer je wilt dat de ontvanger je factuur ziet zoals jij hem hebt opgesteld.</p>
+        <h3>Eenvoudig als bijlage versturen</h3>
+        <p>Je kunt een PDF toevoegen aan een e-mail of delen via een berichtendienst.</p>
+        <p>De ontvanger heeft geen speciaal tekstverwerkingsprogramma nodig om het bestand te openen.</p>
+        <h3>Geschikt om te printen</h3>
+        <p>Een PDF is eenvoudig af te drukken op A4-formaat.</p>
+        <h3>Gemakkelijk bewaren</h3>
+        <p>Je kunt PDF-facturen opslaan in je administratie en terugvinden op basis van factuurnummer of klantnaam.</p>
+        <p><strong>Let op:</strong> een PDF is niet automatisch beveiligd tegen wijzigingen. Ook PDF-bestanden kunnen worden bewerkt.</p>
 
-        <h2>Veelgestelde vragen</h2>
-        <h3>Hoe download ik een factuur als PDF?</h3>
-        <p>Vul je factuur in bij FactuurBaas, controleer de preview en klik op &quot;Download PDF&quot;. Je krijgt direct een <strong>factuur pdf</strong> op je computer.</p>
-        <h3>Kan ik een factuur printen?</h3>
-        <p>Ja. Open de gedownloade PDF en kies Print. Geschikt voor archivering of om per post te sturen.</p>
-        <h3>Wat is het verschil tussen factuur pdf en Word?</h3>
-        <p>Een PDF is vast en niet bewerkbaar; Word kan door de ontvanger worden aangepast. Voor officiële facturen is <strong>factuur pdf</strong> de standaard.</p>
+        <h2>Factuur PDF of Word en Excel?</h2>
+        <p>Je kunt een factuur maken in verschillende programma&apos;s.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Methode</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Voordeel</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Nadeel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Word</td>
+                <td className="px-4 py-3">Zelf de opmaak bepalen</td>
+                <td className="px-4 py-3">Handmatig bedragen controleren</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Excel</td>
+                <td className="px-4 py-3">Formules voor berekeningen</td>
+                <td className="px-4 py-3">Formule- en invoerfouten mogelijk</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Online factuurmaker</td>
+                <td className="px-4 py-3">Vaste structuur en berekeningen</td>
+                <td className="px-4 py-3">Gegevens moeten correct worden ingevuld</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">PDF</td>
+                <td className="px-4 py-3">Geschikt om te delen en bewaren</td>
+                <td className="px-4 py-3">Minder handig om inhoud achteraf te wijzigen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Word en Excel zijn hulpmiddelen om een factuur op te stellen. PDF is vooral een bestandsformaat waarin je de uiteindelijke factuur kunt bewaren en versturen.</p>
+        <p>Met FactuurBaas maak je de factuur online en download je direct de PDF.</p>
+
+        <h2>Factuur als PDF versturen per e-mail</h2>
+        <p>Heb je je factuur gedownload? Dan kun je deze als bijlage naar je klant sturen.</p>
+        <p>Gebruik een duidelijk onderwerp, bijvoorbeeld:</p>
+        <p><strong>Factuur 2026-018 – Jansen Marketing</strong></p>
+        <p>Je kunt de volgende e-mailtekst gebruiken:</p>
+        <p><em>Beste [naam],</em></p>
+        <p><em>Bijgevoegd vind je factuur 2026-018 voor de uitgevoerde werkzaamheden.</em></p>
+        <p><em>Het totaalbedrag is €399,30 en de vervaldatum is 22 oktober 2026.</em></p>
+        <p><em>Alvast bedankt voor de betaling.</em></p>
+        <p><em>Met vriendelijke groet,</em></p>
+        <p><em>[Je naam]</em></p>
+        <p>Voeg de PDF toe als bijlage en controleer het e-mailadres voordat je de factuur verstuurt.</p>
+
+        <h2>Factuur PDF printen</h2>
+        <p>Wil je een factuur op papier bewaren of per post versturen?</p>
+        <p>Dat kan eenvoudig.</p>
+        <ol>
+          <li>Open de gedownloade PDF.</li>
+          <li>Kies <strong>Afdrukken</strong> of gebruik Ctrl+P op Windows of Cmd+P op Mac.</li>
+          <li>Selecteer je printer.</li>
+          <li>Controleer de papierinstellingen.</li>
+          <li>Print de factuur.</li>
+        </ol>
+        <p>Bewaar daarnaast een digitale kopie voor je administratie.</p>
+
+        <h2>Factuur als PDF maken op je telefoon</h2>
+        <p>Je hebt niet per se een computer nodig om een factuur te maken.</p>
+        <p>Met FactuurBaas kun je ook op je telefoon:</p>
+        <ul>
+          <li>De factuurmaker openen.</li>
+          <li>Je gegevens invullen.</li>
+          <li>Producten of werkzaamheden toevoegen.</li>
+          <li>De bedragen controleren.</li>
+          <li>Je factuur als PDF downloaden.</li>
+        </ul>
+        <p>Daarna kun je het bestand vanuit je telefoon delen of toevoegen aan een e-mail.</p>
+        <p>FactuurBaas is ook als web-app aan je beginscherm toe te voegen.</p>
+
+        <h2>Is een PDF-factuur rechtsgeldig?</h2>
+        <p>Ja. Een factuur in PDF-formaat kan een geldige factuur zijn, zolang deze voldoet aan de toepasselijke wettelijke eisen.</p>
+        <p>Het bestandsformaat alleen bepaalt niet of een factuur geldig is.</p>
+        <p>Belangrijk zijn onder andere de vereiste factuurgegevens, de leesbaarheid en het waarborgen van de authenticiteit van de herkomst en de integriteit van de inhoud.</p>
+        <p>Een gewone PDF-factuur is bovendien niet hetzelfde als een gestructureerde elektronische factuur, zoals een UBL- of Peppol-factuur.</p>
+        <p>Voor sommige afnemers, waaronder bepaalde overheidsorganisaties, kunnen specifieke eisen aan elektronische facturatie gelden.</p>
+
+        <h2>Veelgemaakte fouten bij PDF-facturen</h2>
+        <p>Ook bij een PDF-factuur kunnen fouten ontstaan.</p>
+        <p><strong>Een verkeerd factuurnummer gebruiken.</strong> Controleer dat ieder nummer uniek is.</p>
+        <p><strong>Het verkeerde btw-tarief selecteren.</strong> Een automatische berekening helpt niet wanneer het gekozen tarief onjuist is.</p>
+        <p><strong>De verkeerde klantgegevens invullen.</strong> Controleer de naam en het adres.</p>
+        <p><strong>Een oude versie versturen.</strong> Download en verstuur altijd de definitieve versie.</p>
+        <p><strong>De factuur niet bewaren.</strong> Zorg dat je een kopie beschikbaar houdt voor je administratie.</p>
+        <p>
+          <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">Bekijk de 7 veelgemaakte fouten op facturen</Link>.
+        </p>
+
+        <h2>Veelgestelde vragen over PDF-facturen</h2>
+        <h3>Hoe kan ik gratis een factuur als PDF maken?</h3>
+        <p>Open FactuurBaas, vul de factuurgegevens in, controleer de bedragen en klik op Download PDF. Je hebt geen account nodig.</p>
+        <h3>Kan ik een factuur downloaden zonder account?</h3>
+        <p>Ja. Met FactuurBaas kun je gratis een factuur maken en downloaden zonder registratie.</p>
+        <h3>Kan ik een PDF-factuur aanpassen?</h3>
+        <p>Ja, PDF-bestanden kunnen met geschikte software worden bewerkt. Wanneer een factuur al is uitgereikt, moet je eventuele correcties wel op een administratief juiste manier verwerken.</p>
+        <h3>Kan ik een factuur als PDF printen?</h3>
+        <p>Ja. Open de PDF en kies Afdrukken. Je kunt de factuur vervolgens op papier bewaren of versturen.</p>
+        <h3>Kan ik een PDF-factuur via e-mail sturen?</h3>
+        <p>Ja. Download de PDF en voeg deze als bijlage toe aan een e-mail aan je klant.</p>
+        <h3>Is een PDF-factuur hetzelfde als een e-factuur?</h3>
+        <p>Niet altijd. Een gewone PDF is een digitaal document, terwijl een gestructureerde e-factuur gegevens bevat die automatisch door boekhoudsystemen kunnen worden verwerkt.</p>
+        <h3>Kan ik een factuur als PDF maken op mijn telefoon?</h3>
+        <p>Ja. FactuurBaas werkt via je mobiele browser, zodat je een factuur kunt invullen en downloaden.</p>
+        <h3>Moet ik betalen om een factuur als PDF te downloaden?</h3>
+        <p>Nee. FactuurBaas biedt gratis PDF-downloads zonder verplicht account of abonnement.</p>
+
+        <h2>Maak en download je gratis PDF-factuur</h2>
+        <p>Je hoeft geen Word-template of Excel-bestand te gebruiken om een professionele factuur te maken.</p>
+        <p>Met FactuurBaas vul je je gegevens in, laat je de bedragen berekenen en download je de factuur als PDF.</p>
+        <p><strong>Gratis factuur maken. Direct PDF downloaden. Geen account nodig.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een PDF-factuur" />
       </>
     )
   },
   {
     slug: 'gratis-factuur-zzp',
-    relatedSlugs: ['factuur-maken-zzp', 'factuur-fouten-voorkomen', 'factuur-pdf-downloaden', 'factureren-zonder-account', 'factuur-templates-zzp', 'factureren-startende-zzper'],
-    title: 'Gratis factuur maken zzp: voorbeeld, template & uitleg (2026)',
-    keywords: 'factuur maken zzp, factuur zzp, voorbeeld factuur zzp, facturen maken zzp, template factuur zzp, gratis factuur maken zzp, factureren zzp, wat moet er op een factuur staan zzp',
-    excerpt: 'Gratis factuur maken zzp (online) zonder account: wat er op een factuur moet staan, plus een professionele template om direct als PDF te downloaden.',
+    relatedSlugs: ['factuur-maken-zzp', 'factuur-templates-zzp', 'factureren-startende-zzper', 'factureren-zonder-account'],
+    metaTitle: 'Gratis factuur maken ZZP – Online zonder account',
+    title: 'Gratis factuur maken als zzp\'er',
+    breadcrumbLabel: 'Gratis factuur maken ZZP',
+    keywords: 'gratis factuur maken zzp, factuur maken zzp, gratis factuur maken als zzp, zzp factuur maken',
+    excerpt: 'Maak gratis een factuur als zzp\'er. Zonder account, direct online en als PDF te downloaden. Inclusief factuurvoorbeeld en uitleg over verplichte gegevens.',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Gratis%20factuur%20maken%20Factuurbaas%20gratis%20online%20facturen%20maken.png',
-      alt: 'Gratis factuur maken voor zzp\'ers: voorbeeld en template met FactuurBaas.',
+      alt: 'Gratis factuur maken als zzp\'er: online zonder account, met voorbeeld en PDF-download.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-02-05',
+    dateModified: '2026-10-08',
     faq: [
       {
-        question: 'Wat moet er op een factuur staan als zzp\'er?',
-        answer: 'Verplicht op elke factuur: jouw bedrijfsgegevens en KVK-nummer, btw-nummer, klantgegevens, uniek factuurnummer, factuurdatum, omschrijving van geleverde diensten of producten, datum van levering, bedrag excl. en incl. btw, en je betaalgegevens met betalingstermijn.',
+        question: 'Kan ik als zzp\'er gratis facturen maken?',
+        answer: 'Ja. Je kunt zelf een factuur maken in Word of Excel of een gratis online factuurmaker gebruiken. Met FactuurBaas kun je zonder account een factuur opstellen en als PDF downloaden.',
       },
       {
-        question: 'Hoe maak ik een factuur als zzp\'er?',
-        answer: 'Verzamel je gegevens en die van de klant, kies een template of tool (zoals FactuurBaas), vul de regels in met duidelijke omschrijvingen, controleer de btw en het totaal, en download of verstuur de factuur als PDF. Met een gratis tool doe je dit in enkele minuten.',
+        question: 'Heb ik een boekhoudprogramma nodig om te factureren?',
+        answer: 'Nee. Een boekhoudprogramma is niet verplicht om een factuur te maken. Je moet wel zorgen dat je facturen aan de wettelijke eisen voldoen en dat je administratie correct wordt bijgehouden en bewaard.',
       },
       {
-        question: 'Kan ik gratis een factuur maken als zzp\'er?',
-        answer: 'Ja. Bij FactuurBaas maak je zonder account en zonder kosten een professionele factuur. Je vult je gegevens in en downloadt direct een PDF die voldoet aan de eisen van de Belastingdienst.',
+        question: 'Welk factuurnummer moet ik gebruiken?',
+        answer: 'Gebruik een uniek, opeenvolgend nummer. Bijvoorbeeld 2026-001, 2026-002 en 2026-003. Een nummer mag binnen je nummerreeks niet dubbel voorkomen.',
       },
       {
-        question: 'Welk factuurnummer gebruik ik als zzp\'er?',
-        answer: 'Gebruik een uniek, opeenvolgend nummer per factuur, bijvoorbeeld 2026-001, 2026-002 of F2026-001. Geen nummer twee keer gebruiken. Veel factuurtools genereren het nummer automatisch.',
+        question: 'Welke betalingstermijn zet ik op mijn factuur?',
+        answer: 'Je kunt bijvoorbeeld 14 of 30 dagen afspreken, rekening houdend met de wettelijke regels die voor jouw klant en situatie gelden. Vermeld de afgesproken termijn duidelijk op de factuur.',
       },
       {
-        question: 'Welke betalingstermijn zet ik op mijn factuur als zzp\'er?',
-        answer: 'Veel zzp\'ers kiezen 14 of 30 dagen. Vermeld dit duidelijk op de factuur, bijvoorbeeld: "Graag betalen binnen 14 dagen na factuurdatum." Een korte termijn helpt je cashflow.',
-      },
-      {
-        question: 'Moet mijn KVK-nummer op de factuur staan?',
-        answer: 'Ja. Voor de Belastingdienst is het KVK-nummer verplicht op je factuur. Je btw-identificatienummer ook. Zonder deze gegevens is je factuur niet in orde.',
+        question: 'Kan ik een factuur maken zonder KVK-nummer?',
+        answer: 'Dat hangt af van je situatie. Als je bij de KVK staat ingeschreven, moet je je KVK-nummer op de factuur vermelden.',
       },
     ],
     content: (
       <>
-        <p>Als zzp&apos;er moet je kunnen factureren: een factuur maken, een goed voorbeeld of template gebruiken en weten wat er verplicht op moet staan. Veel zoekopdrachten gaan over <strong>factuur maken zzp</strong>, <strong>voorbeeld factuur zzp</strong> en <strong>gratis factuur maken zzp</strong>. In dit artikel vind je een overzicht: wat moet er op een factuur staan, welke opties je hebt om facturen te maken (inclusief gratis), en hoe je snel een professionele factuur als zzp&apos;er klaarzet.</p>
+        <p>Als zzp&apos;er kun je gratis een professionele factuur maken, zonder boekhoudprogramma of betaald abonnement. Met FactuurBaas vul je je bedrijfsgegevens, klantgegevens en werkzaamheden in en download je de factuur als PDF. Een account is niet nodig.</p>
 
-        <h2>Wat moet er op een factuur staan als zzp&apos;er?</h2>
-        <p>De Belastingdienst eist bepaalde gegevens op elke factuur. Zorg dat deze er altijd op staan:</p>
+        <CtaButton href="/tools/factuur-maken" label="Maak gratis een factuur" />
+
+        <h2>Hoe maak je gratis een factuur als zzp&apos;er?</h2>
+        <p>Je hebt geen speciale software nodig om een factuur op te stellen. Zorg wel dat alle verplichte gegevens erop staan.</p>
+        <ol>
+          <li><strong>Vul je bedrijfsgegevens in.</strong> Vermeld je bedrijfsnaam, adres, KVK-nummer en btw-identificatienummer, voor zover van toepassing.</li>
+          <li><strong>Voeg je klant toe.</strong> Vul de naam en het adres in van de persoon of het bedrijf waarvoor je hebt gewerkt.</li>
+          <li><strong>Beschrijf je werkzaamheden.</strong> Vermeld welke diensten of producten je hebt geleverd, hoeveel en tegen welke prijs.</li>
+          <li><strong>Controleer de btw.</strong> Gebruik het btw-tarief dat voor jouw levering geldt. Werk je onder de kleineondernemersregeling (KOR), dan breng je geen btw in rekening.</li>
+          <li><strong>Controleer het factuurnummer en de datums.</strong> Gebruik een uniek, opeenvolgend factuurnummer en vermeld de factuurdatum en leveringsdatum.</li>
+          <li><strong>Download je factuur.</strong> Controleer alle gegevens en sla de factuur op als PDF.</li>
+        </ol>
+        <p>Je kunt de PDF vervolgens naar je klant versturen.</p>
+
+        <h2>Voorbeeld van een ZZP-factuur</h2>
+        <p>Stel dat je als zelfstandig schilder 12 uur hebt gewerkt voor €45 per uur, exclusief btw.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Omschrijving</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Schilderwerk – 12 uur × €45</td>
+                <td className="px-4 py-3 text-right">€540,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€113,40</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal inclusief btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€653,40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dit voorbeeld gaat ervan uit dat het werk onder het btw-tarief van 21% valt. Voor andere werkzaamheden kan een ander tarief of een vrijstelling gelden.</p>
+        <p>Op de daadwerkelijke factuur vermeld je ook de gegevens van jezelf en je klant, het factuurnummer, de relevante datums en de overige verplichte gegevens.</p>
+        <p>
+          Wil je zien hoe zo&apos;n document eruitziet? Bekijk dan het{' '}
+          <Link href="/factuur-voorbeeld/zzp" className="text-warm-orange hover:underline">ZZP-factuurvoorbeeld</Link>.
+        </p>
+
+        <h2>Wat moet er verplicht op een ZZP-factuur staan?</h2>
+        <p>Volgens de Belastingdienst bevat een gewone btw-factuur onder andere:</p>
         <ul>
-          <li><strong>Jouw gegevens:</strong> Naam, adres, KVK-nummer en btw-identificatienummer.</li>
-          <li><strong>Klantgegevens:</strong> Volledige naam en adres van de ontvanger.</li>
-          <li><strong>Factuurnummer:</strong> Uniek en opeenvolgend (bijv. 2026-001, 2026-002).</li>
-          <li><strong>Factuurdatum en leveringsdatum.</strong></li>
-          <li><strong>Omschrijving:</strong> Wat heb je geleverd (diensten/producten), hoeveelheid en prijs.</li>
-          <li><strong>Bedragen:</strong> Subtotaal excl. btw, btw-bedrag en -tarief, totaal incl. btw.</li>
-          <li><strong>Betaalgegevens:</strong> IBAN, tenaamstelling en betalingstermijn (bijv. 14 dagen).</li>
+          <li>Je volledige naam en adres en die van je klant.</li>
+          <li>Je btw-identificatienummer en, als je bent ingeschreven, je KVK-nummer.</li>
+          <li>Een uniek, opeenvolgend factuurnummer.</li>
+          <li>De factuurdatum.</li>
+          <li>De datum waarop de goederen of diensten zijn geleverd, of de datum van een vooruitbetaling.</li>
+          <li>Een duidelijke omschrijving en omvang van de geleverde producten of diensten.</li>
+          <li>De bedragen exclusief btw, het toepasselijke btw-tarief en het btw-bedrag.</li>
         </ul>
-        <p>Een <strong>template factuur zzp</strong> of een tool zoals FactuurBaas zorgt ervoor dat je niets vergeet. Meer detail vind je in ons stappenplan <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">Hoe maak je een factuur als zzp&apos;er?</Link>.</p>
+        <p>Voor bepaalde situaties, zoals kleine factuurbedragen, de KOR of buitenlandse klanten, kunnen afwijkende regels gelden.</p>
+        <p>Je IBAN en betalingstermijn zijn niet algemeen verplicht volgens de btw-factuureisen. Het is wel verstandig ze te vermelden, zodat je klant weet hoeveel, wanneer en waar hij moet betalen.</p>
+        <p>
+          Bron:{' '}
+          <a
+            href="https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/facturen_maken/factuureisen/"
+            className="text-warm-orange hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Belastingdienst – Factuureisen
+          </a>
+          .
+        </p>
 
-        <CtaButton />
+        <h2>Gratis factuur maken: online of met een template?</h2>
+        <p>Je kunt een factuur op verschillende manieren maken.</p>
+        <h3>Word of Excel</h3>
+        <p>
+          Met een{' '}
+          <Link href="/factuur-template" className="text-warm-orange hover:underline">gratis factuurtemplate</Link>{' '}
+          maak je zelf een document. Je bepaalt de opmaak, maar moet ook zelf zorgen voor de juiste berekeningen, nummering en gegevens.
+        </p>
+        <h3>Online factuurmaker</h3>
+        <p>
+          Met de{' '}
+          <Link href="/tools/factuur-maken" className="text-warm-orange hover:underline">gratis factuurmaker van FactuurBaas</Link>{' '}
+          vul je de gegevens in en maak je direct een PDF. Je hoeft geen account aan te maken.
+        </p>
+        <h3>Factureren met een account</h3>
+        <p>Maak je regelmatig facturen? Dan kun je met een gratis FactuurBaas-account je facturen bewaren, klanten beheren en bijhouden welke facturen betaald of nog openstaand zijn.</p>
+        <p>Je hoeft dus niet direct een uitgebreid boekhoudprogramma te gebruiken wanneer je alleen facturen wilt maken en overzicht wilt houden.</p>
 
-        <h2>Factuur maken als zzp&apos;er: welke opties heb je?</h2>
-        <p>Voor het maken van facturen als zzp&apos;er bestaan grofweg drie manieren. Hier een korte vergelijking.</p>
-
-        <h3>Optie 1: Word of Excel (template zelf invullen)</h3>
-        <p>Veel zzp&apos;ers beginnen met een factuur voorbeeld in Word of Excel: een template downloaden en handmatig invullen.</p>
-        <ul>
-          <li><strong>Voordelen:</strong> Geen extra software, je hebt het vaak al.</li>
-          <li><strong>Nadelen:</strong> Foutgevoelig (factuurnummers, btw), tijdrovend en het ziet er vaak minder professioneel uit. Je moet zelf als PDF opslaan.</li>
-        </ul>
-
-        <h3>Optie 2: Boekhoudpakket (Moneybird, e-Boekhouden, etc.)</h3>
-        <p>Een volledig pakket voor administratie en facturatie.</p>
-        <ul>
-          <li><strong>Voordelen:</strong> Alles-in-één: factureren, bank, btw-aangifte.</li>
-          <li><strong>Nadelen:</strong> Leercurve, vaak overkill als je alleen facturen wilt maken, en na een proefperiode betaald.</li>
-        </ul>
-
-        <h3>Optie 3: FactuurBaas — gratis factuur maken voor zzp&apos;ers</h3>
-        <p>FactuurBaas is gemaakt om snel een correcte factuur te maken: geen account nodig, geen abonnement. Ideaal om te <strong>factureren als zzp&apos;er</strong> zonder gedoe.</p>
-        <ul>
-          <li><strong>Voordelen:</strong> Geen registratie, direct een professionele PDF, alle verplichte velden zitten in de template. 100% gratis voor het maken van facturen.</li>
-          <li><strong>Nadelen:</strong> Geen volledige boekhouding; facturen en betaalstatus beheer je zelf (bijv. in een map).</li>
-        </ul>
-
-        <h2>Voorbeeld en template: zo ziet een factuur zzp eruit</h2>
-        <p>Een goed <strong>voorbeeld factuur zzp</strong> heeft een duidelijke opbouw: jouw gegevens en logo bovenaan, klantgegevens, factuurnummer en datum, tabel met regels (omschrijving, aantal, prijs, btw), totaal en betaalgegevens. Met FactuurBaas kies je een template en vul je alleen de velden in; de layout en verplichte onderdelen staan al goed. Geen gedoe met opmaak of vergeten velden.</p>
-
-        <CtaButton />
-
-        <h2>Conclusie: factuur maken zzp en factureren zzp</h2>
-        <p>Of je nu zoekt op <strong>factuur zzp</strong>, <strong>facturen maken zzp</strong> of <strong>gratis factuur maken zzp</strong>: je hebt recht op een eenvoudige, correcte factuur. Zorg dat je weet wat er op moet staan, kies een voorbeeld of template die daaraan voldoet, en gebruik desnoods een gratis tool. Voor de zzp&apos;er die snel wil factureren zonder account of kosten is FactuurBaas een logische keuze: gegevens invullen, PDF downloaden, klaar.</p>
-        <CtaButton />
+        <h2>Factuur maken zonder btw</h2>
+        <p>Niet iedere zzp&apos;er brengt btw in rekening. Dat kan bijvoorbeeld het geval zijn wanneer je deelneemt aan de kleineondernemersregeling (KOR) of wanneer je een btw-vrijgestelde prestatie verricht.</p>
+        <p>De juiste vermelding op de factuur hangt af van de reden waarom je geen btw berekent. Gebruik daarom niet automatisch 0% btw wanneer een vrijstelling of de KOR van toepassing is.</p>
+        <p>
+          Bekijk ook het{' '}
+          <Link href="/factuur-template/zonder-btw" className="text-warm-orange hover:underline">voorbeeld van een factuur zonder btw</Link>.
+        </p>
 
         <h2>Veelgestelde vragen</h2>
-        <h3>Wat moet er op een factuur staan als zzp&apos;er?</h3>
-        <p>Verplicht: jouw gegevens (incl. KVK en btw-nummer), klantgegevens, factuurnummer, data, omschrijving en bedragen (excl./incl. btw), plus betaalgegevens en betalingstermijn.</p>
+        <h3>Kan ik als zzp&apos;er gratis facturen maken?</h3>
+        <p>Ja. Je kunt zelf een factuur maken in Word of Excel of een gratis online factuurmaker gebruiken. Met FactuurBaas kun je zonder account een factuur opstellen en als PDF downloaden.</p>
+        <h3>Heb ik een boekhoudprogramma nodig om te factureren?</h3>
+        <p>Nee. Een boekhoudprogramma is niet verplicht om een factuur te maken. Je moet wel zorgen dat je facturen aan de wettelijke eisen voldoen en dat je administratie correct wordt bijgehouden en bewaard.</p>
+        <h3>Welk factuurnummer moet ik gebruiken?</h3>
+        <p>Gebruik een uniek, opeenvolgend nummer. Bijvoorbeeld 2026-001, 2026-002 en 2026-003. Een nummer mag binnen je nummerreeks niet dubbel voorkomen.</p>
+        <h3>Welke betalingstermijn zet ik op mijn factuur?</h3>
+        <p>Je kunt bijvoorbeeld 14 of 30 dagen afspreken, rekening houdend met de wettelijke regels die voor jouw klant en situatie gelden. Vermeld de afgesproken termijn duidelijk op de factuur.</p>
+        <h3>Kan ik een factuur maken zonder KVK-nummer?</h3>
+        <p>
+          Dat hangt af van je situatie. Als je bij de KVK staat ingeschreven, moet je je KVK-nummer op de factuur vermelden. Bekijk de uitleg over{' '}
+          <Link href="/factuur-maken/zonder-kvk" className="text-warm-orange hover:underline">factureren zonder KVK</Link>.
+        </p>
 
-        <h3>Hoe maak ik een factuur als zzp&apos;er?</h3>
-        <p>Verzamel gegevens, kies een template of tool (bijv. FactuurBaas), vul regels in met duidelijke omschrijvingen, controleer btw en totaal, download of verstuur als PDF.</p>
-
-        <h3>Kan ik gratis een factuur maken als zzp&apos;er?</h3>
-        <p>Ja. Met FactuurBaas maak je zonder account en gratis een professionele factuur die voldoet aan de eisen van de Belastingdienst.</p>
-
-        <h3>Welk factuurnummer en welke betalingstermijn?</h3>
-        <p>Gebruik een uniek opeenvolgend nummer (bijv. 2026-001). Voor de termijn kiezen veel zzp&apos;ers 14 of 30 dagen; vermeld dit duidelijk op de factuur.</p>
+        <h2>Direct een gratis ZZP-factuur maken</h2>
+        <p>Vul je gegevens in, controleer de bedragen en download je factuur als PDF. Zonder account of abonnement.</p>
+        <CtaButton href="/tools/factuur-maken" label="Maak gratis je factuur" />
       </>
     )
   },
@@ -5624,369 +8136,1080 @@ export const articles = [
   {
     slug: 'zakelijke-rekening-zzp',
     relatedSlugs: ['factuurbeheer-overzicht', 'wanneer-boekhoudsoftware-nodig-zzp', 'sneller-betalen-factuur', 'factuur-maken-zzp'],
-    title: 'Heb ik een zakelijke rekening nodig als zzp\'er? Alles wat je moet weten',
-    excerpt: 'Zakelijke rekening zzp: is het verplicht? Voordelen, kosten, alternatieven en wanneer het handig is. Met tips voor overzicht en koppeling met je facturatie.',
-    keywords: 'zakelijke rekening zzp, zakelijke rekening eenmanszaak, zakelijke rekening nodig zzp, privé of zakelijke rekening zzp, kosten zakelijke rekening, zakelijke betaalrekening zzp',
+    metaTitle: 'Zakelijke rekening zzp: verplicht of niet?',
+    title: 'Zakelijke rekening als zzp\'er: verplicht of niet?',
+    breadcrumbLabel: 'Zakelijke rekening zzp',
+    excerpt: 'Is een zakelijke rekening verplicht als zzp\'er? Lees wanneer je een zakelijke rekening nodig hebt, wat het kost en of je je privérekening mag gebruiken.',
+    keywords: 'zakelijke rekening zzp, zakelijke rekening verplicht zzp, zakelijke rekening nodig als zzp, zzp rekening, zakelijke betaalrekening zzp',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/heb%20ik%20een%20zakelijke%20rekening%20nodig%20als%20zzper.png',
-      alt: 'Heb ik een zakelijke rekening nodig als zzp\'er? Overzicht, kosten en tips.',
+      alt: 'Zakelijke rekening als zzp\'er: verplicht of niet? Uitleg over wet, bankvoorwaarden en kosten.',
     },
     datePublished: '2026-02-06',
-    dateModified: '2026-02-06',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Is een zakelijke rekening verplicht voor zzp\'ers?', answer: 'Nee. Voor een eenmanszaak is een zakelijke rekening geen wettelijke verplichting. Wel handig voor overzicht: je scheidt privé en zakelijk. Bij een BV is een aparte zakelijke rekening vaak wel vereist.' },
-      { question: 'Wat zijn de voordelen van een zakelijke rekening als zzp\'er?', answer: 'Beter overzicht in je administratie, professionele uitstraling naar klanten, gemak bij incasso\'s en boekhoudkoppelingen, en mogelijk meer bescherming van je privévermogen bij zakelijke risico\'s.' },
-      { question: 'Wat kost een zakelijke rekening ongeveer?', answer: 'Online banken: vaak €0–€10 per maand, soms eerste 500 transacties gratis. Traditionele banken: circa €7–€15 per maand plus transactiekosten. Let ook op transactiekosten en internationale betalingen.' },
-      { question: 'Kan ik als zzp\'er zonder zakelijke rekening factureren?', answer: 'Ja. Je kunt een privérekening op je factuur zetten. Voor startende zzp\'ers met weinig transacties kan dat volstaan. Met een tool zoals FactuurBaas beheer je je facturen overzichtelijk, ook zonder eigen bankkoppeling.' },
-      { question: 'Wat zijn alternatieven voor een zakelijke rekening?', answer: 'Een aparte privérekening alleen voor je bedrijf, een virtuele/digitale rekening via een online bank, of je huidige rekening combineren met een boekhoud- of factuurtool voor overzicht.' },
+      { question: 'Is een zakelijke rekening verplicht als zzp\'er?', answer: 'Nee. Voor een eenmanszaak is een zakelijke rekening niet wettelijk verplicht. Je bank kan zakelijk gebruik van een privérekening wel verbieden.' },
+      { question: 'Moet ik als zzp\'er een aparte rekening hebben?', answer: 'Niet wettelijk, maar het is vaak verstandig. Je houdt zakelijke inkomsten en uitgaven overzichtelijker.' },
+      { question: 'Mag ik mijn privérekening gebruiken voor mijn eenmanszaak?', answer: 'Dat kan wettelijk, maar alleen als de voorwaarden van je bank het toestaan.' },
+      { question: 'Kan ik een tweede privérekening gebruiken voor zakelijke betalingen?', answer: 'Alleen als de bank zakelijk gebruik van die rekening toestaat. Een tweede privérekening is niet automatisch een toegestane zakelijke betaalrekening.' },
+      { question: 'Is een zakelijke rekening verplicht voor de btw-aangifte?', answer: 'Nee. De Belastingdienst vereist een controleerbare administratie, maar schrijft voor een eenmanszaak geen zakelijke bankrekening voor.' },
+      { question: 'Wat is de goedkoopste zakelijke rekening voor zzp\'ers?', answer: 'Dat hangt af van je betaalgedrag. Vergelijk zowel abonnementskosten als transactiekosten en eventuele extra diensten.' },
+      { question: 'Kan ik zonder zakelijke rekening een factuur sturen?', answer: 'Ja. Je hebt geen zakelijke bankrekening nodig om een factuur op te stellen. Gebruik voor betalingen wel een rekening die je volgens de bankvoorwaarden zakelijk mag gebruiken.' },
+      { question: 'Is een zakelijke rekening verplicht bij een bv?', answer: 'Een bv is een afzonderlijke rechtspersoon en heeft in de praktijk een eigen zakelijke rekening nodig om haar financiën gescheiden te beheren.' },
+      { question: 'Kan ik later overstappen naar een zakelijke rekening?', answer: 'Ja. Je kunt later een zakelijke rekening openen en je klanten informeren over het nieuwe rekeningnummer. Werk ook je facturen en administratie bij.' },
     ],
     content: (
       <>
-        <p><strong>Heb ik een zakelijke rekening nodig als zzp&apos;er?</strong> Het is een vraag die veel starters zich stellen. Een aparte zakelijke rekening is niet wettelijk verplicht voor een eenmanszaak, maar biedt vaak wel overzicht, professionaliteit en gemak. In dit artikel lees je wanneer een <strong>zakelijke rekening voor zzp&apos;ers</strong> handig is, wat het ongeveer kost, welke alternatieven er zijn en hoe je kiest — inclusief de rol van je facturatie en administratie.</p>
+        <p>Ben je net begonnen als zzp&apos;er en vraag je je af of je een zakelijke rekening nodig hebt? Dan is het korte antwoord: <strong>nee, voor een eenmanszaak is een zakelijke bankrekening niet wettelijk verplicht.</strong></p>
+        <p>Toch kiezen veel zzp&apos;ers voor een aparte zakelijke rekening. Daarmee houd je privé- en zakelijke betalingen gescheiden, wordt je administratie overzichtelijker en kun je gemakkelijker samenwerken met een boekhoudprogramma.</p>
+        <p>Er is wel een belangrijk verschil tussen wat wettelijk mag en wat je bank toestaat. Hieronder leggen we uit hoe dat zit, welke kosten je kunt verwachten en wanneer een zakelijke rekening verstandig is.</p>
 
-        <h2>Waarom een zakelijke rekening handig kan zijn</h2>
+        <h2>Is een zakelijke rekening verplicht voor zzp&apos;ers?</h2>
+        <p>Nee. Als je als zzp&apos;er een eenmanszaak hebt, verplicht de Nederlandse wet je niet om een zakelijke bankrekening te openen.</p>
+        <p>Voor de Belastingdienst is vooral belangrijk dat je een controleerbare administratie bijhoudt en zakelijke en privétransacties kunt onderscheiden.</p>
+        <p>De regels verschillen per rechtsvorm.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Rechtsvorm</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Zakelijke rekening verplicht?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Eenmanszaak / zzp</td>
+                <td className="px-4 py-3">Nee, niet wettelijk</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Vof</td>
+                <td className="px-4 py-3">Nee, niet algemeen wettelijk</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Maatschap</td>
+                <td className="px-4 py-3">Nee, niet algemeen wettelijk</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Bv</td>
+                <td className="px-4 py-3">In de praktijk nodig vanwege de afzonderlijke rechtspersoon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Let op:</strong> de meeste banken staan zakelijk gebruik van een gewone privérekening niet toe. Controleer daarom altijd de voorwaarden van je bank.</p>
 
-        <h3>1. Overzicht in je administratie</h3>
-        <p>Een aparte <strong>zakelijke rekening</strong> scheidt privé- en zakelijk geld. Dat maakt het bijhouden van inkomsten, uitgaven en btw eenvoudiger. Geen gemixte transacties betekent minder kans op fouten bij je boekhouding en een helder beeld voor de Belastingdienst. Meer over structuur in je administratie lees je in ons artikel over <Link href="/blogs/factuurbeheer-overzicht" className="text-warm-orange hover:underline">factuurbeheer en overzicht</Link>.</p>
+        <h2>Mag je als zzp&apos;er je privérekening gebruiken?</h2>
+        <p>Wettelijk gezien kan dat bij een eenmanszaak. Maar je bank kan het verbieden.</p>
+        <p>Bij veel banken staat in de algemene voorwaarden dat een particuliere betaalrekening uitsluitend voor privégebruik bedoeld is.</p>
+        <p>Gebruik je zo&apos;n rekening structureel voor zakelijke betalingen, dan kan de bank je vragen een zakelijke rekening te openen of maatregelen nemen op basis van de voorwaarden.</p>
+        <h3>En een tweede privérekening?</h3>
+        <p>Een extra privérekening openen om zakelijke betalingen apart te houden lijkt een goedkope oplossing.</p>
+        <p>Maar ook voor een tweede privérekening gelden de voorwaarden van de bank.</p>
+        <p>Een aparte rekening is dus niet automatisch geschikt voor zakelijk gebruik.</p>
+        <p><strong>Praktisch advies:</strong> vraag je bank expliciet of je de rekening voor je eenmanszaak mag gebruiken.</p>
 
-        <h3>2. Professionele uitstraling</h3>
-        <p>Klanten en leveranciers zien dat je serieus bent. Een factuur met een zakelijke rekening oogt betrouwbaarder en professioneler dan een privé-rekening. Zorg daarnaast dat je <Link href="/blogs/factuur-maken-zzp" className="text-warm-orange hover:underline">factuur aan alle eisen voldoet</Link> — dan maak je een sterke indruk.</p>
+        <h2>Waarom kiezen veel zzp&apos;ers voor een zakelijke rekening?</h2>
+        <p>Hoewel een zakelijke rekening niet wettelijk verplicht is, kan deze verschillende voordelen bieden.</p>
+        <h3>1. Je houdt privé en zakelijk gescheiden</h3>
+        <p>Stel dat je iedere maand twintig privébetalingen en tien zakelijke transacties hebt.</p>
+        <p>Als alles via dezelfde rekening loopt, moet je bij het bijwerken van je administratie steeds bepalen welke transacties zakelijk zijn.</p>
+        <p>Met een aparte zakelijke rekening wordt dat eenvoudiger.</p>
+        <p>Je ziet sneller hoeveel klanten hebben betaald, welke zakelijke kosten je hebt gemaakt en hoeveel geld beschikbaar is.</p>
+        <h3>2. Je administratie wordt overzichtelijker</h3>
+        <p>Een zakelijke rekening maakt het gemakkelijker om banktransacties te vergelijken met facturen en bonnetjes.</p>
+        <p>Dat is vooral handig bij de btw-aangifte en het opstellen van je jaarcijfers.</p>
+        <p>Een zakelijke rekening vervangt je administratie overigens niet. Je moet facturen, bonnetjes en andere bewijsstukken nog steeds bewaren.</p>
+        <h3>3. Je kunt boekhoudsoftware koppelen</h3>
+        <p>Veel zakelijke bankrekeningen ondersteunen koppelingen met boekhoudsoftware.</p>
+        <p>Daarmee kunnen banktransacties automatisch worden ingelezen en soms aan facturen worden gekoppeld.</p>
+        <p>Welke koppelingen beschikbaar zijn, verschilt per bank en softwarepakket.</p>
+        <h3>4. Je kunt betalingen op bedrijfsnaam ontvangen</h3>
+        <p>Bij een zakelijke rekening kan de naam van je onderneming zichtbaar zijn voor klanten.</p>
+        <p>Dat kan herkenbaarder zijn dan betalingen aan je persoonlijke naam.</p>
+        <p>Welke naam wordt getoond, hangt af van de bank, de tenaamstelling en de gebruikte betaalmethode.</p>
+        <h3>5. Je kunt zakelijke betaaldiensten gebruiken</h3>
+        <p>Voor bepaalde betaaldiensten, webshops en zakelijke betaaloplossingen kan een zakelijke rekening vereist zijn.</p>
+        <p>Controleer dit vooraf als je bijvoorbeeld online betalingen wilt accepteren.</p>
 
-        <h3>3. Gemak bij betalingen en incasso&apos;s</h3>
-        <p>Veel zakelijke rekeningen bieden automatische incasso&apos;s, betaalverzoeken en integraties met boekhoudsoftware. Zo bespaar je tijd bij het verwerken van facturen en betalingen. Tips om <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">je factuur sneller betaald te krijgen</Link> combineren goed met een duidelijke betaalrekening.</p>
+        <h2>Beschermt een zakelijke rekening je privévermogen?</h2>
+        <p>Nee. Dit is een belangrijk misverstand.</p>
+        <p>Bij een eenmanszaak ben je persoonlijk aansprakelijk voor de schulden van je onderneming.</p>
+        <p>Het openen van een aparte zakelijke bankrekening verandert die aansprakelijkheid niet.</p>
+        <p>Een zakelijke rekening scheidt je geldstromen administratief, maar zorgt niet voor een juridische scheiding tussen je privévermogen en je onderneming.</p>
 
-        <h3>4. Veiligheid en aansprakelijkheid</h3>
-        <p>Sommige rechtsvormen, zoals een BV, vereisen een aparte zakelijke rekening. Ook voor eenmanszaken kan het verstandig zijn om privévermogen te beschermen tegen zakelijke risico&apos;s. Het scheiden van geldstromen maakt de administratie bovendien inzichtelijker.</p>
-
-        <CtaButton />
-
-        <h2>Heb ik als zzp&apos;er echt een zakelijke rekening nodig?</h2>
-        <p>Niet altijd. Voor startende zzp&apos;ers met weinig transacties en een overzichtelijke administratie kan een privé-rekening soms volstaan. Overweeg een <strong>zakelijke rekening voor zzp</strong> vooral als:</p>
+        <h2>Wat kost een zakelijke rekening voor zzp&apos;ers?</h2>
+        <p>De kosten verschillen per aanbieder en pakket.</p>
+        <p>Sommige banken rekenen een vast maandbedrag, terwijl andere vooral kosten per transactie in rekening brengen.</p>
+        <p>Let bij het vergelijken op:</p>
         <ul>
-          <li>Je regelmatig betalingen ontvangt van klanten.</li>
-          <li>Je veel zakelijke uitgaven hebt die je wilt scheiden van privé.</li>
-          <li>Je een professionelere indruk wilt maken.</li>
-          <li>Je gebruik wilt maken van boekhoudkoppelingen of automatische incasso&apos;s.</li>
+          <li>Maandelijkse abonnementskosten.</li>
+          <li>Kosten per inkomende of uitgaande betaling.</li>
+          <li>Kosten voor betaalpassen.</li>
+          <li>Internationale betalingen en valutawissels.</li>
+          <li>Boekhoudkoppelingen.</li>
+          <li>Extra gebruikers of rekeningen.</li>
+          <li>Eventuele introductiekortingen.</li>
         </ul>
-        <p>Een zakelijke rekening is geen wettelijke verplichting voor een eenmanszaak, maar biedt vaak structureel gemak en overzicht. Of je ook <strong>boekhoudsoftware</strong> nodig hebt, hangt daar weer mee samen — lees daarvoor <Link href="/blogs/wanneer-boekhoudsoftware-nodig-zzp" className="text-warm-orange hover:underline">wanneer heb je boekhoudsoftware nodig als zzp&apos;er?</Link></p>
+        <h3>Rekenvoorbeeld</h3>
+        <p>Stel dat een zakelijke rekening €8 per maand kost en je gemiddeld €0,15 per betaalde transactie betaalt.</p>
+        <p>Bij twintig betaalde transacties per maand zijn de kosten:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Kostenpost</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Abonnement</td>
+                <td className="px-4 py-3 text-right">€8,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">20 transacties × €0,15</td>
+                <td className="px-4 py-3 text-right">€3,00</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal per maand</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€11,00</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal per jaar</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€132,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dit is een fictief rekenvoorbeeld, geen actueel tarief van een specifieke bank.</p>
+        <p>Vergelijk daarom de totale kosten op basis van je eigen betaalgedrag.</p>
 
-        <h2>Wat kost een zakelijke rekening ongeveer?</h2>
-        <p>De prijzen verschillen per bank en pakket. Een grove richtlijn:</p>
+        <h2>Welke zakelijke rekening past bij jouw situatie?</h2>
+        <p>De beste zakelijke rekening hangt af van hoe je werkt.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Situatie</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Waarop letten?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Startende zzp&apos;er met weinig transacties</td>
+                <td className="px-4 py-3">Lage vaste kosten</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Freelancer met veel klanten</td>
+                <td className="px-4 py-3">Kosten per betaling en overzicht</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Ondernemer met boekhoudsoftware</td>
+                <td className="px-4 py-3">Beschikbare bankkoppelingen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Zzp&apos;er met buitenlandse klanten</td>
+                <td className="px-4 py-3">IBAN, valuta en internationale kosten</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Webshop of online dienstverlener</td>
+                <td className="px-4 py-3">Compatibiliteit met betaaldiensten</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Ondernemer met veel spaargeld voor belasting</td>
+                <td className="px-4 py-3">Mogelijkheid om geld apart te reserveren</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kies niet automatisch voor het goedkoopste abonnement.</p>
+        <p>Een rekening met lage vaste kosten kan duurder uitvallen wanneer je veel transacties uitvoert.</p>
+
+        <h2>Zakelijke rekening openen als zzp&apos;er: wat heb je nodig?</h2>
+        <p>Bij het openen van een zakelijke rekening vraagt een bank meestal om gegevens waarmee zij je identiteit en onderneming kan controleren.</p>
+        <p>Denk aan:</p>
         <ul>
-          <li><strong>Online banken:</strong> vaak €0–€10 per maand, transactiekosten variabel of de eerste 500 gratis. Vaak extra functies zoals boekhoudkoppeling, virtuele betaalpassen en automatische incasso.</li>
-          <li><strong>Traditionele banken:</strong> circa €7–€15 per maand, meestal transactiekosten per betaling. Pluspunten: fysieke filialen, persoonlijke ondersteuning en soms extra verzekeringen.</li>
+          <li>Een geldig identiteitsbewijs.</li>
+          <li>Je KvK-nummer.</li>
+          <li>Gegevens over je onderneming en werkzaamheden.</li>
+          <li>Informatie over eventuele internationale activiteiten.</li>
         </ul>
-        <p>Belangrijk: kijk niet alleen naar het maandbedrag, maar ook naar transactiekosten, extra rekeningen en internationale mogelijkheden. Zo voorkom je verrassingen.</p>
+        <p>Welke gegevens precies nodig zijn, verschilt per bank.</p>
+        <p>Bij veel aanbieders kun je de aanvraag online doen.</p>
 
-        <h2>Alternatieven voor een zakelijke rekening</h2>
-        <p>Twijfel je of je er direct een nodig hebt? Er zijn opties:</p>
+        <h2>Kan ik factureren zonder zakelijke rekening?</h2>
+        <p>Ja. Als zzp&apos;er met een eenmanszaak kun je facturen versturen zonder zakelijke rekening, mits je een betaalrekening gebruikt die je volgens de voorwaarden van je bank zakelijk mag gebruiken.</p>
+        <p>Op je factuur vermeld je duidelijk hoe je klant kan betalen.</p>
+        <p>Bijvoorbeeld:</p>
+        <p>
+          <strong>Te betalen: €605,00</strong><br />
+          <strong>IBAN:</strong> NL00 BANK 0123 4567 89<br />
+          <strong>Ten name van:</strong> J. Jansen<br />
+          <strong>Betalingskenmerk:</strong> 2026-018<br />
+          <strong>Vervaldatum:</strong> 22 oktober 2026
+        </p>
+        <p>Het IBAN is in dit voorbeeld fictief.</p>
+        <p>Zorg dat de rekeninggegevens kloppen en dat de klant weet aan wie hij betaalt.</p>
+        <p>
+          Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je gratis een factuur maken en als PDF downloaden, zonder account.
+        </p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
+
+        <h2>Hoe houd je je administratie bij zonder zakelijke rekening?</h2>
+        <p>Gebruik je een rekening waarop zowel privé- als zakelijke transacties staan?</p>
+        <p>Dan moet je extra zorgvuldig administreren.</p>
+        <h3>Stap 1: Bewaar je facturen</h3>
+        <p>Bewaar alle uitgaande facturen en zakelijke inkoopfacturen.</p>
+        <h3>Stap 2: Markeer zakelijke transacties</h3>
+        <p>Zorg dat je kunt aantonen welke ontvangsten en uitgaven bij je onderneming horen.</p>
+        <h3>Stap 3: Controleer betalingen</h3>
+        <p>Vergelijk je banktransacties met je openstaande facturen.</p>
+        <h3>Stap 4: Reserveer geld voor belastingen</h3>
+        <p>Houd rekening met toekomstige btw- en inkomstenbelastingbetalingen.</p>
+        <h3>Stap 5: Bewaar je administratie</h3>
+        <p>Voor de meeste fiscale administratieve gegevens geldt een bewaartermijn van zeven jaar. Voor bepaalde gegevens gelden langere termijnen.</p>
+        <p>
+          <Link href="/blogs/factuurbeheer-overzicht" className="text-warm-orange hover:underline">Lees hoe je overzicht houdt met digitaal factuurbeheer</Link>.
+        </p>
+
+        <h2>Wanneer is een zakelijke rekening verstandig?</h2>
+        <p>Een zakelijke rekening wordt aantrekkelijker wanneer je onderneming groeit.</p>
+        <p>Bijvoorbeeld wanneer:</p>
         <ul>
-          <li><strong>Aparte privé-rekening:</strong> Gebruik een tweede privérekening uitsluitend voor je bedrijf. Geen extra kosten bij je bank, wel meer overzicht dan alles op één rekening.</li>
-          <li><strong>Virtuele of digitale rekening:</strong> Via een online bank kun je soms een aparte &quot;zakelijke&quot; of virtuele rekening openen zonder dure pakketten.</li>
-          <li><strong>Factuurbeheer naast je rekening:</strong> Combineer je betaalrekening (privé of zakelijk) met een boekhoud- of factuurtool. Met <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link> houd je je facturen en betalingen overzichtelijk, ook zonder eigen bankkoppeling.</li>
+          <li>Je regelmatig facturen verstuurt.</li>
+          <li>Je veel zakelijke uitgaven hebt.</li>
+          <li>Je betalingen automatisch wilt verwerken.</li>
+          <li>Je internationale klanten hebt.</li>
+          <li>Je zakelijke betaaldiensten gebruikt.</li>
+          <li>Je niet langer privé- en zakelijke transacties wilt uitzoeken.</li>
         </ul>
+        <p>Heb je slechts enkele zakelijke transacties per maand? Dan kun je eerst onderzoeken welke mogelijkheden je bank biedt.</p>
+        <p>Zorg wel dat je vanaf het begin een correcte administratie bijhoudt.</p>
 
-        <CtaButton />
+        <h2>Veelgestelde vragen over zakelijke rekeningen voor zzp&apos;ers</h2>
+        <h3>Is een zakelijke rekening verplicht als zzp&apos;er?</h3>
+        <p>Nee. Voor een eenmanszaak is een zakelijke rekening niet wettelijk verplicht. Je bank kan zakelijk gebruik van een privérekening wel verbieden.</p>
+        <h3>Moet ik als zzp&apos;er een aparte rekening hebben?</h3>
+        <p>Niet wettelijk, maar het is vaak verstandig. Je houdt zakelijke inkomsten en uitgaven overzichtelijker.</p>
+        <h3>Mag ik mijn privérekening gebruiken voor mijn eenmanszaak?</h3>
+        <p>Dat kan wettelijk, maar alleen als de voorwaarden van je bank het toestaan.</p>
+        <h3>Kan ik een tweede privérekening gebruiken voor zakelijke betalingen?</h3>
+        <p>Alleen als de bank zakelijk gebruik van die rekening toestaat. Een tweede privérekening is niet automatisch een toegestane zakelijke betaalrekening.</p>
+        <h3>Is een zakelijke rekening verplicht voor de btw-aangifte?</h3>
+        <p>Nee. De Belastingdienst vereist een controleerbare administratie, maar schrijft voor een eenmanszaak geen zakelijke bankrekening voor.</p>
+        <h3>Wat is de goedkoopste zakelijke rekening voor zzp&apos;ers?</h3>
+        <p>Dat hangt af van je betaalgedrag. Vergelijk zowel abonnementskosten als transactiekosten en eventuele extra diensten.</p>
+        <h3>Kan ik zonder zakelijke rekening een factuur sturen?</h3>
+        <p>Ja. Je hebt geen zakelijke bankrekening nodig om een factuur op te stellen. Gebruik voor betalingen wel een rekening die je volgens de bankvoorwaarden zakelijk mag gebruiken.</p>
+        <h3>Is een zakelijke rekening verplicht bij een bv?</h3>
+        <p>Een bv is een afzonderlijke rechtspersoon en heeft in de praktijk een eigen zakelijke rekening nodig om haar financiën gescheiden te beheren.</p>
+        <h3>Kan ik later overstappen naar een zakelijke rekening?</h3>
+        <p>Ja. Je kunt later een zakelijke rekening openen en je klanten informeren over het nieuwe rekeningnummer. Werk ook je facturen en administratie bij.</p>
 
-        <h2>Tips bij het kiezen van een zakelijke rekening</h2>
-        <ul>
-          <li><strong>Bepaal je transacties:</strong> Hoeveel inkomende en uitgaande betalingen heb je per maand? Dat bepaalt of een pakket met vaste kosten of per-transactie voor jou goedkoper is.</li>
-          <li><strong>Controleer automatisering:</strong> Past de bank bij je boekhoudsoftware of bij FactuurBaas als je later wilt koppelen?</li>
-          <li><strong>Let op verborgen kosten:</strong> Bij sommige gratis rekeningen betaal je voor extra diensten zoals internationale betalingen of extra pasjes.</li>
-          <li><strong>Denk aan toekomstplannen:</strong> Ga je groeien naar een BV of internationale klanten bedienen? Kies een bank die meegroeit.</li>
-        </ul>
-
-        <h2>Conclusie</h2>
-        <p>Of je een <strong>zakelijke rekening nodig hebt als zzp&apos;er</strong> hangt af van je situatie en wensen. Voor starters met weinig transacties kan een aparte privérekening volstaan; wie overzicht, professionaliteit en automatisering wil, profiteert vaak van een zakelijke rekening.</p>
-        <p>Met tools zoals FactuurBaas kun je zelfs zonder eigen bankkoppeling je facturen professioneel beheren en grip houden op je financiële administratie. <strong>Tip:</strong> Begin klein, analyseer je transacties en breid eventueel uit naar een zakelijke rekening als dat nodig blijkt. Zo houd je je kosten laag en je administratie overzichtelijk.</p>
-
-        <CtaButton />
-
-        <h2>Veelgestelde vragen</h2>
-        <h3>Is een zakelijke rekening verplicht voor zzp&apos;ers?</h3>
-        <p>Nee. Voor een eenmanszaak niet. Wel handig voor overzicht; bij een BV vaak wel vereist.</p>
-        <h3>Wat zijn de voordelen van een zakelijke rekening?</h3>
-        <p>Overzicht in je administratie, professionelere uitstraling, gemak bij incasso&apos;s en boekhoudkoppelingen, en mogelijk betere scheiding van privé en zakelijk vermogen.</p>
-        <h3>Wat kost een zakelijke rekening?</h3>
-        <p>Online: vaak €0–€10 per maand. Traditioneel: circa €7–€15 per maand plus transactiekosten. Vergelijk altijd op totaalkosten.</p>
-        <h3>Kan ik zonder zakelijke rekening factureren?</h3>
-        <p>Ja. Je kunt je privé-IBAN op je factuur zetten. Voor weinig transacties kan dat. Met FactuurBaas beheer je je facturen overzichtelijk, met of zonder zakelijke rekening.</p>
+        <h2>Conclusie: zakelijke rekening als zzp&apos;er, wel of niet?</h2>
+        <p>Voor een eenmanszaak is een zakelijke rekening niet wettelijk verplicht.</p>
+        <p>Toch is het voor veel zzp&apos;ers een verstandige keuze, vooral vanwege het administratieve overzicht en de voorwaarden die banken stellen aan privérekeningen.</p>
+        <p>Begin met het vergelijken van de totale kosten en de functies die je nodig hebt.</p>
+        <p>En of je nu een zakelijke rekening gebruikt of een toegestane privérekening: zorg dat je facturen duidelijk en correct zijn.</p>
+        <p><strong>Met FactuurBaas maak je gratis een professionele factuur als PDF, zonder account.</strong></p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
     )
   },
   {
     slug: 'revolut-business-zzp-voordelen-nadelen',
     relatedSlugs: ['zakelijke-rekening-zzp', 'factuurbeheer-overzicht', 'sneller-betalen-factuur', 'wanneer-boekhoudsoftware-nodig-zzp'],
-    title: 'Revolut Business voor zzp: voordelen en nadelen',
-    excerpt: 'Revolut Business als zakelijke rekening voor zzp\'ers: pakketten, kosten, voordelen en nadelen. Wanneer past Revolut bij jouw onderneming en hoe combineer je het met je facturatie?',
-    keywords: 'Revolut Business zzp, Revolut zakelijk, Revolut zakelijke rekening, Revolut Business voordelen nadelen, zakelijke rekening zzp Revolut, Revolut Basic Grow Scale',
+    metaTitle: 'Revolut Business voor zzp\'ers: kosten & nadelen',
+    title: 'Revolut Business voor zzp\'ers: kosten, voordelen en nadelen',
+    breadcrumbLabel: 'Revolut Business zzp',
+    excerpt: 'Is Revolut Business geschikt voor zzp\'ers? Bekijk de kosten, pakketten, voordelen, nadelen, boekhoudkoppelingen en alternatieven.',
+    keywords: 'revolut zzp, revolut business kosten, revolut zakelijke rekening, revolut nadelen, revolut zzp rekening',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/voor%20en%20nad%20delen%20van%20revolut%20zakelijk.png',
-      alt: 'Revolut Business voor zzp: voordelen en nadelen van de zakelijke rekening.',
+      alt: 'Revolut Business voor zzp\'ers: kosten, voordelen en nadelen van de zakelijke rekening.',
     },
     datePublished: '2026-02-06',
-    dateModified: '2026-02-06',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Wat kost een zakelijke rekening bij Revolut?', answer: 'Revolut Business Basic kost circa €10 per maand; Grow vanaf €30 en Scale vanaf €90 per maand. Bovenop het pakket kunnen transactiekosten en verzendkosten voor pasjes gelden. Vergelijk altijd op totaalkosten en aantal gratis transacties.' },
-      { question: 'Is Revolut Business geschikt voor zzp\'ers?', answer: 'Ja, vooral voor zzp\'ers met internationale klanten of valuta. Je krijgt meerdere valuta\'s, vaak transparante kosten en een app met betaalverzoeken en betaalkaarten. Let op: boekhoudkoppeling en Nederlands-talige support zijn niet in elk pakket of beperkt beschikbaar.' },
-      { question: 'Wat zijn de nadelen van Revolut Business?', answer: 'De klantenservice is vooral Engelstalig (Nederlands beperkt), je ontvangt geen rente op je saldo, en niet elk pakket biedt een directe boekhoudkoppeling. Voor puur lokale zzp\'ers kan een Nederlandse bank soms praktischer zijn.' },
-      { question: 'Hoe veilig is Revolut?', answer: 'Revolut heeft een Litouwse bankvergunning en valt onder het Europees depositogarantiestelsel. Tot €100.000 per rekeninghouder is gegarandeerd. De app ondersteunt tweestapsverificatie.' },
+      { question: 'Is Revolut geschikt voor zzp\'ers?', answer: 'Ja, Revolut Business kan geschikt zijn voor Nederlandse zzp\'ers, vooral wanneer zij digitaal werken of internationale betalingen uitvoeren.' },
+      { question: 'Wat kost Revolut Business?', answer: 'De gepubliceerde maandprijzen zijn €10 voor Basic, €35 voor Grow en €125 voor Scale. Enterprise heeft een prijs op aanvraag. Extra kosten kunnen van toepassing zijn.' },
+      { question: 'Is Revolut Business gratis?', answer: 'Nee, het reguliere Basic-pakket is betaald. Tijdelijke acties of proefperiodes kunnen beschikbaar zijn.' },
+      { question: 'Krijg je een Nederlandse IBAN bij Revolut Business?', answer: 'Revolut biedt Nederlandse zakelijke klanten een Nederlandse IBAN.' },
+      { question: 'Krijg je rente bij Revolut Business?', answer: 'Revolut biedt een zakelijk spaarproduct met variabele rente. De hoogte hangt af van je abonnement en de actuele voorwaarden.' },
+      { question: 'Heeft Revolut Business een boekhoudkoppeling?', answer: 'Ja, Revolut ondersteunt diverse boekhoudintegraties, waaronder Exact Online, SnelStart en Yuki.' },
+      { question: 'Wat zijn de grootste nadelen van Revolut Business?', answer: 'De vaste abonnementskosten, mogelijke extra transactiekosten, het ontbreken van fysieke bankkantoren en het feit dat niet iedere ondernemer de internationale functies nodig heeft.' },
+      { question: 'Kan ik Revolut Business gebruiken met FactuurBaas?', answer: 'Ja. Je kunt je Revolut-IBAN op een factuur zetten die je met FactuurBaas maakt. Er is geen directe bankkoppeling tussen beide diensten.' },
     ],
     content: (
       <>
-        <p><strong>Revolut Business voor zzp&apos;ers</strong> is een zakelijke rekening van een digitale bank: wereldwijd betalen en ontvangen, meerdere valuta&apos;s en duidelijke tarieven. Past Revolut bij jou? In dit artikel lees je de <strong>voordelen en nadelen van Revolut Business</strong>, welke pakketten er zijn, wat het ongeveer kost en hoe je het combineert met je facturatie en administratie.</p>
+        <p>Overweeg je Revolut Business als zakelijke rekening voor je eenmanszaak? Dan wil je waarschijnlijk weten wat het kost, of je een Nederlands IBAN krijgt en hoe geschikt Revolut is voor je dagelijkse administratie.</p>
+        <p><strong>Revolut Business kan interessant zijn voor zzp&apos;ers die digitaal bankieren, internationale betalingen ontvangen of in meerdere valuta&apos;s werken.</strong> Maar het is niet automatisch de goedkoopste keuze.</p>
+        <p>In dit artikel vergelijken we de pakketten, voordelen, nadelen en alternatieven van Revolut Business voor Nederlandse zzp&apos;ers.</p>
+        <p><em>Laatst gecontroleerd: oktober 2026. Tarieven en voorwaarden kunnen veranderen.</em></p>
 
         <h2>Wat is Revolut Business?</h2>
-        <p>Revolut is een digitale bank (opgericht in 2015) die zich richt op betaalgemak en lage kosten, ook voor ondernemers. Met <strong>Revolut Business</strong> kun je als zzp&apos;er een zakelijke rekening openen, in veel valuta&apos;s betalen en ontvangen, betaalverzoeken sturen en vaak tegen gunstige koersen wisselen. Er zijn meerdere pakketten: van een basisrekening tot oplossingen voor grotere bedrijven. Of een <strong>zakelijke rekening</strong> überhaupt iets voor jou is, lees je in ons artikel over <Link href="/blogs/zakelijke-rekening-zzp" className="text-warm-orange hover:underline">een zakelijke rekening als zzp&apos;er</Link>.</p>
+        <p>Revolut Business is de zakelijke bankdienst van Revolut, waarmee ondernemers betalingen kunnen ontvangen en uitvoeren, betaalkaarten beheren en in meerdere valuta&apos;s werken.</p>
+        <p>Voor Nederlandse ondernemers biedt Revolut onder andere:</p>
+        <ul>
+          <li>Een Nederlandse IBAN.</li>
+          <li>Lokale en internationale overschrijvingen.</li>
+          <li>Betalingen via iDEAL.</li>
+          <li>Fysieke en virtuele betaalkaarten.</li>
+          <li>Wisselen tussen verschillende valuta&apos;s.</li>
+          <li>Integraties met boekhoudsoftware.</li>
+          <li>Zakelijke spaarmogelijkheden.</li>
+        </ul>
+        <p>De beschikbaarheid van functies en limieten hangt af van het gekozen abonnement.</p>
+
+        <h2>Wat kost Revolut Business in 2026?</h2>
+        <p>Revolut biedt verschillende zakelijke pakketten.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Pakket</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Maandprijs</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Gericht op</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Basic</td>
+                <td className="px-4 py-3 text-right">€10</td>
+                <td className="px-4 py-3">Starters en kleinere ondernemingen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Grow</td>
+                <td className="px-4 py-3 text-right">€35</td>
+                <td className="px-4 py-3">Ondernemers met meer betaalverkeer</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Scale</td>
+                <td className="px-4 py-3 text-right">€125</td>
+                <td className="px-4 py-3">Bedrijven met hogere volumes</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Enterprise</td>
+                <td className="px-4 py-3 text-right">Op aanvraag</td>
+                <td className="px-4 py-3">Grotere ondernemingen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dit zijn de gepubliceerde Nederlandse maandprijzen in oktober 2026.</p>
+        <p>Naast abonnementskosten kunnen kosten gelden voor transacties, kaarten, internationale betalingen en valutawissels.</p>
+        <h3>Wat krijg je bij Revolut Business Basic?</h3>
+        <p>Het Basic-pakket biedt onder andere:</p>
+        <ul>
+          <li>10 kosteloze lokale overschrijvingen binnen de pakketvoorwaarden.</li>
+          <li>Een valutawissellimiet van €1.000 tegen de interbancaire koers tijdens handelsuren.</li>
+          <li>Zakelijke betaalkaarten.</li>
+          <li>Toegang tot de Revolut Business-app.</li>
+          <li>Mogelijkheden voor boekhoudintegraties.</li>
+        </ul>
+        <p>Boven de inbegrepen limieten kunnen extra kosten gelden.</p>
+        <h3>Is Revolut Business gratis?</h3>
+        <p>Nee. Het reguliere Basic-pakket kost €10 per maand.</p>
+        <p>Revolut biedt soms tijdelijke proefperiodes of promoties aan. Controleer daarvoor de actuele actievoorwaarden.</p>
 
         <h2>Voordelen van Revolut Business voor zzp&apos;ers</h2>
-        <ul>
-          <li><strong>Transparante kosten:</strong> Vaak geen verborgen kosten; je ziet wat je betaalt per transactie of pakket.</li>
-          <li><strong>Meerdere valuta&apos;s:</strong> Je kunt in tientallen valuta&apos;s ontvangen, aanhouden en betalen — handig als je internationaal werkt.</li>
-          <li><strong>Gunstige wisselkoersen:</strong> Binnen je pakket vaak een deel gratis wisselen tegen de interbancaire koers; daarboven een lage toeslag.</li>
-          <li><strong>Moderne app:</strong> Betaalverzoeken, virtuele en fysieke pasjes, en inzicht in transacties. Sommige pakketten bieden een API of boekhoudkoppeling.</li>
-          <li><strong>Lage vaste kosten bij Basic:</strong> Het instappakket is relatief goedkoop per maand, wat voor startende zzp&apos;ers aantrekkelijk kan zijn.</li>
-        </ul>
-        <p>Combineer je Revolut-rekening met goed <Link href="/blogs/factuurbeheer-overzicht" className="text-warm-orange hover:underline">factuurbeheer</Link>: zo houd je overzicht welke facturen betaald zijn en welke nog openstaan.</p>
-
-        <CtaButton />
+        <h3>1. Nederlandse IBAN</h3>
+        <p>Revolut biedt Nederlandse zakelijke klanten een Nederlandse IBAN.</p>
+        <p>Dat maakt het praktisch voor ondernemers die vooral met Nederlandse klanten en leveranciers werken.</p>
+        <h3>2. Internationale betalingen</h3>
+        <p>Werk je met klanten buiten Nederland? Dan kan Revolut aantrekkelijk zijn.</p>
+        <p>Je kunt verschillende valuta&apos;s gebruiken en internationaal betalen.</p>
+        <p>Let wel op de wissellimieten, eventuele toeslagen en kosten voor internationale overboekingen.</p>
+        <h3>3. Moderne app en virtuele kaarten</h3>
+        <p>Je kunt betalingen en zakelijke uitgaven beheren via de app of webomgeving.</p>
+        <p>Virtuele kaarten kunnen handig zijn voor bijvoorbeeld softwareabonnementen en online aankopen.</p>
+        <h3>4. Boekhoudkoppelingen</h3>
+        <p>Revolut ondersteunt integraties met onder andere Exact Online, SnelStart en Yuki.</p>
+        <p>Dat kan helpen om banktransacties sneller in je administratie te verwerken.</p>
+        <p>Controleer vooraf of jouw specifieke boekhoudpakket wordt ondersteund en welke functies beschikbaar zijn.</p>
+        <h3>5. Zakelijke spaarmogelijkheden</h3>
+        <p>Met Revolut Business Savings kun je onder voorwaarden rente ontvangen op zakelijk spaargeld.</p>
+        <p>De rente is variabel en afhankelijk van je pakket.</p>
+        <p>Dit kan bijvoorbeeld interessant zijn wanneer je geld apart houdt voor belastingen of toekomstige uitgaven.</p>
+        <p>Let op het verschil tussen een gewone spaarrekening en een geldmarktfonds: bij een geldmarktfonds bestaat beleggingsrisico.</p>
 
         <h2>Nadelen van Revolut Business</h2>
+        <h3>1. Geen gratis standaardabonnement</h3>
+        <p>Voor zzp&apos;ers met slechts enkele transacties per maand kunnen de vaste kosten relatief zwaar wegen.</p>
+        <p>Vergelijk daarom de totale jaarprijs met andere zakelijke rekeningen.</p>
+        <h3>2. Extra kosten buiten je pakket</h3>
+        <p>De inbegrepen transacties en valutawissels zijn beperkt.</p>
+        <p>Als je regelmatig grote bedragen wisselt of veel internationale betalingen doet, kunnen extra kosten ontstaan.</p>
+        <h3>3. Geen fysieke bankkantoren</h3>
+        <p>Revolut is gericht op digitaal bankieren.</p>
+        <p>Als je graag naar een lokaal bankfiliaal gaat, is dat een nadeel.</p>
+        <h3>4. Niet iedere ondernemer heeft internationale functies nodig</h3>
+        <p>Wanneer je uitsluitend Nederlandse klanten hebt en weinig transacties uitvoert, gebruik je mogelijk maar een klein deel van de functies.</p>
+        <h3>5. Mogelijke controles en tijdelijke beperkingen</h3>
+        <p>Net als andere financiële instellingen moet Revolut voldoen aan regels voor klantonderzoek en transactiemonitoring.</p>
+        <p>Dat kan in bepaalde gevallen leiden tot aanvullende documentatieverzoeken of tijdelijke beperkingen.</p>
+        <p>Dit is geen uniek risico van Revolut, maar wel iets om rekening mee te houden wanneer je volledig afhankelijk bent van één betaalrekening.</p>
+
+        <h2>Revolut Business rente: krijg je rente op je saldo?</h2>
+        <p>Revolut biedt zakelijke spaarmogelijkheden met variabele rente.</p>
+        <p>De gepubliceerde tarieven hangen af van het abonnement.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[400px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Pakket</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Gepubliceerde variabele spaarrente</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Basic</td>
+                <td className="px-4 py-3 text-right">1,25% per jaar</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Grow</td>
+                <td className="px-4 py-3 text-right">1,40% per jaar</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Scale</td>
+                <td className="px-4 py-3 text-right">1,75% per jaar</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Enterprise</td>
+                <td className="px-4 py-3 text-right">2,25% per jaar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Deze percentages zijn momentopnames en kunnen veranderen.</p>
+        <p>De spaarrente geldt voor het daarvoor bestemde spaarproduct, niet automatisch voor ieder saldo op je gewone betaalrekening.</p>
+        <p>Controleer ook de voorwaarden en toepasselijke depositobescherming.</p>
+
+        <h2>Is Revolut Business veilig?</h2>
+        <p>Revolut Bank UAB is een in Litouwen gevestigde bank met activiteiten in Nederland.</p>
+        <p>Voor in aanmerking komende bankdeposito&apos;s geldt bescherming via het Litouwse depositogarantiestelsel, doorgaans tot €100.000 per deposant per bank.</p>
+        <p>Controleer onder welke juridische entiteit jouw rekening valt en welke bescherming voor het specifieke product geldt.</p>
+        <p>Beleggingsproducten, zoals geldmarktfondsen, vallen niet onder dezelfde depositogarantie als gewone bankdeposito&apos;s.</p>
+
+        <h2>Revolut Business of bunq voor zzp&apos;ers?</h2>
+        <p>Beide aanbieders richten zich op digitaal bankieren, maar hun pakketten en functies verschillen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderwerp</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Revolut Business</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">bunq Business</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Zakelijke rekening</td>
+                <td className="px-4 py-3">Ja</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Digitale app</td>
+                <td className="px-4 py-3">Ja</td>
+                <td className="px-4 py-3">Ja</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Internationale betalingen</td>
+                <td className="px-4 py-3">Sterke focus</td>
+                <td className="px-4 py-3">Beschikbaar</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Meerdere valuta&apos;s</td>
+                <td className="px-4 py-3">Ja</td>
+                <td className="px-4 py-3">Afhankelijk van functies en pakket</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Boekhoudkoppelingen</td>
+                <td className="px-4 py-3">Beschikbaar</td>
+                <td className="px-4 py-3">Beschikbaar</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Fysieke bankkantoren</td>
+                <td className="px-4 py-3">Nee</td>
+                <td className="px-4 py-3">Nee</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Kosten</td>
+                <td className="px-4 py-3">Vanaf €10 per maand</td>
+                <td className="px-4 py-3">Afhankelijk van actueel pakket</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor internationaal werk kan Revolut interessant zijn.</p>
+        <p>Voor ondernemers die vooral Nederlandse betalingen uitvoeren, is het verstandig ook bunq en traditionele zakelijke banken te vergelijken.</p>
+        <p>Vergelijk de actuele kosten voordat je een keuze maakt.</p>
+
+        <h2>Wanneer is Revolut Business geschikt voor een zzp&apos;er?</h2>
+        <p>Revolut Business kan goed passen wanneer je:</p>
         <ul>
-          <li><strong>Klantenservice vooral Engels:</strong> Ondersteuning is vaak Engelstalig; Nederlands is niet overal of niet 24/7 beschikbaar.</li>
-          <li><strong>Geen rente op saldo:</strong> Over een positief saldo ontvang je bij Revolut doorgaans geen rente.</li>
-          <li><strong>Geen of beperkte boekhoudkoppeling in goedkope pakketten:</strong> Automatische koppeling met boekhoudsoftware is niet in elk pakket inbegrepen.</li>
-          <li><strong>Geen fysieke kantoren:</strong> Alles gaat via de app; als je liever persoonlijk advies wilt, kies je een bank met filialen.</li>
+          <li>Regelmatig internationale betalingen ontvangt.</li>
+          <li>In meerdere valuta&apos;s werkt.</li>
+          <li>Volledig digitaal wilt bankieren.</li>
+          <li>Virtuele kaarten gebruikt.</li>
+          <li>Je rekening wilt koppelen aan boekhoudsoftware.</li>
+          <li>Een zakelijke spaarmogelijkheid zoekt.</li>
         </ul>
-        <p>Of je naast je bank ook <strong>boekhoudsoftware</strong> nodig hebt, hangt af van je omzet en administratie — lees <Link href="/blogs/wanneer-boekhoudsoftware-nodig-zzp" className="text-warm-orange hover:underline">wanneer boekhoudsoftware nodig is voor zzp&apos;ers</Link>.</p>
+        <p>Een andere bank kan aantrekkelijker zijn wanneer je weinig transacties hebt, fysieke dienstverlening wilt of een specifieke Nederlandse bankdienst nodig hebt.</p>
 
-        <h2>Pakketten: Basic, Grow, Scale en Enterprise</h2>
-        <p>Revolut biedt meerdere zakelijke pakketten. Een korte indruk:</p>
-        <ul>
-          <li><strong>Business Basic:</strong> Instappakket met lage maandelijkse kosten, een beperkt aantal gratis transacties per jaar en mogelijkheid om tot een bepaald bedrag tegen de interbancaire koers te wisselen. Geschikt voor starters of zzp&apos;ers met weinig transacties.</li>
-          <li><strong>Business Grow:</strong> Meer gratis transacties, vaak inclusief creditcard of extra kaarten, en soms boekhoudkoppeling. Voor wie meer betaalverkeer heeft.</li>
-          <li><strong>Business Scale:</strong> Nog meer transacties en extra&apos;s, bedoeld voor grotere ondernemingen.</li>
-          <li><strong>Business Enterprise:</strong> Op maat voor grote bedrijven met specifieke wensen.</li>
-        </ul>
-        <p>Kosten en limieten wijzigen regelmatig; check altijd de actuele tarieven op de website van Revolut. Tip: bereken of je met je verwachte aantal transacties beter uit bent met een duurder pakket met meer gratis transacties of met Basic en transactiekosten.</p>
+        <h2>Revolut Business combineren met FactuurBaas</h2>
+        <p>
+          Ook met een Revolut Business-rekening moet je correcte facturen versturen.
+        </p>
+        <p>
+          Met{' '}
+          <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link>{' '}
+          kun je gratis een factuur maken en als PDF downloaden.
+        </p>
+        <p>Vermeld daarop je zakelijke IBAN en de juiste tenaamstelling.</p>
+        <p>Je kunt FactuurBaas gebruiken om facturen op te stellen, ongeacht bij welke bank je een rekening hebt.</p>
+        <p>FactuurBaas biedt momenteel geen rechtstreekse Revolut-bankkoppeling of automatische betaalstatussynchronisatie.</p>
 
-        <CtaButton />
-
-        <h2>Kosten in het kort</h2>
-        <p>De maandelijkse kosten lopen uiteen van circa €10 (Basic) tot tientallen euros (Grow, Scale). Daarnaast kunnen gelden:</p>
-        <ul>
-          <li>Transactiekosten na het opgebruiken van je gratis transacties (bijv. per bij- of afschrijving).</li>
-          <li>Kosten voor internationale overschrijvingen buiten je pakket.</li>
-          <li>Verzendkosten voor fysieke betaalpassen.</li>
-          <li>Eventuele toeslag op valuta wisselen boven je gratis limiet.</li>
-        </ul>
-        <p>Vergelijk daarom altijd op totaalkosten: maandbedrag + wat je verwacht te betalen aan transacties en wissels. Zo kies je de goedkoopste optie voor jouw situatie.</p>
-
-        <h2>Wanneer past Revolut Business bij jou?</h2>
-        <p>Revolut Business kan een goede keuze zijn als je:</p>
-        <ul>
-          <li>Internationaal werkt of in meerdere valuta&apos;s factureert en betaalt.</li>
-          <li>Lage, transparante kosten belangrijk vindt.</li>
-          <li>Geen behoefte hebt aan een fysiek kantoor en digitale service voldoende vindt.</li>
-        </ul>
-        <p>Minder geschikt als je vooral Nederlandse klanten hebt, Nederlands-talige telefonische support wilt of een directe, gratis boekhoudkoppeling nodig hebt in het goedkoopste pakket. In dat geval kunnen een Nederlandse bank of een andere zakelijke rekening beter aansluiten. Hoe je <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">sneller betaald krijgt</Link> op je facturen, geldt ongeacht welke bank je kiest.</p>
-
-        <h2>Revolut en je facturatie</h2>
-        <p>Of je nu bij Revolut of een andere bank zit: je facturen moeten kloppen en overzichtelijk zijn. Met <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link> maak je professionele facturen en houd je ze bij. Je kunt je zakelijke IBAN (bijv. van Revolut) op je factuur zetten; klanten betalen dan naar die rekening. FactuurBaas werkt naast elke bank — handig als je later van bank wisselt.</p>
-
-        <CtaButton />
-
-        <h2>Conclusie</h2>
-        <p><strong>Revolut Business voor zzp</strong> biedt voordelen: transparante tarieven, meerdere valuta&apos;s en een moderne app. Nadelen zijn de vooral Engelstalige klantenservice, geen rente op saldo en in de basispakketten soms geen of beperkte boekhoudkoppeling. Weeg voor- en nadelen af tegen je eigen werkzaamheden: wie veel internationaal doet, kan goed uit zijn met Revolut; wie puur lokaal werkt, vergelijkt beter ook Nederlandse alternatieven. Combineer je zakelijke rekening altijd met helder factuurbeheer, bijvoorbeeld met FactuurBaas.</p>
-
-        <h2>Veelgestelde vragen</h2>
-        <h3>Wat kost Revolut Business?</h3>
-        <p>Basic circa €10 per maand; Grow en Scale duurder, met meer gratis transacties en extra&apos;s. Reken ook transactie- en eventueel verzendkosten mee.</p>
+        <h2>Veelgestelde vragen over Revolut Business</h2>
         <h3>Is Revolut geschikt voor zzp&apos;ers?</h3>
-        <p>Ja, vooral als je internationaal werkt of in meerdere valuta&apos;s betaalt. Let op taal van de support en of boekhoudkoppeling in jouw pakket zit.</p>
-        <h3>Wat zijn de nadelen van Revolut Business?</h3>
-        <p>Vooral Engelstalige service, geen rente op saldo, en niet in elk pakket een boekhoudkoppeling. Geen fysieke kantoren.</p>
-        <h3>Hoe veilig is Revolut?</h3>
-        <p>Revolut valt onder het Europees depositogarantiestelsel; tot €100.000 per rekeninghouder is gedekt. De app ondersteunt tweestapsverificatie.</p>
+        <p>Ja, Revolut Business kan geschikt zijn voor Nederlandse zzp&apos;ers, vooral wanneer zij digitaal werken of internationale betalingen uitvoeren.</p>
+        <h3>Wat kost Revolut Business?</h3>
+        <p>De gepubliceerde maandprijzen zijn €10 voor Basic, €35 voor Grow en €125 voor Scale. Enterprise heeft een prijs op aanvraag. Extra kosten kunnen van toepassing zijn.</p>
+        <h3>Is Revolut Business gratis?</h3>
+        <p>Nee, het reguliere Basic-pakket is betaald. Tijdelijke acties of proefperiodes kunnen beschikbaar zijn.</p>
+        <h3>Krijg je een Nederlandse IBAN bij Revolut Business?</h3>
+        <p>Revolut biedt Nederlandse zakelijke klanten een Nederlandse IBAN.</p>
+        <h3>Krijg je rente bij Revolut Business?</h3>
+        <p>Revolut biedt een zakelijk spaarproduct met variabele rente. De hoogte hangt af van je abonnement en de actuele voorwaarden.</p>
+        <h3>Heeft Revolut Business een boekhoudkoppeling?</h3>
+        <p>Ja, Revolut ondersteunt diverse boekhoudintegraties, waaronder Exact Online, SnelStart en Yuki.</p>
+        <h3>Wat zijn de grootste nadelen van Revolut Business?</h3>
+        <p>De vaste abonnementskosten, mogelijke extra transactiekosten, het ontbreken van fysieke bankkantoren en het feit dat niet iedere ondernemer de internationale functies nodig heeft.</p>
+        <h3>Kan ik Revolut Business gebruiken met FactuurBaas?</h3>
+        <p>Ja. Je kunt je Revolut-IBAN op een factuur zetten die je met FactuurBaas maakt. Er is geen directe bankkoppeling tussen beide diensten.</p>
+
+        <h2>Conclusie: is Revolut Business een goede keuze?</h2>
+        <p>Revolut Business is vooral interessant voor zzp&apos;ers die internationaal werken en waarde hechten aan digitaal bankieren, meerdere valuta&apos;s en moderne betaalfuncties.</p>
+        <p>Voor een ondernemer met weinig Nederlandse transacties is het verstandig om de vaste kosten en inbegrepen functies goed te vergelijken.</p>
+        <p>Bekijk de actuele pakketten op de officiële website van Revolut voordat je een rekening opent.</p>
+        <p>En welke bank je ook kiest: met FactuurBaas maak je gratis professionele facturen, zonder account.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
     )
   },
   {
     slug: 'btw-te-laat-betaald',
-    relatedSlugs: ['btw-factuur-zzp', 'factuurbeheer-overzicht', 'zakelijke-rekening-zzp'],
-    title: 'Btw te laat betaald: dit zijn de gevolgen',
-    excerpt: 'Wat gebeurt er als je de btw te laat betaalt? Ontdek de boetes, naheffingsaanslagen en hoe je problemen voorkomt. Belangrijk voor elke zzp\'er.',
-    keywords: 'btw te laat betaald, boete btw te laat, naheffingsaanslag btw, btw betaalverzuim, btw aangifte te laat, betalingsregeling belastingdienst btw, boete te laat betalen btw',
+    relatedSlugs: ['btw-factuur-zzp', 'factuurbeheer-overzicht', 'zakelijke-rekening-zzp', 'hoeveel-geld-apart-belasting-zzper'],
+    metaTitle: 'Btw te laat betaald? Boete en wat je nu moet doen',
+    title: 'Btw te laat betaald? Dit zijn de gevolgen',
+    breadcrumbLabel: 'Btw te laat betaald',
+    excerpt: 'Btw te laat betaald of aangifte vergeten? Lees wat de gevolgen zijn, wanneer je een boete krijgt en welke stappen je nu kunt nemen.',
+    keywords: 'btw te laat betaald, btw te laat betalen, boete btw te laat betaald, btw aangifte te laat, btw niet betaald',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/btw%20te%20laat%20betaald.png',
-      alt: 'Illustratie van een te laat betaalde BTW-aangifte met een kalender en rode stempel.',
+      alt: 'Btw te laat betaald? Dit zijn de gevolgen, boetes en stappen die je nu kunt nemen.',
     },
     datePublished: '2026-02-07',
-    dateModified: '2026-02-07',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Wat is de boete als ik mijn btw te laat betaal?', answer: 'De standaard boete voor te late btw-betaling is 3% van het openstaande bedrag, met een minimum van €50 en een maximum van €6.709. Bij herhaaldelijk verzuim kan dit oplopen tot 10%.' },
-      { question: 'Wat is de coulancetermijn voor btw-betaling?', answer: 'Er geldt een coulancetermijn van 7 kalenderdagen na de uiterste betaaldatum. Als je binnen deze termijn betaalt en de vorige aangifte op tijd was, krijg je mogelijk geen boete, alleen een verzuimmededeling.' },
-      { question: 'Wat is het verschil tussen aangifteverzuim en betaalverzuim?', answer: 'Aangifteverzuim is het te laat of niet indienen van de btw-aangifte (standaard boete €82). Betaalverzuim is het te laat, te weinig of niet betalen van de btw (standaard boete 3%). Je kunt voor beide apart een boete krijgen.' },
-      { question: 'Wat moet ik doen bij betalingsproblemen met de btw?', answer: 'Neem direct contact op met de Belastingdienst om een betalingsregeling te treffen. Dit kan hogere boetes en aanmaningskosten voorkomen.' },
+      { question: 'Wat gebeurt er als ik één dag te laat btw betaal?', answer: 'Je betaling is officieel te laat. Maar als je binnen de coulancetermijn van zeven kalenderdagen betaalt en je vorige aangifte op tijd en volledig hebt betaald, krijg je normaal gesproken geen betaalverzuimboete.' },
+      { question: 'Hoeveel dagen mag je te laat zijn met btw betalen?', answer: 'Er geldt een coulancetermijn van zeven kalenderdagen voor de beoordeling van een mogelijke boete. Dit verandert de officiële betaaldatum niet.' },
+      { question: 'Hoeveel is de boete voor te laat btw betalen?', answer: 'De standaard betaalverzuimboete is 3% van het niet of te laat betaalde bedrag, met een minimum van €50 en een maximum van €6.709.' },
+      { question: 'Wat is de boete voor te laat btw-aangifte doen?', answer: 'De standaard aangifteverzuimboete bedraagt €82 als je aangifte niet binnen de wettelijke termijn en de daaropvolgende coulancetermijn binnenkomt.' },
+      { question: 'Wat als ik mijn btw niet kan betalen?', answer: 'Dien je aangifte op tijd in en onderzoek zo snel mogelijk of je een betalingsregeling of uitstel van betaling kunt aanvragen.' },
+      { question: 'Kan ik btw later alsnog betalen?', answer: 'Ja. Betaal de openstaande btw zo snel mogelijk met het juiste betalingskenmerk. Afhankelijk van je situatie kun je wel een boete of aanvullende kosten krijgen.' },
+      { question: 'Moet ik btw-aangifte doen als ik niets heb verdiend?', answer: 'Als je verplicht bent btw-aangifte te doen, moet je doorgaans ook aangifte doen wanneer je geen omzet hebt gehad. Er zijn uitzonderingen, bijvoorbeeld voor bepaalde ondernemers die zijn vrijgesteld van periodieke btw-aangifte.' },
     ],
     content: (
       <>
-        <p>Als zzp&apos;er heb je te maken met de btw-aangifte. Het is cruciaal om deze op tijd in te dienen en te betalen. Maar wat gebeurt er als je de <strong>btw te laat betaalt</strong>? En wat zijn de gevolgen als je te weinig of zelfs helemaal niet betaalt? In dit artikel duiken we in de regels van de Belastingdienst, de boetes die je kunt verwachten en hoe je financiële problemen voorkomt. Zo houd je jouw <Link href="/blogs/factuurbeheer-overzicht" className="text-warm-orange hover:underline">factuurbeheer</Link> en administratie zonder verrassingen.</p>
+        <p>Ben je vergeten je btw te betalen of heb je de uiterste betaaldatum gemist? Dan kun je een boete krijgen van de Belastingdienst.</p>
+        <p><strong>Het goede nieuws: als je binnen zeven kalenderdagen na de deadline betaalt, krijg je onder bepaalde voorwaarden geen betaalverzuimboete.</strong></p>
+        <p>Maar let op: de officiële betaaldatum blijft gelden. De coulancetermijn is geen extra betalingstermijn.</p>
+        <p>Hieronder lees je welke boetes gelden in 2026, wat je direct moet doen en wat er gebeurt als je de btw helemaal niet kunt betalen.</p>
 
-        <h2>De uiterste betaaldatum en de coulancetermijn</h2>
-        <p>De Belastingdienst hanteert strikte deadlines voor de btw-aangifte en betaling. Meestal moet je ieder kwartaal aangifte doen en betalen, uiterlijk op de laatste dag van de maand die volgt op het kwartaal. Daarnaast is er een &apos;coulancetermijn&apos; van 7 kalenderdagen na de uiterste betaaldatum. Dit betekent dat je, onder bepaalde voorwaarden, nog een korte periode hebt om te betalen zonder direct een zware boete te krijgen.</p>
+        <h2>Btw te laat betaald: wat moet je nu doen?</h2>
+        <p>Heb je de betaaldatum gemist? Volg dan deze stappen.</p>
+        <ol>
+          <li><strong>Controleer de uiterste betaaldatum.</strong> Kijk in Mijn Belastingdienst Zakelijk.</li>
+          <li><strong>Betaal de openstaande btw zo snel mogelijk.</strong> Gebruik het juiste betalingskenmerk.</li>
+          <li><strong>Controleer of je btw-aangifte is ingediend.</strong> Te laat aangifte doen kan een afzonderlijke boete opleveren.</li>
+          <li><strong>Bewaar je betaalbewijs.</strong> Controleer of de betaling correct is verwerkt.</li>
+          <li><strong>Kun je niet betalen?</strong> Onderzoek direct of je voor uitstel of een betalingsregeling in aanmerking komt.</li>
+        </ol>
+        <p>Wacht niet totdat je een naheffingsaanslag ontvangt als je de verschuldigde btw al kunt betalen.</p>
 
-        <h3>Wanneer is er sprake van te laat betalen?</h3>
-        <p>Je betaalt te laat zodra je betaling na de officiële uiterste betaaldatum binnenkomt bij de Belastingdienst. Afhankelijk van eerdere betalingsgedrag en of je binnen de coulancetermijn betaalt, gelden er verschillende regels.</p>
+        <h2>Wanneer moet je btw betalen?</h2>
+        <p>De meeste zzp&apos;ers doen ieder kwartaal btw-aangifte.</p>
+        <p>Voor Nederlandse ondernemers gelden in 2026 de volgende uiterste betaaldata:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[400px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Btw-tijdvak</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Uiterste betaaldatum</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">1e kwartaal 2026</td>
+                <td className="px-4 py-3">30 april 2026</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2e kwartaal 2026</td>
+                <td className="px-4 py-3">31 juli 2026</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">3e kwartaal 2026</td>
+                <td className="px-4 py-3">31 oktober 2026</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">4e kwartaal 2026</td>
+                <td className="px-4 py-3">31 januari 2027</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De betaling moet uiterlijk op deze datum bij de Belastingdienst zijn ontvangen.</p>
+        <p>Houd rekening met de verwerkingstijd van je bank.</p>
+        <p>Voor ondernemers die per maand of jaar aangifte doen, gelden andere data. Ook voor bepaalde buitenlandse ondernemers kunnen afwijkende termijnen gelden.</p>
 
-        <h2>Gevolgen van te laat btw betalen (betaalverzuim)</h2>
-        <p>Betaalverzuim treedt op wanneer je de verschuldigde btw niet, te laat, of te weinig betaalt. De gevolgen kunnen variëren:</p>
-        <ul>
-          <li><strong>Te laat, maar binnen de coulancetermijn:</strong> Als je de vorige aangifte op tijd en volledig betaald had, ontvang je meestal alleen een verzuimmededeling, zonder boete. Had je de vorige keer ook al een deadline gemist? Dan krijg je direct een betaalverzuimboete van 3% van het te laat betaalde bedrag (minimaal €50, maximaal €6.709).</li>
-          <li><strong>Te laat én na de coulancetermijn:</strong> Je ontvangt altijd een betaalverzuimboete van 3% van het te laat betaalde bedrag (minimaal €50, maximaal €6.709).</li>
-          <li><strong>Deels binnen, deels na de coulancetermijn:</strong> De boete van 3% wordt berekend over het <em>totale</em> te laat betaalde bedrag, dus ook het deel dat nog binnen de coulancetermijn is voldaan.</li>
-          <li><strong>Niet of te weinig betaald:</strong> De Belastingdienst stuurt een naheffingsaanslag voor het openstaande bedrag, plus een betaalverzuimboete van 3% (minimaal €50, maximaal €6.709) over het niet-betaalde bedrag.</li>
-          <li><strong>Herhaaldelijk verzuim:</strong> Als je vaker te laat of te weinig betaalt, kan de boete oplopen van 3% naar 10%.</li>
-        </ul>
-        <p>Naast de boetes kan de Belastingdienst ook invorderingsrente in rekening brengen. Deze rente begint te lopen na het verstrijken van de betalingstermijn en wordt berekend over het gehele openstaande bedrag. Dit kan de totale kosten aanzienlijk verhogen.</p>
+        <h2>Krijg je een boete als je btw te laat betaalt?</h2>
+        <p>Dat hangt af van hoe laat je betaalt en of je de vorige btw-aangifte op tijd en volledig hebt betaald.</p>
+        <p>De Belastingdienst gebruikt een coulancetermijn van zeven kalenderdagen.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Situatie</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Gevolg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Op tijd en volledig betaald</td>
+                <td className="px-4 py-3">Geen betaalverzuimboete</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Binnen 7 dagen te laat, vorige keer op tijd en volledig betaald</td>
+                <td className="px-4 py-3">Geen betaalverzuimboete, wel verzuimmededeling</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Binnen 7 dagen te laat, vorige keer ook te laat of onvolledig betaald</td>
+                <td className="px-4 py-3">Normaal gesproken 3% boete</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Later dan 7 dagen betaald</td>
+                <td className="px-4 py-3">Normaal gesproken 3% boete</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Niet of onvoldoende betaald</td>
+                <td className="px-4 py-3">Naheffingsaanslag en doorgaans 3% betaalverzuimboete</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De standaard betaalverzuimboete bedraagt 3% van het niet of te laat betaalde bedrag, met een minimum van €50 en een maximum van €6.709.</p>
+        <p>Bij bijzondere omstandigheden kunnen andere boeteregels gelden.</p>
 
-        <CtaButton />
+        <h2>Hoeveel boete krijg je als je btw te laat betaalt?</h2>
+        <p>Hieronder staan voorbeelden van de standaard betaalverzuimboete van 3%.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Te laat betaald bedrag</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Boete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['€500', '€50'],
+                ['€1.000', '€50'],
+                ['€2.000', '€60'],
+                ['€5.000', '€150'],
+                ['€10.000', '€300'],
+              ].map(([bedrag, boete]) => (
+                <tr key={bedrag} className="border-b border-slate-100 last:border-0">
+                  <td className="px-4 py-3">{bedrag}</td>
+                  <td className="px-4 py-3 text-right">{boete}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>Bij €500 en €1.000 geldt het minimumbedrag van €50.</p>
+        <p>Deze voorbeelden gaan ervan uit dat een betaalverzuimboete wordt opgelegd. Als je aan de voorwaarden voor coulance voldoet, kan de boete achterwege blijven.</p>
 
-        <h2>Aangifteverzuim vs. Betaalverzuim: twee aparte boetes</h2>
-        <p>Het is belangrijk om te weten dat de Belastingdienst onderscheid maakt tussen twee soorten verzuim:</p>
-        <ul>
-          <li><strong>Aangifteverzuim:</strong> Dit is het te laat indienen of helemaal niet doen van de btw-aangifte. De standaardboete hiervoor is €82,00, zelfs bij een nihil-aangifte (waarbij je geen btw hoeft te betalen of terugkrijgt). Ook hiervoor geldt een coulancetermijn van 7 dagen, waarbinnen je de aangifte nog boetevrij kunt indienen als je niet eerder in gebreke bent geweest.</li>
-          <li><strong>Betaalverzuim:</strong> Zoals hierboven beschreven, gaat dit over het te laat, te weinig of niet betalen van de verschuldigde btw. De boete bedraagt hier 3% van het openstaande bedrag.</li>
-        </ul>
-        <p>Je kunt dus twee afzonderlijke boetes ontvangen als je zowel te laat aangifte doet én te laat betaalt.</p>
+        <h2>Wat als je btw-aangifte ook te laat is?</h2>
+        <p>Te laat aangifte doen en te laat betalen zijn twee verschillende overtredingen.</p>
+        <h3>Boete voor te laat btw-aangifte doen</h3>
+        <p>De standaardboete voor het niet of te laat indienen van een btw-aangifte bedraagt €82.</p>
+        <p>Voor het indienen van de aangifte geldt een coulancetermijn van zeven kalenderdagen. Komt de aangifte binnen deze periode binnen, dan krijg je geen aangifteverzuimboete.</p>
+        <h3>Boete voor te laat btw betalen</h3>
+        <p>Bij een betalingsverzuim geldt doorgaans de boete van 3%, met een minimum van €50 en een maximum van €6.709.</p>
+        <p>Je kunt dus zowel een aangifteverzuimboete als een betaalverzuimboete krijgen.</p>
+        <p>Ook als je geen btw hoeft af te dragen, moet je aangifte doen wanneer je daartoe verplicht bent.</p>
 
-        <h2>De vergrijpboete: bij grove schuld of opzet</h2>
-        <p>In ernstigere gevallen, zoals vermoeden van grove schuld of (voorwaardelijke) opzet, kan de Belastingdienst een <strong>vergrijpboete</strong> opleggen in plaats van een reguliere betaalverzuimboete. Deze boetes zijn aanzienlijk hoger. Je ontvangt hierover altijd eerst een schriftelijke mededeling met de reden van de boete. Als je het er niet mee eens bent, kun je bezwaar maken.</p>
+        <h2>Wat gebeurt er als je helemaal geen btw betaalt?</h2>
+        <p>Als je de verschuldigde btw niet betaalt, kan de Belastingdienst een naheffingsaanslag opleggen.</p>
+        <p>Daarop staat het bedrag dat je nog moet betalen, eventueel aangevuld met een boete.</p>
+        <p>Betaal je ook de naheffingsaanslag niet op tijd, dan kunnen verdere invorderingsmaatregelen en extra kosten volgen.</p>
+        <p>Denk aan een aanmaning, invorderingsrente en uiteindelijk een dwangbevel.</p>
+        <p>Het is daarom verstandig om zo snel mogelijk actie te ondernemen.</p>
 
-        <h2>Fouten corrigeren met een suppletieaangifte</h2>
-        <p>Ontdek je achteraf een fout in een eerder ingediende btw-aangifte waardoor je meer dan €1.000 te weinig hebt betaald of te veel hebt teruggevraagd? Dan moet je dit corrigeren via een suppletieaangifte. Dit doe je via het formulier &apos;Suppletie btw (omzetbelasting)&apos; in Mijn Belastingdienst Zakelijk.</p>
-        <p>Dien de suppletie zo snel mogelijk in – uiterlijk binnen 8 weken nadat je de fout hebt ontdekt en vóórdat de Belastingdienst de fout zelf opmerkt – om boetes te voorkomen. Voor bedragen onder de €1.000 mag je de fout corrigeren in de eerstvolgende reguliere btw-aangifte.</p>
+        <h2>Wat als je de btw niet kunt betalen?</h2>
+        <p>Heb je onvoldoende geld om de btw te betalen?</p>
+        <p>Doe dan wel op tijd aangifte, ook als je de betaling niet direct kunt voldoen.</p>
+        <p>Onderzoek vervolgens of je uitstel van betaling of een betalingsregeling kunt aanvragen.</p>
+        <p>Voor ondernemers heeft de Belastingdienst een afzonderlijke procedure voor betalingsproblemen.</p>
+        <p>Let op: een verzoek om uitstel betekent niet automatisch dat je uitstel hebt gekregen.</p>
+        <p>Bij een bv of andere daarvoor kwalificerende rechtspersoon kan bovendien een afzonderlijke verplichting bestaan om betalingsonmacht tijdig te melden.</p>
 
-        <CtaButton />
+        <h2>Btw te weinig betaald: moet je een suppletie indienen?</h2>
+        <p>Heb je wel op tijd betaald, maar ontdek je later dat je btw-aangifte niet klopt?</p>
+        <p>Dan gaat het om een correctie van je aangifte.</p>
+        <h3>Correctie van maximaal €1.000</h3>
+        <p>Een btw-correctie van maximaal €1.000 kun je doorgaans verwerken in je eerstvolgende reguliere btw-aangifte.</p>
+        <h3>Correctie van meer dan €1.000</h3>
+        <p>Bij een correctie van meer dan €1.000 moet je een suppletie btw indienen.</p>
+        <p>Sinds 1 januari 2025 geldt dat je een ontdekte onjuistheid binnen acht weken moet corrigeren wanneer de suppletieplicht van toepassing is.</p>
+        <p>Wacht niet totdat de Belastingdienst de fout zelf ontdekt.</p>
+        <p>Bij correcties kunnen andere boete- en renteregels gelden dan bij het simpelweg te laat betalen van een correct aangegeven bedrag.</p>
 
-        <h2>Voorkomen is beter dan genezen: tips voor tijdige btw-betaling</h2>
-        <p>Om boetes en onnodige stress te vermijden, is een goede planning essentieel:</p>
-        <ul>
-          <li><strong>Reserveer tijdig:</strong> Zet een deel van je omzet direct apart voor de btw. Een <Link href="/blogs/zakelijke-rekening-zzp" className="text-warm-orange hover:underline">zakelijke rekening</Link> met verschillende potjes of reserveringsfuncties kan hierbij helpen.</li>
-          <li><strong>Houd je administratie bij:</strong> Zorg ervoor dat je facturen en bonnetjes altijd up-to-date zijn, zodat je snel en accuraat aangifte kunt doen.</li>
-          <li><strong>Gebruik een facturatieprogramma:</strong> Tools zoals FactuurBaas helpen je niet alleen met het maken van facturen, maar geven je ook overzicht van je inkomsten en uitgaven, wat de btw-aangifte vereenvoudigt.</li>
-          <li><strong>Stel herinneringen in:</strong> Markeer de deadlines voor btw-aangifte en -betaling in je agenda of gebruik automatische herinneringen.</li>
-          <li><strong>Neem contact op bij problemen:</strong> Als je voorziet dat je de btw niet op tijd kunt betalen, neem dan direct contact op met de Belastingdienst om een betalingsregeling te bespreken.</li>
-        </ul>
+        <h2>Hoe voorkom je dat je btw te laat betaalt?</h2>
+        <h3>Zet btw apart</h3>
+        <p>Houd de btw die je van klanten ontvangt afzonderlijk bij.</p>
+        <p>Houd ook rekening met btw die je op zakelijke kosten mag aftrekken.</p>
+        <h3>Plan de deadlines</h3>
+        <p>Zet de uiterste aangifte- en betaaldata in je agenda.</p>
+        <p>Plan je betaling enkele dagen vóór de deadline.</p>
+        <h3>Controleer het betalingskenmerk</h3>
+        <p>Gebruik het betalingskenmerk dat bij de betreffende aangifte hoort.</p>
+        <p>Een onjuist betalingskenmerk kan problemen opleveren bij het verwerken van je betaling.</p>
+        <h3>Houd je facturen en bonnetjes bij</h3>
+        <p>Bewaar je uitgaande facturen en zakelijke inkoopfacturen overzichtelijk.</p>
+        <p>Met FactuurBaas kun je gratis facturen maken en als PDF downloaden. Je btw-aangifte en betaling aan de Belastingdienst regel je afzonderlijk.</p>
+        <h3>Gebruik de Btw-Alert app</h3>
+        <p>De Belastingdienst biedt de Btw-Alert app waarmee je herinneringen voor aangifte en betaling kunt instellen.</p>
 
-        <h2>Conclusie</h2>
-        <p>Te laat btw betalen kan leiden tot vervelende boetes en extra kosten. Als zzp&apos;er is het daarom cruciaal om op de hoogte te zijn van de deadlines en de mogelijke gevolgen. Door je administratie goed bij te houden, tijdig te reserveren en proactief te handelen bij problemen, kun je veel narigheid voorkomen. FactuurBaas helpt je graag bij het stroomlijnen van je facturatie, zodat je meer tijd overhoudt voor je onderneming en minder zorgen hebt over je administratie.</p>
+        <h2>Veelgestelde vragen</h2>
+        <h3>Wat gebeurt er als ik één dag te laat btw betaal?</h3>
+        <p>Je betaling is officieel te laat. Maar als je binnen de coulancetermijn van zeven kalenderdagen betaalt en je vorige aangifte op tijd en volledig hebt betaald, krijg je normaal gesproken geen betaalverzuimboete.</p>
+        <h3>Hoeveel dagen mag je te laat zijn met btw betalen?</h3>
+        <p>Er geldt een coulancetermijn van zeven kalenderdagen voor de beoordeling van een mogelijke boete. Dit verandert de officiële betaaldatum niet.</p>
+        <h3>Hoeveel is de boete voor te laat btw betalen?</h3>
+        <p>De standaard betaalverzuimboete is 3% van het niet of te laat betaalde bedrag, met een minimum van €50 en een maximum van €6.709.</p>
+        <h3>Wat is de boete voor te laat btw-aangifte doen?</h3>
+        <p>De standaard aangifteverzuimboete bedraagt €82 als je aangifte niet binnen de wettelijke termijn en de daaropvolgende coulancetermijn binnenkomt.</p>
+        <h3>Wat als ik mijn btw niet kan betalen?</h3>
+        <p>Dien je aangifte op tijd in en onderzoek zo snel mogelijk of je een betalingsregeling of uitstel van betaling kunt aanvragen.</p>
+        <h3>Kan ik btw later alsnog betalen?</h3>
+        <p>Ja. Betaal de openstaande btw zo snel mogelijk met het juiste betalingskenmerk. Afhankelijk van je situatie kun je wel een boete of aanvullende kosten krijgen.</p>
+        <h3>Moet ik btw-aangifte doen als ik niets heb verdiend?</h3>
+        <p>Als je verplicht bent btw-aangifte te doen, moet je doorgaans ook aangifte doen wanneer je geen omzet hebt gehad. Er zijn uitzonderingen, bijvoorbeeld voor bepaalde ondernemers die zijn vrijgesteld van periodieke btw-aangifte.</p>
+
+        <h2>Conclusie: btw te laat betaald?</h2>
+        <p>Heb je de btw-deadline gemist, controleer dan direct je aangifte en betaal het openstaande bedrag zo snel mogelijk.</p>
+        <p>Binnen zeven kalenderdagen kan een betaalverzuimboete onder voorwaarden achterwege blijven. Daarna geldt doorgaans een boete van 3%, met een minimum van €50.</p>
+        <p>Kun je niet betalen, wacht dan niet af maar onderzoek je mogelijkheden bij de Belastingdienst.</p>
+        <p>Een overzichtelijke factuuradministratie helpt om toekomstige aangiften voor te bereiden.</p>
+        <p>Met FactuurBaas kun je gratis professionele facturen maken en als PDF downloaden, zonder account.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
     ),
   },
   {
     slug: 'hoeveel-geld-apart-belasting-zzper',
     relatedSlugs: ['btw-factuur-zzp', 'btw-te-laat-betaald', 'zakelijke-rekening-zzp', 'factureren-startende-zzper'],
-    title: 'Hoeveel geld moet je apart zetten voor belasting als zzp\'er?',
-    excerpt: 'Richtlijnen voor btw en inkomstenbelasting: hoeveel reserveren als zzp\'er? Inclusief de stelregel dat je in 2026 tot € 30.582 winst geen netto inkomstenbelasting betaalt.',
-    keywords: 'geld apart zetten belasting zzp, belasting reserveren zzp, btw apart zetten zzp, inkomstenbelasting zzp, belasting zzp berekenen, belastingpot zzp, geen belasting tot 30582 zzp 2026',
+    metaTitle: 'Hoeveel belasting apart zetten als zzp\'er? (2026)',
+    title: 'Hoeveel belasting moet je apart zetten als zzp\'er?',
+    breadcrumbLabel: 'Hoeveel belasting apart zetten',
+    excerpt: 'Hoeveel geld moet je als zzp\'er apart zetten voor belasting? Bekijk voorbeelden voor btw, inkomstenbelasting en Zvw en bereken je maandelijkse reservering.',
+    keywords: 'hoeveel belasting apart zetten zzp, hoeveel reserveren voor inkomstenbelasting zzp, hoeveel per maand apart zetten zzp, belasting reserveren zzp',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Hoeveel%20belasting%20moet%20een%20zzper%20betalen.png',
-      alt: 'Hoeveel belasting moet een zzp\'er betalen: geld apart zetten voor btw en inkomstenbelasting.',
+      alt: 'Hoeveel belasting moet je apart zetten als zzp\'er? Uitleg over btw, inkomstenbelasting en Zvw.',
     },
     datePublished: '2026-02-06',
-    dateModified: '2026-02-06',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Hoeveel procent van mijn omzet moet ik apart zetten voor belasting als zzp\'er?', answer: 'Zet ongeveer 1/3 tot 40% van je bruto-inkomsten (factuurbedrag inclusief btw) apart. Btw: 21% direct reserveren. Daarnaast 30-40% van je nettowinst voor inkomstenbelasting en Zvw-premie.' },
-      { question: 'Moet ik btw apart zetten op een andere rekening?', answer: 'Ja. Reken standaard 21% btw over je diensten en zet dit direct op een aparte (zakelijke) rekening. Zo voorkom je dat je het uitgeeft; je draagt het per kwartaal af aan de Belastingdienst.' },
-      { question: 'Betaal ik als zzp\'er in 2026 geen inkomstenbelasting tot € 30.582?', answer: 'Met de juiste aftrekposten (zelfstandigenaftrek, startersaftrek, MKB winstvrijstelling en heffingskortingen) kan je belastbaar inkomen zo laag uitkomen dat je netto € 0 inkomstenbelasting betaalt. Let op: je betaalt nog wel Zvw-premie.' },
-      { question: 'Wat is de startersaftrek voor zzp\'ers?', answer: 'De startersaftrek is € 2.123 extra naast de zelfstandigenaftrek (€ 1.200). Je mag deze drie keer toepassen in de eerste vijf jaar van je onderneming, waardoor je minder belasting betaalt en de reservering iets lager kunt houden.' },
-      { question: 'Is het beter om te veel of te weinig te reserveren voor belasting?', answer: 'Beter te veel dan te weinig. Wat overblijft na de definitieve aanslag is een mooie bonus. Te weinig reserveren kan leiden tot onverwachte naheffingen en cashflowproblemen.' },
+      { question: 'Hoeveel procent belasting moet ik apart zetten als zzp\'er?', answer: 'Een voorlopige reservering van 30% tot 40% van je verwachte winst voor inkomstenbelasting en Zvw kan een bruikbaar startpunt zijn. Houd de btw afzonderlijk bij en bereken je persoonlijke belastingpositie.' },
+      { question: 'Hoeveel moet ik per maand apart zetten als zzp\'er?', answer: 'Dat hangt af van je winst. Bij €3.000 verwachte maandwinst betekent een reservering van 35% bijvoorbeeld €1.050 per maand, exclusief je btw-reservering.' },
+      { question: 'Moet ik 21% van iedere betaling apart zetten voor btw?', answer: 'Nee. Bij een bedrag inclusief 21% btw is de btw-component 21/121 van het totaal. Bovendien kun je mogelijk voorbelasting aftrekken.' },
+      { question: 'Betaal je als startende zzp\'er de eerste drie jaar geen belasting?', answer: 'Nee. Starters kunnen onder voorwaarden bepaalde aftrekposten toepassen, maar er bestaat geen algemene belastingvrijstelling voor de eerste drie jaar.' },
+      { question: 'Betaal ik geen inkomstenbelasting tot €30.582 winst?', answer: 'Dat kun je niet algemeen stellen. De verschuldigde belasting hangt af van je inkomen, aftrekposten, heffingskortingen en persoonlijke situatie.' },
+      { question: 'Moet ik belasting reserveren als ik gebruikmaak van de KOR?', answer: 'Bij de kleineondernemersregeling (KOR) breng je in beginsel geen btw in rekening op prestaties die onder de regeling vallen. Je kunt dan doorgaans ook geen btw op zakelijke kosten aftrekken. Je kunt nog steeds inkomstenbelasting en Zvw verschuldigd zijn.' },
+      { question: 'Hoeveel geld mag ik op mijn zakelijke rekening hebben?', answer: 'Er is geen algemene maximale saldohoogte voor een eenmanszaak. Je banksaldo is niet hetzelfde als je belastbare winst.' },
     ],
     content: (
       <>
-        <p>Als zzp&apos;er vraag je je waarschijnlijk af: <strong>hoeveel geld moet ik apart zetten voor belasting</strong>? Je hebt te maken met btw én inkomstenbelasting, en je wilt geen verrassingen aan het einde van het jaar. In dit artikel krijg je een helder overzicht: van een praktische stelregel voor je belastingpot tot het goede nieuws dat je in 2026 tot een bepaalde winst netto geen inkomstenbelasting betaalt. Zo hou je grip op je financiën en voorkom je stress.</p>
+        <p>Als zzp&apos;er ontvang je betalingen van klanten, maar niet al dat geld is vrij te besteden. Je moet rekening houden met btw, inkomstenbelasting en de inkomensafhankelijke bijdrage Zorgverzekeringswet (Zvw).</p>
+        <p><strong>Een praktische start is om de ontvangen btw apart te houden en daarnaast voorlopig 30% tot 40% van je winst te reserveren voor inkomstenbelasting en Zvw.</strong></p>
+        <p>Dat is een voorzichtige vuistregel, geen vast belastingpercentage. Afhankelijk van je inkomen, aftrekposten en persoonlijke situatie kun je uiteindelijk minder of juist meer nodig hebben.</p>
+        <p>Hieronder lees je hoe je de bedragen berekent en hoeveel je iedere maand kunt reserveren.</p>
 
-        <h2>De stelregel: hoeveel reserveren als zzp&apos;er?</h2>
-        <p>Als zzp&apos;er is het raadzaam om ongeveer <strong>1/3 tot 40%</strong> van je bruto-inkomsten (het factuurbedrag inclusief btw) apart te zetten voor belastingen. Dit dekt zowel de btw (21% op de meeste diensten) als de inkomstenbelasting. Een veilige aanpak:</p>
+        <h2>Hoeveel geld moet je als zzp&apos;er apart zetten?</h2>
+        <p>Maak onderscheid tussen twee belastingpotjes.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Belasting</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Praktische reservering</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw</td>
+                <td className="px-4 py-3">Houd de btw die je klanten in rekening brengt apart, rekening houdend met aftrekbare voorbelasting</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Inkomstenbelasting en Zvw</td>
+                <td className="px-4 py-3">Begin bijvoorbeeld met 30–40% van je verwachte winst en pas dit aan op basis van een persoonlijke berekening</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Belangrijk:</strong> bereken je inkomstenbelastingreservering over je verwachte winst, niet over je omzet inclusief btw.</p>
+        <p>Je winst is in grote lijnen je omzet exclusief btw minus je zakelijke kosten, met eventuele fiscale correcties.</p>
+
+        <h2>1. Hoeveel btw moet je apart zetten?</h2>
+        <p>Stel dat je een factuur verstuurt van €1.000 exclusief 21% btw.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Omzet exclusief btw</td>
+                <td className="px-4 py-3 text-right">€1.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw 21%</td>
+                <td className="px-4 py-3 text-right">€210</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal factuur</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€1.210</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wanneer je klant €1.210 betaalt, is €210 daarvan btw.</p>
+        <p>Het is verstandig dat bedrag apart te houden totdat je weet hoeveel btw je daadwerkelijk moet afdragen.</p>
+        <h3>Wat als je zakelijke kosten hebt?</h3>
+        <p>Stel dat je in hetzelfde kwartaal €105 aan aftrekbare btw hebt betaald over zakelijke aankopen.</p>
+        <p>Dan ziet de vereenvoudigde berekening er zo uit:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Btw op verkopen</td>
+                <td className="px-4 py-3 text-right">€210</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Aftrekbare btw op inkopen</td>
+                <td className="px-4 py-3 text-right">− €105</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Te betalen btw</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€105</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je hoeft in dit voorbeeld uiteindelijk €105 af te dragen.</p>
+        <p>Let op: de btw-aangifte wordt niet altijd gebaseerd op het moment waarop je klant betaalt. Bij het gebruikelijke factuurstelsel telt doorgaans het factuurtijdvak.</p>
+        <h3>Hoe bereken je btw uit een bedrag inclusief btw?</h3>
+        <p>Bij 21% btw gebruik je:</p>
+        <p><strong>Btw = bedrag inclusief btw × 21 / 121</strong></p>
+        <p>Bijvoorbeeld:</p>
+        <p>€1.210 × 21 / 121 = €210 btw.</p>
+        <p>Bij 9% btw gebruik je 9 / 109.</p>
+
+        <h2>2. Hoeveel reserveren voor inkomstenbelasting als zzp&apos;er?</h2>
+        <p>Naast btw betaal je als ondernemer mogelijk inkomstenbelasting over je winst.</p>
+        <p>De hoogte hangt onder andere af van:</p>
         <ul>
-          <li><strong>Btw:</strong> Reserveer 21% direct en zet dit op een aparte rekening.</li>
-          <li><strong>Inkomstenbelasting en Zvw:</strong> Daarnaast nog eens 30-40% van je nettowinst (omzet minus kosten).</li>
+          <li>Je jaarlijkse winst.</li>
+          <li>Eventuele andere inkomsten.</li>
+          <li>Je recht op ondernemersaftrek.</li>
+          <li>De mkb-winstvrijstelling.</li>
+          <li>Heffingskortingen.</li>
+          <li>Je leeftijd en persoonlijke omstandigheden.</li>
         </ul>
-        <p>Tip: zet het geld op een <Link href="/blogs/zakelijke-rekening-zzp" className="text-warm-orange hover:underline">zakelijke spaarrekening</Link>, zodat je het niet per ongeluk uitgeeft. Het is beter om te veel te reserveren dan te weinig; wat overblijft na de definitieve aanslag is een mooie bonus.</p>
+        <p>Daarom bestaat er geen percentage dat voor iedere zzp&apos;er precies klopt.</p>
+        <h3>Praktische vuistregel</h3>
+        <p>Als voorlopig uitgangspunt kun je 30% tot 40% van je verwachte winst apart zetten voor inkomstenbelasting en Zvw samen.</p>
+        <p>Bij een hogere winst of andere inkomsten kan een hogere reservering nodig zijn.</p>
+        <p>Bij een lagere winst en toepasselijke aftrekposten kan je uiteindelijke belasting lager uitvallen.</p>
+        <p>Gebruik een persoonlijke belastingberekening om de reservering te verfijnen.</p>
 
-        <CtaButton />
+        <h2>3. Hoeveel belasting per maand apart zetten als zzp&apos;er?</h2>
+        <p>Stel dat je gemiddeld €4.000 per maand omzet hebt, exclusief btw.</p>
+        <p>Je zakelijke kosten bedragen €1.000 per maand, exclusief btw.</p>
+        <p>Dan ziet een eenvoudige berekening er zo uit:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Onderdeel</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Per maand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Omzet excl. btw</td>
+                <td className="px-4 py-3 text-right">€4.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Zakelijke kosten excl. btw</td>
+                <td className="px-4 py-3 text-right">− €1.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Verwachte winst</td>
+                <td className="px-4 py-3 text-right">€3.000</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Reservering 30%</td>
+                <td className="px-4 py-3 text-right">€900</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Reservering 35%</td>
+                <td className="px-4 py-3 text-right">€1.050</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Reservering 40%</td>
+                <td className="px-4 py-3 text-right">€1.200</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij een reservering van 35% zet je dus €1.050 per maand apart voor inkomstenbelasting en Zvw.</p>
+        <p>De btw houd je afzonderlijk bij.</p>
+        <p>Dit is een budgetvoorbeeld, geen berekening van je werkelijke belastingaanslag.</p>
 
-        <h2>Btw apart zetten: 21% direct reserveren</h2>
-        <p>De btw die je op je facturen berekent, is geen inkomsten voor jou — het geld gaat uiteindelijk naar de Belastingdienst. Reken standaard <strong>21% btw</strong> over je diensten (of 9% indien van toepassing) en zet dit direct apart. Draag het per kwartaal af via je btw-aangifte. Met een factuurtool zoals FactuurBaas zie je in één oogopslag wat je aan btw hebt gerekend, wat het reserveren een stuk makkelijker maakt.</p>
+        <h2>4. Hoeveel moet je reserveren bij verschillende winsten?</h2>
+        <p>Onderstaande bedragen zijn gebaseerd op een voorlopige reservering van 35% van de winst.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Maandelijkse winst</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Reservering per maand</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['€1.500', '€525'],
+                ['€2.000', '€700'],
+                ['€3.000', '€1.050'],
+                ['€4.000', '€1.400'],
+                ['€5.000', '€1.750'],
+                ['€6.000', '€2.100'],
+              ].map(([winst, reservering]) => (
+                <tr key={winst} className="border-b border-slate-100 last:border-0">
+                  <td className="px-4 py-3">{winst}</td>
+                  <td className="px-4 py-3 text-right">{reservering}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>De percentages zijn bedoeld voor het plannen van je geld.</p>
+        <p>Ze zeggen niet hoeveel inkomstenbelasting je daadwerkelijk verschuldigd bent.</p>
 
-        <h2>Inkomstenbelasting en Zvw: 30-40% van je nettowinst</h2>
-        <p>Naast btw betaal je inkomstenbelasting en een premie voor de zorgverzekeringswet (Zvw) over je winst. Hoeveel je precies moet reserveren, hangt af van je winstniveau:</p>
-        <ul>
-          <li><strong>Winst tot € 80.000:</strong> Reserveer ongeveer 30% tot 35% van je nettowinst.</li>
-          <li><strong>Winst boven € 80.000:</strong> Verhoog de reservering naar 40% of meer; je valt dan in een hogere belastingschijf.</li>
-        </ul>
-        <p><strong>Startersaftrek:</strong> In de eerste 3 jaar van je onderneming kun je gebruikmaken van de startersaftrek. Daardoor betaal je minder belasting en kun je de reservering iets lager houden. Meer daarover lees je hieronder.</p>
+        <h2>5. Welke aftrekposten gelden voor zzp&apos;ers in 2026?</h2>
+        <p>De inkomstenbelasting wordt niet uitsluitend bepaald door je winst.</p>
+        <p>Voor ondernemers kunnen fiscale aftrekposten gelden.</p>
+        <h3>Zelfstandigenaftrek 2026</h3>
+        <p>De zelfstandigenaftrek bedraagt in 2026 €1.200.</p>
+        <p>Je moet onder andere ondernemer zijn voor de inkomstenbelasting en voldoen aan het urencriterium.</p>
+        <h3>Startersaftrek 2026</h3>
+        <p>De startersaftrek bedraagt in 2026 €2.123.</p>
+        <p>Deze is aanvullend op de zelfstandigenaftrek en geldt alleen wanneer je aan de voorwaarden voldoet.</p>
+        <p>Je kunt de startersaftrek maximaal drie keer toepassen binnen de relevante periode van vijf jaar.</p>
+        <p>Je hebt er dus niet automatisch gedurende je eerste drie ondernemingsjaren recht op.</p>
+        <h3>Mkb-winstvrijstelling 2026</h3>
+        <p>De mkb-winstvrijstelling bedraagt in 2026 12,7% van de winst na ondernemersaftrek.</p>
+        <p>Hiervoor hoef je niet aan het urencriterium te voldoen, maar je moet wel ondernemer zijn voor de inkomstenbelasting.</p>
+        <h3>Heffingskortingen</h3>
+        <p>De algemene heffingskorting en arbeidskorting kunnen je verschuldigde inkomstenbelasting verlagen.</p>
+        <p>De hoogte is afhankelijk van je persoonlijke situatie en inkomen.</p>
+        <p><strong>Er bestaat geen algemene regel dat iedere zzp&apos;er tot €30.582 winst in 2026 geen inkomstenbelasting betaalt.</strong></p>
 
-        <h2>Geen netto inkomstenbelasting tot € 30.582 winst in 2026</h2>
-        <p>Je leest het goed: als zzp&apos;er hoef je in 2026 over een winst tot € 30.582 <strong>geen netto inkomstenbelasting</strong> te betalen — mits je aan bepaalde voorwaarden voldoet. Je betaalt dan wel inkomstenbelasting, maar krijgt heffingskortingen terug waardoor je op nul uitkomt. Let op: de Zvw-premie betaal je nog steeds. Hieronder zie je welke aftrekposten en kortingen hiervoor zorgen.</p>
+        <h2>6. Vergeet de Zvw-bijdrage niet</h2>
+        <p>Naast inkomstenbelasting kun je als zzp&apos;er een inkomensafhankelijke bijdrage Zorgverzekeringswet verschuldigd zijn.</p>
+        <p>Deze bijdrage staat los van je gewone zorgverzekeringspremie.</p>
+        <p>De berekening is afhankelijk van je bijdrage-inkomen en het toepasselijke maximum.</p>
+        <p>Daarom is het verstandig om de Zvw mee te nemen wanneer je berekent hoeveel geld je apart moet zetten.</p>
+        <p>Ontvang je ook loon uit dienstverband? Dan kan dat invloed hebben op de uiteindelijke berekening.</p>
 
-        <h3>Zelfstandigenaftrek en startersaftrek</h3>
-        <p>De <strong>zelfstandigenaftrek</strong> is een aftrekpost voor zzp&apos;ers. Je komt ervoor in aanmerking als je geld verdient aan je onderneming en voldoet aan het urencriterium. In 2026 bedraagt deze € 1.200. Als starter mag je daar nog <strong>€ 2.123 startersaftrek</strong> bij optellen. Deze startersaftrek mag je drie keer toepassen in de eerste vijf jaar. De startersaftrek en zelfstandigenaftrek gaan altijd samen; het loont om goed te bekijken of toepassen in een bepaald jaar het meeste voordeel oplevert.</p>
+        <h2>7. Hoeveel geld mag je op je zakelijke rekening hebben?</h2>
+        <p>Er bestaat geen algemene maximale hoeveelheid geld die je als eenmanszaak op je zakelijke rekening mag hebben.</p>
+        <p>Je mag dus geld reserveren voor belastingen, toekomstige investeringen en onverwachte kosten.</p>
+        <p><strong>Het saldo van je zakelijke rekening is niet hetzelfde als je belastbare winst.</strong></p>
+        <p>Je betaalt als ondernemer inkomstenbelasting op basis van je fiscale resultaat en persoonlijke situatie, niet simpelweg over het bedrag dat op je zakelijke rekening staat.</p>
+        <p>Voor ondernemersvermogen en privévermogen kunnen wel verschillende fiscale regels gelden.</p>
+        <p>Het is daarom verstandig om zakelijke en privétransacties duidelijk te administreren.</p>
 
-        <h3>MKB-winstvrijstelling</h3>
-        <p>De <strong>MKB-winstvrijstelling</strong> is een directe aftrekpost op je winst. In 2026 bedraagt deze 12,7%, ongeacht de hoogte van je winst. Bij een winst van € 30.582 komt dat neer op € 3.462. Voor de MKB-winstvrijstelling hoef je niet aan het urencriterium te voldoen.</p>
+        <h2>8. Zo maak je een belastingpotje als zzp&apos;er</h2>
+        <p>Een praktische aanpak bestaat uit vier stappen.</p>
+        <h3>Stap 1: Maak twee reserveringen</h3>
+        <p>Houd btw gescheiden van je reservering voor inkomstenbelasting en Zvw.</p>
+        <h3>Stap 2: Reserveer zodra geld binnenkomt</h3>
+        <p>Wacht niet tot het einde van het kwartaal of jaar.</p>
+        <p>Maak bijvoorbeeld na iedere klantbetaling direct geld over naar je belastingpotjes.</p>
+        <h3>Stap 3: Bereken ieder kwartaal opnieuw</h3>
+        <p>Controleer of je werkelijke winst overeenkomt met je verwachting.</p>
+        <p>Stijgt je winst? Dan moet je mogelijk meer reserveren.</p>
+        <h3>Stap 4: Gebruik je voorlopige aanslag</h3>
+        <p>Met een voorlopige aanslag inkomstenbelasting kun je gedurende het jaar alvast betalen.</p>
+        <p>Dat kan helpen om een grote betaling achteraf te voorkomen.</p>
+        <p>Een voorlopige aanslag is wel gebaseerd op een schatting. Controleer daarom of deze nog aansluit op je actuele inkomen.</p>
 
-        <h3>Heffingskortingen: algemene heffingskorting en arbeidskorting</h3>
-        <p>Heffingskortingen zijn directe kortingen op het te betalen belastingbedrag. De belangrijkste voor zzp&apos;ers zijn:</p>
-        <ul>
-          <li><strong>Algemene heffingskorting:</strong> Iedere belastingplichtige heeft hier recht op. Tot de AOW-leeftijd en zonder andere inkomsten is dat in 2026 € 3.115 (tot een belastbaar inkomen uit werk en woning van € 29.736).</li>
-          <li><strong>Arbeidskorting:</strong> Over inkomen uit je winst uit onderneming heb je recht op arbeidskorting. Bij een winst van € 30.582 bedraagt deze € 5.392.</li>
-        </ul>
-
-        <h2>Rekenvoorbeeld: geen netto belasting bij € 30.582 winst</h2>
-        <p>Stel, je bent startende zzp&apos;er met een te verwachten winst van € 30.582. Je hebt geen andere inkomsten en voldoet aan het urencriterium. Dan kan het er zo uitzien:</p>
-        <p><strong>Stap 1 – Belastbare inkomsten:</strong></p>
-        <ul>
-          <li>Winst uit onderneming: € 30.582</li>
-          <li>Min zelfstandigenaftrek: € 1.200</li>
-          <li>Min startersaftrek: € 2.123</li>
-          <li>Winst voor MKB-winstvrijstelling: € 27.259</li>
-          <li>Min MKB-winstvrijstelling (12,7%): € 3.462</li>
-          <li><strong>Belastbare inkomsten: € 23.797</strong></li>
-        </ul>
-        <p><strong>Stap 2 – Te betalen belasting:</strong></p>
-        <ul>
-          <li>Te betalen belasting (35,75% over € 23.797): € 8.507</li>
-          <li>Min algemene heffingskorting: € 3.115</li>
-          <li>Min arbeidskorting: € 5.392</li>
-          <li><strong>Totaal: € 0</strong></li>
-        </ul>
-        <p><strong>Let op:</strong> De Zvw-premie betaal je nog wél. In 2026 is dat 4,85% over € 23.797 = circa € 1.154. Houd dus ook dit bedrag apart.</p>
-
-        <CtaButton />
-
-        <h2>Hoe bereken je hoeveel je moet reserveren?</h2>
-        <p>Voor het berekenen van je inkomstenbelasting heb je een jaarrekening en balans nodig. Die kun je zelf maken of laten maken. Een boekhoudprogramma helpt je met de berekening. Maar om te beginnen: houd je inkomsten en uitgaven goed bij. Met FactuurBaas heb je overzicht over je gefactureerde bedragen, zodat je makkelijker kunt inschatten hoeveel je per maand of kwartaal moet reserveren.</p>
-
-        <h2>Praktische tips: je belastingpot goed beheren</h2>
-        <ul>
-          <li><strong>Zakelijke spaarrekening:</strong> Open een aparte rekening voor je belastingpot. Zo raak je het niet kwijt tussen je privé-uitgaven.</li>
-          <li><strong>Automatisch overschrijven:</strong> Zet direct na elke binnenkomende betaling een vast percentage (bijv. 35%) naar je belastingrekening.</li>
-          <li><strong>Btw apart:</strong> Reken de 21% btw direct mee en zet deze op een eigen pot; je draagt het per kwartaal af.</li>
-          <li><strong>Liever te veel dan te weinig:</strong> Een overschot na de definitieve aanslag is een leuke meevaller. Een tekort leidt tot stress en eventueel boetes.</li>
-        </ul>
-
-        <h2>Conclusie</h2>
-        <p><strong>Hoeveel geld apart zetten voor belasting als zzp&apos;er?</strong> Reken met 1/3 tot 40% van je bruto-inkomsten: 21% voor btw en 30-40% van je nettowinst voor inkomstenbelasting en Zvw. Gebruik een zakelijke spaarrekening en reserveer liever te veel dan te weinig. Als startende zzp&apos;er met een winst tot circa € 30.582 kun je in 2026 met de juiste aftrekposten netto € 0 inkomstenbelasting betalen — maar de Zvw-premie blijft van toepassing. FactuurBaas helpt je met helder overzicht over je facturatie, zodat je gericht kunt reserveren.</p>
+        <h2>9. Veelgemaakte fouten bij belasting reserveren</h2>
+        <p><strong>Btw en winst door elkaar halen.</strong> De btw op je facturen is niet automatisch omzet die je vrij kunt besteden.</p>
+        <p><strong>Reserveren over omzet in plaats van winst.</strong> Voor inkomstenbelasting is je fiscale winst een belangrijk uitgangspunt.</p>
+        <p><strong>Aannemen dat starters geen belasting betalen.</strong> Ondernemersaftrek en heffingskortingen zijn afhankelijk van voorwaarden.</p>
+        <p><strong>De Zvw-bijdrage vergeten.</strong> Deze kan bovenop je inkomstenbelasting komen.</p>
+        <p><strong>Het hele banksaldo als beschikbaar geld zien.</strong> Een deel kan nodig zijn voor btw, belastingen en toekomstige kosten.</p>
+        <p><strong>Nooit je reservering aanpassen.</strong> Controleer je schatting regelmatig.</p>
 
         <h2>Veelgestelde vragen</h2>
-        <h3>Hoeveel procent van mijn omzet moet ik apart zetten?</h3>
-        <p>Zet ongeveer 1/3 tot 40% van je bruto-inkomsten apart. Btw: 21% direct. Daarnaast 30-40% van je nettowinst voor inkomstenbelasting en Zvw.</p>
-        <h3>Betaal ik geen belasting tot € 30.582 winst?</h3>
-        <p>Met de juiste aftrekposten en heffingskortingen kan je netto te betalen inkomstenbelasting op nul uitkomen. Je betaalt nog wel Zvw-premie.</p>
-        <h3>Wat is de startersaftrek?</h3>
-        <p>De startersaftrek is € 2.123 extra naast de zelfstandigenaftrek. Je mag deze drie keer toepassen in de eerste vijf jaar van je onderneming.</p>
+        <h3>Hoeveel procent belasting moet ik apart zetten als zzp&apos;er?</h3>
+        <p>Een voorlopige reservering van 30% tot 40% van je verwachte winst voor inkomstenbelasting en Zvw kan een bruikbaar startpunt zijn. Houd de btw afzonderlijk bij en bereken je persoonlijke belastingpositie.</p>
+        <h3>Hoeveel moet ik per maand apart zetten als zzp&apos;er?</h3>
+        <p>Dat hangt af van je winst. Bij €3.000 verwachte maandwinst betekent een reservering van 35% bijvoorbeeld €1.050 per maand, exclusief je btw-reservering.</p>
+        <h3>Moet ik 21% van iedere betaling apart zetten voor btw?</h3>
+        <p>Nee. Bij een bedrag inclusief 21% btw is de btw-component 21/121 van het totaal. Bovendien kun je mogelijk voorbelasting aftrekken.</p>
+        <h3>Betaal je als startende zzp&apos;er de eerste drie jaar geen belasting?</h3>
+        <p>Nee. Starters kunnen onder voorwaarden bepaalde aftrekposten toepassen, maar er bestaat geen algemene belastingvrijstelling voor de eerste drie jaar.</p>
+        <h3>Betaal ik geen inkomstenbelasting tot €30.582 winst?</h3>
+        <p>Dat kun je niet algemeen stellen. De verschuldigde belasting hangt af van je inkomen, aftrekposten, heffingskortingen en persoonlijke situatie.</p>
+        <h3>Moet ik belasting reserveren als ik gebruikmaak van de KOR?</h3>
+        <p>Bij de kleineondernemersregeling (KOR) breng je in beginsel geen btw in rekening op prestaties die onder de regeling vallen. Je kunt dan doorgaans ook geen btw op zakelijke kosten aftrekken. Je kunt nog steeds inkomstenbelasting en Zvw verschuldigd zijn.</p>
+        <h3>Hoeveel geld mag ik op mijn zakelijke rekening hebben?</h3>
+        <p>Er is geen algemene maximale saldohoogte voor een eenmanszaak. Je banksaldo is niet hetzelfde als je belastbare winst.</p>
+
+        <h2>Conclusie: hoeveel belasting apart zetten als zzp&apos;er?</h2>
+        <p>Wil je voorkomen dat je onverwacht geld tekortkomt bij je belastingaangifte?</p>
+        <p>Houd dan de btw afzonderlijk bij en reserveer daarnaast voorlopig een deel van je winst voor inkomstenbelasting en Zvw.</p>
+        <p>Een startpunt van 30% tot 40% van de verwachte winst kan helpen, maar een persoonlijke berekening geeft meer zekerheid.</p>
+        <p>Met FactuurBaas kun je gratis facturen maken en als PDF downloaden, zodat je je gefactureerde omzet overzichtelijk kunt vastleggen in je administratie.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
     ),
   },
@@ -6262,92 +9485,318 @@ export const articles = [
   {
     slug: 'factuur-niet-betaald-wat-mag-je-doen',
     relatedSlugs: ['sneller-betalen-factuur', 'factuur-fouten-voorkomen', 'factuur-maken-zzp', 'factuurbeheer-overzicht'],
-    title: 'Factuur niet betaald: wat mag je doen?',
-    excerpt: 'Een klant betaalt niet? Ontdek het stappenplan: van vriendelijke herinnering en aanmaning tot incassobureau en gerechtelijke procedure. Plus wettelijke rente, btw terugvragen en verjaring.',
-    keywords: 'factuur niet betaald, klant betaalt niet, aanmaning factuur, incassokosten factuur, wettelijke rente factuur, wanbetaling, incassobureau factuur',
+    metaTitle: 'Factuur niet betaald? Dit kun je doen (stappenplan)',
+    title: 'Factuur niet betaald? Dit kun je doen',
+    breadcrumbLabel: 'Factuur niet betaald',
+    excerpt: 'Je factuur wordt niet betaald? Lees wanneer je een herinnering of aanmaning stuurt, welke incassokosten zijn toegestaan en hoe je je geld krijgt.',
+    keywords: 'factuur niet betaald, factuur wordt niet betaald, factuur nog niet betaald, factuur niet betaald wat nu, zzp factuur niet betaald',
     image: {
       url: 'https://iemgpccgdlwpsrsjuumo.supabase.co/storage/v1/object/public/Blogs/Mijn%20factuur%20wordt%20niet%20betaald.png',
-      alt: 'Factuur niet betaald: wat mag je doen? Stappenplan bij wanbetaling.',
+      alt: 'Factuur niet betaald? Dit kun je doen: stappenplan voor herinnering, aanmaning en incasso.',
     },
     datePublished: '2026-02-06',
-    dateModified: '2026-02-06',
+    dateModified: '2026-10-08',
     faq: [
-      { question: 'Wat moet ik doen als een klant niet betaalt?', answer: 'Begin met een vriendelijke herinnering (mail of brief), bel de klant en vraag waarom er niet betaald is. Stuur daarna een formele aanmaning (bij voorkeur aangetekend) met een termijn van 14 dagen. Bij consumenten is een kosteloze aanmaning verplicht voordat je incassokosten mag rekenen.' },
-      { question: 'Mag ik incassokosten en wettelijke rente rekenen bij te late betaling?', answer: 'Ja. Na het versturen van de aanmaning mag je wettelijke rente en incassokosten in rekening brengen. Bij particulieren moet je eerst een WIK-brief (14-dagenbrief) versturen voordat je incassokosten mag rekenen.' },
-      { question: 'Hoelang duurt de verjaring van een factuur?', answer: 'Bij consumenten verjaart een factuur na 2 jaar (bij diensten en reizen 5 jaar). Bij zakelijke klanten is dat 5 jaar na afloop van de betalingstermijn. Door op tijd een herinnering te sturen, stuit je de verjaring — de termijn begint dan opnieuw.' },
-      { question: 'Kan ik btw terugvragen als een factuur niet betaald wordt?', answer: 'Ja. Als een factuur definitief oninbaar is, kun je na een jaar de btw als oninbaar terugvragen bij de Belastingdienst.' },
-      { question: 'Wanneer moet ik een incassobureau of deurwaarder inschakelen?', answer: 'Als het minnelijk traject (herinnering, belcontact, aanmaning) niets oplevert. Een incassobureau stuurt namens jou brieven; een deurwaarder kan een gerechtelijke procedure starten en dwangmiddelen gebruiken. Bij hoge bedragen of complexe zaken is een incasso-advocaat verstandig.' },
+      { question: 'Wat moet ik doen als mijn factuur niet betaald wordt?', answer: 'Controleer eerst de vervaldatum en factuurgegevens. Stuur daarna een vriendelijke herinnering en neem contact op met je klant. Blijft betaling uit, dan kun je een aanmaning en verdere incassostappen overwegen.' },
+      { question: 'Mag ik meteen een incassobureau inschakelen?', answer: 'Je kunt een incassobureau inschakelen, maar dat betekent niet dat alle kosten direct op de klant mogen worden verhaald. Vooral bij consumenten moet je eerst aan specifieke wettelijke eisen voldoen.' },
+      { question: 'Moet ik altijd eerst een herinnering sturen?', answer: 'Bij consumenten moet je voordat je incassokosten rekent een correcte kosteloze veertiendagenaanmaning sturen. Bij zakelijke klanten geldt die verplichting niet op dezelfde manier.' },
+      { question: 'Mag ik een onbetaalde factuur verhogen?', answer: 'Je mag onder voorwaarden wettelijke rente en incassokosten vorderen. Je mag niet zomaar zelf een willekeurige toeslag bepalen.' },
+      { question: 'Wat als een bedrijf mijn factuur niet betaalt?', answer: 'Controleer de gemaakte afspraken, stuur een herinnering of aanmaning en beoordeel of handelsrente en incassokosten verschuldigd zijn. Bij aanhoudende wanbetaling kun je professionele incassohulp overwegen.' },
+      { question: 'Wat als mijn opdrachtgever mijn factuur betwist?', answer: 'Vraag waarom de factuur wordt betwist en controleer de overeenkomst, werkzaamheden en bewijsstukken. Een inhoudelijk geschil kan invloed hebben op de beste vervolgstappen.' },
+      { question: 'Kan ik de btw van een onbetaalde factuur terugvragen?', answer: 'Bij toepassing van het factuurstelsel kun je onder voorwaarden btw terugvragen zodra de vordering oninbaar is. Daarvoor gelden specifieke regels en termijnen.' },
+      { question: 'Hoe lang blijft een onbetaalde factuur geldig?', answer: 'Dat hangt af van de overeenkomst. Veel zakelijke vorderingen verjaren na vijf jaar, terwijl voor de koopprijs bij consumentenkoop vaak twee jaar geldt.' },
     ],
     content: (
       <>
-        <p>Een factuur die maanden openstaat: het overkomt bijna elke ondernemer. Voordat je in paniek raakt of juist alles laat sudderen — er is een helder stappenplan. In dit artikel lees je <strong>wat je mag doen als een factuur niet betaald wordt</strong>: van een vriendelijke herinnering tot het inschakelen van een incassobureau of rechter. Zo handel je kordaat én binnen de wet.</p>
+        <p>Je hebt je werkzaamheden uitgevoerd, de factuur verstuurd en de betalingstermijn is voorbij. Maar het geld staat nog steeds niet op je rekening.</p>
+        <p><strong>Wat kun je doen als je factuur niet betaald wordt?</strong></p>
+        <p>Begin met controleren of de betaling daadwerkelijk te laat is. Stuur vervolgens een vriendelijke herinnering en neem contact op met je klant. Blijft betaling uit, dan kun je een formele aanmaning sturen en eventueel incassokosten of wettelijke rente in rekening brengen.</p>
+        <p>Welke stappen je mag zetten, hangt onder andere af van de vraag of je klant een bedrijf of particulier is.</p>
 
-        <h2>Stap 1: Minnelijk traject — zelf actie ondernemen</h2>
-        <p>De meeste betalingsachterstanden worden opgelost zonder juridische stappen. Begin daarom altijd met persoonlijk contact en duidelijke communicatie.</p>
+        <h2>Factuur niet betaald: het stappenplan</h2>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[420px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Stap</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Wat doe je?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">1</td>
+                <td className="px-4 py-3">Controleer de betalingstermijn en factuur</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">2</td>
+                <td className="px-4 py-3">Stuur een vriendelijke betalingsherinnering</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">3</td>
+                <td className="px-4 py-3">Neem contact op met de klant</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">4</td>
+                <td className="px-4 py-3">Stuur zo nodig een formele aanmaning</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">5</td>
+                <td className="px-4 py-3">Beoordeel wettelijke rente en incassokosten</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">6</td>
+                <td className="px-4 py-3">Overweeg een betalingsregeling of incassobureau</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je hoeft niet meteen een incassobureau in te schakelen. Veel betalingsachterstanden zijn op te lossen door contact op te nemen met de klant.</p>
 
-        <h3>Vriendelijke herinnering</h3>
-        <p>Stuur een herinneringsmail of -brief enkele dagen nadat de betalingstermijn verstreken is. Soms is de factuur simpelweg over het hoofd gezien. Verwijs naar de factuur, het openstaande bedrag en de betaalgegevens. Meld dat je wettelijke rente in rekening gaat brengen als er niet betaald wordt.</p>
-
-        <h3>Telefonisch contact</h3>
-        <p>Persoonlijk contact werkt vaak het best. Bel de klant op en vraag of de dienst naar wens was en of de factuur klopt. Vraag ook waarom er nog niet betaald is — zo achterhaal je of er een misverstand, een fout of een structureel probleem speelt. Maak aantekeningen van het gesprek; die kunnen later van pas komen.</p>
-
-        <h3>Aanmaning versturen</h3>
-        <p>Als de herinnering geen reactie oplevert, verstuur een <strong>formele aanmaning</strong> (ook wel sommatiebrief genoemd). Daarin verwijs je naar de levering, de factuur en eventuele eerdere contacten. Geef een betalingstermijn van 14 dagen en maak melding van incassokosten en juridische stappen bij niet-betaling.</p>
-        <p>Stuur de aanmaning per post én mail, en bewaar kopieën. Voor bewijs van ontvangst kun je hem <strong>aangetekend</strong> versturen. Voor consumenten is een kosteloze aanmaning verplicht; een betalingsherinnering telt hiervoor. Bij zakelijke klanten mag je je eigen incassoprocedure volgen.</p>
-
-        <h3>WIK-brief bij particulieren</h3>
-        <p>Factureer je aan consumenten? Dan moet je vóór het rekenen van incassokosten een <strong>14-dagen brief</strong> (Wet Incassokosten, WIK) versturen. Daarin geef je de klant 14 dagen de tijd om alsnog te betalen, voordat je extra kosten mag doorbelasten.</p>
-
-        <h2>Stap 2: Buitengerechtelijk — hulp inschakelen</h2>
-        <p>Levert het minnelijk traject niets op? Schakel dan professionele hulp in.</p>
+        <h2>1. Controleer of de factuur te laat is</h2>
+        <p>Voordat je actie onderneemt, controleer je eerst de vervaldatum.</p>
+        <p>Stel dat je een factuur op 1 oktober verstuurt met een afgesproken betalingstermijn van 14 dagen.</p>
+        <p>Dan is de vervaldatum 15 oktober.</p>
+        <p>Is er op 16 oktober nog niet betaald? Dan kun je de klant benaderen.</p>
+        <p>Controleer ook of:</p>
         <ul>
-          <li><strong>Incassobureau:</strong> Stuurt namens jou brieven en verhoogt de druk. Kan betaling niet afdwingen.</li>
-          <li><strong>Gerechtsdeurwaarder:</strong> Kan een gerechtelijke procedure starten en dwangmiddelen gebruiken (zoals beslaglegging), meestal na een vonnis van de rechter.</li>
-          <li><strong>Incasso-advocaat:</strong> Aan te raden bij hoge bedragen of complexe zaken. Kan een dagvaarding opstellen of het faillissement van de schuldenaar aanvragen.</li>
+          <li>Het factuurnummer klopt.</li>
+          <li>De factuur naar het juiste e-mailadres is gestuurd.</li>
+          <li>Het bedrag overeenkomt met de gemaakte afspraken.</li>
+          <li>De klant de factuur heeft ontvangen.</li>
+          <li>De betaling misschien al onderweg is.</li>
         </ul>
-        <p>Bij buitenlandse klanten: schakel een incassobureau in dat het land en de taal kent. Lukt dat niet, dan kun je een Europees betalingsbevelprocedure starten — de klant krijgt dan 30 dagen om te reageren.</p>
+        <h3>Wat als er geen betalingstermijn is afgesproken?</h3>
+        <p>Bij zakelijke transacties geldt doorgaans een wettelijke betalingstermijn van 30 dagen wanneer partijen geen betalingstermijn hebben afgesproken.</p>
+        <p>Voor consumenten bestaat geen algemene vaste wettelijke betalingstermijn. De termijn moet redelijk zijn en bij voorkeur vooraf duidelijk zijn overeengekomen.</p>
 
-        <CtaButton />
+        <h2>2. Stuur een vriendelijke betalingsherinnering</h2>
+        <p>Een eerste betalingsherinnering hoeft niet ingewikkeld te zijn.</p>
+        <p>Houd het bericht vriendelijk, duidelijk en kort.</p>
+        <h3>Voorbeeld betalingsherinnering</h3>
+        <p><strong>Onderwerp: Betalingsherinnering factuur 2026-018</strong></p>
+        <p>Beste [naam],</p>
+        <p>Volgens mijn administratie staat factuur 2026-018 van €605 nog open. De vervaldatum was 15 oktober.</p>
+        <p>Zou je kunnen controleren of de betaling al is verwerkt?</p>
+        <p>Mocht je inmiddels betaald hebben, dan kun je deze herinnering als niet verzonden beschouwen.</p>
+        <p>Alvast bedankt!</p>
+        <p>Met vriendelijke groet,<br />[Je naam]</p>
+        <p>Voeg de oorspronkelijke factuur opnieuw toe, zodat je klant niet hoeft te zoeken.</p>
 
-        <h2>Stap 3: Gerechtelijk traject</h2>
-        <p>Blijft betaling uit? Dan kun je via een deurwaarder een <strong>dagvaarding</strong> laten betekenen en een gerechtelijke procedure starten. Bij structurele wanbetalers kan een kort geding of dreigen met faillissement helpen. Als laatste redmiddel kun je het faillissement van de klant aanvragen. Is je klant al failliet? Dien dan zo snel mogelijk je vordering in bij de curator (indienen ter verificatie).</p>
-
-        <h2>Rente, kosten en fiscale gevolgen</h2>
-        <h3>Wettelijke rente en incassokosten</h3>
-        <p>Na de aanmaning mag je <strong>wettelijke rente</strong> en <strong>incassokosten</strong> in rekening brengen. De wettelijke rente is de rente die de wet toekent bij betalingsachterstand. Incassokosten zijn de kosten die je maakt om je geld te krijgen. Zorg dat je deze bedragen duidelijk communiceert.</p>
-
-        <h3>Btw terugvragen als oninbaar</h3>
-        <p>Bereken je btw op je factuur? Die betaal je aan de Belastingdienst, ook als de klant niet betaalt. Wordt de factuur definitief niet betaald? Dan kun je de btw als <strong>oninbaar</strong> terugvragen. Meestal kan dat na een jaar. Check de actuele regels op Belastingdienst.nl.</p>
-
-        <h3>Let op verjaring</h3>
-        <p>Facturen verjaren als je te lang niets doet. Bij <strong>consumenten</strong>: 2 jaar (bij diensten en reizen 5 jaar). Bij <strong>zakelijke klanten</strong>: 5 jaar na afloop van de betalingstermijn. Herinner je de klant vóór het einde van de verjaringstermijn aan de factuur? Dan <strong>stuit</strong> je de verjaring — de termijn begint opnieuw. Handel dus tijdig.</p>
-
-        <h2>Betalingsregelingen en juridische middelen</h2>
-        <p>Is de klant tijdelijk krap bij kas? Onderzoek eerst of betaling met kort uitstel mogelijk is. Is dat niet het geval, spreek dan een <strong>betalingsregeling</strong> af. Zet deze op papier en spreek af dat de regeling stopt als de klant niet op de afgesproken momenten betaalt.</p>
-        <p>Bij geleverde <strong>producten of goederen</strong> kun je soms je schade beperken:</p>
+        <h2>3. Neem contact op met de klant</h2>
+        <p>Reageert de klant niet op je herinnering?</p>
+        <p>Dan kan persoonlijk contact helpen.</p>
+        <p>Vraag bijvoorbeeld:</p>
         <ul>
-          <li><strong>Eigendomsvoorbehoud:</strong> Staat dit in je algemene voorwaarden? Dan blijf je eigenaar tot er betaald is. Je kunt de goederen terugvorderen zolang de klant niet betaalt.</li>
-          <li><strong>Recht van reclame:</strong> Hiermee kun je geleverde goederen terugvorderen bij niet-betaling, ook bij surseance of faillissement.</li>
-          <li><strong>Verrekening:</strong> Koop je ook bij je klant? Dan kun je onder voorwaarden je schuld verrekenen met het bedrag dat zij jou nog verschuldigd zijn.</li>
+          <li>Is de factuur goed ontvangen?</li>
+          <li>Kloppen alle gegevens?</li>
+          <li>Is er een probleem met de geleverde werkzaamheden?</li>
+          <li>Wanneer kan de betaling worden verwacht?</li>
         </ul>
+        <p>Probeer een concrete betaaldatum af te spreken.</p>
+        <p>Bevestig die afspraak vervolgens per e-mail, zodat je later kunt terugvinden wat er is besproken.</p>
 
-        <h2>Risico&apos;s van wanbetaling voorkomen</h2>
-        <p>Voorkomen is beter dan genezen. Sluit een kredietverzekering af, check de financiële situatie van zakelijke klanten voor grote orders, en zet in je algemene voorwaarden dat bij niet-tijdig betalen geen volgende leveringen plaatsvinden. Een heldere factuur met alle verplichte gegevens en een duidelijke betalingstermijn helpt ook — zo voorkom je misverstanden. Lees ook <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">hoe je je factuur sneller betaald krijgt</Link> en <Link href="/blogs/factuur-fouten-voorkomen" className="text-warm-orange hover:underline">veelgemaakte fouten op facturen</Link>.</p>
+        <h2>4. Stuur een formele aanmaning</h2>
+        <p>Blijft betaling uit? Dan kun je een formele aanmaning sturen.</p>
+        <p>Een aanmaning is een duidelijk verzoek om een openstaande schuld alsnog te betalen.</p>
+        <p>Hierbij is het belangrijk om onderscheid te maken tussen particuliere en zakelijke klanten.</p>
+        <h3>Particuliere klant: verplichte veertiendagenbrief</h3>
+        <p>Wil je incassokosten rekenen aan een consument?</p>
+        <p>Dan moet je eerst een correcte, kosteloze veertiendagenaanmaning sturen.</p>
+        <p>Daarin moet je de consument na ontvangst voldoende tijd geven om alsnog zonder incassokosten te betalen.</p>
+        <p>Ook moet je duidelijk vermelden welke incassokosten verschuldigd worden wanneer de betaling uitblijft.</p>
+        <p>Een gewone herinnering voldoet alleen als die aan alle wettelijke eisen voldoet.</p>
+        <h3>Zakelijke klant: andere regels</h3>
+        <p>Bij zakelijke klanten is een kosteloze veertiendagenbrief niet standaard verplicht voordat incassokosten verschuldigd kunnen worden.</p>
+        <p>De wettelijke regels en eventuele contractuele afspraken bepalen wanneer rente en kosten kunnen worden gevorderd.</p>
+        <p>Een duidelijke aanmaning is in de praktijk vaak wel verstandig.</p>
+        <h3>Voorbeeld zakelijke aanmaning</h3>
+        <p><strong>Onderwerp: Aanmaning openstaande factuur 2026-018</strong></p>
+        <p>Beste [naam],</p>
+        <p>Ondanks onze eerdere herinnering hebben wij nog geen betaling ontvangen voor factuur 2026-018 van €605, met vervaldatum 15 oktober.</p>
+        <p>Wij verzoeken je het openstaande bedrag uiterlijk [datum] over te maken naar [IBAN], onder vermelding van het factuurnummer.</p>
+        <p>Als betaling uitblijft, kunnen wij verdere incassomaatregelen overwegen en, voor zover wettelijk toegestaan, rente en kosten in rekening brengen.</p>
+        <p>Met vriendelijke groet,<br />[Naam / bedrijfsnaam]</p>
+        <p><strong>Let op:</strong> dit is een voorbeeld voor een zakelijke klant en geen juridisch gecontroleerde veertiendagenbrief voor consumenten.</p>
 
-        <CtaButton />
+        <h2>5. Mag je rente en incassokosten rekenen?</h2>
+        <p>Wanneer een klant te laat betaalt, kun je onder voorwaarden wettelijke rente en incassokosten vorderen.</p>
+        <p>Maar je mag niet zomaar een willekeurig bedrag aan de factuur toevoegen.</p>
+        <h3>Wettelijke rente</h3>
+        <p>Er bestaan verschillende wettelijke rentetarieven.</p>
+        <ul>
+          <li><strong>Wettelijke handelsrente:</strong> voor daarvoor kwalificerende zakelijke handelstransacties.</li>
+          <li><strong>Wettelijke rente voor niet-handelstransacties:</strong> onder andere voor veel vorderingen op consumenten.</li>
+        </ul>
+        <p>De percentages kunnen veranderen. Controleer daarom het actuele tarief voordat je rente berekent.</p>
+        <h3>Incassokosten</h3>
+        <p>Bij consumenten gelden wettelijke staffels en een minimum van €40, mits aan de voorwaarden is voldaan.</p>
+        <p>Bij zakelijke klanten kunnen contractuele afspraken een rol spelen. Als daarvan niet geldig is afgeweken, gelden de toepasselijke wettelijke regels.</p>
+        <h3>Voorbeeld</h3>
+        <p>Een klant heeft een factuur van €1.000 niet betaald.</p>
+        <p>Dat betekent niet dat je automatisch €100 aan administratiekosten mag toevoegen.</p>
+        <p>Je moet eerst bepalen welke regels gelden, of de klant in verzuim is en welke rente en incassokosten daadwerkelijk zijn toegestaan.</p>
 
-        <h2>Conclusie</h2>
-        <p>Bij een niet-betaalde factuur is het belangrijk om kordaat en gestructureerd op te treden. Begin met een herinnering en belcontact, ga over op een formele aanmaning en schakel zo nodig een incassobureau of advocaat in. Vergeet niet: je mag wettelijke rente en incassokosten rekenen, je kunt btw als oninbaar terugvragen, en door tijdig te handelen voorkom je verjaring. Dit advies is gebaseerd op algemene Nederlandse regelgeving — voor juridische stappen raden we aan een incassospecialist of advocaat te raadplegen.</p>
+        <h2>6. Spreek eventueel een betalingsregeling af</h2>
+        <p>Soms wil een klant wel betalen, maar lukt het niet om het hele bedrag ineens over te maken.</p>
+        <p>Een betalingsregeling kan dan een praktische oplossing zijn.</p>
+        <p>Bijvoorbeeld voor een openstaande factuur van €900:</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[320px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Betaalmoment</th>
+                <th className="px-4 py-3 text-right font-semibold text-deep-blue" scope="col">Bedrag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Eerste termijn</td>
+                <td className="px-4 py-3 text-right">€300</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Tweede termijn</td>
+                <td className="px-4 py-3 text-right">€300</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Derde termijn</td>
+                <td className="px-4 py-3 text-right">€300</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-semibold text-deep-blue">Totaal</td>
+                <td className="px-4 py-3 text-right font-semibold text-deep-blue">€900</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Leg de regeling schriftelijk vast.</p>
+        <p>Vermeld daarbij de betaaldata, bedragen en wat er gebeurt als een termijn niet wordt betaald.</p>
+        <p>Een betalingsregeling hoeft niet altijd de beste oplossing te zijn. Bij twijfel over de betalingsbereidheid of financiële situatie van de klant kan professioneel advies verstandig zijn.</p>
 
-        <h2>Veelgestelde vragen</h2>
-        <h3>Hoelang wacht ik voor ik een aanmaning stuur?</h3>
-        <p>Stuur een herinnering enkele dagen na het verstrijken van de betalingstermijn. Als daarop geen reactie komt, kun je na ongeveer een week een aanmaning versturen.</p>
-        <h3>Moet ik een aanmaning aangetekend versturen?</h3>
-        <p>Het is niet verplicht, maar wel verstandig. Zo heb je bewijs van ontvangst als de klant later ontkent de brief te hebben gekregen.</p>
-        <h3>Wat als mijn klant in het buitenland zit?</h3>
-        <p>Schakel een incassobureau in dat het land kent. Je kunt ook een Europees betalingsbevelprocedure starten. Wil je dat de Nederlandse rechter beslist? Zet dit dan van tevoren in je contract.</p>
+        <h2>7. Wanneer schakel je een incassobureau in?</h2>
+        <p>Als herinneringen, contact en aanmaningen niets opleveren, kun je professionele hulp inschakelen.</p>
+        <p>Er zijn verschillende mogelijkheden.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[560px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Partij</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Wat kan deze doen?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Incassobureau</td>
+                <td className="px-4 py-3">Probeert betaling te verkrijgen zonder gerechtelijke dwangmiddelen</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Gerechtsdeurwaarder</td>
+                <td className="px-4 py-3">Kan onder meer dagvaardingen betekenen en onder voorwaarden beslag uitvoeren</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Incasso-advocaat</td>
+                <td className="px-4 py-3">Kan juridisch adviseren, onderhandelen en procedures voeren</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een incassobureau kan niet zelfstandig beslag leggen.</p>
+        <p>Voor veel dwangmaatregelen is eerst een executoriale titel nodig, zoals een rechterlijk vonnis.</p>
+        <p>Controleer bij het kiezen van een incassodienstverlener de registratie en voorwaarden.</p>
+
+        <h2>8. Wat als de klant nog steeds niet betaalt?</h2>
+        <p>Wanneer buitengerechtelijke incasso niet werkt, kun je onderzoeken of een gerechtelijke procedure zinvol is.</p>
+        <p>Daarbij spelen verschillende vragen:</p>
+        <ul>
+          <li>Hoe hoog is de openstaande vordering?</li>
+          <li>Is de vordering juridisch goed onderbouwd?</li>
+          <li>Heb je bewijs van de overeenkomst en levering?</li>
+          <li>Betwist de klant de factuur?</li>
+          <li>Is de klant waarschijnlijk in staat om te betalen?</li>
+          <li>Wegen de verwachte kosten op tegen het mogelijke resultaat?</li>
+        </ul>
+        <p>Bewaar daarom je offerte, overeenkomst, correspondentie, factuur en eventuele opleveringsbewijzen.</p>
+        <p>Bij een grote of betwiste vordering is juridisch advies verstandig.</p>
+
+        <h2>9. Kun je de btw terugvragen als een factuur niet betaald wordt?</h2>
+        <p>In bepaalde gevallen wel.</p>
+        <p>Als je het factuurstelsel toepast, heb je mogelijk al btw aangegeven en afgedragen over een factuur die je klant nooit betaalt.</p>
+        <p>Je kunt die btw terugvragen zodra vaststaat dat de vordering geheel of gedeeltelijk oninbaar is.</p>
+        <p>Een vordering wordt voor deze regeling in ieder geval uiterlijk één jaar na de overeengekomen uiterste betaaldatum als oninbaar beschouwd.</p>
+        <p>Wordt de factuur later alsnog betaald, dan moet je de btw-verwerking opnieuw beoordelen.</p>
+        <p>Bij het kasstelsel gelden andere regels.</p>
+        <p>Controleer de voorwaarden bij de Belastingdienst.</p>
+
+        <h2>10. Kan een onbetaalde factuur verjaren?</h2>
+        <p>Ja. Je kunt niet onbeperkt wachten met het innen van een vordering.</p>
+        <p>De verjaringstermijn hangt af van het soort overeenkomst.</p>
+        <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Situatie</th>
+                <th className="px-4 py-3 text-left font-semibold text-deep-blue" scope="col">Gebruikelijke verjaringstermijn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Zakelijke vordering uit overeenkomst</td>
+                <td className="px-4 py-3">Vaak 5 jaar</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="px-4 py-3">Koopprijs bij consumentenkoop</td>
+                <td className="px-4 py-3">2 jaar</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3">Diensten aan consumenten</td>
+                <td className="px-4 py-3">Vaak 5 jaar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De precieze termijn en het beginmoment hangen af van de juridische grondslag.</p>
+        <p>Onder voorwaarden kun je verjaring stuiten, bijvoorbeeld door een correcte schriftelijke aanmaning waarin je je recht op nakoming ondubbelzinnig voorbehoudt.</p>
+        <p>Niet iedere informele herinnering is daarvoor automatisch voldoende.</p>
+        <p>Wacht bij oudere vorderingen daarom niet tot het laatste moment.</p>
+
+        <h2>Hoe voorkom je onbetaalde facturen?</h2>
+        <p>Niet iedere wanbetaling is te voorkomen, maar je kunt het risico verkleinen.</p>
+        <p><strong>Maak vooraf duidelijke afspraken.</strong> Leg de prijs, werkzaamheden en betalingstermijn schriftelijk vast.</p>
+        <p><strong>Factureer op tijd.</strong> Wacht niet onnodig met het versturen van je factuur.</p>
+        <p><strong>Gebruik correcte gegevens.</strong> Een foutieve factuur kan tot vertraging leiden.</p>
+        <p><strong>Vraag bij grotere opdrachten een aanbetaling.</strong> Houd daarbij rekening met de toepasselijke wettelijke regels.</p>
+        <p><strong>Controleer openstaande facturen regelmatig.</strong> Zo kun je snel reageren als een vervaldatum verstrijkt.</p>
+        <p><strong>Werk met een overzichtelijke administratie.</strong> Bewaar facturen en correspondentie op één plek.</p>
+        <p>
+          <Link href="/blogs/sneller-betalen-factuur" className="text-warm-orange hover:underline">Lees ook: factuur sneller betaald krijgen</Link>.
+        </p>
+
+        <h2>Veelgestelde vragen over niet-betaalde facturen</h2>
+        <h3>Wat moet ik doen als mijn factuur niet betaald wordt?</h3>
+        <p>Controleer eerst de vervaldatum en factuurgegevens. Stuur daarna een vriendelijke herinnering en neem contact op met je klant. Blijft betaling uit, dan kun je een aanmaning en verdere incassostappen overwegen.</p>
+        <h3>Mag ik meteen een incassobureau inschakelen?</h3>
+        <p>Je kunt een incassobureau inschakelen, maar dat betekent niet dat alle kosten direct op de klant mogen worden verhaald. Vooral bij consumenten moet je eerst aan specifieke wettelijke eisen voldoen.</p>
+        <h3>Moet ik altijd eerst een herinnering sturen?</h3>
+        <p>Bij consumenten moet je voordat je incassokosten rekent een correcte kosteloze veertiendagenaanmaning sturen. Bij zakelijke klanten geldt die verplichting niet op dezelfde manier.</p>
+        <h3>Mag ik een onbetaalde factuur verhogen?</h3>
+        <p>Je mag onder voorwaarden wettelijke rente en incassokosten vorderen. Je mag niet zomaar zelf een willekeurige toeslag bepalen.</p>
+        <h3>Wat als een bedrijf mijn factuur niet betaalt?</h3>
+        <p>Controleer de gemaakte afspraken, stuur een herinnering of aanmaning en beoordeel of handelsrente en incassokosten verschuldigd zijn. Bij aanhoudende wanbetaling kun je professionele incassohulp overwegen.</p>
+        <h3>Wat als mijn opdrachtgever mijn factuur betwist?</h3>
+        <p>Vraag waarom de factuur wordt betwist en controleer de overeenkomst, werkzaamheden en bewijsstukken. Een inhoudelijk geschil kan invloed hebben op de beste vervolgstappen.</p>
+        <h3>Kan ik de btw van een onbetaalde factuur terugvragen?</h3>
+        <p>Bij toepassing van het factuurstelsel kun je onder voorwaarden btw terugvragen zodra de vordering oninbaar is. Daarvoor gelden specifieke regels en termijnen.</p>
+        <h3>Hoe lang blijft een onbetaalde factuur geldig?</h3>
+        <p>Dat hangt af van de overeenkomst. Veel zakelijke vorderingen verjaren na vijf jaar, terwijl voor de koopprijs bij consumentenkoop vaak twee jaar geldt.</p>
+
+        <h2>Factuur niet betaald? Begin met een duidelijke volgende stap</h2>
+        <p>Een onbetaalde factuur is vervelend, maar je hoeft niet meteen juridische maatregelen te nemen.</p>
+        <p>Controleer de vervaldatum, stuur een herinnering en probeer een concrete betalingsafspraak te maken.</p>
+        <p>Blijft betaling uit, dan kun je de vervolgstappen bepalen op basis van het type klant, de gemaakte afspraken en de wettelijke regels.</p>
+        <p>Wil je toekomstige facturen duidelijk en overzichtelijk opstellen?</p>
+        <p>Met FactuurBaas maak je gratis een factuur als PDF, zonder account.</p>
+        <CtaButton href="/create-invoice" label="Maak gratis een factuur" />
       </>
-    ),
+    )
   },
   {
     slug: 'hypotheek-als-zzper-hoe-werkt-het',

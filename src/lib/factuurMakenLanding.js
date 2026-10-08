@@ -111,7 +111,7 @@ export const SLUG_PAGES = {
     relatedLinks: [
       { label: 'ZZP factuur template', href: '/factuur-template/zzp' },
       { label: 'Hoe maak je een factuur als zzp’er?', href: '/blogs/factuur-maken-zzp' },
-      { label: 'Gratis factuur voor zzp’ers', href: '/blogs/gratis-factuur-zzp' },
+      { label: 'Uitleg over gratis ZZP-facturen', href: '/blogs/gratis-factuur-zzp' },
     ],
   },
   'zonder-kvk': {
