@@ -528,6 +528,9 @@ export const articles = [
         <h2>Factuur maken als zzp&apos;er in de zorg</h2>
         <p>Werk je als zelfstandige in de zorg? Dan is het belangrijk om te bepalen of je diensten btw-belast of btw-vrijgesteld zijn.</p>
         <p>Niet iedere zorgdienst is automatisch vrijgesteld van btw. Dit hangt onder andere af van de aard en het doel van de werkzaamheden.</p>
+        <p>
+          <Link href="/factuur-voorbeeld/zorg" className="text-warm-orange hover:underline">Bekijk een factuur voorbeeld voor zzp zorg</Link>.
+        </p>
         <p>Een zorgfactuur kan bijvoorbeeld de volgende regels bevatten:</p>
         <div className="not-prose my-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
           <table className="w-full min-w-[480px] text-sm text-slate-700 sm:text-base">
@@ -1192,7 +1195,11 @@ export const articles = [
           </li>
           <li>
             <strong>Factuur voorbeeld zzp zorg:</strong> Zorgverlening — 8 uur × €55 = €440 (controleer altijd of
-            btw-vrijstelling van toepassing is).
+            btw-vrijstelling van toepassing is). Meer voor zorgverleners:{' '}
+            <Link href="/factuur-voorbeeld/zorg" className="text-warm-orange hover:underline">
+              factuur voorbeeld zzp zorg
+            </Link>
+            .
           </li>
           <li>
             <strong>Factuur voorbeeld koerier:</strong> Transport Amsterdam–Rotterdam — 1 rit × €85 = €85.

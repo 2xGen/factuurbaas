@@ -128,8 +128,9 @@ function ItemCard({ item, index, featured = false }) {
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.035]"
           alt={item.image.alt}
           src={item.image.url}
-          loading={index < 6 ? 'eager' : 'lazy'}
-          fetchPriority={index < 3 ? 'high' : undefined}
+          loading="eager"
+          fetchPriority={index === 0 ? 'high' : 'auto'}
+          decoding="async"
         />
         <div className="absolute inset-0 bg-ink-950/0 transition-colors duration-500 group-hover:bg-ink-950/10" />
       </Link>

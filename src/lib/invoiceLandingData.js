@@ -42,6 +42,13 @@ export const popularTemplates = [
     tag: 'Bouw',
   },
   {
+    slug: 'zorg',
+    title: 'Zorg factuur',
+    description: "Voor zzp'ers in de zorg, met uren en btw-vrijstelling.",
+    href: '/factuur-template/zorg',
+    tag: 'Zorg',
+  },
+  {
     slug: 'uren',
     title: 'Uren factuur',
     description: 'Factureer gewerkte uren met uurtarief.',

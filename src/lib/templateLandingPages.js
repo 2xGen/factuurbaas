@@ -1403,6 +1403,55 @@ export const templatePages = {
     ],
   }),
 
+  zorg: professionTemplate('zorg', {
+    h1: 'Factuur template zzp zorg',
+    shortTitle: 'Zorg factuur',
+    metaTitle: 'Factuur template zzp zorg – Gratis maken & downloaden | FactuurBaas',
+    metaDescription:
+      "Gratis factuur template voor zzp'ers in de zorg. Vermeld uren, tarieven en de juiste btw-behandeling. Download direct als PDF.",
+    intro:
+      "Als zelfstandig zorgverlener heb je een factuur nodig waarop uren, tarieven en de btw-behandeling duidelijk staan. Met deze zorg-template maak je online een overzichtelijke factuur voor een zorginstelling of andere opdrachtgever — zonder account.",
+    previewLayout: 'plain',
+    whyOnlineParagraph:
+      'Een zorgfactuur hoef je niet zelf in Word of Excel te bouwen. Met een online template heb je direct de juiste structuur, ruimte voor uren en tarieven, en een professionele PDF. Controleer zelf of je btw moet rekenen of een vrijstelling mag toepassen.',
+    sectionIntro: 'Op een zorgfactuur komen deze gegevens typisch terug:',
+    bullets: [
+      'Omschrijving van de zorg, bijvoorbeeld verpleegkundige zorg of avonddiensten',
+      'Aantal gewerkte uren en het afgesproken uurtarief per regel',
+      'De periode waarin je de zorg hebt verleend',
+      'Het toepasselijke btw-tarief of de btw-vrijstelling',
+      'Factuurnummer, datum, betaaltermijn en IBAN',
+    ],
+    extraSections: [
+      {
+        h2: 'Factureren in de zorg: waar let je op?',
+        paragraphs: [
+          'Niet iedere zzp’er in de zorg mag automatisch zonder btw factureren. Veel medische en verpleegkundige zorgdiensten kunnen onder voorwaarden zijn vrijgesteld, maar advieswerk, niet-medische diensten of het ter beschikking stellen van personeel kan btw-belast zijn.',
+          'Vermeld uren en tarieven per soort dienst. Controleer per opdracht of de vrijstelling geldt.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'Moet ik als zzp’er in de zorg btw rekenen?',
+        a: 'Niet altijd. Veel zorgdiensten zijn onder voorwaarden vrijgesteld van btw. Of dit voor jouw werkzaamheden geldt, hangt af van de aard van de zorg, je kwalificaties en de afspraken met je opdrachtgever.',
+      },
+      {
+        q: 'Kan ik dagdiensten en avonddiensten op één factuur zetten?',
+        a: 'Ja. Gebruik aparte regels wanneer de tarieven of de btw-behandeling verschillen.',
+      },
+      {
+        q: 'Is deze template geschikt voor een zzp-verpleegkundige?',
+        a: 'Ja. De template is geschikt als basis voor zelfstandig verpleegkundigen en andere zorgverleners. Pas de omschrijving, tarieven en btw-behandeling aan jouw situatie aan.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Zorg voorbeeld', href: '/factuur-voorbeeld/zorg' },
+      { label: 'Uren template', href: '/factuur-template/uren' },
+      { label: 'Zonder btw', href: '/factuur-template/zonder-btw' },
+    ],
+  }),
+
   uren: professionTemplate('uren', {
     h1: 'Factuur template uren',
     shortTitle: 'Uren factuur',

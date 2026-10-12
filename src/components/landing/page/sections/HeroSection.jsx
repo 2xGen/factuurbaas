@@ -19,20 +19,16 @@ const HeroSection = () => {
   const reduce = useReducedMotion();
 
   return (
-    <section className="grain relative isolate overflow-hidden bg-paper text-ink">
-      <div className="bg-ledger mask-fade-y pointer-events-none absolute inset-0 -z-10" aria-hidden />
-      <div
-        className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(210,96,26,0.14),transparent_65%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-56 -left-40 -z-10 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(10,42,77,0.08),transparent_65%)]"
-        aria-hidden
-      />
+    <section className="grain relative isolate bg-paper text-ink">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
+        <div className="bg-ledger mask-fade-y absolute inset-0" />
+        <div className="absolute -right-40 -top-40 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(210,96,26,0.14),transparent_65%)]" />
+        <div className="absolute -bottom-56 -left-40 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(10,42,77,0.08),transparent_65%)]" />
+      </div>
 
-      <div className="container relative mx-auto px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
-        <div className="grid items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 xl:gap-20">
-          <div>
+      <div className="container relative mx-auto px-4 pb-16 pt-8 sm:px-6 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
+        <div className="grid items-start gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 xl:gap-20">
+          <div className="bg-paper lg:sticky lg:top-[calc(var(--header-height,5rem)+1.25rem)] lg:z-10 lg:self-start">
             <p
               className="inline-flex items-center gap-2.5 rounded-full border border-ink/10 bg-white/70 py-1.5 pl-2.5 pr-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-700 backdrop-blur motion-safe:animate-rise"
               style={rise(0)}
@@ -45,7 +41,7 @@ const HeroSection = () => {
             </p>
 
             <h1
-              className="mt-7 max-w-[13ch] font-display text-[2.9rem] font-normal leading-[0.98] tracking-[-0.035em] text-ink sm:text-[4rem] lg:text-[4.4rem] xl:text-[5rem] motion-safe:animate-rise"
+              className="mt-5 max-w-[13ch] font-display text-[2.9rem] font-normal leading-[0.98] tracking-[-0.035em] text-ink sm:text-[4rem] lg:text-[4.4rem] xl:text-[5rem] motion-safe:animate-rise"
               style={rise(80)}
             >
               Gratis factuur maken{' '}
@@ -72,7 +68,7 @@ const HeroSection = () => {
             </h1>
 
             <div
-              className="mt-8 max-w-[34rem] space-y-3 text-[1.05rem] leading-relaxed text-ink-500 sm:text-lg motion-safe:animate-rise"
+              className="mt-6 max-w-[34rem] space-y-3 text-[1.05rem] leading-relaxed text-ink-500 sm:text-lg motion-safe:animate-rise"
               style={rise(180)}
             >
               <p>
@@ -83,7 +79,7 @@ const HeroSection = () => {
             </div>
 
             <div
-              className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center motion-safe:animate-rise"
+              className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center motion-safe:animate-rise"
               style={rise(260)}
             >
               <Link

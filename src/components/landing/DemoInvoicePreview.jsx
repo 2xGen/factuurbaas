@@ -202,6 +202,10 @@ export default function DemoInvoicePreview({
           </div>
         </div>
 
+        {data.note ? (
+          <p className={cn('mt-4 text-[9px] leading-snug sm:text-[10px]', theme.muted)}>{data.note}</p>
+        ) : null}
+
         {showButton && (
           <div className="mt-5 flex justify-end">
             <div

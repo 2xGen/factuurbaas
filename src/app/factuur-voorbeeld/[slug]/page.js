@@ -15,6 +15,7 @@ export async function generateMetadata({ params }) {
   return {
     title: page.metaTitle,
     description: page.metaDescription,
+    keywords: page.keywords,
     alternates: { canonical: `https://factuurbaas.nl/factuur-voorbeeld/${slug}` },
     openGraph: {
       title: page.metaTitle,

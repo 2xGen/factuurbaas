@@ -65,6 +65,13 @@ export const FACTUUR_TYPES = [
     href: '/factuur-template/bouw',
     related: '/factuur-voorbeeld',
   },
+  {
+    title: 'Zorgfactuur',
+    description:
+      "Voor zzp'ers in de zorg, met uren, tarieven en de juiste btw-behandeling.",
+    href: '/factuur-voorbeeld/zorg',
+    related: '/factuur-template/zorg',
+  },
 ];
 
 export const REQUIRED_FIELDS = [

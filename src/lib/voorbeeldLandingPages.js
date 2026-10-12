@@ -11,6 +11,7 @@ function examplePage(slug, config) {
     h1: config.h1,
     metaTitle: config.metaTitle,
     metaDescription: config.metaDescription,
+    keywords: config.keywords,
     intro: config.intro,
     example: config.example,
     templateHref: config.templateHref,
@@ -253,6 +254,248 @@ export const voorbeeldPages = {
       { label: 'Hoe maak je een offerte', href: '/gidsen/hoe-maak-je-een-offerte' },
       { label: 'ZZP voorbeeld', href: '/factuur-voorbeeld/zzp' },
       { label: 'Uren factureren voorbeeld', href: '/factuur-voorbeeld/uren' },
+    ],
+  }),
+
+  zorg: examplePage('zorg', {
+    h1: 'Factuur voorbeeld zzp zorg',
+    metaTitle: 'Factuur voorbeeld zzp zorg – Gratis maken & downloaden',
+    metaDescription:
+      "Bekijk een factuur voorbeeld voor zzp'ers in de zorg. Inclusief uren, btw-uitleg en betaaltermijn. Maak gratis je eigen zorgfactuur als PDF.",
+    keywords:
+      'voorbeeld factuur zzp zorg, factuur maken zzp zorg, zzp zorg factuur voorbeeld, factuur zzp zorg',
+    intro:
+      "Een factuur maken als zzp'er in de zorg? Hieronder vind je een factuur voorbeeld voor zorgverleners, met gewerkte uren, uurtarieven, een betaaltermijn en een voorbeeld van btw-vrijgestelde zorg. Gebruik het voorbeeld als basis voor je eigen factuur en pas de gegevens aan jouw werkzaamheden aan.",
+    templateHref: '/factuur-template/zorg',
+    closingTitle: 'Maak gratis je eigen zorgfactuur',
+    closingText:
+      'Vul je gegevens in, voeg je gewerkte uren toe, controleer de btw en download je factuur als PDF. Gratis en zonder account.',
+    example: {
+      layout: 'plain',
+      invoiceNumber: '#2026-041',
+      date: '12 oktober 2026',
+      paymentTerm: '30 dagen',
+      from: { name: 'Zorgverlening De Vries', detail: 'KvK 87654321' },
+      to: { name: 'Zorginstelling De Linde', detail: 'Utrecht' },
+      lineItems: [
+        { description: 'Verpleegkundige zorg – september 2026', quantity: '32 uur × €45', amount: '€ 1.440,00' },
+        { description: 'Verpleegkundige zorg – avonddiensten', quantity: '8 uur × €50', amount: '€ 400,00' },
+      ],
+      subtotal: '€ 1.840,00',
+      btwLabel: 'Btw – vrijgesteld',
+      btwAmount: '€ 0,00',
+      total: '€ 1.840,00',
+      note: 'Btw-vrijstelling: gezondheidskundige verzorging, voor zover voldaan aan de wettelijke voorwaarden.',
+    },
+    sections: [
+      {
+        h2: 'Voorbeeld factuur zzp zorg',
+        paragraphs: [
+          'Het voorbeeld hierboven laat zien hoe je als zelfstandig zorgverlener een factuur kunt opstellen voor een zorginstelling. De factuur bevat 32 uur verpleegkundige zorg tegen €45 per uur en 8 uur avonddienst tegen €50 per uur. Het totaalbedrag is €1.840.',
+          'De uren en tarieven zijn apart vermeld, zodat de opdrachtgever eenvoudig kan controleren welke werkzaamheden in rekening worden gebracht.',
+          'In dit voorbeeld is uitgegaan van zorgwerkzaamheden die voldoen aan de voorwaarden voor de btw-vrijstelling. Niet iedere zzp’er in de zorg mag automatisch zonder btw factureren.',
+          'Fictief factuurvoorbeeld. De btw-vrijstelling is uitsluitend van toepassing als de werkzaamheden en overeenkomst aan de voorwaarden voldoen.',
+        ],
+      },
+      {
+        h2: 'Wat moet er op een factuur van een zzp’er in de zorg staan?',
+        paragraphs: [
+          'Wanneer je als zzp’er in de zorg een factuur opstelt, is het belangrijk dat de opdrachtgever kan zien wie de werkzaamheden heeft uitgevoerd, over welke periode je factureert en hoe het totaalbedrag is berekend.',
+          'Vermeld bij voorkeur:',
+        ],
+        bullets: [
+          'je bedrijfsnaam en adresgegevens',
+          'de naam en adresgegevens van je opdrachtgever',
+          'je KvK-nummer en, indien van toepassing, je btw-identificatienummer',
+          'een uniek, opeenvolgend factuurnummer',
+          'de factuurdatum',
+          'de periode waarin je zorg hebt verleend',
+          'een duidelijke omschrijving van de werkzaamheden',
+          'het aantal gewerkte uren en het afgesproken uurtarief',
+          'eventuele toeslagen voor avond-, nacht- of weekenddiensten',
+          'het toepasselijke btw-tarief of de btw-vrijstelling',
+          'het totaalbedrag',
+          'de afgesproken betaaltermijn en je betaalgegevens',
+        ],
+        closingParagraphs: [
+          'Welke gegevens wettelijk verplicht zijn, hangt mede af van de btw-behandeling. Bij vrijgestelde zorgprestaties gelden afwijkende factureringsregels. Een overzichtelijke factuur blijft ook dan verstandig.',
+        ],
+      },
+      {
+        h2: 'Uren en diensten vermelden op een zorgfactuur',
+        paragraphs: [
+          'Als zelfstandig zorgverlener factureer je vaak op basis van gewerkte uren. Het is verstandig om per soort dienst aan te geven hoeveel uur je hebt gewerkt en welk tarief daarbij hoort.',
+        ],
+        subsections: [
+          {
+            h3: 'Voorbeeld van een duidelijke omschrijving',
+            paragraphs: [
+              'In plaats van alleen “Zorgwerkzaamheden – €1.840” kun je vermelden: “Verpleegkundige zorg september 2026 – 32 uur à €45 – €1.440.”',
+              'Heb je verschillende tarieven afgesproken? Zet deze dan op afzonderlijke factuurregels.',
+              'Denk bijvoorbeeld aan:',
+            ],
+            bullets: [
+              'reguliere dagdiensten',
+              'avonddiensten',
+              'nachtdiensten',
+              'weekenddiensten',
+              'feestdagentoeslagen',
+              'afgesproken reis- of andere bijkomende kosten',
+            ],
+          },
+        ],
+        closingParagraphs: [
+          'Vermeld toeslagen en kosten alleen wanneer deze met je opdrachtgever zijn afgesproken. Controleer ook of voor eventuele afzonderlijke prestaties dezelfde btw-behandeling geldt.',
+        ],
+      },
+      {
+        h2: 'Factuur maken zzp zorg: met of zonder btw?',
+        paragraphs: [
+          'Een belangrijke vraag bij factureren in de zorg is of je btw moet rekenen.',
+          'Veel medische en verpleegkundige zorgdiensten kunnen zijn vrijgesteld van btw. De vrijstelling geldt onder voorwaarden voor werkzaamheden die gericht zijn op de persoonlijke gezondheidskundige verzorging van mensen.',
+          'Maar het feit dat je als zzp’er in de zorg werkt, betekent niet automatisch dat al je facturen btw-vrij zijn.',
+          'Of de vrijstelling geldt, hangt onder meer af van:',
+        ],
+        bullets: [
+          'de aard en het doel van de werkzaamheden',
+          'je beroepskwalificaties, waar relevant',
+          'de overeenkomst met de opdrachtgever',
+          'of je zelfstandig zorg verleent of personeel ter beschikking stelt',
+          'de specifieke wettelijke voorwaarden voor de zorgdienst',
+        ],
+        subsections: [
+          {
+            h3: 'Voorbeeld van een factuur zonder btw',
+            paragraphs: [
+              'Voldoe je aan de voorwaarden voor de zorgvrijstelling? Dan kun je op je factuur vermelden: “Btw vrijgesteld – gezondheidskundige verzorging.”',
+              'Je berekent dan geen btw over de vrijgestelde prestatie.',
+            ],
+          },
+          {
+            h3: 'Wanneer moet een zzp’er in de zorg wel btw rekenen?',
+            paragraphs: [
+              'Bijvoorbeeld bij bepaalde advieswerkzaamheden, niet-medische diensten of het ter beschikking stellen van personeel kan btw verschuldigd zijn.',
+              'Ook als je via een bemiddelaar of rechtstreeks voor een zorginstelling werkt, moet je kijken naar de feitelijke werkzaamheden en contractuele afspraken.',
+              'Controleer daarom per opdracht of je de vrijstelling mag toepassen. Raadpleeg bij twijfel de Belastingdienst of een belastingadviseur.',
+            ],
+          },
+        ],
+      },
+      {
+        h2: 'Factuur voor een zorginstelling of opdrachtgever',
+        paragraphs: [
+          'Veel zzp’ers in de zorg werken voor verpleeghuizen, thuiszorgorganisaties, zorginstellingen of andere zorgaanbieders.',
+          'Je kunt de factuur rechtstreeks aan de opdrachtgever sturen. Zorg dat de factuur aansluit op de afspraken in je overeenkomst.',
+          'Sommige opdrachtgevers vragen om aanvullende gegevens, zoals:',
+        ],
+        bullets: [
+          'een opdrachtnummer of referentie',
+          'de betreffende afdeling of locatie',
+          'de gewerkte periode',
+          'een urenregistratie of goedgekeurde urenstaat',
+          'een specifieke omschrijving of kostenplaats',
+        ],
+        closingParagraphs: [
+          'Dit zijn niet allemaal wettelijke factuureisen, maar ze kunnen wel nodig zijn voor een snelle administratieve verwerking.',
+          'Vermeld geen onnodige medische persoonsgegevens van cliënten op de factuur. Gebruik waar mogelijk een algemene omschrijving van de geleverde zorg.',
+        ],
+      },
+      {
+        h2: 'Factuur maken als zzp-verpleegkundige of verzorgende',
+        paragraphs: [
+          'Het voorbeeld is geschikt als basis voor verschillende zelfstandige zorgverleners, waaronder verpleegkundigen en verzorgenden.',
+          'Werk je als zzp-verpleegkundige? Dan kun je bijvoorbeeld je verpleegkundige diensten per week of maand factureren.',
+          'Werk je als zelfstandig verzorgende? Dan kun je je afgesproken verzorgingsdiensten en uren vermelden.',
+          'Ook voor andere zorgberoepen kun je dezelfde factuuropbouw gebruiken. Pas de omschrijving en btw-behandeling altijd aan jouw situatie aan.',
+        ],
+      },
+      {
+        h2: 'Welke betaaltermijn gebruik je voor een zorgfactuur?',
+        paragraphs: [
+          'Veel opdrachtgevers werken met een betaaltermijn van 14 of 30 dagen. Welke termijn geldt, hangt af van de gemaakte afspraken en de toepasselijke wettelijke regels.',
+          'Spreek bij voorkeur vooraf af wanneer je factureert en wanneer de betaling uiterlijk moet zijn ontvangen.',
+          'Bijvoorbeeld: “Betaling binnen 30 dagen na factuurdatum, onder vermelding van het factuurnummer.”',
+          'Een vaste factuurdatum en duidelijke betaaltermijn helpen om je administratie overzichtelijk te houden.',
+        ],
+      },
+      {
+        h2: 'Hoe zorg je dat facturen sneller betaald worden?',
+        paragraphs: [
+          'Als zzp’er in de zorg wil je niet onnodig lang wachten op betaling voor diensten die je al hebt uitgevoerd.',
+          'Een paar praktische maatregelen kunnen helpen:',
+        ],
+        numbered: true,
+        bullets: [
+          '**Dien je uren op tijd in.** Wacht niet onnodig lang met het laten goedkeuren van je urenregistratie.',
+          '**Controleer de factuurgegevens.** Een verkeerd referentienummer of ontbrekende urenstaat kan verwerking vertragen.',
+          '**Factureer regelmatig.** Spreek bijvoorbeeld af dat je iedere week of maand factureert.',
+          '**Vermeld een duidelijke betaaltermijn.** Zo weet de opdrachtgever wanneer de betaling verwacht wordt.',
+          '**Stuur tijdig een betalingsherinnering.** Is de vervaldatum verstreken? Neem contact op met de administratie van je opdrachtgever.',
+        ],
+        closingParagraphs: [
+          'Wordt een factuur niet betaald? Controleer eerst of er een administratieve reden is en volg daarna je gebruikelijke herinneringsprocedure.',
+        ],
+      },
+      {
+        h2: 'Heb je een boekhoudprogramma nodig als zzp’er in de zorg?',
+        paragraphs: [
+          'Je hebt niet per se een betaald boekhoudprogramma nodig om een factuur te maken.',
+          'Als je weinig opdrachtgevers hebt, kun je beginnen met een gratis factuurmaker en je facturen en betalingen overzichtelijk bijhouden.',
+          'Bij meer opdrachten kan boekhoudsoftware handig zijn voor het registreren van inkomsten, uitgaven, openstaande facturen en belastinggegevens.',
+          'Let bij het kiezen van een boekhoudprogramma op de mogelijkheid om btw-vrijgestelde en btw-belaste prestaties correct te verwerken, als je beide soorten werkzaamheden uitvoert.',
+        ],
+      },
+      {
+        h2: 'Maak gratis je eigen factuur voor de zorg',
+        paragraphs: [
+          'Met FactuurBaas kun je eenvoudig een factuur maken voor je werkzaamheden als zzp’er in de zorg. Je hoeft geen account aan te maken.',
+        ],
+        numbered: true,
+        bullets: [
+          'Vul je bedrijfsgegevens in.',
+          'Voeg de gegevens van de zorginstelling of opdrachtgever toe.',
+          'Vermeld de gewerkte uren en uurtarieven.',
+          'Kies de juiste btw-behandeling.',
+          'Controleer de betaaltermijn en bedragen.',
+          'Download je factuur als PDF.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'Hoe maak ik een factuur als zzp’er in de zorg?',
+        a: 'Vermeld je bedrijfsgegevens, de opdrachtgever, het factuurnummer, de datum, de gewerkte uren, het uurtarief en het totaalbedrag. Controleer of je btw moet berekenen of een vrijstelling mag toepassen. Met FactuurBaas kun je gratis een factuur maken en downloaden.',
+      },
+      {
+        q: 'Moet ik als zzp’er in de zorg btw rekenen?',
+        a: 'Niet altijd. Veel zorgdiensten zijn onder voorwaarden vrijgesteld van btw. Of dit voor jouw werkzaamheden geldt, hangt af van de aard van de zorg, je kwalificaties en de afspraken met je opdrachtgever.',
+      },
+      {
+        q: 'Wat zet ik bij de omschrijving op mijn zorgfactuur?',
+        a: 'Vermeld bijvoorbeeld “Verpleegkundige zorg – september 2026 – 32 uur à €45”. Gebruik aparte regels voor diensten met verschillende tarieven of toeslagen.',
+      },
+      {
+        q: 'Kan ik als zzp’er in de zorg zonder boekhoudprogramma factureren?',
+        a: 'Ja. Je kunt een factuur maken met een gratis factuurtool. Je moet je administratie wel goed bijhouden en voldoen aan de regels die voor jouw onderneming gelden.',
+      },
+      {
+        q: 'Kan ik één factuur maken voor meerdere diensten?',
+        a: 'Ja. Je kunt meerdere diensten op dezelfde factuur zetten, bijvoorbeeld dagdiensten en avonddiensten. Gebruik aparte regels wanneer de tarieven of btw-behandeling verschillen.',
+      },
+      {
+        q: 'Hoe krijg ik mijn zorgfacturen sneller betaald?',
+        a: 'Maak duidelijke afspraken over urenregistratie, factuurmomenten en betaaltermijnen. Controleer de vereiste referenties, verstuur facturen tijdig en stuur een herinnering wanneer de betaling uitblijft.',
+      },
+      {
+        q: 'Is dit factuurvoorbeeld geschikt voor een zzp-verpleegkundige?',
+        a: 'Ja. Het voorbeeld is geschikt als basis voor zelfstandig verpleegkundigen en andere zorgverleners. Pas de werkzaamheden, tarieven en btw-behandeling aan jouw eigen situatie aan.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Zorg template', href: '/factuur-template/zorg' },
+      { label: 'Uren factureren voorbeeld', href: '/factuur-voorbeeld/uren' },
+      { label: 'Zonder btw voorbeeld', href: '/factuur-voorbeeld/zonder-btw' },
+      { label: 'ZZP voorbeeld', href: '/factuur-voorbeeld/zzp' },
     ],
   }),
 
@@ -819,6 +1062,7 @@ export function getVoorbeeldHubLinks() {
   const hubTitles = {
     zzp: 'ZZP voorbeeld',
     bouw: 'Bouw voorbeeld',
+    zorg: 'Zorg voorbeeld',
     uren: 'Uren factureren',
     consultant: 'Consultant voorbeeld',
     freelance: 'Freelance voorbeeld',
@@ -832,6 +1076,7 @@ export function getVoorbeeldHubLinks() {
     description: {
       zzp: 'Standaard factuur voor zelfstandigen met btw.',
       bouw: 'Voor aannemers, schilders en klusbedrijven.',
+      zorg: "Voor zzp'ers in de zorg, met uren en btw-vrijstelling.",
       uren: "Voorbeeld urenfactuur met uurtarief voor zzp'ers.",
       consultant: 'Professioneel voor adviseurs en consultants.',
       freelance: 'Voor designers, developers en creatieven.',
@@ -840,6 +1085,7 @@ export function getVoorbeeldHubLinks() {
     tag: {
       zzp: 'Populair',
       bouw: 'Bouw',
+      zorg: 'Zorg',
       uren: 'Uren',
       consultant: 'Diensten',
       freelance: 'Freelance',

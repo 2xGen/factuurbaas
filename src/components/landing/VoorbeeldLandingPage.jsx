@@ -11,6 +11,29 @@ import {
   btn,
 } from '@/components/site/editorial';
 
+function renderInline(text) {
+  if (!text || !text.includes('**')) return text;
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
+function ContentList({ items, numbered = false }) {
+  if (!items?.length) return null;
+  const List = numbered ? 'ol' : 'ul';
+  return (
+    <List>
+      {items.map((item) => (
+        <li key={item}>{renderInline(item)}</li>
+      ))}
+    </List>
+  );
+}
+
 function FaqJsonLd({ faqs }) {
   if (!faqs?.length) return null;
 
@@ -77,30 +100,24 @@ export default function VoorbeeldLandingPage({ page }) {
               <div key={section.h2}>
                 <h2>{section.h2}</h2>
                 {section.paragraphs?.map((p) => (
-                  <p key={p.slice(0, 40)}>{p}</p>
+                  <p key={p.slice(0, 40)}>{renderInline(p)}</p>
                 ))}
+                <ContentList items={section.bullets} numbered={section.numbered} />
                 {section.subsections?.map((sub) => (
                   <div key={sub.h3}>
                     <h3>{sub.h3}</h3>
                     {sub.paragraphs?.map((p) => (
-                      <p key={p.slice(0, 40)}>{p}</p>
+                      <p key={p.slice(0, 40)}>{renderInline(p)}</p>
                     ))}
-                    {sub.bullets && (
-                      <ul>
-                        {sub.bullets.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    )}
+                    <ContentList items={sub.bullets} numbered={sub.numbered} />
+                    {sub.closingParagraphs?.map((p) => (
+                      <p key={p.slice(0, 40)}>{renderInline(p)}</p>
+                    ))}
                   </div>
                 ))}
-                {section.bullets && (
-                  <ul>
-                    {section.bullets.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
+                {section.closingParagraphs?.map((p) => (
+                  <p key={p.slice(0, 40)}>{renderInline(p)}</p>
+                ))}
               </div>
             ))}
           </article>

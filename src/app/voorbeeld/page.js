@@ -12,7 +12,7 @@ const categoryLinks = [
     label: 'Factuur voorbeelden',
     href: '/factuur-voorbeeld',
     description:
-      "6 voorbeelden voor ZZP'ers, bouw, uren, consultants en KOR.",
+      "7 voorbeelden voor ZZP'ers, zorg, bouw, uren, consultants en KOR.",
     tag: 'Factuur',
     footerLabel: 'Bekijk factuur voorbeelden',
     example: {
