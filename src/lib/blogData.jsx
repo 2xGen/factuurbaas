@@ -6,6 +6,7 @@ import { aovArticles } from '@/lib/aovBlogData';
 import { uitgavenArticles } from '@/lib/uitgavenBlogData';
 import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
 import { zakelijkeLeaseArticles } from '@/lib/zakelijkeLeaseBlogData';
+import { zakelijkInternetTelefonieArticles } from '@/lib/zakelijkInternetTelefonieBlogData';
 import { gratisFactuurAppArticle } from '@/lib/gratisFactuurAppBlog';
 
 const CtaButton = ({ href = '/create-invoice', label = 'Maak Nu Je Gratis Factuur' }) => (
@@ -16864,6 +16865,7 @@ export const articles = [
   ...uitgavenArticles,
   ...zakelijkeKostenArticles,
   ...zakelijkeLeaseArticles,
+  ...zakelijkInternetTelefonieArticles,
   gratisFactuurAppArticle,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];

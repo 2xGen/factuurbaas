@@ -36,6 +36,9 @@ export const telefoonAftrekbaarArticle = {
     'btw-zakelijke-kosten-aftrekken',
     'laptop-aftrekbaar-zzp',
     'internet-aftrekbaar-zzp',
+    'telefoonkosten-aftrekbaar-zzp',
+    'telefoon-zakelijk-of-prive-zzp',
+    'btw-telefoon-aftrekken-zzp',
     'software-abonnementen-aftrekken-zzp',
     'zakelijke-kosten-prive-betaald',
   ],
@@ -815,8 +818,14 @@ export const telefoonAftrekbaarArticle = {
 
       <p className="mt-4 text-sm text-slate-500">
         Dit artikel is informatief en geen fiscaal advies. Regels kunnen wijzigen; check bij
-        twijfel de Belastingdienst of je boekhouder. Zie ook{' '}
-        <TextLink href="/blogs/zakelijke-kosten-zzp">zakelijke kosten zzp</TextLink>.
+        twijfel de Belastingdienst of je boekhouder.         Zie ook{' '}
+        <TextLink href="/blogs/zakelijke-kosten-zzp">zakelijke kosten zzp</TextLink>
+        ,{' '}
+        <TextLink href="/blogs/telefoonkosten-aftrekbaar-zzp">
+          telefoonkosten aftrekken als zzp&apos;er
+        </TextLink>{' '}
+        en{' '}
+        <TextLink href="/zakelijk-sim-only">zakelijk Sim Only</TextLink>.
       </p>
     </>
   ),

@@ -184,6 +184,30 @@ export const blogPillars = [
     ],
   },
   {
+    id: 'zakelijk-internet-telefonie',
+    title: "Zakelijk internet & telefonie",
+    titleAccent: 'telefonie',
+    cardTitle: 'Zakelijk internet & telefonie',
+    cardAccent: null,
+    cardBlurb: 'Internet, Sim Only en aftrek.',
+    description:
+      "Zakelijk internet en telefonie voor zzp'ers: glasvezel, Sim Only, aftrekbaarheid en het verschil tussen privé en zakelijk.",
+    slugs: [
+      'telefoonkosten-aftrekbaar-zzp',
+      'telefoon-zakelijk-of-prive-zzp',
+      'internetkosten-aftrekbaar-zzp',
+      'zakelijk-telefoonabonnement-zzp',
+      'zakelijk-internet-thuis',
+      'internet-zakelijk-of-prive-zzp',
+      'zakelijk-sim-only-zzp',
+      'telefoon-van-de-zaak-zzp',
+      'zakelijk-internet-kosten',
+      'zakelijk-mobiel-zonder-toestel',
+      'glasvezel-zzp',
+      'btw-telefoon-aftrekken-zzp',
+    ],
+  },
+  {
     id: 'hypotheek',
     title: "Hypotheek als zzp'er",
     titleAccent: "zzp'er",
@@ -263,5 +287,6 @@ export function getPillarHref(pillar) {
   if (pillar.id === 'hypotheek') return '/blogs/hypotheek-als-zzper';
   if (pillar.id === 'aov') return '/blogs/aov-zzp';
   if (pillar.id === 'zakelijke-kosten') return '/blogs/zakelijke-kosten-zzp';
+  if (pillar.id === 'zakelijk-internet-telefonie') return '/zakelijk-internet-telefonie';
   return `/blogs?pillar=${pillar.id}`;
 }

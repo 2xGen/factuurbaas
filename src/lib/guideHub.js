@@ -72,6 +72,18 @@ export const guideHubIntro = {
       '.',
     ],
   },
+  'zakelijk-internet-telefonie': {
+    title: "Zakelijk internet & telefonie",
+    titleAccent: 'telefonie',
+    paragraphs: [
+      "Zakelijk internet, Sim Only of toch je privéabonnement houden? In deze gidsen lees je wat zzp’ers moeten weten over kosten, aftrek, glasvezel, btw en het verschil tussen een zakelijk en privécontract.",
+    ],
+    followUp: [
+      'Wil je internet of mobiel vergelijken? Start bij ',
+      { href: '/zakelijk-internet-telefonie', label: 'zakelijk internet en telefonie' },
+      '.',
+    ],
+  },
 };
 
 /** Hub FAQs with short answers; each links to a guide. */

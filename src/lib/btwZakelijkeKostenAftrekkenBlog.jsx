@@ -47,6 +47,7 @@ export const btwZakelijkeKostenArticle = {
   slug: 'btw-zakelijke-kosten-aftrekken',
   relatedSlugs: CLUSTER_RELATED.filter((s) => s !== 'btw-zakelijke-kosten-aftrekken').concat([
     'btw-factuur-zzp',
+    'btw-telefoon-aftrekken-zzp',
   ]),
   metaTitle: "Btw aftrekken van zakelijke kosten als zzp'er: zo werkt het",
   title: 'Btw aftrekken van zakelijke kosten: hoe werkt het?',
@@ -320,7 +321,13 @@ export const btwZakelijkeKostenArticle = {
         Veel zzp&apos;ers gebruiken bepaalde aankopen zowel zakelijk als privé. Denk aan:
       </p>
       <ul>
-        <li>een telefoon;</li>
+        <li>
+          een telefoon (
+          <TextLink href="/blogs/btw-telefoon-aftrekken-zzp">
+            btw telefoon aftrekken als zzp&apos;er
+          </TextLink>
+          );
+        </li>
         <li>een laptop;</li>
         <li>een auto;</li>
         <li>bepaalde abonnementen;</li>

@@ -89,6 +89,11 @@ export default function SeoIndexSection() {
               </Link>
             </li>
             <li>
+              <Link href="/zakelijk-internet-telefonie" className={listLink}>
+                Zakelijk internet &amp; telefonie
+              </Link>
+            </li>
+            <li>
               <Link href="/blogs" className="text-[13px] font-medium text-ink-700 hover:text-ink">
                 Alle gidsen →
               </Link>

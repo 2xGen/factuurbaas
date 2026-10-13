@@ -10,6 +10,10 @@ import {
   getZakelijkeLeaseArticleBreadcrumbs,
   isZakelijkeLeaseGuideSlug,
 } from '@/lib/zakelijkeLease';
+import {
+  getZitArticleBreadcrumbs,
+  isZitGuideSlug,
+} from '@/lib/zakelijkInternetTelefonie';
 
 // Dynamic to avoid auth/context issues during Vercel static build
 export const dynamic = 'force-dynamic';
@@ -67,7 +71,11 @@ export default async function BlogPostPage({ params }) {
   const article = articles.find((a) => a.slug === resolvedParams.slug);
   if (!article) notFound();
   const relatedLimit =
-    isHypotheekGuideSlug(article.slug) || isZakelijkeLeaseGuideSlug(article.slug) ? 6 : 4;
+    isHypotheekGuideSlug(article.slug) ||
+    isZakelijkeLeaseGuideSlug(article.slug) ||
+    isZitGuideSlug(article.slug)
+      ? 6
+      : 4;
   const relatedArticles = (article.relatedSlugs?.length
     ? article.relatedSlugs
         .map((slug) => articles.find((a) => a.slug === slug))
@@ -79,6 +87,8 @@ export default async function BlogPostPage({ params }) {
     ? getHypotheekArticleBreadcrumbs(article.title)
     : isZakelijkeLeaseGuideSlug(article.slug)
       ? getZakelijkeLeaseArticleBreadcrumbs(article.title)
+    : isZitGuideSlug(article.slug)
+      ? getZitArticleBreadcrumbs(article.title)
     : article.breadcrumbLabel
       ? [
           { name: 'Home', href: '/' },

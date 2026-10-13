@@ -47,6 +47,7 @@ export default function FooterClient() {
               <li><Link href="/blogs/hypotheek-als-zzper" className="text-[13px] transition-colors hover:text-ink">Hypotheek als zzp&apos;er</Link></li>
               <li><Link href="/blogs/aov-zzp" className="text-[13px] transition-colors hover:text-ink">AOV zzp</Link></li>
               <li><Link href="/zakelijke-lease-vergelijken" className="text-[13px] transition-colors hover:text-ink">Zakelijke lease vergelijken</Link></li>
+              <li><Link href="/zakelijk-internet-telefonie" className="text-[13px] transition-colors hover:text-ink">Zakelijk internet &amp; telefonie</Link></li>
               <li><Link href="/waarom-gratis" className="text-[13px] transition-colors hover:text-ink">Waarom gratis</Link></li>
             </ul>
           </div>

@@ -278,6 +278,13 @@ export const zakelijkeKostenArticles = [
           <TextLink href="/blogs/telefoon-aftrekbaar-zzp">
             Telefoon aftrekbaar als zzp&apos;er?
           </TextLink>
+          {' '}
+          Over maandelijkse bel- en datakosten:{' '}
+          <TextLink href="/blogs/telefoonkosten-aftrekbaar-zzp">
+            telefoonkosten aftrekken als zzp&apos;er
+          </TextLink>
+          . Overweeg je een zakelijk abonnement?{' '}
+          <TextLink href="/zakelijk-sim-only">Zakelijk Sim Only</TextLink>.
         </p>
 
         <h3>Internet</h3>
@@ -294,6 +301,14 @@ export const zakelijkeKostenArticles = [
           <TextLink href="/blogs/internet-aftrekbaar-zzp">
             Internet aftrekbaar als zzp&apos;er?
           </TextLink>
+          {' '}
+          Over de fiscale regels voor thuisinternet en zakelijke abonnementen:{' '}
+          <TextLink href="/blogs/internetkosten-aftrekbaar-zzp">
+            internetkosten aftrekbaar als zzp&apos;er
+          </TextLink>
+          {' '}
+          en{' '}
+          <TextLink href="/zakelijk-internet">zakelijk internet</TextLink>.
         </p>
 
         <h3>Kantoorartikelen en materiaal</h3>

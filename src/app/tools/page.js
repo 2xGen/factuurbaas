@@ -126,6 +126,10 @@ export default function ToolsHubPage() {
           label: 'Zakelijke lease vergelijken',
         },
         {
+          href: '/zakelijk-internet-telefonie',
+          label: 'Zakelijk internet & telefonie',
+        },
+        {
           href: '/gidsen/deze-7-tools-zijn-heel-handig-voor-zzpers',
           label: "7 handige tools voor zzp'ers",
         },

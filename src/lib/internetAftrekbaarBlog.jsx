@@ -35,6 +35,9 @@ export const internetAftrekbaarArticle = {
     'zakelijke-uitgaven-bijhouden-zzp',
     'btw-zakelijke-kosten-aftrekken',
     'telefoon-aftrekbaar-zzp',
+    'internetkosten-aftrekbaar-zzp',
+    'internet-zakelijk-of-prive-zzp',
+    'zakelijk-internet-thuis',
     'laptop-aftrekbaar-zzp',
     'software-abonnementen-aftrekken-zzp',
     'werkruimte-thuis-aftrekbaar-zzp',
@@ -804,8 +807,14 @@ export const internetAftrekbaarArticle = {
 
       <p className="mt-4 text-sm text-slate-500">
         Dit artikel is informatief en geen fiscaal advies. Regels kunnen wijzigen; check bij
-        twijfel de Belastingdienst of je boekhouder. Zie ook{' '}
-        <TextLink href="/blogs/zakelijke-kosten-zzp">zakelijke kosten zzp</TextLink>.
+        twijfel de Belastingdienst of je boekhouder.         Zie ook{' '}
+        <TextLink href="/blogs/zakelijke-kosten-zzp">zakelijke kosten zzp</TextLink>
+        ,{' '}
+        <TextLink href="/blogs/internetkosten-aftrekbaar-zzp">
+          internetkosten aftrekbaar
+        </TextLink>{' '}
+        en{' '}
+        <TextLink href="/zakelijk-internet">zakelijk internet</TextLink>.
       </p>
     </>
   ),
