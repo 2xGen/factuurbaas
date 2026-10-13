@@ -6,6 +6,10 @@ import {
   getHypotheekArticleBreadcrumbs,
   isHypotheekGuideSlug,
 } from '@/lib/hypotheekHub';
+import {
+  getZakelijkeLeaseArticleBreadcrumbs,
+  isZakelijkeLeaseGuideSlug,
+} from '@/lib/zakelijkeLease';
 
 // Dynamic to avoid auth/context issues during Vercel static build
 export const dynamic = 'force-dynamic';
@@ -22,6 +26,16 @@ export async function generateMetadata({ params }) {
   const modified = article.dateModified ? `${article.dateModified}T12:00:00+01:00` : published;
   const articleUrl = `https://factuurbaas.nl/blogs/${article.slug}`;
   const seoTitle = article.metaTitle || article.title;
+  const ogImages = article.image?.url
+    ? [
+        {
+          url: article.image.url,
+          width: 1200,
+          height: 630,
+          alt: article.image.alt || seoTitle,
+        },
+      ]
+    : siteOpenGraphImages;
   return {
     title: `${seoTitle} | FactuurBaas`,
     description: article.excerpt,
@@ -34,7 +48,7 @@ export async function generateMetadata({ params }) {
       url: articleUrl,
       type: 'article',
       siteName: 'FactuurBaas',
-      images: siteOpenGraphImages,
+      images: ogImages,
       publishedTime: published,
       modifiedTime: modified,
     },
@@ -42,7 +56,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: seoTitle,
       description: article.excerpt,
-      images: [SITE_OG_IMAGE],
+      images: [article.image?.url || SITE_OG_IMAGE],
     },
     alternates: { canonical: articleUrl },
   };
@@ -52,7 +66,8 @@ export default async function BlogPostPage({ params }) {
   const resolvedParams = typeof params.then === 'function' ? await params : params;
   const article = articles.find((a) => a.slug === resolvedParams.slug);
   if (!article) notFound();
-  const relatedLimit = isHypotheekGuideSlug(article.slug) ? 6 : 4;
+  const relatedLimit =
+    isHypotheekGuideSlug(article.slug) || isZakelijkeLeaseGuideSlug(article.slug) ? 6 : 4;
   const relatedArticles = (article.relatedSlugs?.length
     ? article.relatedSlugs
         .map((slug) => articles.find((a) => a.slug === slug))
@@ -62,6 +77,8 @@ export default async function BlogPostPage({ params }) {
 
   const breadcrumbItems = isHypotheekGuideSlug(article.slug)
     ? getHypotheekArticleBreadcrumbs(article.title)
+    : isZakelijkeLeaseGuideSlug(article.slug)
+      ? getZakelijkeLeaseArticleBreadcrumbs(article.title)
     : article.breadcrumbLabel
       ? [
           { name: 'Home', href: '/' },

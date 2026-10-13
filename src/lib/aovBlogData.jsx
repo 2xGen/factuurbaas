@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import InsifyAovCta from '@/components/aov/InsifyAovCta';
 
 const AOV_PILLAR_IMAGE = {
   url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/Arbeidsongeschiktheidsverzekering%20zzp.jpg',
@@ -10,9 +9,13 @@ const AOV_PILLAR_IMAGE = {
 
 const AovCta = ({
   href = '/tools/aov-berekenen-zzp',
-  label = "Bereken je benodigde AOV-dekking →",
+  label = 'Bereken je benodigde AOV-dekking →',
+  hint = 'Maak een indicatieve berekening van je AOV-dekking',
 }) => (
   <div className="my-8 text-center">
+    {hint ? (
+      <p className="mb-3 text-[15px] leading-relaxed text-ink-500">{hint}</p>
+    ) : null}
     <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
       <Link href={href}>{label}</Link>
     </Button>
@@ -44,7 +47,7 @@ export const aovArticles = [
       "aov zzp, arbeidsongeschiktheidsverzekering zzp, aov zzp nodig, aov voor zzp'ers, arbeidsongeschiktheidsverzekering zzp nodig, aov zzp verplicht, aov zzp kosten, aov zzp premie, arbeidsongeschiktheidsverzekering zelfstandige, inkomen verzekeren zzp, zzp arbeidsongeschiktheidsverzekering, aov berekenen zzp, aov zzp vergelijken, verplichte aov zzp",
     image: AOV_PILLAR_IMAGE,
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: "Is een AOV verplicht voor zzp'ers?",
@@ -101,7 +104,7 @@ export const aovArticles = [
           </p>
           <p className="mt-2 text-sm text-slate-600">
             Gebruik de{' '}
-            <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+            <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
               AOV-tool voor zzp&apos;ers
             </Link>{' '}
             om je situatie in kaart te brengen.
@@ -342,8 +345,7 @@ export const aovArticles = [
           Wil je eerst zelf bekijken hoeveel inkomen je nodig zou hebben als je arbeidsongeschikt
           raakt? Gebruik daarvoor onze gratis tool:
         </p>
-        <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
-        <InsifyAovCta />
+        <AovCta />
         <p>
           Met de tool kun je je financiële situatie als zzp&apos;er in kaart brengen en nadenken
           over hoeveel inkomen je bij arbeidsongeschiktheid zou moeten kunnen opvangen.
@@ -553,12 +555,11 @@ export const aovArticles = [
 
         <h3>Bereken je AOV-behoefte</h3>
         <p>Wil je dat eerst concreet maken?</p>
-        <AovCta href="/tools/aov-zzp" label="Gebruik de AOV-tool voor zzp'ers →" />
+        <AovCta />
         <p>
           Daarna kun je beter beoordelen hoeveel van het risico je zelf kunt dragen en welk deel je
           eventueel wilt verzekeren.
         </p>
-        <AovCta label="Of ga direct naar de AOV-calculator →" />
 
         <p className="text-sm text-slate-500">
           Dit artikel is algemene informatie en geen verzekerings- of fiscaal advies.
@@ -591,7 +592,7 @@ export const aovArticles = [
       alt: "Wat kost een AOV voor zzp'ers? Premie en factoren uitgelegd.",
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: "Wat kost een AOV gemiddeld voor een zzp'er?",
@@ -643,9 +644,7 @@ export const aovArticles = [
           individuele premies kunnen daar flink van afwijken.
         </p>
         <p>Wil je eerst weten hoeveel inkomen je eigenlijk zou moeten kunnen opvangen?</p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <InsifyAovCta />
-
+        <AovCta />
         <h2>Wat kost een AOV gemiddeld?</h2>
         <p>
           Als grove indicatie kun je voor een AOV als zzp&apos;er denken aan ongeveer{' '}
@@ -999,7 +998,7 @@ export const aovArticles = [
 
         <h3>Bereken je AOV-behoefte</h3>
         <p>Je kunt dit ook eenvoudig met onze gratis tool bekijken:</p>
-        <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
+        <AovCta />
         <p>
           De tool helpt je om je financiële situatie inzichtelijk te maken voordat je naar een
           verzekering gaat kijken.
@@ -1060,8 +1059,7 @@ export const aovArticles = [
           Daarna kun je pas goed beoordelen hoeveel risico je zelf wilt dragen en welk bedrag je
           eventueel wilt verzekeren.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p>
           Meer over of je een AOV nodig hebt:{' '}
           <Link href="/blogs/aov-zzp" className="text-warm-orange hover:underline">
@@ -1104,7 +1102,7 @@ export const aovArticles = [
       alt: "AOV voor startende zzp'ers: wanneer heb je die nodig?",
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: "Kan ik als startende zzp'er een AOV afsluiten?",
@@ -1567,7 +1565,7 @@ export const aovArticles = [
         </p>
         <p>
           Gebruik dan onze{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>
           .
@@ -1576,9 +1574,7 @@ export const aovArticles = [
           Zo krijg je eerst inzicht in je financiële behoefte voordat je naar een specifieke
           verzekering gaat kijken.
         </p>
-        <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
-        <InsifyAovCta />
-
+        <AovCta />
         <h2>Wanneer kun je het beste een AOV afsluiten?</h2>
         <p>Er is geen universeel moment dat voor iedere starter het beste is.</p>
         <p>Maar wacht niet alleen omdat je onderneming nog klein is.</p>
@@ -1643,8 +1639,7 @@ export const aovArticles = [
           Daarna kun je bepalen welk deel je zelf wilt opvangen en welk deel je eventueel wilt
           verzekeren.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als startende zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p>Lees ook:</p>
         <ul>
           <li>
@@ -1698,7 +1693,7 @@ export const aovArticles = [
       alt: "AOV verplicht voor zzp'ers? Plannen voor 2030 uitgelegd.",
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: "Is een AOV in 2026 verplicht voor zzp'ers?",
@@ -2063,7 +2058,7 @@ export const aovArticles = [
         </p>
         <p>
           Gebruik dan de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>
           .
@@ -2072,9 +2067,7 @@ export const aovArticles = [
           Daarmee kun je je financiële situatie eerst in kaart brengen voordat je naar een
           particuliere AOV of andere oplossing kijkt.
         </p>
-        <AovCta href="/tools/aov-zzp" label="AOV berekenen voor zzp'ers →" />
-        <InsifyAovCta />
-
+        <AovCta />
         <h2>Wat kun je nu al doen?</h2>
         <p>
           Je hoeft niet te wachten tot de wet definitief is om je financiële risico te bekijken.
@@ -2164,8 +2157,7 @@ export const aovArticles = [
             opvangen?
           </strong>
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p>Lees ook:</p>
         <ul>
           <li>
@@ -2218,7 +2210,7 @@ export const aovArticles = [
       alt: 'AOV zonder medische keuring: wat is er mogelijk?',
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: 'Kan ik een AOV afsluiten zonder medische keuring?',
@@ -2525,7 +2517,7 @@ export const aovArticles = [
         </p>
         <p>
           Op FactuurBaas kun je hiervoor de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>{' '}
           gebruiken.
@@ -2534,8 +2526,7 @@ export const aovArticles = [
           Daarmee kun je onder andere nadenken over je gewenste maandelijkse inkomen, je
           financiële buffer en de periode die je zelf kunt overbruggen.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <InsifyAovCta />
+        <AovCta />
         <p>Wil je eerst de basis van een AOV begrijpen? Lees dan ook:</p>
         <ul>
           <li>
@@ -2584,8 +2575,7 @@ export const aovArticles = [
           </strong>
           .
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p className="text-sm text-slate-500">
           Dit artikel is algemene informatie en geen verzekerings- of fiscaal advies.
         </p>
@@ -2615,7 +2605,7 @@ export const aovArticles = [
       alt: 'AOV met korte wachttijd: wat kost het en wanneer is het verstandig?',
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: 'Wat is de kortste wachttijd bij een AOV?',
@@ -3027,7 +3017,7 @@ export const aovArticles = [
         </p>
         <p>
           Op FactuurBaas kun je daarvoor de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>{' '}
           gebruiken.
@@ -3036,8 +3026,7 @@ export const aovArticles = [
           Daarmee kun je eerst je financiële situatie in kaart brengen voordat je naar een
           specifieke verzekering kijkt.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <InsifyAovCta />
+        <AovCta />
         <p>Lees ook:</p>
         <ul>
           <li>
@@ -3095,8 +3084,7 @@ export const aovArticles = [
           Kijk bij het vergelijken van een AOV daarom altijd naar de combinatie van{' '}
           <strong>wachttijd, verzekerd bedrag, premie, uitkeringsduur en voorwaarden</strong>.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p className="text-sm text-slate-500">
           Dit artikel is algemene informatie en geen verzekerings- of fiscaal advies.
         </p>
@@ -3125,7 +3113,7 @@ export const aovArticles = [
       alt: 'AOV met lange wachttijd: lagere premie, maar meer risico',
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: 'Wat is een lange wachttijd bij een AOV?',
@@ -3569,13 +3557,12 @@ export const aovArticles = [
         </ul>
         <p>
           Gebruik daarvoor de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>{' '}
           van FactuurBaas.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <InsifyAovCta />
+        <AovCta />
         <p>Je kunt daarnaast verder lezen:</p>
         <ul>
           <li>
@@ -3631,8 +3618,7 @@ export const aovArticles = [
           <strong>wachttijd, verzekerd bedrag, uitkeringsduur, eindleeftijd en voorwaarden</strong>
           .
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p className="text-sm text-slate-500">
           Dit artikel is algemene informatie en geen verzekerings- of fiscaal advies.
         </p>
@@ -3660,7 +3646,7 @@ export const aovArticles = [
       alt: "Hoeveel AOV heb ik nodig als zzp'er? Bereken je dekking",
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: "Hoeveel AOV heb ik nodig als zzp'er?",
@@ -4212,7 +4198,7 @@ export const aovArticles = [
         <p>Wil je niet zelf met een kladblok rekenen?</p>
         <p>
           Gebruik dan de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>{' '}
           van FactuurBaas.
@@ -4227,9 +4213,7 @@ export const aovArticles = [
         <p>
           Zo krijg je een beter beeld van hoeveel inkomen je daadwerkelijk zou moeten opvangen.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken hoeveel AOV je nodig hebt →" />
-        <InsifyAovCta />
-
+        <AovCta />
         <h2>Conclusie</h2>
         <p>
           <strong>
@@ -4256,8 +4240,7 @@ export const aovArticles = [
           Een goede AOV draait dus niet om het maximaal verzekerbare bedrag, maar om het{' '}
           <strong>inkomensrisico dat je zelf niet wilt of kunt dragen</strong>.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV-behoefte als zzp'er →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p>Lees ook:</p>
         <ul>
           <li>
@@ -4313,7 +4296,7 @@ export const aovArticles = [
       alt: "AOV berekenen voor zzp'ers: bereken je dekking",
     },
     datePublished: '2026-09-18',
-    dateModified: '2026-09-18',
+    dateModified: '2026-10-13',
     faq: [
       {
         question: 'Hoe bereken ik hoeveel AOV ik nodig heb?',
@@ -4367,9 +4350,7 @@ export const aovArticles = [
           beroep, leeftijd en de gekozen wachttijd. KVK noemt deze factoren expliciet bij het
           bepalen van de kosten van een AOV.
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV →" />
-        <InsifyAovCta />
-
+        <AovCta />
         <h2>AOV berekenen: begin met je maandelijkse behoefte</h2>
         <p>Een eenvoudige manier om je AOV te berekenen is:</p>
         <p>
@@ -4863,7 +4844,7 @@ export const aovArticles = [
         <p>Wil je snel berekenen hoeveel inkomen je ongeveer wilt beschermen?</p>
         <p>
           Gebruik dan de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool voor zzp&apos;ers
           </Link>{' '}
           van FactuurBaas.
@@ -4880,7 +4861,7 @@ export const aovArticles = [
           <li>je wachttijd;</li>
           <li>je andere inkomsten.</li>
         </ul>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV →" />
+        <AovCta />
 
         <h2>Conclusie</h2>
         <p>
@@ -4900,13 +4881,12 @@ export const aovArticles = [
         </p>
         <p>
           Wil je het zelf berekenen? Gebruik dan de{' '}
-          <Link href="/tools/aov-zzp" className="font-medium text-warm-orange hover:underline">
+          <Link href="/tools/aov-berekenen-zzp" className="font-medium text-warm-orange hover:underline">
             AOV-tool van FactuurBaas
           </Link>
           .
         </p>
-        <AovCta href="/tools/aov-zzp" label="Bereken je AOV →" />
-        <AovCta label="Of open direct de AOV-calculator →" />
+        <AovCta />
         <p>Lees ook:</p>
         <ul>
           <li>

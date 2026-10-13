@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calculator, Clock, FileText, Receipt } from 'lucide-react';
+import { ArrowRight, Calculator, Clock, FileText, ListChecks, Receipt, Scale } from 'lucide-react';
 import { LandingSection, SectionHeader } from '@/components/landing/LandingSection';
 
 const featuredTools = [
@@ -30,6 +30,20 @@ const featuredTools = [
     description: 'Bereken de vervaldatum van je factuur in seconden.',
     href: '/tools/betaaltermijn-calculator',
     icon: Receipt,
+  },
+  {
+    label: 'Boekhoudprogramma vergelijken',
+    description: "Vergelijk boekhoudsoftware voor zzp'ers en starters op prijs en functies.",
+    href: '/boekhoudprogramma-vergelijken',
+    icon: Scale,
+    cta: 'Bekijk de vergelijker',
+  },
+  {
+    label: 'Boekhoudprogramma-check',
+    description: 'Ontdek of een factuurtool of boekhoudsoftware bij jouw administratie past.',
+    href: '/tools/boekhoudprogramma-check',
+    icon: ListChecks,
+    cta: 'Doe de check',
   },
 ];
 
@@ -76,7 +90,7 @@ export default function HomeToolsSection() {
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-slate-600">{tool.description}</p>
                   <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-warm-orange">
-                    Gebruik tool
+                    {tool.cta || 'Gebruik tool'}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>

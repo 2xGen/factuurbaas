@@ -137,6 +137,10 @@ export const RESULTS = {
       'of meer inzicht wilt in je financiële situatie.',
     ],
     primaryCta: { href: '/create-invoice', label: 'Maak gratis een factuur →' },
+    secondaryCta: {
+      href: '/boekhoudprogramma-vergelijken',
+      label: "Toch programma's vergelijken",
+    },
     primaryNote:
       'Met FactuurBaas kun je gratis een professionele factuur maken zonder account. Je downloadt de factuur als PDF en verstuurt deze zelf naar je klant.',
   },
@@ -173,8 +177,8 @@ export const RESULTS = {
     upgradeWhen:
       'Als je aantal transacties sterk groeit, veel automatisering wilt of uitgebreidere financiële rapportages nodig hebt, kan een uitgebreider boekhoudprogramma interessanter worden.',
     primaryCta: {
-      href: '/blogs/beste-boekhoudprogramma-zzp',
-      label: "Bekijk de beste boekhoudprogramma's voor zzp'ers →",
+      href: '/boekhoudprogramma-vergelijken',
+      label: "Vergelijk boekhoudprogramma's →",
     },
   },
   compleet: {
@@ -211,8 +215,8 @@ export const RESULTS = {
     ],
     note: "Er is niet één boekhoudprogramma dat voor iedere zzp'er het beste is.",
     primaryCta: {
-      href: '/blogs/beste-boekhoudprogramma-zzp',
-      label: 'Vergelijk Moneybird, Jortt en e-Boekhouden.nl →',
+      href: '/boekhoudprogramma-vergelijken',
+      label: "Vergelijk boekhoudprogramma's →",
     },
   },
   boekhouder: {
@@ -242,8 +246,8 @@ export const RESULTS = {
     selfDoWhen:
       'Als je administratie eenvoudiger wordt, je meer kennis opbouwt of je voldoende tijd hebt om de boekhouding zelf te doen, kun je altijd meer zelf gaan beheren.',
     primaryCta: {
-      href: '/blogs/beste-boekhoudprogramma-zzp',
-      label: "Vergelijk boekhoudprogramma's voor zzp'ers →",
+      href: '/boekhoudprogramma-vergelijken',
+      label: "Vergelijk boekhoudprogramma's →",
     },
   },
 };

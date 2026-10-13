@@ -35,6 +35,8 @@ export const reiskostenAftrekkenArticle = {
     'zakelijke-uitgaven-bijhouden-zzp',
     'btw-zakelijke-kosten-aftrekken',
     'zakelijke-kosten-prive-betaald',
+    'zakelijk-auto-leasen-zzp',
+    'auto-zakelijk-of-prive-zzp',
   ],
   metaTitle: "Reiskosten aftrekken als zzp'er: regels & €0,25/km in 2026",
   title: "Reiskosten aftrekken als zzp'er: wat mag je aftrekken?",
@@ -534,9 +536,21 @@ export const reiskostenAftrekkenArticle = {
         <li>leasekosten.</li>
       </ul>
       <p>
+        Overweeg je een auto te leasen voor je onderneming? Lees{' '}
+        <TextLink href="/blogs/zakelijk-auto-leasen-zzp">
+          zakelijk auto leasen als zzp&apos;er
+        </TextLink>
+        .
+      </p>
+      <p>
         Gebruik je de zakelijke auto ook privé? Dan kun je daarnaast te maken krijgen met een
         correctie voor privégebruik en eventueel bijtelling. De keuze tussen een auto zakelijk of
-        privé houden is daarom een aparte fiscale beslissing.
+        privé houden is daarom een aparte fiscale beslissing. Meer daarover:{' '}
+        <TextLink href="/blogs/auto-zakelijk-of-prive-zzp">
+          auto zakelijk of privé als zzp&apos;er
+        </TextLink>
+        . Wil je leaseaanbiedingen vergelijken?{' '}
+        <TextLink href="/zakelijke-lease-vergelijken">zakelijke lease vergelijken</TextLink>.
       </p>
 
       <h2>Privéauto versus auto van de zaak</h2>

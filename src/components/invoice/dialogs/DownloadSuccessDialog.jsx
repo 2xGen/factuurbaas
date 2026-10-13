@@ -11,12 +11,24 @@ import { CheckCircle2, LayoutDashboard } from 'lucide-react';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
 import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 
-const NEXT_STEPS = [
-  'Boekhouding',
-  'Zakelijke rekening',
-  'Facturen automatisch bewaren',
-  'Betaalherinneringen',
-];
+function BoekhoudCompareNudge({ onClose }) {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <p className="text-sm font-semibold text-slate-900">Meer dan alleen facturen maken?</p>
+      <p className="mt-1 text-sm leading-relaxed text-slate-600">
+        Wil je ook je uitgaven, btw en administratie bijhouden? Vergelijk boekhoudprogramma&apos;s
+        voor zzp&apos;ers en ontdek welk pakket bij je past.
+      </p>
+      <Link
+        href="/boekhoudprogramma-vergelijken"
+        onClick={onClose}
+        className="mt-3 inline-flex text-sm font-semibold text-warm-orange hover:underline"
+      >
+        Vergelijk boekhoudprogramma&apos;s
+      </Link>
+    </div>
+  );
+}
 
 export default function DownloadSuccessDialog({
   isOpen,
@@ -54,22 +66,9 @@ export default function DownloadSuccessDialog({
             <p className="text-sm text-slate-600">
               Tip: klik op <strong>Factuur opslaan</strong> zodat hij in je dashboard verschijnt.
             </p>
-          ) : (
-            <div>
-              <p className="text-sm font-semibold text-slate-900">Handige volgende stap</p>
-              <p className="mt-1 text-sm text-slate-600">
-                Veel ondernemers gebruiken na hun eerste factuur ook:
-              </p>
-              <ul className="mt-2 space-y-1">
-                {NEXT_STEPS.map((step) => (
-                  <li key={step} className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className="text-slate-400">•</span>
-                    {step}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          ) : null}
+
+          <BoekhoudCompareNudge onClose={onClose} />
 
           {!isLoggedIn && <FeatureUpdatesSignup companyEmail={companyEmail} />}
 

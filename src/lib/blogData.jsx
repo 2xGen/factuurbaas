@@ -5,6 +5,7 @@ import { MONEYBIRD_URL, JORTT_URL, E_BOEKHOUDEN_URL } from '@/lib/affiliateLinks
 import { aovArticles } from '@/lib/aovBlogData';
 import { uitgavenArticles } from '@/lib/uitgavenBlogData';
 import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
+import { zakelijkeLeaseArticles } from '@/lib/zakelijkeLeaseBlogData';
 import { gratisFactuurAppArticle } from '@/lib/gratisFactuurAppBlog';
 
 const CtaButton = ({ href = '/create-invoice', label = 'Maak Nu Je Gratis Factuur' }) => (
@@ -1406,7 +1407,7 @@ export const articles = [
       alt: 'Verschil tussen offerte en factuur uitgelegd.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-08-28',
+    dateModified: '2026-10-13',
     faq: [
       { question: 'Wat is het verschil tussen offerte en factuur?', answer: 'Een offerte is een prijsvoorstel vóór je levert; een factuur is een betaalverzoek ná levering. De offerte legt prijs en voorwaarden vast, de factuur vraagt om betaling voor geleverd werk of producten.' },
       { question: 'Is een offerte vrijblijvend?', answer: 'Dat hangt af van de tekst en omstandigheden. Een offerte kan een bindend aanbod zijn zodra de klant akkoord geeft. Veel ondernemers vermelden expliciet dat een offerte vrijblijvend is, of zetten een geldigheidsduur op het document. Lees altijd de voorwaarden op de offerte zelf.' },
@@ -1506,6 +1507,7 @@ export const articles = [
                 <li>Je stuurt een factuur die verwijst naar de offerte.</li>
             </ol>
             <p>Een duidelijke offerte voorkomt misverstanden en maakt factureren achteraf eenvoudiger. Maak je offerte met de <Link href="/tools/offerte-maker" className="text-warm-orange hover:underline">gratis offerte maker</Link> en stuur daarna je factuur via <Link href="/create-invoice" className="text-warm-orange hover:underline">FactuurBaas</Link> — beide gratis, zonder account, direct als PDF.</p>
+            <p>Wil je facturen én offertes in één administratie bijhouden? <Link href="/boekhoudprogramma-vergelijken" className="text-warm-orange hover:underline">Vergelijk boekhoudprogramma&apos;s voor facturen en offertes</Link>.</p>
             <OfferteFactuurCtas />
 
             <h2>Veelgestelde vragen</h2>
@@ -3810,7 +3812,7 @@ export const articles = [
       alt: 'Gratis factuur maken online zonder account: direct als PDF downloaden.',
     },
     datePublished: '2026-02-01',
-    dateModified: '2026-08-28',
+    dateModified: '2026-10-13',
     faq: [
       { question: 'Kan ik een factuur maken zonder account?', answer: 'Ja. Bij FactuurBaas maak je direct een professionele factuur zonder registratie of inloggen. Je vult je gegevens in op de pagina en downloadt de PDF. Geen e-mail, wachtwoord of account nodig.' },
       { question: 'Waar kan ik gratis een factuur maken online?', answer: 'Op FactuurBaas.nl kun je gratis online een factuur maken zonder account. Bezoek de factuurpagina, vul je gegevens in en download je factuur direct als PDF. Alles gebeurt in je browser; wij slaan niets op.' },
@@ -3861,6 +3863,9 @@ export const articles = [
         <h2>Account of zonder account?</h2>
         <p>Beide kan. Gratis factureren zonder account blijft de snelste route: direct invullen en PDF downloaden. Wil je je bedrijfsgegevens opslaan, klanten beheren of een overzicht van facturen bijhouden? Maak dan gratis een account aan — volledig optioneel. Meer over opslaan en beheren lees je in <Link href="/blogs/factuurbeheer-overzicht" className="text-warm-orange hover:underline">factuurbeheer voor zzp&apos;ers</Link>.</p>
         <CtaButton />
+
+        <h2>Wanneer heb je een boekhoudprogramma nodig?</h2>
+        <p>Een gratis factuur maken kan prima zonder account. Maar wanneer je steeds meer facturen verstuurt, uitgaven wilt bijhouden of je btw-administratie wilt vereenvoudigen, kan boekhoudsoftware handig zijn. Bekijk onze <Link href="/boekhoudprogramma-vergelijken" className="text-warm-orange hover:underline">vergelijker voor boekhoudprogramma&apos;s</Link> om te ontdekken welke oplossing bij jouw onderneming past.</p>
 
         <h2>Veelgestelde vragen</h2>
         <h3>Kan ik een factuur maken zonder account?</h3>
@@ -3960,7 +3965,11 @@ export const articles = [
             boekhoudprogramma-check
           </Link>
           : in acht korte vragen zie je of een factuurtool, basissoftware, compleet boekhoudprogramma of software plus
-          boekhouder waarschijnlijk het beste past. Of lees hoe je{' '}
+          boekhouder waarschijnlijk het beste past. Wil je pakketten en prijzen naast elkaar zien? Gebruik de{' '}
+          <Link href="/boekhoudprogramma-vergelijken" className="text-warm-orange hover:underline">
+            boekhoudprogramma-vergelijker
+          </Link>
+          . Of lees hoe je{' '}
           <Link href="/gidsen/zelf-boekhouden-zzp" className="text-warm-orange hover:underline">
             zelf je boekhouding als zzp&apos;er kunt doen
           </Link>
@@ -16854,6 +16863,7 @@ export const articles = [
   ...aovArticles,
   ...uitgavenArticles,
   ...zakelijkeKostenArticles,
+  ...zakelijkeLeaseArticles,
   gratisFactuurAppArticle,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];

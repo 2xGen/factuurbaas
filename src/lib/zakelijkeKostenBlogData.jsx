@@ -394,6 +394,13 @@ export const zakelijkeKostenArticles = [
           Voor een auto die tot het ondernemingsvermogen behoort gelden andere regels.
         </p>
         <p>
+          Overweeg je een auto op de zaak via lease? Lees{' '}
+          <TextLink href="/blogs/zakelijk-auto-leasen-zzp">
+            zakelijk auto leasen als zzp&apos;er
+          </TextLink>
+          .
+        </p>
+        <p>
           Lees verder:{' '}
           <TextLink href="/blogs/reiskosten-aftrekken-zzp">
             Reiskosten aftrekken als zzp&apos;er

@@ -123,8 +123,8 @@ export default function BoekhoudprogrammaCheckSeoContent({
         </p>
         <CtaRow>
           <Cta
-            href="/blogs/beste-boekhoudprogramma-zzp"
-            label="Bekijk de beste boekhoudprogramma's voor zzp'ers →"
+            href="/boekhoudprogramma-vergelijken"
+            label="Vergelijk boekhoudprogramma's →"
           />
         </CtaRow>
       </section>
@@ -169,8 +169,8 @@ export default function BoekhoudprogrammaCheckSeoContent({
         <p>Er is niet één boekhoudprogramma dat voor iedere zzp&apos;er het beste is.</p>
         <CtaRow>
           <Cta
-            href="/blogs/beste-boekhoudprogramma-zzp"
-            label="Vergelijk Moneybird, Jortt en e-Boekhouden.nl →"
+            href="/boekhoudprogramma-vergelijken"
+            label="Vergelijk boekhoudprogramma's →"
           />
         </CtaRow>
       </section>
@@ -187,8 +187,9 @@ export default function BoekhoudprogrammaCheckSeoContent({
           <li>of je liever hebt dat iemand je administratie controleert of verzorgt.</li>
         </ul>
         <p>
-          Software kan ook in deze situatie nuttig zijn. Het zorgt voor structuur en kan het
-          uitwisselen van gegevens met een boekhouder makkelijker maken.
+          <Link href="/boekhoudprogramma-vergelijken">Boekhoudsoftware</Link> kan ook in deze
+          situatie nuttig zijn. Het zorgt voor structuur en kan het uitwisselen van gegevens met
+          een boekhouder makkelijker maken.
         </p>
         <p>
           Je hoeft dus niet te kiezen tussen <strong>software óf een boekhouder</strong>.
@@ -210,6 +211,12 @@ export default function BoekhoudprogrammaCheckSeoContent({
           Als je administratie eenvoudiger wordt, je meer kennis opbouwt of je voldoende tijd hebt
           om de boekhouding zelf te doen, kun je altijd meer zelf gaan beheren.
         </p>
+        <CtaRow>
+          <Cta
+            href="/boekhoudprogramma-vergelijken"
+            label="Vergelijk boekhoudprogramma's →"
+          />
+        </CtaRow>
       </section>
 
       <section>
@@ -338,8 +345,8 @@ export default function BoekhoudprogrammaCheckSeoContent({
         </p>
         <CtaRow>
           <Cta
-            href="/blogs/beste-boekhoudprogramma-zzp"
-            label="Bekijk onze vergelijking van boekhoudprogramma's voor zzp'ers →"
+            href="/boekhoudprogramma-vergelijken"
+            label="Vergelijk boekhoudprogramma's voor zzp'ers →"
           />
         </CtaRow>
       </section>
@@ -429,8 +436,8 @@ export default function BoekhoudprogrammaCheckSeoContent({
               {faq.q.includes('beste boekhoudprogramma') && (
                 <div className="mt-5 flex">
                   <Cta
-                    href="/blogs/beste-boekhoudprogramma-zzp"
-                    label="Bekijk de beste boekhoudprogramma's voor zzp'ers →"
+                    href="/boekhoudprogramma-vergelijken"
+                    label="Vergelijk boekhoudprogramma's →"
                     variant="secondary"
                   />
                 </div>
@@ -459,8 +466,8 @@ export default function BoekhoudprogrammaCheckSeoContent({
         <CtaRow>
           <Cta href="/create-invoice" label="Maak gratis een factuur met FactuurBaas →" />
           <Cta
-            href="/blogs/beste-boekhoudprogramma-zzp"
-            label="Of vergelijk de beste boekhoudprogramma's voor zzp'ers →"
+            href="/boekhoudprogramma-vergelijken"
+            label="Of vergelijk boekhoudprogramma's →"
             variant="secondary"
           />
         </CtaRow>

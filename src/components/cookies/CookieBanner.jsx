@@ -164,8 +164,8 @@ export default function CookieBanner() {
                   Marketingcookies
                 </Label>
                 <p className="text-sm text-slate-600">
-                  Gebruikt voor relevante advertenties of campagnes. Alleen geplaatst als u hiervoor
-                  toestemming geeft.
+                  Gebruikt voor relevante advertenties, campagnes of vergelijkingspartners zoals Daisycon.
+                  Alleen geplaatst als u hiervoor toestemming geeft.
                 </p>
               </div>
               <Switch

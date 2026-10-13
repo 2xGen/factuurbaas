@@ -26,7 +26,7 @@ const sections = [
 ];
 
 export default function PrivacyPolicyPage() {
-  const lastUpdatedDate = '7 oktober 2026';
+  const lastUpdatedDate = '13 oktober 2026';
 
   return (
     <LegalDocument

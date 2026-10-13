@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "@/components/landing/page/sections/HeroSection";
 import DashboardMockupSection from "@/components/landing/page/sections/DashboardMockupSection";
 import WhyFreeHomeSection from "@/components/landing/page/sections/WhyFreeHomeSection";
+import HomeToolsSection from "@/components/landing/page/sections/HomeToolsSection";
 import CallToActionSection from "@/components/landing/page/sections/CallToActionSection";
 import SeoIndexSection from "@/components/landing/page/sections/SeoIndexSection";
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
@@ -36,6 +37,7 @@ export default function HomePage() {
       <HeroSection />
       <DashboardMockupSection />
       <WhyFreeHomeSection />
+      <HomeToolsSection />
       <CallToActionSection />
       <SeoIndexSection />
     </>

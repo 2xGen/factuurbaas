@@ -127,10 +127,22 @@ export default function BoekhoudprogrammaCheck() {
           </>
         }
         lead={
-          <p>
-            Beantwoord 8 korte vragen en ontdek of een factuurtool, basissoftware, compleet
-            boekhoudprogramma of een boekhouder naast software beter past.
-          </p>
+          <>
+            <p>
+              Beantwoord 8 korte vragen en ontdek of een factuurtool, basissoftware, compleet
+              boekhoudprogramma of een boekhouder naast software beter past.
+            </p>
+            <p className="text-base text-ink-400 sm:text-lg">
+              Weet je al dat je software zoekt?{' '}
+              <Link
+                href="/boekhoudprogramma-vergelijken"
+                className="font-medium text-ink underline decoration-ink/20 underline-offset-[6px] transition-colors hover:decoration-ember"
+              >
+                Vergelijk direct pakketten en prijzen
+              </Link>
+              .
+            </p>
+          </>
         }
         containerClassName="max-w-6xl pb-10 pt-8 sm:pb-12 sm:pt-10 lg:pb-14 lg:pt-12"
       />
@@ -312,11 +324,16 @@ export default function BoekhoudprogrammaCheck() {
                       </div>
                     )}
 
-                    <div className="flex flex-col gap-3 border-t border-ink/[0.07] pt-8 sm:flex-row">
+                    <div className="flex flex-col gap-3 border-t border-ink/[0.07] pt-8 sm:flex-row sm:flex-wrap">
                       <Link href={result.primaryCta.href} className={btn.primary}>
                         {result.primaryCta.label}
                         <ArrowIcon />
                       </Link>
+                      {result.secondaryCta && (
+                        <Link href={result.secondaryCta.href} className={btn.secondary}>
+                          {result.secondaryCta.label}
+                        </Link>
+                      )}
                       <button type="button" className={btn.secondary} onClick={reset}>
                         <RotateCcw className="h-4 w-4" aria-hidden />
                         Opnieuw doen

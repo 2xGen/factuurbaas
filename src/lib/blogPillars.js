@@ -163,6 +163,27 @@ export const blogPillars = [
     ],
   },
   {
+    id: 'zakelijke-lease',
+    title: "Zakelijke lease voor zzp'ers",
+    titleAccent: "zzp'ers",
+    cardTitle: 'Zakelijke lease',
+    cardAccent: null,
+    cardBlurb: 'Financial, operational en wat het kost.',
+    description:
+      "Zakelijk auto leasen als zzp'er: financial lease, operational lease, aftrek, bijtelling en kosten vergelijken.",
+    slugs: [
+      'zakelijk-auto-leasen-zzp',
+      'financial-lease-vs-operational-lease',
+      'financial-lease-zzp',
+      'operational-lease-zzp',
+      'zakelijke-lease-aftrekbaar',
+      'zakelijke-lease-zonder-jaarrekening',
+      'auto-zakelijk-of-prive-zzp',
+      'bijtelling-leaseauto-zzp',
+      'zakelijke-lease-kosten',
+    ],
+  },
+  {
     id: 'hypotheek',
     title: "Hypotheek als zzp'er",
     titleAccent: "zzp'er",
@@ -243,11 +264,4 @@ export function getPillarHref(pillar) {
   if (pillar.id === 'aov') return '/blogs/aov-zzp';
   if (pillar.id === 'zakelijke-kosten') return '/blogs/zakelijke-kosten-zzp';
   return `/blogs?pillar=${pillar.id}`;
-}
-
-const AOV_PILLAR = blogPillars.find((p) => p.id === 'aov');
-
-/** True for AOV cluster blog slugs (Insify sticky / CTAs). */
-export function isAovArticleSlug(slug) {
-  return Boolean(slug && AOV_PILLAR?.slugs?.includes(slug));
 }

@@ -33,6 +33,8 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/tools/betaaltermijn-calculator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/kor-calculator`, lastModified: new Date('2026-09-03'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/boekhoudprogramma-check`, lastModified: new Date('2026-09-05'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/boekhoudprogramma-vergelijken`, lastModified: new Date('2026-10-13'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITEMAP_BASE_URL}/zakelijke-lease-vergelijken`, lastModified: new Date('2026-10-13'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/tools/factuur-maken`, lastModified: new Date('2026-09-15'), changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITEMAP_BASE_URL}/tools/hypotheek-zzp`, lastModified: new Date('2026-09-15'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/tools/hypotheek-berekenen-zzp`, lastModified: new Date('2026-09-15'), changeFrequency: 'monthly', priority: 0.85 },

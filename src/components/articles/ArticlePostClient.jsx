@@ -4,10 +4,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
-import InsifyAovSticky from '@/components/aov/InsifyAovSticky';
 import CallToActionSection from '@/components/landing/page/sections/CallToActionSection';
 import { EASE_OUT, Reveal, Stagger, staggerItem } from '@/components/landing/page/motion';
-import { blogPillars, isAovArticleSlug } from '@/lib/blogPillars';
+import { blogPillars } from '@/lib/blogPillars';
 
 function formatDate(iso) {
   if (!iso) return null;
@@ -198,13 +197,11 @@ export default function ArticlePostClient({
   const modifiedFormatted = formatDate(modified);
   const showModified = publishedFormatted && modifiedFormatted && modified !== published;
 
-  const showInsifySticky = basePath === '/blogs' && isAovArticleSlug(article.slug);
   const showHypotheekHubLink = breadcrumbItems?.some((item) => item.href === '/blogs/hypotheek-als-zzper');
   const showToc = headings.length >= 3;
 
   return (
     <>
-      {showInsifySticky && <InsifyAovSticky />}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}

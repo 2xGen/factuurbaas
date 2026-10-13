@@ -12,7 +12,7 @@ export default function FooterClient() {
   return (
     <footer className="border-t border-ink/10 bg-paper py-10 text-ink-500">
       <div className="container mx-auto px-6">
-        <div className="mb-6 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-5">
+        <div className="mb-6 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-3 xl:grid-cols-6">
           <div className="col-span-2 lg:col-span-1">
             <h3 className="mb-2 flex items-center gap-2 text-base font-semibold tracking-[-0.02em] text-ink">
               <img src="/crown-favicon.svg" alt="" className="h-5 w-5" aria-hidden />
@@ -33,13 +33,20 @@ export default function FooterClient() {
             </ul>
           </div>
           <div>
+            <h3 className="mb-4 font-mono text-[11px] font-normal uppercase tracking-[0.16em] text-ink-400">Boekhouden</h3>
+            <ul className="space-y-1.5">
+              <li><Link href="/boekhoudprogramma-vergelijken" className="text-[13px] transition-colors hover:text-ink">Boekhoudprogramma vergelijken</Link></li>
+              <li><Link href="/uitgaven-bijhouden" className="text-[13px] transition-colors hover:text-ink">Uitgaven bijhouden</Link></li>
+            </ul>
+          </div>
+          <div>
             <h3 className="mb-4 font-mono text-[11px] font-normal uppercase tracking-[0.16em] text-ink-400">Meer</h3>
             <ul className="space-y-1.5">
-              <li><Link href="/uitgaven-bijhouden" className="text-[13px] transition-colors hover:text-ink">Uitgaven bijhouden</Link></li>
               <li><Link href="/tools" className="text-[13px] transition-colors hover:text-ink">Tools</Link></li>
               <li><Link href="/blogs" className="text-[13px] transition-colors hover:text-ink">Gidsen</Link></li>
               <li><Link href="/blogs/hypotheek-als-zzper" className="text-[13px] transition-colors hover:text-ink">Hypotheek als zzp&apos;er</Link></li>
               <li><Link href="/blogs/aov-zzp" className="text-[13px] transition-colors hover:text-ink">AOV zzp</Link></li>
+              <li><Link href="/zakelijke-lease-vergelijken" className="text-[13px] transition-colors hover:text-ink">Zakelijke lease vergelijken</Link></li>
               <li><Link href="/waarom-gratis" className="text-[13px] transition-colors hover:text-ink">Waarom gratis</Link></li>
             </ul>
           </div>

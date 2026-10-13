@@ -304,6 +304,23 @@ export default function BlogListClient({ articles, guides = [] }) {
                   {paragraph}
                 </p>
               ))}
+              {intro.followUp?.length > 0 && (
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-500 first:mt-0 sm:text-[1.05rem]">
+                  {intro.followUp.map((part, index) =>
+                    typeof part === 'string' ? (
+                      <React.Fragment key={index}>{part}</React.Fragment>
+                    ) : (
+                      <Link
+                        key={part.href}
+                        href={part.href}
+                        className="font-medium text-ink underline decoration-ink/20 underline-offset-[6px] transition-colors hover:decoration-ember"
+                      >
+                        {part.label}
+                      </Link>
+                    )
+                  )}
+                </p>
+              )}
             </div>
           </div>
 

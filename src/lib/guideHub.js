@@ -53,7 +53,23 @@ export const guideHubIntro = {
     titleAccent: "zzp'er",
     paragraphs: [
       "Kun je zelf je boekhouding doen? Wanneer heb je een boekhoudprogramma nodig? En wat is het verschil tussen een factuurtool en boekhoudsoftware? In deze gidsen lees je hoe je als zzp'er je administratie regelt.",
-      'Doe ook de gratis boekhoudprogramma-check om te zien welk type oplossing bij jouw situatie past.',
+    ],
+    followUp: [
+      'Wil je prijzen, functies en pakketten naast elkaar zien? ',
+      { href: '/boekhoudprogramma-vergelijken', label: "Vergelijk boekhoudprogramma's voor zzp'ers" },
+      '.',
+    ],
+  },
+  'zakelijke-lease': {
+    title: "Zakelijke lease voor zzp'ers",
+    titleAccent: "zzp'ers",
+    paragraphs: [
+      "Financial lease, operational lease of toch privé rijden? In deze gidsen lees je hoe zakelijke lease werkt, wat aftrekbaar kan zijn en waar je op let bij maandbedrag en bijtelling.",
+    ],
+    followUp: [
+      'Wil je actuele aanbiedingen naast elkaar zien? ',
+      { href: '/zakelijke-lease-vergelijken', label: 'Vergelijk zakelijke lease voor zzp’ers' },
+      '.',
     ],
   },
 };

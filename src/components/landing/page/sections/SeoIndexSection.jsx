@@ -79,6 +79,16 @@ export default function SeoIndexSection() {
               </li>
             ))}
             <li>
+              <Link href="/boekhoudprogramma-vergelijken" className={listLink}>
+                Boekhoudprogramma vergelijken
+              </Link>
+            </li>
+            <li>
+              <Link href="/zakelijke-lease-vergelijken" className={listLink}>
+                Zakelijke lease vergelijken
+              </Link>
+            </li>
+            <li>
               <Link href="/blogs" className="text-[13px] font-medium text-ink-700 hover:text-ink">
                 Alle gidsen →
               </Link>

@@ -9,14 +9,17 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 import {
   ArrowRight,
+  ChevronDown,
   Clock,
   Crown,
   FilePlus2,
   FileText,
   LayoutDashboard,
+  ListChecks,
   LogOut,
   Menu,
   Receipt,
+  Scale,
   UserCircle,
   Users,
   Wallet,
@@ -29,15 +32,39 @@ const guestNavLinks = [
   { name: 'Templates', href: '/template' },
   { name: 'Tools', href: '/tools' },
   { name: 'Gidsen', href: '/blogs' },
-  { name: 'Waarom gratis', href: '/waarom-gratis' },
 ];
+
+const boekhoudItems = [
+  {
+    name: 'Boekhoudprogramma vergelijken',
+    href: '/boekhoudprogramma-vergelijken',
+    description: "Vergelijk boekhoudsoftware voor zzp'ers en starters op prijs en functies.",
+    cta: 'Bekijk de vergelijker',
+    icon: Scale,
+  },
+  {
+    name: 'Boekhoudprogramma-check',
+    href: '/tools/boekhoudprogramma-check',
+    description: 'Ontdek of een factuurtool of boekhoudsoftware bij jouw administratie past.',
+    cta: 'Doe de check',
+    icon: ListChecks,
+  },
+];
+
+function isBoekhoudPath(pathname) {
+  return boekhoudItems.some(
+    (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
+  );
+}
 
 export default function HeaderClient() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
+  const [boekhoudOpen, setBoekhoudOpen] = useState(false);
   const headerRef = useRef(null);
   const createMenuRef = useRef(null);
+  const boekhoudMenuRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
   const { user, loading, signOut } = useAuth();
@@ -52,6 +79,7 @@ export default function HeaderClient() {
 
   useEffect(() => {
     setIsOpen(false);
+    setBoekhoudOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -100,6 +128,24 @@ export default function HeaderClient() {
     return () => document.removeEventListener('mousedown', onDoc);
   }, [createMenuOpen]);
 
+  useEffect(() => {
+    if (!boekhoudOpen) return;
+    const onDoc = (e) => {
+      if (boekhoudMenuRef.current && !boekhoudMenuRef.current.contains(e.target)) {
+        setBoekhoudOpen(false);
+      }
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') setBoekhoudOpen(false);
+    };
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [boekhoudOpen]);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
@@ -130,7 +176,88 @@ export default function HeaderClient() {
 
         {!loading && !isLoggedIn && (
           <nav className="hidden items-center gap-6 lg:gap-7 md:flex">
-            {guestNavLinks.map((link) => {
+            {guestNavLinks.slice(0, 3).map((link) => {
+              const isActive =
+                pathname === link.href ||
+                (link.href !== '/' && pathname.startsWith(`${link.href}/`));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-[15px] transition-colors hover:text-ink ${
+                    isActive ? 'font-medium text-ink' : 'text-ink-500'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            <div
+              className="relative"
+              ref={boekhoudMenuRef}
+              onMouseEnter={() => setBoekhoudOpen(true)}
+              onMouseLeave={() => setBoekhoudOpen(false)}
+            >
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1 text-[15px] transition-colors hover:text-ink ${
+                  isBoekhoudPath(pathname) || boekhoudOpen
+                    ? 'font-medium text-ink'
+                    : 'text-ink-500'
+                }`}
+                aria-expanded={boekhoudOpen}
+                aria-haspopup="menu"
+                onClick={() => setBoekhoudOpen((open) => !open)}
+              >
+                Boekhouden
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    boekhoudOpen ? 'rotate-180' : ''
+                  }`}
+                  aria-hidden
+                />
+              </button>
+              {boekhoudOpen && (
+                <div className="absolute left-0 top-full z-50 pt-2">
+                <div
+                  role="menu"
+                  className="w-[22rem] overflow-hidden rounded-2xl border border-ink/10 bg-white py-1.5 shadow-[0_16px_40px_-20px_rgba(10,42,77,0.35)]"
+                >
+                  {boekhoudItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        role="menuitem"
+                        className="group block px-4 py-3.5 transition-colors hover:bg-paper-100"
+                        onClick={() => setBoekhoudOpen(false)}
+                      >
+                        <span className="flex items-start gap-3">
+                          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-warm-orange/15 to-amber-500/10 text-warm-orange">
+                            <Icon className="h-4 w-4" strokeWidth={2} />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-[15px] font-medium text-ink group-hover:text-warm-orange">
+                              {item.name}
+                            </span>
+                            <span className="mt-0.5 block text-[13px] leading-snug text-ink-500">
+                              {item.description}
+                            </span>
+                            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-warm-orange">
+                              {item.cta}
+                              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                            </span>
+                          </span>
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+                </div>
+              )}
+            </div>
+            {guestNavLinks.slice(3).map((link) => {
               const isActive =
                 pathname === link.href ||
                 (link.href !== '/' && pathname.startsWith(`${link.href}/`));
@@ -344,13 +471,6 @@ export default function HeaderClient() {
                       <UserCircle className="h-4 w-4" /> Profiel
                     </span>
                   </Link>
-                  <div className="my-2 border-t border-slate-100" />
-                  <Link
-                    href="/waarom-gratis"
-                    className="rounded-lg px-3 py-3 text-sm text-slate-500 hover:bg-slate-50"
-                  >
-                    Waarom is FactuurBaas gratis?
-                  </Link>
                   <button
                     type="button"
                     className="rounded-lg px-3 py-3 text-left text-base font-medium text-slate-700 hover:bg-slate-50"
@@ -363,7 +483,31 @@ export default function HeaderClient() {
                 </>
               ) : (
                 <>
-                  {guestNavLinks.map((link) => (
+                  {guestNavLinks.slice(0, 3).map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="rounded-lg px-3 py-3 text-base text-slate-700 hover:bg-slate-50"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <p className="px-3 pt-3 pb-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400">
+                    Boekhouden
+                  </p>
+                  {boekhoudItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="rounded-lg px-3 py-3 hover:bg-slate-50"
+                    >
+                      <span className="block text-base text-slate-700">{item.name}</span>
+                      <span className="mt-0.5 block text-sm leading-snug text-slate-500">
+                        {item.description}
+                      </span>
+                    </Link>
+                  ))}
+                  {guestNavLinks.slice(3).map((link) => (
                     <Link
                       key={link.name}
                       href={link.href}

@@ -7,7 +7,7 @@ export const metadata = {
   description:
     "Welk boekhoudprogramma past bij jou als zzp'er? Doe de korte check en ontdek of je een factuurtool, basissoftware, boekhoudprogramma of boekhouder nodig hebt.",
   keywords:
-    "welk boekhoudprogramma zzp, boekhoudprogramma kiezen zzp, boekhoudprogramma nodig zzp, beste boekhoudprogramma zzp, boekhoudprogramma zzp vergelijken",
+    'welk boekhoudprogramma zzp, boekhoudprogramma kiezen zzp, boekhoudprogramma nodig zzp',
   alternates: { canonical: 'https://factuurbaas.nl/tools/boekhoudprogramma-check' },
 };
 
@@ -29,8 +29,8 @@ export default function BoekhoudprogrammaCheckGatePage() {
       ]}
       toolHref={TOOL_HREF}
       toolCtaLabel="Doe de check"
-      secondaryHref="/blogs/beste-boekhoudprogramma-zzp"
-      secondaryCtaLabel="Vergelijk programma's"
+      secondaryHref="/boekhoudprogramma-vergelijken"
+      secondaryCtaLabel="Direct vergelijken"
       faqSchema={getBoekhoudCheckFaqSchema()}
     >
       <BoekhoudprogrammaCheckSeoContent toolHref={TOOL_HREF} />

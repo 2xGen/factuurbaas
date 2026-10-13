@@ -49,6 +49,21 @@ const toolGroups = [
     ],
   },
   {
+    title: 'Administratie',
+    links: [
+      {
+        label: 'Boekhoudprogramma vergelijken',
+        href: '/boekhoudprogramma-vergelijken',
+        description: "Vergelijk prijzen, functies en pakketten van boekhoudprogramma's.",
+      },
+      {
+        label: 'Boekhoudprogramma-check',
+        href: '/tools/boekhoudprogramma-check',
+        description: 'Ontdek welk type oplossing bij jouw administratie past.',
+      },
+    ],
+  },
+  {
     title: 'Inkomen & bedrijf',
     links: [
       {
@@ -81,6 +96,11 @@ const toolGroups = [
         href: '/tools/aov-zzp',
         description: 'Hoeveel inkomen je wilt beschermen, en wat een wachttijd betekent.',
       },
+      {
+        label: 'Zakelijke lease vergelijken',
+        href: '/zakelijke-lease-vergelijken',
+        description: 'Vergelijk financial en operational lease voor zzp’ers.',
+      },
     ],
   },
 ];
@@ -98,8 +118,12 @@ export default function ToolsHubPage() {
       relatedLinksTitle="Ook handig"
       relatedLinks={[
         {
-          href: '/tools/boekhoudprogramma-check',
-          label: 'Boekhoudprogramma-check',
+          href: '/boekhoudprogramma-vergelijken',
+          label: 'Boekhoudprogramma vergelijken',
+        },
+        {
+          href: '/zakelijke-lease-vergelijken',
+          label: 'Zakelijke lease vergelijken',
         },
         {
           href: '/gidsen/deze-7-tools-zijn-heel-handig-voor-zzpers',
