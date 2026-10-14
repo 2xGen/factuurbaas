@@ -11,6 +11,7 @@ import {
 } from '@/components/site/editorial';
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 import { KpnAffiliateLink } from '@/components/tools/KpnAffiliateCta';
+import SimOnlyComparisonWidget from '@/components/tools/SimOnlyComparisonWidget';
 import {
   KPN_AFFILIATE,
   KPN_AFFILIATE_REL,
@@ -105,11 +106,36 @@ export default function ZakelijkSimOnlyPage() {
           </>
         }
       >
-        <a href={KPN_AFFILIATE.simOnly} target="_blank" rel={KPN_AFFILIATE_REL} className={btn.primary}>
-          Bekijk KPN Zakelijk Sim Only
-          <ArrowIcon />
-        </a>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href="#vergelijker" className={btn.primary}>
+            Vergelijk Sim Only
+            <ArrowIcon />
+          </a>
+          <a href={KPN_AFFILIATE.simOnly} target="_blank" rel={KPN_AFFILIATE_REL} className={btn.secondary}>
+            Bekijk KPN Zakelijk Sim Only
+            <ArrowIcon />
+          </a>
+        </div>
       </PageHeader>
+
+      <section id="vergelijker" className="scroll-mt-28 border-t border-ink/[0.06] py-12 sm:py-16">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="font-display text-[1.85rem] font-normal leading-tight tracking-[-0.025em] text-ink sm:text-[2.15rem]">
+            Vergelijk Sim Only-abonnementen
+          </h2>
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink-500">
+            Filter op databundel, looptijd en prijs. Controleer bij de aanbieder of het contract
+            zakelijk is en of je een factuur op bedrijfsnaam krijgt.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-2xl border border-ink/[0.08] bg-white p-3 shadow-paper sm:p-5">
+            <SimOnlyComparisonWidget />
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-ink-400">
+            Prijzen en bundels worden door de vergelijkingspartner bijgehouden. Een aanbod in de
+            lijst is niet automatisch een zakelijk contract of fiscaal aftrekbaar.
+          </p>
+        </div>
+      </section>
 
       <section className="border-t border-ink/[0.06] py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto max-w-3xl px-4 sm:px-6">
@@ -256,8 +282,8 @@ export default function ZakelijkSimOnlyPage() {
       </DarkPanel>
 
       <p className="mx-auto max-w-3xl px-4 py-8 text-center text-sm leading-relaxed text-ink-400 sm:px-6">
-        {ZIT_DISCLOSURE} Dit is geen fiscaal of telecomadvies. Prijzen, bundels en voorwaarden
-        wijzigen; check ze bij de aanbieder.
+        {ZIT_DISCLOSURE} De vergelijker wordt aangeboden door Daisycon. Dit is geen fiscaal of
+        telecomadvies. Prijzen, bundels en voorwaarden wijzigen; check ze bij de aanbieder.
       </p>
 
       <section className="bg-paper py-14 sm:py-16">
