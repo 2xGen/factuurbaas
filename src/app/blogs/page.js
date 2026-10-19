@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { articles } from '@/lib/blogData';
+import { publishedArticles as articles } from '@/lib/blogData';
 import { getGuideListItems } from '@/lib/guideData';
 import { guideHubFaqs } from '@/lib/guideHub';
 import BlogListClient from './BlogListClient';

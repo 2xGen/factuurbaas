@@ -61,6 +61,11 @@ const toolGroups = [
         href: '/tools/boekhoudprogramma-check',
         description: 'Ontdek welk type oplossing bij jouw administratie past.',
       },
+      {
+        label: 'Zelf boekhouden of uitbesteden',
+        href: '/tools/boekhouding-uitbesteden-calculator',
+        description: 'Vergelijk je administratietijd met de kosten van een boekhouder.',
+      },
     ],
   },
   {

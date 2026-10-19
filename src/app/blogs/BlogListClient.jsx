@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { EASE_OUT, Reveal } from '@/components/landing/page/motion';
 import { blogPillars, formatPillarTitle } from '@/lib/blogPillars';
+import { ArrowIcon, btn } from '@/components/site/editorial';
 import { GUIDES_PER_PAGE, getBlogHubIntro, guideHubFaqs } from '@/lib/guideHub';
 
 function toListItem(article) {
@@ -351,6 +352,16 @@ export default function BlogListClient({ articles, guides = [] }) {
               ))}
             </div>
           </nav>
+
+          {selectedPillar === 'boekhouden' && (
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-ink-500">
+              Zelf boekhouden of een deel uitbesteden?{' '}
+              <Link href="/boekhouder-vinden" className={btn.link}>
+                Vind een boekhouder
+                <ArrowIcon />
+              </Link>
+            </p>
+          )}
         </div>
       </header>
 

@@ -162,7 +162,7 @@ export default function LoginPage() {
     if (privacyAccepted) return true;
     toast({
       title: 'Akkoord vereist',
-      description: 'Bevestig het privacybeleid en de voorwaarden om door te gaan.',
+      description: 'Vink aan dat je akkoord gaat met de algemene voorwaarden om door te gaan.',
       variant: 'destructive',
     });
     return false;
@@ -286,8 +286,8 @@ export default function LoginPage() {
                 Inloggen of account maken
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-ink-500">
-                Sla facturen veilig op en bekijk openstaande bedragen in je dashboard. Gratis met Google
-                of met e-mail en wachtwoord.
+                Sla facturen veilig op en bekijk je administratie in één overzicht. Gratis met Google of
+                met e-mail en wachtwoord.
               </p>
             </div>
 
@@ -453,8 +453,8 @@ export default function LoginPage() {
         <div className="motion-safe:animate-rise">
           <img src="/crown-favicon.svg" alt="" aria-hidden className="h-9 w-9" />
           <p className="mt-8 max-w-[18ch] font-display text-[2.6rem] font-normal leading-[1.04] tracking-[-0.03em] xl:text-[3.1rem]">
-            Sla facturen veilig op en bekijk <em className="text-ember-100">openstaande bedragen</em> in je
-            dashboard.
+            Sla facturen veilig op en bekijk je <em className="text-ember-100">administratie</em> in één
+            overzicht.
           </p>
           <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
             Gratis met Google of met e-mail en wachtwoord

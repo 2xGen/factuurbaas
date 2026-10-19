@@ -55,7 +55,9 @@ export const guideHubIntro = {
       "Kun je zelf je boekhouding doen? Wanneer heb je een boekhoudprogramma nodig? En wat is het verschil tussen een factuurtool en boekhoudsoftware? In deze gidsen lees je hoe je als zzp'er je administratie regelt.",
     ],
     followUp: [
-      'Wil je prijzen, functies en pakketten naast elkaar zien? ',
+      'Het overzicht van zelf boekhouden, software en een boekhouder staat op ',
+      { href: '/boekhouden', label: 'boekhouden voor zzp’ers' },
+      '. Wil je prijzen en functies naast elkaar zien? ',
       { href: '/boekhoudprogramma-vergelijken', label: "Vergelijk boekhoudprogramma's voor zzp'ers" },
       '.',
     ],

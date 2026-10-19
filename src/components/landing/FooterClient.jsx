@@ -35,6 +35,8 @@ export default function FooterClient() {
           <div>
             <h3 className="mb-4 font-mono text-[11px] font-normal uppercase tracking-[0.16em] text-ink-400">Boekhouden</h3>
             <ul className="space-y-1.5">
+              <li><Link href="/boekhouden" className="text-[13px] transition-colors hover:text-ink">Boekhouden</Link></li>
+              <li><Link href="/boekhouder-vinden" className="text-[13px] transition-colors hover:text-ink">Boekhouder vinden</Link></li>
               <li><Link href="/boekhoudprogramma-vergelijken" className="text-[13px] transition-colors hover:text-ink">Boekhoudprogramma vergelijken</Link></li>
               <li><Link href="/uitgaven-bijhouden" className="text-[13px] transition-colors hover:text-ink">Uitgaven bijhouden</Link></li>
             </ul>

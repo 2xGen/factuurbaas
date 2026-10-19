@@ -31,8 +31,8 @@ export default function PrivacyConsentCheckbox({
           className="font-medium text-warm-orange hover:underline"
         >
           Algemene voorwaarden
-        </Link>
-        , het{' '}
+        </Link>{' '}
+        en heb kennisgenomen van het{' '}
         <Link href="/privacybeleid" target="_blank" className="font-medium text-warm-orange hover:underline">
           Privacybeleid
         </Link>{' '}
@@ -40,7 +40,7 @@ export default function PrivacyConsentCheckbox({
         <Link href="/verwerkersovereenkomst" target="_blank" className="font-medium text-warm-orange hover:underline">
           Verwerkersovereenkomst
         </Link>
-        . Facturen worden alleen opgeslagen als ik dat kies.
+        .
       </span>
     </label>
   );

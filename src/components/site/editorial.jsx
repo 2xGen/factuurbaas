@@ -129,6 +129,7 @@ export function PageHeader({
   className,
   containerClassName,
   size = 'xl',
+  align = 'center',
 }) {
   const rise = (ms) => ({ animationDelay: `${ms}ms` });
   return (
@@ -145,7 +146,12 @@ export function PageHeader({
         )}
       >
         {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-10 motion-safe:animate-rise" />}
-        <div className={cn(aside && 'grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16')}>
+        <div
+          className={cn(
+            aside && 'grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16',
+            aside && (align === 'start' ? 'items-start' : 'items-center')
+          )}
+        >
           <div>
             {eyebrow && (
               <div className="motion-safe:animate-rise" style={rise(40)}>

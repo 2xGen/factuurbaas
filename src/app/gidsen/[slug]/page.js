@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import ArticlePostClient from '@/components/articles/ArticlePostClient';
 import { getGuideBySlug, getRelatedGuideItems, guides } from '@/lib/guideData';
+import { withBookkeeperCtas } from '@/lib/boekhouderArticleCtas';
 import { clusterToPillarId } from '@/lib/guideHub';
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 
@@ -51,11 +52,20 @@ export default async function GuidePostPage({ params }) {
 
   const pillarId = clusterToPillarId(guide.cluster);
   const listHref = pillarId ? `/blogs?pillar=${pillarId}` : '/blogs';
+  const relatedItems = getRelatedGuideItems(guide);
+  if (guide.slug === 'boekhouding-zzp' || guide.slug === 'zelf-boekhouden-zzp') {
+    relatedItems.unshift({
+      type: 'hub',
+      href: '/boekhouden',
+      title: "Boekhouden voor zzp'ers",
+      excerpt: 'Overzicht: zelf boekhouden, een boekhoudprogramma kiezen of een boekhouder inschakelen.',
+    });
+  }
 
   return (
     <ArticlePostClient
-      article={guide}
-      relatedItems={getRelatedGuideItems(guide)}
+      article={{ ...guide, content: withBookkeeperCtas(guide.content, guide.slug) }}
+      relatedItems={relatedItems}
       basePath="/gidsen"
       listHref={listHref}
       listLabel="Terug naar gidsen"

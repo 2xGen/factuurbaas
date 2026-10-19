@@ -3,7 +3,8 @@
  * Replace with affiliate URLs when available.
  */
 export const MONEYBIRD_URL = 'https://www.moneybird.nl/';
-export const JORTT_URL = 'https://www.jortt.nl/';
+export const JORTT_URL =
+  'https://jf79.net/c/?si=16611&li=1713658&wi=430588&ws=&dl=prijs%2F';
 export const E_BOEKHOUDEN_URL = 'https://www.e-boekhouden.nl/';
 
 /** Insify AOV affiliate (TradeTracker / bdt9). */

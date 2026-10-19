@@ -1,13 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MONEYBIRD_URL, JORTT_URL, E_BOEKHOUDEN_URL } from '@/lib/affiliateLinks';
+import { JORTT_URL, E_BOEKHOUDEN_URL } from '@/lib/affiliateLinks';
 import { aovArticles } from '@/lib/aovBlogData';
 import { uitgavenArticles } from '@/lib/uitgavenBlogData';
 import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
 import { zakelijkeLeaseArticles } from '@/lib/zakelijkeLeaseBlogData';
 import { zakelijkInternetTelefonieArticles } from '@/lib/zakelijkInternetTelefonieBlogData';
 import { gratisFactuurAppArticle } from '@/lib/gratisFactuurAppBlog';
+import { facturenVerwerkenArticles } from '@/lib/facturenVerwerkenBlog';
 
 const CtaButton = ({ href = '/create-invoice', label = 'Maak Nu Je Gratis Factuur' }) => (
     <div className="my-8 text-center">
@@ -28,20 +29,25 @@ const BoekhoudCheckCta = () => (
 const MoneybirdCta = () => (
     <div className="my-8 text-center">
         <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={MONEYBIRD_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk Moneybird →
-            </a>
+            <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
         </Button>
     </div>
+);
+
+const JorttAffiliateNote = () => (
+    <p className="mx-auto mt-3 max-w-md text-center text-xs leading-relaxed text-slate-500">
+        De link naar Jortt is een affiliatelink. Voor jou kost dit niets. FactuurBaas kan een kleine vergoeding ontvangen.
+    </p>
 );
 
 const JorttCta = () => (
     <div className="my-8 text-center">
         <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={JORTT_URL} target="_blank" rel="noopener noreferrer">
+            <a href={JORTT_URL} target="_blank" rel="noopener noreferrer sponsored">
                 Bekijk Jortt →
             </a>
         </Button>
+        <JorttAffiliateNote />
     </div>
 );
 
@@ -74,26 +80,25 @@ const HypotheekHubLink = () => (
 );
 
 const MoneybirdJorttCtas = () => (
-    <div className="my-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={MONEYBIRD_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk Moneybird →
-            </a>
-        </Button>
-        <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={JORTT_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk Jortt →
-            </a>
-        </Button>
+    <div className="my-8 text-center">
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
+                <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
+            </Button>
+            <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
+                <a href={JORTT_URL} target="_blank" rel="noopener noreferrer sponsored">
+                    Bekijk Jortt →
+                </a>
+            </Button>
+        </div>
+        <JorttAffiliateNote />
     </div>
 );
 
 const MoneybirdEBoekhoudenCtas = () => (
     <div className="my-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={MONEYBIRD_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk Moneybird →
-            </a>
+            <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
         </Button>
         <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
             <a href={E_BOEKHOUDEN_URL} target="_blank" rel="noopener noreferrer">
@@ -104,17 +109,20 @@ const MoneybirdEBoekhoudenCtas = () => (
 );
 
 const JorttEBoekhoudenCtas = () => (
-    <div className="my-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={JORTT_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk Jortt →
-            </a>
-        </Button>
-        <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={E_BOEKHOUDEN_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk e-Boekhouden.nl →
-            </a>
-        </Button>
+    <div className="my-8 text-center">
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
+                <a href={JORTT_URL} target="_blank" rel="noopener noreferrer sponsored">
+                    Bekijk Jortt →
+                </a>
+            </Button>
+            <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
+                <a href={E_BOEKHOUDEN_URL} target="_blank" rel="noopener noreferrer">
+                    Bekijk e-Boekhouden.nl →
+                </a>
+            </Button>
+        </div>
+        <JorttAffiliateNote />
     </div>
 );
 
@@ -4114,9 +4122,7 @@ export const articles = [
         </p>
         <div className="my-8 text-center not-prose">
           <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-            <a href="https://www.moneybird.nl/" target="_blank" rel="noopener noreferrer">
-              Bekijk Moneybird →
-            </a>
+            <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
           </Button>
         </div>
 
@@ -16866,6 +16872,7 @@ export const articles = [
   ...zakelijkeKostenArticles,
   ...zakelijkeLeaseArticles,
   ...zakelijkInternetTelefonieArticles,
+  ...facturenVerwerkenArticles,
   gratisFactuurAppArticle,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];
@@ -16881,3 +16888,5 @@ export const articles = [
   // Fallback to alphabetical sort for other articles if needed
   return a.title.localeCompare(b.title);
 });
+
+export const publishedArticles = articles.filter((article) => !article.draft);

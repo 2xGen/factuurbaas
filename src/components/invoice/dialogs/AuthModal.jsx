@@ -31,7 +31,7 @@ const AuthModal = ({
     if (!privacyAccepted) {
       toast({
         title: 'Akkoord vereist',
-        description: 'Bevestig het privacybeleid en de voorwaarden om door te gaan.',
+        description: 'Vink aan dat je akkoord gaat met de algemene voorwaarden om door te gaan.',
         variant: 'destructive',
       });
       return;

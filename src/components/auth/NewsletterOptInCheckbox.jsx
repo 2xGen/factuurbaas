@@ -23,8 +23,8 @@ export default function NewsletterOptInCheckbox({
         disabled={disabled}
       />
       <span className="leading-relaxed">
-        Ja, ik wil tips en nieuws van FactuurBaas ontvangen{' '}
-        <span className="text-slate-500">(optioneel — geen spam, altijd uitschrijven)</span>.
+        Ja, ik wil tips en nieuws van FactuurBaas ontvangen.{' '}
+        <span className="text-slate-500">(Optioneel, altijd uitschrijven.)</span>
       </span>
     </label>
   );

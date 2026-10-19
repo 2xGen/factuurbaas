@@ -20,6 +20,7 @@ import {
   Menu,
   Receipt,
   Scale,
+  Search,
   UserCircle,
   Users,
   Wallet,
@@ -36,24 +37,30 @@ const guestNavLinks = [
 
 const boekhoudItems = [
   {
+    name: 'Boekhouder vinden',
+    href: '/boekhouder-vinden',
+    description: 'Vind hulp bij je administratie en belastingaangifte.',
+    icon: Search,
+  },
+  {
     name: 'Boekhoudprogramma vergelijken',
     href: '/boekhoudprogramma-vergelijken',
-    description: "Vergelijk boekhoudsoftware voor zzp'ers en starters op prijs en functies.",
-    cta: 'Bekijk de vergelijker',
+    description: "Vergelijk boekhoudsoftware voor zzp'ers en kleine bedrijven.",
     icon: Scale,
   },
   {
     name: 'Boekhoudprogramma-check',
     href: '/tools/boekhoudprogramma-check',
-    description: 'Ontdek of een factuurtool of boekhoudsoftware bij jouw administratie past.',
-    cta: 'Doe de check',
+    description: 'Ontdek welke oplossing bij jouw administratie past.',
     icon: ListChecks,
   },
 ];
 
 function isBoekhoudPath(pathname) {
-  return boekhoudItems.some(
-    (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
+  return (
+    pathname === '/boekhouden' ||
+    pathname.startsWith('/boekhouden/') ||
+    boekhoudItems.some((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
   );
 }
 
@@ -198,25 +205,31 @@ export default function HeaderClient() {
               onMouseEnter={() => setBoekhoudOpen(true)}
               onMouseLeave={() => setBoekhoudOpen(false)}
             >
-              <button
-                type="button"
-                className={`inline-flex items-center gap-1 text-[15px] transition-colors hover:text-ink ${
-                  isBoekhoudPath(pathname) || boekhoudOpen
-                    ? 'font-medium text-ink'
-                    : 'text-ink-500'
-                }`}
-                aria-expanded={boekhoudOpen}
-                aria-haspopup="menu"
-                onClick={() => setBoekhoudOpen((open) => !open)}
-              >
-                Boekhouden
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                    boekhoudOpen ? 'rotate-180' : ''
+              <div className="inline-flex items-center">
+                <Link
+                  href="/boekhouden"
+                  className={`text-[15px] transition-colors hover:text-ink ${
+                    isBoekhoudPath(pathname) || boekhoudOpen ? 'font-medium text-ink' : 'text-ink-500'
                   }`}
-                  aria-hidden
-                />
-              </button>
+                >
+                  Boekhouden
+                </Link>
+                <button
+                  type="button"
+                  className="inline-flex items-center px-1 text-ink-500 transition-colors hover:text-ink"
+                  aria-expanded={boekhoudOpen}
+                  aria-haspopup="menu"
+                  aria-label="Boekhouden menu"
+                  onClick={() => setBoekhoudOpen((open) => !open)}
+                >
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                      boekhoudOpen ? 'rotate-180' : ''
+                    }`}
+                    aria-hidden
+                  />
+                </button>
+              </div>
               {boekhoudOpen && (
                 <div className="absolute left-0 top-full z-50 pt-2">
                 <div
@@ -243,10 +256,6 @@ export default function HeaderClient() {
                             </span>
                             <span className="mt-0.5 block text-[13px] leading-snug text-ink-500">
                               {item.description}
-                            </span>
-                            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-warm-orange">
-                              {item.cta}
-                              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                             </span>
                           </span>
                         </span>
@@ -492,9 +501,12 @@ export default function HeaderClient() {
                       {link.name}
                     </Link>
                   ))}
-                  <p className="px-3 pt-3 pb-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400">
+                  <Link
+                    href="/boekhouden"
+                    className="rounded-lg px-3 pt-3 pb-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400 hover:text-ink"
+                  >
                     Boekhouden
-                  </p>
+                  </Link>
                   {boekhoudItems.map((item) => (
                     <Link
                       key={item.href}

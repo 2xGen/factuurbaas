@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { articles } from '@/lib/blogData';
+import { withBookkeeperCtas } from '@/lib/boekhouderArticleCtas';
 import BlogPostClient from './BlogPostClient';
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 import {
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }) {
     description: article.excerpt,
     keywords: article.keywords,
     authors: [{ name: 'FactuurBaas', url: 'https://factuurbaas.nl' }],
-    robots: { index: true, follow: true },
+    robots: article.draft ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       title: seoTitle,
       description: article.excerpt,
@@ -99,7 +100,7 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <BlogPostClient
-      article={article}
+      article={{ ...article, content: withBookkeeperCtas(article.content, article.slug) }}
       relatedArticles={relatedArticles}
       breadcrumbItems={breadcrumbItems}
     />

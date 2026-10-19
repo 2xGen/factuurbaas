@@ -19,7 +19,7 @@ function formatDate(iso) {
 
 function resolveRelatedHref(item) {
   if (item.type === 'guide') return `/gidsen/${item.slug}`;
-  if (item.type === 'tool') return item.href;
+  if (item.type === 'tool' || item.type === 'hub') return item.href;
   return `/blogs/${item.slug}`;
 }
 
@@ -430,7 +430,7 @@ export default function ArticlePostClient({
                         )}
                       </div>
                       <p className="mt-4 font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-400">
-                        {item.type === 'guide' ? 'Gids' : item.type === 'tool' ? 'Tool' : 'Artikel'}
+                        {item.type === 'guide' ? 'Gids' : item.type === 'tool' ? 'Tool' : item.type === 'hub' ? 'Overzicht' : 'Artikel'}
                       </p>
                       <h3 className="mt-2 font-display text-[1.3rem] leading-[1.2] tracking-[-0.015em] text-ink line-clamp-3">
                         <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">

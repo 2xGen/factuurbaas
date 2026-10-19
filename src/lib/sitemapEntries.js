@@ -1,4 +1,4 @@
-import { articles } from '@/lib/blogData';
+import { publishedArticles as articles } from '@/lib/blogData';
 import { guides } from '@/lib/guideData';
 import { getAllTemplateSlugs } from '@/lib/templateLandingPages';
 import { getAllVoorbeeldSlugs } from '@/lib/voorbeeldLandingPages';
@@ -16,7 +16,7 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/factuur-maken/particulier`, lastModified: new Date('2026-08-02'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITEMAP_BASE_URL}/waarom-gratis`, lastModified: new Date('2026-08-02'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITEMAP_BASE_URL}/veiligheid`, lastModified: new Date('2026-10-07'), changeFrequency: 'yearly', priority: 0.4 },
-    { url: `${SITEMAP_BASE_URL}/verwerkersovereenkomst`, lastModified: new Date('2026-10-07'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITEMAP_BASE_URL}/verwerkersovereenkomst`, lastModified: new Date('2026-10-18'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITEMAP_BASE_URL}/template`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/factuur-template`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/offerte-template`, lastModified: new Date('2026-07-09'), changeFrequency: 'weekly', priority: 0.85 },
@@ -33,7 +33,10 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/tools/betaaltermijn-calculator`, lastModified: new Date('2026-07-10'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/kor-calculator`, lastModified: new Date('2026-09-03'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITEMAP_BASE_URL}/tools/boekhoudprogramma-check`, lastModified: new Date('2026-09-05'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/tools/boekhouding-uitbesteden-calculator`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITEMAP_BASE_URL}/boekhouden`, lastModified: new Date('2026-10-18'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/boekhoudprogramma-vergelijken`, lastModified: new Date('2026-10-13'), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITEMAP_BASE_URL}/boekhouder-vinden`, lastModified: new Date('2026-10-18'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/zakelijke-lease-vergelijken`, lastModified: new Date('2026-10-13'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/zakelijk-internet-telefonie`, lastModified: new Date('2026-10-13'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/zakelijk-internet`, lastModified: new Date('2026-10-13'), changeFrequency: 'weekly', priority: 0.85 },
@@ -49,8 +52,8 @@ export function getSitemapEntries() {
     { url: `${SITEMAP_BASE_URL}/blogs`, lastModified: new Date('2026-09-05'), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITEMAP_BASE_URL}/blogs/hypotheek-als-zzper`, lastModified: new Date('2026-09-18'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITEMAP_BASE_URL}/2xgen`, lastModified: new Date('2026-02-05'), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${SITEMAP_BASE_URL}/privacybeleid`, lastModified: new Date('2026-10-07'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITEMAP_BASE_URL}/algemene-voorwaarden`, lastModified: new Date('2026-10-07'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITEMAP_BASE_URL}/privacybeleid`, lastModified: new Date('2026-10-18'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITEMAP_BASE_URL}/algemene-voorwaarden`, lastModified: new Date('2026-10-18'), changeFrequency: 'yearly', priority: 0.3 },
   ];
 
   const blogPages = articles.map((article) => ({

@@ -29,6 +29,13 @@ export default function BoekhoudprogrammaCheckSeoContent({
 }) {
   return (
     <div className={PROSE}>
+      <p className="not-prose mb-8 text-[15px] leading-relaxed text-ink-500">
+        Onderdeel van{' '}
+        <Link href="/boekhouden" className="underline decoration-ink/20 underline-offset-4 hover:decoration-ember">
+          boekhouden voor zzp&apos;ers
+        </Link>
+        .
+      </p>
       <section>
         <h2>Jouw resultaat</h2>
         <p>

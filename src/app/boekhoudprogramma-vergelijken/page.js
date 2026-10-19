@@ -73,6 +73,7 @@ const faqSchema = {
 };
 
 const relatedLinks = [
+  { label: 'Boekhouden', href: '/boekhouden' },
   { label: 'Boekhoudprogramma-check', href: '/tools/boekhoudprogramma-check' },
   { label: "Beste boekhoudprogramma zzp", href: '/blogs/beste-boekhoudprogramma-zzp' },
   { label: 'Gratis factuur maken', href: '/create-invoice' },
@@ -87,7 +88,7 @@ export default function BoekhoudprogrammaVergelijkenPage() {
       <PageHeader
         breadcrumbs={[
           { name: 'Home', href: '/' },
-          { name: 'Tools', href: '/tools' },
+          { name: 'Boekhouden', href: '/boekhouden' },
           { name: 'Boekhoudprogramma vergelijken' },
         ]}
         eyebrow="Vergelijker"

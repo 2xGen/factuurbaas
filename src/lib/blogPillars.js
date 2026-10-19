@@ -123,6 +123,16 @@ export const blogPillars = [
     description:
       "Zelf boekhouden als zzp'er, welk boekhoudprogramma past bij jou, en wanneer software of een boekhouder handig is.",
     slugs: [
+      'facturen-verwerken-boekhouding',
+      'facturen-bijhouden-zzp',
+      'facturen-zelf-boekhouden-of-uitbesteden',
+      'factuur-verkeerd-geboekt',
+      'facturen-en-btw-aangifte',
+      'inkoopfacturen-en-verkoopfacturen',
+      'facturen-bewaren-belastingdienst',
+      'facturen-automatisch-verwerken',
+      'hoeveel-facturen-zelf-verwerken',
+      'facturen-laten-verwerken-boekhouder',
       'wanneer-boekhoudsoftware-nodig-zzp',
       'beste-boekhoudprogramma-zzp',
       'gratis-factuurtool-vs-boekhoudprogramma',
