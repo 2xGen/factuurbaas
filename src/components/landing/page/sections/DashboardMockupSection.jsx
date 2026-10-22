@@ -34,7 +34,7 @@ const NAV = [
 const STATS = [
   { label: 'Je verdiende', value: 8420 },
   { label: 'Je gaf uit', value: 3140 },
-  { label: 'Je hield over', value: 5280, answer: true },
+  { label: 'Geregistreerd resultaat', value: 5280, answer: true },
 ];
 
 const MONTHS = [
@@ -314,6 +314,12 @@ export default function DashboardMockupSection() {
             <AppWindow />
             <Notification />
           </motion.div>
+          <figcaption className="mx-auto mt-8 max-w-3xl text-center text-[11px] leading-relaxed text-white/45 sm:mt-14">
+            <strong className="font-semibold text-white/70">Let op:</strong> Dit is een voorbeeldweergave.
+            FactuurBaas toont indicatieve financiële inzichten op basis van ingevoerde gegevens en biedt geen
+            volledige boekhouding of fiscaal advies. Je blijft zelf verantwoordelijk voor je administratie en
+            belastingaangiften.
+          </figcaption>
         </figure>
 
         <div className="mx-auto mt-28 min-w-0 max-w-6xl sm:mt-40">

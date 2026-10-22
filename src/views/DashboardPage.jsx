@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { nl } from 'date-fns/locale';
 import { Loader2, Plus } from 'lucide-react';
 import DashboardAttention from '@/components/dashboard/DashboardAttention';
+import DashboardBookkeeperOffer from '@/components/dashboard/DashboardBookkeeperOffer';
 import DashboardStats, { DashboardSideMetrics } from '@/components/dashboard/DashboardStats';
 import DashboardCharts from '@/components/dashboard/DashboardCharts';
 import DashboardGoal from '@/components/dashboard/DashboardGoal';
@@ -133,7 +134,7 @@ export default function DashboardPage() {
     [userInvoices, incomeMonth.vatAmount]
   );
   const expensesMonth = useMemo(() => sumExpensesForMonth(expenses), [expenses]);
-  const { resultaat, btwTeReserveren } = useMemo(
+  const { btwTeReserveren } = useMemo(
     () =>
       getMonthBusinessResult({
         revenueExcl: revenueThisMonth,
@@ -220,12 +221,17 @@ export default function DashboardPage() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-400">
-                {monthLabel}
+                Grip op je bedrijf · {monthLabel}
               </p>
               <h1 className="mt-1 font-heading text-xl font-bold tracking-tight text-deep-blue sm:text-2xl">
                 {greeting}, {firstName}
               </h1>
-              <p className="mt-1 text-sm text-slate-500">Hoe je bedrijf ervoor staat</p>
+              <p className="mt-1 max-w-xl text-sm leading-relaxed text-slate-500">
+                Inzicht in je facturen, inkomsten en uitgaven op basis van je eigen invoer. Geen volledige boekhouding.{' '}
+                <Link href="/boekhoudprogramma-vergelijken" className="font-semibold text-warm-orange hover:underline">
+                  Vergelijk boekhoudprogramma&apos;s
+                </Link>
+              </p>
             </div>
             <Link
               href="/create-invoice"
@@ -246,9 +252,17 @@ export default function DashboardPage() {
           </div>
 
           <DashboardStats
-            revenueThisMonth={revenueThisMonth}
-            expensesThisMonth={expensesMonth.amountExcl}
-            resultaat={resultaat}
+            revenueExcl={revenueThisMonth}
+            revenueBtw={salesBtwThisMonth}
+            expensesExcl={expensesMonth.amountExcl}
+            expensesBtw={expensesMonth.vatAmount}
+          />
+
+          <DashboardBookkeeperOffer
+            userId={user.id}
+            email={user.email}
+            invoiceCount={userInvoices.length}
+            vatApproaching={isVatReturnApproaching()}
           />
 
           <div className="mt-3 grid gap-3 lg:grid-cols-[1.45fr_1fr]">
@@ -269,6 +283,19 @@ export default function DashboardPage() {
           <div className="mt-3">
             <DashboardGoal userId={user.id} ytd={ytd} initialGoal={yearlyGoal} year={year} />
           </div>
+
+          <p className="mt-10 text-[11px] leading-relaxed text-slate-400">
+            Indicatie op basis van je ingevoerde gegevens. FactuurBaas levert geen boekhouding of belastingberekening. Je blijft zelf verantwoordelijk voor je administratie en aangiften. Zie de{' '}
+            <Link href="/algemene-voorwaarden" className="underline hover:text-slate-500">
+              gebruiksvoorwaarden
+            </Link>
+            . Laat je cijfers controleren door een{' '}
+            <Link href="/boekhouder-vinden" className="font-semibold text-warm-orange hover:underline">
+              boekhouder
+            </Link>
+            .
+          </p>
+
         </div>
       </div>
 

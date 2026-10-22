@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { JORTT_URL, E_BOEKHOUDEN_URL } from '@/lib/affiliateLinks';
+import { JORTT_URL, MONEYBIRD_URL } from '@/lib/affiliateLinks';
 import { aovArticles } from '@/lib/aovBlogData';
 import { uitgavenArticles } from '@/lib/uitgavenBlogData';
 import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
@@ -26,11 +26,24 @@ const BoekhoudCheckCta = () => (
     </div>
 );
 
+const moneybirdLink = {
+    href: MONEYBIRD_URL,
+    target: '_blank',
+    rel: 'noopener noreferrer sponsored',
+};
+
+const MoneybirdAffiliateNote = () => (
+    <p className="mx-auto mt-3 max-w-md text-center text-xs leading-relaxed text-slate-500">
+        De link naar Moneybird is een affiliatelink. Voor jou kost dit niets. FactuurBaas kan een kleine vergoeding ontvangen.
+    </p>
+);
+
 const MoneybirdCta = () => (
     <div className="my-8 text-center">
         <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
+            <a {...moneybirdLink}>Bekijk Moneybird →</a>
         </Button>
+        <MoneybirdAffiliateNote />
     </div>
 );
 
@@ -54,9 +67,7 @@ const JorttCta = () => (
 const EBoekhoudenCta = () => (
     <div className="my-8 text-center">
         <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={E_BOEKHOUDEN_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk e-Boekhouden.nl →
-            </a>
+            <Link href="/boekhoudprogramma-vergelijken">Vergelijk boekhoudprogramma&apos;s →</Link>
         </Button>
     </div>
 );
@@ -83,7 +94,7 @@ const MoneybirdJorttCtas = () => (
     <div className="my-8 text-center">
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-                <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
+                <a {...moneybirdLink}>Bekijk Moneybird →</a>
             </Button>
             <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
                 <a href={JORTT_URL} target="_blank" rel="noopener noreferrer sponsored">
@@ -91,20 +102,22 @@ const MoneybirdJorttCtas = () => (
                 </a>
             </Button>
         </div>
+        <MoneybirdAffiliateNote />
         <JorttAffiliateNote />
     </div>
 );
 
 const MoneybirdEBoekhoudenCtas = () => (
-    <div className="my-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-            <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
-        </Button>
-        <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-            <a href={E_BOEKHOUDEN_URL} target="_blank" rel="noopener noreferrer">
-                Bekijk e-Boekhouden.nl →
-            </a>
-        </Button>
+    <div className="my-8 text-center">
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild className="bg-warm-orange hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
+                <a {...moneybirdLink}>Bekijk Moneybird →</a>
+            </Button>
+            <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
+                <Link href="/boekhoudprogramma-vergelijken">Vergelijk boekhoudprogramma&apos;s →</Link>
+            </Button>
+        </div>
+        <MoneybirdAffiliateNote />
     </div>
 );
 
@@ -117,9 +130,7 @@ const JorttEBoekhoudenCtas = () => (
                 </a>
             </Button>
             <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-                <a href={E_BOEKHOUDEN_URL} target="_blank" rel="noopener noreferrer">
-                    Bekijk e-Boekhouden.nl →
-                </a>
+                <Link href="/boekhoudprogramma-vergelijken">Vergelijk boekhoudprogramma&apos;s →</Link>
             </Button>
         </div>
         <JorttAffiliateNote />
@@ -4122,7 +4133,7 @@ export const articles = [
         </p>
         <div className="my-8 text-center not-prose">
           <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-            <Link href="/boekhoudprogramma-vergelijken">Bekijk Moneybird →</Link>
+            <a {...moneybirdLink}>Bekijk Moneybird →</a>
           </Button>
         </div>
 
@@ -4162,9 +4173,7 @@ export const articles = [
         </p>
         <div className="my-8 text-center not-prose">
           <Button asChild variant="outline" className="font-bold py-3 px-6 rounded-lg text-lg">
-            <a href="https://www.e-boekhouden.nl/" target="_blank" rel="noopener noreferrer">
-              Bekijk e-Boekhouden.nl →
-            </a>
+            <Link href="/boekhoudprogramma-vergelijken">Vergelijk boekhoudprogramma&apos;s →</Link>
           </Button>
         </div>
 
@@ -5110,6 +5119,27 @@ export const articles = [
                   <td className="px-4 py-3">{jortt}</td>
                 </tr>
               ))}
+              <tr>
+                <td className="px-4 py-4" />
+                <td className="px-4 py-4">
+                  <a
+                    {...moneybirdLink}
+                    className="inline-flex rounded-full bg-warm-orange px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+                  >
+                    Bekijk Moneybird
+                  </a>
+                </td>
+                <td className="px-4 py-4">
+                  <a
+                    href={JORTT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex rounded-full bg-warm-orange px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+                  >
+                    Bekijk Jortt
+                  </a>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -5843,6 +5873,16 @@ export const articles = [
                   <td className="px-4 py-3">{eboekhouden}</td>
                 </tr>
               ))}
+              <tr>
+                <td className="px-4 py-4" colSpan={3}>
+                  <a
+                    {...moneybirdLink}
+                    className="flex w-full items-center justify-center rounded-full bg-warm-orange px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-600"
+                  >
+                    Bekijk Moneybird
+                  </a>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

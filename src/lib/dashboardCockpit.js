@@ -337,7 +337,7 @@ export function buildDashboardSignals({
       type: 'vat-reserve',
       tone: 'info',
       title: 'BTW-aangifte nadert',
-      detail: `${formatEuro(btwTeReserveren)} apart houden`,
+      detail: `${formatEuro(btwTeReserveren)} geschatte btw`,
       href: '/uitgaven',
       cta: 'Bekijk',
     });

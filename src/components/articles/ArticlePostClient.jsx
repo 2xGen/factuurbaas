@@ -8,6 +8,12 @@ import CallToActionSection from '@/components/landing/page/sections/CallToAction
 import { EASE_OUT, Reveal, Stagger, staggerItem } from '@/components/landing/page/motion';
 import { blogPillars } from '@/lib/blogPillars';
 
+const AFFILIATE_ARTICLE_SLUGS = new Set([
+  'moneybird-vs-jortt',
+  'moneybird-vs-eboekhouden',
+  'jortt-vs-eboekhouden',
+]);
+
 function formatDate(iso) {
   if (!iso) return null;
   try {
@@ -297,6 +303,12 @@ export default function ArticlePostClient({
         </header>
 
         <div className="container mx-auto -mt-28 max-w-6xl px-4 sm:-mt-40 sm:px-6">
+          {AFFILIATE_ARTICLE_SLUGS.has(article.slug) && (
+            <p className="relative z-10 mb-3 max-w-3xl text-[11px] leading-relaxed text-ink-400">
+              <strong className="font-semibold text-ink-500">Affiliate disclosure:</strong> FactuurBaas kan een
+              vergoeding ontvangen wanneer je via een link in dit artikel een product afneemt. Voor jou kost dit niets.
+            </p>
+          )}
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 28, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}

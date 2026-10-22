@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Eye, Info, Save, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PreviewDialog from '@/components/invoice/dialogs/PreviewDialog';
@@ -134,6 +135,13 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
             </div>
           </>
         )}
+
+        <p className="text-xs leading-relaxed text-slate-500">
+          Ook hulp nodig met je boekhouding?{' '}
+          <Link href="/boekhouder-vinden" className="font-semibold text-warm-orange hover:underline">
+            Vind gratis een boekhouder
+          </Link>
+        </p>
 
         {isLoggedIn && brandingOn && (
           <div className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5 text-xs leading-relaxed text-slate-600">

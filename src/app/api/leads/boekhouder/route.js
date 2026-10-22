@@ -193,3 +193,36 @@ export async function POST(request) {
 
   return NextResponse.json({ ok: true });
 }
+
+export async function GET(request) {
+  const authHeader = request.headers.get('authorization') || '';
+  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+  if (!token) return NextResponse.json({ submitted: false });
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !anonKey || !serviceKey) return NextResponse.json({ submitted: false });
+
+  const userClient = createClient(supabaseUrl, anonKey, {
+    global: { headers: { Authorization: `Bearer ${token}` } },
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const {
+    data: { user },
+  } = await userClient.auth.getUser(token);
+  const email = String(user?.email || '').trim().toLowerCase();
+  if (!email) return NextResponse.json({ submitted: false });
+
+  const admin = createClient(supabaseUrl, serviceKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const { data, error } = await admin
+    .from('accountant_leads')
+    .select('id')
+    .eq('email', email)
+    .limit(1);
+
+  if (error) return NextResponse.json({ submitted: false });
+  return NextResponse.json({ submitted: Boolean(data?.length) });
+}

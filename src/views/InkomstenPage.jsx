@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import { nl } from 'date-fns/locale';
-import { Loader2, Plus, Wallet } from 'lucide-react';
+import { Info, Loader2, Plus, Wallet } from 'lucide-react';
+import DashboardBookkeeperOffer from '@/components/dashboard/DashboardBookkeeperOffer';
 import IncomeFormDialog from '@/components/inkomsten/IncomeFormDialog';
 import RowActionsMenu from '@/components/shared/RowActionsMenu';
 import { Button } from '@/components/ui/button';
@@ -76,6 +78,14 @@ export default function InkomstenPage() {
   }, [user?.id]);
 
   const monthTotals = useMemo(() => sumIncomesForMonth(incomes), [incomes]);
+  const totalReceived = useMemo(
+    () => Math.round(incomes.reduce((sum, item) => sum + (Number(item.amountIncl) || 0), 0) * 100) / 100,
+    [incomes]
+  );
+  const totalVatToPay = useMemo(
+    () => Math.round(incomes.reduce((sum, item) => sum + (Number(item.vatAmount) || 0), 0) * 100) / 100,
+    [incomes]
+  );
   const filtered = useMemo(() => {
     const q = searchTerm.toLowerCase().trim();
     if (!q) return incomes;
@@ -152,7 +162,7 @@ export default function InkomstenPage() {
                 Inkomsten
               </h1>
               <p className="mt-1 text-sm text-slate-500">
-                Verkopen zonder factuur. Facturen tellen automatisch mee in je overzicht.
+                Verkopen zonder factuur. Facturen blijven bij Facturen.
                 {monthTotals.count > 0
                   ? ` · ${formatEuro(monthTotals.amountExcl)} excl. btw deze maand`
                   : ''}
@@ -169,6 +179,51 @@ export default function InkomstenPage() {
             placeholder="Zoek op omschrijving"
             className="mb-4 h-11 w-full max-w-sm rounded-xl border border-slate-200 bg-white px-3.5 text-sm outline-none focus:border-deep-blue/40"
           />
+
+          {incomes.length > 0 && (
+            <div className="mb-4">
+              <div className="mb-3 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-slate-200/80 bg-white p-4">
+                  <p className="text-xs text-slate-500">Totale inkomsten</p>
+                  <p className="mt-2 font-heading text-[1.65rem] font-bold tracking-tight text-deep-blue sm:text-3xl">
+                    {formatEuro(totalReceived)}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-slate-200/80 bg-white p-4">
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs text-slate-500">Totale btw te betalen</p>
+                    <details className="group relative">
+                      <summary className="flex cursor-pointer list-none items-center text-slate-400 hover:text-deep-blue [&::-webkit-details-marker]:hidden">
+                        <Info className="h-3.5 w-3.5" aria-hidden />
+                        <span className="sr-only">Toelichting bij btw te betalen</span>
+                      </summary>
+                      <div className="absolute right-0 z-10 mt-2 w-64 rounded-xl border border-slate-200 bg-white p-3 text-xs leading-relaxed text-slate-600 shadow-lg">
+                        <p>
+                          Dit is de btw op je ingevoerde inkomsten, zonder facturen. De btw te vorderen op je uitgaven is hierin niet meegenomen.
+                        </p>
+                        <p className="mt-2">
+                          FactuurBaas doet geen btw-aangifte. Hulp nodig?{' '}
+                          <Link href="/boekhouder-vinden" className="font-semibold text-warm-orange hover:underline">
+                            Vind een boekhouder
+                          </Link>
+                          .
+                        </p>
+                      </div>
+                    </details>
+                  </div>
+                  <p className="mt-2 font-heading text-[1.65rem] font-bold tracking-tight text-deep-blue sm:text-3xl">
+                    {formatEuro(totalVatToPay)}
+                  </p>
+                </div>
+              </div>
+              <DashboardBookkeeperOffer
+                userId={user.id}
+                email={user.email}
+                eligible
+                forceVat
+              />
+            </div>
+          )}
 
           {filtered.length === 0 ? (
             <div className="rounded-2xl border border-slate-200/80 bg-white px-6 py-12 text-center">

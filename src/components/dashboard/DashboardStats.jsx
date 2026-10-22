@@ -2,25 +2,63 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { Info } from 'lucide-react';
 import { formatEuro } from '@/lib/dashboardCockpit';
 import { cn } from '@/lib/utils';
 
-function StatCard({ label, value, hint, href, highlight }) {
-  const body = (
-    <>
-      <p className={cn('text-xs', highlight ? 'text-white/70' : 'text-slate-500')}>{label}</p>
-      <p
+function InfoClip({ label, children, light }) {
+  return (
+    <details className="relative">
+      <summary
         className={cn(
-          'mt-2 font-heading text-[1.65rem] font-bold tracking-tight sm:text-3xl',
-          highlight ? 'text-white' : 'text-deep-blue'
+          'flex cursor-pointer list-none items-center [&::-webkit-details-marker]:hidden',
+          light ? 'text-white/70 hover:text-white' : 'text-slate-400 hover:text-deep-blue'
         )}
       >
-        {value}
-      </p>
-      {hint && (
-        <p className={cn('mt-1.5 text-xs leading-snug', highlight ? 'text-white/55' : 'text-slate-500')}>
-          {hint}
-        </p>
+        <Info className="h-3.5 w-3.5" aria-hidden />
+        <span className="sr-only">{label}</span>
+      </summary>
+      <div className="absolute left-0 z-10 mt-2 w-64 rounded-xl border border-slate-200 bg-white p-3 text-xs leading-relaxed text-slate-600 shadow-lg">
+        {children}
+      </div>
+    </details>
+  );
+}
+
+function StatCard({ label, value, hint, href, highlight }) {
+  const figure = (
+    <p
+      className={cn(
+        'mt-2 font-heading text-[1.65rem] font-bold tracking-tight sm:text-3xl',
+        highlight ? 'text-white' : 'text-deep-blue'
+      )}
+    >
+      {value}
+    </p>
+  );
+
+  const body = (
+    <>
+      <div className="flex items-center gap-1.5">
+        {href ? (
+          <Link href={href} className={cn('text-xs', highlight ? 'text-white/70' : 'text-slate-500')}>
+            {label}
+          </Link>
+        ) : (
+          <p className={cn('text-xs', highlight ? 'text-white/70' : 'text-slate-500')}>{label}</p>
+        )}
+        {hint && (
+          <InfoClip label={`Toelichting bij ${label}`} light={highlight}>
+            {hint}
+          </InfoClip>
+        )}
+      </div>
+      {href ? (
+        <Link href={href} className="block">
+          {figure}
+        </Link>
+      ) : (
+        figure
       )}
     </>
   );
@@ -32,15 +70,9 @@ function StatCard({ label, value, hint, href, highlight }) {
       : 'border border-slate-200/80 bg-white'
   );
 
-  if (href) {
-    return (
-      <Link href={href} className={cn(className, 'transition hover:border-deep-blue/20')}>
-        {body}
-      </Link>
-    );
-  }
-
-  return <div className={className}>{body}</div>;
+  return (
+    <div className={cn(className, href && 'transition hover:border-deep-blue/20')}>{body}</div>
+  );
 }
 
 export function DashboardSideMetrics({
@@ -69,42 +101,69 @@ export function DashboardSideMetrics({
         href="/uitgaven"
         className="rounded-xl border border-slate-200/80 bg-white p-4 transition hover:border-deep-blue/20"
       >
-        <p className="text-xs text-slate-500">Btw apart houden</p>
+        <p className="text-xs text-slate-500">Geschatte btw</p>
         <p className="mt-1.5 font-heading text-2xl font-bold text-deep-blue">
           {formatEuro(btwTeReserveren)}
         </p>
-        <p className="mt-2 text-[11px] text-slate-400">
-          {formatEuro(salesBtwThisMonth)} verkoop − {formatEuro(expensesBtwThisMonth)} aftrek
+        <p className="mt-2 text-[11px] leading-snug text-slate-400">
+          {formatEuro(salesBtwThisMonth)} verkoop − {formatEuro(expensesBtwThisMonth)} aftrek. Indicatie op basis van je geregistreerde facturen en uitgaven, niet het definitief verschuldigde bedrag.
         </p>
       </Link>
     </div>
   );
 }
 
+function roundMoney(n) {
+  return Math.round(n * 100) / 100;
+}
+
 export default function DashboardStats({
-  revenueThisMonth = 0,
-  expensesThisMonth = 0,
-  resultaat = 0,
+  revenueExcl = 0,
+  revenueBtw = 0,
+  expensesExcl = 0,
+  expensesBtw = 0,
 }) {
+  const received = roundMoney(revenueExcl + revenueBtw);
+  const paid = roundMoney(expensesExcl + expensesBtw);
+  const kept = roundMoney(received - paid);
+
   return (
     <section className="mb-3">
       <div className="grid gap-3 sm:grid-cols-3">
         <StatCard
-          label="Je verdiende"
-          value={formatEuro(revenueThisMonth)}
-          hint="Deze maand, excl. btw"
+          label="Geregistreerde inkomsten"
+          value={formatEuro(received)}
+          hint={
+            <>
+              <p>
+                {formatEuro(revenueExcl)} + {formatEuro(revenueBtw)} btw.
+              </p>
+              <p className="mt-2">
+                Een factuur telt mee in de maand van de factuurdatum, ook als hij nog openstaat. Op betaald zetten telt hem niet nog een keer. Verkoop zonder factuur zet je bij Inkomsten. Dit is geen volledige boekhouding.
+              </p>
+            </>
+          }
           href="/inkomsten"
         />
         <StatCard
-          label="Je gaf uit"
-          value={formatEuro(expensesThisMonth)}
-          hint="Zakelijke uitgaven"
+          label="Geregistreerde uitgaven"
+          value={formatEuro(paid)}
+          hint={`${formatEuro(expensesExcl)} + ${formatEuro(expensesBtw)} btw. Alleen de uitgaven die je hebt ingevuld.`}
           href="/uitgaven"
         />
         <StatCard
-          label="Je hield over"
-          value={formatEuro(resultaat)}
-          hint="Inkomsten minus uitgaven"
+          label="Resultaat op basis van je invoer"
+          value={formatEuro(kept)}
+          hint={
+            <>
+              <p>
+                {formatEuro(received)} − {formatEuro(paid)}.
+              </p>
+              <p className="mt-2">
+                Dit is het verschil tussen je geregistreerde inkomsten en uitgaven, inclusief btw. Het is geen nettowinst en geen besteedbaar inkomen. Belasting en posten die je niet hebt ingevuld zitten hier niet in.
+              </p>
+            </>
+          }
           highlight
         />
       </div>

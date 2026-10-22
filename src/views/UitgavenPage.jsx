@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { format, parseISO } from 'date-fns';
 import { nl } from 'date-fns/locale';
-import { Loader2, Plus, Receipt, Search } from 'lucide-react';
+import { Info, Loader2, Plus, Receipt, Search } from 'lucide-react';
 import ExpenseFormDialog from '@/components/uitgaven/ExpenseFormDialog';
 import RowActionsMenu from '@/components/shared/RowActionsMenu';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
+import DashboardBookkeeperOffer from '@/components/dashboard/DashboardBookkeeperOffer';
 import { formatEuro } from '@/lib/dashboardCockpit';
 import {
   categoryLabel,
@@ -83,6 +84,15 @@ export default function UitgavenPage() {
   }, [user?.id]);
 
   const monthTotals = useMemo(() => sumExpensesForMonth(expenses), [expenses]);
+  const totalPaid = useMemo(
+    () => Math.round(expenses.reduce((sum, expense) => sum + (Number(expense.amountIncl) || 0), 0) * 100) / 100,
+    [expenses]
+  );
+  const totalVatToClaim = useMemo(
+    () => Math.round(expenses.reduce((sum, expense) => sum + (Number(expense.vatAmount) || 0), 0) * 100) / 100,
+    [expenses]
+  );
+  const monthPaid = Math.round((monthTotals.amountExcl + monthTotals.vatAmount) * 100) / 100;
 
   const filtered = useMemo(() => {
     const q = searchTerm.toLowerCase().trim();
@@ -209,7 +219,7 @@ export default function UitgavenPage() {
                 <p className="mt-1 text-sm text-slate-500">
                   {expenses.length} opgeslagen
                   {monthTotals.count > 0
-                    ? ` · ${formatEuro(monthTotals.amountExcl)} excl. btw deze maand`
+                    ? ` · ${formatEuro(monthPaid)} betaald deze maand`
                     : ''}
                 </p>
               </div>
@@ -233,6 +243,51 @@ export default function UitgavenPage() {
               />
             </div>
           </div>
+
+          {expenses.length > 0 && (
+            <div className="mb-6">
+              <div className="mb-3 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-slate-200/80 bg-white p-4">
+                  <p className="text-xs text-slate-500">Totale uitgaven</p>
+                  <p className="mt-2 font-heading text-[1.65rem] font-bold tracking-tight text-deep-blue sm:text-3xl">
+                    {formatEuro(totalPaid)}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-slate-200/80 bg-white p-4">
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs text-slate-500">Totale btw te vorderen</p>
+                    <details className="group relative">
+                      <summary className="flex cursor-pointer list-none items-center text-slate-400 hover:text-deep-blue [&::-webkit-details-marker]:hidden">
+                        <Info className="h-3.5 w-3.5" aria-hidden />
+                        <span className="sr-only">Toelichting bij btw te vorderen</span>
+                      </summary>
+                      <div className="absolute right-0 z-10 mt-2 w-64 rounded-xl border border-slate-200 bg-white p-3 text-xs leading-relaxed text-slate-600 shadow-lg">
+                        <p>
+                          Dit is de btw op je ingevoerde uitgaven. De btw op je verkoopfacturen is hierin niet meegenomen.
+                        </p>
+                        <p className="mt-2">
+                          FactuurBaas doet geen btw-aangifte. Hulp nodig?{' '}
+                          <Link href="/boekhouder-vinden" className="font-semibold text-warm-orange hover:underline">
+                            Vind een boekhouder
+                          </Link>
+                          .
+                        </p>
+                      </div>
+                    </details>
+                  </div>
+                  <p className="mt-2 font-heading text-[1.65rem] font-bold tracking-tight text-deep-blue sm:text-3xl">
+                    {formatEuro(totalVatToClaim)}
+                  </p>
+                </div>
+              </div>
+              <DashboardBookkeeperOffer
+                userId={user.id}
+                email={user.email}
+                eligible
+                forceVat
+              />
+            </div>
+          )}
 
           {filtered.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-14 text-center shadow-sm">

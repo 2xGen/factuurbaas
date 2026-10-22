@@ -7,6 +7,7 @@ import { track } from '@vercel/analytics';
 import { ArrowLeft, Check } from 'lucide-react';
 import { ArrowIcon, btn } from '@/components/site/editorial';
 import { BUSINESS_TYPES, validateBoekhouderLead } from '@/lib/boekhouderLead';
+import { rememberBookkeeperLead } from '@/components/dashboard/DashboardBookkeeperOffer';
 
 const inputClass =
   'mt-1.5 w-full rounded-xl border border-ink/15 bg-paper-50 px-4 py-3 text-base text-ink outline-none transition-colors placeholder:text-ink-400 focus:border-ink focus:bg-white focus:ring-2 focus:ring-ember/40';
@@ -128,6 +129,7 @@ export default function BookkeeperLeadForm({
         return;
       }
       track('boekhouder_form_success', { sourceType });
+      rememberBookkeeperLead(values.email);
       setDone(true);
     } catch {
       setErrors({ form: 'Versturen lukt nu niet. Controleer je verbinding en probeer het opnieuw.' });

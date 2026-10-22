@@ -11,21 +11,19 @@ import { CheckCircle2, LayoutDashboard } from 'lucide-react';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
 import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 
-function BoekhoudCompareNudge({ onClose }) {
+function BookkeeperNudge({ onClose }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-      <p className="text-sm font-semibold text-slate-900">Meer dan alleen facturen maken?</p>
+      <p className="text-sm font-semibold text-slate-900">Ook hulp nodig met je boekhouding?</p>
       <p className="mt-1 text-sm leading-relaxed text-slate-600">
-        Wil je ook je uitgaven, btw en administratie bijhouden? Vergelijk boekhoudprogramma&apos;s
-        voor zzp&apos;ers en ontdek welk pakket bij je past.
+        Een boekhouder kan je helpen met je administratie, btw-aangifte en belastingzaken. Ontdek
+        vrijblijvend de mogelijkheden.
       </p>
-      <Link
-        href="/boekhoudprogramma-vergelijken"
-        onClick={onClose}
-        className="mt-3 inline-flex text-sm font-semibold text-warm-orange hover:underline"
-      >
-        Vergelijk boekhoudprogramma&apos;s
-      </Link>
+      <Button asChild variant="outline" className="mt-3 w-full border-deep-blue/20 font-semibold text-deep-blue">
+        <Link href="/boekhouder-vinden" onClick={onClose}>
+          Vind gratis een boekhouder
+        </Link>
+      </Button>
     </div>
   );
 }
@@ -39,36 +37,38 @@ export default function DownloadSuccessDialog({
 }) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
+      <DialogContent className="flex max-h-[90vh] max-w-md flex-col gap-4 overflow-hidden">
+        <DialogHeader className="shrink-0 pr-6">
           <div className="flex items-center gap-3">
             <CheckCircle2 className="h-8 w-8 flex-shrink-0 text-green-600" />
-            <DialogTitle className="text-xl text-deep-blue">
-              {wasSavedToAccount ? 'Gedownload én opgeslagen' : 'Je factuur is gedownload'}
-            </DialogTitle>
+            <DialogTitle className="text-xl text-deep-blue">Je factuur is aangemaakt!</DialogTitle>
           </div>
         </DialogHeader>
 
-        <div className="space-y-5 pt-2">
-          {wasSavedToAccount ? (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm text-slate-700">
-                Je factuur staat in je dashboard — openstaand bedrag, btw en status bijhouden.
-              </p>
-              <Button asChild className="mt-3 w-full rounded-xl bg-deep-blue font-semibold">
-                <Link href="/dashboard" onClick={onClose}>
-                  <LayoutDashboard className="mr-2 h-4 w-4" />
+        <div className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain pr-1">
+          <p className="text-sm leading-relaxed text-slate-600">
+            {wasSavedToAccount
+              ? 'Je factuur is gedownload als PDF en staat in je account.'
+              : 'Je factuur is gedownload als PDF.'}
+            {wasSavedToAccount ? (
+              <>
+                {' '}
+                <Link href="/dashboard" onClick={onClose} className="inline-flex items-center font-semibold text-deep-blue hover:underline">
+                  <LayoutDashboard className="mr-1 h-3.5 w-3.5" />
                   Naar dashboard
                 </Link>
-              </Button>
-            </div>
-          ) : isLoggedIn ? (
-            <p className="text-sm text-slate-600">
-              Tip: klik op <strong>Factuur opslaan</strong> zodat hij in je dashboard verschijnt.
-            </p>
-          ) : null}
+              </>
+            ) : isLoggedIn ? (
+              <>
+                {' '}
+                Klik op <strong>Opslaan in mijn account</strong> zodat hij in je dashboard verschijnt.
+              </>
+            ) : (
+              ' Sla hem op in je account als je hem later terug wilt vinden.'
+            )}
+          </p>
 
-          <BoekhoudCompareNudge onClose={onClose} />
+          <BookkeeperNudge onClose={onClose} />
 
           {!isLoggedIn && <FeatureUpdatesSignup companyEmail={companyEmail} />}
 
