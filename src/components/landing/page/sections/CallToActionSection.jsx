@@ -26,11 +26,12 @@ const CallToActionSection = () => {
         />
 
         <img src="/crown-favicon.svg" alt="" aria-hidden className="mx-auto h-10 w-10" />
-        <h2 className="mx-auto mt-8 max-w-[18ch] font-display text-[2.5rem] font-normal leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4.25rem]">
-          Zie hoe je bedrijf <em className="text-ember-100">ervoor staat.</em>
+        <h2 className="mx-auto mt-8 max-w-[16ch] font-display text-[2.5rem] font-normal leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4.25rem]">
+          Maak je volgende factuur <em className="text-ember-100">nog sneller.</em>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
-          Houd inkomsten, uitgaven, facturen en offertes bij. Gratis en eenvoudig.
+          Bewaar je klantgegevens, maak nieuwe facturen vanuit eerdere facturen en houd eenvoudig bij
+          welke betalingen nog openstaan.
         </p>
         <div className="mt-10 flex flex-col items-center gap-5">
           <Link
@@ -41,7 +42,7 @@ const CallToActionSection = () => {
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <p className="text-sm text-white/55">
-            Liever eerst een factuur maken?{' '}
+            Liever zonder account?{' '}
             <Link
               href="/create-invoice"
               className="font-medium text-white underline decoration-white/30 underline-offset-[5px] transition-colors hover:decoration-white"

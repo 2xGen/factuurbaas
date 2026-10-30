@@ -19,9 +19,8 @@ export default function SeoIndexSection() {
               factuur direct als PDF. Geen account. Geen abonnement.
             </p>
             <p className="mt-2">
-              Met een gratis account bewaar je facturen en offertes, registreer je uitgaven en zie
-              je resultaat. Handig voor zzp&apos;ers én voor een kleine zaak die vooral verkopen
-              bijhoudt.
+              Met een gratis account bewaar je facturen en offertes, houd je bij welke betaald zijn
+              en zie je wat nog openstaat.
             </p>
           </div>
           <div>

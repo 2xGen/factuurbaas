@@ -75,95 +75,35 @@ function StatCard({ label, value, hint, href, highlight }) {
   );
 }
 
-export function DashboardSideMetrics({
-  totalOutstandingAmount = 0,
-  outstandingInvoicesCount = 0,
-  btwTeReserveren = 0,
-  salesBtwThisMonth = 0,
-  expensesBtwThisMonth = 0,
-}) {
-  const openHint =
-    outstandingInvoicesCount === 1 ? '1 factuur open' : `${outstandingInvoicesCount} facturen open`;
-
-  return (
-    <div className="grid gap-3">
-      <Link
-        href="/facturen"
-        className="rounded-xl border border-slate-200/80 bg-white p-4 transition hover:border-deep-blue/20"
-      >
-        <p className="text-xs text-slate-500">Moet je nog ontvangen</p>
-        <p className="mt-1.5 font-heading text-2xl font-bold text-deep-blue">
-          {formatEuro(totalOutstandingAmount)}
-        </p>
-        <p className="mt-2 text-[11px] text-slate-400">{openHint}</p>
-      </Link>
-      <Link
-        href="/uitgaven"
-        className="rounded-xl border border-slate-200/80 bg-white p-4 transition hover:border-deep-blue/20"
-      >
-        <p className="text-xs text-slate-500">Geschatte btw</p>
-        <p className="mt-1.5 font-heading text-2xl font-bold text-deep-blue">
-          {formatEuro(btwTeReserveren)}
-        </p>
-        <p className="mt-2 text-[11px] leading-snug text-slate-400">
-          {formatEuro(salesBtwThisMonth)} verkoop − {formatEuro(expensesBtwThisMonth)} aftrek. Indicatie op basis van je geregistreerde facturen en uitgaven, niet het definitief verschuldigde bedrag.
-        </p>
-      </Link>
-    </div>
-  );
-}
-
 function roundMoney(n) {
   return Math.round(n * 100) / 100;
 }
 
 export default function DashboardStats({
-  revenueExcl = 0,
-  revenueBtw = 0,
-  expensesExcl = 0,
-  expensesBtw = 0,
+  invoicedIncl = 0,
+  paidIncl = 0,
+  outstandingIncl = 0,
 }) {
-  const received = roundMoney(revenueExcl + revenueBtw);
-  const paid = roundMoney(expensesExcl + expensesBtw);
-  const kept = roundMoney(received - paid);
-
   return (
     <section className="mb-3">
       <div className="grid gap-3 sm:grid-cols-3">
         <StatCard
-          label="Geregistreerde inkomsten"
-          value={formatEuro(received)}
-          hint={
-            <>
-              <p>
-                {formatEuro(revenueExcl)} + {formatEuro(revenueBtw)} btw.
-              </p>
-              <p className="mt-2">
-                Een factuur telt mee in de maand van de factuurdatum, ook als hij nog openstaat. Op betaald zetten telt hem niet nog een keer. Verkoop zonder factuur zet je bij Inkomsten. Dit is geen volledige boekhouding.
-              </p>
-            </>
-          }
-          href="/inkomsten"
+          label="Gefactureerd"
+          value={formatEuro(roundMoney(invoicedIncl))}
+          hint="Totaal van al je facturen, inclusief btw. Elke factuur telt één keer mee voor het hele bedrag."
+          href="/facturen"
         />
         <StatCard
-          label="Geregistreerde uitgaven"
-          value={formatEuro(paid)}
-          hint={`${formatEuro(expensesExcl)} + ${formatEuro(expensesBtw)} btw. Alleen de uitgaven die je hebt ingevuld.`}
-          href="/uitgaven"
+          label="Betaald"
+          value={formatEuro(roundMoney(paidIncl))}
+          hint="Facturen die je zelf als betaald hebt gemarkeerd, inclusief btw. FactuurBaas controleert niet of het geld is bijgeschreven. Deelbetalingen worden niet apart bijgehouden."
+          href="/facturen"
         />
         <StatCard
-          label="Resultaat op basis van je invoer"
-          value={formatEuro(kept)}
-          hint={
-            <>
-              <p>
-                {formatEuro(received)} − {formatEuro(paid)}.
-              </p>
-              <p className="mt-2">
-                Dit is het verschil tussen je geregistreerde inkomsten en uitgaven, inclusief btw. Het is geen nettowinst en geen besteedbaar inkomen. Belasting en posten die je niet hebt ingevuld zitten hier niet in.
-              </p>
-            </>
-          }
+          label="Openstaand"
+          value={formatEuro(roundMoney(outstandingIncl))}
+          hint="Facturen die nog niet als betaald zijn gemarkeerd, ook als de vervaldatum voorbij is. Inclusief btw. Gefactureerd min betaald."
+          href="/facturen"
           highlight
         />
       </div>

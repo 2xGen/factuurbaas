@@ -8,10 +8,8 @@ import {
   Crown,
   FileText,
   LayoutDashboard,
-  Receipt,
   UserCircle,
   Users,
-  Wallet,
   Wrench,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -22,8 +20,6 @@ const NAV = [
   { label: 'Offertes', href: '/offertes', icon: FileText },
   { label: 'Klanten', href: '/klanten', icon: Users },
   { label: 'Uren', href: '/uren', icon: Clock },
-  { label: 'Inkomsten', href: '/inkomsten', icon: Wallet },
-  { label: 'Uitgaven', href: '/uitgaven', icon: Receipt },
   { label: 'Tools', href: '/rekenen', icon: Wrench },
   { label: 'Baas status', href: '/baas-status', icon: Crown },
 ];
@@ -40,7 +36,7 @@ export default function AppSidebar() {
   return (
     <aside className="hidden w-[13.5rem] shrink-0 border-r border-slate-200/80 bg-[#f6f4f1] px-3 py-5 lg:flex lg:flex-col">
       <p className="px-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-        Grip op je bedrijf
+        Facturen
       </p>
       <ul className="mt-4 space-y-0.5 text-[13px]">
         {NAV.map(({ label, href, icon: Icon }) => {

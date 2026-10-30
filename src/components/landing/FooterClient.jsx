@@ -19,7 +19,7 @@ export default function FooterClient() {
               FactuurBaas
             </h3>
             <p className="max-w-xs text-[13px] leading-relaxed text-ink-500">
-              FactuurBaas helpt Nederlandse zzp&apos;ers met facturen, administratie en grip op hun bedrijf. Gratis en eenvoudig.
+              FactuurBaas is voor Nederlandse zzp&apos;ers die gratis een factuur willen maken en bewaren.
             </p>
             <FooterAppInstallLink />
           </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
   Bell,
@@ -11,13 +11,10 @@ import {
   LayoutDashboard,
   Lock,
   Plus,
-  Receipt,
   Users,
-  Wallet,
   Wrench,
 } from 'lucide-react';
 import { CountUp, EASE_OUT, Reveal } from '@/components/landing/page/motion';
-import IncomeDemo from '@/components/landing/page/IncomeDemo';
 
 const NAV = [
   { label: 'Overzicht', icon: LayoutDashboard },
@@ -25,25 +22,14 @@ const NAV = [
   { label: 'Offertes', icon: FileText },
   { label: 'Klanten', icon: Users },
   { label: 'Uren', icon: Clock },
-  { label: 'Inkomsten', icon: Wallet },
-  { label: 'Uitgaven', icon: Receipt },
   { label: 'Tools', icon: Wrench },
   { label: 'Baas status', icon: Crown },
 ];
 
 const STATS = [
-  { label: 'Je verdiende', value: 8420 },
-  { label: 'Je gaf uit', value: 3140 },
-  { label: 'Geregistreerd resultaat', value: 5280, answer: true },
-];
-
-const MONTHS = [
-  { month: 'mei', income: 6.1, expenses: 2.4 },
-  { month: 'jun', income: 7.4, expenses: 3.1 },
-  { month: 'jul', income: 5.2, expenses: 2.2 },
-  { month: 'aug', income: 8.9, expenses: 3.6 },
-  { month: 'sep', income: 7.6, expenses: 2.9 },
-  { month: 'okt', income: 8.42, expenses: 3.14, current: true },
+  { label: 'Gefactureerd', value: 8420 },
+  { label: 'Betaald', value: 5670 },
+  { label: 'Openstaand', value: 2750, answer: true },
 ];
 
 const INVOICES = [
@@ -57,62 +43,6 @@ const STATUS_TONES = {
   open: 'bg-amber-50 text-amber-700 ring-amber-600/15',
   late: 'bg-rose-50 text-rose-700 ring-rose-600/15',
 };
-
-function Chart() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
-  const reduce = useReducedMotion();
-  const max = 10;
-
-  return (
-    <div ref={ref} className="rounded-xl border border-ink/[0.07] bg-white p-4 sm:p-5">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold text-ink">Inkomsten en uitgaven</p>
-        <div className="flex items-center gap-3 text-[11px] text-ink-500">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-sm bg-ink" /> In
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-sm bg-ember/70" /> Uit
-          </span>
-        </div>
-      </div>
-      <div className="relative mt-5 h-36 sm:h-40">
-        <div className="absolute inset-0 flex flex-col justify-between" aria-hidden>
-          {[0, 1, 2, 3].map((i) => (
-            <span key={i} className="border-t border-dashed border-ink/[0.07]" />
-          ))}
-        </div>
-        <div className="relative flex h-full items-end justify-between gap-2 sm:gap-3">
-          {MONTHS.map((m, i) => (
-            <div key={m.month} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
-              <div className="flex h-full w-full items-end justify-center gap-1">
-                {[
-                  { v: m.income, cls: m.current ? 'bg-ink' : 'bg-ink/80' },
-                  { v: m.expenses, cls: 'bg-ember/70' },
-                ].map((bar, j) => (
-                  <motion.span
-                    key={j}
-                    className={`block w-full max-w-[14px] origin-bottom rounded-t-[3px] ${bar.cls}`}
-                    style={{ height: `${(bar.v / max) * 100}%` }}
-                    initial={reduce ? false : { scaleY: 0 }}
-                    animate={inView ? { scaleY: 1 } : undefined}
-                    transition={{ duration: 0.8, delay: 0.15 + i * 0.07 + j * 0.05, ease: EASE_OUT }}
-                  />
-                ))}
-              </div>
-              <span
-                className={`font-mono text-[10px] ${m.current ? 'font-semibold text-ink' : 'text-ink-400'}`}
-              >
-                {m.month}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function AppWindow() {
   return (
@@ -164,8 +94,8 @@ function AppWindow() {
         <div className="bg-paper-50/40 p-4 sm:p-7">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">Oktober</p>
-              <p className="mt-1 font-display text-xl sm:text-2xl">Hoe je bedrijf ervoor staat</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">FactuurBaas</p>
+              <p className="mt-1 font-display text-xl sm:text-2xl">Mijn facturen</p>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-xs font-medium text-white">
               <Plus className="h-3.5 w-3.5" /> Nieuwe factuur
@@ -190,25 +120,6 @@ function AppWindow() {
                 />
               </div>
             ))}
-          </div>
-
-          <div className="mt-3 grid gap-3 lg:grid-cols-[1.45fr_1fr]">
-            <Chart />
-            <div className="grid gap-3">
-              <div className="rounded-xl border border-ink/[0.07] bg-white p-4">
-                <p className="text-xs text-ink-500">Moet je nog ontvangen</p>
-                <CountUp value={2750} rounded className="mt-1.5 block font-display text-2xl tabular" />
-                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-paper-200">
-                  <div className="h-full w-[62%] rounded-full bg-amber-500/80" />
-                </div>
-                <p className="mt-2 text-[11px] text-ink-400">2 facturen open</p>
-              </div>
-              <div className="rounded-xl border border-ink/[0.07] bg-white p-4">
-                <p className="text-xs text-ink-500">Btw apart houden</p>
-                <CountUp value={1120} rounded className="mt-1.5 block font-display text-2xl tabular" />
-                <p className="mt-2 text-[11px] text-ink-400">Voor je volgende aangifte</p>
-              </div>
-            </div>
           </div>
 
           <div className="mt-3 rounded-xl border border-ink/[0.07] bg-white">
@@ -292,16 +203,23 @@ export default function DashboardMockupSection() {
               Met een gratis account
             </p>
             <h2 className="mt-5 font-display text-[2.4rem] font-normal leading-[1.02] tracking-[-0.03em] sm:text-5xl lg:text-[3.5rem]">
-              Verdiend. Uitgegeven.
+              Al je facturen.
               <br />
-              <em className="text-ember-100">Overgehouden.</em>
+              <em className="text-ember-100">Eén overzicht.</em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="max-w-md text-base leading-relaxed text-white/65 sm:text-lg lg:ml-auto">
-              Wat je verdiende, wat je uitgaf, en wat je overhoudt. Inclusief wat nog openstaat en
-              wat je apart zet voor de btw.
+              Maak en bewaar facturen, houd bij welke betaald zijn en zie direct welke betalingen
+              nog openstaan. Gratis, zonder ingewikkeld boekhoudprogramma.
             </p>
+            <ul className="mt-5 flex flex-wrap gap-2 text-[13px] text-white/80 lg:justify-end">
+              {['Klantgegevens bewaren', 'Facturen hergebruiken', 'Openstaande betalingen'].map((item) => (
+                <li key={item} className="rounded-full border border-white/15 px-3 py-1">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
 
@@ -315,34 +233,9 @@ export default function DashboardMockupSection() {
             <Notification />
           </motion.div>
           <figcaption className="mx-auto mt-8 max-w-3xl text-center text-[11px] leading-relaxed text-white/45 sm:mt-14">
-            <strong className="font-semibold text-white/70">Let op:</strong> Dit is een voorbeeldweergave.
-            FactuurBaas toont indicatieve financiële inzichten op basis van ingevoerde gegevens en biedt geen
-            volledige boekhouding of fiscaal advies. Je blijft zelf verantwoordelijk voor je administratie en
-            belastingaangiften.
+            Voorbeeldweergave met fictieve facturen.
           </figcaption>
         </figure>
-
-        <div className="mx-auto mt-28 min-w-0 max-w-6xl sm:mt-40">
-          <Reveal className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
-            <h3 className="max-w-[20ch] font-display text-[2rem] font-normal leading-[1.05] tracking-[-0.03em] sm:text-[2.6rem]">
-              Ook als je omzet <em className="text-ember-100">niet alleen uit facturen</em> komt.
-            </h3>
-            <div className="lg:text-right">
-              <p className="max-w-md text-base leading-relaxed text-white/65 lg:ml-auto">
-                Verkoop in je winkel, op locatie of rechtstreeks aan een klant? Voeg de inkomsten in
-                een paar seconden toe. Omschrijving, datum, bedrag, opslaan. Je overzicht klopt
-                meteen.
-              </p>
-              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">
-                Pin · Contant · Overboeking
-              </p>
-              <p className="mt-3 text-sm font-medium text-white">Probeer het: klik op Opslaan.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="mt-10 sm:mt-12">
-            <IncomeDemo />
-          </Reveal>
-        </div>
       </div>
     </section>
   );

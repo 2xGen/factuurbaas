@@ -75,7 +75,7 @@ const HeroSection = () => {
                 Maak een professionele factuur en download hem direct als PDF.{' '}
                 <span className="text-ink">Gratis, zonder abonnement.</span>
               </p>
-              <p>Met een gratis account houd je ook je inkomsten, uitgaven, offertes en resultaat bij.</p>
+              <p>Met een gratis account bewaar je facturen, zie je wat betaald is en wat nog openstaat.</p>
             </div>
 
             <div
@@ -98,7 +98,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="lg:pl-4">
+          <div className="min-w-0 lg:pl-4">
             <HeroInvoice />
           </div>
         </div>

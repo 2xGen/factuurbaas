@@ -3,14 +3,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { format } from 'date-fns';
-import { nl } from 'date-fns/locale';
 import { Loader2, Plus } from 'lucide-react';
 import DashboardAttention from '@/components/dashboard/DashboardAttention';
 import DashboardBookkeeperOffer from '@/components/dashboard/DashboardBookkeeperOffer';
-import DashboardStats, { DashboardSideMetrics } from '@/components/dashboard/DashboardStats';
-import DashboardCharts from '@/components/dashboard/DashboardCharts';
-import DashboardGoal from '@/components/dashboard/DashboardGoal';
+import DashboardStats from '@/components/dashboard/DashboardStats';
 import DashboardRecentInvoices from '@/components/dashboard/DashboardRecentInvoices';
 import ReminderDialog from '@/components/dashboard/dialogs/ReminderDialog';
 import MarkPaidDialog from '@/components/dashboard/dialogs/MarkPaidDialog';
@@ -34,6 +30,7 @@ import {
   getExpiredValidityQuotes,
   getMonthBusinessResult,
   getOverdueInvoices,
+  getInvoiceStatusTotals,
   getProfileCompletion,
   getQuotesExpiringSoon,
   getRevenueThisMonth,
@@ -126,6 +123,7 @@ export default function DashboardPage() {
     [userInvoices]
   );
 
+  const invoiceTotals = useMemo(() => getInvoiceStatusTotals(userInvoices), [userInvoices]);
   const invoiceRevenueMonth = useMemo(() => getRevenueThisMonth(userInvoices), [userInvoices]);
   const incomeMonth = useMemo(() => sumIncomesForMonth(incomes), [incomes]);
   const revenueThisMonth = invoiceRevenueMonth + incomeMonth.amountExcl;
@@ -189,10 +187,6 @@ export default function DashboardPage() {
 
   const greeting = getTimeOfDayGreeting();
   const firstName = getDisplayFirstName(user, profile);
-  const monthLabel = format(new Date(), 'LLLL', { locale: nl });
-  const year = new Date().getFullYear();
-  const yearlyGoal =
-    Number(profile?.yearly_goal_year) === year ? Number(profile?.yearly_goal) || 0 : Number(profile?.yearly_goal) || 0;
 
   const confirmMarkPaid = (paidDate) => {
     if (!invoiceToMarkPaid) return;
@@ -221,16 +215,13 @@ export default function DashboardPage() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-slate-400">
-                Grip op je bedrijf · {monthLabel}
+                Mijn facturen
               </p>
               <h1 className="mt-1 font-heading text-xl font-bold tracking-tight text-deep-blue sm:text-2xl">
                 {greeting}, {firstName}
               </h1>
               <p className="mt-1 max-w-xl text-sm leading-relaxed text-slate-500">
-                Inzicht in je facturen, inkomsten en uitgaven op basis van je eigen invoer. Geen volledige boekhouding.{' '}
-                <Link href="/boekhoudprogramma-vergelijken" className="font-semibold text-warm-orange hover:underline">
-                  Vergelijk boekhoudprogramma&apos;s
-                </Link>
+                Gefactureerd, betaald en openstaand over al je facturen. Een factuur telt helemaal mee.
               </p>
             </div>
             <Link
@@ -252,10 +243,9 @@ export default function DashboardPage() {
           </div>
 
           <DashboardStats
-            revenueExcl={revenueThisMonth}
-            revenueBtw={salesBtwThisMonth}
-            expensesExcl={expensesMonth.amountExcl}
-            expensesBtw={expensesMonth.vatAmount}
+            invoicedIncl={invoiceTotals.invoiced}
+            paidIncl={invoiceTotals.paid}
+            outstandingIncl={invoiceTotals.outstanding}
           />
 
           <DashboardBookkeeperOffer
@@ -265,23 +255,8 @@ export default function DashboardPage() {
             vatApproaching={isVatReturnApproaching()}
           />
 
-          <div className="mt-3 grid gap-3 lg:grid-cols-[1.45fr_1fr]">
-            <DashboardCharts invoices={userInvoices} expenses={expenses} incomes={incomes} />
-            <DashboardSideMetrics
-              totalOutstandingAmount={totalOutstandingAmount}
-              outstandingInvoicesCount={outstandingInvoicesCount}
-              btwTeReserveren={btwTeReserveren}
-              salesBtwThisMonth={salesBtwThisMonth}
-              expensesBtwThisMonth={expensesMonth.vatAmount}
-            />
-          </div>
-
           <div className="mt-3">
             <DashboardRecentInvoices invoices={userInvoices} />
-          </div>
-
-          <div className="mt-3">
-            <DashboardGoal userId={user.id} ytd={ytd} initialGoal={yearlyGoal} year={year} />
           </div>
 
           <p className="mt-10 text-[11px] leading-relaxed text-slate-400">

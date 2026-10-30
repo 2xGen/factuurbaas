@@ -18,12 +18,10 @@ import {
   ListChecks,
   LogOut,
   Menu,
-  Receipt,
   Scale,
   Search,
   UserCircle,
   Users,
-  Wallet,
   Wrench,
   X,
 } from 'lucide-react';
@@ -176,7 +174,7 @@ export default function HeaderClient() {
               FactuurBaas
             </span>
             <span className="mt-0.5 block text-[11px] font-medium text-slate-500 sm:text-xs">
-              Grip op je bedrijf
+              Online facturen maken
             </span>
           </span>
         </Link>
@@ -430,22 +428,6 @@ export default function HeaderClient() {
                   >
                     <span className="inline-flex items-center gap-2">
                       <Clock className="h-4 w-4" /> Uren
-                    </span>
-                  </Link>
-                  <Link
-                    href="/inkomsten"
-                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Wallet className="h-4 w-4" /> Inkomsten
-                    </span>
-                  </Link>
-                  <Link
-                    href="/uitgaven"
-                    className="rounded-lg px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Receipt className="h-4 w-4" /> Uitgaven
                     </span>
                   </Link>
                   <Link

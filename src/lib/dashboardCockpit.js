@@ -119,6 +119,24 @@ export function getSalesBtwThisMonth(invoices = [], now = new Date()) {
   }, 0);
 }
 
+/**
+ * One scope: every saved invoice, once, including btw.
+ * A factuur is entirely betaald or entirely openstaand. There is no partial payment.
+ * Openstaand includes invoices past their due date.
+ */
+export function getInvoiceStatusTotals(invoices = []) {
+  return invoices.reduce(
+    (totals, inv) => {
+      const amount = Number(inv.total_incl) || 0;
+      totals.invoiced += amount;
+      if (inv.status === 'paid') totals.paid += amount;
+      else totals.outstanding += amount;
+      return totals;
+    },
+    { invoiced: 0, paid: 0, outstanding: 0 }
+  );
+}
+
 /** Omzet − uitgaven; BTW te reserveren = verkoop-btw − aftrekbare btw. */
 export function getMonthBusinessResult({
   revenueExcl = 0,

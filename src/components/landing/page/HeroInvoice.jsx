@@ -46,7 +46,8 @@ export default function HeroInvoice() {
         };
 
   return (
-    <div className="relative mx-auto w-full max-w-[34rem] overflow-x-clip lg:mr-0 sm:overflow-visible">
+    <div className="relative mx-auto w-full max-w-[40rem] overflow-x-clip px-10 pb-12 pt-4 lg:mr-0">
+      <div className="relative">
       <div
         className="absolute inset-0 hidden translate-x-5 translate-y-4 rotate-[3.5deg] rounded-[10px] border border-ink/5 bg-paper-50 shadow-paper sm:block"
         aria-hidden
@@ -196,6 +197,7 @@ export default function HeroInvoice() {
           </span>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }
