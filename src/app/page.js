@@ -5,6 +5,7 @@ import WhyFreeHomeSection from "@/components/landing/page/sections/WhyFreeHomeSe
 import HomeToolsSection from "@/components/landing/page/sections/HomeToolsSection";
 import CallToActionSection from "@/components/landing/page/sections/CallToActionSection";
 import SeoIndexSection from "@/components/landing/page/sections/SeoIndexSection";
+import EFactuurHomeSection from "@/components/landing/page/sections/EFactuurHomeSection";
 import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
 
 export const metadata = {
@@ -40,6 +41,7 @@ export default function HomePage() {
       <HomeToolsSection />
       <CallToActionSection />
       <SeoIndexSection />
+      <EFactuurHomeSection />
     </>
   );
 }

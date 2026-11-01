@@ -9,7 +9,7 @@ import HeroInvoice from '@/components/landing/page/HeroInvoice';
 const TRUST = [
   { icon: MapPin, label: 'Gemaakt voor Nederland' },
   { icon: ShieldCheck, label: 'Accountgegevens in de EU' },
-  { icon: FileDown, label: 'Direct als PDF' },
+  { icon: FileDown, label: 'PDF & UBL/XML' },
   { icon: Euro, label: 'Geen abonnement' },
 ];
 
@@ -72,8 +72,8 @@ const HeroSection = () => {
               style={rise(180)}
             >
               <p>
-                Maak een professionele factuur en download hem direct als PDF.{' '}
-                <span className="text-ink">Gratis, zonder abonnement.</span>
+                Maak een professionele factuur en download hem direct als PDF of UBL/XML.{' '}
+                <span className="text-ink">Gratis, zonder account of abonnement.</span>
               </p>
               <p>Met een gratis account bewaar je facturen, zie je wat betaald is en wat nog openstaat.</p>
             </div>

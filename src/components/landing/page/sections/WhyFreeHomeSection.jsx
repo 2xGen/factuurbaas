@@ -19,7 +19,7 @@ const facts = [
   },
   {
     title: 'Gratis factureren',
-    text: 'Een factuur maken en als PDF downloaden blijft gratis, zonder verplicht abonnement.',
+    text: 'Een factuur maken en downloaden als PDF of UBL/XML blijft gratis, zonder verplicht abonnement.',
     href: '/waarom-gratis',
     link: 'Waarom het gratis is',
   },

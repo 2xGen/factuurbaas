@@ -16,7 +16,7 @@ export default function SeoIndexSection() {
             <h2 className="text-sm font-medium text-ink-700">Gratis factuur maken voor zzp&apos;ers</h2>
             <p className="mt-2">
               Vul je bedrijfsgegevens, klant en werkzaamheden in, controleer de btw en download je
-              factuur direct als PDF. Geen account. Geen abonnement.
+              factuur direct als PDF of UBL/XML. Geen account. Geen abonnement.
             </p>
             <p className="mt-2">
               Met een gratis account bewaar je facturen en offertes, houd je bij welke betaald zijn

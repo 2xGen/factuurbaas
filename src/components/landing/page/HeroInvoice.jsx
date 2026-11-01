@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Check, FileDown } from 'lucide-react';
+import { Check, FileCode, FileDown } from 'lucide-react';
 import { CountUp, EASE_OUT, formatEuro } from './motion';
 
 const ITEMS = [
@@ -46,7 +46,7 @@ export default function HeroInvoice() {
         };
 
   return (
-    <div className="relative mx-auto w-full max-w-[40rem] overflow-x-clip px-10 pb-12 pt-4 lg:mr-0">
+    <div className="relative mx-auto w-full max-w-[40rem] overflow-x-clip px-10 pb-20 pt-4 lg:mr-0">
       <div className="relative">
       <div
         className="absolute inset-0 hidden translate-x-5 translate-y-4 rotate-[3.5deg] rounded-[10px] border border-ink/5 bg-paper-50 shadow-paper sm:block"
@@ -187,14 +187,25 @@ export default function HeroInvoice() {
         className="absolute -bottom-6 -left-4 hidden sm:block lg:-left-10"
         aria-hidden
       >
-        <div className="flex items-center gap-3 rounded-xl border border-ink/[0.08] bg-white p-2.5 pr-5 shadow-paper">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-ember-50 text-ember">
-            <FileDown className="h-4 w-4" />
-          </span>
-          <span>
-            <span className="block text-xs font-semibold text-ink">PDF klaar</span>
-            <span className="block font-mono text-[10px] text-ink-400">factuur-2026-001.pdf</span>
-          </span>
+        <div className="rounded-xl border border-ink/[0.08] bg-white p-2.5 pr-5 shadow-paper">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-ember-50 text-ember">
+              <FileDown className="h-4 w-4" />
+            </span>
+            <span>
+              <span className="block text-xs font-semibold text-ink">PDF klaar</span>
+              <span className="block font-mono text-[10px] text-ink-400">factuur-2026-001.pdf</span>
+            </span>
+          </div>
+          <div className="mt-2 flex items-center gap-3 border-t border-ink/[0.06] pt-2">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-ink/[0.04] text-ink-700">
+              <FileCode className="h-4 w-4" />
+            </span>
+            <span>
+              <span className="block text-xs font-semibold text-ink">Ook als UBL/XML</span>
+              <span className="block font-mono text-[10px] text-ink-400">factuur-2026-001.xml</span>
+            </span>
+          </div>
         </div>
       </motion.div>
       </div>

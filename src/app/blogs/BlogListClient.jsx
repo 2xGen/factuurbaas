@@ -14,7 +14,7 @@ function toListItem(article) {
   return {
     ...article,
     type: 'blog',
-    href: `/blogs/${article.slug}`,
+    href: article.path || `/blogs/${article.slug}`,
   };
 }
 

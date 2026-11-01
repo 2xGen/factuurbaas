@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { publishedArticles as articles } from '@/lib/blogData';
+import { getArticleHref, publishedArticles as articles } from '@/lib/blogData';
 import { getGuideListItems } from '@/lib/guideData';
 import { guideHubFaqs } from '@/lib/guideHub';
 import BlogListClient from './BlogListClient';
@@ -42,7 +42,7 @@ const itemListSchema = {
     ...articles.map((article, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      url: `https://factuurbaas.nl/blogs/${article.slug}`,
+      url: `https://factuurbaas.nl${getArticleHref(article)}`,
       name: article.title,
     })),
     ...guideListItems.map((guide, index) => ({

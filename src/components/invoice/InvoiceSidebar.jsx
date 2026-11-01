@@ -89,7 +89,7 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
           disabled={isSaving}
         >
           <Eye className="mr-2 h-4 w-4" />
-          Bekijk PDF
+          Bekijk Factuur
         </Button>
 
         {isLoggedIn ? (
@@ -129,7 +129,7 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
               <ul className="mt-1.5 list-disc space-y-0.5 pl-4">
                 <li>Facturen later terugvinden</li>
                 <li>Bedrijfs- en klantgegevens bewaren</li>
-                <li>BTW bijhouden</li>
+                <li>Openstaande betalingen bijhouden</li>
                 <li>FactuurBaas-vermelding uitzetten</li>
               </ul>
             </div>
@@ -189,6 +189,7 @@ const InvoiceSidebar = ({ invoice, previewRef, onSave, isSaving, isLoggedIn, onI
       <DownloadSuccessDialog
         isOpen={isSuccessOpen}
         onClose={() => setIsSuccessOpen(false)}
+        invoice={invoice}
         companyEmail={invoice.companyDetails?.email}
         isLoggedIn={isLoggedIn}
         wasSavedToAccount={wasSavedToAccount}

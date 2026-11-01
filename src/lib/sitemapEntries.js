@@ -1,4 +1,4 @@
-import { publishedArticles as articles } from '@/lib/blogData';
+import { getArticleHref, publishedArticles as articles } from '@/lib/blogData';
 import { guides } from '@/lib/guideData';
 import { getAllTemplateSlugs } from '@/lib/templateLandingPages';
 import { getAllVoorbeeldSlugs } from '@/lib/voorbeeldLandingPages';
@@ -57,7 +57,7 @@ export function getSitemapEntries() {
   ];
 
   const blogPages = articles.map((article) => ({
-    url: `${SITEMAP_BASE_URL}/blogs/${article.slug}`,
+    url: `${SITEMAP_BASE_URL}${getArticleHref(article)}`,
     lastModified: article.dateModified ? new Date(article.dateModified) : new Date(article.datePublished || '2026-02-05'),
     changeFrequency: 'monthly',
     priority: 0.7,

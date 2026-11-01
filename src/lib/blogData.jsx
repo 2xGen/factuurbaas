@@ -8,6 +8,12 @@ import { zakelijkeKostenArticles } from '@/lib/zakelijkeKostenBlogData';
 import { zakelijkeLeaseArticles } from '@/lib/zakelijkeLeaseBlogData';
 import { zakelijkInternetTelefonieArticles } from '@/lib/zakelijkInternetTelefonieBlogData';
 import { gratisFactuurAppArticle } from '@/lib/gratisFactuurAppBlog';
+import { ublFactuurMakenArticle } from '@/lib/ublFactuurMakenBlog';
+import { eFactuurMakenArticle } from '@/lib/eFactuurMakenBlog';
+import { watIsEenUblFactuurArticle } from '@/lib/watIsEenUblFactuurBlog';
+import { watIsPeppolArticle } from '@/lib/watIsPeppolBlog';
+import { xmlFactuurMakenArticle } from '@/lib/xmlFactuurMakenBlog';
+import { eFacturatieVerplichtArticle } from '@/lib/eFacturatieVerplichtBlog';
 import { facturenVerwerkenArticles } from '@/lib/facturenVerwerkenBlog';
 
 const CtaButton = ({ href = '/create-invoice', label = 'Maak Nu Je Gratis Factuur' }) => (
@@ -16914,6 +16920,12 @@ export const articles = [
   ...zakelijkInternetTelefonieArticles,
   ...facturenVerwerkenArticles,
   gratisFactuurAppArticle,
+  ublFactuurMakenArticle,
+  eFactuurMakenArticle,
+  watIsEenUblFactuurArticle,
+  watIsPeppolArticle,
+  xmlFactuurMakenArticle,
+  eFacturatieVerplichtArticle,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];
   const aIsSpecial = specialSlugs.includes(a.slug);
@@ -16930,3 +16942,7 @@ export const articles = [
 });
 
 export const publishedArticles = articles.filter((article) => !article.draft);
+
+export function getArticleHref(article) {
+  return article?.path || `/blogs/${article.slug}`;
+}

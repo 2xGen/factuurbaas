@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { articles } from '@/lib/blogData';
 import { withBookkeeperCtas } from '@/lib/boekhouderArticleCtas';
 import BlogPostClient from './BlogPostClient';
@@ -29,8 +29,9 @@ export async function generateMetadata({ params }) {
   if (!article) return { title: 'Blog | FactuurBaas' };
   const published = article.datePublished ? `${article.datePublished}T12:00:00+01:00` : '';
   const modified = article.dateModified ? `${article.dateModified}T12:00:00+01:00` : published;
-  const articleUrl = `https://factuurbaas.nl/blogs/${article.slug}`;
+  const articleUrl = `https://factuurbaas.nl${article.path || `/blogs/${article.slug}`}`;
   const seoTitle = article.metaTitle || article.title;
+  const description = article.metaDescription || article.excerpt;
   const ogImages = article.image?.url
     ? [
         {
@@ -43,13 +44,13 @@ export async function generateMetadata({ params }) {
     : siteOpenGraphImages;
   return {
     title: `${seoTitle} | FactuurBaas`,
-    description: article.excerpt,
+    description,
     keywords: article.keywords,
     authors: [{ name: 'FactuurBaas', url: 'https://factuurbaas.nl' }],
     robots: article.draft ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       title: seoTitle,
-      description: article.excerpt,
+      description,
       url: articleUrl,
       type: 'article',
       siteName: 'FactuurBaas',
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: 'summary_large_image',
       title: seoTitle,
-      description: article.excerpt,
+      description,
       images: [article.image?.url || SITE_OG_IMAGE],
     },
     alternates: { canonical: articleUrl },
@@ -71,6 +72,7 @@ export default async function BlogPostPage({ params }) {
   const resolvedParams = typeof params.then === 'function' ? await params : params;
   const article = articles.find((a) => a.slug === resolvedParams.slug);
   if (!article) notFound();
+  if (article.path) redirect(article.path);
   const relatedLimit =
     isHypotheekGuideSlug(article.slug) ||
     isZakelijkeLeaseGuideSlug(article.slug) ||

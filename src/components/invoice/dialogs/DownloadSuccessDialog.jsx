@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, LayoutDashboard } from 'lucide-react';
 import FeatureUpdatesSignup from '@/components/invoice/FeatureUpdatesSignup';
+import UblDownloadAction from '@/components/invoice/UblDownloadAction';
 import ShareFactuurBaas from '@/components/shared/ShareFactuurBaas';
 
 function BookkeeperNudge({ onClose }) {
@@ -31,6 +32,7 @@ function BookkeeperNudge({ onClose }) {
 export default function DownloadSuccessDialog({
   isOpen,
   onClose,
+  invoice,
   companyEmail,
   isLoggedIn = false,
   wasSavedToAccount = false,
@@ -67,6 +69,8 @@ export default function DownloadSuccessDialog({
               ' Sla hem op in je account als je hem later terug wilt vinden.'
             )}
           </p>
+
+          <UblDownloadAction invoice={invoice} />
 
           <BookkeeperNudge onClose={onClose} />
 

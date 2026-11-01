@@ -26,7 +26,7 @@ function formatDate(iso) {
 function resolveRelatedHref(item) {
   if (item.type === 'guide') return `/gidsen/${item.slug}`;
   if (item.type === 'tool' || item.type === 'hub') return item.href;
-  return `/blogs/${item.slug}`;
+  return item.path || `/blogs/${item.slug}`;
 }
 
 function findPillar(slug, isGuide) {
@@ -137,7 +137,7 @@ export default function ArticlePostClient({
   const bodyRef = useRef(null);
   const { minutes, headings, activeId } = useArticleOutline(bodyRef);
 
-  const articleUrl = `https://factuurbaas.nl${basePath}/${article.slug}`;
+  const articleUrl = `https://factuurbaas.nl${article.path || `${basePath}/${article.slug}`}`;
   const published = article.datePublished ? `${article.datePublished}T12:00:00+01:00` : new Date().toISOString();
   const modified = article.dateModified ? `${article.dateModified}T12:00:00+01:00` : published;
   const isGuide = basePath === '/gidsen';
