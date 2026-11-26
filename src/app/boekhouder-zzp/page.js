@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { UserRound } from 'lucide-react';
+import { User } from 'lucide-react';
 import BookkeeperLeadForm from '@/components/leads/BookkeeperLeadForm';
 import BookkeeperStickyCta from '@/components/leads/BookkeeperStickyCta';
 import BookkeeperClusterLinks from '@/components/leads/BookkeeperClusterLinks';
@@ -193,7 +193,7 @@ export default function BoekhouderZzpPage() {
           { name: 'Boekhouder ZZP' },
         ]}
         eyebrow="Boekhouder ZZP"
-        eyebrowIcon={UserRound}
+        eyebrowIcon={User}
         title="Boekhouder voor zzp'ers en eenmanszaken vinden"
         size="lg"
         align="start"
