@@ -3,18 +3,22 @@ import { Suspense } from 'react';
 import { Search } from 'lucide-react';
 import BookkeeperLeadForm from '@/components/leads/BookkeeperLeadForm';
 import BookkeeperStickyCta from '@/components/leads/BookkeeperStickyCta';
+import BookkeeperClusterLinks from '@/components/leads/BookkeeperClusterLinks';
 import { ArrowIcon, DisplayHeading, FaqList, PageHeader, TrustList, btn } from '@/components/site/editorial';
-import { siteOpenGraphImages, SITE_OG_IMAGE } from '@/lib/siteOg';
-
-const title = 'Boekhouder vinden voor ZZP & MKB | FactuurBaas';
+const title = 'Boekhouder vinden voor ZZP, BV en MKB | FactuurBaas';
 const description =
-  'Boekhouder zoeken voor je eenmanszaak, VOF of BV? Vind hulp bij je administratie, btw-aangifte en jaarrekening. Gratis en vrijblijvend aanvragen.';
+  "Een boekhouder vinden voor je eenmanszaak, VOF, BV of MKB? Bekijk indicatieve kosten en vraag gratis en vrijblijvend hulp aan bij het vinden van een boekhouder.";
+
+const FEATURED_IMAGE = {
+  url: 'https://mtadtabmwahpxmpquovg.supabase.co/storage/v1/object/public/Factuurbaas/boekhouder%20voor%20zzp.jpg',
+  alt: "Boekhouder vinden voor zzp'ers, BV en MKB.",
+};
 
 export const metadata = {
   title,
   description,
   keywords:
-    'boekhouder vinden, boekhouder zoeken, boekhouder zzp, boekhouder eenmanszaak, boekhouder mkb, boekhouder voor bv',
+    'boekhouder vinden, boekhouder zoeken, zoek een boekhouder, boekhouder zzp, boekhouder eenmanszaak, boekhouder bv, boekhouder mkb, boekhouding uitbesteden, boekhouder zakelijk',
   alternates: { canonical: 'https://factuurbaas.nl/boekhouder-vinden' },
   openGraph: {
     title,
@@ -22,56 +26,71 @@ export const metadata = {
     url: 'https://factuurbaas.nl/boekhouder-vinden',
     siteName: 'FactuurBaas',
     type: 'website',
-    images: siteOpenGraphImages,
+    images: [
+      {
+        url: FEATURED_IMAGE.url,
+        width: 1200,
+        height: 630,
+        alt: FEATURED_IMAGE.alt,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title,
     description,
-    images: [SITE_OG_IMAGE],
+    images: [FEATURED_IMAGE.url],
   },
 };
 
 const FAQS = [
   {
     q: 'Hoe vind ik een goede boekhouder?',
-    a: 'Bepaal eerst welke werkzaamheden je wilt uitbesteden, bijvoorbeeld btw-aangiften, jaarwerk of je volledige administratie. Kijk vervolgens naar ervaring met jouw bedrijfsvorm, tarieven, bereikbaarheid en de manier waarop je documenten aanlevert. Via FactuurBaas kun je vrijblijvend een aanvraag indienen om hulp te krijgen bij je zoektocht.',
+    a: 'Zoek een boekhouder met ervaring in jouw rechtsvorm en branche. Let daarnaast op tarieven, bereikbaarheid, dienstverlening en de manier waarop je jouw administratie kunt aanleveren. Via FactuurBaas kun je gratis en vrijblijvend hulp aanvragen bij het vinden van een passende boekhouder.',
   },
   {
-    q: 'Wat kost een boekhouder voor een ZZP’er?',
-    a: 'Dat hangt af van het aantal transacties, de werkzaamheden en de afspraken met het kantoor. Alleen hulp bij btw-aangiften is doorgaans goedkoper dan het volledig uitbesteden van de administratie. Vraag vooraf een duidelijke prijsopgave en controleer wat inbegrepen is.',
+    q: 'Wat kost een boekhouder voor een zzp’er?',
+    a: 'Voor volledige uitbesteding van de boekhouding van een eenmanszaak kun je indicatief rekening houden met €100 tot €150 per maand. De uiteindelijke prijs hangt af van het aantal transacties, de complexiteit en de gewenste dienstverlening.',
   },
   {
-    q: 'Is een boekhouder verplicht voor ZZP’ers?',
-    a: 'Nee, als ZZP’er ben je niet verplicht een boekhouder in te schakelen. Je bent wel verantwoordelijk voor een administratie die voldoet aan de wettelijke verplichtingen en voor het correct indienen van je belastingaangiften. Je kunt dit zelf doen of hulp inschakelen.',
+    q: 'Wat kost een boekhouder voor een BV?',
+    a: 'Voor een afzonderlijke werkmaatschappij beginnen de indicatieve kosten bij ongeveer €250 per maand. Voor een afzonderlijke holding beginnen de indicatieve kosten bij ongeveer €100 per maand. Bij meerdere ondernemingen, personeel of aanvullende adviesbehoeften kunnen de kosten hoger uitvallen.',
   },
   {
-    q: 'Wat is het verschil tussen een boekhouder en een accountant?',
-    a: 'Een boekhouder verzorgt doorgaans de financiële administratie en ondersteunt bij aangiften. AA en RA zijn beschermde accountantstitels waarvoor specifieke opleiding, registratie en beroepsregels gelden. Niet iedere onderneming heeft een accountant nodig.',
+    q: 'Wat kost een boekhouder voor een VOF?',
+    a: 'Voor een VOF liggen de indicatieve kosten voor volledige boekhouding tussen €150 en €250 per maand. De daadwerkelijke kosten zijn afhankelijk van de administratie en gewenste ondersteuning.',
   },
   {
-    q: 'Kan ik alleen mijn btw-aangifte laten doen?',
-    a: 'Ja, sommige boekhouders bieden ondersteuning bij afzonderlijke werkzaamheden, zoals de btw-aangifte of de jaarlijkse belastingaangifte. Vraag vooraf of dit mogelijk is en wat je zelf moet aanleveren.',
+    q: 'Is een boekhouder verplicht voor zzp’ers?',
+    a: 'Nee. Een zzp’er is niet verplicht om een boekhouder in te schakelen. Je bent wel verantwoordelijk voor een correcte administratie en het nakomen van je fiscale verplichtingen.',
   },
   {
-    q: 'Kan ik een boekhouder vinden voor mijn BV?',
-    a: 'Ja, je kunt een aanvraag indienen voor een BV. Let bij de keuze op ervaring met vennootschapsbelasting, jaarrekeningen en eventuele salarisadministratie.',
+    q: 'Kan ik alleen mijn btw-aangifte uitbesteden?',
+    a: 'Dat is bij sommige boekhouders mogelijk. Veel administratiekantoren richten zich echter op doorlopende samenwerkingen waarbij meerdere administratieve werkzaamheden worden gecombineerd. Bespreek vooraf welke ondersteuning je nodig hebt.',
   },
   {
-    q: 'Moet mijn boekhouder bij mij in de buurt zitten?',
-    a: 'Niet noodzakelijk. Veel administratie kan digitaal worden aangeleverd en besproken. Als je persoonlijk contact belangrijk vindt, kun je bij je aanvraag of het vervolggesprek aangeven dat je een boekhouder in de buurt zoekt.',
+    q: 'Kan ik zelf facturen blijven maken als ik een boekhouder heb?',
+    a: 'Ja. Je kunt zelf facturen maken met FactuurBaas en deze aanleveren bij je boekhouder. Bespreek vooraf welke bestandsformaten en aanlevermethoden jouw boekhouder accepteert.',
   },
   {
-    q: 'Hoe werkt het vinden van een boekhouder via FactuurBaas?',
-    a: 'Je vult je bedrijfsvorm, bedrijfsgegevens en contactgegevens in. FactuurBaas stuurt je aanvraag door naar samenwerkingspartner WRKD B.V., die contact met je kan opnemen over de mogelijkheden. Je beslist zelf of je vervolgens met een boekhouder wilt samenwerken.',
+    q: 'Moet mijn boekhouder in de buurt zitten?',
+    a: 'Nee. Veel boekhouders werken digitaal, waardoor je ook kunt samenwerken met een administratiekantoor buiten jouw regio. Als persoonlijk contact op locatie belangrijk voor je is, kun je dit aangeven bij het bespreken van je wensen.',
+  },
+  {
+    q: 'Kan ik overstappen naar een andere boekhouder?',
+    a: 'Ja. Controleer wel de afspraken en eventuele opzegtermijn bij je huidige boekhouder. Zorg daarnaast voor een goede overdracht van je administratie en openstaande werkzaamheden.',
+  },
+  {
+    q: 'Kan ik een boekhouder vinden voor een MKB-bedrijf met personeel?',
+    a: 'Ja. Je kunt een aanvraag indienen voor ondersteuning bij de administratie van je MKB-bedrijf. Bespreek daarbij ook of salarisadministratie, financiële rapportages en aanvullende dienstverlening nodig zijn.',
   },
   {
     q: 'Is een boekhouder vinden via FactuurBaas gratis?',
-    a: 'Het indienen van een aanvraag via FactuurBaas is gratis en vrijblijvend. Wanneer je besluit met een boekhouder samen te werken, maak je zelf afspraken over de dienstverlening en bijbehorende kosten.',
+    a: 'Het indienen van een aanvraag via FactuurBaas is gratis en vrijblijvend. De uiteindelijke dienstverlening van een boekhouder is doorgaans betaald. Je maakt hierover zelf afspraken met de betreffende dienstverlener.',
   },
   {
-    q: 'Welke gegevens moet ik invullen?',
-    a: 'We vragen naar je bedrijfsvorm, naam, bedrijfsnaam, plaats, e-mailadres en telefoonnummer. Deze gegevens zijn nodig om je aanvraag te verwerken en contact met je op te kunnen nemen.',
+    q: 'Wat gebeurt er met mijn aanvraag?',
+    a: 'FactuurBaas stuurt je aanvraag na jouw toestemming door naar samenwerkingspartner WRKD B.V. Deze kan contact met je opnemen om jouw wensen en de mogelijkheden te bespreken. Je bent niet verplicht om een samenwerking aan te gaan.',
   },
 ];
 
@@ -108,10 +127,11 @@ function LeadForm() {
   return (
     <div>
       <p className="font-display text-[1.65rem] font-normal leading-tight tracking-[-0.02em] text-ink">
-        Vind hulp bij je boekhouding
+        Vind een boekhouder voor jouw onderneming
       </p>
       <p className="mt-2 mb-4 text-sm leading-relaxed text-ink-500">
-        Vertel ons welke bedrijfsvorm je hebt en laat je contactgegevens achter.
+        Vertel ons welke bedrijfsvorm je hebt en laat je contactgegevens achter. Onze samenwerkingspartner
+        neemt contact met je op om de mogelijkheden te bespreken.
       </p>
       <Suspense
         fallback={<div className="min-h-[28rem] rounded-2xl border border-ink/[0.08] bg-white shadow-paper" />}
@@ -139,17 +159,23 @@ export default function BoekhouderVindenPage() {
         ]}
         eyebrow="Boekhouder vinden"
         eyebrowIcon={Search}
-        title="Boekhouder vinden voor ZZP en MKB"
+        title="Boekhouder vinden voor ZZP, BV en MKB"
         size="lg"
         align="start"
         containerClassName="max-w-6xl"
         lead={
-          <p>
-            Zoek je een boekhouder voor je eenmanszaak, VOF of BV? Of je nu hulp nodig hebt bij je
-            facturen, btw-aangifte, jaarrekening of volledige boekhouding: via FactuurBaas vraag je
-            gratis en vrijblijvend hulp aan bij het vinden van een boekhouder die past bij jouw
-            onderneming.
-          </p>
+          <>
+            <p>
+              Op zoek naar een boekhouder die past bij jouw onderneming? Of je nu net bent begonnen als
+              zzp&apos;er, een groeiend MKB-bedrijf hebt of de administratie van je BV wilt uitbesteden:
+              via FactuurBaas vraag je gratis en vrijblijvend hulp aan bij het vinden van een passende
+              boekhouder.
+            </p>
+            <p className="mt-4">
+              Van btw-aangiften en dagelijkse administratie tot jaarrekeningen, salarisadministratie en
+              fiscaal advies.
+            </p>
+          </>
         }
         aside={<LeadForm />}
       >
@@ -157,7 +183,9 @@ export default function BoekhouderVindenPage() {
           items={[
             'Gratis en vrijblijvend aanvragen',
             "Voor eenmanszaken, VOF's, stichtingen en BV's",
-            'Binnen 1 minuut het formulier invullen',
+            'Voor startende en bestaande ondernemingen',
+            'Binnen één minuut een aanvraag indienen',
+            'Geen verplichting om een boekhouder in te schakelen',
           ]}
         />
       </PageHeader>
@@ -166,10 +194,10 @@ export default function BoekhouderVindenPage() {
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <span className="block h-px w-10 bg-ember" aria-hidden />
           <DisplayHeading size="md" className="mb-4 mt-6 max-w-[22ch]">
-            Hoe werkt een boekhouder vinden via FactuurBaas?
+            Hoe vind je een boekhouder via FactuurBaas?
           </DisplayHeading>
           <p className="max-w-2xl text-lg leading-relaxed text-ink-500">
-            Een boekhouder zoeken hoeft niet ingewikkeld te zijn. Je hoeft niet zelf tientallen
+            Een goede boekhouder vinden hoeft niet ingewikkeld te zijn. Je hoeft niet zelf verschillende
             administratiekantoren te benaderen om een eerste stap te zetten.
           </p>
           <ol className="mt-10 grid gap-4 lg:grid-cols-3">
@@ -177,17 +205,17 @@ export default function BoekhouderVindenPage() {
               [
                 '1',
                 'Vertel ons over je onderneming',
-                'Selecteer je bedrijfsvorm en vul je bedrijfsnaam, plaats en contactgegevens in. De aanvraag duurt ongeveer één minuut.',
+                'Selecteer je bedrijfsvorm en vul je bedrijfsnaam, vestigingsplaats en contactgegevens in.',
               ],
               [
                 '2',
-                'Je wordt benaderd over je aanvraag',
-                'FactuurBaas stuurt je gegevens door naar onze samenwerkingspartner WRKD B.V. Je kunt vervolgens worden benaderd om je boekhoudkundige wensen te bespreken.',
+                'Bespreek jouw boekhoudkundige wensen',
+                'Onze samenwerkingspartner kan contact met je opnemen om te bespreken welke werkzaamheden je wilt uitbesteden, wat je belangrijk vindt en welke ondersteuning bij jouw onderneming past.',
               ],
               [
                 '3',
-                'Bespreek de mogelijkheden',
-                'Je kunt aangeven welke werkzaamheden je wilt uitbesteden, zoals de btw-aangifte, jaarlijkse belastingaangifte of volledige administratie. Of je daadwerkelijk met een boekhouder gaat samenwerken, bepaal je zelf.',
+                'Beslis zelf of je wilt samenwerken',
+                'Bespreek de dienstverlening, tarieven en mogelijkheden. Je bepaalt zelf of je daadwerkelijk een samenwerking aangaat.',
               ],
             ].map(([number, heading, text]) => (
               <li key={number} className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-paper">
@@ -199,7 +227,42 @@ export default function BoekhouderVindenPage() {
               </li>
             ))}
           </ol>
-          <FormCta>Vind een boekhouder</FormCta>
+          <FormCta>Vind vrijblijvend een boekhouder</FormCta>
+        </div>
+      </section>
+
+      <section className="border-t border-ink/[0.06] py-16 sm:py-20">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+          <DisplayHeading size="md" className="max-w-[18ch]">
+            Een boekhouder voor iedere onderneming
+          </DisplayHeading>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-500">
+            Niet iedere onderneming heeft dezelfde boekhoudkundige behoeften. Een zzp&apos;er met enkele
+            facturen per maand heeft andere verplichtingen dan een BV met personeel of een groeiend
+            MKB-bedrijf.
+          </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ['/boekhouder-zzp', "Boekhouder voor zzp'ers", '€100 – €150 / maand', 'Voor eenmanszaken en freelancers'],
+              ['/boekhouder-bv', 'Boekhouder voor BV', 'Vanaf €250 / maand', 'Voor werkmaatschappij en holding'],
+              ['/boekhouder-mkb', 'Boekhouder voor MKB', 'Op maat', 'Voor groeiende bedrijven'],
+              ['/boekhouding-uitbesteden', 'Boekhouding uitbesteden', 'Deels of volledig', 'Zelf factureren, administratie uitbesteden'],
+              ['/boekhouder-overstappen', 'Niet tevreden over je huidige boekhouder?', 'Vrijblijvend', 'Overstappen zonder direct op te zeggen'],
+              ['/online-boekhouder', 'Online boekhouder', 'Digitaal', 'Samenwerken zonder kantoor om de hoek'],
+            ].map(([href, heading, price, text]) => (
+              <Link
+                key={href}
+                href={href}
+                className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-paper transition-colors hover:border-ink/25"
+              >
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ember">{price}</p>
+                <h3 className="mt-3 font-display text-2xl font-normal leading-snug tracking-[-0.02em] text-ink">
+                  {heading}
+                </h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-ink-500">{text}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -429,78 +492,63 @@ export default function BoekhouderVindenPage() {
           </DisplayHeading>
           <div className="mt-4 max-w-2xl space-y-4 text-[15px] leading-relaxed text-ink-500 sm:text-base">
             <p>
-              De kosten van een boekhouder verschillen per onderneming. Een ZZP&apos;er met enkele
-              facturen per maand heeft meestal een andere administratie dan een BV met personeel, veel
-              transacties en meerdere belastingverplichtingen.
+              De kosten van een boekhouder hangen af van je rechtsvorm, het aantal financiële
+              transacties, de complexiteit van je administratie en de werkzaamheden die je wilt
+              uitbesteden.
             </p>
             <p>
-              Sommige boekhouders werken met een vast maandbedrag. Anderen rekenen per uur, per
-              aangifte of per boekjaar.
+              Onderstaande bedragen zijn indicatieve tarieven voor een doorlopende samenwerking waarbij
+              de boekhouding volledig wordt uitbesteed.
             </p>
           </div>
-          <h3 className="mt-10 font-display text-2xl font-normal text-ink">Waar hangt de prijs van af?</h3>
-          <div className="mt-4 overflow-x-auto">
+          <div className="mt-8 overflow-x-auto">
             <table className="w-full min-w-[36rem] border-y border-ink/10 text-left text-[15px]">
-              <caption className="sr-only">Factoren die de kosten van een boekhouder beïnvloeden</caption>
+              <caption className="sr-only">Indicatieve kosten van een boekhouder per rechtsvorm</caption>
               <thead>
                 <tr className="border-b border-ink/10">
                   <th scope="col" className="py-3 pr-6 font-medium text-ink">
-                    Factor
+                    Rechtsvorm
+                  </th>
+                  <th scope="col" className="py-3 pr-6 font-medium text-ink">
+                    Kosten per maand
                   </th>
                   <th scope="col" className="py-3 font-medium text-ink">
-                    Invloed op de kosten
+                    Kosten per jaar
                   </th>
                 </tr>
               </thead>
               <tbody className="text-ink-500">
                 {[
-                  ['Bedrijfsvorm', 'Een BV heeft doorgaans meer administratieve verplichtingen dan een eenmanszaak.'],
-                  ['Aantal transacties', 'Meer facturen, bonnetjes en banktransacties betekenen vaak meer werk.'],
-                  ['Werkzaamheden', 'Alleen btw-aangifte kost doorgaans minder dan volledige boekhouding.'],
-                  ['Salarisadministratie', 'Loonadministratie kan extra kosten met zich meebrengen.'],
-                  [
-                    'Complexiteit',
-                    'Buitenlandse transacties, meerdere activiteiten of bijzondere fiscale situaties kunnen extra werk opleveren.',
-                  ],
-                  ['Eigen voorbereiding', 'Een goed bijgehouden administratie kan de verwerking eenvoudiger maken.'],
-                ].map(([factor, effect]) => (
-                  <tr key={factor} className="border-b border-ink/10">
+                  ['Eenmanszaak / zzp', '€100 – €150', '€1.200 – €1.800'],
+                  ['VOF', '€150 – €250', '€1.800 – €3.000'],
+                  ['BV – werkmaatschappij', 'Vanaf €250', 'Vanaf €3.000'],
+                  ['BV – holding', 'Vanaf €100', 'Vanaf €1.200'],
+                ].map(([form, month, year]) => (
+                  <tr key={form} className="border-b border-ink/10">
                     <th scope="row" className="py-4 pr-6 align-top font-medium text-ink">
-                      {factor}
+                      {form}
                     </th>
-                    <td className="py-4 align-top leading-relaxed">{effect}</td>
+                    <td className="py-4 pr-6 align-top">{month}</td>
+                    <td className="py-4 align-top">{year}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <article>
-              <h3 className="font-display text-2xl font-normal text-ink">Vast maandbedrag of uurtarief?</h3>
-              <div className="mt-3 space-y-4 text-[15px] leading-relaxed text-ink-500">
-                <p>
-                  Bij een vast maandbedrag weet je vooraf beter waar je aan toe bent. Controleer wel
-                  of de btw-aangiften, jaarafsluiting en belastingaangiften zijn inbegrepen.
-                </p>
-                <p>
-                  Bij een uurtarief betaal je voor de daadwerkelijk bestede tijd. Dat kan aantrekkelijk
-                  zijn wanneer je maar af en toe hulp nodig hebt.
-                </p>
-              </div>
-            </article>
-            <article>
-              <h3 className="font-display text-2xl font-normal text-ink">Hoe voorkom je onverwachte kosten?</h3>
-              <div className="mt-3 space-y-4 text-[15px] leading-relaxed text-ink-500">
-                <p>
-                  Vraag vooraf wat de boekhouder precies doet, welke werkzaamheden je zelf moet
-                  uitvoeren en welke diensten apart worden gefactureerd.
-                </p>
-                <p>
-                  Vergelijk niet alleen de prijs, maar ook de bereikbaarheid, ervaring en afspraken
-                  over het aanleveren van je administratie.
-                </p>
-              </div>
-            </article>
+          <p className="mt-4 max-w-3xl text-[13px] leading-relaxed text-ink-500">
+            Bron: indicatieve tarieven van onze samenwerkingspartner WRKD B.V. De daadwerkelijke kosten
+            zijn afhankelijk van jouw situatie en de afspraken met de boekhouder. Dit zijn geen bindende
+            offertes. Vraag altijd of bedragen inclusief of exclusief btw zijn.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link href="/boekhouder-kosten" className={btn.secondary}>
+              Wat kost een boekhouder?
+              <ArrowIcon />
+            </Link>
+            <Link href="/tools/boekhouder-kosten-calculator" className={btn.secondary}>
+              Bereken jouw boekhoudkosten
+              <ArrowIcon />
+            </Link>
           </div>
         </div>
       </section>
@@ -668,13 +716,14 @@ export default function BoekhouderVindenPage() {
             <ArrowIcon />
           </a>
           <p className="mt-8 max-w-2xl text-[13px] leading-relaxed text-ink-500">
-            FactuurBaas werkt voor deze aanvragen samen met WRKD B.V. Je gegevens worden na je
+            FactuurBaas werkt voor deze aanvragen samen met WRKD B.V. Je gegevens worden na jouw
             toestemming doorgestuurd voor opvolging van je aanvraag. FactuurBaas kan hiervoor een
-            vergoeding ontvangen. De informatie op deze pagina is algemeen en vormt geen persoonlijk
-            fiscaal advies.
+            vergoeding ontvangen. De genoemde tarieven zijn indicatief. De informatie op deze pagina is
+            algemeen en vormt geen persoonlijk financieel of fiscaal advies.
           </p>
         </div>
       </section>
+      <BookkeeperClusterLinks currentHref="/boekhouder-vinden" />
       <BookkeeperStickyCta />
     </div>
   );

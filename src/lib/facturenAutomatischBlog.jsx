@@ -389,9 +389,11 @@ export const facturenAutomatischArticle = {
       <p>
         Automatiseren helpt, maar je kunt je administratie ook laten verzorgen. Ontdek welke boekhoudkundige
         ondersteuning bij jouw onderneming past, of kies voor{' '}
-        <TextLink href="/boekhouder-vinden">boekhouding uitbesteden</TextLink>.
+        <TextLink href="/boekhouding-uitbesteden">administratieve werkzaamheden uitbesteden</TextLink>. Liever{' '}
+        <TextLink href="/online-boekhouder">samenwerken met een online boekhouder</TextLink>? Of alleen je{' '}
+        <TextLink href="/btw-aangifte-uitbesteden">btw-administratie laten verzorgen</TextLink>?
       </p>
-      <Cta href="/boekhouder-vinden" label="Vind een boekhouder" />
+      <Cta href="/online-boekhouder" label="Samenwerken met een online boekhouder" />
       <p className="text-center text-slate-600">Een aanvraag via FactuurBaas is gratis en vrijblijvend.</p>
 
       <h2>Wanneer loont automatische factuurverwerking?</h2>

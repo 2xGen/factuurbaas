@@ -399,11 +399,11 @@ export const facturenEnBtwAangifteArticle = {
 
       <h3>Liever hulp bij je btw-aangifte?</h3>
       <p>
-        Weet je niet zeker of je alle facturen en btw goed hebt verwerkt? Vind boekhoudkundige ondersteuning die past
-        bij jouw onderneming, of vraag direct{' '}
-        <TextLink href="/boekhouder-vinden">hulp bij btw-aangifte</TextLink>.
+        Weet je niet zeker of je alle facturen en btw goed hebt verwerkt? Ontdek hoe je{' '}
+        <TextLink href="/btw-aangifte-uitbesteden">je btw-aangifte kunt laten verzorgen</TextLink>, of vraag{' '}
+        <TextLink href="/boekhouder-vinden">hulp bij btw-aangifte</TextLink> via FactuurBaas.
       </p>
-      <Cta href="/boekhouder-vinden" label="Vind een boekhouder voor je btw" />
+      <Cta href="/btw-aangifte-uitbesteden" label="Je btw-aangifte laten verzorgen" />
       <p className="text-center text-slate-600">Een aanvraag via FactuurBaas is gratis en vrijblijvend.</p>
 
       <h2>Moet je btw-aangifte doen als je geen omzet hebt?</h2>
@@ -440,12 +440,13 @@ export const facturenEnBtwAangifteArticle = {
       </p>
       <p>
         Met FactuurBaas kun je <TextLink href="/create-invoice">gratis facturen maken</TextLink> en btw-bedragen
-        berekenen. Voor ingewikkeldere btw-vragen of het verzorgen van aangiften kun je een boekhouder inschakelen.
+        berekenen. Voor ingewikkeldere btw-vragen of het verzorgen van aangiften kun je{' '}
+        <TextLink href="/boekhouding-uitbesteden">boekhoudkundige werkzaamheden uitbesteden</TextLink>.
       </p>
       <p>
         <strong>Wil je ondersteuning bij je btw-aangifte of boekhouding?</strong>
       </p>
-      <Cta href="/boekhouder-vinden" label="Vind gratis en vrijblijvend een boekhouder" />
+      <Cta href="/boekhouding-uitbesteden" label="Boekhoudkundige werkzaamheden uitbesteden" />
     </>
   ),
 };

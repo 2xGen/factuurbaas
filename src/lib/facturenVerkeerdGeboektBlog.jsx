@@ -456,9 +456,11 @@ export const factuurVerkeerdGeboektArticle = {
       <h3>Twijfel je of je boekhouding klopt?</h3>
       <p>
         Een verkeerde boeking kan gevolgen hebben voor je administratie of btw-aangifte. Een boekhouder kan helpen
-        fouten te controleren en te corrigeren.
+        fouten te controleren en te corrigeren. Zoek{' '}
+        <TextLink href="/btw-aangifte-uitbesteden">professionele hulp bij btw-correcties</TextLink> wanneer de fout
+        je aangifte raakt.
       </p>
-      <Cta href="/boekhouder-vinden" label="Zoek hulp bij je boekhouding" />
+      <Cta href="/btw-aangifte-uitbesteden" label="Professionele hulp bij btw-correcties" />
       <p className="text-center text-slate-600">Gratis en vrijblijvend aanvragen.</p>
 
       <h2>Conclusie: een verkeerd geboekte factuur herstellen</h2>
@@ -470,6 +472,10 @@ export const factuurVerkeerdGeboektArticle = {
       <p>Bij fouten in btw-aangiften, afgesloten boekjaren of ingewikkelde transacties kan professionele hulp verstandig zijn.</p>
       <p>
         <strong>Wil je zeker weten dat je administratie goed wordt verwerkt?</strong>
+      </p>
+      <p>
+        <TextLink href="/boekhouder-overstappen">Ontevreden over je huidige boekhouder?</TextLink> Ontdek hoe
+        overstappen werkt.
       </p>
       <Cta href="/boekhouder-vinden" label="Vind een boekhouder" />
     </>

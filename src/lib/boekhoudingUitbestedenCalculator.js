@@ -33,6 +33,44 @@ function roundMoney(amount) {
   return Math.round(amount * 100) / 100;
 }
 
+/**
+ * Landing-page outsourcing calculator (hours × % outsourced × hourly value).
+ * Defaults used on /boekhouding-uitbesteden: 8h, €60, 75%, €125.
+ */
+export function calculateLandingOutsource({
+  hoursPerMonth,
+  hourlyRate,
+  outsourcingPercent,
+  monthlyBookkeeperCost,
+}) {
+  const hours = Math.max(0, Number(hoursPerMonth) || 0);
+  const rate = Math.max(0, Number(hourlyRate) || 0);
+  const percent = Math.min(100, Math.max(0, Number(outsourcingPercent) || 0));
+  const monthlyCost = Math.max(0, Number(monthlyBookkeeperCost) || 0);
+
+  const freedMonthlyHours = hours * (percent / 100);
+  const remainingMonthlyHours = Math.max(0, hours - freedMonthlyHours);
+  const freedAnnualHours = freedMonthlyHours * 12;
+  const potentialAnnualTimeValue = freedMonthlyHours * rate * 12;
+  const annualBookkeeperCost = monthlyCost * 12;
+  const theoreticalAnnualDifference = potentialAnnualTimeValue - annualBookkeeperCost;
+  const breakEvenMonthlyHours = rate > 0 ? monthlyCost / rate : null;
+
+  return {
+    hours,
+    rate,
+    percent,
+    monthlyCost,
+    freedMonthlyHours,
+    remainingMonthlyHours,
+    freedAnnualHours,
+    potentialAnnualTimeValue,
+    annualBookkeeperCost,
+    theoreticalAnnualDifference,
+    breakEvenMonthlyHours,
+  };
+}
+
 export function calculateOutsource({ invoices, minutes, hourlyRate, bookkeeperCost, remainingHours }) {
   const values = [invoices, minutes, hourlyRate, bookkeeperCost, remainingHours];
   if (values.some((value) => value === null)) return null;

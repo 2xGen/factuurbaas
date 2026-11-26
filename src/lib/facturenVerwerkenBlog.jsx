@@ -337,10 +337,11 @@ const publishedArticle = {
       </p>
       <h3>Liever hulp bij je boekhouding?</h3>
       <p>
-        Je hoeft niet alles zelf uit te zoeken. Via FactuurBaas kun je gratis en vrijblijvend een aanvraag indienen om
-        in contact te komen met een partij die je kan helpen bij het vinden van boekhoudkundige ondersteuning.
+        Je hoeft niet alles zelf uit te zoeken. Lees meer over{' '}
+        <TextLink href="/boekhouding-uitbesteden">boekhouding laten verzorgen</TextLink>, of{' '}
+        <TextLink href="/online-boekhouder">online boekhouder vinden</TextLink> voor digitale samenwerking.
       </p>
-      <Cta href="/boekhouder-vinden" label="Vind een boekhouder" />
+      <Cta href="/online-boekhouder" label="Online boekhouder vinden" />
 
       <h2>Veelgemaakte fouten bij het verwerken van facturen</h2>
       <h3>1. Privé- en zakelijke kosten door elkaar halen</h3>

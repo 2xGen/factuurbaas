@@ -157,7 +157,12 @@ export const facturenLatenVerwerkenArticle = {
         <li>Betalingen controleren.</li>
         <li>Je boekhouding periodiek bijwerken.</li>
       </ul>
-      <Cta href="/boekhouder-vinden" label="Vind een boekhouder voor je administratie" />
+      <p>
+        Wil je vooral{' '}
+        <TextLink href="/online-boekhouder">je facturen digitaal laten verwerken</TextLink>, of alleen je{' '}
+        <TextLink href="/btw-aangifte-uitbesteden">btw-administratie uitbesteden</TextLink>?
+      </p>
+      <Cta href="/online-boekhouder" label="Je facturen digitaal laten verwerken" />
       <p className="text-center text-slate-600">Een aanvraag is gratis en vrijblijvend.</p>
 
       <h2>Wat betekent facturen laten verwerken?</h2>
@@ -320,7 +325,9 @@ export const facturenLatenVerwerkenArticle = {
       <p>In dit fictieve voorbeeld bedraagt het verschil €115 per maand.</p>
       <p>
         Wil je dit met je eigen aantallen doorrekenen? Gebruik de{' '}
-        <TextLink href="/tools/boekhouding-uitbesteden-calculator">boekhouding uitbesteden calculator</TextLink>.
+        <TextLink href="/tools/boekhouding-uitbesteden-calculator">boekhouding uitbesteden calculator</TextLink>
+        {' '}of lees over de{' '}
+        <TextLink href="/boekhouder-kosten">Wat kost een boekhouder?</TextLink>
       </p>
       <p>
         Maar let op: vrijgekomen tijd levert niet automatisch extra omzet op. Ook moeten de werkzaamheden en kosten
@@ -508,11 +515,14 @@ export const facturenLatenVerwerkenArticle = {
         tijd aan boekhouden wilt besteden of behoefte hebt aan professionele ondersteuning.
       </p>
       <p>
-        Je kunt alleen je inkoopfacturen laten verwerken, hulp krijgen bij btw-aangiften of een groter deel van je
-        boekhouding uitbesteden.
+        Je kunt alleen je inkoopfacturen laten verwerken, hulp krijgen bij btw-aangiften of een groter deel van je{' '}
+        <TextLink href="/boekhouding-uitbesteden">financiële administratie uitbesteden</TextLink>.
       </p>
       <p>De kosten hangen af van je onderneming, het aantal transacties en de werkzaamheden die je wilt laten verzorgen.</p>
-      <p>Wil je ontdekken welke mogelijkheden er zijn?</p>
+      <p>
+        Wil je ontdekken welke mogelijkheden er zijn, of zoek je{' '}
+        <TextLink href="/boekhouder-overstappen">een andere boekhouder</TextLink>?
+      </p>
       <Cta href="/boekhouder-vinden" label="Vind een boekhouder voor je facturen" />
       <p className="text-center text-slate-600">Een aanvraag via FactuurBaas is gratis en vrijblijvend.</p>
     </>

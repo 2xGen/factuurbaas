@@ -66,6 +66,11 @@ const toolGroups = [
         href: '/tools/boekhouding-uitbesteden-calculator',
         description: 'Vergelijk je administratietijd met de kosten van een boekhouder.',
       },
+      {
+        label: 'Boekhouder kosten calculator',
+        href: '/tools/boekhouder-kosten-calculator',
+        description: 'Bereken indicatieve maand- en jaarkosten van een boekhouder.',
+      },
     ],
   },
   {

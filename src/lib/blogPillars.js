@@ -120,6 +120,27 @@ export const blogPillars = [
     slugs: ['factuur-templates-zzp', 'factuur-pdf-downloaden'],
   },
   {
+    id: 'boekhouder',
+    title: 'Boekhouder vinden',
+    titleAccent: 'vinden',
+    cardTitle: 'Boekhouder vinden',
+    cardAccent: 'vinden',
+    cardBlurb: 'ZZP, BV, MKB en kosten.',
+    description:
+      'Hulp bij het vinden van een boekhouder, kostenindicaties en uitbesteden van administratie of btw-aangifte.',
+    slugs: [
+      'boekhouder-vinden',
+      'boekhouder-kosten',
+      'boekhouder-zzp',
+      'boekhouder-bv',
+      'boekhouder-mkb',
+      'boekhouding-uitbesteden',
+      'boekhouder-overstappen',
+      'online-boekhouder',
+      'btw-aangifte-uitbesteden',
+    ],
+  },
+  {
     id: 'boekhouden',
     title: "Boekhouden als zzp'er",
     titleAccent: "zzp'er",

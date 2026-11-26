@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useMemo, useState, useCallback } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { Copy, Download, FileText, Receipt, Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { DisplayHeading } from '@/components/site/editorial';
+import { DisplayHeading, btn } from '@/components/site/editorial';
 import { Stagger, staggerItem } from '@/components/landing/page/motion';
 import {
   AffixInput,
@@ -307,6 +308,27 @@ export default function BtwCalculator() {
                         </button>
                       </div>
                     </ResultActions>
+
+                    <div className="mt-5 rounded-xl border border-ink/[0.08] bg-paper-50 p-4">
+                      <p className="font-display text-lg font-normal tracking-[-0.02em] text-ink">
+                        Liever je btw-aangifte uitbesteden?
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-500">
+                        Btw berekenen is één ding. Je volledige btw-administratie bijhouden kost vaak meer tijd.
+                        Ontdek wat een boekhouder voor je kan betekenen.
+                      </p>
+                      <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                        <Link href="/btw-aangifte-uitbesteden" className={cn(btn.secondary, 'w-full sm:w-auto')}>
+                          Bekijk de mogelijkheden
+                        </Link>
+                        <Link
+                          href="/btw-aangifte-uitbesteden#boekhouder-formulier"
+                          className="inline-flex items-center justify-center text-sm font-medium text-ink-500 underline decoration-ink/20 underline-offset-4 hover:decoration-ember"
+                        >
+                          Gratis en vrijblijvend hulp aanvragen
+                        </Link>
+                      </div>
+                    </div>
                   </>
                 ) : (
                   <ResultEmpty>Vul een bedrag in om direct het btw-resultaat te zien.</ResultEmpty>

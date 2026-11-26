@@ -14,6 +14,7 @@ import { watIsEenUblFactuurArticle } from '@/lib/watIsEenUblFactuurBlog';
 import { watIsPeppolArticle } from '@/lib/watIsPeppolBlog';
 import { xmlFactuurMakenArticle } from '@/lib/xmlFactuurMakenBlog';
 import { eFacturatieVerplichtArticle } from '@/lib/eFacturatieVerplichtBlog';
+import { boekhouderClusterArticles } from '@/lib/boekhouderClusterBlog';
 import { facturenVerwerkenArticles } from '@/lib/facturenVerwerkenBlog';
 
 const CtaButton = ({ href = '/create-invoice', label = 'Maak Nu Je Gratis Factuur' }) => (
@@ -4538,6 +4539,16 @@ export const articles = [
           <strong>Volledige administratie nodig?</strong> → Vergelijk boekhoudprogramma&apos;s en kies de oplossing die
           bij jouw onderneming past.
         </p>
+        <p>
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            Liever een online boekhouder?
+          </Link>{' '}
+          Zelf factureren en de rest digitaal laten verzorgen. Of{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            kosten van een boekhouder vergelijken
+          </Link>
+          .
+        </p>
         <BoekhoudCheckCta />
         <CtaButton />
 
@@ -5726,6 +5737,13 @@ export const articles = [
           </Link>
           .
         </p>
+        <p>
+          Liever niet alles zelf?{' '}
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            Digitale boekhouding uitbesteden
+          </Link>{' '}
+          met een online boekhouder.
+        </p>
       </>
     ),
   },
@@ -6533,6 +6551,13 @@ export const articles = [
           </Link>
           .
         </p>
+        <p>
+          Of laat{' '}
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            je boekhouding digitaal verzorgen
+          </Link>{' '}
+          door een online boekhouder.
+        </p>
       </>
     ),
   },
@@ -7125,6 +7150,13 @@ export const articles = [
           En als je eigenlijk alleen facturen hoeft te maken, heb je misschien helemaal geen betaald
           boekhoudprogramma nodig.
         </p>
+        <p>
+          Of wil je{' '}
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            een online boekhouder inschakelen
+          </Link>{' '}
+          in plaats van zelf software te kiezen?
+        </p>
         <JorttEBoekhoudenCtas />
 
         <h2>Veelgestelde vragen over Jortt en e-Boekhouden.nl</h2>
@@ -7636,7 +7668,19 @@ export const articles = [
         </p>
         <p>
           Als zzp&apos;er kun je je administratie ook zonder boekhoudprogramma bijhouden. Zeker als je net begint en
-          maar weinig facturen en kosten hebt, kan een eenvoudige oplossing voldoende zijn.
+          maar weinig facturen en kosten hebt, kan een eenvoudige oplossing voldoende zijn. Alternatief:{' '}
+          <Link href="/boekhouding-uitbesteden" className="text-warm-orange hover:underline">
+            boekhouding uitbesteden in plaats van zelf doen
+          </Link>
+          , zoek{' '}
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            professionele digitale boekhoudondersteuning
+          </Link>
+          , of bekijk{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            wat een boekhouder voor zzp&apos;ers kost
+          </Link>
+          .
         </p>
         <p>
           Een <strong>boekhoudprogramma wordt vooral interessant zodra je administratie groeit</strong>. Denk aan
@@ -8195,7 +8239,15 @@ export const articles = [
           <Link href="/tools/boekhoudprogramma-check" className="text-warm-orange hover:underline">
             boekhoudprogramma-check
           </Link>{' '}
-          voor een snelle indicatie.
+          voor een snelle indicatie. Of blijf{' '}
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            zelf factureren met een online boekhouder
+          </Link>
+          . Bekijk ook{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            professionele boekhoudkosten
+          </Link>
+          .
         </p>
         <BoekhoudCheckCta />
         <CtaButton />
@@ -16926,6 +16978,7 @@ export const articles = [
   watIsPeppolArticle,
   xmlFactuurMakenArticle,
   eFacturatieVerplichtArticle,
+  ...boekhouderClusterArticles,
 ].sort((a, b) => {
   const specialSlugs = ['gratis-factuur-zzp', 'factuur-maken-zzp'];
   const aIsSpecial = specialSlugs.includes(a.slug);

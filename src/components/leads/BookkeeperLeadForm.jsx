@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { track } from '@vercel/analytics';
@@ -8,6 +8,11 @@ import { ArrowLeft, Check } from 'lucide-react';
 import { ArrowIcon, btn } from '@/components/site/editorial';
 import { BUSINESS_TYPES, validateBoekhouderLead } from '@/lib/boekhouderLead';
 import { rememberBookkeeperLead } from '@/components/dashboard/DashboardBookkeeperOffer';
+import {
+  RECHTSVORM_TO_BUSINESS_TYPE,
+  getLegalForm,
+  readCalculatorSession,
+} from '@/lib/boekhouderKostenCalculator';
 
 const inputClass =
   'mt-1.5 w-full rounded-xl border border-ink/15 bg-paper-50 px-4 py-3 text-base text-ink outline-none transition-colors placeholder:text-ink-400 focus:border-ink focus:bg-white focus:ring-2 focus:ring-ember/40';
@@ -38,16 +43,68 @@ export default function BookkeeperLeadForm({
   source = '/boekhouder-vinden',
   sourceType = 'seo',
   id = 'boekhouder-formulier',
+  initialBusinessType = '',
+  lockBusinessType = false,
 }) {
   const searchParams = useSearchParams();
-  const [step, setStep] = useState(0);
-  const [values, setValues] = useState(empty);
+  const lockedType =
+    lockBusinessType && BUSINESS_TYPES.some((item) => item.id === initialBusinessType)
+      ? initialBusinessType
+      : '';
+  const [step, setStep] = useState(lockedType ? 1 : 0);
+  const [values, setValues] = useState(() =>
+    lockedType ? { ...empty, businessType: lockedType } : empty
+  );
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const ignoreSubmit = useRef(false);
+  const prefillsTracked = useRef(false);
 
   const sourcePage = source.startsWith('/') ? source : `/${source}`;
+  const minStep = lockedType ? 1 : 0;
+  const totalSteps = lockedType ? 2 : 3;
+  const displayStep = lockedType ? step : step + 1;
+
+  useEffect(() => {
+    if (lockedType) {
+      if (!prefillsTracked.current) {
+        prefillsTracked.current = true;
+        track('bookkeeper_lead_form_started', {
+          sourceType,
+          prefilled: '1',
+          bron: searchParams.get('bron') || 'page',
+        });
+      }
+      return;
+    }
+
+    const fromProp = BUSINESS_TYPES.some((item) => item.id === initialBusinessType)
+      ? initialBusinessType
+      : '';
+    const fromQuery = searchParams.get('rechtsvorm');
+    const mapped = RECHTSVORM_TO_BUSINESS_TYPE[String(fromQuery || '').toLowerCase()];
+    const session = readCalculatorSession();
+    const fromSession = session?.legalFormId
+      ? getLegalForm(session.legalFormId).leadBusinessType
+      : null;
+    const businessType = fromProp || mapped || fromSession;
+    if (!businessType || !BUSINESS_TYPES.some((item) => item.id === businessType)) return;
+
+    setValues((current) => {
+      if (current.businessType) return current;
+      return { ...current, businessType };
+    });
+
+    if (!prefillsTracked.current) {
+      prefillsTracked.current = true;
+      track('bookkeeper_lead_form_started', {
+        sourceType,
+        prefilled: '1',
+        bron: searchParams.get('bron') || 'direct',
+      });
+    }
+  }, [searchParams, sourceType, initialBusinessType, lockedType]);
 
   function setField(key, value) {
     setValues((current) => ({ ...current, [key]: value }));
@@ -129,6 +186,7 @@ export default function BookkeeperLeadForm({
         return;
       }
       track('boekhouder_form_success', { sourceType });
+      track('bookkeeper_lead_submitted', { sourceType });
       rememberBookkeeperLead(values.email);
       setDone(true);
     } catch {
@@ -164,15 +222,25 @@ export default function BookkeeperLeadForm({
     >
       <div className="flex items-baseline justify-between gap-4">
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400">
-          Stap {step + 1} van 3
+          Stap {displayStep} van {totalSteps}
         </p>
-        <p className="text-sm tabular-nums text-ink-400">{Math.round(((step + 1) / 3) * 100)}%</p>
+        <p className="text-sm tabular-nums text-ink-400">
+          {Math.round((displayStep / totalSteps) * 100)}%
+        </p>
       </div>
       <div className="mt-3 flex gap-1.5" aria-hidden>
-        {[0, 1, 2].map((index) => (
-          <span key={index} className={`h-1 flex-1 rounded-full ${index <= step ? 'bg-ember' : 'bg-ink/10'}`} />
+        {Array.from({ length: totalSteps }, (_, index) => (
+          <span
+            key={index}
+            className={`h-1 flex-1 rounded-full ${index < displayStep ? 'bg-ember' : 'bg-ink/10'}`}
+          />
         ))}
       </div>
+      {lockedType && (
+        <p className="mt-4 inline-flex items-center rounded-full border border-ink/10 bg-paper-50 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-700">
+          {BUSINESS_TYPES.find((item) => item.id === lockedType)?.label || 'BV'}
+        </p>
+      )}
       <h2 className="mt-4 font-display text-[1.45rem] font-normal leading-tight tracking-[-0.02em] text-ink">
         {step === 0 && 'Wat is je bedrijfsvorm?'}
         {step === 1 && 'Bedrijfsgegevens'}
@@ -267,12 +335,12 @@ export default function BookkeeperLeadForm({
       {errors.form && <p className="mt-4 text-sm text-ember">{errors.form}</p>}
 
       <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-        {step > 0 ? (
+        {step > minStep ? (
           <button
             type="button"
             onClick={() => {
               setErrors({});
-              setStep((current) => current - 1);
+              setStep((current) => Math.max(minStep, current - 1));
             }}
             className="inline-flex items-center justify-center gap-2 text-sm font-medium text-ink-500 hover:text-ink"
           >

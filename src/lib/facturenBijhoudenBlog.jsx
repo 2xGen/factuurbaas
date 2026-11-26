@@ -359,10 +359,11 @@ export const facturenBijhoudenArticle = {
       </p>
       <h3>Zelf je facturen bijhouden of liever hulp?</h3>
       <p>
-        Met FactuurBaas houd je eenvoudig je facturen bij. Wil je ook ondersteuning bij je volledige boekhouding?
-        Ontdek welke boekhoudkundige hulp bij jouw onderneming past.
+        Met FactuurBaas houd je eenvoudig je facturen bij. Wil je{' '}
+        <TextLink href="/boekhouding-uitbesteden">minder tijd kwijt zijn aan administratie</TextLink>? Ontdek welke
+        boekhoudkundige hulp bij jouw onderneming past.
       </p>
-      <Cta href="/boekhouder-vinden" label="Vind boekhoudkundige hulp" />
+      <Cta href="/boekhouding-uitbesteden" label="Minder tijd kwijt zijn aan administratie" />
 
       <h2>Veelgestelde vragen</h2>
       <h3>Kan ik als zzp&apos;er zelf mijn facturen bijhouden?</h3>
@@ -556,10 +557,12 @@ export const facturenUitbestedenArticle = {
       </p>
       <h3>Liever je boekhouding uitbesteden?</h3>
       <p>
-        Je hoeft niet alles zelf te doen. Vind boekhoudkundige ondersteuning die past bij jouw onderneming en de
-        werkzaamheden die je wilt uitbesteden.
+        Je hoeft niet alles zelf te doen. Lees meer over{' '}
+        <TextLink href="/boekhouding-uitbesteden">je volledige boekhouding uitbesteden</TextLink>,{' '}
+        <TextLink href="/online-boekhouder">je boekhouding online uitbesteden</TextLink>, of alleen{' '}
+        <TextLink href="/btw-aangifte-uitbesteden">je btw-aangifte uitbesteden</TextLink>.
       </p>
-      <Cta href="/boekhouder-vinden" label="Vind een boekhouder" />
+      <Cta href="/online-boekhouder" label="Je boekhouding online uitbesteden" />
       <p>Een aanvraag via FactuurBaas is gratis en vrijblijvend.</p>
 
       <h2>Wat kost zelf boekhouden als zzp&apos;er?</h2>
@@ -738,7 +741,10 @@ export const facturenUitbestedenArticle = {
       <p>Zelf boekhouden is een goede optie wanneer je administratie eenvoudig is en je voldoende tijd en kennis hebt.</p>
       <p>
         Uitbesteden kan verstandig zijn wanneer je administratie groeit, je regelmatig vragen hebt of liever meer tijd
-        besteedt aan je onderneming.
+        besteedt aan je onderneming. Lees meer over{' '}
+        <TextLink href="/boekhouding-uitbesteden">je volledige boekhouding uitbesteden</TextLink>, bekijk de{' '}
+        <TextLink href="/boekhouder-kosten">kosten van boekhouding uitbesteden</TextLink> of gebruik de{' '}
+        <TextLink href="/tools/boekhouder-kosten-calculator">boekhouder kosten calculator</TextLink>.
       </p>
       <p>Je hoeft bovendien niet te kiezen tussen alles zelf doen en alles uitbesteden.</p>
       <p>

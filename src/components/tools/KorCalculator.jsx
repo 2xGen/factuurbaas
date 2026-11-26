@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Copy, Info } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
@@ -341,6 +342,21 @@ export default function KorCalculator() {
                     Kopieer resultaat
                   </button>
                 </ResultActions>
+
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <p className="font-display text-lg font-normal tracking-[-0.02em] text-white">
+                    Hulp bij je btw-verplichtingen?
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">
+                    Of je wel of niet onder de KOR valt: een boekhouder kan helpen bij btw-vragen en aangiften.
+                  </p>
+                  <Link
+                    href="/btw-aangifte-uitbesteden"
+                    className="mt-3 inline-flex text-sm font-medium text-ember-100 underline decoration-white/20 underline-offset-4 hover:decoration-ember-100"
+                  >
+                    Hulp bij je btw-verplichtingen →
+                  </Link>
+                </div>
               </div>
             ) : (
               <ResultEmpty>Vul je verwachte omzet in om het resultaat te zien.</ResultEmpty>

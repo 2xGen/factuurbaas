@@ -461,7 +461,10 @@ export const hoeveelFacturenArticle = {
       <p>Neem ook de tijdsbesparing, het gemak en de kwaliteit van de administratieve verwerking mee.</p>
       <p>
         Je kunt die vergelijking ook maken met de{' '}
-        <TextLink href="/tools/boekhouding-uitbesteden-calculator">boekhouding uitbesteden calculator</TextLink>.
+        <TextLink href="/tools/boekhouding-uitbesteden-calculator">boekhouding uitbesteden calculator</TextLink>
+        ,{' '}
+        <TextLink href="/tools/boekhouder-kosten-calculator">boekhouder kosten berekenen</TextLink> of{' '}
+        <TextLink href="/boekhouder-kosten">bereken je boekhoudkosten</TextLink> op de tarievenpagina.
       </p>
 
       <h2>Conclusie: kijk verder dan het aantal facturen</h2>
@@ -473,13 +476,14 @@ export const hoeveelFacturenArticle = {
       <p>Heb je een eenvoudige administratie? Dan kun je vaak prima zelf je facturen maken en bijhouden.</p>
       <p>
         Groeit je onderneming en besteed je steeds meer tijd aan administratie? Dan kan boekhoudsoftware of een
-        boekhouder een logische volgende stap zijn.
+        boekhouder een logische volgende stap zijn. Lees wanneer{' '}
+        <TextLink href="/boekhouding-uitbesteden">boekhouding uitbesteden interessant</TextLink> wordt.
       </p>
       <p>
         <strong>Wil je minder tijd kwijt zijn aan je boekhouding?</strong>
       </p>
       <p>Via FactuurBaas kun je gratis en vrijblijvend boekhoudkundige ondersteuning aanvragen.</p>
-      <Cta href="/boekhouder-vinden" label="Vind een boekhouder" />
+      <Cta href="/boekhouding-uitbesteden" label="Wanneer wordt boekhouding uitbesteden interessant?" />
     </>
   ),
 };

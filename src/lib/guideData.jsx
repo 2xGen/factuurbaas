@@ -9608,7 +9608,19 @@ jan@klant.nl`}
         </div>
         <p>Voor een eenvoudige onderneming kan zelf boekhouden een prima keuze zijn.</p>
         <p>
-          Wordt je administratie complexer of kost het je steeds meer tijd? Dan kan uitbesteden aantrekkelijker worden.
+          Wordt je administratie complexer of kost het je steeds meer tijd? Dan kan{' '}
+          <Link href="/boekhouding-uitbesteden" className="text-warm-orange hover:underline">
+            je boekhouding gedeeltelijk uitbesteden
+          </Link>{' '}
+          aantrekkelijker worden. Bekijk ook de{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            kosten van professionele ondersteuning
+          </Link>
+          , of laat alleen je{' '}
+          <Link href="/btw-aangifte-uitbesteden" className="text-warm-orange hover:underline">
+            btw-aangifte doen
+          </Link>
+          .
         </p>
 
         <h2>Wanneer moet je overstappen?</h2>
@@ -10299,7 +10311,20 @@ jan@klant.nl`}
         <GuideToolCta href="/tools/boekhoudprogramma-check" label="Doe de gratis boekhoudprogramma-check →" />
         <p>
           Beantwoord een paar vragen over je facturen, kosten, transacties en manier van werken. Je krijgt vervolgens
-          een indicatie welke oplossing waarschijnlijk het beste bij jouw situatie past en waarom.
+          een indicatie welke oplossing waarschijnlijk het beste bij jouw situatie past en waarom. Overweeg je liever
+          om{' '}
+          <Link href="/boekhouding-uitbesteden" className="text-warm-orange hover:underline">
+            je administratie uit te besteden
+          </Link>
+          ? Bekijk dan de mogelijkheden voor volledige of gedeeltelijke uitbesteding, of de{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            indicatieve boekhoudtarieven
+          </Link>
+          . Voor alleen btw:{' '}
+          <Link href="/btw-aangifte-uitbesteden" className="text-warm-orange hover:underline">
+            hulp bij je btw-aangifte
+          </Link>
+          .
         </p>
 
         <h2>Veelgestelde vragen</h2>
@@ -11045,7 +11070,11 @@ jan@klant.nl`}
         <h3>Is een boekhouder goedkoper dan een boekhoudprogramma?</h3>
         <p>
           Niet per definitie. Een boekhouder kost meer dan alleen software, maar je krijgt daar persoonlijke
-          dienstverlening en kennis voor terug. De juiste keuze hangt af van hoeveel administratie je zelf wilt doen.
+          dienstverlening en kennis voor terug. De juiste keuze hangt af van hoeveel administratie je zelf wilt doen.{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            Vergelijk de kosten met een boekhouder
+          </Link>
+          .
         </p>
         <h3>Kan ik als zzp&apos;er eerst goedkoop beginnen?</h3>
         <p>
@@ -11715,6 +11744,16 @@ jan@klant.nl`}
         />
         <p>Of heb je alleen een professionele factuur nodig?</p>
         <GuideToolCta href="/create-invoice" label="Maak gratis een factuur met FactuurBaas →" />
+        <p>
+          Liever niet zelf boekhouden?{' '}
+          <Link href="/online-boekhouder" className="text-warm-orange hover:underline">
+            Een online boekhouder als alternatief
+          </Link>
+          , of{' '}
+          <Link href="/boekhouder-kosten" className="text-warm-orange hover:underline">
+            zelf boekhouden of een boekhouder betalen?
+          </Link>
+        </p>
       </>
     ),
   },
